@@ -1,0 +1,6 @@
+those are the mapping deleted from crparchitect
+ `crparchitect_ibfk_15` FOREIGN KEY (`CrpArchitectId`) REFERENCES `crparchitectfinal` (`Id`) ON DELETE CASCADE
+  `crparchitect_ibfk_14` FOREIGN KEY (`CreatedBy`) REFERENCES `sysuser` (`Id`)
+
+
+

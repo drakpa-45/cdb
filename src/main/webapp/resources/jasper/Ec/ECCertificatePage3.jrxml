@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ECCertificatePage3" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="144"/>
+	<parameter name="applNo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sign" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ecHeader" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="seal" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select DATE_FORMAT(d.`License_Expiry_Date`,'%D /%b, %Y')EC_Expiry_Date,DATE_FORMAT(d.`License_Issue_Date`,'%D %b, %Y') App_Approval_Date,d.`Pro_Estb_Name`,
+(CASE WHEN d.`Scale_of_Investment`='S' THEN 'Small' WHEN d.`Scale_of_Investment`='M' THEN 'Medium' WHEN d.`Scale_of_Investment`='L' THEN 'Large' ELSE '' END)scale,IF(d.`Additional_Terms` IS NULL,'N/A',d.`Additional_Terms`) AS Additional_terms_cond
+from t_license_dtls d
+where d.`Application_Number`= $P{applNo}]]>
+	</queryString>
+	<field name="EC_Expiry_Date" class="java.lang.String"/>
+	<field name="App_Approval_Date" class="java.lang.String"/>
+	<field name="Pro_Estb_Name" class="java.lang.String"/>
+	<field name="scale" class="java.lang.String"/>
+	<field name="Additional_terms_cond" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="108" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="3" width="556" height="100"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{ecHeader}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="532" splitType="Stretch">
+			<image>
+				<reportElement x="164" y="162" width="160" height="121"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{seal}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="327" y="227" width="174" height="54"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{sign}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement mode="Transparent" x="325" y="280" width="216" height="32" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Issuing Authority]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="83" width="551" height="63"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[This EC is issued with validity from                                       until                                      only for the development and operation of (                                       ) (                                         scale).]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-14" y="-189" width="528" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Validity :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="11" width="555" height="48"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Failure to comply with any of the above terms and conditions shall constitute an offence and the proponent shall be liable in accordance to the Environmental Assessment Act 2000 and/or existing environmental laws.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="64" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Validity :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="397" width="542" height="80"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[
+1.CEO, Environment Assessment and Compliance Division, NECS, Thimphu for kind information.
+2.Dasho Dzongdag, Dzongkhag Administration, -------------------------------- for kind information.
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="179" y="83" width="226" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{App_Approval_Date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="310" y="83" width="105" height="20"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{EC_Expiry_Date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="83" y="96" width="113" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Pro_Estb_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="213" y="96" width="103" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{scale}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="384" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Copy to:]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="57" splitType="Stretch">
+			<staticText>
+				<reportElement x="27" y="22" width="528" height="30" forecolor="#666666"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Tel # 332124/336199 & Fax # 327891: P.O. Box # 141, Thimphu Bhutan]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

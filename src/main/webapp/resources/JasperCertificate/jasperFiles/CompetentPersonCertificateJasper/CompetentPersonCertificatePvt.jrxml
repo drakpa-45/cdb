@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="doc_approval" language="groovy" pageWidth="750" pageHeight="1000" whenNoDataType="AllSectionsNoDetail" columnWidth="710" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" isIgnorePagination="true">
+	<property name="ireport.zoom" value="1.0000000000000009"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="288"/>
+	<parameter name="name" class="java.lang.String"/>
+	<parameter name="Sign_Date" class="java.lang.String"/>
+	<parameter name="RegistrationNo" class="java.lang.String"/>
+	<parameter name="RegistrationDate" class="java.lang.String"/>
+	<parameter name="PassportPhoto" class="java.lang.String"/>
+	<parameter name="CertExpiryDate" class="java.lang.String"/>
+	<parameter name="Company_Logo1" class="java.lang.String"/>
+	<parameter name="Company_Department" class="java.lang.String"/>
+	<parameter name="Company_Logo2" class="java.lang.String"/>
+	<parameter name="Dzongkhag" class="java.lang.String"/>
+	<parameter name="emplName" class="java.lang.String"/>
+	<parameter name="WATER_MARK" class="java.lang.String"/>
+	<parameter name="cpType" class="java.lang.String"/>
+	<parameter name="cpRegType" class="java.lang.String"/>
+	<parameter name="cid" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="emplLocation" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="950" splitType="Stretch">
+			<image>
+				<reportElement mode="Transparent" x="1" y="0" width="709" height="950"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{WATER_MARK}]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement mode="Transparent" x="5" y="0" width="702" height="939"/>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Transparent" x="49" y="237" width="123" height="23" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Registration No.: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="48" y="263" width="124" height="23" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Date of Registration: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="172" y="239" width="254" height="23"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{RegistrationNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="172" y="265" width="251" height="23"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{RegistrationDate}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="162" y="315" width="202" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="49" y="315" width="87" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[It is certified that ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="47" y="883" width="56" height="23" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Date : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="48" y="646" width="607" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[1.     This certificate should be possessed by the Competent Person at all times in the work premises and shown]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="72" y="671" width="501" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[on demand by the Inspectors.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="389" y="749" width="41" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[of M/s]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="48" y="616" width="78" height="23" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conditions:]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="103" y="883" width="212" height="23"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{Sign_Date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="48" y="748" width="261" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[This certificate is granted vide application dated]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="520" y="883" width="119" height="23" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[  Drug Controller]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="48" y="535" width="144" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[This certificate is valid upto ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="47" y="697" width="608" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[2.     The certificate of Competent Person shall abide by the duties as specified under the Rules and Regulation.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="238" y="102" width="214" height="22" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Thimpu, Bhutan]]></text>
+			</staticText>
+			<image>
+				<reportElement x="13" y="13" width="107" height="98"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{Company_Logo1}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="586" y="13" width="107" height="98"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{Company_Logo2}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement mode="Transparent" x="213" y="34" width="270" height="23" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Drug Regulatory Authority]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Bottom">
+				<reportElement x="225" y="8" width="254" height="30"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{Company_Department}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement mode="Transparent" x="234" y="80" width="218" height="23" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[P.O. Box NO. 1556]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="49" y="150" width="164" height="23" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Regulation No. :       145]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="125" y="183" width="376" height="36" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CERTIFICATE OF REGISTRATION AS A COMPETENT PERSON]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="213" y="57" width="254" height="23" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Royal Government of Bhutan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="364" y="315" width="291" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<text><![CDATA[is registered as a Competent Person for the purpose of]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="49" y="341" width="246" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sale and Distribution of Medical Products ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="134" y="315" width="28" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mr.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="341" width="360" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[as per the qualifications laid down in the Bhutan Medicine Rules]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="49" y="367" width="100" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[and Regulations.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="192" y="535" width="80" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{CertExpiryDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="272" y="535" width="296" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(3years from the date of issue)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="309" y="749" width="80" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{RegistrationDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="749" width="220" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="120" y="405" width="160" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Name of the Firm/Employer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="431" width="160" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Dzongkhag/Location]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="280" y="431" width="288" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{emplLocation}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="405" width="288" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{emplName}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="581" y="124" width="112" height="121"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{PassportPhoto}]]></imageExpression>
+			</image>
+		</band>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

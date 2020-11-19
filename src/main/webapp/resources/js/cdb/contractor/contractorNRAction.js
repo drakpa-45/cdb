@@ -1,0 +1,430 @@
+/**
+ * Created by user on 2/14/2020.
+ */
+var $check = null;
+function checkBtn(checkBoxId)
+{
+    $check.prop('checked',true);
+
+}
+
+var contractorNRAction = (function () {
+    "use strict";
+    var isSubmitted = false;
+
+
+    function _baseURL() {
+        return cdbGlobal.baseURL() + "/admin/contractorNRAction";
+    }
+
+    function checkHR(){
+        $('body').on('click','.checkCid',function(){
+            //var modal = $(this).closest('.modal').attr('id');
+            var cidNo = $(this).closest('tr').find('.cidNo').text();
+            $check = $(this).closest('tr').find('.check');
+            if(!cidNo){
+                return;
+            }
+            $.ajax({
+                url: cdbGlobal.baseURL() + "/contractorNR/getPersonalInfo",
+                type: 'GET',
+                data: {cidNo: cidNo},
+                success: function (res) {
+                    if (res.status == '1') {
+                        var dto = res.dto;
+                        $('#nameM').text(dto.fullName);
+                        $('#sexM').text(dto.sex);
+                        $('#dzongkhagM').text(dto.dzongkhagNmae);
+                        $('#gewogM').text(dto.gowegName);
+                        $('#villageM').text(dto.villageName);
+                        $('#dobM').text(dto.dob);
+                        var imagelink='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo='+cidNo;
+                        $('#photoM').html("<img src='"+imagelink+"'  width='200px'  height='200px' class='pull-right'/>");
+                        $("#hrModal").modal('show');
+                    }
+                }
+            });
+        });
+    }
+
+    function getContractorInfo() {
+        var applicationNo = $('#appNoVA').val();
+        if (applicationNo) {
+            $.ajax({
+                url: _baseURL() + '/getContractorInfo',
+                type: 'GET',
+                data: {appNo: applicationNo,flag:'V'},
+                success: function (res) {
+                    if (res.status == '1') {
+                        var contractorDTO = res.dto;
+                        var contractor = contractorDTO.contractor;
+                        $('#ownershipType').text(contractorDTO.ownershipTypeTxt);
+                        $('#country').text(contractorDTO.countryTxt);
+                        $('#tradeLicenseNo').text(contractor.tradeLicenseNo);
+                        $('#firmName').text(contractor.firmName);
+                        $('#tpn').text(contractor.tpn);
+                        $('#pDzongkhag').text(contractorDTO.pDzongkhagTxt);
+                        $('#pGewog').text(contractor.pGewog);
+                        $('#pVillage').text(contractor.pVillage);
+                        $('#estAddress').text(contractor.estAddress);
+                        $('#estDzongkhag').text(contractorDTO.estDzongkhagTxt);
+                        $('#regEmail').text(contractor.regEmail);
+                        $('#regMobileNo').text(contractor.regMobileNo);
+                        $('#regPhoneNo').text(contractor.regPhoneNo);
+                        $('#regFaxNo').text(contractor.regFaxNo);
+
+                        var contractorHrs = contractorDTO.contractorHRs;
+                        var partnerHrTr = "";
+                        var hrTr = "";
+                        var m = 0, n = 0;
+                        var owner='';
+                        for (var i in contractorHrs) {
+                            var verifiedApproved = '';
+                            if(contractorHrs[i].Approved == '1'){
+                                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+                                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+                            }else if(contractorHrs[i].verified == '1'){
+                                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+                                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' value='1'  required=''></td>";
+                            }else{
+                                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' value='1'  required=''></td>";
+                            }
+                            if (contractorHrs[i].isPartnerOrOwner == '1') {
+                                owner = contractorHrs[i].name;
+                                m++;
+                                partnerHrTr = partnerHrTr + "<tr><td>" + m + "</td>" +
+                                "<td>" + contractorHrs[i].countryName + "</td>" +
+                                "<td class='cidNo'>" + contractorHrs[i].cidNo + "</td>" +
+                                "<td>" + contractorHrs[i].salutationName + "</td>" +
+                                "<td>" + contractorHrs[i].name + "</td>" +
+                                "<td>" + contractorHrs[i].sex + "</td>" +
+                                "<td>" + contractorHrs[i].designationName + "</td>" +
+                                "<td>" + ((contractorHrs[i].siCertificate == '1')?'(✔)':'') + "</td>" +
+                                "<td><input type='button' name='humanResource' value='Check for this CID' class='checkCid btn btn-success'></td>" +
+                                verifiedApproved+"</tr>";
+                            } else {
+                                n++;
+                                var attachments = '';
+                                for (var j in contractorHrs[i].hrAttachments){
+                                    attachments = attachments + "<a href='"+_baseURL() + "/viewDownload?documentPath="+contractorHrs[i].hrAttachments[j].documentPath+"' target='_blank'>"+contractorHrs[i].hrAttachments[j].documentName+"</a><br>";
+                                }
+                                var href = _baseURL() + "/viewDownload?tableName=crpcontractorhumanresourceattachment&filterCol=CrpContractorHumanResourceId&filterVal="+contractorHrs[i].id;
+                                hrTr = hrTr + "<tr>" +
+                                "<td>" + n + "<input type='hidden' class='contractorHRid' value='"+contractorHrs[i].id +"' </td>" +
+                                "<td>" + contractorHrs[i].countryName + "</td>" +
+                                "<td class='cidNo'>" + contractorHrs[i].cidNo + "</td>" +
+                                "<td>" + contractorHrs[i].salutationName + "</td>" +
+                                "<td>" + contractorHrs[i].name + "</td>" +
+                                "<td>" + contractorHrs[i].sex + "</td>" +
+                                "<td>" + contractorHrs[i].designationName + "</td>" +
+                                "<td>" + contractorHrs[i].qualificationName + "</td>" +
+                                "<td>" + contractorHrs[i].tradeName + "</td>" +
+                                "<td>" + nullif(contractorHrs[i].joiningDate) + "</td>" +
+                                "<td>" + contractorHrs[i].serviceTypeName + "</td>" +
+                                    //"<td><a href='javascript:void(0);' class='vAttachment'>View/Download</a> </td>" +
+                                "<td>"+attachments+"</td>" +
+                                "<td><input type='button'  value='Check for this CID' class='checkCid btn btn-success'></td>" +
+                                verifiedApproved+"</tr>";
+                            }
+                        }
+                        $('#partnerDtls').find('tbody').html(partnerHrTr);
+                        $('#hrTbl').find('tbody').html(hrTr);
+
+                        var categoryClassDTOs = contractorDTO.categories;
+                        var ccTr = "";
+                        var tFeeAmount = 0;
+                        for (var i in categoryClassDTOs) {
+                            tFeeAmount += parseFloat(categoryClassDTOs[i].aAmount);
+                            ccTr = ccTr + "<tr><td><input class='form-control' type='checkbox' checked='checked' disabled style='width: 17px; height: 17px;'></td>" +
+                            "<td>" + categoryClassDTOs[i].categoryName + "</td>" +
+                            "<td><select disabled class='form-control'><option>" + categoryClassDTOs[i].aClassName + "</option></select></td>" +
+                            "<td>"+categoryClassDTOs[i].aAmount+"</td></tr>";
+
+                        }
+                        var tfoot = "<tr><td colspan='3' align='right'>Total</td><td>"+tFeeAmount+"</td> ";
+                        $('#contractorCCTbl').find('tbody').html(ccTr);
+                        $('#contractorCCTbl').find('tfoot').html(tfoot);
+
+                        var equipments = contractorDTO.equipments;
+                        var eqTr = "";
+                        for (var i in equipments) {
+                            var verifiedApprovedEq = '';
+                            if(equipments[i].approved == '1'){
+                                verifiedApprovedEq = verifiedApprovedEq + "<td>(✔)</td>";
+                                verifiedApprovedEq = verifiedApprovedEq + "<td>(✔)</td>";
+                            }
+                            else if(equipments[i].verified == '1'){
+                                verifiedApprovedEq = verifiedApprovedEq + "<td>(✔)</td>";
+                                verifiedApprovedEq = verifiedApprovedEq + "<td><input type='checkbox' style='zoom:1.6' name='approveEq' value='1'  class='check' required=''></td>";
+                            }else{
+                                verifiedApprovedEq = verifiedApprovedEq + "<td><input type='checkbox' style='zoom:1.6' name='verifyEq' value='1'  class='check' required=''></td>";
+                            }
+                            var attachment = '';
+                            for (var j in equipments[i].eqAttachments){
+                                attachment = attachment + "<a href='"+_baseURL() + "/viewDownload?documentPath="+equipments[i].eqAttachments[j].documentPath+"' target='_blank'>"+equipments[i].eqAttachments[j].documentName+"</a><br>";
+                            }
+                            eqTr = eqTr +
+                            "<tr><td>" + (parseInt(i) + 1) + "</td>" +
+                            "<td>" + equipments[i].equipmentName + "</td>" +
+                            "<td></td>" +
+                            "<td>" + equipments[i].registrationNo + "</td>" +
+                            "<td>"+owner+"</td>" +
+                            "<td>" + equipments[i].quantity + "</td>" +
+                            "<td style='text-align: center'>"+attachment+"</td>" +
+                            "<td><input type='button' name='humanResource' value='Check for Equipment' class='equipmentCheck btn btn-success'></td>" +
+                            verifiedApprovedEq+"</tr>";
+                        }
+                        $('#equipmentTbl').find('tbody').html(eqTr);
+
+                        var appHistoryDTOs = contractorDTO.appHistoryDTOs;
+
+                        var appHistoryTr = "";
+
+                        for (var i in appHistoryDTOs) {
+                            var actionTakenBy = appHistoryDTOs[i].userName;
+                            actionTakenBy = (actionTakenBy==null)?'By Citizen':actionTakenBy;
+                            appHistoryTr = appHistoryTr +
+                            "<tr><td>" + appHistoryDTOs[i].appStatus + "</td>" +
+                            "<td>" + actionTakenBy + "</td>" +
+                            "<td>" + formatAsDate(appHistoryDTOs[i].actionDate) + "</td>" +
+                            "<td>"+ appHistoryDTOs[i].remarks +"</td></tr>";
+
+                        }
+                        $('#appStatusTbl').find('tbody').html(appHistoryTr);
+
+                        if(contractor.ownershipTypeId != '1e243ef0-c652-11e4-b574-080027dcfac6'){
+
+                        }
+
+                    } else {
+                        warningMsg(res.text);
+                    }
+                }
+            });
+        }
+    }
+
+    function nullif(val){
+        if(val == null || val == 'null'){
+            val = ''
+        }
+        return val;
+    }
+
+    function viewDownloadAttachment(){
+        $('body').on('click','.vAttachment',function(){
+            var id = $(this).closest('tr').find('.contractorHRid').val();
+            $.ajax({
+                url: _baseURL() + '/viewDownload',
+                type: 'GET',
+                data: {tableName:'crpcontractorhumanresourceattachment',filterCol:'CrpContractorHumanResourceId',filterVal:id}
+
+            });
+        });
+    }
+    function verify() {
+        $('#btnVerify').on('click', function (e) {
+            $.ajax({
+                url: _baseURL() + '/verify',
+                type: 'POST',
+                data: {appNo:$('#appNoVA').val(),vRemarks:$('#vRemarks').val()},
+                success: function (res) {
+                    if (res.status == '1') {
+                        successMsg(res.text, _baseURL());
+                    } else {
+                        warningMsg(res.text);
+                    }
+                }
+            });
+        })
+    }
+
+    function approve() {
+        $('#btnApprove').on('click', function (e) {
+            $.ajax({
+                url: _baseURL() + '/approve',
+                type: 'POST',
+                data: {appNo:$('#appNoVA').val(),remarks:$('#vRemarks').val()},
+                success: function (res) {
+                    if (res.status == '1') {
+                        successMsg(res.text, _baseURL());
+                    } else {
+                        warningMsg(res.text);
+                    }
+                }
+            });
+        })
+    }
+
+    function reject() {
+        $('#btnReject').on('click', function (e) {
+            $.ajax({
+                url: _baseURL() + '/reject',
+                type: 'POST',
+                data: {appNo:$('#appNoVA').val(),remarks:$('#vRemarks').val()},
+                success: function (res) {
+                    if (res.status == '1') {
+                        successMsg(res.text, _baseURL());
+                    } else {
+                        warningMsg(res.text);
+                    }
+                }
+            });
+        })
+    }
+
+    function sendBack() {
+        $('#btnSendBack').on('click', function (e) {
+            var appNo = $('#appNoVA').val();
+            if(!appNo){
+                appNo = $('#appNoPayment').val();
+            }
+            $.ajax({
+                url: _baseURL() + '/sendBack',
+                type: 'POST',
+                data: {appNo:appNo,remarks:$('#vRemarks').val()},
+                success: function (res) {
+                    if (res.status == '1') {
+                        successMsg(res.text, _baseURL());
+                    } else {
+                        warningMsg(res.text);
+                    }
+                }
+            });
+        })
+    }
+
+    function getContractorInfoForPayment() {
+        var applicationNo = $('#appNoPayment').val();
+        if (applicationNo) {
+            $.ajax({
+                url: _baseURL() + '/getContractorInfo',
+                type: 'GET',
+                data: {appNo: applicationNo,flag:'P'},
+                success: function (res) {
+                    if (res.status == '1') {
+                        var contractorDTO = res.dto;
+                        var contractor = contractorDTO.contractor;
+                        $('#ownershipType').text(contractorDTO.ownershipTypeTxt);
+                        $('#country').text(contractorDTO.countryTxt);
+                        $('#tradeLicenseNo').text(contractor.tradeLicenseNo);
+                        $('#firmName').text(contractor.firmName);
+                        $('#tpn').text(contractor.tpn);
+                        $('#estAddress').text(contractor.estAddress);
+                        $('#estDzongkhag').text(contractorDTO.estDzongkhagTxt);
+                        $('#regEmail').text(contractor.regEmail);
+                        $('#regMobileNo').text(contractor.regMobileNo);
+                        $('#regPhoneNo').text(contractor.regPhoneNo);
+                        $('#regFaxNo').text(contractor.regFaxNo);
+
+                        var contractorHrs = contractorDTO.contractorHRs;
+                        var partnerHrTr = "";
+                        var m = 0;
+                        for (var i in contractorHrs) {
+                            if (contractorHrs[i].isPartnerOrOwner == '1') {
+                                m++;
+                                partnerHrTr = partnerHrTr + "<tr><td>" + m + "</td>" +
+                                "<td>" + contractorHrs[i].countryName + "</td>" +
+                                "<td class='cidNo'>" + contractorHrs[i].cidNo + "</td>" +
+                                "<td>" + contractorHrs[i].salutationName + "</td>" +
+                                "<td>" + contractorHrs[i].name + "</td>" +
+                                "<td>" + contractorHrs[i].sex + "</td>" +
+                                "<td>" + contractorHrs[i].designationName + "</td>" +
+                                "<td>" + ((contractorHrs[i].siCertificate == '1')?'(✔)':'') + "</td>" +
+                                "</tr>";
+                            }
+                        }
+                        $('#partnerDtls').find('tbody').html(partnerHrTr);
+
+                        var categoryClassDTOs = contractorDTO.categories;
+                        var ccTr = "";
+                        var tApplAmount = 0,tVerAmount= 0,tApprAmount=0;
+                        for (var i in categoryClassDTOs) {
+                            tApplAmount += parseFloat(categoryClassDTOs[i].aAmount);
+                            tVerAmount += parseFloat(categoryClassDTOs[i].vAmount);
+                            tApprAmount += parseFloat(categoryClassDTOs[i].apAmount);
+                            ccTr = ccTr + "<tr><td><input class='form-control' type='checkbox' checked='checked' disabled style='width: 17px; height: 17px;'></td>" +
+                            "<td>" + categoryClassDTOs[i].categoryName + "</td>" +
+                            "<td>" + categoryClassDTOs[i].aClassName + "</td>" +
+                            "<td class='fee'>"+categoryClassDTOs[i].aAmount+"</td>" +
+                            "<td>" + categoryClassDTOs[i].vClassName + "</td>" +
+                            "<td class='fee'>"+categoryClassDTOs[i].vAmount+"</td>" +
+                            "<td>" + categoryClassDTOs[i].apClassName + "</td>" +
+                            "<td class='fee'>"+categoryClassDTOs[i].apAmount+"</td>" +
+                            "</tr>";
+                        }
+                        var tfoot = "<tr><td colspan='2' align='right'>Total</td><td colspan='2'>"+tApplAmount+"</td>" +
+                            "<td colspan='2'>"+tVerAmount+"</td><td colspan='2'>"+tApprAmount+"</td> ";
+
+                        $('#contractorCCTbl').find('tbody').html(ccTr);
+                        $('#contractorCCTbl').find('tfoot').html(tfoot);
+                        $('#paymentAmount').val(tApprAmount);
+                        $('#cdbNo').val(contractorDTO.cdbNo);
+
+                        var appHistoryDTOs = contractorDTO.appHistoryDTOs;
+
+                        var appHistoryTr = "";
+
+                        for (var i in appHistoryDTOs) {
+                            var actionTakenBy = appHistoryDTOs[i].userName;
+                            //actionTakenBy = (actionTakenBy==null)?'By Citizen':actionTakenBy
+                            actionTakenBy = (actionTakenBy==null)? contractorHrs[i].cidNo +'(Applicants CID/work permit number)':actionTakenBy
+                            appHistoryTr = appHistoryTr +
+                            "<tr><td>" + appHistoryDTOs[i].appStatus + "</td>" +
+                            "<td>" + actionTakenBy + "</td>" +
+                            "<td>" + formatAsDate(appHistoryDTOs[i].actionDate) + "</td>" +
+                            "<td>"+ appHistoryDTOs[i].remarks +"</td></tr>";
+
+                        }
+                        $('#appStatusTbl').find('tbody').html(appHistoryTr);
+                    } else {
+                        warningMsg(res.text);
+                    }
+                }
+            });
+        }
+    }
+
+    function paymentUpdate() {
+        $('#btnSave').on('click', function (e) {
+            $('#contractorPaymentForm').validate({
+                submitHandler: function (form) {
+                    $.ajax({
+                        url: _baseURL() + '/paymentUpdate',
+                        type: 'POST',
+                        data: $(form).serializeArray(),
+                        success: function (res) {
+                            if (res.status == '1') {
+                                successMsg(res.text, _baseURL());
+                            } else {
+                                warningMsg(res.text);
+                            }
+                        }
+                    });
+                }
+            })
+        })
+    }
+
+    function init(){
+        viewDownloadAttachment();
+        approve();
+        reject();
+        getContractorInfoForPayment();
+        paymentUpdate();
+        checkHR();
+        sendBack();
+    }
+    return {
+        verify: verify,
+        getContractorInfo: getContractorInfo,
+        init:init
+    };
+})();
+
+$(document).ready(function () {
+        contractorNRAction.verify();
+        contractorNRAction.getContractorInfo();
+        contractorNRAction.init();
+    }
+);

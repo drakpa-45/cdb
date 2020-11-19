@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ECCertificatePage1" pageWidth="595" pageHeight="900" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="applNo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ecHeader" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="seal" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sign" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select d.`Application_Number`,p.`First_Name`,p.`Mobile_Phone_Number`,p.`CID_Reg_Dept_Number`,d.`Pro_Estb_Name` Estb_Name,IF(ec.`Ec_Number` IS NULL,'New',d.`License_Number`) AS License_Number ,
+DATE_FORMAT(d.`License_Expiry_Date`,'%D /%b, %Y')EC_Expiry_Date,DATE_FORMAT(d.`License_Issue_Date`,'%D %b, %Y') App_Approval_Date,d.`License_Number` EC_Registration_No,
+am.`Activity_Name`,concat(v.`Village_Name`,', ',g.`Gewog_Name`) Location,dz.`Dzongkhag_Name`
+from t_license_dtls d
+left join t_activity_application a on a.`License_Number`=d.`License_Number`
+left join t_activity_master am on am.`Activity_Serial_No`=a.`Activity_Sl_No`
+left join t_village_lookup v on v.`Village_Serial_No`=d.`Estb_Village_Serial_No`
+left join t_gewog_lookup g on g.`Gewog_Serial_No`=v.`Gewog_Serial_No`
+left join t_dzongkhag_lookup dz on dz.`Dzongkhag_Serial_No`=g.`Dzongkhag_Serial_No`
+left join t_licn_personal_dtls p on p.`License_Number`=d.`License_Number`
+left join t_license_ec ec on d.`License_Number`=ec.`License_Number`
+where d.`Application_Number` = $P{applNo}]]>
+	</queryString>
+	<field name="Application_Number" class="java.lang.String"/>
+	<field name="First_Name" class="java.lang.String"/>
+	<field name="Mobile_Phone_Number" class="java.lang.String"/>
+	<field name="CID_Reg_Dept_Number" class="java.lang.String"/>
+	<field name="Estb_Name" class="java.lang.String"/>
+	<field name="License_Number" class="java.lang.String"/>
+	<field name="EC_Expiry_Date" class="java.lang.String"/>
+	<field name="App_Approval_Date" class="java.lang.String"/>
+	<field name="EC_Registration_No" class="java.lang.String"/>
+	<field name="Activity_Name" class="java.lang.String"/>
+	<field name="Location" class="java.lang.String"/>
+	<field name="Dzongkhag_Name" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="104" splitType="Stretch">
+			<image>
+				<reportElement x="2" y="-1" width="555" height="104"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{ecHeader}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="681" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="21" width="555" height="22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[ENVIRONMENTAL CLEARANCE]]></text>
+			</staticText>
+			<line>
+				<reportElement x="10" y="156" width="536" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="28" y="313" width="528" height="29"/>
+				<textElement/>
+				<text><![CDATA[Inform EU, DoI, MoEA and any other relevant authorities of any unanticipated or unforeseen chance-find of any precious metals or minerals or articles, that have economic, cultural, religious, archeological, and/or ecological importance; ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="187" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[1. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="156" width="528" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[I.  General
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="271" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[3. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="187" width="528" height="56"/>
+				<textElement/>
+				<text><![CDATA[Comply with provisions of the National Environment Protection Act 2007, Environmental Assessment Act 2000 and its Regulation 2016, Waste Prevention & Management Act of Bhutan 2009 and its Regulation 2016, The Water Act of Bhutan 2011 and its Regulation 2014 and Revised Regulation on the Control of Ozone Depleting Substances (ODS) 2008;
+
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="341" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[6.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="242" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[2.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="313" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[5.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="298" width="528" height="16"/>
+				<textElement/>
+				<text><![CDATA[Restore the damage of any public or private properties caused by the development and operation of the plant;]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="242" width="528" height="29"/>
+				<textElement/>
+				<text><![CDATA[Ensure that development and operation of plant is in line with Environmental Impact Assessment or Initial Environmental Examination report submitted for EC;]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="270" width="528" height="29"/>
+				<textElement/>
+				<text><![CDATA[Ensure that local communities, properties and any religious, cultural, historic and ecologically important sites are not adversely affected by the development and operation of plant;]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="341" width="528" height="16"/>
+				<textElement/>
+				<text><![CDATA[Erect a signboard at the take-off point of the main entry of the plant stating the name of the plant and contact address.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="298" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[4.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="171" width="528" height="17"/>
+				<textElement verticalAlignment="Top">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[   The holder shall: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="510" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[1. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="463" width="528" height="17"/>
+				<textElement/>
+				<text><![CDATA[The holder shall comply with the existing Environmental Standards;]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="542" width="528" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IV. Pollution control]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="46" y="510" width="510" height="17"/>
+				<textElement/>
+				<text><![CDATA[Not import and use secondhand equipment and machineries; and ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="495" width="528" height="17"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[   The holder shall: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="618" width="528" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[V. Protection and management of water resources]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="47" y="558" width="509" height="17"/>
+				<textElement/>
+				<text><![CDATA[Ensure that adequate pollution abatement measures are put in place in the plant;]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="447" width="528" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[II. Environmental standards
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="479" width="528" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[III. Import and use of secondhand equipment and ODS
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="356" width="528" height="28"/>
+				<textElement/>
+				<text><![CDATA[Comply with provisions of the Labour and Employment Act of Bhutan 2007 and Regulation on Occupational Health, Safety and Welfare 2012 with regard to occupational health and safety and firefighting facilities;]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="356" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[7.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="383" width="528" height="16"/>
+				<textElement/>
+				<text><![CDATA[Ensure that general housekeeping is maintained at all times;]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="383" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[8.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="398" width="528" height="16"/>
+				<textElement/>
+				<text><![CDATA[Be solely responsible for any dispute arising from the operation of the plant; and]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="398" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[9.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="412" width="528" height="36"/>
+				<textElement/>
+				<text><![CDATA[Ensure that a copy of this Environment Clearance is displayed at site and produced as and when demanded by officials of the relevant government agencies, such as EU/NECS/RTIO/Dzongkhag Administration.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="413" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[10.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="45" y="526" width="510" height="17"/>
+				<textElement/>
+				<text><![CDATA[Ensure that import and use ODS are in line with the Revised Regulation on the Control of ODS 2008.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="527" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[2. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="558" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[1. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="47" y="574" width="509" height="17"/>
+				<textElement/>
+				<text><![CDATA[Ensure that the noise does not exceed the National permissible level at all times; and]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="575" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[2. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="589" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[3. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="46" y="590" width="509" height="29"/>
+				<textElement/>
+				<text><![CDATA[Comply with provisions of the Regulation on Occupational Health, Safety and Welfare 2012 with regard to noise pollution and take appropriate measures to minimize noise generation.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="634" width="528" height="17"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[   The holder shall: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="47" y="650" width="509" height="16"/>
+				<textElement/>
+				<text><![CDATA[Ensure that development and operation of the plant does not disrupt the water flow and pollute the water bodies; and]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="650" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[1. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="665" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[2. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="48" y="665" width="509" height="16"/>
+				<textElement/>
+				<text><![CDATA[Ensure that 30 meter or 100 feet buffer is maintained  from the water resources at all times.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="2" y="3" width="216" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{EC_Registration_No}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="445" y="3" width="110" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{App_Approval_Date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="367" y="105" width="178" height="18"/>
+				<textElement verticalAlignment="Top">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Location}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="457" y="121" width="100" height="22"/>
+				<textElement verticalAlignment="Top">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Dzongkhag_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="58" y="143" width="78" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{License_Number}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="218" y="143" width="78" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Mobile_Phone_Number}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="416" y="3" width="30" height="18"/>
+				<textElement/>
+				<text><![CDATA[Date :]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="188" y="83" width="150" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Activity_Name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="63" width="454" height="20"/>
+				<textElement/>
+				<text><![CDATA[(if industry required waste abstraction), this Environment Clearance (EC) is hereby issued to ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="103" width="366" height="20"/>
+				<textElement/>
+				<text><![CDATA[in State Reserve Forest Land or Private land or Industrial estate located at]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="123" width="509" height="20"/>
+				<textElement/>
+				<text><![CDATA[measuring(----acre) along with ancillary facilities (if applicable) ------road(Kms),labour colony, under]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="143" width="56" height="20"/>
+				<textElement/>
+				<text><![CDATA[License No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="136" y="143" width="76" height="20"/>
+				<textElement/>
+				<text><![CDATA[and Contact No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="296" y="143" width="139" height="20"/>
+				<textElement/>
+				<text><![CDATA[with the following]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="43" width="544" height="20"/>
+				<textElement/>
+				<text><![CDATA[In accordance with section 34.1 of the Environmental Assessment Act 2000 and section 34 of the Water Act 2011]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="83" width="186" height="20"/>
+				<textElement/>
+				<text><![CDATA[for the development and operation of ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="435" y="63" width="120" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{First_Name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="18" y="4" width="528" height="30" forecolor="#666666"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Tel # 332124/336199 & Fax # 327891: P.O. Box # 141, Thimphu Bhutan]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,90 @@
+/*
+.breadcrumb {
+    background: #ddd;
+    display: inline-block;
+    padding: 1px 18px 1px 1px;
+
+}
+
+.breadcrumb li {
+    display: inline-block;
+    background: white;
+    padding: 0;
+    position: relative;
+    min-width:50px;
+    text-decoration: none;
+    -webkit-clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 50%, calc(100% - 15px) 100%, 0 100%, 15px 50%);
+    clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 50%, calc(100% - 15px) 100%, 0 100%, 15px 50%);
+    margin-right: -13px;
+}
+
+.breadcrumb li#last {
+    -webkit-clip-path: polygon(0 0, calc(100% - 0px) 0, 100% 50%, calc(100% - 0px) 100%, 0 100%, 15px 50%);
+    clip-path: polygon(0 0, calc(100% - 0px) 0, 100% 50%, calc(100% - 0px) 100%, 0 100%, 15px 50%);
+}
+
+.breadcrumb li:hover {
+    color: white;
+    background: #fff;
+}
+
+*/
+/* first link should not have anything cliped on the left side *//*
+
+.breadcrumb li:first-child {
+    -webkit-clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 50%, calc(100% - 15px) 100%, 0 100%);
+    clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 50%, calc(100% - 15px) 100%, 0 100%);
+}
+
+.label{
+    height: 100%;
+    width: 100%;
+}
+   
+   */
+
+body
+{
+    counter-reset: Serial;           /* Set the Serial counter to 0 */
+}
+
+table
+{
+    border-collapse: separate;
+}
+
+.auto-index tbody td:first-child:before
+{
+    counter-increment: Serial;      /* Increment the Serial counter */
+    content: counter(Serial); /* Display the counter */
+}
+
+.error{
+    border-color: #ff0000;
+}
+
+.modal-div .form-group {
+    margin-bottom: 0.25rem;
+}
+
+.form_val{
+    background-color: #e9ecef;
+    font-weight: bold;
+}
+
+tr.strikeout td:before {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 2%;
+    border-bottom: 1px solid red;
+    width: 96%;
+}
+
+tr.strikeout td:after {
+    content: "\00B7";
+    font-size: 1px;
+}
+/*.table thead{
+    background-color: #898da0;
+}*/

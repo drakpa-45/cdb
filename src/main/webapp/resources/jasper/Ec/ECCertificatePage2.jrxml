@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ECCertificatePage1" pageWidth="595" pageHeight="1200" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="911"/>
+	<parameter name="applNo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ecHeader" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="seal" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sign" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select DATE_FORMAT(d.`License_Expiry_Date`,'%D /%b, %Y')EC_Expiry_Date,DATE_FORMAT(d.`License_Issue_Date`,'%D %b, %Y') App_Approval_Date,d.`Pro_Estb_Name`,
+(CASE WHEN d.`Scale_of_Investment`='S' THEN 'Small' WHEN d.`Scale_of_Investment`='M' THEN 'Medium' WHEN d.`Scale_of_Investment`='L' THEN 'Large' ELSE '' END)scale,IF(d.`Additional_Terms` IS NULL,'N/A',d.`Additional_Terms`) AS Additional_terms_cond
+from t_license_dtls d
+where d.`Application_Number`= $P{applNo}]]>
+	</queryString>
+	<field name="EC_Expiry_Date" class="java.lang.String"/>
+	<field name="App_Approval_Date" class="java.lang.String"/>
+	<field name="Pro_Estb_Name" class="java.lang.String"/>
+	<field name="scale" class="java.lang.String"/>
+	<field name="Additional_terms_cond" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="104" splitType="Stretch">
+			<image>
+				<reportElement x="1" y="0" width="556" height="104"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{ecHeader}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="972" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="230" width="528" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VIII. Management of raw materials and finished products
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="36" y="246" width="518" height="30"/>
+				<textElement/>
+				<text><![CDATA[The holder shall ensure appropriate measures are put in place for handling and storage of raw materials and finished products to avoid fugitive emissions, if any.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="380" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[ 2. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="336" width="528" height="17"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[   The holder shall: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="352" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[1. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="352" width="519" height="30"/>
+				<textElement/>
+				<text><![CDATA[Ensure that the effective day-to-day monitoring of the EC terms and conditions are carried out by the environmental unit or designated environment focal person; and]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="380" width="519" height="30"/>
+				<textElement/>
+				<text><![CDATA[Maintain proper records on wastes generated and its management, stating types (industrial and general wastes), quantities and characteristic and submit to EU, DoI, MoEA annually.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="320" width="528" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X. Monitoring and reporting]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="488" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[ 2. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="440" width="518" height="50"/>
+				<textElement/>
+				<text><![CDATA[Ensure that renewal of this EC is processed at least three months prior to its expiry along with a copy EC, license and a report on the implementation of its terms and conditions failing which the applicant shall be liable for penalty as per the Section 76 of RECOP 2016; ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="489" width="519" height="33"/>
+				<textElement/>
+				<text><![CDATA[Obtain prior approval from EU, DoI, MoEA for any modification (up-gradation, activity conversion) including change of project name and location change to the existing proposal/application; and]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="425" width="528" height="17"/>
+				<textElement verticalAlignment="Top">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[   The holder shall: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="440" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[1. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="409" width="528" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[XI. Renewal and modification]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="552" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[1. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="580" width="519" height="30"/>
+				<textElement/>
+				<text><![CDATA[The EC shall be subject to periodic review and modifications as per Article 25 of the EA Act 2000, without any liability on the part of the Royal Government.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="580" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[ 2. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="536" width="528" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[XlI. Reservation ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="552" width="519" height="30"/>
+				<textElement/>
+				<text><![CDATA[The EU/DoI/MoEA may stop the activity or impose additional terms and conditions, as may be deemed necessary; and ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="609" width="555" height="40"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[The holder may adopt best practices in executing these terms and conditions to avoid adverse environmental impacts. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[ENVIRONMENTAL CLEARANCE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="664" width="528" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Special Terms And Condition]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="689" width="528" height="271"/>
+				<textElement markup="html"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Additional_terms_cond}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="110" width="528" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VII.Management of excavated materials, industrial waste, and run-off
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="126" width="528" height="17"/>
+				<textElement verticalAlignment="Top">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[   The holder shall: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="142" width="518" height="45"/>
+				<textElement/>
+				<text><![CDATA[Dispose excess excavated materials generated during construction of access road and development and operation of plant only at the pre-identified dumpsite designated and approved by the Dzongkhag Administration/Thromde/Municipal Authority; ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="142" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[1. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="36" y="186" width="519" height="30"/>
+				<textElement/>
+				<text><![CDATA[Ensure that industrial waste generated during operation of plant is not mixed with domestic waste, and is dumped separately at pre-identified approved dumpsite; and]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="186" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[ 2. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="36" y="215" width="518" height="16"/>
+				<textElement/>
+				<text><![CDATA[Put appropriate measures to avoid erosion and landslides during construction phase, if any.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="215" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[ 3. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="275" width="528" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IX. Implementation plan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="34" y="291" width="518" height="30"/>
+				<textElement/>
+				<text><![CDATA[The holder shall prepare a detailed implementation plan focusing on the Implementation of terms and conditions of this EC and submit to EU within three (03) months from the date of issue of this EC.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="38" y="521" width="518" height="16"/>
+				<textElement/>
+				<text><![CDATA[Submit all the aforementioned reports to EU, DoI, MoEA during renewal of EC.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="520" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[ 3. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="19" width="528" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VI. Waste prevention and management
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="36" width="528" height="17"/>
+				<textElement verticalAlignment="Top">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[   The holder shall: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="39" y="51" width="518" height="45"/>
+				<textElement/>
+				<text><![CDATA[Manage wastes generated from the development and operation of plant (Industrial site, labour camps, offices etc.) with the application of 4R (Reduce, Reuse, Recycle, Responsibility) principle and other environmentally friendly methods of waste management; and]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="52" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[1. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="95" width="14" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[ 2. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="39" y="95" width="518" height="16"/>
+				<textElement/>
+				<text><![CDATA[Ensure that import and use of hazardous wastes are strictly prohibited.]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="26" y="3" width="528" height="30" forecolor="#666666"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Tel # 332124/336199 & Fax # 327891: P.O. Box # 141, Thimphu Bhutan]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,829 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ConsultantCertificate" language="groovy" pageWidth="650" pageHeight="1000" columnWidth="610" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0000000000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="288"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#F0FFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TH" mode="Opaque" backcolor="#73B0E6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TH" mode="Opaque" backcolor="#8FAFCC">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TD" mode="Transparent" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_TH" mode="Opaque" backcolor="#8FAFCC">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 6">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 6_TH" mode="Opaque" backcolor="#8FAFCC">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 6_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 6_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 7">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 7_TH" mode="Opaque" backcolor="#8FAFCC">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 7_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 7_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 8">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 8_TH" mode="Opaque" backcolor="#8FAFCC">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 8_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 8_TD" mode="Transparent" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 9">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 9_TH" mode="Opaque" backcolor="#8FAFCC">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 9_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 9_TD" mode="Transparent" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 10">
+		<box>
+			<pen lineWidth="1.0" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 10_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 10_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 10_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 11">
+		<box>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 11_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 11_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 11_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 12">
+		<box>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 12_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 12_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 12_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Civil">
+		<parameter name="applicationNo" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+  (
+    CASE
+      WHEN Eng_Services = 'C1'
+      THEN 'C1 - Structural'
+      WHEN Eng_Services = 'C2'
+      THEN 'C2 - Geo-tech Studies'
+      WHEN Eng_Services = 'C3'
+      THEN 'C3 - Social Studies & Environmental Studies'
+      WHEN Eng_Services = 'C4'
+      THEN 'C4 - Road & Bridges'
+      WHEN Eng_Services = 'C5'
+      THEN 'C5 - Irrigation & Hydraulics'
+      WHEN Eng_Services = 'C6'
+      THEN 'C6 - Construction Management & Site Supervision'
+      ELSE 'C7 - Services: Water supply, Sanitation,Sewerage, Solid Waste and Surveying'
+    END
+  ) Eng_Services,
+  Eng_Services_Value
+FROM
+  t_engineering_services WHERE Application_Number = $P{applicationNo}]]>
+		</queryString>
+		<field name="Eng_Services" class="java.lang.String"/>
+		<field name="Eng_Services_Value" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="Electrical">
+		<parameter name="applicationNo" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+  (
+    CASE
+      WHEN Eleng_Services = 'E1'
+      THEN 'E1 - Rural Electrification &
+        Transmission Line
+'
+      WHEN Eleng_Services = 'E2'
+      THEN 'E2 - Urban Electrification &
+        Communication and Scada
+'
+      WHEN Eleng_Services = 'E3'
+      THEN 'E3 - Sub-Station'
+      WHEN Eleng_Services = 'E4'
+      THEN 'E4 - Major Hydro Power Construction'
+      WHEN Eleng_Services = 'E5'
+      THEN 'E5 - Small Hydro Power Construction'
+      WHEN Eleng_Services = 'E6'
+      THEN 'E6 - Mini Hydro Power Construction'
+      ELSE 'E7 - House Wiring'
+    END
+  ) Eleng_Services,
+  Eleng_Services_Value
+FROM
+  t_elec_engineering_services WHERE Application_Number = $P{applicationNo}]]>
+		</queryString>
+		<field name="Eleng_Services" class="java.lang.String"/>
+		<field name="Eleng_Services_Value" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="Architect">
+		<parameter name="applicationNo" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+  (
+    CASE
+      WHEN Arch_Services = 'A1'
+      THEN 'A1 - Architectural and Interior Design'
+      WHEN Arch_Services = 'A2'
+      THEN 'A2 - Urban Planning'
+      ELSE 'A3 - Landscaping and Site Development'
+    END
+  ) Arch_Services,
+  Arch_Services_Value
+FROM
+  t_architectural_services
+  WHERE Application_Number = $P{applicationNo}]]>
+		</queryString>
+		<field name="Arch_Services" class="java.lang.String"/>
+		<field name="Arch_Services_Value" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="Partners">
+		<parameter name="applicationNo" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select Name from t_reg_appl_owner
+Where Application_Number=$P{applicationNo} and Nationality IS NOT NULL]]>
+		</queryString>
+		<field name="Name" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="applicationNo" class="java.lang.String"/>
+	<parameter name="topLeftBorder" class="java.lang.String"/>
+	<parameter name="topRightBorder" class="java.lang.String"/>
+	<parameter name="bottomLeftBorder" class="java.lang.String"/>
+	<parameter name="bottomRightBorder" class="java.lang.String"/>
+	<parameter name="topWidth" class="java.lang.String"/>
+	<parameter name="bottomWidth" class="java.lang.String"/>
+	<parameter name="rightSide" class="java.lang.String"/>
+	<parameter name="leftSide" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="background" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["F:\\Enhancement of CDB\\workspace\\CDB\\WebContent\\Pages\\cdb\\certificate\\Consultant\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT A.*,B.* FROM (SELECT
+  a.Application_Number,
+  a.CDB_Number,
+  a.App_Submission_Date,
+  a.App_Approval_Date,
+  (SELECT
+    Owner_Name
+  FROM
+    t_reg_appl_owner
+   WHERE Application_Number=a.Application_Number AND Nationality IS NULL ) AS Owner_Name,
+  (SELECT
+    CID_Number FROM t_reg_appl_owner
+  WHERE Application_Number=a.Application_Number AND Nationality IS NULL )AS CID_Number,
+  (SELECT
+    ADDDATE(App_Approval_Date, 1098)
+  FROM
+    t_registration_con_application
+  WHERE Application_Number = a.Application_Number) AS expiry_date
+FROM
+  t_registration_con_application a
+WHERE Application_Number =  $P{applicationNo}) A,
+(SELECT GROUP_CONCAT(o.Name SEPARATOR ',') AS pname FROM
+    t_owner_dtls o
+   WHERE o.CDB_Number IN (SELECT CDB_Number FROM t_registration_con_application app WHERE app.Application_Number=$P{applicationNo}) AND o.Identifier='p')B]]>
+	</queryString>
+	<field name="Application_Number" class="java.lang.String"/>
+	<field name="CDB_Number" class="java.lang.String"/>
+	<field name="App_Submission_Date" class="java.sql.Date"/>
+	<field name="App_Approval_Date" class="java.sql.Date"/>
+	<field name="Owner_Name" class="java.lang.String"/>
+	<field name="CID_Number" class="java.lang.String"/>
+	<field name="expiry_date" class="java.sql.Date"/>
+	<field name="pname" class="java.lang.String"/>
+	<background>
+		<band height="854">
+			<image scaleImage="FillFrame" isUsingCache="false">
+				<reportElement mode="Opaque" x="47" y="246" width="536" height="520"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{background}]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<detail>
+		<band height="960" splitType="Stretch">
+			<image>
+				<reportElement x="512" y="858" width="101" height="101"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{bottomRightBorder}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="509" y="0" width="101" height="101"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{topRightBorder}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="0" y="859" width="101" height="101"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{bottomLeftBorder}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="104" y="950" width="408" height="9"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{bottomWidth}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="101" y="0" width="408" height="9"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{topWidth}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="101" height="101"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{topLeftBorder}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="0" y="102" width="8" height="761"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{leftSide}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="601" y="102" width="8" height="761"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{rightSide}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="18" y="426" width="561" height="20" forecolor="#3018AB"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[This is to certify that M/s.……………………………………………………..………..............bering CID Number:
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="446" width="561" height="20" forecolor="#3018AB"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[......................................................is a registered Consultancy Firm with the Construction Development Board, ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="466" width="558" height="20" forecolor="#3018AB"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[and M/s.......................................................................................................................................As Partner. ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="208" y="847" width="200" height="1" forecolor="#3018AB"/>
+			</line>
+			<staticText>
+				<reportElement x="250" y="849" width="116" height="20" forecolor="#3018AB"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[( Director General )
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="195" y="868" width="250" height="20" forecolor="#3018AB"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Construction Development Board
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="907" width="411" height="20" forecolor="#3018AB"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Tel. No: +975-2-326035 / 333502  Fax No: +975-2-321989  : Post Box # 1349
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="927" width="411" height="20" forecolor="#3018AB"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[E-mail:  cdb@druknet.bt  : Web address : www.cdb.gov.bt
+]]></text>
+			</staticText>
+			<image>
+				<reportElement mode="Transparent" x="79" y="9" width="442" height="272"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="170" y="425" width="299" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Owner_Name}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="179" y="315" width="179" height="1" forecolor="#3018AB"/>
+			</line>
+			<line>
+				<reportElement x="180" y="342" width="179" height="1" forecolor="#3018AB"/>
+			</line>
+			<line>
+				<reportElement x="181" y="369" width="179" height="1" forecolor="#3018AB"/>
+			</line>
+			<line>
+				<reportElement x="181" y="400" width="179" height="1" forecolor="#3018AB"/>
+			</line>
+			<line>
+				<reportElement x="384" y="410" width="199" height="1" forecolor="#3018AB"/>
+			</line>
+			<line>
+				<reportElement x="15" y="281" width="580" height="1"/>
+				<graphicElement>
+					<pen lineWidth="2.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="18" y="422" width="575" height="1"/>
+				<graphicElement>
+					<pen lineWidth="2.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="17" y="282" width="1" height="141"/>
+				<graphicElement>
+					<pen lineWidth="2.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="593" y="281" width="1" height="141"/>
+				<graphicElement>
+					<pen lineWidth="2.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="29" y="294" width="149" height="20" forecolor="#3018AB"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CDB Registration Number : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="179" y="294" width="170" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CDB_Number}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="29" y="322" width="149" height="20" forecolor="#3018AB"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Initial Registration Date     : ]]></text>
+			</staticText>
+			<textField pattern="MM/dd/yyyy">
+				<reportElement x="179" y="322" width="170" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{App_Submission_Date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="29" y="351" width="149" height="20" forecolor="#3018AB"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Revalidation Date               : ]]></text>
+			</staticText>
+			<textField pattern="MM/dd/yyyy">
+				<reportElement x="180" y="351" width="170" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{App_Approval_Date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="29" y="380" width="149" height="20" forecolor="#3018AB"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Registration Expiry Date    : ]]></text>
+			</staticText>
+			<textField pattern="MM/dd/yyyy">
+				<reportElement x="180" y="380" width="170" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{expiry_date}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="366" y="282" width="1" height="141"/>
+				<graphicElement>
+					<pen lineWidth="2.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="394" y="298" width="160" height="20" forecolor="#3018AB"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[ Proprietors Signature
+
+]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement key="table 4" style="table 3_TD" mode="Transparent" x="8" y="533" width="210" height="20"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Civil">
+						<datasetParameter name="applicationNo">
+							<datasetParameterExpression><![CDATA[$P{applicationNo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="214">
+						<jr:detailCell style="table 4_TD" height="26" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="214" height="26" backcolor="#F0F0F0"/>
+								<textElement>
+									<font size="10" isBold="false"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$F{Eng_Services}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="92">
+						<jr:detailCell style="table 4_TD" height="26" rowSpan="1">
+							<textField>
+								<reportElement mode="Transparent" x="0" y="0" width="92" height="26"/>
+								<textElement textAlignment="Center">
+									<font size="10" isBold="false"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$F{Eng_Services_Value}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement key="table 8" style="table 8" x="315" y="533" width="219" height="20"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Electrical">
+						<datasetParameter name="applicationNo">
+							<datasetParameterExpression><![CDATA[$P{applicationNo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="200">
+						<jr:detailCell style="table 8_TD" height="26" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="200" height="26"/>
+								<textElement>
+									<font size="10"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$F{Eleng_Services}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="86">
+						<jr:detailCell style="table 8_TD" height="26" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="86" height="26"/>
+								<textElement textAlignment="Center">
+									<font size="10"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$F{Eleng_Services_Value}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement key="table 9" style="table 9" x="161" y="745" width="267" height="20"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Architect">
+						<datasetParameter name="applicationNo">
+							<datasetParameterExpression><![CDATA[$P{applicationNo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="221">
+						<jr:detailCell style="table 9_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="221" height="20"/>
+								<textElement/>
+								<textFieldExpression class="java.lang.String"><![CDATA[$F{Arch_Services}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="87">
+						<jr:detailCell style="table 9_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="87" height="20"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression class="java.lang.String"><![CDATA[$F{Arch_Services_Value}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement x="315" y="512" width="286" height="20" forecolor="#3018AB"/>
+				<box leftPadding="0">
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[ELECTRICAL ENGINEERING SERVICES
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="161" y="725" width="308" height="20" forecolor="#3018AB"/>
+				<box leftPadding="0">
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[ARCHITECTURAL SERVICES
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="512" width="307" height="20" forecolor="#3018AB"/>
+				<box leftPadding="0">
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[CIVIL ENGINEERING SERVICES
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="21" y="446" width="149" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CID_Number}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="17" y="492" width="554" height="20" forecolor="#3018AB"/>
+				<textElement>
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[The Firm is registered in the following  categories:]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement key="table 12" style="table 12" x="445" y="342" width="90" height="55"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Partners">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90">
+						<jr:tableHeader style="table 12_TH" height="30"/>
+						<jr:tableFooter style="table 12_TH" height="30"/>
+						<jr:columnHeader style="table 12_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement/>
+								<text><![CDATA[Name]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 12_CH" height="30"/>
+						<jr:detailCell style="table 12_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement/>
+								<textFieldExpression class="java.lang.String"><![CDATA[$F{Name}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<textField>
+				<reportElement x="95" y="466" width="299" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{pname}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

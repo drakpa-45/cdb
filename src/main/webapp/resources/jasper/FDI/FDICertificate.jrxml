@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ECCertificatePage1" language="groovy" pageWidth="595" pageHeight="900" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="480"/>
+	<parameter name="applNo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ecHeader" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="seal" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sign" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT a.`License_Number`,p.`Company_Name`,GROUP_CONCAT(IF(i.`Investor_Name` IS NULL || i.`Investor_Name`='',i.`Investor_Company`,i.`Investor_Name`) SEPARATOR ', ')  investors,
+a.`Certificate_Approve_Date`,a.`Signatory_Name`
+ FROM t_licn_application a LEFT JOIN t_licn_appl_personal p ON a.`Application_Number`=p.`Application_Number`
+LEFT JOIN `t_investor_application` i ON i.`Application_Number`=a.`Application_Number`
+ WHERE a.`Application_Number` = $P{applNo}]]>
+	</queryString>
+	<field name="License_Number" class="java.lang.String"/>
+	<field name="Company_Name" class="java.lang.String"/>
+	<field name="investors" class="java.lang.String"/>
+	<field name="Certificate_Approve_Date" class="java.sql.Date"/>
+	<field name="Signatory_Name" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="104" splitType="Stretch">
+			<image>
+				<reportElement x="2" y="-1" width="555" height="104"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{ecHeader}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="681" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="1" width="555" height="22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Serif" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Foreign Direct Investment Registration Certificate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="136" width="113" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[the proposed project.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="61" width="196" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[This Registration Certificate is issued to]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="111" width="553" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[to commence preliminary project activities including preparation of Detailed Project Report/Feasibility Report for ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="420" y="25" width="137" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{License_Number}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="294" y="24" width="124" height="22"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font fontName="Serif" size="11" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Certificate No :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="200" y="60" width="220" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Company_Name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="430" y="61" width="127" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[proposed by]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="4" y="86" width="553" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{investors}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="161" width="553" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[This certificate is issued based on the information provided in the FDI Registration Application Form and is valid for]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="187" width="553" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[a period of one year subject to the investors meeting the conditions listed on the back of this Certificate.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="551" width="124" height="22"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font size="11" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Dated:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="139" y="551" width="109" height="22"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{Certificate_Approve_Date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="383" y="470" width="100" height="20"/>
+				<textElement>
+					<font fontName="Serif" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Signatory_Name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="372" y="497" width="124" height="22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Serif" size="11" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[(Chief Industries Officer)
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="524" width="179" height="22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Serif" size="11" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[DEPARTMENT OF INDUSTRY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="403" y="551" width="143" height="22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Serif" size="11" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[FDI Division]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="18" y="4" width="528" height="30" forecolor="#666666"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Tel # 332124/336199 & Fax # 327891: P.O. Box # 141, Thimphu Bhutan]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

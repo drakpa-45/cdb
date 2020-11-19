@@ -1,0 +1,8 @@
+<sitemesh>
+    <mapping path="/*" decorator="/layout/layout-main.jsp"/>
+    <mapping path="*emptylayout*" decorator="/layout/empty-layout.jsp"/>
+    <mapping path="/login" decorator="/layout/layout-login.jsp"/>
+    <mapping path="/admin*" decorator="/layout/layout-admin.jsp"/>
+    <mapping path="/public*" decorator="/layout/layout-public-user.jsp"/>
+    <mapping path="/acknowledgement*" decorator="/layout/empty-layout.jsp"/>
+</sitemesh>

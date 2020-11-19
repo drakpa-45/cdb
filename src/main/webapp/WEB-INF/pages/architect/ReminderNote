@@ -1,0 +1,11 @@
+Tables Changed (alter):
+    added field called Mode_Of_Payment in `crparchitectservicepayment` and `crparchitectregistrationpayment`
+
+New Table Added:
+    cmnundertaking
+
+Change in foreigh key mappings:
+    from crparchitect:
+        removed following foreign key relation:
+            - `crparchitect_ibfk_14` FOREIGN KEY (`CreatedBy`) REFERENCES `sysuser` (`Id`)
+            - `crparchitect_ibfk_15` FOREIGN KEY (`CrpArchitectId`) REFERENCES `crparchitectfinal` (`Id`) ON DELETE CASCADE

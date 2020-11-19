@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tech_authorization" language="groovy" pageWidth="750" pageHeight="1100" whenNoDataType="AllSectionsNoDetail" columnWidth="710" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" isIgnorePagination="true">
+	<property name="ireport.zoom" value="1.0000000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="144"/>
+	<parameter name="name" class="java.lang.String"/>
+	<parameter name="Sign_Date" class="java.lang.String"/>
+	<parameter name="RegistrationNo" class="java.lang.String"/>
+	<parameter name="PassportPhoto" class="java.lang.String"/>
+	<parameter name="Company_Logo1" class="java.lang.String"/>
+	<parameter name="Company_Department" class="java.lang.String"/>
+	<parameter name="Company_Logo2" class="java.lang.String"/>
+	<parameter name="location" class="java.lang.String"/>
+	<parameter name="fromDate" class="java.lang.String"/>
+	<parameter name="toDate" class="java.lang.String"/>
+	<parameter name="cpName" class="java.lang.String"/>
+	<parameter name="cpRegistrationNo" class="java.lang.String"/>
+	<parameter name="WATER_MARK" class="java.lang.String"/>
+	<parameter name="firmName" class="java.lang.String"/>
+	<parameter name="taType" class="java.lang.String"/>
+	<parameter name="ApplicationNumber" class="java.lang.String"/>
+	<parameter name="regDate" class="java.lang.String"/>
+	<background>
+		<band height="964">
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="5" y="5" width="700" height="953"/>
+			</rectangle>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="16" y="0" width="680" height="964"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{WATER_MARK}]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement mode="Transparent" x="10" y="9" width="690" height="944"/>
+			</rectangle>
+		</band>
+	</background>
+	<title>
+		<band height="142" splitType="Stretch">
+			<image>
+				<reportElement x="22" y="19" width="107" height="98"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{Company_Logo1}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="580" y="17" width="107" height="98"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{Company_Logo2}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement mode="Transparent" x="207" y="46" width="283" height="23" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Drug Regulatory Authority]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="214" y="69" width="267" height="23" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Royal Government of Bhutan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="234" y="92" width="231" height="23" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[P.O. Box NO. 1556]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="233" y="113" width="227" height="22" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Thimpu, Bhutan]]></text>
+			</staticText>
+			<image>
+				<reportElement x="272" y="17" width="251" height="29"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{Company_Department}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="869" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="72" y="138" width="29" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ No: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="102" y="138" width="184" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{RegistrationNo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="72" y="414" width="560" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[1.     The authorization and licence shall be displayed in the premises of all employers, employees and]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="72" y="390" width="137" height="24" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conditions of Licensee:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="98" y="763" width="91" height="24"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{Sign_Date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="71" y="518" width="561" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[3.     Only registered medical products shall be sold.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="502" y="763" width="151" height="24" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  Drug Controller]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="384" y="196" width="118" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="72" y="196" width="20" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[M/s]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="312" y="196" width="72" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(proprietor:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="71" y="287" width="166" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Name of Competent Person]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="237" y="287" width="302" height="26"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{cpName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="71" y="312" width="239" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Registration number of Competent Person: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="310" y="313" width="228" height="26"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{cpRegistrationNo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="98" y="570" width="272" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Bhutan Medicine Rules and Regulations.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="72" y="466" width="560" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[2.     The license shall inform the Authority in writing in case of any change in the Competent Person(s)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="98" y="492" width="534" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[and in the location and ownership of the firm.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="70" y="544" width="562" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[4.     The dispensing of the drugs shall be carried by the Competent Person inline with the exiting ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="69" y="596" width="563" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[5.     The licensee shall not sell drugs during the period of suspension of liscence]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="69" y="640" width="270" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[This authorization is granted vide application no.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="549" y="640" width="83" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[of M/s]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="98" y="440" width="203" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[customer to see.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="134" y="67" width="445" height="32" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AUTHORIZATION TO SELL OR DISTRIBUTE MEDICAL PRODUCT BY  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="70" y="39" width="418" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Regulation No. :       122]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="69" y="19" width="418" height="26" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Form No. :                IVA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="262" width="109" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Name of the Firm]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="180" y="262" width="359" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{firmName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="301" y="99" width="100" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{taType}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="92" y="196" width="221" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{firmName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="504" y="196" width="142" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[) is hereby authorized]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="72" y="222" width="239" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[to sell or distribute the medical products by ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="311" y="222" width="76" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{taType}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="387" y="222" width="73" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[at premises]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="460" y="222" width="245" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{location}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="71" y="351" width="215" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[The authorization shall be in force from ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="286" y="351" width="73" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{fromDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="351" width="73" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{toDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="359" y="351" width="11" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[to]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="59" y="763" width="39" height="24" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ Date : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="341" y="640" width="100" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ApplicationNumber}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="439" y="640" width="42" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[dated]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="480" y="640" width="69" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{regDate}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="70" y="666" width="221" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{firmName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
