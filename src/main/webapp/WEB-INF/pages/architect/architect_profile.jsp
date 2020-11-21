@@ -102,7 +102,7 @@
                                         <table class="table table-condensed">
                                             <tr>
                                                 <td><strong>Qualification: </strong></td>
-                                                <td>${App_Details.qualificationId}</td>
+                                                <td>${App_Details.qualification}</td>
                                             </tr>
                                             <tr>
                                                 <td><strong>Year of Graduation: </strong></td>

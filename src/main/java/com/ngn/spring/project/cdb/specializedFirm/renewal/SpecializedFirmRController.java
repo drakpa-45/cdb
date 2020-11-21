@@ -87,12 +87,12 @@ public class SpecializedFirmRController extends BaseController {
 
     @RequestMapping(value ="/save", method = RequestMethod.POST)
     public String save(HttpServletRequest request,SpFirmDTO spFirmDTO, RenewalServiceType renewalService
-            ,RedirectAttributes redirectAttributes) throws Exception{
+            ,RedirectAttributes redirectAttributes) throws Exception {
         loggedInUser = gLoggedInUser(request);
         responseMessage =cRenewalService.save(spFirmDTO,renewalService,loggedInUser);
-        if(responseMessage.getStatus() == 1){
+        if(responseMessage.getStatus() == 1) {
             redirectAttributes.addFlashAttribute("acknowledgement_message",responseMessage.getText());
-        } else{
+        } else {
             redirectAttributes.addFlashAttribute("res", responseMessage);
             return "redirect:/public_access/specializedFirmRC";
         }

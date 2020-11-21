@@ -128,6 +128,7 @@
                                 <th style="width: 7%">Trade / Fields</th>
                                 <th style="width: 7%">Service Type</th>
                                 <th style="width: 21%">Attachments (CV/UT/AT)</th>
+                                <th style="width: 5%">Joining Date</th>
                                 <th style="width: 5%">Action</th>
                             </tr>
                             </thead>

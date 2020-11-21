@@ -5,4 +5,5 @@
     <mapping path="/admin*" decorator="/layout/layout-admin.jsp"/>
     <mapping path="/public*" decorator="/layout/layout-public-user.jsp"/>
     <mapping path="/acknowledgement*" decorator="/layout/empty-layout.jsp"/>
+    <mapping path="*/printInformation" decorator="/layout/empty-layout.jsp"/>
 </sitemesh>

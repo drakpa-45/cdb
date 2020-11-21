@@ -28,6 +28,7 @@ import java.util.ResourceBundle;
  * Reason :
  * ==================================================================================
  */
+
 @Service
 public class SpecializedFirmActionService extends BaseService {
 
@@ -59,7 +60,7 @@ public class SpecializedFirmActionService extends BaseService {
             specializedFirmDTO.setOwnershipTypeTxt(commonService.getValue("cmnlistitem", "Name", "Id", specializedFirm.getOwnershipTypeId()).toString());
             specializedFirmDTO.setCountryTxt(commonService.getValue("cmncountry", "Name", "Id", specializedFirm.getpCountryId()).toString());
             if(specializedFirm.getpDzongkhagId() != null) {
-                specializedFirmDTO.setpDzongkhagTxt(commonService.getValue("cmndzongkhag", "NameEn", "Id", specializedFirm.getRegDzongkhagId()).toString());
+                specializedFirmDTO.setpDzongkhagTxt(commonService.getValue("cmndzongkhag", "NameEn", "Id", specializedFirm.getpDzongkhagId()).toString());
             }
             List<SpFirmHrDTO> specializedFirmHRs = getSpecializedFirmHRs(specializedFirm.getCrpSpecializedTradeId(),'B'); //B for both owner and hr
             List<EquipmentDTO> equipmentDTOs = getSpecializedFirmEQs(specializedFirm.getCrpSpecializedTradeId());

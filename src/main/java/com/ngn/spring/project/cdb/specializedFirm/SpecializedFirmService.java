@@ -318,6 +318,7 @@ public class SpecializedFirmService extends BaseService {
         conCategory.setCreatedOn(loggedInUser.getServerDate());
         dao.saveUpdate(conCategory);
     }
+
     @Transactional(readOnly = false)
     public void savePayment(SpFirmRegPayment spFirmRegPayment, LoggedInUser loggedInUser) {
         FeeStructureDTO feeDTO = (FeeStructureDTO)dao.gFeeStructure(spFirmRegPayment.getAppliedCategoryId()).get(0);

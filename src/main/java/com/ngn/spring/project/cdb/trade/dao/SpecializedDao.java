@@ -225,7 +225,7 @@ public class SpecializedDao extends BaseDao {
     public String insertInPaymentServiceDetails(TradeDto dto, String userID) {
         String retval="";
         try {
-            org.hibernate.query.Query query1 = sqlQuery("INSERT INTO crpspecializedtradeservicepayment (Id,CrpSpecializedTradeId,CmnServiceTypeId,NoOfDaysLate,NoOfDaysAfterGracePeriod,PenaltyPerDay,CreatedBy,,PaymentAmount,TotalAmount,CreatedOn) VALUES(?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP) ");
+            org.hibernate.query.Query query1 = sqlQuery("INSERT INTO crpspecializedtradeservicepayment (Id,CrpSpecializedTradeId,CmnServiceTypeId,NoOfDaysLate,NoOfDaysAfterGracePeriod,PenaltyPerDay,CreatedBy,PaymentAmount,TotalAmount,CreatedOn) VALUES(?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP) ");
             query1.setParameter(1, UUID.randomUUID().toString()).setParameter(2, dto.getCrpSpecializedTradeId()).setParameter(3, dto.getServiceTypeId()).setParameter(4, dto.getNoOfDaysLate()).setParameter(5, dto.getNoOfDaysAfterGracePeriod()).setParameter(6, "100").setParameter(7, userID).setParameter(8,dto.getPaymentAmt()).setParameter(9,dto.getTotalAmt());
             int save = query1.executeUpdate();
             if (save > 0) {
@@ -391,7 +391,7 @@ public class SpecializedDao extends BaseDao {
                         "(SysUserId,ReferenceNo,ApplicationDate,SPNo,CmnSalutationId,NAME,CmnDzongkhagId,Gewog,Village,Email,MobileNo,TelephoneNo,EmployerName,EmployerAddress,\n" +
                         "TPN,CmnApplicationRegistrationStatusId,RegistrationApprovedDate,RegistrationExpiryDate,CreatedBy,CIDNo,CrpSpecializedTradeId,Id,InitialDate,CreatedOn,EditedOn)\n" +
                         "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_DATE,CURRENT_DATE,CURRENT_TIMESTAMP)");
-                query1.setParameter(1, actorId).setParameter(2, dto.getReferenceNo()).setParameter(3, dto.getApplicationDate()).setParameter(4, dto.getCdbNo()).setParameter(5, dto.getSalutation()).setParameter(6, dto.getFullname()).setParameter(7, dto.getDzongkhagId()).setParameter(8, dto.getGewog()).setParameter(9, dto.getVillage())
+                query1.setParameter(1, sysuserId).setParameter(2, dto.getReferenceNo()).setParameter(3, dto.getApplicationDate()).setParameter(4, dto.getCdbNo()).setParameter(5, dto.getSalutation()).setParameter(6, dto.getFullname()).setParameter(7, dto.getDzongkhagId()).setParameter(8, dto.getGewog()).setParameter(9, dto.getVillage())
                         .setParameter(10, dto.getEmail()).setParameter(11, dto.getMobileNo()).setParameter(12, dto.getTelephoneNo()).setParameter(13, dto.getEmployeeName()).setParameter(14, dto.getEmployeeAddress()).setParameter(15, dto.getTpn()).setParameter(16,ApplicationStatus.APPROVED.getCode()).setParameter(17, dto.getApplicationDate()).setParameter(18, dto.getRegExpDate()).setParameter(19, userID)
                         .setParameter(20, dto.getCidNo()).setParameter(21,dto.getCrpSpecializedTradeId()).setParameter(22,finalId);
                 int save = query1.executeUpdate();

@@ -175,7 +175,7 @@
                             <span class="text-danger">*</span>:</label>
                         <div class="col-lg-4">
                             <select name="contractorHRs[0].countryId" id="hr5" required="" class="form-control custom-select text-left select-beast country">
-                                <option value="">Select Country</option>
+                               <%-- <option value="">Select Country</option>--%>
                                 <c:forEach var="item" items="${countryList}">
                                     <option value="${item.value}"><c:out value="${item.text}"/></option>
                                 </c:forEach>

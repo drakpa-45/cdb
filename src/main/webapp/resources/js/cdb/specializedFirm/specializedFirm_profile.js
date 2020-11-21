@@ -174,7 +174,6 @@ var specializedFirmCC = (function () {
     }
 
 
-
     function init(){
         getHRsFinal();
         getOwnerFinal();

@@ -116,7 +116,7 @@ var specializedFirm_action = (function () {
                                 "<td>" + specializedFirmHrs[i].designationName + "</td>" +
                                 "<td>" + specializedFirmHrs[i].qualificationName + "</td>" +
                                 "<td>" + specializedFirmHrs[i].tradeName + "</td>" +
-                                "<td>" + nullif(specializedFirmHrs[i].joiningDate) + "</td>" +
+                                "<td>" + nullif(specializedFirmHrs[i].joinDate) + "</td>" +
                                 "<td>" + specializedFirmHrs[i].serviceTypeName + "</td>" +
                                     //"<td><a href='javascript:void(0);' class='vAttachment'>View/Download</a> </td>" +
                                 "<td>"+attachments+"</td>" +

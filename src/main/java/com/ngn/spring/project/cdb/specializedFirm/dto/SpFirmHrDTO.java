@@ -31,6 +31,7 @@ public class SpFirmHrDTO {
     private Integer verified;
     private Integer Approved;
     private Integer deleteRequest;
+    private String joinDate;
 
     private String salutationName;
     private String countryName;
@@ -91,6 +92,14 @@ public class SpFirmHrDTO {
 
     public String getCountryId() {
         return countryId;
+    }
+
+    public String getJoinDate() {
+        return joinDate;
+    }
+
+    public void setJoinDate(String joinDate) {
+        this.joinDate = joinDate;
     }
 
     public void setCountryId(String countryId) {

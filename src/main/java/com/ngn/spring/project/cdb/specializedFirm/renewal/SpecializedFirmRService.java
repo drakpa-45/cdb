@@ -373,7 +373,6 @@ public class SpecializedFirmRService extends BaseService {
         dao.saveUpdate(spFirmRegPayment);
     }
 
-
     public String saveRC(SpecializedFirm specializedFirm,LoggedInUser loggedInUser){
         String referenceNo = commonService.getNextID("crpspecializedtrade", "ReferenceNo").toString();
         specializedFirm.setReferenceNo(referenceNo);

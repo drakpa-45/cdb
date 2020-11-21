@@ -1,5 +1,7 @@
 //region functions callable from jsp
-
+function openModal(modalId) {
+    $("#" + modalId).modal({backdrop: 'static', keyboard: false});
+}
 function addRow(tableId) {
     var $tableBody = $('#' + tableId).find("tbody");
     var isValid = true;
@@ -49,6 +51,7 @@ function getModalData(tableId, prefix, totalCol) {
     var td = "";
     var modal = $('#' + prefix + '1').closest('.modal');
     if (modal.find(':input').valid() == false) {
+        warningMsg('Please provide your information');
         return false;
     }
     for (var i = 1; i <= totalCol; i++) {
@@ -66,13 +69,18 @@ function getModalData(tableId, prefix, totalCol) {
             text = value;
             name = $this.prop('name');
         }
-
         var tdVal = "<input type='hidden' name='" + name + "' value='" + value + "'/>" + text;
         td = td + "<td>" + tdVal + "</td>";
     }
+    var joiningDate = $('#joiningDate');
+    var jd = "<input type='hidden' name='"+joiningDate.prop('name')+"' value='"+joiningDate.val()+"'>";
+
     td = td + "<td ><span class='doc'></span> <div class='hidden hr_attachment'></div></td>";
 
-    var tr = "<tr id='"+j+"'>" + td + "<td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger'></i></a></td></tr>";
+    td = td + "<td >"+jd+"</td>";
+
+    var tr = "<tr id='"+j+"'>" + td + "<td class=''><a class='p-2 edit-hr'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a>" +
+        "<a class='p-2 del_row'><i class='fa fa-trash text-danger '></i></a></td></tr>";
 
     $("#" + tableId).append(tr).find(".noRecord").hide();
     if(prefix == 'hr'){
@@ -159,8 +167,6 @@ function previousTab(previousClass, presentClass) {
 
 function showConfirmation(){
     $('#confirmationModel').modal('show');
-    //$('#actiontype').val('submit');
-    //$('#formId').val('contractorForm');
     $('#targetId').val('acknowledgementmessage');
     $('#messages').html('You are about to submit application. Are you sure to proceed ?');
 }
@@ -239,6 +245,10 @@ var specializedFirm = (function () {
                 }
 
             });
+            if($('.categoryCheck').is(':checked') == false){
+                isValid = false;
+                warningMsg("Please choose at least one category and class.");
+            }
             //var isValid = $('#contractorForm').validate().element('#gInfo :input');
             if (isValid == true) {
                 nextTab('category_details', 'human_resource_criteria')
@@ -437,6 +447,25 @@ var specializedFirm = (function () {
         })
     }
 
+    function edit_HR(){
+        $('body').on('click','.edit-hr',function(e){
+            e.preventDefault();
+            var row = $(this).closest('tr');
+            var hrModal = $('#addHRModal');
+            hrModal.find('#hr5').val(row.find('.hr5').val());
+            hrModal.find('#hr3').val(row.find('.hr3').val());
+            hrModal.find('#hr1').val(row.find('.hr1').val());
+            hrModal.find('#hr2').val(row.find('.hr2').val());
+            hrModal.find('#hr4').val(row.find('.hr4').val());
+            hrModal.find('#hr6').val(row.find('.hr6').val());
+            hrModal.find('#hr7').val(row.find('.hr7').val());
+            hrModal.find('#hr8').val(row.find('.hr8').val());
+            hrModal.find('#hr9').val(row.find('.hr9').val());
+            hrModal.find('#joiningDate').val(row.find('.joiningDate').val());
+            openModal('addHRModal');
+        });
+    }
+
     function getPersonalInfo(){
         $('#partnerDtls').on('blur','.hr-cid', function () {
             var $this = $(this);
@@ -575,9 +604,8 @@ var specializedFirm = (function () {
               //  $(this).focus();
                 return;
             }
-        })
+        });
     }
-
 
     function validate_joiningDate(){
        /* var today = new Date(),
@@ -657,6 +685,7 @@ var specializedFirm = (function () {
         confirmEmail();
         validate_joiningDate();
         checkDuplicateHR();
+        edit_HR();
     }
     return {
         init: init

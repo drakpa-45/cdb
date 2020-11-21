@@ -233,11 +233,11 @@ public class SpecializedService extends BaseService{
         if (terms.size() > 0) {
             List<TradeDocument> doc = dao.getdocumentList(dto.getCrpSpecializedTradeId());
             dto.setDoc(doc);
-            if (doc.size() > 0) {
+          /*  if (doc.size() > 0) {
                 TradeDto updatecrpspecializedTrade = dao.updatecrpspecializedTrade(specializedTradeNo, appNo);
             } else {
                 System.out.print("unable to update updatecrpspecializedTrade because doc size is zero.");
-            }
+            }*/
         } else {
             System.out.print("unable to fetch appliedserviceId.");
         }
@@ -339,7 +339,8 @@ public class SpecializedService extends BaseService{
                     insert=dao.insertspTradeFinalDetails(dto1, userID, insert.split("/")[0]);
                         if(insert.equalsIgnoreCase("Success")){
                             String servicepaymentID = commonService.getRandomGeneratedId();
-                            dto= dao.specializedtradeservicepayment(dto, userID, request,servicepaymentID);
+                       //     dto= dao.specializedtradeservicepayment(dto, userID, request,servicepaymentID);
+                            dao.updatePaymentServiceDetails(dto1, userID);
                             if(dto.getUpdateStatus().equalsIgnoreCase("Success")){
                                 dto= dao.approveSpTradeRegistrationSole(dto, userID, request);
                                 dto.setUpdateStatus(insert);
@@ -428,7 +429,7 @@ public class SpecializedService extends BaseService{
         entity.setInitialDate(new Date());
         entity.setReferenceNo(getMaxId().toString());
         entity.setCmnApplicationRegistrationStatusId(ApplicationStatus.UNDER_PROCESS.getCode());
-        entity.setSPNo(dto1.getCdbNo());
+        entity.setSPNo(dto.getCdbNo());
         entity.setRegistrationExpiryDate(dto.getRegExpDate());
         entity.setCIDNo(dto.getCidNo());
         entity.setName(dto.getFullname());
@@ -527,25 +528,21 @@ public class SpecializedService extends BaseService{
                 dto1.setServiceTypeId(ApplicationStatus.RENEWAL.getCode());
                 dto1.setCdbNo(dto.getCdbNo());
                 deletePrevRecord = dao.deletePrevRecord(dto1);
-                if (deletePrevRecord.equalsIgnoreCase("Success")) {
-                    insert = dao.insertspTradeFinalDetails(dto1, userID, insert.split("/")[0]);
-                    if (insert.equalsIgnoreCase("success")) {
-                        String paymentSuccess = dao.updatePaymentServiceDetails(dto1, userID);
-                        if (paymentSuccess.equalsIgnoreCase("success")) {
-                            insert = dao.updateRenewalDetails(dto1, userID, 3);
-                        } else {
-                            dto.setUpdateStatus("fail");
-                        }
+                insert = dao.insertspTradeFinalDetails(dto1, userID, insert.split("/")[0]);
+                if (insert.equalsIgnoreCase("success")) {
+                    String paymentSuccess = dao.updatePaymentServiceDetails(dto1, userID);
+                    if (paymentSuccess.equalsIgnoreCase("success")) {
+                        insert = dao.updateRenewalDetails(dto1, userID, 3);
                     } else {
                         dto.setUpdateStatus("fail");
                     }
                 } else {
-                    TransactionAspectSupport.currentTransactionStatus().isRollbackOnly();
+                    dto.setUpdateStatus("fail");
                 }
-                if (insert.equalsIgnoreCase("Success")) {
-                    dto.setUpdateStatus("Success");
-                    //send notification
-                }
+            }
+            if (insert.equalsIgnoreCase("Success")) {
+                dto.setUpdateStatus("Success");
+                //send notification
             }
         }
             return dto;

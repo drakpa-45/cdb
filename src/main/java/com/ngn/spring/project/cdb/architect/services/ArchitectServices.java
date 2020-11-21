@@ -289,6 +289,7 @@ public class ArchitectServices extends BaseService{
             }
             else if(dto.getServiceTypeId().equalsIgnoreCase("renewal")){
                 dto1.setServiceTypeId(ApplicationStatus.RENEWAL.getCode());
+                dto1.setCdbNo(dto.getCdbNo());
                 deletePrevRecord = dao.deletePrevRecord(dto1);
                     deleteFromSysuser = commonDao.deleteFromSysuser(dto1);
                     insert = dao.insertuserDetails(dto1, userID, request);

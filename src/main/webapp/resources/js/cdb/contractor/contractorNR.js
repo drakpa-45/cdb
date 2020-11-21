@@ -69,7 +69,6 @@ function getModalData(tableId, prefix, totalCol) {
             value = $this.val();
             text = value;
             name = $this.prop('name');
-
         }
 
         var tdVal = "<input type='hidden' class='"+$this.attr('id')+"' name='" + name + "' value='" + value + "'/>" + text;

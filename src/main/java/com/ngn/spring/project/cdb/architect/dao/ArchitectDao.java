@@ -417,7 +417,7 @@ public class ArchitectDao extends BaseDao {
         dto.setServiceTypeId(ApplicationStatus.RENEWAL.getCode());
         String retval = "";
         try {
-            Query query1 = sqlQuery("UPDATE crparchitectservicepayment SET TotalAmount = ?,PaymentAmount = ?,Mode_Of_Payment = ? WHERE CrpSurveyId = ?");
+            Query query1 = sqlQuery("UPDATE crparchitectservicepayment SET TotalAmount = ?,PaymentAmount = ?,Mode_Of_Payment = ? WHERE CrpArchitectId = ?");
             query1.setParameter(1,dto.getTotalAmt()).setParameter(2, dto.getPaymentAmt()).setParameter(3, dto.getPaymentmode()).setParameter(4, dto.getCrpArchitectId());
             int save = query1.executeUpdate();
             if (save > 0) {
@@ -515,7 +515,7 @@ public class ArchitectDao extends BaseDao {
                 return_value = "Success";
             }
         } catch (Exception e) {
-            System.out.print("Exception in ArchitectDao # updateCancellationDetails: " + e);
+            System.out.print("Exception in ArchitectDao # deletePrevRecord: " + e);
             e.printStackTrace();
         }
         return return_value;
