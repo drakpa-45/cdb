@@ -139,10 +139,10 @@ public class EngineerAdminController extends BaseController {
         return "/architect/acknowledgement";
     }
 
-    @RequestMapping(value = "/survey_print_Certificate", method = RequestMethod.GET)
+    @RequestMapping(value = "/engineer_print_Certificate", method = RequestMethod.GET)
     public String survey_print_Certificate(ModelMap model, HttpServletRequest request) {model.addAttribute("printList", services.getPrintList());
         model.addAttribute("printList", services.getPrintList());
-        return "survey/surveyPrint";
+        return "engineer/engineerPrint";
     }
     @RequestMapping(value = "/emptylayout/printarchitectInfo", method = RequestMethod.GET)
     public String printarchitectInfo(HttpServletRequest request,ArchitectDto dto,Model model, String cdbNo){

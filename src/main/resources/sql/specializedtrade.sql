@@ -97,7 +97,7 @@ SpecializedFirmActionDao.getIncAttachment = SELECT DocumentName AS documentName,
 
 /*Renewal for specializedFirm*/
 
-SpecializedFirmRCDao.getSpecializedFirmHRsFinal=SELECT hr.Id AS id,hr.CrpSpecializedTradeFinalId specializedFirmID,hr.CIDNo cidNo,hr.Name AS name,hr.Sex sex,hr.ShowInCertificate AS siCertificate,hr.DeleteRequest AS deleteRequest,hr.IsPartnerOrOwner isPartnerOrOwner,hr.JoiningDate joiningDate,sa.Name salutationName,co.Name countryName,qu.Name qualificationName,st.Name serviceTypeName,td.Name tradeName,de.Name designationName \
+SpecializedFirmRCDao.getSpecializedFirmHRsFinal=SELECT hr.Id AS id,hr.CrpSpecializedTradeFinalId specializedFirmID,hr.CIDNo cidNo,hr.Name AS name,hr.Sex sex,hr.ShowInCertificate AS siCertificate,hr.DeleteRequest AS deleteRequest,hr.IsPartnerOrOwner isPartnerOrOwner,DATE_FORMAT(hr.JoiningDate, '%d-%m-%Y') joinDate,sa.Name salutationName,co.Name countryName,qu.Name qualificationName,st.Name serviceTypeName,td.Name tradeName,de.Name designationName \
 FROM crpspecializedtradehumanresourcefinal hr INNER JOIN cmnlistitem sa ON sa.Id = hr.CmnSalutationId INNER JOIN cmncountry co ON co.Id = hr.CmnCountryId LEFT JOIN cmnlistitem qu ON qu.Id = hr.CmnQualificationId LEFT JOIN cmnlistitem st ON st.Id = hr.CmnServiceTypeId LEFT JOIN cmnlistitem td ON td.Id = hr.CmnTradeId INNER JOIN cmnlistitem de ON de.Id = hr.CmnDesignationId WHERE hr.CrpSpecializedTradeFinalId = :specializedFirmId AND (:ownerOrPartner IS NULL OR hr.IsPartnerOrOwner = :ownerOrPartner)
 
 SpecializedFirmRCDao.getHRAttachmentsFinal=SELECT a.Id AS id,a.DocumentName documentName,DocumentPath documentPath, FileType fileType FROM crpspecializedtradehumanresourceattachmentfinal a WHERE a.CrpSpecializedTradeHumanResourceFinalId = :hrId

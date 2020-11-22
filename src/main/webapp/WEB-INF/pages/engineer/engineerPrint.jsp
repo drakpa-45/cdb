@@ -22,7 +22,7 @@
                 </div>
                 <div class="card" id="registrtaionFormCard">
                     <div class="card-header">
-                        <h3 class="card-title font-weight-bold">Print List for Surveyor</h3>
+                        <h3 class="card-title font-weight-bold">Print List for Engineer</h3>
                     </div>
                     <div class="card-body">
                         <div class="row">

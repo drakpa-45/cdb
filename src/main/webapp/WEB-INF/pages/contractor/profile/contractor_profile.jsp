@@ -24,7 +24,7 @@
                                 </tr>
                                 <tr>
                                     <td><strong>CDB No.</strong></td>
-                                    <td><input type="text" value="${appDetail.cdbNo}" id="cdbNo" class="form-control" readonly></td>
+                                    <td><input type="hidden" value="${appDetail.cdbNo}" id="cdbNo" class="form-control" readonly>${appDetail.cdbNo}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Ownership Type</strong></td>
@@ -231,6 +231,7 @@
 													<th>Designation</th>
 													<th>Trade</th>
 													<th>Qualification</th>
+                                                    <th>Service Type</th>
 													<th>Join Date</th>
 													<th>Attachment</th>
 												</tr>

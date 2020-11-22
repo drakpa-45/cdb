@@ -296,9 +296,11 @@ function validateFeesDetails(){
 $('#architect_table').DataTable({
     responsive: true
 });
-function printCertificate(refNo){
-    var url= '/cdb/print/printCertificate?refNo='+refNo;
-    $('#content_main_div_public_user').load(url);
+function printCertificate(cdbNo){
+    alert(cdbNo);
+    window.open("/cdb/print/printCertificate?cdbNo=" + cdbNo);
+   /* var url= '/cdb/print/printCertificate?cdbNo='+cdbNo;
+    $('#registrtaionFormCard').load(url);*/
 }
 function printInfo(cdbNo){
     var url= '/cdb/admin_architect/emptylayout/printarchitectInfo?cdbNo='+cdbNo;

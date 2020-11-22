@@ -39,13 +39,19 @@ var contractorPr = (function () {
                     "<td class='qualificationName'>" + contractorHrs[i].qualificationName + "</td>" +
                     "<td class='tradeName'>" + contractorHrs[i].tradeName + "</td>" +
                     "<td class='serviceTypeName'>" + contractorHrs[i].serviceTypeName + "</td>" +
+                    "<td>" + nullif(contractorHrs[i].joinDate) + "</td>" +
                     "<td class='attachments'>" + attachments + "</td>" +
                     "</tr>";
                 }
                 $('#hrDtlsTable').find('tbody').html(hrTr);
             }
-
         });
+        function nullif(val){
+            if(val == null || val == 'null'){
+                val = ''
+            }
+            return val;
+        }
     }
 
     function getOwnerFinal(){

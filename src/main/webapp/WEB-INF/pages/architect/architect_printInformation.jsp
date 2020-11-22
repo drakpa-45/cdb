@@ -18,18 +18,14 @@
                         Registration Information
                     </strong>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                    <button class="btn btn-sm btn-primary pull-right" type="button" onclick="printInfo('${App_Details.cdbNo}')"><i class="fa fa-print"></i> Print Information</button> &nbsp;&nbsp;&nbsp;
-                    <button class="btn btn-sm btn-success pull-right" type="button" onclick="printCertificate('${App_Details.refNo}')"><i class="fa fa-edit"></i> Print Certificate</button>&nbsp;&nbsp;&nbsp;
-                </div>
             </div>
             <hr />
             <input type="hidden" id="isExpired" value="<%=request.getSession().getAttribute("isExpired")%>"/>
             <div class="row form-froup">
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+              <%--  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                     <img src='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo=${App_Details.cidNo}'  width='200px'  height='200px' class='pull-right'/>
-                </div>
-                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                </div>--%>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="table-responsive">
                         <table class="table">
                             <tbody>

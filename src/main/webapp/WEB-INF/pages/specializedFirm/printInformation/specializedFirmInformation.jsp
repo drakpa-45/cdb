@@ -225,6 +225,7 @@
                                                 <th>Designation</th>
                                                 <th>Trade</th>
                                                 <th>Qualification</th>
+                                                <th>Service Type</th>
                                                 <th>Join Date</th>
                                                 <th>Attachment</th>
                                             </tr>
@@ -254,7 +255,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="tab-pane" id="classification">
+                                    <div id="classification">
                                          <span style="color: blue">
 												Category Details
 											</span>

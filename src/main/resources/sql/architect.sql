@@ -13,3 +13,6 @@ ArchitectDao.getarchitectregDetails=SELECT `ApplicationDate` applicationDate,Cmn
 ArchitectDao.getPrintList=SELECT f.`ARNo` cdbNo,f.`ApplicationDate` applicationDate,f.`CIDNo` cidNo,f.`Email` email,f.`Name` fullname,f.`RegistrationApprovedDate` paymentReceiptDate,f.`MobileNo` mobileNo FROM crparchitectfinal f WHERE f.`CmnApplicationRegistrationStatusId`=?
 
 ArchitectDao.getArchitectOngoingApp = SELECT f.`ARNo` cdbNo,i.`Name` updateStatus,f.`ApplicationDate` applicationDate,f.`ReferenceNo` ReferenceNo FROM crparchitect f LEFT JOIN cmnlistitem i ON i.`Id`=f.`CmnApplicationRegistrationStatusId` WHERE i.`Id` IN ('262a3f11-adbd-11e4-99d7-080027dcfac6','36f9627a-adbd-11e4-99d7-080027dcfac6','6195664d-c3c5-11e4-af9f-080027dcfac6') AND f.`ARNo`=:cdbNo
+
+
+ArchitectDao.getArchitetPrintDetails = SELECT a.ReferenceNo referenceNo,a.CIDNo ownerCID,a.Name ownerName,d.NameEn dzongkhagName,c.Name countryName,ser.Name serviceSectorType,a.CmnServiceSectorTypeId serviceSectorTypeId,a.ARNo cdbNo,DATE_FORMAT(a.RegistrationExpiryDate, '%d-%m-%Y') regExpiryDate,DATE_FORMAT(a.ApplicationDate, '%d-%m-%Y') initialRegistrationDate FROM crparchitectfinal a  LEFT JOIN cmndzongkhag d ON d.Id = a.CmnDzongkhagId LEFT JOIN cmncountry c ON c.Id = a.CmnCountryId LEFT JOIN cmnlistitem ser ON ser.Id = a.CmnServiceSectorTypeId WHERE a.ARNo =?;

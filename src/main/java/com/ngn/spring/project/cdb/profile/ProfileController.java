@@ -107,12 +107,12 @@ public class ProfileController {
 
         if(type.split("999")[0].equalsIgnoreCase("Consultant")){
             model.addAttribute("appDetail", profileService.getApplicationDetailsConsultant(type.split("999")[1]));;
-            return "consultant/profile/consultant_profile";
+            return "consultant/printInformation/consultantInformation";
         }
 
         if(type.split("999")[0].equalsIgnoreCase("Contractor")){
             model.addAttribute("appDetail", profileService.getApplicationDetails(type.split("999")[1]));
-            return "contractor/profile/contractor_profile";
+            return "contractor/printInformation/contractorInformation";
         }
 
         if(type.split("999")[0].equalsIgnoreCase("SpecializedFirm")){

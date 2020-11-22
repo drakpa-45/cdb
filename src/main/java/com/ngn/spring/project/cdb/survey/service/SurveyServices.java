@@ -4,6 +4,7 @@ import bt.gov.ditt.sso.client.dto.UserSessionDetailDTO;
 import com.ngn.spring.project.base.BaseService;
 import com.ngn.spring.project.cdb.architect.dto.ArchitectDto;
 import com.ngn.spring.project.cdb.architect.entity.CrparchitectFinalEntity;
+import com.ngn.spring.project.cdb.certification.CertificateDTO;
 import com.ngn.spring.project.cdb.common.CommonDao;
 import com.ngn.spring.project.cdb.common.CommonService;
 import com.ngn.spring.project.cdb.contractor.renewal.LateFeeDTO;
@@ -636,4 +637,8 @@ public class SurveyServices extends BaseService {
         return dao.getSurveyFinal(cdbNo);
     }
 
+    @Transactional
+    public CertificateDTO getSurveyPrintDetails(HttpServletRequest request, String cdbNo) {
+        return dao.getSurveyPrintDetails(request,cdbNo);
+    }
 }

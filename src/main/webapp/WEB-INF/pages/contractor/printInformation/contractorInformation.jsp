@@ -20,7 +20,7 @@
                                 </tr>
                                 <tr>
                                     <td><strong>CDB No.</strong></td>
-                                    <td><input type="text" value="${appDetail.cdbNo}" id="cdbNo" class="form-control" readonly></td>
+                                    <td><input type="hidden" value="${appDetail.cdbNo}" id="cdbNo" class="form-control" readonly>${appDetail.cdbNo}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Ownership Type</strong></td>
@@ -142,40 +142,7 @@
                 <div class="form-group">
 						<div class="col-md-12">
 							<div class="panel with-nav-tabs">
-								<%--<div class="panel-heading">
-									<ul class="nav nav-tabs">
-										<li class="">
-											<a href="#ownerpartner"	data-toggle="tab" class="active show">
-                                                Owner or Partner
-											</a>
-										</li>
-										<li>
-											<a href="#humanresourceSection"	data-toggle="tab">
-                                                Contractor Human Resource
-											</a>
-										</li>
-										<li>
-											<a href="#equipmentSection" data-toggle="tab">
-                                                Contractor Equipment
-											</a>
-										</li>
-										<li>
-											<a href="#classification" data-toggle="tab">
-                                                Classification Details
-                                            </a>
-										</li>
-										<li>
-											<a href="#trackRecord" data-toggle="tab">
-                                                Track Records
-											</a>
-										</li>
-										<li>
-											<a href="#command" data-toggle="tab">
-                                                Comments/Adverse Record
-											</a>
-										</li>
-									</ul>
-								</div>--%>
+
 								<div class="panel-body">
 									<div class="tab-content">
 										<div class="active show" id="ownerpartner">
@@ -227,6 +194,7 @@
 													<th>Designation</th>
 													<th>Trade</th>
 													<th>Qualification</th>
+                                                    <th>Service Type</th>
 													<th>Join Date</th>
 													<th>Attachment</th>
 												</tr>
@@ -298,7 +266,7 @@
                                                 </tbody>
 											</table>
 										</div>
-										<div class="tab-pane fade in" id="command">
+										<div id="command">
 											<span style="color: blue">Comments
 											</span>
 											<table width="100%">

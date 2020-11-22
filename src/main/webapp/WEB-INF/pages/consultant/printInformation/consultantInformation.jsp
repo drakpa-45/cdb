@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 <body>
-<div class="content-wrapper" >
+<div class="content-wrapper" id="printdiv" >
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-body">
@@ -12,10 +12,6 @@
                 <input type="hidden" id="consultantIdFinal" value="${appDetail.id}">
 
                 <div class="form-group ">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                        <button class="btn btn-sm btn-primary pull-right" type="button" onclick="printInfo('${appDetail.cdbNo}')"><i class="fa fa-print"></i> Print Information</button> &nbsp;&nbsp;&nbsp;
-                        <button class="btn btn-sm btn-success pull-right" type="button" onclick="printCertificate()"><i class="fa fa-edit"></i> Print Certificate</button>&nbsp;&nbsp;&nbsp;
-                    </div>
                     <hr />
                     <div class="col-md-6 table-responsive">
                         <table class="table table-condensed">
@@ -25,7 +21,7 @@
                             </tr>
                             <tr>
                                 <td><strong>CDB No.</strong></td>
-                                <td><input type="text" value="${appDetail.cdbNo}" id="cdbNo" class="form-control" readonly></td>
+                                <td><input type="hidden" value="${appDetail.cdbNo}" id="cdbNo" class="form-control" readonly>${appDetail.cdbNo}</td>
                             </tr>
                             <tr>
                                 <td><strong>Ownership Type</strong></td>
@@ -147,43 +143,9 @@
                 <div class="form-group">
                     <div class="col-md-12">
                         <div class="panel with-nav-tabs">
-                            <div class="panel-heading">
-                                <ul class="nav nav-tabs">
-                                    <li class="">
-                                        <a href="#ownerpartner"	data-toggle="tab" class="active show">
-                                            Owner or Partner
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#humanresourceSection"	data-toggle="tab">
-                                            consultant Human Resource
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#equipmentSection" data-toggle="tab">
-                                            consultant Equipment
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#classification" data-toggle="tab">
-                                            Classification Details
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#trackRecord" data-toggle="tab">
-                                            Track Records
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#command" data-toggle="tab">
-                                            Comments/Adverse Record
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                             <div class="panel-body">
                                 <div class="tab-content">
-                                    <div class="tab-pane fade in active show" id="ownerpartner">
+                                    <div id="ownerpartner">
 											<span style="color: blue">
 												Name of owner/partners/others with controlling interest
 											</span>
@@ -218,7 +180,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="tab-pane fade in" id="humanresourceSection">
+                                    <div id="humanresourceSection">
                                         <span style="color: blue">Human Resource</span>
                                         <table width="100%" class="table table-bordered table-hover " id="hrDtlsTable">
                                             <thead>
@@ -242,7 +204,8 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="tab-pane fade in" id="equipmentSection">
+                                    <div id="equipmentSection">
+                                        <span style="color: blue">Equipment Details</span>
                                         <table class="table table-bordered table-hover" id="equipmentTbl">
                                             <thead>
                                             <tr style="background-color: #e6f9ff">
@@ -259,7 +222,8 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="tab-pane " id="classification">
+                                    <div  id="classification">
+                                        <span style="color: blue">Category Details</span>
                                         <table id="classificationTbl" class="table table-bordered table-hover">
                                             <thead style="background-color: #F2F2F2">
                                             <tr>
@@ -350,7 +314,8 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="tab-pane fade in" id="trackRecord">
+                                    <div id="trackRecord">
+                                        <span style="color: blue">Track Records</span>
                                         <table id="trackRecordTbl"
                                                class="table table-bordered table-hover">
                                             <thead>
@@ -376,9 +341,8 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="tab-pane fade in" id="command">
-											<span>Comments
-											</span>
+                                    <div id="command">
+                                        <span style="color: blue">Comments</span>
                                         <table width="100%">
                                             <thead>
                                             <tr>
@@ -415,8 +379,9 @@
                         </div>
                     </div>
                 </div>
-
             </div>
+            <button class="btn btn-info" type="button" id="prntid" onclick="printAndDowoload()"><i class="fa fa-download"></i>Print</button>
+            <hr />
         </div>
     </div>
     <script type="text/javascript" src="<c:url value="/resources/js/cdb/consultant/consultant_profile.js"/>"></script>
@@ -425,6 +390,16 @@
     function printInfo(cdbNo){
         var url= '/cdb/public_access/profile/printInformation?CDBNo='+cdbNo;
         $('#content_main_div_public_user').load(url);
+    }
+
+    function printAndDowoload() {
+        $('#prntid').hide();
+        var divToPrint = document.getElementById('printdiv');
+        var popupWin = window.open('', '_blank', 'width=600,height=400');
+        popupWin.document.open();
+        popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</body></html>');
+        popupWin.document.write('<link rel="stylesheet" href="http://www.dynamicdrive.com/ddincludes/mainstyle.css" type="text/css" />');
+        popupWin.document.close();
     }
 </script>
 </body>

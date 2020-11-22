@@ -28,6 +28,7 @@ public class ConsultantHrDTO {
     private Integer siCertificate;
     private Integer isPartnerOrOwner;
     private Date joiningDate;
+    private String joinDate;
     private Integer verified;
     private Integer Approved;
     private Integer deleteRequest;
@@ -151,6 +152,14 @@ public class ConsultantHrDTO {
 
     public void setJoiningDate(Date joiningDate) {
         this.joiningDate = joiningDate;
+    }
+
+    public String getJoinDate() {
+        return joinDate;
+    }
+
+    public void setJoinDate(String joinDate) {
+        this.joinDate = joinDate;
     }
 
     public Integer getVerified() {

@@ -8,6 +8,7 @@ import com.ngn.spring.project.cdb.architect.entity.ArchitectDocument;
 import com.ngn.spring.project.cdb.architect.entity.CrparchitectEntity;
 import com.ngn.spring.project.cdb.architect.entity.CrparchitectFinalEntity;
 import com.ngn.spring.project.cdb.architect.entity.ServiceEntity;
+import com.ngn.spring.project.cdb.certification.CertificateDTO;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
 import org.hibernate.query.Query;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -519,6 +520,13 @@ public class ArchitectDao extends BaseDao {
             e.printStackTrace();
         }
         return return_value;
+    }
+
+    public CertificateDTO getArchitetPrintDetails(HttpServletRequest request, String cdbNo) {
+        CertificateDTO dto =new CertificateDTO();
+        sqlQuery = properties.getProperty("ArchitectDao.getArchitetPrintDetails");
+        dto=(CertificateDTO) hibernateQuery(sqlQuery, CertificateDTO.class).setParameter(1, cdbNo).list().get(0);
+        return dto;
     }
 }
 
