@@ -25,25 +25,6 @@
                     Construction Development Board
                 </h1>
             </div>
-            <!-- tab open -->
-            <div class="card" id="verifyTab" style="display: none">
-                <div class="card-header">
-                    <h3 class="card-title font-weight-bold">Application Acknowledgement</h3>
-                </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <div class="col-lg-12">
-                            This application is verified and forwarded for approval,<br>
-                            Click on tasklist button to go back to tasklist
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="col-lg-12 mt-3">
-                            <a href="<c:url value="/admin/"/>" class="btn btn-blue">TaskList</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="card" id="registrtaionFormCard">
             <div class="card-header">
@@ -72,10 +53,15 @@
                                        data-placement="top">
                                         <i class="fa fa-users mr-1"></i>Human Resource Criteria</a>
                                 </li>
-                                <li class="tab-pane consultantEquipmentDtls">
+                                <li class="tab-pane contractorEquipmentDtls">
                                     <a href="#consultant_equipment_details" class="border" data-toggle="tab"
                                        data-placement="top">
                                         <i class="fa fa-truck mr-1"></i>Contractor Equipment Details</a>
+                                </li>
+                                <li class="tab-pane saveAndPreview">
+                                    <a href="#saveAndPreview" class="border" data-toggle="tab"
+                                       data-placement="top">
+                                        <i class="fa fa-truck mr-1"></i>Preview</a>
                                 </li>
                             </ul>
                             <div class="tab-content border p-3 col-lg-12">
@@ -125,18 +111,16 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="col-lg-12">
-                                                        <div class=""><input id="addMoreCert" type="button"
+                                                        <%--<div class=""><input id="addMoreCert" type="button"
                                                                              value="Add More Certificate"
-                                                                             class="btn btn-primary"></div>
+                                                                             class="btn btn-primary"></div>--%>
                                                         <table class="table table-bordered table-center table-responsive-lg auto-index"
-                                                               id="certificateTbl">
+                                                               id="IncCertificateTbl">
                                                             <thead>
                                                             <tr>
                                                                 <th>Sl no</th>
                                                                 <th>Document Name</th>
                                                                 <th>Document Attached</th>
-                                                                <th>File Size</th>
-                                                                <th>Action</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
@@ -219,8 +203,8 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="col-lg-12">
-                                                        <table class="table table-bordered table-center table-responsive-lg"
-                                                               id="partnerDtls1">
+                                                        <table class="table table-bordered table-center table-responsive-lg auto-index"
+                                                               id="inductionCourseDtl">
                                                             <thead>
                                                             <tr>
                                                                 <th>Sl No</th>
@@ -232,7 +216,7 @@
                                                             </tr>
                                                             </thead>
                                                             <tbody>
-                                                            <tr>
+                                                            <tr class="noRecord">
                                                                 <td colspan="6">No Record Found</td>
                                                             </tr>
                                                             </tbody>
@@ -290,8 +274,8 @@
                                                 class="btn btn-azure col-lg-offset-9">
                                             <i class="fa fa-arrow-circle-left"></i>Back
                                         </button>
-                                        <button type="button" onclick="nextTab('generalInformation','categoryDtls')"
-                                                class="btn btn-primary">
+                                        <button type="button" disabled onclick="nextTab('generalInformation','categoryDtls')"
+                                                class="btn btn-primary" id="nextGIBtn">
                                             <i class="fa fa-arrow-circle-right"></i>Next
                                         </button>
                                     </div>
@@ -383,17 +367,17 @@
                                                 class="btn btn-azure col-lg-offset-9">
                                             <i class="fa fa-arrow-circle-left"></i>Back
                                         </button>
-                                        <button type="button"
-                                                onclick="nextTab('humanResourceCriteria','consultantEquipmentDtls')"
+                                        <button type="button" id="nextHRBtn" disabled
+                                                onclick="nextTab('humanResourceCriteria','contractorEquipmentDtls')"
                                                 class="btn btn-primary">
                                             <i class="fa fa-arrow-circle-right"></i>Next
                                         </button>
                                     </div>
                                 </div>
-                                <div class="tab-pane consultantEquipmentDtls">
+                                <div class="tab-pane contractorEquipmentDtls">
                                     <form action="" method="post" class="">
-                                        <div id="consultantEquipment" style="">
-                                            <i><strong>Consultant Equipment Details</strong></i>
+                                        <div id="contractorEquipment" style="">
+                                            <i><strong>Contractor Equipment Details</strong></i>
 
                                             <div class="panel panel-default">
                                                 <div class="panel-body">
@@ -428,6 +412,19 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        </form>
+                                    <div class="col-lg-12 form-group">
+                                        <button type="button" onclick="backTab('contractorEquipmentDtls','humanResourceCriteria')" class="btn btn-azure col-lg-offset-9">
+                                            <i class="fa fa-arrow-circle-left"></i>&nbsp; Back
+                                        </button>
+                                        <button type="button" disabled class="btn btn-primary" id="btnValEqNext" onclick="saveAndPreview('contractorEquipmentDtls', 'saveAndPreview')">
+                                            Save & Preview &nbsp;
+                                            <i class="fa fa-life-saver"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane saveAndPreview" id="saveAndPreview">
+                                    <div id="submitSection" style="">
                                         <div class="panel-body">
                                             <div class="form-group">
                                                 <div class="table-responsive">
@@ -738,6 +735,7 @@
         </script>
     </div>
     <script src="<c:url value="/resources/js/cdb/contractor/contractorNRAction.js"/>"></script>
+</div>
 </div>
 </body>
 </html>

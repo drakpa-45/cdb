@@ -1,6 +1,7 @@
 package com.ngn.spring.project.cdb.admin.dto;
 
 import com.ngn.spring.project.cdb.contractor.registration.dto.ContractorHrDTO;
+import com.ngn.spring.project.cdb.contractor.registration.dto.ContractorTrainingDTO;
 import com.ngn.spring.project.cdb.contractor.registration.model.Contractor;
 import com.ngn.spring.project.cdb.contractor.registration.model.ContractorAttachment;
 import com.ngn.spring.project.cdb.contractor.registration.model.ContractorHRAttachment;
@@ -23,6 +24,7 @@ public class ContractorInfoDTO {
     private List<EquipmentDTO> equipments;
     private List<ApplicationHistoryDTO> appHistoryDTOs;
     private List<ContractorAttachment> incAttachments;
+    private List<ContractorTrainingDTO> trainingDTOs;
 
     private String ownershipTypeTxt;
     private String countryTxt;
@@ -143,5 +145,13 @@ public class ContractorInfoDTO {
 
     public void setCdbNo(String cdbNo) {
         this.cdbNo = cdbNo;
+    }
+
+    public List<ContractorTrainingDTO> getTrainingDTOs() {
+        return trainingDTOs;
+    }
+
+    public void setTrainingDTOs(List<ContractorTrainingDTO> trainingDTOs) {
+        this.trainingDTOs = trainingDTOs;
     }
 }
