@@ -556,7 +556,7 @@ var contractorRC = (function () {
         $('body').on('click','.edit_row_eq',function(e){
             e.preventDefault();
             var row = $(this).closest('tr');
-            alert(row.find('.contractorEQid').val());
+            //alert(row.find('.contractorEQid').val());
             var modal = $('#eqModal');
             modal.find('#eq1').val(row.find('.contractorEQid').val());
             modal.find('#eq2').val(row.find('td:eq(2)').text());
