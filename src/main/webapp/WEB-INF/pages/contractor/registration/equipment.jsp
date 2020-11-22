@@ -267,7 +267,7 @@
                         </div>
                         <label class = "col-lg-3">Registration No <span class="text-danger">*</span>:</label>
                         <div class = "col-lg-3">
-                            <input type="text" name="equipments[0].registrationNo" class="form-control registrationNo" <%--required="true"--%> disabled id="eq2">
+                            <input type="text" placeholder="BP-1-A1234" name="equipments[0].registrationNo" class="form-control registrationNo" <%--required="true"--%> disabled id="eq2">
                         </div>
                     </div>
 

@@ -48,13 +48,14 @@ var hr_modal = $("#hrModal").html();
 var eq_modal = $("#eqModal").html();
 var j= 0;
 function getModalData(tableId, prefix, totalCol) {
-    if(prefix == 'hr') {
+    /*if(prefix == 'hr') {
         $('body').find('#' + tableId).find('.hr3').each(function () {
             if($(this).val() == $('#hr3').val()){
                 $(this).closest('tr').remove();
             }
         });
-    }
+    }*/
+    $('#'+tableId).find('.tbd').remove();
     var td = "";
     var modal = $('#' + prefix + '1').closest('.modal');
     if (modal.find(':input').valid() == false) {
@@ -86,7 +87,7 @@ function getModalData(tableId, prefix, totalCol) {
 */
     td = td + "<td ><span class='doc'></span> <div class='hidden hr_attachment'></div></td>";
 
-    var tr = "<tr id='"+j+"'>" + td + "<td class=''><a class='p-2 edit-hr'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a>" +
+    var tr = "<tr id='"+j+"'>" + td + "<td class=''><a class='p-2 edit-"+prefix+"'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a>" +
         "<a class='p-2 del_row'><i class='fa fa-trash text-danger '></i></a></td></tr>";
 
     $("#" + tableId).append(tr).find(".noRecord").hide();
@@ -228,13 +229,13 @@ var contractor = (function () {
     function validate_gInfo() {
         $('#btnValGINext').on('click', function (e) {
             var isValid = true;
-            /*$('#general_Information').find(':input').each(function () {
+            $('#general_Information').find(':input').each(function () {
                 if (isValid == true) {
                     isValid = $('#contractorForm').validate().element(this);
                 } else {
                     $('#contractorForm').validate().element(this);
                 }
-            });*/
+            });
             //var isValid = $('#contractorForm').validate().element('#gInfo :input');
             if (isValid == true) {
                 nextTab('general_Information', 'category_details')
@@ -546,8 +547,22 @@ var contractor = (function () {
             hrModal.find('#hr7').val(row.find('.hr7').val());
             hrModal.find('#hr8').val(row.find('.hr8').val());
             hrModal.find('#hr9').val(row.find('.hr9').val());
-            hrModal.find('#joiningDate').val(row.find('.joiningDate').val());
+            hrModal.find('#hr10').val(row.find('.hr10').val());
+            row.addClass('tbd'); //add class to be deleted
             openModal('addHRModal');
+        });
+    }
+
+    function edit_EQ(){
+        $('body').on('click','.edit-eq',function(e){
+            e.preventDefault();
+            var row = $(this).closest('tr');
+            var hrModal = $('#eqModal');
+            hrModal.find('#eq1').val(row.find('.eq1').val());
+            hrModal.find('#eq2').val(row.find('.eq2').val());
+            hrModal.find('#eq3').val(row.find('.eq3').val());
+            row.addClass('tbd'); //add class to be deleted
+            openModal('eqModal');
         });
     }
 
@@ -698,6 +713,7 @@ var contractor = (function () {
         delTableRow();
         confirmEmail();
         edit_HR();
+        edit_EQ();
     }
     return {
         init: init
