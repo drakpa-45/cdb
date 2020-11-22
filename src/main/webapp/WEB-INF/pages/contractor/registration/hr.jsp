@@ -141,6 +141,7 @@
                                 <th style="width: 10%">Qualification</th>
                                 <th style="width: 7%">Trade / Fields</th>
                                 <th style="width: 7%">Service Type</th>
+                                <th style="width: 10%">Joining Date</th>
                                 <th style="width: 21%">Attachments (CV/UT/AT)</th>
                                 <th style="width: 5%">Action</th>
                             </tr>
@@ -269,7 +270,7 @@
                                 <span class="input-group-addon pr-5"><i
                                         class="fa fa-calendar"></i></span>
                                 <input type="date" name="contractorHRs[0].joiningDate"
-                                       value="" id="joiningDate"
+                                       value="" id="hr10"
                                        class="form-control datepicker">
                             </div>
                         </div>
@@ -320,7 +321,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" onclick="getModalData('hrDtlsTable','hr',9)" type="button">OK</button>
+                <button class="btn btn-primary" onclick="getModalData('hrDtlsTable','hr',10)" type="button">OK</button>
                 <button data-dismiss="modal" class="btn btn-warning" type="button">Close</button>
             </div>
         </div>

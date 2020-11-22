@@ -203,7 +203,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
+                    <tr class="noRecord">
                         <td colspan="6">No Record Found</td>
                     </tr>
                     </tbody>

@@ -328,7 +328,7 @@ public class CommonService extends BaseService {
             personalInfoDTO.setFullName(" ");
             responseMessage = new ResponseMessage();
             responseMessage.setStatus(UNSUCCESSFUL_STATUS);
-            responseMessage.setText("Could not connect to DCRC API. Please check the connection.");
+            responseMessage.setText("Could not connect to DCRC API. Please wait for the connection OR enter the information correctly.");
             responseMessage.setDto(personalInfoDTO);
             return responseMessage;
 

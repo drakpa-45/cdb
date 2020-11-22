@@ -48,6 +48,13 @@ var hr_modal = $("#hrModal").html();
 var eq_modal = $("#eqModal").html();
 var j= 0;
 function getModalData(tableId, prefix, totalCol) {
+    if(prefix == 'hr') {
+        $('body').find('#' + tableId).find('.hr3').each(function () {
+            if($(this).val() == $('#hr3').val()){
+                $(this).closest('tr').remove();
+            }
+        });
+    }
     var td = "";
     var modal = $('#' + prefix + '1').closest('.modal');
     if (modal.find(':input').valid() == false) {
@@ -74,10 +81,10 @@ function getModalData(tableId, prefix, totalCol) {
         var tdVal = "<input type='hidden' class='"+$this.attr('id')+"' name='" + name + "' value='" + value + "'/>" + text;
         td = td + "<td>" + tdVal + "</td>";
     }
-    var joiningDate = $('#joiningDate');
-    var jd = "<input type='hidden' name='"+joiningDate.prop('name')+"' value='"+joiningDate.val()+"'>";
-
-    td = td + "<td >"+jd+"<span class='doc'></span> <div class='hidden hr_attachment'></div></td>";
+    /*var joiningDate = $('#joiningDate');
+    var jd = "<td><input type='hidden' name='"+joiningDate.prop('name')+"' value='"+joiningDate.val()+"'>"+joiningDate.val()+"</td>";
+*/
+    td = td + "<td ><span class='doc'></span> <div class='hidden hr_attachment'></div></td>";
 
     var tr = "<tr id='"+j+"'>" + td + "<td class=''><a class='p-2 edit-hr'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a>" +
         "<a class='p-2 del_row'><i class='fa fa-trash text-danger '></i></a></td></tr>";
@@ -221,13 +228,13 @@ var contractor = (function () {
     function validate_gInfo() {
         $('#btnValGINext').on('click', function (e) {
             var isValid = true;
-            $('#general_Information').find(':input').each(function () {
+            /*$('#general_Information').find(':input').each(function () {
                 if (isValid == true) {
                     isValid = $('#contractorForm').validate().element(this);
                 } else {
                     $('#contractorForm').validate().element(this);
                 }
-            });
+            });*/
             //var isValid = $('#contractorForm').validate().element('#gInfo :input');
             if (isValid == true) {
                 nextTab('general_Information', 'category_details')
@@ -366,26 +373,34 @@ var contractor = (function () {
         return (Math.round(_size * 100) / 100) + ' ' + fSExt[i];
     }
 
-    function getTrainingDtl(cidNo){
-        if(!cidNo){
+    function getTrainingDtl($this){
+        /*if(!$this){
             return;
-        }
+        }*/
+        var prevCidNo = $this.data('val');
+        var cidNo = $this.val();
         $.ajax({
             url: _baseURL() + '/getTrainingDtl',
             type: 'GET',
             data: {cidNo: cidNo},
             success: function (res) {
                 var trainingTbl = $('#inductionCourseDtl');
+                trainingTbl.find('tbody').find('.'+cidNo).remove();
+                if(prevCidNo != '') {
+                    trainingTbl.find('tbody').find('.' + prevCidNo).remove();
+                }
+                trainingTbl.find('tbody').find('.noRecord').remove();
                 var tr = '';
+                var ind = trainingTbl.find('tbody tr').length;
                 for(var i in res){
-                    tr = tr + "<tr><td>"+(parseInt(i)+1)+"</td>" +
+                    tr = tr + "<tr class='"+cidNo+"'><td>"+(parseInt(ind)+parseInt(i)+1)+"</td>" +
                     "<td>" + res[i].tType + "</td>" +
                     "<td>" + (formatAsDate(res[i].fromDate) + ' to '+ formatAsDate(res[i].toDate) ) + "</td>" +
                     "<td>"+res[i].tModule+"</td>" +
                     "<td>"+res[i].participant+"</td>"+
                     "<td>"+res[i].cidNo+"</td></tr>";
                 }
-                trainingTbl.find('tbody').html(tr);
+                trainingTbl.find('tbody').append(tr);
             }
         });
     }
@@ -404,7 +419,7 @@ var contractor = (function () {
             if (~option.indexOf("Incorporated")) {
                 $('.afterNameMsg').html("For incorporation, please include 'Pvt Ltd' after the proposed firm name");
                 $('#cIncorporation').removeClass('hide');
-                certificateTbl.append(cert);
+                certificateTbl.html(cert);
             }else{
                 $('.afterNameMsg').html("For Sole Proprietorship, please include 'Construction' or 'Builder' after the proposed firm name");
                 $('#cIncorporation').addClass('hide');
@@ -509,12 +524,11 @@ var contractor = (function () {
     function delTableRow(){
         $('body').on('click','.del_row',function(){
 
-            //if($(this).closest('table').find('tbody tr').length > 1) {
+            if($(this).closest('table').find('tbody tr').length > 1) {
                 $(this).closest('tr').remove();
-            //}
-            /*else{
-                warningMsg("Cannot delete last row. You must have atleast one row!");
-            }*/
+            } else{
+                warningMsg("Cannot delete last row. You must have at least one row!");
+            }
         });
     }
 
@@ -570,12 +584,14 @@ var contractor = (function () {
     function getPersonalInfo($this,country,hrOrPartner){
 
         if(country == '8f897032-c6e6-11e4-b574-080027dcfac6') { //if bhutanese fetch from DCRC
+
             $.ajax({
                 url: _baseURL() + '/getPersonalInfo',
                 type: 'GET',
-                async:false,
+                //async:false,
                 data: {cidNo: $this.val()},
                 success: function (res) {
+
                     if (res.status == '1') {
                         var dto = res.dto;
                        // var index = $this.closest("tr").index();
@@ -594,10 +610,18 @@ var contractor = (function () {
                             }
                         }
                     }
+                    else{
+                        warningMsg(res.text);
+                        $this.closest('tr').find('.name').prop('readonly', false);
+                        $this.closest('tr').find('.sex').prop('readonly', false);
+                    }
+                    getTrainingDtl($this);
                 }
             });
-            getTrainingDtl($this.val());
+        }else{
+            getTrainingDtl($this);
         }
+
     }
 
     function confirmEmail(){
@@ -614,7 +638,12 @@ var contractor = (function () {
     }
 
     function checkDuplicateHR(){
-        $('body').on('change','.hr-cid',function(){
+
+        $('body').on('focusin', '.hr-cid', function(){
+            //console.log("Saving value " + $(this).val());
+            $(this).data('val', $(this).val());
+        }).on('change','.hr-cid',function(){
+
             var $this = $(this);
             var isHrExist = false;
 
@@ -646,6 +675,7 @@ var contractor = (function () {
             });
             if(!isHrExist){
                 getPersonalInfo($this,country,hrOrPartner);
+                //getTrainingDtl($this);
             }
         })
     }
