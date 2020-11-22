@@ -65,7 +65,7 @@
                             <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fa fa-print"></i> Print Certificate <i class="fa fa-chevron-down"></i></a>
                             <div class="dropdown-menu dropdown-menu-arrow">
                                 <a href="<c:url value="/admin_architect/architect_print_Certificate"/>" class="nav-link pl-4" style="color:black"> <i class="fa fa-check"></i>Architect</a>
-                                <a href="<c:url value="#"/>" class="nav-link pl-4" style="color:black"> <i class="fa fa-check"></i>Engineer</a>
+                                <a href="<c:url value="/admin_engineer/engineer_print_Certificate"/>" class="nav-link pl-4" style="color:black"> <i class="fa fa-check"></i>Engineer</a>
                                 <a href="<c:url value="#"/>" class="nav-link pl-4" style="color:black"> <i class="fa fa-check"></i>Contractor</a>
                                 <a href="<c:url value="#"/>" class="nav-link pl-4" style="color:black"> <i class="fa fa-check"></i>Consultant</a>
                                 <a href="<c:url value="/admin_survey/survey_print_Certificate"/>" class="nav-link pl-4" style="color:black"> <i class="fa fa-check"></i>Surveyor</a>

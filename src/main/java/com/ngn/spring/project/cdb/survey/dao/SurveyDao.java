@@ -6,6 +6,7 @@ import com.ngn.spring.project.cdb.architect.dto.ArchitectDto;
 import com.ngn.spring.project.cdb.architect.dto.ArchitectFeesDto;
 import com.ngn.spring.project.cdb.architect.entity.CrparchitectEntity;
 import com.ngn.spring.project.cdb.architect.entity.CrparchitectFinalEntity;
+import com.ngn.spring.project.cdb.certification.CertificateDTO;
 import com.ngn.spring.project.cdb.survey.entity.CrpsurveyFinalEntity;
 import com.ngn.spring.project.cdb.survey.entity.SurveyDocument;
 import com.ngn.spring.project.cdb.survey.entity.SurveyServiceEntity;
@@ -543,6 +544,13 @@ public class SurveyDao extends BaseDao {
             e.printStackTrace();
         }
         return return_value;
+    }
+
+    public CertificateDTO getSurveyPrintDetails(HttpServletRequest request, String cdbNo) {
+        CertificateDTO dto =new CertificateDTO();
+        sqlQuery = properties.getProperty("SurveyorDao.getSurveyPrintDetails");
+        dto=(CertificateDTO) hibernateQuery(sqlQuery, CertificateDTO.class).setParameter(1, cdbNo).list().get(0);
+        return dto;
     }
 }
 

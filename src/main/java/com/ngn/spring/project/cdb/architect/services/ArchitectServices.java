@@ -8,6 +8,7 @@ import com.ngn.spring.project.cdb.architect.entity.ArchitectDocument;
 import com.ngn.spring.project.cdb.architect.entity.CrparchitectEntity;
 import com.ngn.spring.project.cdb.architect.entity.CrparchitectFinalEntity;
 import com.ngn.spring.project.cdb.architect.entity.ServiceEntity;
+import com.ngn.spring.project.cdb.certification.CertificateDTO;
 import com.ngn.spring.project.cdb.common.CommonDao;
 import com.ngn.spring.project.cdb.common.CommonService;
 import com.ngn.spring.project.cdb.common.dto.PersonalInfoDTO;
@@ -608,5 +609,10 @@ public class ArchitectServices extends BaseService{
     @Transactional(readOnly = true)
     private CrparchitectFinalEntity getArchitectFinal(String cdbNo) {
         return dao.getArchitectFinal(cdbNo);
+    }
+
+    @Transactional
+    public CertificateDTO getArchitetPrintDetails(HttpServletRequest request, String cdbNo) {
+        return dao.getArchitetPrintDetails(request,cdbNo);
     }
 }

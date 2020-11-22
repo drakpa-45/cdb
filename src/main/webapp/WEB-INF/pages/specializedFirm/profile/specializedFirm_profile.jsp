@@ -229,6 +229,7 @@
                                                 <th>Designation</th>
                                                 <th>Trade</th>
                                                 <th>Qualification</th>
+                                                <th>Service Type</th>
                                                 <th>Join Date</th>
                                                 <th>Attachment</th>
                                             </tr>

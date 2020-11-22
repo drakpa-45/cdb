@@ -38,13 +38,19 @@ var consultantCC = (function () {
                     "<td class='qualificationName'>" + consultantHrs[i].qualificationName + "</td>" +
                     "<td class='tradeName'>" + consultantHrs[i].tradeName + "</td>" +
                     "<td class='serviceTypeName'>" + consultantHrs[i].serviceTypeName + "</td>" +
+                    "<td>" + nullif(consultantHrs[i].joinDate) + "</td>" +
                     "<td class='attachments'>" + attachments + "</td>" +
                     "</tr>";
                 }
                 $('#hrDtlsTable').find('tbody').html(hrTr);
             }
-
         });
+        function nullif(val){
+            if(val == null || val == 'null'){
+                val = ''
+            }
+            return val;
+        }
     }
 
     function getOwnerFinal(){

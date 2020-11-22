@@ -39,6 +39,7 @@ var specializedFirmCC = (function () {
                     "<td class='qualificationName'>" + specializedFirmHrs[i].qualificationName + "</td>" +
                     "<td class='tradeName'>" + specializedFirmHrs[i].tradeName + "</td>" +
                     "<td class='serviceTypeName'>" + specializedFirmHrs[i].serviceTypeName + "</td>" +
+                    "<td>" + nullif(specializedFirmHrs[i].joinDate) + "</td>" +
                     "<td class='attachments'>" + attachments + "</td>" +
                     "</tr>";
                 }
@@ -46,6 +47,12 @@ var specializedFirmCC = (function () {
             }
 
         });
+        function nullif(val){
+            if(val == null || val == 'null'){
+                val = ''
+            }
+            return val;
+        }
     }
 
     function getOwnerFinal(){

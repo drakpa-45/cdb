@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CERTIFICATE_specialized" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f9b8bb1f-abf6-4c22-a0e7-fbefcda7fef3">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="576"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="a89241c4-46a4-4731-8c0c-4b208861aef7"/>
+	<parameter name="sideImageTopLeft" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="imageTop" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sideImageTopRight" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sideImageMiddleLeft" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sideImageMiddleRight" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sideImageBottomLeft" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sideImageBottomRight" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="cdbNo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="initialRegistrationDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="revalidationDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="regExpiryDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ownerName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ownerCID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dzongkhagName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="directorSignature" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="imageBottom" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="315" splitType="Stretch">
+			<image isUsingCache="false">
+				<reportElement x="0" y="0" width="80" height="70" uuid="2a6fa64d-9097-4ffb-bfea-f0e2850676a5"/>
+				<imageExpression><![CDATA[$P{sideImageTopLeft}]]></imageExpression>
+			</image>
+			<image hAlign="Center">
+				<reportElement x="80" y="1" width="405" height="9" uuid="6a4fd37a-c73c-40b3-abea-509217569180"/>
+				<imageExpression><![CDATA[$P{imageTop}]]></imageExpression>
+			</image>
+			<image hAlign="Right">
+				<reportElement x="485" y="0" width="70" height="60" uuid="8a953196-7028-4b98-a093-c5c184433ad7"/>
+				<imageExpression><![CDATA[$P{sideImageTopRight}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="117" y="45" width="336" height="238" uuid="be280a27-35af-4f12-9368-c5f11337b271"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="168" splitType="Stretch">
+			<staticText>
+				<reportElement x="26" y="51" width="176" height="20" uuid="1755e5b2-f497-4d69-a40a-3472c5d04e5b"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CDB Registration Number : ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="332" y="42" width="1" height="126" uuid="895a7335-ba7d-48bc-b0f3-6cb62988a855"/>
+			</line>
+			<staticText>
+				<reportElement x="26" y="71" width="176" height="20" uuid="5fa452d2-ecd0-4d08-a5fb-a6f084694999"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Initial Registration Date     : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="91" width="176" height="20" uuid="1bcedc93-84ea-4683-8ce3-2ba6b1d17e03"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Revalidation Date               : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="111" width="176" height="20" uuid="8c235e20-55cb-41ea-a7da-d3643e187589"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Registration Expiry Date   : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="202" y="51" width="113" height="20" uuid="60af32d5-f46e-4615-a8fa-d808946dca5c"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cdbNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="202" y="71" width="113" height="20" uuid="43a6d868-6c8b-4b81-b78e-960a9a711e76"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{initialRegistrationDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="202" y="91" width="113" height="20" uuid="e300d4ac-4461-4e53-9532-1a5f4d69609b"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{revalidationDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="202" y="111" width="113" height="20" uuid="c7102cf7-1207-44fb-8173-299eed76210e"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{regExpiryDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="346" y="53" width="172" height="20" uuid="6396006f-6bc0-4d94-be7d-9da2bd407220"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Proprietor's Name & CID]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="346" y="91" width="172" height="32" uuid="a5686530-9a76-4f05-bd9f-dcc356c07eee"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ownerName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="346" y="131" width="172" height="26" uuid="444f4a08-b4da-4e38-8ea7-53dea5812dbe"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ownerCID}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="121" splitType="Stretch">
+			<staticText>
+				<reportElement x="16" y="36" width="166" height="24" uuid="b21e354b-d3c8-4bd5-8cb1-7e9644c42503"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[This is to certify that Mr/Ms. .......................................................................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="287" y="36" width="101" height="24" uuid="84c16327-48a4-4db4-8a28-7bc0ca79e734"/>
+				<textElement>
+					<font fontName="Arial" size="12" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ bearing CID No. ......................................................................of ................................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="80" width="518" height="24" uuid="09fe7bb1-0fc7-42e1-82a7-ca1823a0d30f"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Dzongkhag is registered as “Architect” with the Construction Development Board. ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="182" y="36" width="105" height="24" uuid="d45798e2-f894-4556-bbb4-094addd5ca80"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ownerName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="388" y="36" width="148" height="24" uuid="6e1c3750-34d2-44ce-9931-0cadf51a30ad"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ownerCID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="15" y="60" width="168" height="20" uuid="e1f9bd75-5529-407f-beeb-521455f31f34"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dzongkhagName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<pageFooter>
+		<band height="73" splitType="Stretch">
+			<textField>
+				<reportElement x="182" y="11" width="204" height="20" uuid="00a191a3-3507-4d52-a1e7-ecfd5afe8b3a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{directorSignature}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="232" y="33" width="100" height="20" uuid="e4e8846c-5160-49ad-8f15-3879ea6b7101"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[(Director)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="182" y="53" width="204" height="20" uuid="44c97c37-884c-489c-a6b0-69b39df2832b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Construction Development Board]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="208" splitType="Stretch">
+			<staticText>
+				<reportElement x="80" y="37" width="373" height="20" uuid="f262a405-1c82-4477-80a8-f3113343e411"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Tel. No: +975-2-326035/34 Fax No: +975-2-321989 : Post Box # 1349 ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="117" y="57" width="309" height="20" uuid="0209094c-f960-4d29-83b0-9bd12f5d4017"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[E-mail: registration@cdb.gov.bt, webmaster@cdb.gov.bt ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="77" width="195" height="20" uuid="a8ac0157-9d9e-4062-916e-79732675c661"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Web address : www.cdb.gov.bt]]></text>
+			</staticText>
+			<image vAlign="Bottom" isUsingCache="false">
+				<reportElement x="1" y="138" width="80" height="70" uuid="63005f84-dcee-4dc0-872a-725bbd28df76"/>
+				<imageExpression><![CDATA[$P{sideImageBottomLeft}]]></imageExpression>
+			</image>
+			<image hAlign="Right" vAlign="Bottom">
+				<reportElement x="485" y="138" width="70" height="70" uuid="6b4d7173-d726-407d-a5cc-343a33705b4d"/>
+				<imageExpression><![CDATA[$P{sideImageBottomRight}]]></imageExpression>
+			</image>
+			<image hAlign="Center">
+				<reportElement x="80" y="199" width="405" height="9" uuid="4f97de8f-4294-45cb-ab60-f3362fb63435"/>
+				<imageExpression><![CDATA[$P{imageBottom}]]></imageExpression>
+			</image>
+		</band>
+	</summary>
+</jasperReport>

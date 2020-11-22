@@ -5,6 +5,7 @@ import com.ngn.spring.project.cdb.admin.dto.TasksDTO;
 import com.ngn.spring.project.cdb.architect.dto.ArchitectDto;
 import com.ngn.spring.project.cdb.architect.dto.ArchitectFeesDto;
 import com.ngn.spring.project.cdb.architect.entity.CrparchitectEntity;
+import com.ngn.spring.project.cdb.certification.CertificateDTO;
 import com.ngn.spring.project.cdb.engineer.model.CrpengineerFinalEntity;
 import com.ngn.spring.project.cdb.engineer.model.Engineer;
 import com.ngn.spring.project.cdb.engineer.model.EngineerAppliedServiceEntity;
@@ -334,7 +335,7 @@ public class EngineerDao extends BaseDao {
 
     @Transactional
     public List<ArchitectDto> getPrintList() {
-        sqlQuery = properties.getProperty("SurveyDao.getPrintList");
+        sqlQuery = properties.getProperty("EngineerDao.getPrintList");
         return hibernateQuery(sqlQuery, ArchitectDto.class).setParameter(1, ApplicationStatus.APPROVED.getCode()).list();
     }
 
@@ -560,5 +561,11 @@ public class EngineerDao extends BaseDao {
         return return_value;
     }
 
+    public CertificateDTO getEngineerPrintDetails(HttpServletRequest request, String cdbNo) {
+        CertificateDTO dto =new CertificateDTO();
+        sqlQuery = properties.getProperty("EngineerDao.getEngineerPrintDetails");
+        dto=(CertificateDTO) hibernateQuery(sqlQuery, CertificateDTO.class).setParameter(1, cdbNo).list().get(0);
+        return dto;
+    }
 }
 
