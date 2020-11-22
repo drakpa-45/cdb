@@ -94,6 +94,8 @@ var hr_modal = $("#hrModal").html();
 var eq_modal = $("#eqModal").html();
 var j= 0;
 function getModalData(tableId, prefix, totalCol) {
+
+    $('#'+tableId).find('.tbd').remove();
     var td = "";
     var modal = $('#' + prefix + '1').closest('.modal');
     $('#modalForm').validate();
@@ -545,7 +547,7 @@ var contractorRC = (function () {
                 "<td><button class='change'>Change</button><button class='del_row'>Delete</button></td></tr>";
             });
             hrModal.find('#hrUploadTbl tbody').empty().html(hraTr);
-            row.remove();
+            row.addClass('tbd'); //add class be be deleted
             openModal('addHRModal');
         });
     }
@@ -570,7 +572,7 @@ var contractorRC = (function () {
                 "<td><button class='change'>Change</button><button class='del_row'>Delete</button></td></tr>";
             });
             modal.find('#eqUploadTbl tbody').empty().html(hraTr);
-            row.remove();
+            row.addClass('tbd'); //add class be be deleted
             openModal('eqModal');
         });
     }
