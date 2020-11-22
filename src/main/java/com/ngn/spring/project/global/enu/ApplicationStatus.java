@@ -8,6 +8,7 @@ package com.ngn.spring.project.global.enu;
  * Reason :
  * ==================================================================================
  */
+
 public enum ApplicationStatus {
     //region enum
     UNDER_PROCESS("262a3f11-adbd-11e4-99d7-080027dcfac6","Under Process"),//when user submit
