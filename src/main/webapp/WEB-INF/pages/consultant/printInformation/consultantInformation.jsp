@@ -335,7 +335,6 @@
                                                 <th>Work Status</th>
                                             </tr>
                                             </thead>
-
                                             <tbody style="font-size: small !important;">
 
                                             </tbody>
@@ -401,6 +400,7 @@
         popupWin.document.write('<link rel="stylesheet" href="http://www.dynamicdrive.com/ddincludes/mainstyle.css" type="text/css" />');
         popupWin.document.close();
     }
+
 </script>
 </body>
 
