@@ -194,6 +194,7 @@
                                 <th style="width: 10%">Qualification</th>
                                 <th style="width: 7%">Trade / Fields</th>
                                 <th style="width: 7%">Service Type</th>
+                                <th style="width: 10%">Joining Date</th>
                                 <th style="width: 21%">Attachments (CV/UT/AT)</th>
                                 <th style="width: 5%">Action</th>
                             </tr>
@@ -228,7 +229,7 @@
                             <span class="text-danger">*</span>:</label>
                         <div class="col-lg-4">
                             <select name="consultantHRs[0].countryId" id="hr5" required="" class="form-control custom-select text-left select-beast country">
-                                <option value="">Select Country</option>
+                             <%--   <option value="">Select Country</option>--%>
                                 <c:forEach var="item" items="${countryList}">
                                     <option value="${item.value}"><c:out value="${item.text}"/></option>
                                 </c:forEach>
@@ -322,7 +323,7 @@
                         <div class="col-lg-4">
                             <div class="input-group margin-bottom-sm">
                                 <span class="input-group-addon pr-5"><i class="fa fa-calendar"></i></span>
-                                <input type="date" name="consultantHRs[0].joiningDate" value="" id="joiningDate" class="form-control datepicker">
+                                <input type="date" name="consultantHRs[0].joiningDate" value="" id="hr10" class="form-control datepicker">
                             </div>
                         </div>
                     </div>
@@ -372,7 +373,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" onclick="getModalData('hrDtlsTable','hr',9)" type="button">OK</button>
+                <button class="btn btn-primary" onclick="getModalData('hrDtlsTable','hr',10)" type="button">OK</button>
                 <button data-dismiss="modal" class="btn btn-warning" type="button">Close</button>
             </div>
         </div>

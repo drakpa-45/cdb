@@ -100,7 +100,7 @@
                     <tr>
                         <td class="country">
                             <form:select id="countryList" class="form-control" name="consultant.consultantHRs[0].countryId" data-msg-required="" data-rule-required="true" path="countryList">
-                                <form:option value="" label="Select Country"/>
+                               <%-- <form:option value="" label="Select Country"/>--%>
                                 <form:options items="${countryList}" itemValue="value" itemLabel="text"/>
                             </form:select>
                         </td>
@@ -139,7 +139,7 @@
                     </tbody>
                 </table>
                 <div class="col-lg-12 text-right">
-                    <b class="text-orange">Note:Please Tick(✔) in "Show in Certificate" field to display your name in Certificate.</b> &nbsp; &nbsp;
+                    <%--<b class="text-orange">Note:Please Tick(✔) in "Show in Certificate" field to display your name in Certificate.</b> &nbsp; &nbsp;--%>
                     <button type="button" class="btn btn-outline-primary btn-sm" onclick="addRow('partnerDtls')">
                         <i class="fe fe-plus mr-2"></i>Add More
                     </button>

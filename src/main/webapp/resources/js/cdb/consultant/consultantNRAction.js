@@ -118,7 +118,7 @@ var consultant_action = (function () {
                                 "<td>" + consultantHrs[i].designationName + "</td>" +
                                 "<td>" + consultantHrs[i].qualificationName + "</td>" +
                                 "<td>" + consultantHrs[i].tradeName + "</td>" +
-                                "<td>" + nullif(consultantHrs[i].joiningDate) + "</td>" +
+                                "<td>" + nullif(consultantHrs[i].joinDate) + "</td>" +
                                 "<td>" + consultantHrs[i].serviceTypeName + "</td>" +
                                     //"<td><a href='javascript:void(0);' class='vAttachment'>View/Download</a> </td>" +
                                 "<td>"+attachments+"</td>" +

@@ -421,10 +421,12 @@ var contractor = (function () {
                 $('.afterNameMsg').html("For incorporation, please include 'Pvt Ltd' after the proposed firm name");
                 $('#cIncorporation').removeClass('hide');
                 certificateTbl.html(cert);
+                $('#siCertificate').prop('checked', false);
             }else{
                 $('.afterNameMsg').html("For Sole Proprietorship, please include 'Construction' or 'Builder' after the proposed firm name");
                 $('#cIncorporation').addClass('hide');
                 certificateTbl.empty();
+                $('#siCertificate').prop('checked', true);
             }
             if(!$(this).val()){
                 $('.afterNameMsg').empty();
@@ -653,7 +655,6 @@ var contractor = (function () {
     }
 
     function checkDuplicateHR(){
-
         $('body').on('focusin', '.hr-cid', function(){
             //console.log("Saving value " + $(this).val());
             $(this).data('val', $(this).val());

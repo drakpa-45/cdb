@@ -277,8 +277,8 @@
                                                 <td>
                                                     <a href="javascript:void(0)" style="color: #006699" title='Architectural and Interior Design' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
                                                     <input type="checkbox" id="asone" value="2dc059a3-bc17-11e4-81ac-080027dcfac6" class="categoryCheck" name="itemId">A1 &nbsp; &nbsp; &nbsp; &nbsp;
-                                                    <a href="javascript:void(0)" style="color: #006699" title='Urban Planning' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                    <input type="checkbox" id="astwo" class="categoryCheck"  value="378c8114-bc17-11e4-81ac-080027dcfac6" name="itemId">A2&nbsp; &nbsp; &nbsp; &nbsp;
+                                                    <a href="javascript:void(0)" style="color: #006699" title='Urban Planning'  class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                    <input type="checkbox" id="astwo" class="categoryCheck"  value="378c8114-bc17-11e4-81ac-080027dcfac6"name="itemId">A2&nbsp; &nbsp; &nbsp; &nbsp;
                                                     <a href="javascript:void(0)" style="color: #006699" title='Landscaping and Site Development' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
                                                     <input type="checkbox" id="asthree"class="categoryCheck"  value="42914a22-bc17-11e4-81ac-080027dcfac6" name="itemId">A3
                                                 </td>

@@ -1,4 +1,7 @@
 //region functions callable from jsp
+function openModal(modalId) {
+    $("#" + modalId).modal({backdrop: 'static', keyboard: false});
+}
 
 function addRow(tableId) {
     var $tableBody = $('#' + tableId).find("tbody");
@@ -45,9 +48,11 @@ var hr_modal = $("#hrModal").html();
 var eq_modal = $("#eqModal").html();
 var j= 0;
 function getModalData(tableId, prefix, totalCol) {
+    $('#'+tableId).find('.tbd').remove();
     var td = "";
     var modal = $('#' + prefix + '1').closest('.modal');
     if (modal.find(':input').valid() == false) {
+        warningMsg('Please provide your information');
         return false;
     }
     for (var i = 1; i <= totalCol; i++) {
@@ -66,12 +71,13 @@ function getModalData(tableId, prefix, totalCol) {
             name = $this.prop('name');
         }
 
-        var tdVal = "<input type='hidden' name='" + name + "' value='" + value + "'/>" + text;
+        var tdVal = "<input type='hidden' class='"+$this.attr('id')+"' name='" + name + "' value='" + value + "'/>" + text;
         td = td + "<td>" + tdVal + "</td>";
     }
     td = td + "<td ><span class='doc'></span> <div class='hidden hr_attachment'></div></td>";
 
-    var tr = "<tr id='"+j+"'>" + td + "<td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger'></i></a></td></tr>";
+    var tr = "<tr id='"+j+"'>" + td + "<td class=''><a class='p-2 edit-"+prefix+"'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a>" +
+        "<a class='p-2 del_row'><i class='fa fa-trash text-danger '></i></a></td></tr>";
 
     $("#" + tableId).append(tr).find(".noRecord").hide();
     if(prefix == 'hr'){
@@ -130,66 +136,6 @@ function cloneEqFiles(tableId,modal,i){
     modal.modal('hide');
     $("#eqModal").empty().html(eq_modal);
 }
-/*
-function getModalData(tableId, prefix, totalCol) {
-    var td = "";
-    var modal = $('#'+prefix+'1').closest('.modal');
-    if(modal.find(':input').valid() == false){
-        return false;
-    }
-    for (var i = 1; i <= totalCol; i++) {
-        var $this = $("#" + prefix + i);
-
-        var text = '',value = '',name = '';
-
-        var input_type = $this.prop('type');
-        if(~input_type.indexOf("select")){
-            value =$this.val();
-            text = $this.find('option:selected').html();
-            name = $this.prop('name');
-        }else{
-            value =$this.val();
-            text = value;
-            name = $this.prop('name');
-        }
-        var tdVal = "<input type='hidden' name='"+name+"' value='"+value+"'/>"+text;
-        td = td + "<td>" + tdVal + "</td>";
-    }
-    var uplTbl = $('#hrUploadTbl').find('tbody');
-    var docName = '';
-
-    uplTbl.find('.file').each(function(e){
-        var index = $(this).closest('tr').index();
-        $(this).attr('name', 'consultantHRs[0].consultantHRAs['+index+'].attachment');
-        //$(this).after($(this).clone()).appendTo($("#" + tableId).find('.hr_attachment'));
-    });
-    uplTbl.find('.docName').each(function(e){
-        var index = $(this).closest('tr').index();
-        docName = docName +"<input type='hidden' name='consultantHRs[0].consultantHRAs["+index+"].documentName' value='"+$(this).val()+"'/>"+$(this).val() +'<br>';
-    });
-
-    td = td + "<td>"+docName+"<div class='hidden hr_attachment'></div></td>";
-
-    var tr = "<tr>" + td + "<td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger'></i></a></td></tr>";
-    $("#" + tableId).find(".noRecord").hide();
-    $('#' + tableId).append(tr);
-
-    uplTbl.find('.file').each(function(e){
-        //var index = $(this).closest('tr').index();
-        //$(this).attr('name', 'contractorHRs[0].contractorHRAs['+index+'].attachment');
-        $(this).after($(this).clone()).appendTo($("#" + tableId).find('.hr_attachment'));
-
-    });
-
-    *//*var $this = $(this), $clone = $this.clone();
-     uplTbl.append(tr);
-     $this.after($clone).appendTo(uplTbl.find('.file'));
-     $this.reset();*//*
-
-    modal.find(":input").val('');
-    modal.modal('hide');
-
-}*/
 
 function nextTab(presentClass, nextClass) {
 
@@ -300,6 +246,10 @@ var consultant = (function () {
                 }
 
             });
+          /*  if($('.categoryCheck').is(':checked') == false){
+                isValid = false;
+                warningMsg("Please choose at least one category.");
+            }*/
             //var isValid = $('#contractorForm').validate().element('#gInfo :input');
             if (isValid == true) {
                 nextTab('category_details', 'human_resource_criteria')
@@ -425,9 +375,9 @@ var consultant = (function () {
 
     var cert = "<tr><td></td>" +
         "<td><input type='text' class='form-control' name='cAttachments[0].documentName'/> </td>"+
-        "<td><input type='file' name='cAttachments[0].attachment' class='form-control-file file'></td>" +
+        "<td><input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
         "<td class='file-size'></td>" +
-        "<td><a class='p-2'><i class='fa fa-pencil text-green'></i></a><a class='p-2'><i class='fa fa-trash text-danger'></i></a></td>" +
+        "<td><a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a></td>" +
         "</tr>";
 
     function sCertIncorporation() {
@@ -436,7 +386,7 @@ var consultant = (function () {
             var certificateTbl = $('#certificateTbl').find('tbody');
             if (~option.indexOf("Incorporated")) {
                 $('#cIncorporation').removeClass('hide');
-                certificateTbl.append(cert);
+                certificateTbl.html(cert);
                 $('#siCertificate').prop('checked', false);
             }else{
                 $('#cIncorporation').addClass('hide');
@@ -491,9 +441,9 @@ var consultant = (function () {
                             $this.closest('tr').find('.name').val(dto.fullName).prop('readonly', true);
                             $this.closest('tr').find('.sex').val(dto.sex).prop('readonly', true);
                             if (parseInt(index) == 0) {
-                               /* $('#pDzongkhagId').val(dto.dzongkhagId).change();
+                                $('#pDzongkhagId').val(dto.dzongkhagId).change();
                                 $('#pGewogId').val(dto.gowegId).change();
-                                $('#pVillageId').val(dto.villageId);*/
+                                $('#pVillageId').val(dto.villageId);
                                 $('#pDzongkhagId').val(dto.dzongkhagId);
                                 $('#pGewogId').html("<option value='"+dto.goweg+"'>"+dto.goweg+"</option>");
                                 $('#pVillageId').val("<option value='"+dto.village+"'>"+dto.village+"</option>");
@@ -505,6 +455,7 @@ var consultant = (function () {
             getTrainingDtl($this.val());
         })
     }
+
 
     function getPersonalInfoHR(){
         $('#addHRModal').on('change','.hr-cid', function (e) {
@@ -580,9 +531,47 @@ var consultant = (function () {
 
     function delTableRow(){
         $('body').on('click','.del_row',function(){
-            $(this).closest('tr').remove();
+            if($(this).closest('table').find('tbody tr').length > 1) {
+                $(this).closest('tr').remove();
+            } else{
+                warningMsg("Cannot delete last row. You must have at least one row!");
+            }
         });
     }
+
+    function edit_HR(){
+        $('body').on('click','.edit-hr',function(e){
+            e.preventDefault();
+            var row = $(this).closest('tr');
+            var hrModal = $('#addHRModal');
+            hrModal.find('#hr5').val(row.find('.hr5').val());
+            hrModal.find('#hr3').val(row.find('.hr3').val());
+            hrModal.find('#hr1').val(row.find('.hr1').val());
+            hrModal.find('#hr2').val(row.find('.hr2').val());
+            hrModal.find('#hr4').val(row.find('.hr4').val());
+            hrModal.find('#hr6').val(row.find('.hr6').val());
+            hrModal.find('#hr7').val(row.find('.hr7').val());
+            hrModal.find('#hr8').val(row.find('.hr8').val());
+            hrModal.find('#hr9').val(row.find('.hr9').val());
+            hrModal.find('#hr10').val(row.find('.hr10').val());
+            row.addClass('tbd'); //add class to be deleted
+            openModal('addHRModal');
+        });
+    }
+
+    function edit_EQ(){
+        $('body').on('click','.edit-eq',function(e){
+            e.preventDefault();
+            var row = $(this).closest('tr');
+            var hrModal = $('#eqModal');
+            hrModal.find('#eq1').val(row.find('.eq1').val());
+            hrModal.find('#eq2').val(row.find('.eq2').val());
+            hrModal.find('#eq3').val(row.find('.eq3').val());
+            row.addClass('tbd'); //add class to be deleted
+            openModal('eqModal');
+        });
+    }
+
 
     function confirmEmail(){
         $('#confirmEmail').on('blur',function(e){
@@ -599,7 +588,11 @@ var consultant = (function () {
     }
 
     function checkDuplicateHR(){
-        $('body').on('change','.hr-cid',function(){
+        $('body').on('focusin', '.hr-cid', function(){
+            //console.log("Saving value " + $(this).val());
+            $(this).data('val', $(this).val());
+        }).on('change','.hr-cid',function(){
+
             var $this = $(this);
             var isHrExist = false;
 
@@ -631,6 +624,7 @@ var consultant = (function () {
             });
             if(!isHrExist){
                 getPersonalInfo($this,country,hrOrPartner);
+                //getTrainingDtl($this);
             }
         })
     }
@@ -653,6 +647,8 @@ var consultant = (function () {
         delTableRow();
         confirmEmail();
         checkDuplicateHR();
+        edit_HR();
+        edit_EQ();
     }
 
     return {

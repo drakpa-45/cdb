@@ -48,6 +48,7 @@ var hr_modal = $("#hrModal").html();
 var eq_modal = $("#eqModal").html();
 var j= 0;
 function getModalData(tableId, prefix, totalCol) {
+    $('#'+tableId).find('.tbd').remove();
     var td = "";
     var modal = $('#' + prefix + '1').closest('.modal');
     if (modal.find(':input').valid() == false) {
@@ -69,17 +70,17 @@ function getModalData(tableId, prefix, totalCol) {
             text = value;
             name = $this.prop('name');
         }
-        var tdVal = "<input type='hidden' name='" + name + "' value='" + value + "'/>" + text;
+        var tdVal = "<input type='hidden' class='"+$this.attr('id')+"' name='" + name + "' value='" + value + "'/>" + text;
         td = td + "<td>" + tdVal + "</td>";
     }
-    var joiningDate = $('#joiningDate');
-    var jd = "<input type='hidden' name='"+joiningDate.prop('name')+"' value='"+joiningDate.val()+"'>";
+   /* var joiningDate = $('#joiningDate');
+    var jd = "<input type='hidden' name='"+joiningDate.prop('name')+"' value='"+joiningDate.val()+"'>";*/
 
     td = td + "<td ><span class='doc'></span> <div class='hidden hr_attachment'></div></td>";
 
     td = td + "<td >"+jd+"</td>";
 
-    var tr = "<tr id='"+j+"'>" + td + "<td class=''><a class='p-2 edit-hr'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a>" +
+    var tr = "<tr id='"+j+"'>" + td + "<td class=''><a class='p-2 edit-"+prefix+"'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a>" +
         "<a class='p-2 del_row'><i class='fa fa-trash text-danger '></i></a></td></tr>";
 
     $("#" + tableId).append(tr).find(".noRecord").hide();
@@ -403,7 +404,7 @@ var specializedFirm = (function () {
             if (~option.indexOf("Incorporated")) {
                //$('.afterNameMsg').html("For incorporation, please include 'Pvt Ltd' after the proposed firm name");
                 $('#cIncorporation').removeClass('hide');
-                certificateTbl.append(cert);
+                certificateTbl.html(cert);
                 $('#siCertificate').prop('checked', false);
             }else{
               //  $('.afterNameMsg').html("For Sole Proprietorship, please include 'Construction' or 'Builder' after the proposed firm name");
@@ -461,8 +462,22 @@ var specializedFirm = (function () {
             hrModal.find('#hr7').val(row.find('.hr7').val());
             hrModal.find('#hr8').val(row.find('.hr8').val());
             hrModal.find('#hr9').val(row.find('.hr9').val());
-            hrModal.find('#joiningDate').val(row.find('.joiningDate').val());
+            hrModal.find('#hr10').val(row.find('.hr10').val());
+            row.addClass('tbd'); //add class to be deleted
             openModal('addHRModal');
+        });
+    }
+
+    function edit_EQ(){
+        $('body').on('click','.edit-eq',function(e){
+            e.preventDefault();
+            var row = $(this).closest('tr');
+            var hrModal = $('#eqModal');
+            hrModal.find('#eq1').val(row.find('.eq1').val());
+            hrModal.find('#eq2').val(row.find('.eq2').val());
+            hrModal.find('#eq3').val(row.find('.eq3').val());
+            row.addClass('tbd'); //add class to be deleted
+            openModal('eqModal');
         });
     }
 
@@ -561,12 +576,11 @@ var specializedFirm = (function () {
     function delTableRow(){
         $('body').on('click','.del_row',function(){
 
-            //if($(this).closest('table').find('tbody tr').length > 1) {
-            $(this).closest('tr').remove();
-            //}
-            /*else{
-             warningMsg("Cannot delete last row. You must have atleast one row!");
-             }*/
+            if($(this).closest('table').find('tbody tr').length > 1) {
+                $(this).closest('tr').remove();
+            } else{
+                warningMsg("Cannot delete last row. You must have at least one row!");
+            }
         });
     }
 
