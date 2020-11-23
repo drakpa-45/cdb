@@ -3,9 +3,7 @@ package com.ngn.spring.project.cdb.certification;
 import com.ngn.spring.project.cdb.architect.services.ArchitectServices;
 import com.ngn.spring.project.cdb.engineer.service.EngineerServices;
 import com.ngn.spring.project.cdb.survey.service.SurveyServices;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.export.JRHtmlExporter;
+import net.sf.jasperreports.engine.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,6 +14,9 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -33,8 +34,9 @@ public class PrintController {
     @Autowired
     EngineerServices engineerServices;
 
+
     @RequestMapping(value = "/printCertificate", method = RequestMethod.GET)
-    public String printCertificate (ModelMap model,HttpServletRequest request,HttpServletResponse response, CertificateDTO certificateDTO) {
+    public String printCertificate (ModelMap model,HttpServletRequest request,HttpServletResponse response) {
         String cdbNo = request.getParameter("cdbNo");
         File filepath = null;
         String initialRegistrationDate = "";
@@ -47,6 +49,7 @@ public class PrintController {
         String newPhotoPath = null;
 
         JasperPrint jasperprint = new JasperPrint();
+        CertificateDTO certificateDTO = new CertificateDTO();
         String url =null;
         try {
             if (cdbNo.startsWith("BA-")) {
@@ -92,16 +95,21 @@ public class PrintController {
             ServletOutputStream out = response.getOutputStream();
             response.setContentType("application/pdf;charset=UTF-8");
 
-            response.setHeader("Content-Disposition", "attachment; filename=CERTIFICATE_Architect.pdf");
-            response.setHeader("Content-Disposition", "attachment; filename=CERTIFICATE_Surveyor.pdf");
-            response.setHeader("Content-Disposition", "attachment; filename=CERTIFICATE_Engineer.pdf");
-
+            if (cdbNo.startsWith("BA-")) {
+                response.setHeader("Content-Disposition", "attachment; filename=architect.pdf");
+            }
+            if (cdbNo.startsWith("BS-")) {
+                response.setHeader("Content-Disposition", "attachment; filename=Surveyor.pdf");
+            }
+            if (cdbNo.startsWith("BE-")) {
+                response.setHeader("Content-Disposition", "attachment; filename=Engineer.pdf");
+            }
             JasperExportManager.exportReportToPdfStream(jasperprint, out);
             out.flush();
             out.close();
-            return null;
         } catch (Exception e) {
             return null;
         }
+        return null;
     }
 }

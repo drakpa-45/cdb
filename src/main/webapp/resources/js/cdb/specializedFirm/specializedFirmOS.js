@@ -323,7 +323,7 @@ var specializedFirmOS = (function () {
                 $('#tradeLicenseNo').val(specializedFirm.tradeLicenseNo).prop('disabled',true);
                 $('#firmName').val(specializedFirm.firmName).prop('disabled',true);
                 $('#tpn').val(specializedFirm.tpn).prop('disabled',true);
-                $('#pDzongkhagId').val(specializedFirm.pDzongkhagId).prop('disabled',true);
+                $('#pDzongkhagId').val(specializedFirm.regDzongkhagName).prop('disabled',true);
                 $('#pGewogId').val(specializedFirm.pGewogId).prop('disabled',true);
                 $('#pVillageId').val(specializedFirm.pVillageId).prop('disabled',true);
                 $('#estAddress').val(specializedFirm.regAddress).prop('disabled',true);

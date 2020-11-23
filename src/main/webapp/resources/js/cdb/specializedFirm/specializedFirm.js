@@ -78,8 +78,6 @@ function getModalData(tableId, prefix, totalCol) {
 
     td = td + "<td ><span class='doc'></span> <div class='hidden hr_attachment'></div></td>";
 
-    td = td + "<td >"+jd+"</td>";
-
     var tr = "<tr id='"+j+"'>" + td + "<td class=''><a class='p-2 edit-"+prefix+"'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a>" +
         "<a class='p-2 del_row'><i class='fa fa-trash text-danger '></i></a></td></tr>";
 
@@ -700,6 +698,7 @@ var specializedFirm = (function () {
         validate_joiningDate();
         checkDuplicateHR();
         edit_HR();
+        edit_EQ();
     }
     return {
         init: init
