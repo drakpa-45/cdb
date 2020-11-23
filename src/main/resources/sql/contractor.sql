@@ -66,6 +66,7 @@ ContractorRCDao.getCategoryClassFinal = SELECT 	`Id` AS id, `CrpContractorFinalI
 ContractorRCDao.saveDeleteHrRequest = Update crpcontractorhumanresourcefinal set DeleteRequest = 1 where Id =:hrId
 ContractorRCDao.saveDeleteEqRequest = Update crpcontractorequipmentfinal set DeleteRequest = 1 where Id =:eqId
 ContractorRCDao.auditMemo = SELECT CONCAT('You have following audit memo:<br>',AIN,' : ',`AuditObservation`) AS auditObservation FROM `crpcontractorauditclearance` WHERE `CrpContractorConsultantId` =:contractorFinalId AND  `Dropped` = '0'
+ContractorRCDao.getIncAttachmentFinal = SELECT DocumentName AS documentName, DocumentPath documentPath,FileType AS fileType FROM crpcontractorattachmentfinal WHERE CrpContractorFinalId =:contractorFinalId
 
 /*Contractor Renewal Action Dao*/
 
