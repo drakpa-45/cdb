@@ -27,8 +27,7 @@ public class ContractorHrDTO {
     private String designationId;
     private Integer siCertificate;
     private Integer isPartnerOrOwner;
-    private Date joiningDate;
-    private String joinDate;
+    private String joiningDate;
     private Integer verified;
     private Integer Approved;
     private Integer deleteRequest;
@@ -146,20 +145,12 @@ public class ContractorHrDTO {
         this.isPartnerOrOwner = isPartnerOrOwner;
     }
 
-    public Date getJoiningDate() {
+    public String getJoiningDate() {
         return joiningDate;
     }
 
-    public void setJoiningDate(Date joiningDate) {
+    public void setJoiningDate(String joiningDate) {
         this.joiningDate = joiningDate;
-    }
-
-    public String getJoinDate() {
-        return joinDate;
-    }
-
-    public void setJoinDate(String joinDate) {
-        this.joinDate = joinDate;
     }
 
     public Integer getVerified() {

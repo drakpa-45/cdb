@@ -5,6 +5,7 @@ import com.ngn.spring.project.cdb.admin.dto.*;
 import com.ngn.spring.project.cdb.common.CommonService;
 import com.ngn.spring.project.cdb.contractor.registration.ContractorNRService;
 import com.ngn.spring.project.cdb.contractor.registration.dto.ContractorHrDTO;
+import com.ngn.spring.project.cdb.contractor.registration.dto.ContractorTrainingDTO;
 import com.ngn.spring.project.cdb.contractor.registration.model.Contractor;
 import com.ngn.spring.project.cdb.contractor.registration.model.ContractorAttachment;
 import com.ngn.spring.project.global.enu.ApplicationStatus;

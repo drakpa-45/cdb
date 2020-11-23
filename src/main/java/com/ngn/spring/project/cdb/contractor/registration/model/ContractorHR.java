@@ -49,7 +49,7 @@ public class ContractorHR extends BaseModel implements Serializable{
     @Column(name = "IsPartnerOrOwner")
     private Integer isPartnerOrOwner;
     @Column(name = "JoiningDate")
-    private Date joiningDate;
+    private String joiningDate;
     @Column(name = "Verified")
     private Integer verified;
     @Column(name = "Approved")
@@ -162,11 +162,11 @@ public class ContractorHR extends BaseModel implements Serializable{
         this.isPartnerOrOwner = isPartnerOrOwner;
     }
 
-    public Date getJoiningDate() {
+    public String getJoiningDate() {
         return joiningDate;
     }
 
-    public void setJoiningDate(Date joiningDate) {
+    public void setJoiningDate(String joiningDate) {
         this.joiningDate = joiningDate;
     }
 

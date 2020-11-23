@@ -92,6 +92,7 @@ var eq_modal = $("#eqModal").html();
 var j= 0;
 function getModalData(tableId, prefix, totalCol) {
     var td = "";
+    $('#'+tableId).find('.tbd').remove();
     $('#modalForm').validate();
     var modal = $('#' + prefix + '1').closest('.modal');
     if (modal.find(':input').valid() == false) {
@@ -431,14 +432,16 @@ var contractorOS = (function () {
 
                             var attachment = '';
                             for (var j in equipments[i].eqAttachments){
-                                attachment = attachment + "<a href='"+_baseURL() + "/viewDownload?documentPath="+equipments[i].eqAttachments[j].documentPath+"' target='_blank'>"+equipments[i].eqAttachments[j].documentName+"</a><br>";
+                                attachment = attachment + "<span class='eqa'><input type='hidden' class='eqId' value='"+equipments[i].eqAttachments[j].id+"'>" +
+                                "<a href='"+_baseURL() + "/viewDownload?documentPath="+equipments[i].eqAttachments[j].documentPath+"' target='_blank'>"+equipments[i].eqAttachments[j].documentName+"</a></span><br>";
                             }
+
                             eqTr = eqTr +
                             "<tr>" +
-                            "<td><input type='hidden' class='contractorEQid' name='contractorEQs[0].id' value='"+equipments[i].id +"'/>"
+                            "<td class='eq1'><input type='hidden' class='contractorEQid' name='contractorEQs[0].id' value='"+equipments[i].id +"'/>"
                             + equipments[i].equipmentName + "</td>" +
-                            "<td>" + equipments[i].registrationNo + "</td>" +
-                            "<td>" + equipments[i].quantity + "</td>" +
+                            "<td class='eq2'>" + equipments[i].registrationNo + "</td>" +
+                            "<td class='qty'>" + equipments[i].quantity + "</td>" +
                             "<td>" + attachment + "</td>" +
                             //"<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
                             "<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
@@ -499,6 +502,17 @@ var contractorOS = (function () {
         });
     }
 
+    function enableRegistrationNo(){
+        $('.equipmentId').on('change',function(e){
+            var isRegistration = $(this).find("option:selected").hasClass("1");
+            if(isRegistration === true){
+                $(this).closest('.form-group').find('.registrationNo').prop('disabled',false).prop('required',true);;
+            }else{
+                $(this).closest('.form-group').find('.registrationNo').prop('disabled',true).prop('required',false).removeClass('error');
+            }
+        })
+    }
+
     function enableClassCategory(){
         $('.categoryCheck').on('click',function(e){
             if($(this).is(':checked')){
@@ -513,7 +527,7 @@ var contractorOS = (function () {
     }
 
     function editInModal(){
-        $('body').on('click','.edit_row',function(e){
+        $('#hrDtlsTable').on('click','.edit_row',function(e){
             e.preventDefault();
             var row = $(this).closest('tr');
             var hrModal = $('#addHRModal');
@@ -539,8 +553,34 @@ var contractorOS = (function () {
                 "<td><button class='change'>Change</button><button class='del_row'>Delete</button></td></tr>";
             });
             hrModal.find('#hrUploadTbl tbody').empty().html(hraTr);
-            row.remove();
+            row.addClass('tbd');
             openModal('addHRModal');
+        });
+    }
+
+    function editInEq(){
+        $('#equipmentTbl').on('click','.edit_row',function(e){
+            e.preventDefault();
+            var row = $(this).closest('tr');
+            var modal = $('#eqModal');
+            modal.find('.id4Edit').val(row.find('.contractorEQid').val())//for Edit
+
+            modal.find('#eq1').val(modal.find('#eq1 option:contains("'+row.find('td:nth-child(1)').text()+'")').val());
+            modal.find('#eq2').val(row.find('td:nth-child(2)').text());
+            modal.find('#eq3').val(row.find('td:nth-child(3)').text());
+            var eqaTr = "";
+            row.find('.eqa').each(function(){
+                var name = $(this).find('a').text();
+                var eqa = $(this).find('a').parent().html();
+                eqaTr = eqaTr+"<tr><td><input type='hidden' class='eqaId' value='"+$(this).find('.eqaId').val()+"'>" +
+                "<input type='text' required class='form-control docName' name='equipments[0].contractorEQAs[0].documentName' value='"+name.substring(0,name.lastIndexOf('.'))+"' disabled></td>" +
+                "<td><span class='aName'> "+eqa+"</span><span class='aFile'></span> </td>" +
+                    /*"<td></td>" +*/
+                "<td><button class='change'>Change</button><button class='del_row'>Delete</button></td></tr>";
+            });
+            modal.find('#eqUploadTbl tbody').empty().html(eqaTr);
+            row.addClass('tbd');
+            openModal('eqModal');
         });
     }
 
@@ -550,6 +590,28 @@ var contractorOS = (function () {
             var $this = $(this);
             var row = $(this).closest('tr');
             var file= "<input type='file' required class='file' name='contractorHRs[0].contractorHRAs[0].attachment'"+
+                "accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>";
+            if($this.text() == 'Change'){
+                row.find('.docName').prop('disabled',false);
+                row.find('.aName').addClass('hide');
+                row.find('.aFile').html(file);
+                $this.text('Cancel');
+            }else{
+                row.find('.docName').prop('disabled',true);
+                row.find('.aName').removeClass('hide');
+                row.find('.aFile').empty();
+                $this.text('Change');
+            }
+
+        });
+    }
+
+    function changeFileEq(){
+        $('#eqUploadTbl').on('click','.change',function(e){
+            //e.preventDefault();
+            var $this = $(this);
+            var row = $(this).closest('tr');
+            var file= "<input type='file' required class='file' name='equipments[0].contractorEQAs[0].attachment'"+
                 "accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>";
             if($this.text() == 'Change'){
                 row.find('.docName').prop('disabled',false);
@@ -586,6 +648,26 @@ var contractorOS = (function () {
         }
     }
 
+    function addMoreFile(){
+        $('#addMoreHr').on('click',function(e){
+            var uplTbl = $('#hrUploadTbl').find('tbody');
+            var tr = "<tr><td><input type='text' required class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/> </td>" +
+                "<td><input type='file' required class='file' name='contractorHRs[0].contractorHRAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>" +
+                "<td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td></tr>";
+            uplTbl.append(tr);
+        });
+    }
+
+    function addMoreEqFile(){
+        $('#addMoreEq').on('click',function(e){
+            var uplTbl = $('#eqUploadTbl').find('tbody');
+            var tr = "<tr><td><input type='text' required class='form-control docName' name='equipments[0].contractorEQAs[0].documentName'/> </td>" +
+                "<td><input type='file' required class='file' name='equipments[0].contractorEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>" +
+                "<td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td></tr>";
+            uplTbl.append(tr);
+        });
+    }
+
     function init(){
         viewDownloadAttachment();
         getContractor();
@@ -597,9 +679,14 @@ var contractorOS = (function () {
         enableClassCategory();
         delTableRow();
         editInModal();
+        editInEq();
         changeFile();
+        changeFileEq();
         addMoreCert();
         allowEditHrEqExpired();
+        enableRegistrationNo();
+        addMoreEqFile();
+        addMoreFile();
     }
 
     return {

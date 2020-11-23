@@ -33,7 +33,7 @@ function saveAndPreview(presentClass, nextClass) {
         '<h3 class="pt-3 text-center">General Information</h3>' + $("#general_Information >.div-actual").html() +
         '<h3 class="pt-3 text-center">Category Details</h3>' + $("#category_details >.div-actual").html()
         + '<h3 class="pt-3 text-center">Human Resource</h3>' + $("#human_resource_criteria >.div-actual").html() +
-        '<h3 class="pt-3 text-center">Consultant Equipment Details</h3>' + $("#equipment_details >.div-actual").html();
+        '<h3 class="pt-3 text-center">Contractor Equipment Details</h3>' + $("#equipment_details >.div-actual").html();
 
     $("." + presentClass + ">a").addClass('bg-blue-light text-white');
     $('.tab-pane').removeClass("active").addClass("active");

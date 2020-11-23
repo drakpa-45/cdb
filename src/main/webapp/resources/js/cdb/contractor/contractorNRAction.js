@@ -8,6 +8,22 @@ function checkBtn(checkBoxId)
 
 }
 
+function saveAndPreview(presentClass, nextClass) {
+    var content = '<h3 class="pt-3 text-center">Fee Structure</h3>' + $("#fees_structure >.div-actual").html() +
+        '<h3 class="pt-3 text-center">General Information</h3>' + $("#general_Information >.div-actual").html() +
+        '<h3 class="pt-3 text-center">Category Details</h3>' + $("#category_details >.div-actual").html()
+        + '<h3 class="pt-3 text-center">Human Resource</h3>' + $("#human_resource_criteria >.div-actual").html() +
+        '<h3 class="pt-3 text-center">Contractor Equipment Details</h3>' + $("#equipment_details >.div-actual").html();
+
+    $("." + presentClass + ">a").addClass('bg-blue-light text-white');
+    $('.tab-pane').removeClass("active").addClass("active");
+    $('.tab-content').removeClass("active").addClass("active");
+    $("." + nextClass).addClass("active");
+    $("." + presentClass + ">a").append("<i class='fa fa-check ml-1'></i>");
+
+    //$("#" + nextClass).prepend(content);
+}
+
 var contractorNRAction = (function () {
     "use strict";
     var isSubmitted = false;
@@ -73,6 +89,8 @@ var contractorNRAction = (function () {
                         $('#regPhoneNo').text(contractor.regPhoneNo);
                         $('#regFaxNo').text(contractor.regFaxNo);
 
+                        incorporation(contractorDTO.incAttachments);
+
                         var contractorHrs = contractorDTO.contractorHRs;
                         var partnerHrTr = "";
                         var hrTr = "";
@@ -102,13 +120,14 @@ var contractorNRAction = (function () {
                                 "<td>" + ((contractorHrs[i].siCertificate == '1')?'(✔)':'') + "</td>" +
                                 "<td><input type='button' name='humanResource' value='Check for this CID' class='checkCid btn btn-success'></td>" +
                                 verifiedApproved+"</tr>";
+                                getTrainingDtl(contractorHrs[i].cidNo);
                             } else {
                                 n++;
                                 var attachments = '';
                                 for (var j in contractorHrs[i].hrAttachments){
                                     attachments = attachments + "<a href='"+_baseURL() + "/viewDownload?documentPath="+contractorHrs[i].hrAttachments[j].documentPath+"' target='_blank'>"+contractorHrs[i].hrAttachments[j].documentName+"</a><br>";
                                 }
-                                var href = _baseURL() + "/viewDownload?tableName=crpcontractorhumanresourceattachment&filterCol=CrpContractorHumanResourceId&filterVal="+contractorHrs[i].id;
+                                //var href = _baseURL() + "/viewDownload?tableName=crpcontractorhumanresourceattachment&filterCol=CrpContractorHumanResourceId&filterVal="+contractorHrs[i].id;
                                 hrTr = hrTr + "<tr>" +
                                 "<td>" + n + "<input type='hidden' class='contractorHRid' value='"+contractorHrs[i].id +"' </td>" +
                                 "<td>" + contractorHrs[i].countryName + "</td>" +
@@ -317,6 +336,8 @@ var contractorNRAction = (function () {
                         $('#regPhoneNo').text(contractor.regPhoneNo);
                         $('#regFaxNo').text(contractor.regFaxNo);
 
+
+
                         var contractorHrs = contractorDTO.contractorHRs;
                         var partnerHrTr = "";
                         var m = 0;
@@ -385,6 +406,46 @@ var contractorNRAction = (function () {
         }
     }
 
+    function incorporation(data){
+        if(data){
+            $('#cIncorporation').removeClass('hide');
+            var tr = '';
+            for(var i in data){
+                tr = tr + "<tr>"+
+                "<td></td>" +
+                "<td>"+data[i].documentName+"</td>"+
+                "<td><a href='"+_baseURL() + "/viewDownload?documentPath="+data[i].documentPath+"' target='_blank'> View </a></td>" +
+                "</tr>";
+            }
+            $('#IncCertificateTbl').find('tbody').html(tr);
+        }else{
+            $('#cIncorporation').addClass('hide');
+        }
+    }
+
+    function getTrainingDtl(cidNo){
+        $.ajax({
+            url: cdbGlobal.baseURL() + '/contractorNR/getTrainingDtl',
+            type: 'GET',
+            data: {cidNo: cidNo},
+            success: function (res) {
+                var trainingTbl = $('#inductionCourseDtl');
+                trainingTbl.find('tbody').find('.noRecord').remove();
+                var tr = '';
+                for (var i in res) {
+                    tr = tr + "<tr><td></td>" +
+                    "<td>" + res[i].tType + "</td>" +
+                    "<td>" + (formatAsDate(res[i].fromDate) + ' to ' + formatAsDate(res[i].toDate) ) + "</td>" +
+                    "<td>" + res[i].tModule + "</td>" +
+                    "<td>" + res[i].participant + "</td>" +
+                    "<td>" + res[i].cidNo + "</td></tr>";
+                }
+                trainingTbl.find('tbody').append(tr);
+            }
+        })
+    }
+
+
     function paymentUpdate() {
         $('#btnSave').on('click', function (e) {
             $('#contractorPaymentForm').validate({
@@ -406,6 +467,62 @@ var contractorNRAction = (function () {
         })
     }
 
+
+    function validateOwner(){
+        $('#partnerDtls').on('change','.check',function(){
+            var allChecked = false;
+            $('#partnerDtls').find('.check').each(function(){
+                if($(this).is(':checked') == true){
+                    allChecked = true;
+                }else{
+                    allChecked = false;
+                    return false;
+                }
+            });
+            if(allChecked == true){
+                $('#nextGIBtn').prop('disabled',false);
+            }else{
+                $('#nextGIBtn').prop('disabled',true);
+            }
+        });
+    }
+    function validateHr(){
+        $('#hrTbl').on('change','.check',function(){
+            var allChecked = false;
+            $('#hrTbl').find('.check').each(function(){
+                if($(this).is(':checked') == true){
+                    allChecked = true;
+                }else{
+                    allChecked = false;
+                    return false;
+                }
+            });
+            if(allChecked == true){
+                $('#nextHRBtn').prop('disabled',false);
+            }else{
+                $('#nextHRBtn').prop('disabled',true);
+            }
+        });
+    }
+    function validateEq(){
+        $('#equipmentTbl').on('change','.check',function(){
+            var allChecked = false;
+            $('#equipmentTbl').find('.check').each(function(){
+                if($(this).is(':checked') == true){
+                    allChecked = true;
+                }else{
+                    allChecked = false;
+                    return false;
+                }
+            });
+            if(allChecked == true){
+                $('#btnValEqNext').prop('disabled',false);
+            }else{
+                $('#btnValEqNext').prop('disabled',true);
+            }
+        });
+    }
+
     function init(){
         viewDownloadAttachment();
         approve();
@@ -414,6 +531,9 @@ var contractorNRAction = (function () {
         paymentUpdate();
         checkHR();
         sendBack();
+        validateOwner();
+        validateHr();
+        validateEq();
     }
     return {
         verify: verify,

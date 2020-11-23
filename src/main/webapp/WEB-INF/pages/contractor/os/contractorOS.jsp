@@ -960,7 +960,7 @@
                         <div class="modal-body form-horizontal">
                             <div class="modal-div">
                                 <div class="form-group">
-                                    <input type="hidden" id="hrId" name="contractorHRs[0].id">
+                                    <input type="hidden" class="id4Edit" name="contractorHRs[0].id">
                                     <label class="col-lg-2">Nationality
                                         <span class="text-danger">*</span>:</label>
 
@@ -1105,7 +1105,6 @@
                                                 <tr>
                                                     <th>Document Name</th>
                                                     <th>Document Attached</th>
-                                                        <%--<th>File Size</th>--%>
                                                     <th>Delete</th>
                                                 </tr>
                                                 </thead>
@@ -1120,7 +1119,6 @@
                                                                name='contractorHRs[0].contractorHRAs[0].attachment'
                                                                accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                     </td>
-                                                        <%--<td class='file-size'></td>--%>
                                                     <td class='del_row'><a class='p-2'><i
                                                             class='fa fa-trash text-danger '></i></a></td>
                                                 </tr>
@@ -1134,7 +1132,6 @@
                                                                name='contractorHRs[0].contractorHRAs[0].attachment'
                                                                accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                     </td>
-                                                    <td class='file-size'></td>
                                                     <td class='del_row'><a class='p-2'><i
                                                             class='fa fa-trash text-danger '></i></a></td>
                                                 </tr>
@@ -1148,7 +1145,6 @@
                                                                name='contractorHRs[0].contractorHRAs[0].attachment'
                                                                accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                     </td>
-                                                    <td class='file-size'></td>
                                                     <td class='del_row'><a class='p-2'><i
                                                             class='fa fa-trash text-danger '></i></a></td>
                                                 </tr>
@@ -1184,6 +1180,8 @@
                                 <div class="form-group">
                                     <label class="col-lg-2">Equipment <span class="text-danger">*</span>:</label>
 
+                                    <input type="hidden" class="id4Edit" name="equipments[0].id" /> <!-- for edit-->
+
                                     <div class="col-lg-4">
                                         <select name="equipments[0].equipmentId"
                                                 class="form-control custom-select text-left equipmentId" required=""
@@ -1200,7 +1198,7 @@
                                     <div class="col-lg-3">
                                         <input type="text" name="equipments[0].registrationNo"
                                                class="form-control registrationNo" <%--required="true"--%> disabled
-                                               id="eq2">
+                                               id="eq2" placeholder="BP-1-A1234">
                                     </div>
                                 </div>
 
@@ -1225,7 +1223,6 @@
                                                 <tr>
                                                     <th>Document Name</th>
                                                     <th>Document Attached</th>
-                                                    <th>File Size</th>
                                                     <th>Delete</th>
                                                 </tr>
                                                 </thead>
@@ -1238,7 +1235,6 @@
                                                                name='equipments[0].contractorEQAs[0].attachment'
                                                                accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                     </td>
-                                                    <td class='file-size'></td>
                                                     <td class='del_row'><a class='p-2'><i
                                                             class='fa fa-trash text-danger '></i></a></td>
                                                 </tr>
@@ -1250,19 +1246,6 @@
                                                                name='equipments[0].contractorEQAs[0].attachment'
                                                                accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                     </td>
-                                                    <td class='file-size'></td>
-                                                    <td class='del_row'><a class='p-2'><i
-                                                            class='fa fa-trash text-danger '></i></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type='text' required="" class='form-control docName'
-                                                               name='equipments[0].contractorEQAs[0].documentName'/>
-                                                    </td>
-                                                    <td><input type='file' required="" class='file'
-                                                               name='equipments[0].contractorEQAs[0].attachment'
-                                                               accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
-                                                    </td>
-                                                    <td class='file-size'></td>
                                                     <td class='del_row'><a class='p-2'><i
                                                             class='fa fa-trash text-danger '></i></a></td>
                                                 </tr>
