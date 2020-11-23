@@ -447,9 +447,9 @@
                                             <button type="button" class="btn btn-primary" id="btnApprove"><i
                                                     class="fa fa-check"></i>&nbsp;&nbsp;Approve
                                             </button>
-                                            <button type="button" class="btn btn-primary" id="btnSendBack"><i
+                                          <%--  <button type="button" class="btn btn-primary" id="btnSendBack"><i
                                                     class="fa fa-backward"></i>&nbsp;&nbsp;Send back
-                                            </button>
+                                            </button>--%>
                                         </security:authorize>
                                         <button type="button" class="btn btn-danger " id="btnReject"><i
                                                 class="fa fa-times mr-1"></i>Reject

@@ -530,7 +530,10 @@ public class SpecializedFirmRService extends BaseService {
     }
 
     @Transactional(readOnly = true)
-    public SpecializedFirmFinal getSpecializedFirmFinal(String cdbNo){return specializedFirmRDao.getSpecializedFirmFinal(cdbNo);}
+    public SpecializedFirmFinal getSpecializedFirmFinal(String cdbNo){
+        SpecializedFirmFinal specializedFirmFinal = specializedFirmRDao.getSpecializedFirmFinal(cdbNo);
+        specializedFirmFinal.setRegDzongkhagName(commonService.getValue("cmndzongkhag", "NameEn", "Id", specializedFirmFinal.getpDzongkhagId()).toString());
+        return specializedFirmFinal;}
 
     /**
      * To get the services fee of other services if refNo is null or fee of that refNo

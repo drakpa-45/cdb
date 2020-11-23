@@ -297,10 +297,7 @@ $('#architect_table').DataTable({
     responsive: true
 });
 function printCertificate(cdbNo){
-    alert(cdbNo);
-    window.open("/cdb/print/printCertificate?cdbNo=" + cdbNo);
-   /* var url= '/cdb/print/printCertificate?cdbNo='+cdbNo;
-    $('#registrtaionFormCard').load(url);*/
+window.open("/cdb/print/printCertificate?cdbNo=" + cdbNo);
 }
 function printInfo(cdbNo){
     var url= '/cdb/admin_architect/emptylayout/printarchitectInfo?cdbNo='+cdbNo;

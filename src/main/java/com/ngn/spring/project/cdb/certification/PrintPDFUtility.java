@@ -46,7 +46,7 @@ public  class PrintPDFUtility {
             String logo = "";
 
             try {
-                sideImageTopLeft = url + "/jasperImages/cdbImages/topLeftBorder.jpg";
+           /*     sideImageTopLeft = url + "/jasperImages/cdbImages/topLeftBorder.jpg";
                 sideImageTopRight = url + "/jasperImages/cdbImages/topRightBorder.jpg";
                 imageTop = url + "/jasperImages/cdbImages/widthBar.jpg";
                 imageBottom = url + "/jasperImages/cdbImages/widthBar.jpg";
@@ -54,10 +54,10 @@ public  class PrintPDFUtility {
                 sideImageMiddleRight = url + "/jasperImages/cdbImages/heightBar.jpg";
                 sideImageBottomLeft = url + "/jasperImages/cdbImages/bottomLeftBorder.jpg";
                 sideImageBottomTop = url + "/jasperImages/cdbImages/bottomRightBorder.jpg";
-                logo = url + "/jasperImages/cdbImages/logo.GIF";
+                logo = url + "/jasperImages/cdbImages/logo.GIF";*/
 
                 parameters.put("URL", url);
-                parameters.put("sideImageTopLeft", sideImageTopLeft);
+              /*  parameters.put("sideImageTopLeft", sideImageTopLeft);
                 parameters.put("sideImageTopRight", sideImageTopRight);
                 parameters.put("imageTop", imageTop);
                 parameters.put("imageBottom", imageBottom);
@@ -65,15 +65,16 @@ public  class PrintPDFUtility {
                 parameters.put("sideImageMiddleRight", sideImageMiddleRight);
                 parameters.put("sideImageBottomLeft", sideImageBottomLeft);
                 parameters.put("sideImageBottomTop", sideImageBottomTop);
-                parameters.put("logo", logo);
+                parameters.put("logo", logo);*/
                 parameters.put("initialRegistrationDate", initialRegistrationDate);
+                parameters.put("revalidationDate", initialRegistrationDate);
                 parameters.put("ownerCID", ownerCID);
                 parameters.put("regExpiryDate", regExpiryDate);
                 parameters.put("ownerName", ownerName);
                 parameters.put("dzongkhagName", dzongkhagName);
 
                 if(cdbNo.startsWith("BA-")){
-                    filepath = url + "/jasperFiles/ArchitectCertificate/CERTIFICATE_Architect.jasper";
+                    filepath = url + "/jasperFiles/CERTIFICATE_Architect.jasper";
                 }
                 if(cdbNo.startsWith("BS-")){
                     filepath = url + "/jasperFiles/SurveyorCertificate/CERTIFICATE_Surveyor.jasper";
@@ -89,6 +90,8 @@ public  class PrintPDFUtility {
             }catch (Exception e){
                 e.printStackTrace();
             }
-    return jasperprint;
+
+        return jasperprint;
+
     }
 }
