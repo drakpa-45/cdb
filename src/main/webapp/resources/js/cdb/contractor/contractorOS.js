@@ -93,6 +93,7 @@ var j= 0;
 function getModalData(tableId, prefix, totalCol) {
     var td = "";
     $('#modalForm').validate();
+    $('#'+tableId).find('.tbd').remove();
     var modal = $('#' + prefix + '1').closest('.modal');
     if (modal.find(':input').valid() == false) {
         return false;
@@ -499,6 +500,17 @@ var contractorOS = (function () {
         });
     }
 
+    function enableRegistrationNo(){
+        $('.equipmentId').on('change',function(e){
+            var isRegistration = $(this).find("option:selected").hasClass("1");
+            if(isRegistration === true){
+                $(this).closest('.form-group').find('.registrationNo').prop('disabled',false).prop('required',true);;
+            }else{
+                $(this).closest('.form-group').find('.registrationNo').prop('disabled',true).prop('required',false).removeClass('error');
+            }
+        })
+    }
+
     function enableClassCategory(){
         $('.categoryCheck').on('click',function(e){
             if($(this).is(':checked')){
@@ -600,6 +612,7 @@ var contractorOS = (function () {
         changeFile();
         addMoreCert();
         allowEditHrEqExpired();
+        enableRegistrationNo();
     }
 
     return {

@@ -1200,7 +1200,7 @@
                                     <div class="col-lg-3">
                                         <input type="text" name="equipments[0].registrationNo"
                                                class="form-control registrationNo" <%--required="true"--%> disabled
-                                               id="eq2">
+                                               id="eq2" placeholder="BP-1-A1234">
                                     </div>
                                 </div>
 
