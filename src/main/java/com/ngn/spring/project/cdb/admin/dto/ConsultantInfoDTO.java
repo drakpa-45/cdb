@@ -1,5 +1,6 @@
 package com.ngn.spring.project.cdb.admin.dto;
 
+import com.ngn.spring.project.cdb.consultant.model.ConsultantAttachment;
 import com.ngn.spring.project.cdb.consultant.registration.dto.ConsultantHrDTO;
 import com.ngn.spring.project.cdb.consultant.model.Consultant;
 import com.ngn.spring.project.cdb.consultant.model.ConsultantHRAttachment;
@@ -20,6 +21,7 @@ public class ConsultantInfoDTO {
     private List<ConsultantHRAttachment> consultantHRAs;
     private List<CategoryClassDTO> categories;
     private List<EquipmentDTO> equipments;
+    private List<ConsultantAttachment> incAttachments;
     private List<ApplicationHistoryDTO> appHistoryDTOs;
 
     private String ownershipTypeTxt;
@@ -133,5 +135,13 @@ public class ConsultantInfoDTO {
 
     public void setCdbNo(String cdbNo) {
         this.cdbNo = cdbNo;
+    }
+
+    public List<ConsultantAttachment> getIncAttachments() {
+        return incAttachments;
+    }
+
+    public void setIncAttachments(List<ConsultantAttachment> incAttachments) {
+        this.incAttachments = incAttachments;
     }
 }

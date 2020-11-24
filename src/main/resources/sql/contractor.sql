@@ -15,7 +15,7 @@ ContractorDao.getContractorOngoingApp = SELECT aa.`CrpContractorId` contractorId
 ContractorActionDao.gTaskList = CALL ProCrpContractorTaskList (:userId,:status,:service);
 
 ContractorActionDao.getContractorHRs = SELECT hr.`Id` AS id,hr.`CrpContractorId` contractorID,hr.`CIDNo`cidNo,hr.`Name` AS name, hr.`Sex` sex,hr.`ShowInCertificate` AS siCertificate, hr.Verified as verified,hr.Approved \
-,hr.`IsPartnerOrOwner` isPartnerOrOwner,hr.`JoiningDate` joiningDate,sa.`Name` salutationName,co.`Name` countryName,qu.`Name` qualificationName,st.`Name` serviceTypeName,td.`Name` tradeName,de.`Name` designationName \
+,hr.`IsPartnerOrOwner` isPartnerOrOwner,DATE_FORMAT(hr.`JoiningDate`,'%d-%m-%Y') joiningDate,sa.`Name` salutationName,co.`Name` countryName,qu.`Name` qualificationName,st.`Name` serviceTypeName,td.`Name` tradeName,de.`Name` designationName \
 FROM `crpcontractorhumanresource` hr INNER JOIN `cmnlistitem` sa ON sa.`Id` = hr.`CmnSalutationId` INNER JOIN `cmncountry` co ON co.`Id` = hr.`CmnCountryId` LEFT JOIN `cmnlistitem` qu ON qu.`Id` = hr.`CmnQualificationId` \
 LEFT JOIN `cmnlistitem` st ON st.`Id` = hr.`CmnServiceTypeId` LEFT JOIN `cmnlistitem` td ON td.`Id` = hr.`CmnTradeId` INNER JOIN `cmnlistitem` de ON de.`Id` = hr.`CmnDesignationId` WHERE hr.`CrpContractorId` =:contractorId and (:ownerOrPartner is null or hr.`IsPartnerOrOwner` =:ownerOrPartner)
 

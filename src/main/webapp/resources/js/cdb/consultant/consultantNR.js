@@ -449,6 +449,11 @@ var consultant = (function () {
                                 $('#pVillageId').val("<option value='"+dto.village+"'>"+dto.village+"</option>");
                             }
                         }
+                        else{
+                            warningMsg(res.text);
+                            $this.closest('tr').find('.name').prop('readonly', false);
+                            $this.closest('tr').find('.sex').prop('readonly', false);
+                        }
                     }
                 });
             }

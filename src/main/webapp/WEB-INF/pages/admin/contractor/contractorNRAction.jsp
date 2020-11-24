@@ -665,15 +665,13 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
         <script type="text/javascript">
             function showAcknowledgement() {
                 $("#registrtaionFormCard").hide();
                 $("#acknowledgementCard").show();
             }
-            function saveAndPreview(presentClass, nextClass) {
+           /* function saveAndPreview(presentClass, nextClass) {
                 var content = '<h3 class="pt-3 text-center">Fee Structure</h3>' + $(".feesStructure > form").html() +
                         '<h3 class="pt-3 text-center">General Information</h3>' + $(".generalInformation > form").html() +
                         '<h3 class="pt-3 text-center">Category Details</h3>' + $(".categoryDtls > form").html()
@@ -686,7 +684,7 @@
                 $("." + nextClass).addClass("active");
                 $("." + presentClass + ">a").append("<i class='fa fa-check ml-1'></i>");
                 $("#" + nextClass).html(content);
-            }
+            }*/
             function getModalData(tableId, prefix, totalCol) {
                 var td = "";
                 for (var i = 1; i <= totalCol; i++) {

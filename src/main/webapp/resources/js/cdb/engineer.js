@@ -269,9 +269,8 @@ function validateFeesDetails(){
 $('#architect_table').DataTable({
     responsive: true
 });
-function printCertificate(refNo){
-    var url= '/cdb/print/printCertificate?refNo='+refNo;
-    $('#content_main_div_public_user').load(url);
+function printCertificate(cdbNo){
+    window.open("/cdb/print/printCertificate?cdbNo=" + cdbNo);
 }
 function printInfo(cdbNo){
     var url= '/cdb/admin_engineer/emptylayout/printarchitectInfo?cdbNo='+cdbNo;

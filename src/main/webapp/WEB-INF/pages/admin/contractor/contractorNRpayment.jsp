@@ -201,7 +201,7 @@
                                                                                 <span class="input-group-addon pr-5"><i
                                                                                         class="fa fa-calendar"></i></span>
                                                                     <input type="date" name="paymentDate"
-                                                                           value="" id="paymentDate"
+                                                                           value="" id="paymentDate" required="true"
                                                                            class="form-control datepicker">
                                                                 </div>
                                                             </div>
@@ -213,7 +213,7 @@
 
                                                             <div class="col-lg-4 ">
                                                                 <input type="text" name="paymentReceiptNo"
-                                                                        id="paymentReceiptNo"
+                                                                        id="paymentReceiptNo" required="true"
                                                                        class="form-control">
                                                             </div>
                                                             <label class="col-lg-2 control-label">
@@ -222,7 +222,7 @@
 
                                                             <div class="col-lg-4">
                                                                 <input type="text" name="paymentRemarks"
-                                                                       value="" id="paymentRemarks"
+                                                                       value="" id="paymentRemarks" required="true"
                                                                        class="form-control">
                                                             </div>
                                                         </div>
@@ -242,9 +242,9 @@
 
                                                             <div class="col-lg-4">
                                                                 <select name="modeOfPayment"
-                                                                        id="contractorType"
+                                                                        id="contractorType" required="true"
                                                                         class="form-control chzn-select">
-                                                                    <option value="select">-Select-</option>
+                                                                    <option value="">-Select-</option>
 
                                                                     <option value="CDb-Cash">CDB-Cash
                                                                     </option>

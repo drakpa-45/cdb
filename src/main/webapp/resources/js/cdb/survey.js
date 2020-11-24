@@ -318,8 +318,17 @@ function enablesubmit(){
 }
 
 function submitForm(){
-    $('#concirmationRenewalModel').modal('show');
-    $('#messages').html('You are about to submit application. Are you sure to proceed ?');
+    var returntpe=true;
+    if($('#file1').val()==""){
+        $('#file1').focus();
+        warningMsg('Please attach your documents');
+        $('#file1').focus();
+        returntpe=false;
+    }else {
+        $('#concirmationRenewalModel').modal('show');
+        $('#messages').html('You are about to submit application. Are you sure to proceed ?');
+        returntpe;
+    }
 }
 
 function SubmitApplicationDetials(){
@@ -330,10 +339,17 @@ function SubmitApplicationDetials(){
 }
 
 function SubmitRenewalApplicationDetials(){
-    var url= '/cdb/public_access/emptylayout/submitRenwalApplicationSurvey';
-    var options = {target:'#content_main_div_public_user',url:url,type:'POST', data: $('#surveyrenewalForm').serialize()};
-    $("#surveyrenewalForm").ajaxSubmit(options);
-    $('#concirmationRenewalModel').modal('hide');
+
+    var url = '/cdb/public_access/emptylayout/submitRenwalApplicationSurvey';
+        var options = {
+            target: '#content_main_div_public_user',
+            url: url,
+            type: 'POST',
+            data: $('#surveyrenewalForm').serialize()
+        };
+        $("#surveyrenewalForm").ajaxSubmit(options);
+        $('#concirmationRenewalModel').modal('hide');
+
 }
 function viewAttachment(uuid,type,path,name){
     //var url= '${pageContext.request.contextPath}/FileDownloadServlet?uuid='+uuid+'&type='+type;
@@ -343,9 +359,13 @@ function viewAttachment(uuid,type,path,name){
 
 
 function submitcancellation(){
+    if($('#cancellationRemarks').val()==""){
+        warningMsg('Please provide reason for cancellation of certificate.');
+    }else{
     var url= '/cdb/public_access/emptylayout/submitsurveycancellation';
     var options = {target:'#content_main_div_public_user',url:url,type:'POST', data: $('#surveyrenewalForm').serialize()};
     $("#surveyrenewalForm").ajaxSubmit(options);
+    }
 }
 
 function resubmission() {

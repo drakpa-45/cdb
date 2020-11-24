@@ -422,7 +422,7 @@ public class SurveyDao extends BaseDao {
     public String insertInPaymentServiceDetails(ArchitectDto dto, String userID) {
         String retval = "";
         try {
-            Query query1 = sqlQuery("INSERT INTO crpsurveyservicepayment (Id,CrpSurveyId,CmnServiceTypeId,NoOfDaysLate,NoOfDaysAfterGracePeriod,PenaltyPerDay,CreatedBy,,PaymentAmount,TotalAmount,CreatedOn) VALUES(?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP) ");
+            Query query1 = sqlQuery("INSERT INTO crpsurveyservicepayment (Id,CrpSurveyId,CmnServiceTypeId,NoOfDaysLate,NoOfDaysAfterGracePeriod,PenaltyPerDay,CreatedBy,PaymentAmount,TotalAmount,CreatedOn) VALUES(?,?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP) ");
             query1.setParameter(1, UUID.randomUUID().toString()).setParameter(2, dto.getCrpSurveyId()).setParameter(3, dto.getServiceTypeId()).setParameter(4, dto.getNoOfDaysLate()).setParameter(5, dto.getNoOfDaysAfterGracePeriod()).setParameter(6, "100").setParameter(7, userID).setParameter(8,dto.getPaymentAmt()).setParameter(9,dto.getTotalAmt());
             int save = query1.executeUpdate();
             if (save > 0) {
@@ -475,7 +475,7 @@ public class SurveyDao extends BaseDao {
         ArchitectDto dto = new ArchitectDto();
         try {
             sqlQuery = "SELECT f.ARNo cdbNo,f.ReferenceNo refNo,f.Id CrpSurveyId,f.CIDNo cidNo,f.Name fullname,f.Village village,f.Gewog gewog,d.NameEn dzongkhagId,c.Name countryId,s.Name salutation,\n" +
-                    "i.Name updateStatus,f.CmnSalutationId salutationId,f.Email email,f.MobileNo mobileNo,f.EmployerName employeeName,f.EmployerAddress employeeAddress,q.Name qualificationId,f.CmnServiceSectorTypeId serviceSectorTypeId,\n" +
+                    "i.Name updateStatus,f.CmnSalutationId salutationId,f.Email email,f.MobileNo mobileNo,f.EmployerName employeeName,f.EmployerAddress employeeAddress,f.CmnQualificationId qualificationId, q.Name qualification,f.CmnServiceSectorTypeId serviceSectorTypeId,\n" +
                     "f.GraduationYear graduationyr,t.Name serviceSectorType,f.NameOfUniversity universityName,f.CmnUniversityCountryId cmnUniversityCountryId,uc.Name universityCountry,f.RegistrationApprovedDate registrationApproveDate,f.RegistrationExpiryDate regExpDate\n" +
                     "FROM crpsurveyfinal f \n" +
                     "LEFT JOIN cmnlistitem i ON i.Id=f.CmnApplicationRegistrationStatusId \n" +

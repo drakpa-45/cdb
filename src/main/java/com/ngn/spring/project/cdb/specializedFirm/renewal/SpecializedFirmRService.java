@@ -226,11 +226,9 @@ public class SpecializedFirmRService extends BaseService {
                         continue;
                     }
                     spFirmEQA.setEquipmentId(spFirmEQ.getId());
-
                     specializedFirmService.saveEQA(spFirmEQA, loggedInUser);
                 }
             }
-
             //to save deleted hr
             List<String> deletedEQs =existingEQs.stream().filter(h->!currentEQs.contains(h)).collect(Collectors.toList());
             if(deletedEQs !=null && !deletedEQs.isEmpty()){
@@ -532,7 +530,8 @@ public class SpecializedFirmRService extends BaseService {
     @Transactional(readOnly = true)
     public SpecializedFirmFinal getSpecializedFirmFinal(String cdbNo){
         SpecializedFirmFinal specializedFirmFinal = specializedFirmRDao.getSpecializedFirmFinal(cdbNo);
-        specializedFirmFinal.setRegDzongkhagName(commonService.getValue("cmndzongkhag", "NameEn", "Id", specializedFirmFinal.getpDzongkhagId()).toString());
+        specializedFirmFinal.setpDzongkhagId(commonService.getValue("cmndzongkhag", "NameEn", "Id", specializedFirmFinal.getpDzongkhagId()).toString());
+        specializedFirmFinal.setRegDzongkhagName(commonService.getValue("cmndzongkhag", "NameEn", "Id", specializedFirmFinal.getRegDzongkhagId()).toString());
         return specializedFirmFinal;}
 
     /**

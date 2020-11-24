@@ -138,12 +138,12 @@
                                                                         <input type="hidden" value="${appDetails.serviceSectorType}" readonly maxlength="100" id="service" name="serviceSectorType" class="form-control">${appDetails.serviceSectorType}
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                                                               <%-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Expiry Date: </label>
                                                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                                         <input type="hidden" value="${appDetails.regExpDate}" readonly id="regExpDate" class="form-control">${appDetails.regExpDate}
                                                                     </div>
-                                                                </div>
+                                                                </div>--%>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -282,12 +282,12 @@
                                                                                             </td>
                                                                                             <td>${appDetails.applicationDate}</td>
                                                                                         </tr>
-                                                                                        <tr>
+                                                                                       <%-- <tr>
                                                                                             <td>
                                                                                                 <strong>Remarks: </strong>
                                                                                             </td>
                                                                                             <td>${appDetails.remarks}</td>
-                                                                                        </tr>
+                                                                                        </tr>--%>
                                                                                         <tr>
                                                                                             <td>
                                                                                                 <strong>CreatedBy: </strong>
@@ -369,7 +369,7 @@
                                                                                 <input type="number" class="form-control " name="panalty" id="panalty" value="0" readonly>
                                                                             </div>
                                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                                <label>Reneal Amount:</label>
+                                                                                <label>Renewal Amount:</label>
                                                                                 <input type="text" class=" form-control number" value="2000.0" readonly name="paymentAmt" id="paymentAmt">
                                                                             </div>
 

@@ -46,6 +46,7 @@ public class ProfileService {
     @Transactional(readOnly = true)
     public Object getApplicationDetailsConsultant(String cdbNo) {
         ConsultantFinal consultant = consultantRCService.getConsultantFinal(cdbNo);
+        consultant.setDzongkhagName(commonService.getValue("cmndzongkhag", "NameEn", "Id", consultant.getpDzongkhagId()).toString());
         consultant.setRegDzongkhagName(commonService.getValue("cmndzongkhag", "NameEn", "Id", consultant.getRegDzongkhagId()).toString());
         consultant.setOwnershipName(commonService.getValue("cmnlistitem", "Name", "Id", consultant.getOwnershipTypeId()).toString());
         consultant.setCountryName(commonService.getValue("cmncountry", "Name", "Id", consultant.getpCountryId()).toString());
@@ -56,6 +57,7 @@ public class ProfileService {
     @Transactional(readOnly = true)
     public Object getApplicationDetailsSpecializedFirm(String cdbNo) {
         SpecializedFirmFinal specializedFirm = specializedFirmRService.getSpecializedFirmFinal(cdbNo);
+        specializedFirm.setDzongkhagName(commonService.getValue("cmndzongkhag", "NameEn", "Id", specializedFirm.getpDzongkhagId()).toString());
         specializedFirm.setRegDzongkhagName(commonService.getValue("cmndzongkhag", "NameEn", "Id", specializedFirm.getRegDzongkhagId()).toString());
         specializedFirm.setOwnershipName(commonService.getValue("cmnlistitem", "Name", "Id", specializedFirm.getOwnershipTypeId()).toString());
         specializedFirm.setCountryName(commonService.getValue("cmncountry", "Name", "Id", specializedFirm.getpCountryId()).toString());

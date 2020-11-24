@@ -77,6 +77,11 @@
                                        data-placement="top">
                                         <i class="fa fa-truck mr-1"></i>Equipment Details</a>
                                 </li>
+                                <li class="tab-pane saveAndPreview">
+                                    <a href="#saveAndPreview" class="border" data-toggle="tab"
+                                       data-placement="top">
+                                        <i class="fa fa-truck mr-1"></i>Preview</a>
+                                </li>
                             </ul>
                             <div class="tab-content border p-3 col-lg-12">
                                 <div class="tab-pane generalInformation active">
@@ -158,19 +163,23 @@
                                             </div>
                                             <!-- Box Close -->
                                             <!-- Box Open -->
-                                            <div class="card tab2">
+                                            <div class="card hide" id="cIncorporation">
                                                 <div class="bg-blue card-status card-status-left"></div>
                                                 <div class="card-header">
-                                                    <h3 class="card-title">Attached Certificates of Incorporation</h3>
+                                                    <h3 class="card-title">Attach Certificates of Incorporation</h3>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="col-lg-12">
+                                                        <%--<div class=""><input id="addMoreCert" type="button"
+                                                                             value="Add More Certificate"
+                                                                             class="btn btn-primary"></div>--%>
                                                         <table class="table table-bordered table-center table-responsive-lg auto-index"
-                                                               id="certificateTbl">
+                                                               id="IncCertificateTbl">
                                                             <thead>
                                                             <tr>
-                                                                <td>Sl No.</td>
-                                                                <td>Attachment</td>
+                                                                <th>Sl no</th>
+                                                                <th>Document Name</th>
+                                                                <th>Document Attached</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
@@ -258,8 +267,8 @@
                                     <div class="col-lg-12 form-group">
 
                                         <label class="col-lg-offset-10"></label>
-                                        <button type="button" onclick="nextTab('generalInformation','categoryDtls')"
-                                                class="btn btn-primary">
+                                        <button type="button" disabled onclick="nextTab('generalInformation','categoryDtls')"
+                                                class="btn btn-primary" id="nextGIBtn">
                                             <i class="fa fa-arrow-circle-right"></i>Next
                                         </button>
                                     </div>
@@ -349,17 +358,18 @@
                                                 class="btn btn-azure col-lg-offset-9">
                                             <i class="fa fa-arrow-circle-left"></i>Back
                                         </button>
-                                        <button type="button"
+                                        <button type="button" id="nextHRBtn" disabled
                                                 onclick="nextTab('humanResourceCriteria','consultantEquipmentDtls')"
                                                 class="btn btn-primary">
                                             <i class="fa fa-arrow-circle-right"></i>Next
                                         </button>
                                     </div>
                                 </div>
+
                                 <div class="tab-pane consultantEquipmentDtls">
                                     <form action="" method="post" class="">
-                                        <div id="consultantEquipment" style="">
-                                            <i><strong>Consultant Equipment Details</strong></i>
+                                        <div id="contractorEquipment" style="">
+                                            <i><strong> Equipment Details</strong></i>
 
                                             <div class="panel panel-default">
                                                 <div class="panel-body">
@@ -394,6 +404,19 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </form>
+                                    <div class="col-lg-12 form-group">
+                                        <button type="button" onclick="backTab('consultantEquipmentDtls','humanResourceCriteria')" class="btn btn-azure col-lg-offset-9">
+                                            <i class="fa fa-arrow-circle-left"></i>&nbsp; Back
+                                        </button>
+                                        <button type="button" disabled class="btn btn-primary" id="btnValEqNext" onclick="saveAndPreview('consultantEquipmentDtls', 'saveAndPreview')">
+                                            Save & Preview &nbsp;
+                                            <i class="fa fa-life-saver"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane saveAndPreview" id="saveAndPreview">
+                                    <div id="submitSection" style="">
                                         <div class="panel-body">
                                             <div class="form-group">
                                                 <div class="table-responsive">
@@ -436,36 +459,36 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
-                                    <div class="col-md-12">
-                                        <security:authorize access="hasRole('ROLE_VERIFIER')">
-                                            <button type="button" class="btn btn-primary" id="btnVerify"><i
-                                                    class="fa fa-check"></i>&nbsp;&nbsp;Verify
+                                        </form>
+                                        <div class="col-md-12">
+                                            <security:authorize access="hasRole('ROLE_VERIFIER')">
+                                                <button type="button" class="btn btn-primary" id="btnVerify"><i
+                                                        class="fa fa-check"></i>&nbsp;&nbsp;Verify
+                                                </button>
+                                            </security:authorize>
+                                            <security:authorize access="hasRole('ROLE_APPROVER')">
+                                                <button type="button" class="btn btn-primary" id="btnApprove"><i
+                                                        class="fa fa-check"></i>&nbsp;&nbsp;Approve
+                                                </button>
+                                                <%--  <button type="button" class="btn btn-primary" id="btnSendBack"><i
+                                                          class="fa fa-backward"></i>&nbsp;&nbsp;Send back
+                                                  </button>--%>
+                                            </security:authorize>
+                                            <button type="button" class="btn btn-danger " id="btnReject"><i
+                                                    class="fa fa-times mr-1"></i>Reject
                                             </button>
-                                        </security:authorize>
-                                        <security:authorize access="hasRole('ROLE_APPROVER')">
-                                            <button type="button" class="btn btn-primary" id="btnApprove"><i
-                                                    class="fa fa-check"></i>&nbsp;&nbsp;Approve
-                                            </button>
-                                          <%--  <button type="button" class="btn btn-primary" id="btnSendBack"><i
-                                                    class="fa fa-backward"></i>&nbsp;&nbsp;Send back
-                                            </button>--%>
-                                        </security:authorize>
-                                        <button type="button" class="btn btn-danger " id="btnReject"><i
-                                                class="fa fa-times mr-1"></i>Reject
-                                        </button>
-                                        <a href="<c:url value="/admin/specializedFirm"/>">
-                                            <button type="button" class="btn btn-warning"><i class="fa fa-ban"></i>
-                                                Cancel
-                                            </button>
-                                        </a>
+                                            <a href="<c:url value="/admin/contractor"/>">
+                                                <button type="button" class="btn btn-warning"><i class="fa fa-ban"></i>
+                                                    Cancel
+                                                </button>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
             <%--HR Modal--%>
             <div id="hrModal" class="modal fade in " tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" style=" max-width: 900px;">
@@ -641,20 +664,7 @@
                 $("#registrtaionFormCard").hide();
                 $("#acknowledgementCard").show();
             }
-            function saveAndPreview(presentClass, nextClass) {
-                var content = '<h3 class="pt-3 text-center">Fee Structure</h3>' + $(".feesStructure > form").html() +
-                        '<h3 class="pt-3 text-center">General Information</h3>' + $(".generalInformation > form").html() +
-                        '<h3 class="pt-3 text-center">Category Details</h3>' + $(".categoryDtls > form").html()
-                        + '<h3 class="pt-3 text-center">Human Resource</h3>' + $(".humanResourceCriteria > form").html() +
-                        '<h3 class="pt-3 text-center">Consultant Equipment Details</h3>' + $(".consultantEquipmentDtls > form").html();
 
-                $("." + presentClass + ">a").addClass('bg-blue text-white');
-                $('.tab-pane').removeClass("active");
-                $('.tab-content').removeClass("active");
-                $("." + nextClass).addClass("active");
-                $("." + presentClass + ">a").append("<i class='fa fa-check ml-1'></i>");
-                $("#" + nextClass).html(content);
-            }
             function getModalData(tableId, prefix, totalCol) {
                 var td = "";
                 for (var i = 1; i <= totalCol; i++) {

@@ -40,7 +40,7 @@
                             </tr>
                             <tr>
                                 <td><strong>Country</strong></td>
-                                <td></td>
+                                <td>${appDetail.countryName}</td>
                             </tr>
                             <tr>
                                 <td><strong>Application Date</strong></td>
@@ -60,7 +60,7 @@
                             </tr>
                             <tr>
                                 <td><strong>Dzongkhag</strong></td>
-                                <td>${appDetail.regDzongkhagName}</td>
+                                <td>${appDetail.dzongkhagName}</td>
                             </tr>
                             <tr>
                                 <td><strong>Gewog</strong></td>

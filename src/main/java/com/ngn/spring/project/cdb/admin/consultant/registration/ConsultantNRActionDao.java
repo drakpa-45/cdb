@@ -2,6 +2,7 @@ package com.ngn.spring.project.cdb.admin.consultant.registration;
 
 import com.ngn.spring.project.base.BaseDao;
 import com.ngn.spring.project.cdb.admin.dto.*;
+import com.ngn.spring.project.cdb.consultant.model.ConsultantAttachment;
 import com.ngn.spring.project.cdb.consultant.registration.dto.ConsultantHrDTO;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -151,5 +152,11 @@ public class ConsultantNRActionDao extends BaseDao {
                 .setParameter("userId", userID)
                         //.setParameter("remarks",sendRemarks)
                 .setParameter("applicationStatusId", appStatus).executeUpdate();
+    }
+
+    @Transactional(readOnly = false)
+    public List<ConsultantAttachment> getIncAttachment(String consultantId) {
+        sqlQuery = properties.getProperty("ConsultantActionDao.getIncAttachment");
+        return hibernateQuery(sqlQuery, ConsultantAttachment.class).setParameter("consultantId", consultantId).list();
     }
 }

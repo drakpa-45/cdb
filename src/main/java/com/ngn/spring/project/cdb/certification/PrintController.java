@@ -36,7 +36,7 @@ public class PrintController {
 
 
     @RequestMapping(value = "/printCertificate", method = RequestMethod.GET)
-    public String printCertificate (ModelMap model,HttpServletRequest request,HttpServletResponse response) {
+    public void printCertificate (ModelMap model,HttpServletRequest request,HttpServletResponse response) {
         String cdbNo = request.getParameter("cdbNo");
         File filepath = null;
         String initialRegistrationDate = "";
@@ -56,6 +56,7 @@ public class PrintController {
                 cdbNo = request.getParameter("cdbNo");
                 certificateDTO = architectServices.getArchitetPrintDetails(request, cdbNo);
                 initialRegistrationDate = certificateDTO.getInitialRegistrationDate();
+                cdbNo = certificateDTO.getCdbNo();
                 ownerName = certificateDTO.getOwnerName();
                 ownerCID = certificateDTO.getOwnerCID();
                 regExpiryDate = certificateDTO.getRegExpiryDate();
@@ -80,8 +81,8 @@ public class PrintController {
                 dzongkhagName = certificateDTO.getDzongkhagName();
             }
             PrintPDFUtility printPDFUtility = new PrintPDFUtility();
-            url = request.getSession().getServletContext().getRealPath("/resources/JasperCertificate");
-            filepath = new File(request.getSession().getServletContext().getRealPath("/resources/JasperCertificate"));
+         //   url = request.getSession().getServletContext().getRealPath("/resources/JasperCertificate");
+             filepath = new File(request.getSession().getServletContext().getRealPath("/resources/JasperCertificate"));
 
             jasperprint = printPDFUtility.getJasperPrintForExporting(
                     filepath.getPath(),
@@ -92,10 +93,11 @@ public class PrintController {
                     dzongkhagName,
                     ownerName,
                     response);
-            ServletOutputStream out = response.getOutputStream();
+
+              ServletOutputStream out = response.getOutputStream();
             response.setContentType("application/pdf;charset=UTF-8");
 
-            if (cdbNo.startsWith("BA-")) {
+          if (cdbNo.startsWith("BA-")) {
                 response.setHeader("Content-Disposition", "attachment; filename=architect.pdf");
             }
             if (cdbNo.startsWith("BS-")) {
@@ -104,12 +106,12 @@ public class PrintController {
             if (cdbNo.startsWith("BE-")) {
                 response.setHeader("Content-Disposition", "attachment; filename=Engineer.pdf");
             }
-            JasperExportManager.exportReportToPdfStream(jasperprint, out);
+          JasperExportManager.exportReportToPdfStream(jasperprint, out);
             out.flush();
             out.close();
         } catch (Exception e) {
-            return null;
+           // return null;
         }
-        return null;
+     //   return null;
     }
 }

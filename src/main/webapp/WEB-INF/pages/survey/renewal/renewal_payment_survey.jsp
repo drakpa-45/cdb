@@ -243,10 +243,10 @@
                                                             <td><strong>Date of application:</strong></td>
                                                             <td>${appDetails.applicationDate}</td>
                                                         </tr>
-                                                        <tr>
+                                                       <%-- <tr>
                                                             <td><strong>Remarks: </strong></td>
                                                             <td>${appDetails.remarks}</td>
-                                                        </tr>
+                                                        </tr>--%>
                                                         <tr>
                                                             <td><strong>CreatedBy: </strong></td>
                                                             <td>${appDetails.createdBy} <b style="color: blueviolet">(Applicant's CID number)</b></td>

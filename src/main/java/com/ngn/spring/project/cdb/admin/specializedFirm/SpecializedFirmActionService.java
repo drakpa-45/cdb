@@ -59,9 +59,7 @@ public class SpecializedFirmActionService extends BaseService {
             List<CategoryClassDTO> categoryClassDTOs = specializedFirmActionDao.getFeeCategoryClass(specializedFirm.getCrpSpecializedTradeId());
             specializedFirmDTO.setOwnershipTypeTxt(commonService.getValue("cmnlistitem", "Name", "Id", specializedFirm.getOwnershipTypeId()).toString());
             specializedFirmDTO.setCountryTxt(commonService.getValue("cmncountry", "Name", "Id", specializedFirm.getpCountryId()).toString());
-            if(specializedFirm.getpDzongkhagId() != null) {
-                specializedFirmDTO.setpDzongkhagTxt(commonService.getValue("cmndzongkhag", "NameEn", "Id", specializedFirm.getpDzongkhagId()).toString());
-            }
+
             List<SpFirmHrDTO> specializedFirmHRs = getSpecializedFirmHRs(specializedFirm.getCrpSpecializedTradeId(),'B'); //B for both owner and hr
             List<EquipmentDTO> equipmentDTOs = getSpecializedFirmEQs(specializedFirm.getCrpSpecializedTradeId());
             List<SpFirmAttachment> cIncAttachment = getIncAttachment(specializedFirm.getCrpSpecializedTradeId());
@@ -80,6 +78,10 @@ public class SpecializedFirmActionService extends BaseService {
             String cdbNo = specializedFirmActionDao.getNextCDBNo();
             specializedFirmDTO.setCdbNo(cdbNo);
             specializedFirmDTO.setAppHistoryDTOs(appHistoryDTOs);
+        }
+
+        if(specializedFirm.getpDzongkhagId() != null) {
+            specializedFirmDTO.setpDzongkhagTxt(commonService.getValue("cmndzongkhag", "NameEn", "Id", specializedFirm.getpDzongkhagId()).toString());
         }
             specializedFirmDTO.setEstDzongkhagTxt(commonService.getValue("cmndzongkhag", "NameEn", "Id", specializedFirm.getRegDzongkhagId()).toString());
             specializedFirmDTO.setOwnershipTypeTxt(commonService.getValue("cmnlistitem", "Name", "Id", specializedFirm.getOwnershipTypeId()).toString());

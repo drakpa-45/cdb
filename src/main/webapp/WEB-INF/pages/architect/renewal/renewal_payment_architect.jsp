@@ -199,7 +199,7 @@
                                             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                     <label>Receipt Number:</label>
-                                                    <input type="text" onclick="remove_err('paymentReceiptNo_err')" class="form-control " name="paymentReceiptNo" id="paymentReceiptNo">
+                                                    <input type="text" onclick="remove_err('paymentReceiptNo_err')" class="form-control" required="true" name="paymentReceiptNo" id="paymentReceiptNo">
                                                     <span id="paymentReceiptNo_err" class="text-danger"></span>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
@@ -244,10 +244,10 @@
                                                             <td><strong>Date of application:</strong></td>
                                                             <td>${appDetails.applicationDate}</td>
                                                         </tr>
-                                                        <tr>
+                                                       <%-- <tr>
                                                             <td><strong>Remarks: </strong></td>
                                                             <td>${appDetails.remarks}</td>
-                                                        </tr>
+                                                        </tr>--%>
                                                         <tr>
                                                             <td><strong>CreatedBy: </strong></td>
                                                             <td>${appDetails.createdBy}</td>

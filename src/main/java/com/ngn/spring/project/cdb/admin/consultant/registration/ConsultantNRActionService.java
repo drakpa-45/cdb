@@ -3,6 +3,7 @@ package com.ngn.spring.project.cdb.admin.consultant.registration;
 import com.ngn.spring.project.base.BaseService;
 import com.ngn.spring.project.cdb.admin.dto.*;
 import com.ngn.spring.project.cdb.common.CommonService;
+import com.ngn.spring.project.cdb.consultant.model.ConsultantAttachment;
 import com.ngn.spring.project.cdb.consultant.registration.ConsultantNRService;
 import com.ngn.spring.project.cdb.consultant.registration.dto.ConsultantHrDTO;
 import com.ngn.spring.project.cdb.consultant.model.Consultant;
@@ -61,26 +62,19 @@ public class ConsultantNRActionService extends BaseService {
             List<CategoryClassDTO> categoryClassDTOs = consultantActionDao.getCategoryClass(consultant.getConsultantId());
             consultantDTO.setOwnershipTypeTxt(commonService.getValue("cmnlistitem", "Name", "Id", consultant.getOwnershipTypeId()).toString());
             consultantDTO.setCountryTxt(commonService.getValue("cmncountry", "Name", "Id", consultant.getpCountryId()).toString());
-            if(consultant.getRegDzongkhagId() != null) {
-                consultantDTO.setpDzongkhagTxt(commonService.getValue("cmndzongkhag", "NameEn", "Id", consultant.getRegDzongkhagId()).toString());
-            }
-            //TODO ::save gewog and village their name or ids
-            consultantDTO.setEstDzongkhagTxt(commonService.getValue("cmndzongkhag", "NameEn", "Id", consultant.getRegDzongkhagId()).toString());
 
-            List<ConsultantHrDTO> consultantHRs = consultantActionDao.getConsultantHRs(consultant.getConsultantId(),'B');  //B for both owner and hr
-            consultantHRs.forEach(h->h.setHrAttachments(consultantActionDao.getHRAttachments(h.getId())));
-
-            List<EquipmentDTO> equipmentDTOs = consultantActionDao.getEquipment(consultant.getConsultantId());
-            equipmentDTOs.forEach(e->e.setEqAttachments(consultantActionDao.getEQAttachments(e.getId())));
-
+            List<ConsultantHrDTO> consultantHRs = getConsultantHRs(consultant.getConsultantId(),'B');  //B for both owner and hr
+            List<EquipmentDTO> equipmentDTOs = getConsultantEQs(consultant.getConsultantId());
+            List<ConsultantAttachment> cIncAttachment = getIncAttachment(consultant.getConsultantId());
             List<ApplicationHistoryDTO> appHistoryDTOs = consultantActionDao.getAppHistoryDtl(consultant.getConsultantId());
             consultantDTO.setConsultantHRs(consultantHRs);
             consultantDTO.setEquipments(equipmentDTOs);
             consultantDTO.setAppHistoryDTOs(appHistoryDTOs);
             consultantDTO.setCategories(categoryClassDTOs);
+            consultantDTO.setIncAttachments(cIncAttachment);
         } else{
-            List<CategoryClassDTO> categoryClassDTOs = consultantActionDao.getCategoryClass(consultant.getConsultantId());
-            List<ConsultantHrDTO> consultantHRs = consultantActionDao.getConsultantHRs(consultant.getConsultantId(), 'O');  //B for both owner and hr
+            List<CategoryClassDTO> categoryClassDTOs = consultantActionDao.getCategoryClass(consultant.getConsultantId());//B for both owner and hr
+            List<ConsultantHrDTO> consultantHRs = consultantActionDao.getConsultantHRs(consultant.getConsultantId(), 'O');
             List<ApplicationHistoryDTO> appHistoryDTOs = consultantActionDao.getAppHistoryDtl(consultant.getConsultantId());
             consultantDTO.setCategories(categoryClassDTOs);
             consultantDTO.setAppHistoryDTOs(appHistoryDTOs);
@@ -88,13 +82,20 @@ public class ConsultantNRActionService extends BaseService {
             String cdbNo = consultantActionDao.getNextCDBNo();
             consultantDTO.setCdbNo(cdbNo);
         }
-            consultantDTO.setEstDzongkhagTxt(commonService.getValue("cmndzongkhag", "NameEn", "Id", consultant.getRegDzongkhagId()).toString());
-            consultantDTO.setOwnershipTypeTxt(commonService.getValue("cmnlistitem", "Name", "Id", consultant.getOwnershipTypeId()).toString());
-            consultantDTO.setCountryTxt(commonService.getValue("cmncountry", "Name", "Id", consultant.getpCountryId()).toString());
-
+            if(consultant.getpDzongkhagId() != null) {
+                consultantDTO.setpDzongkhagTxt(commonService.getValue("cmndzongkhag", "NameEn", "Id", consultant.getpDzongkhagId()).toString());
+            }
+        consultantDTO.setEstDzongkhagTxt(commonService.getValue("cmndzongkhag", "NameEn", "Id", consultant.getRegDzongkhagId()).toString());
+        consultantDTO.setOwnershipTypeTxt(commonService.getValue("cmnlistitem", "Name", "Id", consultant.getOwnershipTypeId()).toString());
+        consultantDTO.setCountryTxt(commonService.getValue("cmncountry", "Name", "Id", consultant.getpCountryId()).toString());
         responseMessage.setDto(consultantDTO);
         responseMessage.setStatus(SUCCESSFUL_STATUS);
         return responseMessage;
+    }
+
+    @Transactional(readOnly = true)
+    private List<ConsultantAttachment> getIncAttachment(String consultantId) {
+        return  consultantActionDao.getIncAttachment(consultantId);
     }
 
     @Transactional(readOnly = false)

@@ -341,7 +341,7 @@ public class SpecializedService extends BaseService{
                             String servicepaymentID = commonService.getRandomGeneratedId();
                        //     dto= dao.specializedtradeservicepayment(dto, userID, request,servicepaymentID);
                             dao.updatePaymentServiceDetails(dto1, userID);
-                            if(dto.getUpdateStatus().equalsIgnoreCase("Success")){
+                            if(dto1.getUpdateStatus().equalsIgnoreCase("Success")){
                                 dto= dao.approveSpTradeRegistrationSole(dto, userID, request);
                                 dto.setUpdateStatus(insert);
                             }

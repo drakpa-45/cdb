@@ -105,7 +105,7 @@ public class ArchitectController extends BaseController {
                 }
                 if (personal.getStatus() == 1) {
                     services.saveDoc(files, resdto.getCrpArchitectId(), "RegistrationOfArchitect", null);
-                    personal.setResponseText("Your application for <label class='control-label'>Registration Of Architecture</label> has been submitted and your application number is <b>" + resdto.getReferenceNo() + "</b> <br><p>You will receive an email as well as sms notification once take further action.</p><label class='control-label'>You can track your application using above Application Number.</label>");
+                    personal.setResponseText("Your application for <label class='control-label'>Registration Of Architect</label> has been submitted and your application number is <b>" + resdto.getReferenceNo() + "</b> <br><p>You will receive an email as well as sms notification once take further action.</p><label class='control-label'>You can track your application using above Application Number.</label>");
 
                     String mailContent = "<b>Application No: "+resdto.getReferenceNo()+" is submitted sucessfully on "+new Date()+" with Construction Development Board (CDB)." +
                             "This is to acknowledge for the registration of the Architect with Construction Development Board (CDB)." +
@@ -220,7 +220,7 @@ public class ArchitectController extends BaseController {
             ArchitectDto resdto=(ArchitectDto)personal.getDto();
             if(personal.getStatus()==1){
                 services.saveDoc(files,resdto.getCrpArchitectId(),"RenewalOfArchitect",loginDTO.getUserId());
-                personal.setResponseText("Your application for <label class='control-label'>Renewal Of Architecture</label> has been submitted and your application number is <b>"+resdto.getReferenceNo()+"</b> <br><p>You will receive an email as well as sms notification once take further action.</p><label class='control-label'>You can track your application using above Application Number. <br /> Thank you.</label>");
+                personal.setResponseText("Your application for <label class='control-label'>Renewal Of Architect</label> has been submitted and your application number is <b>"+resdto.getReferenceNo()+"</b> <br><p>You will receive an email as well as sms notification once take further action.</p><label class='control-label'>You can track your application using above Application Number. <br /> Thank you.</label>");
             }
             model.addAttribute("acknowledgement_message", "Your application for <label class='control-label'>Renewal Of Architecture</label> has been submitted and your application number is <b>"+resdto.getReferenceNo()+"</b> <br><p>You will receive an email as well as sms notification once take further action.</p><label class='control-label'>You can track your application using above Application Number. <br /> Thank you.</label>");
             return "/architect/acknowledgement";
@@ -241,7 +241,7 @@ public class ArchitectController extends BaseController {
         try{
             ResponseMessage personal=services.saveArchitectcancellation(dto, loginDTO.getUserId());
             ArchitectDto resdto=(ArchitectDto)personal.getDto();
-            model.addAttribute("acknowledgement_message", "Your application for <label class='control-label'>Cancellation Of Architecture</label> has been submitted and your application number is <b>"+resdto.getReferenceNo()+"</b> <br><p>You will receive an email as well as sms notification once take further action.</p><label class='control-label'>You can track your application using above Application Number. <br /> Thank you.</label>");
+            model.addAttribute("acknowledgement_message", "Your application for <label class='control-label'>Cancellation Of Architect</label> has been submitted and your application number is <b>"+resdto.getReferenceNo()+"</b> <br><p>You will receive an email as well as sms notification once take further action.</p><label class='control-label'>You can track your application using above Application Number. <br /> Thank you.</label>");
             return "/architect/acknowledgement";
         }catch (Exception e){
             System.out.print(e);

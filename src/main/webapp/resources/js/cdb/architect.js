@@ -264,10 +264,16 @@ function approveAndGenerateCertificate(type){
         $("#architectverificationForm").ajaxSubmit(options);
     }
     else {
-        validateFeesDetails();
-        var url= '/cdb/admin_architect/emptylayout/approveAndGenerateCertificate?servicefor='+type;
-        var options = {target:'#content_main_div',url:url,type:'POST', data: $('#architectverificationForm').serialize()};
-        $("#architectverificationForm").ajaxSubmit(options);
+        if(validateFeesDetails() == true) {
+            var url = '/cdb/admin_architect/emptylayout/approveAndGenerateCertificate?servicefor=' + type;
+            var options = {
+                target: '#content_main_div',
+                url: url,
+                type: 'POST',
+                data: $('#architectverificationForm').serialize()
+            };
+            $("#architectverificationForm").ajaxSubmit(options);
+        }
     }
 }
 function validateFeesDetails(){
@@ -297,8 +303,9 @@ $('#architect_table').DataTable({
     responsive: true
 });
 function printCertificate(cdbNo){
-window.open("/cdb/print/printCertificate?cdbNo=" + cdbNo);
+window.open('/cdb/print/printCertificate?cdbNo=' + cdbNo);
 }
+
 function printInfo(cdbNo){
     var url= '/cdb/admin_architect/emptylayout/printarchitectInfo?cdbNo='+cdbNo;
     $('#content_main_div_public_user').load(url);
@@ -315,8 +322,17 @@ function enablesubmit(){
 }
 
 function submitForm(){
-    $('#concirmationRenewalModel').modal('show');
-    $('#messages').html('You are about to submit application. Are you sure to proceed ?');
+    var returntpe=true;
+    if($('#file1').val()==""){
+        $('#file1').focus();
+        warningMsg('Please attach your documents');
+        $('#file1').focus();
+        returntpe=false;
+    }else {
+        $('#concirmationRenewalModel').modal('show');
+        $('#messages').html('You are about to submit application. Are you sure to proceed ?');
+        returntpe;
+    }
 }
 function SubmitApplicationDetials(){
     var url='/cdb/public_access/emptylayout/saveArchitect';
@@ -325,10 +341,12 @@ function SubmitApplicationDetials(){
     $('#concirmationModel').modal('hide');
 }
 function SubmitRenewalApplicationDetials(){
-    var url= '/cdb/public_access/emptylayout/submitRenwalApplication';
-    var options = {target:'#content_main_div_public_user',url:url,type:'POST', data: $('#architectrenewalForm').serialize()};
-    $("#architectrenewalForm").ajaxSubmit(options);
-    $('#concirmationRenewalModel').modal('hide');
+
+        var url= '/cdb/public_access/emptylayout/submitRenwalApplication';
+        var options = {target:'#content_main_div_public_user',url:url,type:'POST', data: $('#architectrenewalForm').serialize()};
+        $("#architectrenewalForm").ajaxSubmit(options);
+        $('#concirmationRenewalModel').modal('hide');
+        returntpe;
 }
 function viewAttachment(uuid,type,path,name){
     //var url= '${pageContext.request.contextPath}/FileDownloadServlet?uuid='+uuid+'&type='+type;
@@ -336,11 +354,19 @@ function viewAttachment(uuid,type,path,name){
     window.open(url,'_blank');
 }
 
-
-function submitcancellation(){
-    var url= '/cdb/public_access/emptylayout/submitcancellation';
-    var options = {target:'#content_main_div_public_user',url:url,type:'POST', data: $('#architectrenewalForm').serialize()};
-    $("#architectrenewalForm").ajaxSubmit(options);
+function submitcancellation() {
+    if ($('#cancellationRemarks').val() == '') {
+        warningMsg('please Provide reason for cancellation of certificate.');
+    } else {
+        var url = '/cdb/public_access/emptylayout/submitcancellation';
+        var options = {
+            target: '#content_main_div_public_user',
+            url: url,
+            type: 'POST',
+            data: $('#architectrenewalForm').serialize()
+        };
+        $("#architectrenewalForm").ajaxSubmit(options);
+    }
 }
 
 function isMailUnique(mailId){

@@ -6,6 +6,21 @@ function checkBtn(checkBoxId)
 {
     $check.prop('checked',true);
 }
+function saveAndPreview(presentClass, nextClass) {
+    var content = '<h3 class="pt-3 text-center">Fee Structure</h3>' + $("#fees_structure >.div-actual").html() +
+        '<h3 class="pt-3 text-center">General Information</h3>' + $("#general_Information >.div-actual").html() +
+        '<h3 class="pt-3 text-center">Category Details</h3>' + $("#category_details >.div-actual").html()
+        + '<h3 class="pt-3 text-center">Human Resource</h3>' + $("#human_resource_criteria >.div-actual").html() +
+        '<h3 class="pt-3 text-center"> Equipment Details</h3>' + $("#equipment_details >.div-actual").html();
+
+    $("." + presentClass + ">a").addClass('bg-blue-light text-white');
+    $('.tab-pane').removeClass("active").addClass("active");
+    $('.tab-content').removeClass("active").addClass("active");
+    $("." + nextClass).addClass("active");
+    $("." + presentClass + ">a").append("<i class='fa fa-check ml-1'></i>");
+
+    //$("#" + nextClass).prepend(content);
+}
 
 var specializedFirm_action = (function () {
     "use strict";
@@ -69,6 +84,8 @@ var specializedFirm_action = (function () {
                         $('#regMobileNo').text(specializedFirm.regMobileNo);
                         $('#regPhoneNo').text(specializedFirm.regPhoneNo);
                         $('#regFaxNo').text(specializedFirm.regFaxNo);
+
+                        incorporation(specializedFirmDTO.incAttachments);
 
                         var specializedFirmHrs = specializedFirmDTO.spFirmHRs;
                         var partnerHrTr = "";
@@ -385,6 +402,23 @@ var specializedFirm_action = (function () {
         }
     }
 
+    function incorporation(data){
+        if(data){
+            $('#cIncorporation').removeClass('hide');
+            var tr = '';
+            for(var i in data){
+                tr = tr + "<tr>"+
+                "<td></td>" +
+                "<td>"+data[i].documentName+"</td>"+
+                "<td><a href='"+_baseURL() + "/viewDownload?documentPath="+data[i].documentPath+"' target='_blank'> View </a></td>" +
+                "</tr>";
+            }
+            $('#IncCertificateTbl').find('tbody').html(tr);
+        }else{
+            $('#cIncorporation').addClass('hide');
+        }
+    }
+
     function paymentUpdate() {
         $('#btnSave').on('click', function (e) {
             $('#specializedFirmPaymentForm').validate({
@@ -405,7 +439,61 @@ var specializedFirm_action = (function () {
             })
         })
     }
+    function validateOwner(){
+        $('#partnerDtls').on('change','.check',function(){
+            var allChecked = false;
+            $('#partnerDtls').find('.check').each(function(){
+                if($(this).is(':checked') == true){
+                    allChecked = true;
+                }else{
+                    allChecked = false;
+                    return false;
+                }
+            });
+            if(allChecked == true){
+                $('#nextGIBtn').prop('disabled',false);
+            }else{
+                $('#nextGIBtn').prop('disabled',true);
+            }
+        });
+    }
 
+    function validateHr(){
+        $('#hrTbl').on('change','.check',function(){
+            var allChecked = false;
+            $('#hrTbl').find('.check').each(function(){
+                if($(this).is(':checked') == true){
+                    allChecked = true;
+                }else{
+                    allChecked = false;
+                    return false;
+                }
+            });
+            if(allChecked == true){
+                $('#nextHRBtn').prop('disabled',false);
+            }else{
+                $('#nextHRBtn').prop('disabled',true);
+            }
+        });
+    }
+    function validateEq(){
+        $('#equipmentTbl').on('change','.check',function(){
+            var allChecked = false;
+            $('#equipmentTbl').find('.check').each(function(){
+                if($(this).is(':checked') == true){
+                    allChecked = true;
+                }else{
+                    allChecked = false;
+                    return false;
+                }
+            });
+            if(allChecked == true){
+                $('#btnValEqNext').prop('disabled',false);
+            }else{
+                $('#btnValEqNext').prop('disabled',true);
+            }
+        });
+    }
     function init(){
         viewDownloadAttachment();
         approve();
@@ -414,6 +502,9 @@ var specializedFirm_action = (function () {
         paymentUpdate();
         checkHR();
         sendBack();
+        validateOwner();
+        validateHr();
+        validateEq();
     }
     return {
         verify: verify,

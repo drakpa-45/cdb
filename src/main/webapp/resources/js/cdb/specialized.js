@@ -215,10 +215,16 @@ function approveAndGenerateCertificate(type,ownershipType){
         $("#tradeverificationForm").ajaxSubmit(options);
     }
     else {
-        validateFeesDetails();
-        var url= '/cdb/admin_specializedTrade/emptylayout/approveAndGenerateCertificate?servicefor='+type+ '&ownershipType='+ownershipType;
-        var options = {target:'#content_main_div',url:url,type:'POST', data: $('#tradeverificationForm').serialize()};
-        $("#tradeverificationForm").ajaxSubmit(options);
+       if(validateFeesDetails()== true) {
+           var url = '/cdb/admin_specializedTrade/emptylayout/approveAndGenerateCertificate?servicefor=' + type + '&ownershipType=' + ownershipType;
+           var options = {
+               target: '#content_main_div',
+               url: url,
+               type: 'POST',
+               data: $('#tradeverificationForm').serialize()
+           };
+           $("#tradeverificationForm").ajaxSubmit(options);
+       }
     }
 }
 function validateFeesDetails(){

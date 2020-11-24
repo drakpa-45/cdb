@@ -41,7 +41,7 @@
                             </tr>
                             <tr>
                                 <td><strong>Country</strong></td>
-                                <td></td>
+                                <td>${appDetail.countryName}</td>
                             </tr>
                             <tr>
                                 <td><strong>Application Date</strong></td>
@@ -49,12 +49,12 @@
                             </tr>
                             <tr>
                                 <td><strong>Registration Expiry Date</strong></td>
-                               <%-- <%  Boolean isExpired = (Boolean)request.getSession().getAttribute("isExpired");
-                                    if(isExpired){%>--%>
-                              <%--  <td style="color: #ff0000">${appDetail.regExpiryDate} <i>(Expired)</i></td>--%>
-                              <%--  <%}else{%>--%>
+                                <%  Boolean isExpired = (Boolean)request.getSession().getAttribute("isExpired");
+                                    if(isExpired){%>
+                                <td style="color: #ff0000">${appDetail.regExpiryDate} <i>(Expired)</i></td>
+                                <%}else{%>
                                 <td>${appDetail.regExpiryDate}</td>
-                              <%--  <%}%>--%>
+                                <%}%>
 
                             </tr>
                             <tr>
@@ -62,7 +62,7 @@
                             </tr>
                             <tr>
                                 <td><strong>Dzongkhag</strong></td>
-                                <td></td>
+                                <td>${appDetail.dzongkhagName}</td>
                             </tr>
                             <tr>
                                 <td><strong>Village</strong></td>
