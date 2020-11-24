@@ -230,7 +230,6 @@ var contractorOS = (function () {
     var cert = "<tr><td></td>" +
         "<td><input type='text' class='form-control' name='cAttachments[0].documentName'/> </td>"+
         "<td><input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
-        "<td class='file-size'></td>" +
         "<td><a class='p-2'><i class='fa fa-pencil text-green'></i></a><a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a></td>" +
         "</tr>";
 
@@ -257,7 +256,7 @@ var contractorOS = (function () {
 
     function addMoreCert(){
         $('#addMoreCert').on('click',function(e){
-            var certificateTbl = $('#certificateTbl').find('tbody').append(cert);
+            var certificateTbl = $('#IncCertificateTbl').find('tbody').append(cert);
             /*var row = certificateTbl.find('tr:eq(0)').html();
              certificateTbl.append('<tr>'+row.find(':input').val('')+'</tr>');*/
         });
@@ -326,9 +325,46 @@ var contractorOS = (function () {
                 $('#regPhoneNo').val(contractor.regPhoneNo).prop('disabled',true);
                 $('#regFaxNo').val(contractor.regFaxNo).prop('disabled',true);
                 $('#contractorIdFinal').val(contractor.id);
+
+                if(contractor.ownershipTypeId != '1e243ef0-c652-11e4-b574-080027dcfac6'){
+                    getIncAttachmentFinal();
+                }
             }
         });
 
+    }
+
+    function getIncAttachmentFinal(){
+        $.ajax({
+            url: _baseURL() + '/getIncAttachmentFinal',
+            type: 'GET',
+            data: {contractorId:$('#contractorIdFinal').val(),ownerOrHR:'O'},
+            success: function (data) {
+
+                if(data){
+                    $('#cIncorporation').removeClass('hide');
+                    var tr = '';
+                    for(var i in data){
+                        tr = tr + "<tr>"+
+                        "<td></td>" +
+                        "<td>"+data[i].documentName+"</td>"+
+                        "<td><a href='"+_baseURL() + "/viewDownload?documentPath="+data[i].documentPath+"' target='_blank'> View </a></td>" +
+                        "<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
+                        "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                        "</tr>";
+                    }
+                    $('#IncCertificateTbl').find('tbody').html(tr);
+                }else{
+                    $('#cIncorporation').addClass('hide');
+                }
+            }
+
+        });
+    }
+
+
+    function editIncAttachment($this){
+        $this.closest('tr').find('')
     }
 
     function viewDownloadAttachment(){
@@ -532,16 +568,16 @@ var contractorOS = (function () {
             var row = $(this).closest('tr');
             var hrModal = $('#addHRModal');
             hrModal.find('#hrId').val(row.find('.contractorHRid').val())//for Edit
-            hrModal.find('#hr5').val(hrModal.find('#hr5 option:contains("'+row.find('.countryName').text()+'")').val());
-            hrModal.find('#hr3').val(row.find('.cidNo').text());
-            hrModal.find('#hr1').val(hrModal.find('#hr1 option:contains("'+row.find('.salutationName').text()+'")').val());
-            hrModal.find('#hr2').val(row.find('.name').text());
-            hrModal.find('#hr4').val(row.find('.sex').text());
-            hrModal.find('#hr6').val(hrModal.find('#hr6 option:contains("'+row.find('.designationName').text()+'")').val());
-            hrModal.find('#hr7').val(hrModal.find('#hr7 option:contains("'+row.find('.qualificationName').text()+'")').val());
-            hrModal.find('#hr8').val(hrModal.find('#hr8 option:contains("'+row.find('.tradeName').text()+'")').val());
-            hrModal.find('#hr9').val(hrModal.find('#hr9 option:contains("'+row.find('.serviceTypeName').text()+'")').val());
-            hrModal.find('#joiningDate').val(row.find('.joiningDate').val());
+            hrModal.find('#hr1').val(hrModal.find('#hr1 option:contains("'+row.find('td:nth-child(1)').text()+'")').val());
+            hrModal.find('#hr2').val(row.find('td:nth-child(2)').text());
+            hrModal.find('#hr3').val(row.find('td:nth-child(3)').text());
+            hrModal.find('#hr4').val(row.find('td:nth-child(4)').text());
+            hrModal.find('#hr5').val(hrModal.find('#hr5 option:contains("'+row.find('td:nth-child(5)').text()+'")').val());
+            hrModal.find('#hr6').val(hrModal.find('#hr6 option:contains("'+row.find('td:nth-child(6)').text()+'")').val());
+            hrModal.find('#hr7').val(hrModal.find('#hr7 option:contains("'+row.find('td:nth-child(7)').text()+'")').val());
+            hrModal.find('#hr8').val(hrModal.find('#hr8 option:contains("'+row.find('td:nth-child(8)').text()+'")').val());
+            hrModal.find('#hr9').val(hrModal.find('#hr9 option:contains("'+row.find('td:nth-child(9)').text()+'")').val());
+            hrModal.find('#hr10').val(row.find('td:nth-child(10)').val());
             var hraTr = "";
             row.find('.hra').each(function(){
                 var name = $(this).find('a').text();

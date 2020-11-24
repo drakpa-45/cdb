@@ -561,4 +561,8 @@ public class ContractorRCService extends BaseService {
         return contractorRCDao.auditMemo(contractorFinalId);
     }
 
+    @Transactional(readOnly = true)
+    public List<ContractorAttachment> getIncAttachmentFinal(String contractorFinalId) {
+        return  contractorRCDao.getIncAttachmentFinal(contractorFinalId);
+    }
 }

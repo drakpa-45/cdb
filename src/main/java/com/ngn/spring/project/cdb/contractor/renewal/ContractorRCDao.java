@@ -6,6 +6,7 @@ import com.ngn.spring.project.cdb.admin.dto.CategoryClassDTO;
 import com.ngn.spring.project.cdb.admin.dto.EquipmentDTO;
 import com.ngn.spring.project.cdb.common.dto.ServiceFeeDTO;
 import com.ngn.spring.project.cdb.contractor.registration.dto.ContractorHrDTO;
+import com.ngn.spring.project.cdb.contractor.registration.model.ContractorAttachment;
 import com.ngn.spring.project.cdb.contractor.registration.model.ContractorFinal;
 import com.ngn.spring.project.lib.DropdownDTO;
 import org.hibernate.query.Query;
@@ -126,4 +127,10 @@ public class ContractorRCDao extends BaseDao {
         Query hQuery = hibernateQuery(sqlQuery).setParameter("contractorFinalId", contractorFinalId);
         return hQuery.list().isEmpty()?null:hQuery.list().get(0).toString();
     }
+
+    public List<ContractorAttachment> getIncAttachmentFinal(String contractorFinalId) {
+        sqlQuery = properties.getProperty("ContractorRCDao.getIncAttachmentFinal");
+        return hibernateQuery(sqlQuery, ContractorAttachment.class).setParameter("contractorFinalId", contractorFinalId).list();
+    }
+
 }
