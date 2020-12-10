@@ -453,13 +453,46 @@ public class SpecializedDao extends BaseDao {
     public TradeDto populateSpApplicantDetails(String cdbNo) {
         TradeDto dto = new TradeDto();
         try {
-            sqlQuery="SELECT f.SPNo cdbNo,f.CrpSpecializedTradeId crpSpecializedTradeId,f.ReferenceNo referenceNo,f.CIDNo cidNo,f.Name fullname,v.Village_Name village,g.Gewog_Name gewog,dd.NameEn dzongkhagId,c.Name countryId,d.NameEn cmnRegisteredDzongkhagId,s.Name salutation,\n" +
-                    "f.TelephoneNo telephoneNo, f.TPN tpn,\n" +
-                    "i.Name updateStatus,f.Email email,f.MobileNo mobileNo,f.EmployerName employeeName,f.EmployerAddress employeeAddress,f.RegistrationApprovedDate registrationApproveDate,f.RegistrationExpiryDate regExpDate\n" +
-                    "FROM crpspecializedtradefinal f \n" +
-                    "LEFT JOIN cmnlistitem i ON i.Id=f.CmnApplicationRegistrationStatusId \n" +
-                    "LEFT JOIN cmnlistitem s ON s.Id=f.CmnSalutationId \n" +
-                    "LEFT JOIN cmndzongkhag d ON d.Dzongkhag_Serial_No = f.CmnRegisteredDzongkhagId LEFT JOIN cmncountry c ON c.Id=f.CmnCountryId LEFT JOIN sysuser su ON su.Email=f.Email LEFT JOIN cmnvillage v ON v.Village_Serial_No = f.Permenant_village_serialNo LEFT JOIN cmngewog g ON g.Gewog_Serial_No = v.Gewog_Serial_No LEFT JOIN cmndzongkhag dd ON dd.Dzongkhag_Serial_No = g.Dzongkhag_Serial_No WHERE f.SPNo=?";
+            sqlQuery="SELECT \n" +
+                    "  f.SPNo cdbNo,\n" +
+                    "  f.CrpSpecializedTradeId crpSpecializedTradeId,\n" +
+                    "  f.ReferenceNo referenceNo,\n" +
+                    "  f.CIDNo cidNo,\n" +
+                    "  f.Name fullname,\n" +
+                    "  v.Village_Name village,\n" +
+                    "  g.Gewog_Name gewog,\n" +
+                    "  dd.NameEn dzongkhagId,\n" +
+                    "  c.Name countryId,\n" +
+                    "  d.NameEn cmnRegisteredDzongkhagId,\n" +
+                    "  s.Name salutation,\n" +
+                    "  f.TelephoneNo telephoneNo,\n" +
+                    "  f.TPN tpn,\n" +
+                    "  i.Name updateStatus,\n" +
+                    "  f.Email email,\n" +
+                    "  f.MobileNo mobileNo,\n" +
+                    "  f.EmployerName employeeName,\n" +
+                    "  f.EmployerAddress employeeAddress,\n" +
+                    "  f.RegistrationApprovedDate registrationApproveDate,\n" +
+                    "  f.RegistrationExpiryDate regExpDate \n" +
+                    "FROM\n" +
+                    "  crpspecializedtradefinal f \n" +
+                    "  LEFT JOIN cmnlistitem i \n" +
+                    "    ON i.Id = f.CmnApplicationRegistrationStatusId \n" +
+                    "  LEFT JOIN cmnlistitem s \n" +
+                    "    ON s.Id = f.CmnSalutationId \n" +
+                    "  LEFT JOIN cmndzongkhag d \n" +
+                    "    ON d.Dzongkhag_Serial_No = f.CmnRegisteredDzongkhagId \n" +
+                    "  LEFT JOIN cmncountry c \n" +
+                    "    ON c.Id = f.CmnCountryId \n" +
+                    "  LEFT JOIN sysuser su \n" +
+                    "    ON su.Email = f.Email \n" +
+                    "  LEFT JOIN cmnvillage v \n" +
+                    "    ON v.Village_Name = f.village \n" +
+                    "  LEFT JOIN cmngewog g \n" +
+                    "    ON g.Gewog_Serial_No = v.Gewog_Serial_No \n" +
+                    "  LEFT JOIN cmndzongkhag dd \n" +
+                    "    ON dd.Dzongkhag_Serial_No = g.Dzongkhag_Serial_No \n" +
+                    "WHERE f.SPNo = ?";
             dto=(TradeDto) hibernateQuery(sqlQuery, TradeDto.class).setParameter(1, cdbNo).list().get(0);
         } catch (Exception e) {
             System.out.print("Exception in SpecializedDao # populateSpApplicantDetails: " + e);
@@ -1009,6 +1042,18 @@ public class SpecializedDao extends BaseDao {
         return return_value;
     }
 
+    public String isCIDUnique(String cidNo) {
+        String isCIDUnique = "";
+        try {
+            sqlQuery = "SELECT c.CmnApplicationRegistrationStatusId FROM crpspecializedtrade c WHERE c.CIDNo=?";
+            isCIDUnique = (String) hibernateQuery(sqlQuery).setParameter(1, cidNo).list().get(0);
+        } catch (Exception e) {
+            System.out.print("Exception in specializedtrade # isCIDUnique:" + e);
+            e.printStackTrace();
+        }
+        return isCIDUnique;
+    }
+
     public CertificateDTO getSpecializedTradePrintDetails(HttpServletRequest request, String cdbNo) {
         CertificateDTO dto = new CertificateDTO();
         sqlQuery = properties.getProperty("SpecializedDao.getSpecializedTradePrintDetails");
@@ -1016,3 +1061,4 @@ public class SpecializedDao extends BaseDao {
         return dto;
     }
 }
+

@@ -73,7 +73,7 @@
                                                 <div class="form-group row">
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                                         <label>Enter your valid CID Number:<span class="text-danger">*</span></label>
-                                                        <input type="text" onclick="remove_err('app_çid_err')" name="app_çid" class="form-control number" id="app_çid">
+                                                        <input type="number" name="app_çid" class="form-control number" onchange="checkStatus(this.value)" id="app_çid" min="0" onkeypress="return preventDot(event);"/>
                                                         <span id="app_çid_err" class="text-danger"></span>
                                                     </div>
                                                 </div>
@@ -105,7 +105,7 @@
                                             </div>
                                             <div class="tab-pane categoryDtls" id="contact_detail">
                                                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 form-group">
-                                                    <div class="card tab2" id="individualcate_">
+                                                    <div class="card tab2" id="individualcate">
                                                         <div class="bg-blue card-status card-status-left"></div>
                                                         <div class="card-header">
                                                             <h3 class="card-title">Category Information</h3> >> <i>Please tick the radio button to select a category</i>

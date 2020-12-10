@@ -42,11 +42,16 @@ function nextTab(presentClass, nextClass,type){
             });
         }if (presentClass == "personalInformation" && validatepersonalSection()) {
             changeNextTab(presentClass, nextClass)
-        } else  if(presentClass=="categoryDtls"){
-            changeNextTab(presentClass, nextClass)
-        }else if(presentClass=="feesStructurerenewal"){
+        } else  if(presentClass=="categoryDtls" && validate_cc()){
+        if(validate_cc() == true)
+        {
             changeNextTab(presentClass, nextClass)
         }
+        }else if(presentClass=="feesStructurerenewal"){
+            changeNextTab(presentClass, nextClass)
+        }else if(presentClass=="individualcate"){
+        changeNextTab(presentClass, nextClass)
+    }
 }
 function validateFees(){
     var retutype=true;
@@ -63,16 +68,22 @@ function validateFees(){
 
 function validatepersonalSection(){
     var retutype=true;
-    if($('#trade').val()==""){
-        $('#trade').focus();
-        warningMsg("Please select trade.");
-        $('#trade').focus();
+    if($('#mobileNo').val()==""){
+        $('#mobileNo').focus();
+        warningMsg("Please provide your mobile number.");
+        $('#mobileNo').focus();
         retutype=false;
     }
-    if($('#serviceSectorType').val()==""){
-        $('#serviceSectorType').focus();
-        warningMsg("Please select service type.");
-        $('#serviceSectorType').focus();
+    if($('#mobileNo').val().length > 8){
+        $('#mobileNo').focus();
+        warningMsg("Max length of mobile number is 8.");
+        $('#mobileNo').focus();
+        retutype=false;
+    }
+    if($('#regEmail').val()==""){
+        $('#regEmail').focus();
+        warningMsg("Please provide your email.");
+        $('#regEmail').focus();
         retutype=false;
     }
     if($('#salutation').val()==""){
@@ -84,9 +95,24 @@ function validatepersonalSection(){
     return retutype;
 }
 
-function remove_err(errId){
-    $('#'+errId).html('');
+
+function validate_cc() {
+        var isValid = true;
+        if($('.categoryCheck').is(':checked') == false){
+            isValid = false;
+            warningMsg("Please choose one category.");
+        }
+        return isValid;
 }
+
+
+function preventDot(e) {
+    var key = e.charCode ? e.charCode : e.keyCode;
+    if (key == 46)
+    { return false; }
+}
+
+
 function changeNextTab(presentClass, nextClass){
     $("." + presentClass + ">a").addClass('bg-blue text-white');
     $('.tab-pane').removeClass("active");
@@ -260,7 +286,7 @@ function printCertificate(cdbNo){
 }
 
 function printInfo(cdbNo){
-    var url= '/cdb/admin_architect/emptylayout/printarchitectInfo?cdbNo='+cdbNo;
+    var url= '/cdb/public_access/profile/printInformation?cdbNo='+cdbNo;
     $('#content_main_div_public_user').load(url);
 }
 
@@ -373,9 +399,15 @@ function removeRow(tableId) {
 function validateEstbAddrss() {
     var retutype = true;
 
-    if ($('#regMobileNo').val() == "") {
+    if ($('#regMobileNo').val() == "" && $('#regMobileNo').length>8) {
         $('#regMobileNo').focus();
         warningMsg('Please provide your mobile number');
+        $('#regMobileNo').focus();
+        retutype = false;
+    }
+    if ($('#regMobileNo').length>8) {
+        $('#regMobileNo').focus();
+        warningMsg('Max length of mobile number is 8');
         $('#regMobileNo').focus();
         retutype = false;
     }
@@ -493,6 +525,25 @@ function isMailUnique(mailId){
     }
 }
 
+function checkStatus(cidNo){
+    var url= _baseURL() +'/isCIDUnique';
+    var $this = $('#app_çid');
+    $.ajax({
+        url:url,
+        type: 'GET',
+        data: {cidNo: cidNo},
+        success: function (res) {
+            if (res.status == '1') {
+                $this.val('').focus();
+                warningMsg(res.text);
+                $this.val('').focus();
+            }else{
+
+            }
+        }
+    });
+}
+
 function validate() {
     const email =$('#regEmail').val();
     if (validateEmail(email)) {
@@ -509,11 +560,11 @@ function validateEmail() {
     return re.test(email);
 }
 
+
 function checkForEngagement(cidNo){
     $('body').on('click','.checkCid',function(){
         //var modal = $(this).closest('.modal').attr('id');
         var cidNo = $('#cidNo').val();
-        //  alert(cidNo);
         if(!cidNo){
             return;
         }
@@ -539,4 +590,5 @@ function checkForEngagement(cidNo){
         });
     });
 }
+
 checkForEngagement();

@@ -22,7 +22,7 @@
                         <div class="card tab2">
                             <div class="bg-blue card-status card-status-left"></div>
                             <div class="card-header">
-                                <label class='control-label'>Your application for Registration Of Specialized Trade has been submitted and your application number is <i> ${cidDetails.referenceNo} </i><br>You will receive an email as well as sms notification once take further action.You can track your application using above Application Number.</label>
+                                <label class='control-label'>${acknowledgement_message}</label>
                             </div>
                             <div class="card-body">
                                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
@@ -35,10 +35,10 @@
                                 </div>
                                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                        <label>Cid Number: <i>${cidDetails.cidNo}</i></label>
+                                        <label>CID Number: <i>${cidDetails.cidNo}</i></label>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                        <label>Date Of Submission: <i>${cidDetails.initialDate}</i></label>
+                                        <label>Date of Submission: <i>${cidDetails.initialDate}</i></label>
                                     </div>
                                 </div>
                             </div>
@@ -56,7 +56,4 @@
 </div>
 </div>
 </html>
-
-
-
 

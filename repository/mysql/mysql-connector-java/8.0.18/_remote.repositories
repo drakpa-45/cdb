@@ -1,0 +1,4 @@
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Mon Mar 30 18:01:33 BDT 2020
+mysql-connector-java-8.0.18.jar>=
+mysql-connector-java-8.0.18.pom>=

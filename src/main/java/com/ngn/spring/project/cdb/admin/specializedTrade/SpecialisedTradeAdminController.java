@@ -142,7 +142,7 @@ public class SpecialisedTradeAdminController extends BaseController {
             dto = services.approveSpTradeRegistrationSole(dto, getLoggedInUser().getUserID(), request,commonDto);
         }
         if(dto.getUpdateStatus().equalsIgnoreCase("Success")){
-            model.addAttribute("acknowledgement_message", "<br /><div class='alert alert-info col-12 text-center'>You have approved payment for application : <b>"+dto.getReferenceNo()+"</b>. You may print certificate and issue. Thank you</div>");
+            model.addAttribute("acknowledgement_message", "<br /><div class='alert alert-info col-12 text-center'>You have approved payment for application : <b>"+dto.getReferenceNo()+"</b>.and the CDB number is: <b>"+dto.getCdbNo()+"</b> You may print certificate and issue. Thank you</div>");
         } else {
             model.addAttribute("acknowledgement_message", "<br /><div class='alert alert-danger col-12 text-center'>Not able to approve this application. "+dto.getUpdateStatus()+" Please try again</div>");
         }
