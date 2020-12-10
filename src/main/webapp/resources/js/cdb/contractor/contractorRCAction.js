@@ -139,6 +139,7 @@ var contractorRCAction = (function () {
                 type: 'GET',
                 data: {appNo: applicationNo,flag:'V'},
                 success: function (res) {
+                    debugger;
                     if (res.status == '1') {
                         var contractorDTO = res.dto;
                         var contractor = contractorDTO.contractor;
@@ -156,8 +157,11 @@ var contractorRCAction = (function () {
                         $('#regMobileNo').text(contractor.regMobileNo);
                         $('#regPhoneNo').text(contractor.regPhoneNo);
                         $('#regFaxNo').text(contractor.regFaxNo);
+                        $('#oldfirmName').text(contractorDTO.oldFirmName);
+                        $('#oldestAddress').text(contractorDTO.oldEstbAddress);
+                        $('#oldestDzongkhag').text(contractorDTO.oldDzongkhag);
 
-
+                        incorporation(contractorDTO.incAttachments);
 
                         var appHistoryDTOs = contractorDTO.appHistoryDTOs;
 
@@ -165,15 +169,48 @@ var contractorRCAction = (function () {
 
                         for (var i in appHistoryDTOs) {
                             var actionTakenBy = appHistoryDTOs[i].userName;
-                            actionTakenBy = (actionTakenBy==null)?'By Citizen':actionTakenBy
+                            actionTakenBy = (actionTakenBy==null)?'By Citizen':actionTakenBy;
                             appHistoryTr = appHistoryTr +
                             "<tr><td>" + appHistoryDTOs[i].appStatus + "</td>" +
                             "<td>" + actionTakenBy + "</td>" +
                             "<td>" + formatAsDate(appHistoryDTOs[i].actionDate) + "</td>" +
                             "<td>"+ appHistoryDTOs[i].remarks +"</td></tr>";
-
                         }
                         $('#appStatusTbl').find('tbody').html(appHistoryTr);
+
+                        var contractorHrs = contractorDTO.contractorHRs;
+                        var partnerHrTr = "";
+                        var hrTr = "";
+                        var m = 0, n = 0;
+                        var owner='';
+                        for (var i in contractorHrs) {
+                            var verifiedApproved = '';
+                            if(contractorHrs[i].Approved == '1'){
+                                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+                                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+                            }else if(contractorHrs[i].verified == '1'){
+                                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+                                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' value='1'  required=''></td>";
+                            }else{
+                                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' value='1'  required=''></td>";
+                            }
+                            if (contractorHrs[i].isPartnerOrOwner == '1') {
+                                owner = contractorHrs[i].name;
+                                m++;
+                                partnerHrTr = partnerHrTr + "<tr><td>" + m + "</td>" +
+                                "<td>" + contractorHrs[i].countryName + "</td>" +
+                                "<td class='cidNo'>" + contractorHrs[i].cidNo + "</td>" +
+                                "<td>" + contractorHrs[i].salutationName + "</td>" +
+                                "<td>" + contractorHrs[i].name + "</td>" +
+                                "<td>" + contractorHrs[i].sex + "</td>" +
+                                "<td>" + contractorHrs[i].designationName + "</td>" +
+                                "<td>" + ((contractorHrs[i].siCertificate == '1')?'(✔)':'') + "</td>" +
+                                "<td><input type='button' name='humanResource' value='Check for this CID' class='checkCid btn btn-success'></td>" +
+                                verifiedApproved+"</tr>";
+                                getTrainingDtl(contractorHrs[i].cidNo);
+                            }
+                        }
+                        $('#partnerDtls').find('tbody').html(partnerHrTr);
 
                     } else {
                         warningMsg(res.text);
@@ -181,7 +218,6 @@ var contractorRCAction = (function () {
                 }
             });
         }
-
     }
 
 
@@ -296,6 +332,7 @@ var contractorRCAction = (function () {
                     '</tr>';
                 }
                 $('#contractorCCTbl').find('tbody').html(tr);
+                $('#contractorCCTbl1').find('tbody').html(tr);
             }
         })
     }
@@ -396,30 +433,20 @@ var contractorRCAction = (function () {
                         $('#regPhoneNo').text(contractor.regPhoneNo);
                         $('#regFaxNo').text(contractor.regFaxNo);
 
-                        /*var categoryClassDTOs = contractorDTO.categories;
-                        var ccTr = "";
-                        var tApplAmount = 0,tVerAmount= 0,tApprAmount=0;
-                        for (var i in categoryClassDTOs) {
-                            tApplAmount += parseFloat(categoryClassDTOs[i].aAmount);
-                            tVerAmount += parseFloat(categoryClassDTOs[i].vAmount);
-                            tApprAmount += parseFloat(categoryClassDTOs[i].apAmount);
-                            ccTr = ccTr + "<tr><td><input class='form-control' type='checkbox' checked='checked' disabled style='width: 17px; height: 17px;'></td>" +
-                            "<td>" + categoryClassDTOs[i].categoryName + "</td>" +
-                            "<td>" + categoryClassDTOs[i].aClassName + "</td>" +
-                            "<td class='fee'>"+categoryClassDTOs[i].aAmount+"</td>" +
-                            "<td>" + categoryClassDTOs[i].vClassName + "</td>" +
-                            "<td class='fee'>"+categoryClassDTOs[i].vAmount+"</td>" +
-                            "<td>" + categoryClassDTOs[i].apClassName + "</td>" +
-                            "<td class='fee'>"+categoryClassDTOs[i].apAmount+"</td>" +
-                            "</tr>";
-                        }
-                        var tfoot = "<tr><td colspan='2' align='right'>Total</td><td colspan='2'>"+tApplAmount+"</td>" +
-                            "<td colspan='2'>"+tVerAmount+"</td><td colspan='2'>"+tApprAmount+"</td> ";
+                        var appHistoryDTOs = contractorDTO.appHistoryDTOs;
 
-                        $('#contractorCCTbl').find('tbody').html(ccTr);
-                        $('#contractorCCTbl').find('tfoot').html(tfoot);
-                        $('#paymentAmount').val(tApprAmount);
-                        //$('#cdbNo').val(contractorDTO.cdbNo);*/
+                        var appHistoryTr = "";
+
+                        for (var i in appHistoryDTOs) {
+                            var actionTakenBy = appHistoryDTOs[i].userName;
+                            actionTakenBy = (actionTakenBy==null)?'By Citizen':actionTakenBy;
+                            appHistoryTr = appHistoryTr +
+                            "<tr><td>" + appHistoryDTOs[i].appStatus + "</td>" +
+                            "<td>" + actionTakenBy + "</td>" +
+                            "<td>" + formatAsDate(appHistoryDTOs[i].actionDate) + "</td>" +
+                            "<td>"+ appHistoryDTOs[i].remarks +"</td></tr>";
+                        }
+                        $('#appStatusTbl').find('tbody').html(appHistoryTr);
 
                     } else {
                         warningMsg(res.text);
@@ -427,6 +454,7 @@ var contractorRCAction = (function () {
                 }
             });
             getServicesFee(applicationNo);
+
         }
     }
 
@@ -475,15 +503,54 @@ var contractorRCAction = (function () {
         })
     }
 
-    function init(){
+    function incorporation(data){
+        if(data){
+            $('#cIncorporation').removeClass('hide');
+            var tr = '';
+            for(var i in data){
+                tr = tr + "<tr>"+
+                "<td></td>" +
+                "<td>"+data[i].documentName+"</td>"+
+                "<td><a href='"+_baseURL() + "/viewDownload?documentPath="+data[i].documentPath+"' target='_blank'> View </a></td>" +
+                "</tr>";
+            }
+            $('#IncCertificateTbl').find('tbody').html(tr);
+        }else{
+            $('#cIncorporation').addClass('hide');
+        }
+    }
+    function getTrainingDtl(cidNo){
+        $.ajax({
+            url: cdbGlobal.baseURL() + '/contractorNR/getTrainingDtl',
+            type: 'GET',
+            data: {cidNo: cidNo},
+            success: function (res) {
+                var trainingTbl = $('#inductionCourseDtl');
+                trainingTbl.find('tbody').find('.noRecord').remove();
+                var tr = '';
+                for (var i in res) {
+                    tr = tr + "<tr><td></td>" +
+                    "<td>" + res[i].tType + "</td>" +
+                    "<td>" + (formatAsDate(res[i].fromDate) + ' to ' + formatAsDate(res[i].toDate) ) + "</td>" +
+                    "<td>" + res[i].tModule + "</td>" +
+                    "<td>" + res[i].participant + "</td>" +
+                    "<td>" + res[i].cidNo + "</td></tr>";
+                }
+                trainingTbl.find('tbody').append(tr);
+            }
+        })
+    }
 
+    function init(){
         approve();
         reject();
         verify();
+        checkHR();
         getContractorInfoForPayment();
         paymentUpdate();
         sendBack();
         getAppliedServices();
+        getProposedCategories();
     }
     return {
         init:init

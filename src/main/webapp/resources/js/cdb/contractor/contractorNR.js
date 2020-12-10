@@ -663,6 +663,8 @@ var contractor = (function () {
             var $this = $(this);
             var isHrExist = false;
 
+            var designation = $('#designation').val();
+
             var country = '';
             var hrOrPartner = $this.closest('table').attr('id');
             if(hrOrPartner == 'partnerDtls'){
@@ -672,18 +674,20 @@ var contractor = (function () {
                 hrOrPartner = 'H';
                 country = $('#hr5').val();
             }
-
             $('#partnerDtls').find('.ownerCidNo').each(function(e){
-                if(hrOrPartner == 'H' && $this.val() == $(this).val()){
-                    warningMsg("This is CID is already added your Owner/Partner list!!!");
+              //  alert(designation);
+                if(hrOrPartner == 'H' && $this.val() == $(this).val() && designation != '030aacf0-24af-11e6-967f-9c2a70cc8e06'){
+                    warningMsg("This CID is already exists in your Owner/Partner list!!!");
                     $this.val('');
                     isHrExist = true;
                     return false;
                 }
+                /* */
             });
+
             $('#hrDtlsTable').find('tbody tr td:nth-child(3)').each(function(){
                 if($this.val() == $(this).text()){
-                    warningMsg("This is CID is already added your HR list!!!");
+                    warningMsg("This CID is already exists in your HR list!!!");
                     $this.val('');
                     isHrExist = true;
                     return false;
@@ -715,6 +719,7 @@ var contractor = (function () {
         confirmEmail();
         edit_HR();
         edit_EQ();
+        checkDuplicateEQ();
     }
     return {
         init: init

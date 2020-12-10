@@ -105,7 +105,7 @@
                             </form:select>
                         </td>
                         <td>
-                            <input type="text" name="consultant.consultantHRs[0].cidNo" class="form-control hr-cid number" placeholder="enter CID.." required="true">
+                            <input type="text" name="consultant.consultantHRs[0].cidNo" class="form-control hr-cid number ownerCidNo" placeholder="enter CID.." required="true">
                         </td>
                         <td>
                             <form:select id="salutation" name="consultant.consultantHRs[0].salutationId" class="form-control input-sm" data-msg-required="true" data-rule-required="true" path="salutationList">
@@ -124,7 +124,7 @@
                             </select>
                         </td>
                         <td>
-                            <form:select id="designation" name="consultant.consultantHRs[0].designationId" class="form-control input-sm" data-msg-required="" data-rule-required="true" path="designationList">
+                            <form:select id="designation" name="consultant.consultantHRs[0].designationId" class="form-control input-sm designation" data-msg-required="" data-rule-required="true" path="designationList">
                                 <form:option value="" label="Select Designation"/>
                                 <form:options items="${designationList}" itemValue="value" itemLabel="text"/>
                             </form:select>
@@ -140,13 +140,39 @@
                 </table>
                 <div class="col-lg-12 text-right">
                     <%--<b class="text-orange">Note:Please Tick(✔) in "Show in Certificate" field to display your name in Certificate.</b> &nbsp; &nbsp;--%>
-                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="addRow('partnerDtls')">
+                    <button type="button" class="btn btn-outline-primary btn-sm" id="addMorebtn" onclick="addRow('partnerDtls')">
                         <i class="fe fe-plus mr-2"></i>Add More
                     </button>
                     <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeRow('partnerDtls')">
                         <i class="fe fe-trash mr-2"></i>Remove Last Row
                     </button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card hide" id="proprietorCum">
+        <div class="bg-blue card-status card-status-left"></div>
+        <div class="card-header">
+            <h3 class="card-title">Attach Documents</h3>
+        </div>
+        <div class="card-body">
+            <div class="col-lg-12">
+                <div class=""><input id="addMoreProprietorCum" type="button" value="Add More Certificate" class="btn btn-primary"> </div>
+                <table class="table table-bordered table-center table-responsive-lg auto-index" id="proprietorCumTbl">
+                    <thead>
+                    <tr>
+                        <th>Sl no</th>
+                        <th>Document Name</th>
+                        <th>Document Attached</th>
+                        <th>File Size</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -232,7 +258,7 @@
 </div>
 
 <div class="col-lg-12 form-group">
-    <button type="button" onclick="previousTab('fees_structure','generalInformation')" class="btn btn-azure col-lg-offset-9">
+    <button type="button" id="btn2" onclick="backTab('generalInformation','fees_structure')" class="btn btn-azure col-lg-offset-9">
         <i class="fa fa-arrow-circle-left"></i> &nbsp;Back
     </button>
     <button type="button" id="btnValGINext" class="btn btn-primary">

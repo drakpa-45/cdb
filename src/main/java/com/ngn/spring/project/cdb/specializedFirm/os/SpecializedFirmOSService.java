@@ -90,7 +90,6 @@ public class SpecializedFirmOSService extends BaseService {
             specializedFirmRService.updateIncorporation(spFirmDTO.getcAttachments(), loggedInUser, specializedFirm.getCrpSpecializedTradeId());
             specializedFirm.setOwnershipTypeId(ownershipTypeId);
             specializedFirm.setFirmName(spFirmDTO.getSpecializedFirm().getFirmName());
-            specializedFirm.setNewFirmName(spFirmDTO.getSpecializedFirm().getNewFirmName());
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "12");
             appliedServicesList.add(appliedService);
         }
@@ -100,8 +99,6 @@ public class SpecializedFirmOSService extends BaseService {
         if(renewalServiceType.getChangeOfLocation() != null){
             specializedFirm.setEstAddress(spFirmDTO.getSpecializedFirm().getEstAddress());
             specializedFirm.setRegDzongkhagId(spFirmDTO.getSpecializedFirm().getRegDzongkhagId());
-            specializedFirm.setEditEstbAddress(spFirmDTO.getSpecializedFirm().getEditEstbAddress());
-            specializedFirm.setNewRegDzoId(spFirmDTO.getSpecializedFirm().getNewRegDzoId());
             specializedFirm.setRegFaxNo(spFirmDTO.getSpecializedFirm().getRegFaxNo());
             specializedFirm.setRegPhoneNo(spFirmDTO.getSpecializedFirm().getRegPhoneNo());
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "6");
@@ -112,7 +109,6 @@ public class SpecializedFirmOSService extends BaseService {
         //region change of firm name
         if(renewalServiceType.getChangeOfFirmName() != null) {
             specializedFirm.setFirmName(spFirmDTO.getSpecializedFirm().getFirmName());
-            specializedFirm.setNewFirmName(spFirmDTO.getSpecializedFirm().getNewFirmName());
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "10");
             appliedServicesList.add(appliedService);
         }
@@ -166,7 +162,6 @@ public class SpecializedFirmOSService extends BaseService {
                 if(emptyNullCheck(spFirmHR.getCidNo())){
                     continue;
                 }
-
                 spFirmHR.setSpecializedID(specializedFirmId);
                 spFirmHR.setIsPartnerOrOwner(FALSE_INT);
                 specializedFirmService.saveHR(spFirmHR, loggedInUser);
@@ -176,17 +171,14 @@ public class SpecializedFirmOSService extends BaseService {
                         continue;
                     }
                     spFirmtHRA.setSpecializedHrId(spFirmHR.getId());
-
                     specializedFirmService.saveHRA(spFirmtHRA, loggedInUser);
                 }
             }
-
             //to save deleted hr
             List<String> deletedHRs =existingHRs.stream().filter(h->!currentHRs.contains(h)).collect(Collectors.toList());
             if(deletedHRs !=null && !deletedHRs.isEmpty()){
                 deletedHRs.stream().forEach(specializedFirmRDao::saveDeleteHrRequest);
             }
-
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "8");
             appliedServicesList.add(appliedService);
         }
@@ -208,23 +200,22 @@ public class SpecializedFirmOSService extends BaseService {
                 }
                 spFirmEQ.setSpecializedTradeId(specializedFirmId);
                 specializedFirmService.saveEQ(spFirmEQ, loggedInUser);
-                //Save Human resource attachment
+
+                //Save Equipment attachment
                 for (SpFirmEQAttachment spFirmEQA : spFirmEQ.getSpFirmEQAs()) {
                     if(spFirmEQA.getAttachment() == null){ //No changes, so no need to save
                         continue;
                     }
                     spFirmEQA.setEquipmentId(spFirmEQ.getId());
-
                     specializedFirmService.saveEQA(spFirmEQA, loggedInUser);
                 }
             }
 
-            //to save deleted hr
+            //to save deleted eq
             List<String> deletedEQs =existingEQs.stream().filter(h->!currentEQs.contains(h)).collect(Collectors.toList());
             if(deletedEQs !=null && !deletedEQs.isEmpty()){
                 deletedEQs.stream().forEach(specializedFirmRDao::saveDeleteEqRequest);
             }
-
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "9");
             appliedServicesList.add(appliedService);
         }
@@ -283,7 +274,7 @@ public class SpecializedFirmOSService extends BaseService {
         final List<CategoryClassDTO> ccUpDown = new ArrayList<>();  //upgrade downgrade
         String specializedFirmFinalId = (String)commonService.getValue("crpspecializedtradefinal","Id","SPNo",specializedFirm.getCdbNo());
 
-        if(categories != null && !categories.isEmpty()){
+   /*     if(categories != null && !categories.isEmpty()){
             categories.stream().forEach(r->ccUpDown.add(new CategoryClassDTO(r.getAppliedCategoryId()
                     ,specializedFirmRService.getRegisteredClass(specializedFirmFinalId, r.getAppliedCategoryId()))));
             for(CategoryClassDTO classDTO : ccUpDown){
@@ -291,10 +282,43 @@ public class SpecializedFirmOSService extends BaseService {
                 classDTO.setvAmount(fee);
                 totalCCUpDownFee = totalCCUpDownFee.add(fee);
             }
+        }*/
+        BigDecimal totalRenewalFee = BigDecimal.ZERO;
+        List<CategoryClassDTO> ccRenewal; //renewal
+
+        if(categories != null && !categories.isEmpty()){
+            final List<CategoryClassDTO> renewal = new ArrayList<>(); //renewal
+            //upgrade or downgrade or change of category
+            List<SpFirmCategory> conCategoryR = categories.stream().filter(c -> c.getAppliedCategoryId() != null).filter(c -> getRegisteredClass(specializedFirmFinalId, c.getAppliedCategoryId()).equals(c.getAppliedCategoryId())).collect(Collectors.toList());
+            conCategoryR.addAll(categories.stream().filter(c -> c.getAppliedCategoryId() != null && c.getApprovedCategoryId() != null).collect(Collectors.toList()));
+            List<SpFirmCategory> conCategoryUD = categories.stream().filter(c -> !conCategoryR.contains(c)).collect(Collectors.toList());
+
+            conCategoryR.stream().forEach(r ->{
+                String classId = getRegisteredClass(specializedFirmFinalId, r.getAppliedCategoryId());
+                renewal.add(new CategoryClassDTO(r.getAppliedCategoryId(),classId,classId));
+            });
+            conCategoryUD.stream().forEach(r->ccUpDown.add(new CategoryClassDTO(r.getAppliedCategoryId(),r.getAppliedCategoryId(),getRegisteredClass(specializedFirmFinalId, r.getAppliedCategoryId()))));
+            ccRenewal = renewal;
+        } else{ // no upgrade or downgrade or change of category
+            ccRenewal = getCategoryClassFinal(specializedFirmFinalId);
+        }
+
+        for(CategoryClassDTO classDTO : ccRenewal){
+            BigDecimal renewalFee = ((FeeStructureDTO) specializedFirmService.gFeeStructure(classDTO.getaClassId()).get(0)).getRenewalFee();
+            classDTO.setvAmount(BigDecimal.valueOf(00.00));
+            totalRenewalFee = totalRenewalFee.add(renewalFee);
+        }
+
+        for(CategoryClassDTO classDTO : ccUpDown){
+            if(classDTO.getCategoryId() != null){
+                BigDecimal fee = ((FeeStructureDTO) specializedFirmService.gFeeStructure(classDTO.getaClassId()).get(0)).getRegistrationFee();
+                classDTO.setvAmount(fee);
+                totalCCUpDownFee = totalCCUpDownFee.add(fee);
+            }
         }
 
         //save upgrade downgrade change of category
-        if(!Objects.equals(totalCCUpDownFee, BigDecimal.ZERO)){
+        if(!Objects.equals(totalCCUpDownFee, BigDecimal.ZERO) || Objects.equals(totalCCUpDownFee,BigDecimal.ZERO)){
             String appliedServiceId = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "7"); //upgrade downgrade service id
             SpFirmAppliedS spFirmAppliedS = new SpFirmAppliedS();
             spFirmAppliedS.setSpecializedTradeId(specializedFirm.getId());
@@ -312,10 +336,10 @@ public class SpecializedFirmOSService extends BaseService {
             specializedFirmRDao.saveUpdate(servicePaymentUD);
 
             specializedFirmRService.saveServicePaymentDetail(servicePaymentUD.getId(), ccUpDown,loggedInUser);
+
+            specializedFirmRService.saveServicePaymentDetailOS(servicePaymentUD.getId(), ccRenewal,loggedInUser);
         }
-
     }
-
 
     public String getOngoingAppStatusMsg(String cdbNo){
         SpFirmDTOFetch ongoingApp = specializedFirmService.getSpecializedFirmOngoingApp(cdbNo);
@@ -416,4 +440,17 @@ public class SpecializedFirmOSService extends BaseService {
         equipmentDTOs.forEach(e->e.setEqAttachments(specializedFirmRDao.getEQAttachmentsFinal(e.getId())));
         return equipmentDTOs;
     }
+
+    @Transactional(readOnly = true)
+    public String getRegisteredClass(String specializedFirmFinalId,String categoryId){
+        String condition = "CrpSpecializedTradeFinalId = '"+specializedFirmFinalId+"' AND CmnAppliedCategoryId = '"+categoryId+"'";
+        String classId = (String)commonService.getValue("crpspecializedtradeworkclassificationfinal", "CmnApprovedCategoryId", condition);
+        return classId == null?"":classId;
+    }
+
+    @Transactional(readOnly = true)
+    public List<CategoryClassDTO> getCategoryClassFinal(String specializedFirmId) {
+        return specializedFirmRDao.getCategoryClassFinal(specializedFirmId);
+    }
+
 }

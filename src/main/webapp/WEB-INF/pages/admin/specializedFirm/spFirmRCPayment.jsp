@@ -191,7 +191,6 @@
                                                 <h3 class="card-title">Fees Applied</h3>
                                             </div>
                                             <div class="card-body">
-
                                                 <div class="col-lg-12">
                                                     <div class="panel-body">
                                                         <div class="form-group">
@@ -297,32 +296,68 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div class="form-group">
+                                            <div class="table-responsive">
+                                                <fieldset><h3>Application Status</h3>
+                                                    <table id="appStatusTbl" width="1000px" cellpadding="1"
+                                                           cellspacing="1" border="1"
+                                                           style="border-collapse: collapse"
+                                                           class="table table-bordered">
+                                                        <thead>
+                                                        <tr class="Caption">
+                                                            <td width="20%" align="center" valign="top">
+                                                                <strong>Status</strong>
+                                                            </td>
+                                                            <td width="20%" align="center" valign="top">
+                                                                <strong>Action By</strong>
+                                                            </td>
+                                                            <td width="20%" align="center" valign="top">
+                                                                <strong>Action Date</strong>
+                                                            </td>
+                                                            <td width="20%" align="center" valign="top">
+                                                                <strong>Remarks</strong>
+                                                            </td>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                        </tbody>
+                                                    </table>
+                                                    <br>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2" for="vRemarks">Remarks:</label>
+
+                                            <div class="col-md-10" id="remarkclass">
+                                                    <textarea name="vRemarks" id="vRemarks"
+                                                              class="form-control"></textarea>
+                                                <span class="help-block" id="remarkErrorId"></span>
+                                            </div>
+                                        </div>
                                         <!-- Box Close -->
                                     </div>
                                     <div class="col-lg-12 form-group">
                                         <button type="submit" class="btn btn-primary" id="btnSave">
                                             <i class="fa fa-file-text mr-1"></i>Save and Generate Certificate</button>
-                                        <button type="button" class="btn btn-primary" id="btnSendBack"><i
+                                     <%--   <button type="button" class="btn btn-primary" id="btnSendBack"><i
                                                 class="fa fa-backward"></i>&nbsp;&nbsp;Send back
-                                        </button>
+                                        </button>--%>
                                         <a href="<c:url value="/admin/specializedFirm"/>" class="btn btn-orange">
                                             <i class="fa fa-ban"></i>Cancel
                                         </a>
                                     </div>
-
                                 </form>
-
                             </div>
-
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
     <script src="<c:url value="/resources/js/cdb/specializedFirm/specializedFirmRCAction.js"/>"></script>
 </div>
-
 </body>
 </html>

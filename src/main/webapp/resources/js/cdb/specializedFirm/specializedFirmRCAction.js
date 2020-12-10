@@ -68,6 +68,7 @@ var specializedFirmRCAction = (function () {
             data: {appNo: applicationNo},
             success: function (res) {
                 getSpecializedFirmInfo();
+
                 for(var i in res){
                     if(res[i].serviceRefNo == '4'){
                         $('#changeOfOwnerId').prop('checked',true).prop('disabled', true);
@@ -194,51 +195,13 @@ var specializedFirmRCAction = (function () {
                         $('#regMobileNo').text(specializedFirm.regMobileNo);
                         $('#regPhoneNo').text(specializedFirm.regPhoneNo);
                         $('#regFaxNo').text(specializedFirm.regFaxNo);
+                        $('#ownershipchangeRemarks').text(spFirmDTO.ownershipChangeRemarks);
 
-                      /*  var categoryClassDTOs = spFirmDTO.categories;
-                        var ccTr = "";
-                        var tFeeAmount = 0;
-                        for (var i in categoryClassDTOs) {
-                            tFeeAmount += parseFloat(categoryClassDTOs[i].aAmount);
-                            ccTr = ccTr + "<tr><td><input class='form-control' type='checkbox' checked='checked' disabled style='width: 17px; height: 17px;'></td>" +
-                            "<td>" + categoryClassDTOs[i].categoryName + "</td>" +
-                            "<td>"+categoryClassDTOs[i].aAmount+"</td></tr>";
-                        }
-                        var tfoot = "<tr><td colspan='3' align='right'>Total</td><td>"+tFeeAmount+"</td> ";
-                        $('#specializedFirmCCTbl').find('tbody').html(ccTr);
-                        $('#specializedFirmCCTbl').find('tfoot').html(tfoot);
 
-                        var equipments = spFirmDTO.equipments;
-                        var eqTr = "";
-                        for (var i in equipments) {
-                            var verifiedApprovedEq = '';
-                            if(equipments[i].approved == '1'){
-                                verifiedApprovedEq = verifiedApprovedEq + "<td>(✔)</td>";
-                                verifiedApprovedEq = verifiedApprovedEq + "<td>(✔)</td>";
-                            }
-                            else if(equipments[i].verified == '1'){
-                                verifiedApprovedEq = verifiedApprovedEq + "<td>(✔)</td>";
-                                verifiedApprovedEq = verifiedApprovedEq + "<td><input type='checkbox' style='zoom:1.6' name='approveEq' value='1'  class='check' required=''></td>";
-                            }else{
-                                verifiedApprovedEq = verifiedApprovedEq + "<td><input type='checkbox' style='zoom:1.6' name='verifyEq' value='1'  class='check' required=''></td>";
-                            }
-                            var attachment = '';
-                            for (var j in equipments[i].eqAttachments){
-                                attachment = attachment + "<a href='"+_baseURL() + "/viewDownload?documentPath="+equipments[i].eqAttachments[j].documentPath+"' target='_blank'>"+equipments[i].eqAttachments[j].documentName+"</a><br>";
-                            }
-                            eqTr = eqTr +
-                            "<tr><td>" + (parseInt(i) + 1) + "</td>" +
-                            "<td>" + equipments[i].equipmentName + "</td>" +
-                            "<td></td>" +
-                            "<td>" + equipments[i].registrationNo + "</td>" +
-                            "<td>"+owner+"</td>" +
-                            "<td>" + equipments[i].quantity + "</td>" +
-                            "<td style='text-align: center'>"+attachment+"</td>" +
-                            "<td><input type='button' name='humanResource' value='Check for Equipment' class='equipmentCheck btn btn-success'></td>" +
-                            verifiedApprovedEq+"</tr>";
-                        }
-                        $('#equipmentTbl').find('tbody').html(eqTr);
-*/
+                        incorporation(spFirmDTO.incAttachments);
+
+                        getSpFirm();
+
                         var appHistoryDTOs = spFirmDTO.appHistoryDTOs;
 
                         var appHistoryTr = "";
@@ -253,6 +216,41 @@ var specializedFirmRCAction = (function () {
                             "<td>"+ appHistoryDTOs[i].remarks +"</td></tr>";
                         }
                         $('#appStatusTbl').find('tbody').html(appHistoryTr);
+
+                        var specializedFirmHrs = spFirmDTO.spFirmHRs;
+                        var partnerHrTr = "";
+                        var hrTr = "";
+                        var m = 0, n = 0;
+                        var owner='';
+                        for (var i in specializedFirmHrs) {
+                            var verifiedApproved = '';
+                            if(specializedFirmHrs[i].Approved == '1'){
+                                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+                                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+                            }else if(specializedFirmHrs[i].verified == '1'){
+                                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+                                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check'  value='1'  required='true'></td>";
+                            }else{
+                                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' value='1'  required='true'></td>";
+                            }
+                            if (specializedFirmHrs[i].isPartnerOrOwner == '1') {
+                                owner = specializedFirmHrs[i].name;
+                                m++;
+                                partnerHrTr = partnerHrTr + "<tr><td>" + m + "</td>" +
+                                "<td>" + specializedFirmHrs[i].countryName + "</td>" +
+                                "<td class='cidNo'>" + specializedFirmHrs[i].cidNo + "</td>" +
+                                "<td>" + specializedFirmHrs[i].salutationName + "</td>" +
+                                "<td>" + specializedFirmHrs[i].name + "</td>" +
+                                "<td>" + specializedFirmHrs[i].sex + "</td>" +
+                                "<td>" + specializedFirmHrs[i].designationName + "</td>" +
+                                "<td>" + ((specializedFirmHrs[i].siCertificate == '1')?'(✔)':'') + "</td>" +
+                                "<td><input type='button' name='humanResource' value='Check for this CID' class='checkCid btn btn-success'></td>" +
+                                verifiedApproved+"</tr>";
+                            }
+                        }
+
+                        $('#partnerDtls').find('tbody').html(partnerHrTr);
+
                     } else {
                         warningMsg(res.text);
                     }
@@ -260,6 +258,20 @@ var specializedFirmRCAction = (function () {
             });
         }
 
+    }
+
+    function getSpFirm() {
+        var cdbNo = $('#cdbNo').val();
+        $.ajax({
+            url: _baseURL() + '/getSpFirm?cdbNo='+cdbNo,
+            type: 'GET',
+            success: function (res) {
+                var spFirm = res;
+                $('#oldfirmName').text(spFirm.oldFirmName);
+                $('#oldestAddress').text(spFirm.oldEstbAddress);
+                $('#oldestDzongkhag').text(spFirm.oldDzongkhag);
+            }
+        });
     }
     /*function nullif(val){
         if(val == null || val == 'null'){
@@ -291,6 +303,23 @@ var specializedFirmRCAction = (function () {
             }
         })
     }*/
+
+    function incorporation(data){
+        if(data){
+            $('#cIncorporation').removeClass('hide');
+            var tr = '';
+            for(var i in data){
+                tr = tr + "<tr>"+
+                "<td></td>" +
+                "<td>"+data[i].documentName+"</td>"+
+                "<td><a href='"+_baseURL() + "/viewDownload?documentPath="+data[i].documentPath+"' target='_blank'> View </a></td>" +
+                "</tr>";
+            }
+            $('#IncCertificateTbl').find('tbody').html(tr);
+        }else{
+            $('#cIncorporation').addClass('hide');
+        }
+    }
 
     function addHR(tBodyClass, specializedFirmHrs){
 
@@ -529,7 +558,7 @@ var specializedFirmRCAction = (function () {
         //getSpecializedFirmInfo();
         getSpFirmInfoForPayment();
         paymentUpdate();
-        //checkHR();
+       checkHR();
         sendBack();
         getAppliedServices();
     }

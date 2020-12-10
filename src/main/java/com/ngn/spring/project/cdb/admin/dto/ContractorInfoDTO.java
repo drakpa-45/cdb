@@ -32,6 +32,9 @@ public class ContractorInfoDTO {
     private String pGewogTxt;
     private String pVillageTxt;
     private String estDzongkhagTxt;
+    private String oldFirmName;
+    private String oldEstbAddress;
+    private String oldDzongkhag;
 
     private String cdbNo;
 
@@ -153,5 +156,29 @@ public class ContractorInfoDTO {
 
     public void setTrainingDTOs(List<ContractorTrainingDTO> trainingDTOs) {
         this.trainingDTOs = trainingDTOs;
+    }
+
+    public String getOldFirmName() {
+        return oldFirmName;
+    }
+
+    public void setOldFirmName(String oldFirmName) {
+        this.oldFirmName = oldFirmName;
+    }
+
+    public String getOldEstbAddress() {
+        return oldEstbAddress;
+    }
+
+    public void setOldEstbAddress(String oldEstbAddress) {
+        this.oldEstbAddress = oldEstbAddress;
+    }
+
+    public String getOldDzongkhag() {
+        return oldDzongkhag;
+    }
+
+    public void setOldDzongkhag(String oldDzongkhag) {
+        this.oldDzongkhag = oldDzongkhag;
     }
 }

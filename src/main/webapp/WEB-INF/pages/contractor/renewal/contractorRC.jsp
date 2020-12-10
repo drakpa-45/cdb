@@ -461,18 +461,15 @@
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-4 form-label">Gewog </label>
-                                                            <select name="contractor.pGewogId" id="pGewogId"
-                                                                    class="form-control col-lg-8">
-                                                            </select>
+                                                            <input type="text" class="form-control col-lg-8 form-control"
+                                                                   name="contractor.pGewogId" id="pGewogId" required="true" placeholder="Text..">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-4 form-label">Village </label>
-                                                            <select name="contractor.pVillageId" id="pVillageId"
-                                                                    class="form-control col-lg-8">
-
-                                                            </select>
+                                                            <input type="text" class="form-control col-lg-8 form-control"
+                                                                   name="contractor.pVillageId" id="pVillageId" required="true" placeholder="Text..">
                                                         </div>
                                                     </div>
                                                 </div>

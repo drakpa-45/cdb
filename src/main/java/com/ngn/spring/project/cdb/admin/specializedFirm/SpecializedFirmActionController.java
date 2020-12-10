@@ -62,6 +62,12 @@ public class SpecializedFirmActionController extends BaseController {
     }
 
     @ResponseBody
+    @RequestMapping(value ="/checkEquipment", method = RequestMethod.GET)
+    public ResponseMessage checkEquipment(String regNo){
+        return commonService.checkEquipment(regNo);
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/verify", method = RequestMethod.POST)
     public ResponseMessage verify(HttpServletRequest request, BigInteger appNo, String vRemarks) {
         loggedInUser = gLoggedInUser(request);

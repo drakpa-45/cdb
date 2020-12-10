@@ -185,131 +185,37 @@
                                                 <label class="col-lg-4 form-label">TPN Number</label>
                                                 <label class="col-lg-8 form-label" id="tpn"></label>
                                             </div>
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-4 form-label">Previous Firm
+                                                    Name</label>
+                                                <label class="col-lg-8 form-label" id="oldfirmName"></label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="card hide" id="cIncorporation">
+                                <div class="card hidden" id="cIncorporation">
                                     <div class="bg-blue card-status card-status-left"></div>
                                     <div class="card-header">
                                         <h3 class="card-title">Attach Certificates of Incorporation</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12">
-                                            <div class=""><input id="addMoreCert" type="button"
+                                            <%--<div class=""><input id="addMoreCert" type="button"
                                                                  value="Add More Certificate"
-                                                                 class="btn btn-primary"></div>
+                                                                 class="btn btn-primary"></div>--%>
                                             <table class="table table-bordered table-center table-responsive-lg auto-index"
-                                                   id="certificateTbl">
+                                                   id="IncCertificateTbl">
                                                 <thead>
                                                 <tr>
                                                     <th>Sl no</th>
                                                     <th>Document Name</th>
                                                     <th>Document Attached</th>
-                                                    <th>File Size</th>
-                                                    <th>Action</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
 
                                                 </tbody>
                                             </table>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="card hide" id="ownerPartner">
-                                    <div class="bg-blue card-status card-status-left"></div>
-                                    <div class="card-header">
-                                        <h3 class="card-title">Name of Owner, Partners and/or others
-                                            with Controlling Interest</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="col-lg-12">
-                                            <table class="table table-bordered table-center table-responsive-lg"
-                                                   id="partnerDtls">
-                                                <thead>
-                                                <tr>
-                                                    <th>Nationality</th>
-                                                    <th>CID/Work Permit No.</th>
-                                                    <th>Salutation</th>
-                                                    <th>Name</th>
-                                                    <th>Gender</th>
-                                                    <th>Designation</th>
-                                                    <th>Show<br>in<br>certificate</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td class="country">
-                                                        <select id="countryList" class="form-control"
-                                                                name="consultant.consultantHRs[0].countryId"
-                                                                required="true" >
-
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text"
-                                                               name="consultant.consultantHRs[0].cidNo"
-                                                               class="form-control hr-cid"
-                                                               placeholder="Text..">
-                                                    </td>
-                                                    <td>
-                                                        <select id="salutation"
-                                                                name="consultant.consultantHRs[0].salutationId"
-                                                                class="form-control input-sm"
-                                                                required="true">
-
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control name"
-                                                               name="consultant.consultantHRs[0].name"
-                                                               placeholder="Text..">
-                                                    </td>
-                                                    <td>
-                                                        <select id="gender"
-                                                                name="consultant.consultantHRs[0].sex"
-                                                                class="form-control sex">
-                                                            <option value="">Select Gender</option>
-                                                            <option value="M">Male</option>
-                                                            <option value="F">Female</option>
-                                                        </select>
-
-                                                    </td>
-                                                    <td>
-                                                        <select id="designation"
-                                                                name="consultant.consultantHRs[0].designationId"
-                                                                class="form-control input-sm"
-                                                                required="true">
-
-                                                        </select>
-
-                                                    </td>
-                                                    <td>
-                                                        <label class="custom-control custom-checkbox ml-6">
-                                                            <input type="checkbox"
-                                                                   class="custom-control-input showCert"
-                                                                   name="consultant.consultantHRs[0].siCertificate"
-                                                                   value="1">
-                                                            <i class="custom-control-label"></i>
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                            <div class="col-lg-12 text-right">
-                                                <button type="button"
-                                                        class="btn btn-outline-primary btn-sm"
-                                                        onclick="addRow('partnerDtls')">
-                                                    <i class="fe fe-plus mr-2"></i>Add More
-                                                </button>
-                                                <button type="button"
-                                                        class="btn btn-outline-danger btn-sm"
-                                                        onclick="removeRow('partnerDtls')">
-                                                    <i class="fe fe-trash mr-2"></i>Remove Last Row
-                                                </button>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -338,7 +244,43 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="card tab2">
+                                    <div class="bg-blue card-status card-status-left"></div>
+                                    <div class="card-header">
+                                        <h3 class="card-title">Name of Owner, Partners and/or others with
+                                            Controlling Interest</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="col-lg-12">
+                                            <table class="table table-bordered table-center table-responsive-lg"
+                                                   id="partnerDtls">
+                                                <thead>
+                                                <tr>
+                                                    <th>Sl No</th>
+                                                    <th>Nationality</th>
+                                                    <th>CID/Work Permit No.</th>
+                                                    <th>Salutation</th>
+                                                    <th>Name</th>
+                                                    <th>Gender</th>
+                                                    <th>Designation</th>
+                                                    <th>Show in certificate</th>
+                                                    <th>CHECK FOR THE CID</th>
+                                                    <security:authorize access="hasRole('ROLE_VERIFIER')">
+                                                        <th style="width: 10%">Verify</th>
+                                                    </security:authorize>
+                                                    <security:authorize access="hasRole('ROLE_APPROVER')">
+                                                        <th style="width: 10%">Verify</th>
+                                                        <th style="width: 10%">Approve</th>
+                                                    </security:authorize>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
 
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="card tab2">
                                     <div class="bg-blue card-status card-status-left"></div>
                                     <div class="card-header">
@@ -355,6 +297,18 @@
                                                 <label class="col-lg-5 form-label">Dzongkhag</label>
                                                 <label class="col-lg-7 form-label"
                                                        id="estDzongkhag"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-5 form-label">Previous Establishment
+                                                    Address</label>
+                                                <label class="col-lg-7 form-label" id="oldestAddress"></label>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-5 form-label">Previous Dzongkhag</label>
+                                                <label class="col-lg-7 form-label"
+                                                       id="oldestDzongkhag"></label>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">

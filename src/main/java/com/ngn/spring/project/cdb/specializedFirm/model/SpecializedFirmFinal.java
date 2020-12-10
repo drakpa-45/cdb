@@ -104,9 +104,12 @@ public class SpecializedFirmFinal extends BaseModel implements Serializable {
     @Transient
     private String regDzongkhagName;
     @Transient
+    private String dzongkhagName;
+    @Transient
     private String countryName;
     @Transient
-    private String dzongkhagName;
+    private String oldDzongkhag;
+
 
     public String getId() {
         return id;
@@ -427,5 +430,13 @@ public class SpecializedFirmFinal extends BaseModel implements Serializable {
 
     public void setDzongkhagName(String dzongkhagName) {
         this.dzongkhagName = dzongkhagName;
+    }
+
+    public String getOldDzongkhag() {
+        return oldDzongkhag;
+    }
+
+    public void setOldDzongkhag(String oldDzongkhag) {
+        this.oldDzongkhag = oldDzongkhag;
     }
 }

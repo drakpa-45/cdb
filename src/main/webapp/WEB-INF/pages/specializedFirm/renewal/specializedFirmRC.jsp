@@ -293,12 +293,6 @@
                                                                    name="specializedFirm.tpn" id="tpn"
                                                                    placeholder="Text..">
                                                         </div>
-                                                        <div class="col-lg-6 col-lg-6" style="display: none" id="newFirmName">
-                                                            <label class="col-lg-4 form-label">New Proposed Firm
-                                                                Name <span class="text-danger">*</span></label>
-                                                            <input type="text" class="col-lg-7 form-control"
-                                                                   name="specializedFirm.newFirmName" required="true" placeholder="Text..">
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -306,7 +300,7 @@
                                             <div class="card hide" id="cIncorporation">
                                                 <div class="bg-blue card-status card-status-left"></div>
                                                 <div class="card-header">
-                                                    <h3 class="card-title">Attach Certificates of Incorporation</h3>
+                                                    <h3 class="card-title">Attach Documents</h3>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="col-lg-12">
@@ -473,12 +467,10 @@
                                                                 </c:forEach>
                                                             </select>--%>
                                                             <input type="text" class="col-lg-7 form-control" id="pDzongkhagId"
-                                                                   name="specializedFirm.pDzongkhagId" required="true" class="form-control col-lg-8">
+                                                                   name="specializedFirm.dzongkhagName" required="true" class="form-control col-lg-8">
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-4 form-label">Gewog:</label>
-                                                                <%-- <select name="specializedFirm.pGewogId" id="pGewogId" class="form-control col-lg-8">
-                                                                 </select>--%>
                                                             <input type="text" class="col-lg-7 form-control" id="pGewogId"
                                                                    name="specializedFirm.pGewogId" required="true" class="form-control col-lg-8">
                                                         </div>
@@ -486,7 +478,6 @@
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-4 form-label">Village: </label>
-                                                                <%--<select name="specializedFirm.pVillageId" id="pVillageId" class="form-control col-lg-8"></select>--%>
                                                             <input type="text" class="col-lg-7 form-control" id="pVillageId"
                                                                    name="specializedFirm.pVillageId" required="true" class="form-control col-lg-8">
                                                         </div>
@@ -516,27 +507,6 @@
                                                             <form:select id="regDzongkhagId"
                                                                          class="form-control input-sm col-lg-7" required="true"
                                                                          path="dzongkhagList" name="specializedFirm.regDzongkhagId">
-                                                                <form:option value="" label="Select Dzongkhag"/>
-                                                                <form:options items="${dzongkhagList}" itemValue="value"
-                                                                              itemLabel="text"/>
-                                                            </form:select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-lg-6 col-md-6 " id="editEstbAddress" style="display: none;">
-                                                            <label class="col-lg-4 form-label" for="estAddress">New Establishment
-                                                                Address <span
-                                                                        class="text-danger">*</span></label>
-                                                            <input type="text" class="col-lg-7 form-control"
-                                                                   name="specializedFirm.editEstbAddress"  required="true"
-                                                                   placeholder="Text..">
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6" id="newRegDzoId"  style="display: none;">
-                                                            <label class="col-lg-4 form-label">New Estb. Dzongkhag <span
-                                                                    class="text-danger">*</span></label>
-                                                            <form:select
-                                                                    class="form-control input-sm col-lg-7" required="true"
-                                                                    path="dzongkhagList" name="specializedFirm.newRegDzoId">
                                                                 <form:option value="" label="Select Dzongkhag"/>
                                                                 <form:options items="${dzongkhagList}" itemValue="value"
                                                                               itemLabel="text"/>
@@ -577,7 +547,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
                                         <div class="col-lg-12 form-group nextBackBtn">
                                             <button type="button" onclick="backTab('generalInformation')"

@@ -5,6 +5,7 @@ import com.ngn.spring.project.cdb.admin.dto.CategoryClassDTO;
 import com.ngn.spring.project.cdb.admin.dto.EquipmentDTO;
 import com.ngn.spring.project.cdb.common.CommonService;
 import com.ngn.spring.project.cdb.consultant.model.*;
+import com.ngn.spring.project.cdb.consultant.registration.ConsultantNRDao;
 import com.ngn.spring.project.cdb.consultant.registration.ConsultantNRService;
 import com.ngn.spring.project.cdb.consultant.registration.dto.ConsultantDTO;
 import com.ngn.spring.project.cdb.consultant.registration.dto.ConsultantDTOFetch;
@@ -22,6 +23,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -46,6 +48,9 @@ public class ConsultantOSService extends BaseService {
 
     @Autowired
     private CommonService commonService;
+
+    @Autowired
+    private ConsultantNRDao consultantDao;
 
     @Autowired
     private ConsultantNRService consultantNRService;
@@ -90,6 +95,16 @@ public class ConsultantOSService extends BaseService {
             consultantRCService.updateIncorporation(consultantDTO.getcAttachments(), loggedInUser, consultant.getConsultantId());
             consultant.setOwnershipTypeId(ownershipTypeId);
             consultant.setFirmName(consultantDTO.getConsultant().getFirmName());
+            consultant.setOwnershipChangeRemarks(consultantDTO.getConsultant().getOwnershipChangeRemarks());
+            List<ConsultantHR> ownerList = consultantDTO.getConsultant().getConsultantHRs();
+
+            for(ConsultantHR consultantHR:ownerList){
+                String hrId = commonService.getRandomGeneratedId();
+                consultantHR.setId(hrId);
+                consultantHR.setConsultantID(consultantId);
+                consultantHR.setIsPartnerOrOwner(TRUE_INT);
+                consultantNRService.saveHR(consultantHR, loggedInUser);
+            }
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "12");
             appliedServicesList.add(appliedService);
         }
@@ -119,6 +134,14 @@ public class ConsultantOSService extends BaseService {
         String referenceNo = saveOS(consultant, loggedInUser);
         //endregion
 
+        //region save attachment
+        if(consultantDTO.getcAttachments() != null) {
+            for (ConsultantAttachment attachment : consultantDTO.getcAttachments()){
+                attachment.setConsultantId(consultantId);
+                saveAttachment(attachment,loggedInUser);
+            }
+        }
+
         //region Upgrade or downgrade
       /*  if(renewalServiceType.getUpgradeDowngrade() != null){
             List<ConsultantCategory> categories = consultantDTO.getCategories();
@@ -142,6 +165,8 @@ public class ConsultantOSService extends BaseService {
                 consultantHR.setIsPartnerOrOwner(TRUE_INT);
                 consultantNRService.saveHR(consultantHR, loggedInUser);
             }
+
+            consultant.setOwnershipChangeRemarks(consultantDTO.getConsultant().getOwnershipChangeRemarks());
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "4");
             appliedServicesList.add(appliedService);
         }
@@ -158,12 +183,21 @@ public class ConsultantOSService extends BaseService {
                     consultantHR.setId(commonService.getRandomGeneratedId());
                 }
                 currentHRs.add(consultantHR.getId());
+                for(int i =0; i<hrList.size(); i++){
+                    if(emptyNullCheck(hrList.get(i).getDeleteRequest())){
+                        consultantHR.setDeleteRequest("0");
+                    }else if(hrList.get(i).getDeleteRequest().equalsIgnoreCase("yes")){
+                        consultantHR.setDeleteRequest("1");
+                    }else{
+                        consultantHR.setDeleteRequest("0");
+                    }
+                }
                 if(emptyNullCheck(consultantHR.getCidNo())){
                     continue;
                 }
-
                 consultantHR.setConsultantID(consultantId);
                 consultantHR.setIsPartnerOrOwner(FALSE_INT);
+
                consultantNRService.saveHR(consultantHR, loggedInUser);
                 //Save Human resource attachment
                 for (ConsultantHRAttachment consultantHRA : consultantHR.getConsultantHRAs()) {
@@ -171,7 +205,6 @@ public class ConsultantOSService extends BaseService {
                         continue;
                     }
                     consultantHRA.setConsultantHrId(consultantHR.getId());
-
                     consultantNRService.saveHRA(consultantHRA, loggedInUser);
                 }
             }
@@ -181,7 +214,6 @@ public class ConsultantOSService extends BaseService {
             if(deletedHRs !=null && !deletedHRs.isEmpty()){
                 deletedHRs.stream().forEach(consultantRCDao::saveDeleteHrRequest);
             }
-
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "8");
             appliedServicesList.add(appliedService);
         }
@@ -209,22 +241,18 @@ public class ConsultantOSService extends BaseService {
                         continue;
                     }
                     consultantEQA.setEquipmentId(consultantEQ.getId());
-
                     consultantNRService.saveEQA(consultantEQA, loggedInUser);
                 }
             }
-
             //to save deleted hr
             List<String> deletedEQs =existingEQs.stream().filter(h->!currentEQs.contains(h)).collect(Collectors.toList());
             if(deletedEQs !=null && !deletedEQs.isEmpty()){
                 deletedEQs.stream().forEach(consultantRCDao::saveDeleteEqRequest);
             }
-
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "9");
             appliedServicesList.add(appliedService);
         }
         //endregion
-
 
         //region save applied service and payment
         appliedServicesList.stream().filter(c-> !c.isEmpty()).forEach(
@@ -276,11 +304,9 @@ public class ConsultantOSService extends BaseService {
         consultantRCDao.saveOrUpdate(consultant);
 
         return referenceNo;
-
     }
 
     public void saveCCUpgrade(Consultant consultant,List<ConCategory> categories, LoggedInUser loggedInUser){
-
         BigDecimal totalCCUpDownFee = BigDecimal.ZERO;
         final List<CategoryClassDTO> ccUpDown = new ArrayList<>();  //upgrade downgrade
         String contractorFinalId = (String)commonService.getValue("crpconsultantfinal","Id","CDBNo",consultant.getCdbNo());
@@ -294,7 +320,6 @@ public class ConsultantOSService extends BaseService {
                 totalCCUpDownFee = totalCCUpDownFee.add(fee);
             }
         }
-
         //save upgrade downgrade change of category
         if(!Objects.equals(totalCCUpDownFee, BigDecimal.ZERO)){
             String appliedServiceId = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "7"); //upgrade downgrade service id
@@ -315,9 +340,7 @@ public class ConsultantOSService extends BaseService {
 
             consultantRCService.saveServicePaymentDetail(servicePaymentUD.getId(), ccUpDown,loggedInUser);
         }
-
     }
-
 
     public String getOngoingAppStatusMsg(String cdbNo){
         ConsultantDTOFetch ongoingApp = consultantNRService.getConsultantOngoingApp(cdbNo);
@@ -329,7 +352,6 @@ public class ConsultantOSService extends BaseService {
                 +ongoingApp.getAppStatusName()
                 +". Please wait until complete process for this application.";
     }
-
     /**
      * To check for validations for renewal. If any condition is fulfilled or not. and returns the message to be displayed
      * @param cdbNo  -- CBDNo
@@ -375,5 +397,19 @@ public class ConsultantOSService extends BaseService {
         //responseMessage.setValue(String.valueOf(waiveOffLateFee));
         //responseMessage.setVal2(lateFee.toString());
         return responseMessage;
+    }
+    @Transactional(readOnly = false)
+    public void saveAttachment(ConsultantAttachment cAttachment,LoggedInUser loggedInUser) throws Exception {
+        MultipartFile attachment = cAttachment.getAttachment();
+        String docName = cAttachment.getDocumentName()+commonService.getFileEXT(attachment);
+        String specificLoc = UPLOAD_LOC+"//CertIncorporation";
+        String docPath = commonService.uploadDocument(attachment, specificLoc, docName);        String attachmentId = commonService.getRandomGeneratedId();
+        cAttachment.setId(attachmentId);
+        cAttachment.setDocumentPath(docPath);
+        cAttachment.setDocumentName(docName);
+        cAttachment.setFileType(attachment.getContentType());
+        cAttachment.setCreatedBy(loggedInUser.getUserID());
+        cAttachment.setCreatedOn(loggedInUser.getServerDate());
+        consultantDao.saveUpdate(cAttachment);
     }
 }

@@ -25,12 +25,10 @@ import javax.servlet.http.HttpServletResponse;
 @PreAuthorize("isAuthenticated()")
 @RequestMapping(value ={"/public_access/profile"})
 public class ProfileController {
-
     @Autowired
     private CommonService commonService;
     @Autowired
     private ProfileService profileService;
-
 
     @RequestMapping(value ="", method = RequestMethod.GET)
     public String profile(ModelMap model,HttpServletRequest request, HttpServletResponse response) {
@@ -38,40 +36,33 @@ public class ProfileController {
         if(type == null){
             type = request.getSession().getAttribute("CDBNo").toString();
         }
-
         if(type.split("999")[0].equalsIgnoreCase("Architect")){
             model.addAttribute("registrationDetails", commonService.populateApplicantDetails(type.split("999")[1]));
             model.addAttribute("App_Details", commonService.populateApplicantDetails(type.split("999")[1]));
             return "architect/architect_profile";
         }
-
         if(type.split("999")[0].equalsIgnoreCase("SpecializedTrade")){
             model.addAttribute("registrationDetails", commonService.populateSpApplicantDetails(type.split("999")[1]));
             model.addAttribute("App_Details", commonService.populateSpApplicantDetails(type.split("999")[1]));
             return "trade/spTrade_profile";
         }
-
         if(type.split("999")[0].equalsIgnoreCase("Survey")){
             model.addAttribute("registrationDetails", commonService.populateSurveyApplicantDetails(type.split("999")[1]));
             model.addAttribute("App_Details", commonService.populateSurveyApplicantDetails(type.split("999")[1]));
             return "survey/survey_profile";
         }
-
         if(type.split("999")[0].equalsIgnoreCase("Consultant")){
             model.addAttribute("appDetail", profileService.getApplicationDetailsConsultant(type.split("999")[1]));;
             return "consultant/profile/consultant_profile";
         }
-
         if(type.split("999")[0].equalsIgnoreCase("Contractor")){
             model.addAttribute("appDetail", profileService.getApplicationDetails(type.split("999")[1]));
             return "contractor/profile/contractor_profile";
         }
-
         if(type.split("999")[0].equalsIgnoreCase("SpecializedFirm")){
             model.addAttribute("appDetail", profileService.getApplicationDetailsSpecializedFirm(type.split("999")[1]));;
             return "specializedFirm/profile/specializedFirm_profile";
         }
-
         if(type.split("999")[0].equalsIgnoreCase("Engineer")){
             model.addAttribute("registrationDetails", commonService.populateEngineerApplicantDetails(type.split("999")[1]));
             model.addAttribute("App_Details", commonService.populateEngineerApplicantDetails(type.split("999")[1]));
@@ -84,49 +75,11 @@ public class ProfileController {
     public String printInformation(ModelMap model,HttpServletRequest request, HttpServletResponse response) {
         //String type=request.getParameter("param");
         String cdbNo=request.getParameter("cdbNo");
-      /*  if(type == null){
-            type = request.getSession().getAttribute("CDBNo").toString();
-        }*/
-
-      /*  if(type.split("999")[0].equalsIgnoreCase("Architect")){
-            model.addAttribute("registrationDetails", commonService.populateApplicantDetails(type.split("999")[1]));
-            model.addAttribute("App_Details", commonService.populateApplicantDetails(type.split("999")[1]));
-            return "architect/architect_profile";
-        }*/
         if(cdbNo.startsWith("SP-")){
             model.addAttribute("registrationDetails", commonService.populateSpApplicantDetails(cdbNo));
             model.addAttribute("App_Details", commonService.populateSpApplicantDetails(cdbNo));
             return "trade/spTrade_printInformation";
         }
-
-     /*
-
-        if(type.split("999")[0].equalsIgnoreCase("Survey")){
-            model.addAttribute("registrationDetails", commonService.populateSurveyApplicantDetails(type.split("999")[1]));
-            model.addAttribute("App_Details", commonService.populateSurveyApplicantDetails(type.split("999")[1]));
-            return "survey/survey_profile";
-        }
-
-        if(type.split("999")[0].equalsIgnoreCase("Consultant")){
-            model.addAttribute("appDetail", profileService.getApplicationDetailsConsultant(type.split("999")[1]));;
-            return "consultant/printInformation/consultantInformation";
-        }
-
-        if(type.split("999")[0].equalsIgnoreCase("Contractor")){
-            model.addAttribute("appDetail", profileService.getApplicationDetails(type.split("999")[1]));
-            return "contractor/printInformation/contractorInformation";
-        }
-
-        if(type.split("999")[0].equalsIgnoreCase("SpecializedFirm")){
-            model.addAttribute("appDetail", profileService.getApplicationDetailsSpecializedFirm(type.split("999")[1]));;
-            return "specializedFirm/printInformation/specializedFirmInformation";
-        }
-
-        if(type.split("999")[0].equalsIgnoreCase("Engineer")){
-            model.addAttribute("registrationDetails", commonService.populateEngineerApplicantDetails(type.split("999")[1]));
-            model.addAttribute("App_Details", commonService.populateEngineerApplicantDetails(type.split("999")[1]));
-            return "engineer/engineer_profile";
-        }*/
         return null;
     }
 }

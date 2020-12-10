@@ -258,7 +258,7 @@
                     <div class ="form-group">
                         <label class = "col-lg-2">Equipment <span class="text-danger">*</span>:</label>
                         <div class = "col-lg-4">
-                            <select name="equipments[0].equipmentId" class="form-control custom-select text-left equipmentId" required="" id="eq1">
+                            <select name="equipments[0].equipmentId" class="form-control custom-select text-left equipmentId" required="" id="eq1"  onchange="enableRegistrationNo()">
                                 <option value="">Select Equipment</option>
                                 <c:forEach var="item" items="${equipmentList}">
                                     <option value="${item.value}" class="${item.obj1}"><c:out value="${item.text}"/></option>
@@ -267,7 +267,7 @@
                         </div>
                         <label class = "col-lg-3">Registration No <span class="text-danger">*</span>:</label>
                         <div class = "col-lg-3">
-                            <input type="text" name="equipments[0].registrationNo" class="form-control registrationNo" <%--required="true"--%> disabled id="eq2">
+                            <input type="text" name="equipments[0].registrationNo" class="form-control registrationNo" onchange="validateNo(this.value)"<%--required="true"--%> disabled id="eq2">
                         </div>
                     </div>
                     <div class ="form-group">
@@ -315,14 +315,14 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-primary" onclick="getModalData('eqdatatable','eq',3)" type="button">OK</button>
+                <button class="btn btn-primary" onclick="getModalData('eqdatatable','eq',3)" type="button">OK</button>
                 <button data-dismiss="modal" class="btn btn-warning" type="button">Close</button>
             </div>
         </div>
     </div>
 </div>
 <div class="col-lg-12 form-group">
-    <button type="button" onclick="backTab('equipment_details','human_resource_criteria')" class="btn btn-azure col-lg-offset-9">
+    <button type="button" id="btn5" onclick="backTab('equipment_details','human_resource_criteria')" class="btn btn-azure col-lg-offset-9">
         <i class="fa fa-arrow-circle-left"></i>&nbsp; Back
     </button>
     <button type="button" class="btn btn-primary" id="btnValEqNext">
@@ -330,4 +330,44 @@
         <i class="fa fa-life-saver"></i>
     </button>
 </div>
+<script>
+    function validateNo(vNo) {
+        if (validateVehNo(vNo)) {
+            return true;
+        } else {
+            $('#eq2').val('');
+            errorMsg('oops!! please check your vehicle Number format');
+            return false;
+        }
+    }
+    function validateVehNo() {
+        var vNo = $('#eq2').val();
+        const re = /\w[BPG]-\d-\w\d{4}$/;
+        return re.test(vNo);
+    }
+    function checkDuplicateEQ(){
+        var $this = $(this);
+        var isEqExist = false;
+        $('#eqdatatable').find('tbody tr td:nth-child(3)').each(function(){
+            if($this.val() == $(this).text()){
+                warningMsg("This Registration Number is already exists in your list!!!");
+                $this.val('');
+                isEqExist = true;
+                return isEqExist;
+            }
+        });
+    }
 
+    function enableRegistrationNo(){
+        $('.equipmentId').on('change',function(e){
+            var isRegistration = $(this).find("option:selected").hasClass("1");
+            if(isRegistration == true){
+                $('#eq2').prop('disabled',false).prop('required',true);
+                $('#eq3').val(1).prop('disabled',true);
+            } else{
+                $('#eq2').val('').prop('disabled',true);
+                $('#eq3').val('').prop('disabled',false);
+            }
+        })
+    }
+</script>

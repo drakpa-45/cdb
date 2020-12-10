@@ -158,7 +158,7 @@
             <div class="col-lg-12">
                 <div class="col-lg-6 col-md-6 form-group">
                     <label class="col-lg-4 form-label">Dzongkhag</label>
-                    <select id="pDzongkhagId" class="form-control input-sm col-lg-8" name="specializedFirm.pDzongkhagId" required="true">
+                    <select id="pDzongkhagId" class="form-control input-sm col-lg-8" name="specializedFirm.pDzongkhagId">
                         <option value="">Select Dzongkhag</option>
                         <c:forEach var="item" items="${dzongkhagList}">
                             <option value="${item.value}"><c:out value="${item.text}"/></option>
@@ -261,7 +261,7 @@
 </div>
 
 <div class="col-lg-12 form-group">
-    <button type="button" onclick="previousTab('fees_structure','generalInformation')" class="btn btn-azure col-lg-offset-9">
+    <button type="button" id="btn2" onclick="previousTab('fees_structure','generalInformation')" class="btn btn-azure col-lg-offset-9">
         <i class="fa fa-arrow-circle-left"></i> &nbsp;Back
     </button>
     <button type="button" id="btnValGINext" class="btn btn-primary">

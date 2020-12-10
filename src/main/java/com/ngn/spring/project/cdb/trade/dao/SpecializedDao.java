@@ -4,6 +4,7 @@ import bt.gov.ditt.sso.client.dto.UserSessionDetailDTO;
 import com.ngn.spring.project.base.BaseDao;
 import com.ngn.spring.project.cdb.admin.dto.TasksDTO;
 import com.ngn.spring.project.cdb.architect.dto.ArchitectDto;
+import com.ngn.spring.project.cdb.certification.CertificateDTO;
 import com.ngn.spring.project.cdb.specializedFirm.model.SpecializedFirmFinal;
 import com.ngn.spring.project.cdb.trade.dto.OwnershipDTO;
 import com.ngn.spring.project.cdb.trade.dto.TradeDto;
@@ -1035,14 +1036,14 @@ public class SpecializedDao extends BaseDao {
                 return_value = "Success";
             }
         } catch (Exception e) {
-            System.out.print("Exception in EngineerDao # deleteFromSysuser: " + e);
+            System.out.print("Exception in SpecializedDao # deleteFromSysuser: " + e);
             e.printStackTrace();
         }
         return return_value;
     }
 
     public String isCIDUnique(String cidNo) {
-        String isCIDUnique="";
+        String isCIDUnique = "";
         try {
             sqlQuery = "SELECT c.CmnApplicationRegistrationStatusId FROM crpspecializedtrade c WHERE c.CIDNo=?";
             isCIDUnique = (String) hibernateQuery(sqlQuery).setParameter(1, cidNo).list().get(0);
@@ -1052,4 +1053,12 @@ public class SpecializedDao extends BaseDao {
         }
         return isCIDUnique;
     }
+
+    public CertificateDTO getSpecializedTradePrintDetails(HttpServletRequest request, String cdbNo) {
+        CertificateDTO dto = new CertificateDTO();
+        sqlQuery = properties.getProperty("SpecializedDao.getSpecializedTradePrintDetails");
+        dto = (CertificateDTO) hibernateQuery(sqlQuery, CertificateDTO.class).setParameter(1, cdbNo).list().get(0);
+        return dto;
+    }
 }
+

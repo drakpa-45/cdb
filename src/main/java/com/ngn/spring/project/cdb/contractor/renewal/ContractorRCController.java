@@ -110,6 +110,12 @@ public class ContractorRCController extends BaseController {
     }
 
     @ResponseBody
+    @RequestMapping(value ="/getIncAttachmentFinal", method = RequestMethod.GET)
+    public List getIncAttachmentFinal(HttpServletRequest request, String contractorId){
+        return cRenewalService.getIncAttachmentFinal(contractorId);
+    }
+
+    @ResponseBody
     @RequestMapping(value ="/getEquipmentFinal", method = RequestMethod.GET)
     public List getEquipmentFinal(HttpServletRequest request, String contractorId){
         return cRenewalService.getEquipmentFinal(contractorId);

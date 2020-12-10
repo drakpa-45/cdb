@@ -11,7 +11,7 @@
                         Construction Development Board
                     </h1>
                 </div>
-
+                <input type="hidden" id="appNoVA" value="${appNo}" name="applicationNo"/>
                 <div class="card" id="registrtaionFormCard">
                     <div class="card-header">
                         <h3 class="card-title font-weight-bold" style="color: #002752">Contractor >> Renewal Application >>
@@ -63,7 +63,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="card tab2">
                                             <div class="bg-blue card-status card-status-left"></div>
                                             <div class="card-header">
@@ -103,36 +102,47 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <%--<div class="card-header">
-                                                <h3 class="card-title">Name of Owner, Partners and/or others with
-                                                    Controlling Interest</h3>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="col-lg-12">
-                                                    <table class="table table-bordered table-center table-responsive-lg"
-                                                           id="partnerDtls">
-                                                        <thead>
-                                                        <tr>
-                                                            <th>Sl No</th>
-                                                            <th>Nationality</th>
-                                                            <th>CID/Work Permit No.</th>
-                                                            <th>Salutation</th>
-                                                            <th>Name</th>
-                                                            <th>Gender</th>
-                                                            <th>Designation</th>
-                                                            <th>Show in certificate</th>
-
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>--%>
                                         </div>
-
+                                        <div class="card tab2">
+                                            <div class="bg-blue card-status card-status-left"></div>
+                                            <div class="card-header">Category</div>
+                                            <div class="div-actual">
+                                                <table id="contractorCCTbl1" class="table table-bordered table-hover">
+                                                    <thead style="background-color: #F2F2F2">
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>Service Type</th>
+                                                        <th>Category</th>
+                                                        <th>Existing Class</th>
+                                                        <th>New Class</th>
+                                                        <th>Fee</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="card tab2">
+                                            <div class="bg-blue card-status card-status-left"></div>
+                                            <div class="card-header">Service Applied and Fee</div>
+                                            <div class="card-body">
+                                            <table id="contractorCCTbl" class="table table-bordered table-hover">
+                                                <thead style="background-color: #F2F2F2">
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Service Type</th>
+                                                    <th>Category</th>
+                                                    <th>Existing Class</th>
+                                                    <th>New Class</th>
+                                                    <th>Fee</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        </div>
                                         <div class="card tab2">
                                             <div class="bg-blue card-status card-status-left"></div>
                                             <div class="card-header">Service Applied and Fee</div>
@@ -151,38 +161,6 @@
                                                     </tfoot>
                                                 </table>
                                             </div>
-                                            <%--<div class="card-header">
-                                                <h3 class="card-title">Category Details</h3>
-                                            </div>
-                                            <div class="card-body">
-
-
-                                                <div class="col-lg-12">
-                                                    <table id="contractorCCTbl"
-                                                           class="table table-bordered table-hover">
-                                                        <thead style="background-color: #F2F2F2">
-                                                        <tr>
-                                                            <th rowspan="2"></th>
-                                                            <th rowspan="2">Category</th>
-                                                            <th colspan="2">Applied</th>
-                                                            <th colspan="2">Verified</th>
-                                                            <th colspan="2">Approved</th>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Class</th><th>Amount</th>
-                                                            <th>Class</th><th>Amount</th>
-                                                            <th>Class</th><th>Amount</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                        </tbody>
-                                                        <tfoot>
-
-                                                        </tfoot>
-                                                    </table>
-                                                </div>
-                                            </div>--%>
                                         </div>
 
                                         <div class="card tab2">
@@ -299,30 +277,67 @@
                                         </div>
                                         <!-- Box Close -->
                                     </div>
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <div class="table-responsive">
+                                                <fieldset><h3>Application Status</h3>
+                                                    <table id="appStatusTbl" width="1000px" cellpadding="1"
+                                                           cellspacing="1" border="1"
+                                                           style="border-collapse: collapse"
+                                                           class="table table-bordered">
+                                                        <thead>
+                                                        <tr class="Caption">
+                                                            <td width="20%" align="center" valign="top">
+                                                                <strong>Status</strong>
+                                                            </td>
+                                                            <td width="20%" align="center" valign="top">
+                                                                <strong>Action By</strong>
+                                                            </td>
+                                                            <td width="20%" align="center" valign="top">
+                                                                <strong>Action Date</strong>
+                                                            </td>
+                                                            <td width="20%" align="center" valign="top">
+                                                                <strong>Remarks</strong>
+                                                            </td>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                        </tbody>
+                                                    </table>
+                                                    <br>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2" for="vRemarks">Remarks:</label>
+
+                                            <div class="col-md-10" id="remarkclass">
+                                                    <textarea name="vRemarks" id="vRemarks"
+                                                              class="form-control"></textarea>
+                                                <span class="help-block" id="remarkErrorId"></span>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="col-lg-12 form-group">
                                         <button type="submit" class="btn btn-primary" id="btnSave">
                                             <i class="fa fa-file-text mr-1"></i>Save and Generate Certificate</button>
-                                        <button type="button" class="btn btn-primary" id="btnSendBack"><i
+                                       <%-- <button type="button" class="btn btn-primary" id="btnSendBack"><i
                                                 class="fa fa-backward"></i>&nbsp;&nbsp;Send back
-                                        </button>
+                                        </button>--%>
                                         <a href="<c:url value="/admin/contractor"/>" class="btn btn-orange">
                                             <i class="fa fa-ban"></i>Cancel
                                         </a>
                                     </div>
-
                                 </form>
-
                             </div>
-
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
     <script src="<c:url value="/resources/js/cdb/contractor/contractorRCAction.js"/>"></script>
 </div>
-
 </body>
 </html>

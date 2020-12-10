@@ -157,6 +157,8 @@ var consultantRCAction = (function () {
                         $('#regPhoneNo').text(consultant.regPhoneNo);
                         $('#regFaxNo').text(consultant.regFaxNo);
 
+                        incorporation(consultantDTO.incAttachments);
+
                         var appHistoryDTOs = consultantDTO.appHistoryDTOs;
 
                         var appHistoryTr = "";
@@ -173,6 +175,38 @@ var consultantRCAction = (function () {
                         }
                         $('#appStatusTbl').find('tbody').html(appHistoryTr);
 
+                        var consultantHrs = consultantDTO.consultantHRs;
+                        var partnerHrTr = "";
+                        var hrTr = "";
+                        var m = 0, n = 0;
+                        var owner='';
+                        for (var i in consultantHrs) {
+                            var verifiedApproved = '';
+                            if(consultantHrs[i].Approved == '1'){
+                                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+                                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+                            }else if(consultantHrs[i].verified == '1'){
+                                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+                                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' disabled value='1'  required=''></td>";
+                            }else{
+                                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' disabled value='1'  required=''></td>";
+                            }
+                            if (consultantHrs[i].isPartnerOrOwner == '1') {
+                                owner = consultantHrs[i].name;
+                                m++;
+                                partnerHrTr = partnerHrTr + "<tr><td>" + m + "</td>" +
+                                "<td>" + consultantHrs[i].countryName + "</td>" +
+                                "<td class='cidNo'>" + consultantHrs[i].cidNo + "</td>" +
+                                "<td>" + consultantHrs[i].salutationName + "</td>" +
+                                "<td>" + consultantHrs[i].name + "</td>" +
+                                "<td>" + consultantHrs[i].sex + "</td>" +
+                                "<td>" + consultantHrs[i].designationName + "</td>" +
+                                "<td>" + ((consultantHrs[i].siCertificate == '1')?'(✔)':'')+ "</td>" +
+                                "<td><input type='button' name='humanResource' value='Check for this CID' class='checkCid btn btn-success'></td>" +
+                                verifiedApproved+"</tr>";
+                            }
+                        }
+                        $('#partnerDtls').find('tbody').html(partnerHrTr);
                     } else {
                         warningMsg(res.text);
                     }
@@ -295,6 +329,23 @@ var consultantRCAction = (function () {
                 $('#consultantCCTbl').find('tbody').html(tr);
             }
         })
+    }
+
+    function incorporation(data){
+        if(data){
+            $('#cIncorporation').removeClass('hidden');
+            var tr = '';
+            for(var i in data){
+                tr = tr + "<tr>"+
+                "<td></td>" +
+                "<td>"+data[i].documentName+"</td>"+
+                "<td><a href='"+_baseURL() + "/viewDownload?documentPath="+data[i].documentPath+"' target='_blank'> View </a></td>" +
+                "</tr>";
+            }
+            $('#IncCertificateTbl').find('tbody').html(tr);
+        }else{
+            $('#cIncorporation').addClass('hide');
+        }
     }
 
     function verify() {

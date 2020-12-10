@@ -20,6 +20,7 @@ public class TasksDTO {
     private String appStatus;
     private Date applicationDate;
     private String serviceSectorType;
+    private String cdbNo;
 
     public BigInteger getApplicationNo() {
         return applicationNo;
@@ -83,5 +84,13 @@ public class TasksDTO {
 
     public void setServiceSectorType(String serviceSectorType) {
         this.serviceSectorType = serviceSectorType;
+    }
+
+    public String getCdbNo() {
+        return cdbNo;
+    }
+
+    public void setCdbNo(String cdbNo) {
+        this.cdbNo = cdbNo;
     }
 }

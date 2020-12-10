@@ -8,6 +8,8 @@ import com.ngn.spring.project.cdb.contractor.registration.dto.ContractorHrDTO;
 import com.ngn.spring.project.cdb.contractor.registration.dto.ContractorTrainingDTO;
 import com.ngn.spring.project.cdb.contractor.registration.model.Contractor;
 import com.ngn.spring.project.cdb.contractor.registration.model.ContractorAttachment;
+import com.ngn.spring.project.cdb.contractor.registration.model.ContractorFinal;
+import com.ngn.spring.project.cdb.contractor.renewal.ContractorRCService;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
 import com.ngn.spring.project.global.global.MailSender;
 import com.ngn.spring.project.lib.LoggedInUser;
@@ -38,6 +40,9 @@ public class ContractorNRActionService extends BaseService {
     @Autowired
     private ContractorNRService contractorNRService;
 
+    @Autowired
+    private ContractorRCService cRenewalService;
+
     @Transactional(readOnly = true)
     public List gTaskList(String userId,String status,String service){
         return contractorNRActionDao.gTaskList(userId,status,service);
@@ -47,6 +52,14 @@ public class ContractorNRActionService extends BaseService {
     public ResponseMessage getContractorData(String referenceNo,Character flag){
         ContractorInfoDTO contractorDTO = new ContractorInfoDTO();
         Contractor contractor = contractorNRService.getContractor(referenceNo);
+      // ContractorFinal contractorFinal = cRenewalService.getContractorFinal(contractor.getCdbNo());
+      //  contractorDTO.setOldDzongkhag(commonService.getValue("cmndzongkhag", "NameEn", "Id", contractorFinal.getRegDzongkhagId()).toString());
+      //  contractorDTO.setOldFirmName(contractorFinal.getFirmName());
+      //  contractorDTO.setOldEstbAddress(contractorFinal.getEstAddress());
+
+        contractorDTO.setpGewogTxt(contractor.getpGewog());
+        contractorDTO.setpVillageTxt(contractor.getpVillage());
+        contractorDTO.setCountryTxt(commonService.getValue("cmncountry", "Name", "Id", contractor.getpCountryId()).toString());
         contractorDTO.setContractor(contractor);
 
         if(flag != 'P'){
@@ -59,7 +72,7 @@ public class ContractorNRActionService extends BaseService {
 
             List<ContractorHrDTO> contractorHRs = getContractorHRs(contractor.getContractorId(),'B'); //B for both owner and hr
             List<EquipmentDTO> contractorEQs = getContractorEQs(contractor.getContractorId());
-            List<ContractorAttachment> cIncAttachment = getIncAttachment(contractor.getContractorId());
+            List<ContractorAttachment> cIncAttachment = getIncAttachment(contractor.getId());
             List<ApplicationHistoryDTO> appHistoryDTOs = contractorNRActionDao.getAppHistoryDtl(contractor.getContractorId());
             contractorDTO.setContractorHRs(contractorHRs);
             contractorDTO.setEquipments(contractorEQs);

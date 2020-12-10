@@ -8,6 +8,7 @@ import com.ngn.spring.project.cdb.consultant.registration.ConsultantNRService;
 import com.ngn.spring.project.cdb.consultant.registration.dto.ConsultantHrDTO;
 import com.ngn.spring.project.cdb.consultant.model.Consultant;
 import com.ngn.spring.project.cdb.consultant.model.ConsultantFinal;
+import com.ngn.spring.project.cdb.consultant.renewal.ConsultantRCService;
 import com.ngn.spring.project.global.global.MailSender;
 import com.ngn.spring.project.lib.LoggedInUser;
 import com.ngn.spring.project.lib.ResponseMessage;
@@ -36,6 +37,8 @@ public class ConsultantNRActionService extends BaseService {
     private CommonService commonService;
     @Autowired
     private ConsultantNRService consultantService;
+    @Autowired
+    private ConsultantRCService cRenewalService;
 
     @Transactional(readOnly = true)
     public List gTaskList(String userId,String status,String service){
@@ -55,7 +58,16 @@ public class ConsultantNRActionService extends BaseService {
         @Transactional(readOnly = true)
     public ResponseMessage getConsultantData(String referenceNo,Character flag){
             ConsultantInfoDTO consultantDTO = new ConsultantInfoDTO();
-        Consultant consultant = consultantService.getConsultant(referenceNo);
+            Consultant consultant = consultantService.getConsultant(referenceNo);
+
+            /* ConsultantFinal consultantFinal = cRenewalService.getConsultantFinal(consultant.getCdbNo());
+            consultantDTO.setOldDzongkhag(commonService.getValue("cmndzongkhag", "NameEn", "Id", contractorFinal.getRegDzongkhagId()).toString());
+            consultantDTO.setOldFirmName(consultantFinal.getFirmName());
+            consultantDTO.setOldEstbAddress(consultantFinal.getEstAddress());*/
+
+            consultantDTO.setpGewogTxt(consultant.getpGewogId());
+            consultantDTO.setpVillageTxt(consultant.getpVillageId());
+            consultantDTO.setCountryTxt(commonService.getValue("cmncountry", "Name", "Id", consultant.getpCountryId()).toString());
             consultantDTO.setConsultant(consultant);
 
         if(flag != 'P'){
@@ -72,7 +84,7 @@ public class ConsultantNRActionService extends BaseService {
             consultantDTO.setAppHistoryDTOs(appHistoryDTOs);
             consultantDTO.setCategories(categoryClassDTOs);
             consultantDTO.setIncAttachments(cIncAttachment);
-        } else{
+        } else {
             List<CategoryClassDTO> categoryClassDTOs = consultantActionDao.getCategoryClass(consultant.getConsultantId());//B for both owner and hr
             List<ConsultantHrDTO> consultantHRs = consultantActionDao.getConsultantHRs(consultant.getConsultantId(), 'O');
             List<ApplicationHistoryDTO> appHistoryDTOs = consultantActionDao.getAppHistoryDtl(consultant.getConsultantId());
@@ -80,7 +92,7 @@ public class ConsultantNRActionService extends BaseService {
             consultantDTO.setAppHistoryDTOs(appHistoryDTOs);
             consultantDTO.setConsultantHRs(consultantHRs);
             String cdbNo = consultantActionDao.getNextCDBNo();
-            consultantDTO.setCdbNo(cdbNo);
+           consultantDTO.setCdbNo("NULL");
         }
             if(consultant.getpDzongkhagId() != null) {
                 consultantDTO.setpDzongkhagTxt(commonService.getValue("cmndzongkhag", "NameEn", "Id", consultant.getpDzongkhagId()).toString());
@@ -153,7 +165,7 @@ public class ConsultantNRActionService extends BaseService {
         consultantActionDao.paymentUpdate(consultant.getConsultantId(),loggedInUser.getUserID()
                 , approvedApplicationStatusId,loggedInUser.getUserID());//consultant.getCreatedBy()
         responseMessage.setStatus(SUCCESSFUL_STATUS);
-        responseMessage.setText("Consultant application number :"+paymentUpdateDTO.getAppNo()+" Payment Approved");
+        responseMessage.setText("Consultant application number :"+paymentUpdateDTO.getAppNo().charAt(0)+" Payment Approved. Your CDBNo is:"+paymentUpdateDTO.getCdbNo());
         String mailContent = "Dear User,Your application for application number : "+paymentUpdateDTO.getAppNo()+" is approved."+
                 "You can login to the system for renewal other services using following credential:" +
                 "Username : your registered email" +
@@ -212,7 +224,9 @@ public class ConsultantNRActionService extends BaseService {
 
     @Transactional(readOnly = true)
     public String getCDBNoFromAppNo(String appNo){
-        return (String)commonService.getValue("crpconsultant","CDBNo","ReferenceNo",appNo);
+       //  (String)commonService.getValue("crpconsultant","CDBNo","ReferenceNo",appNo);
+        String cdbNo = consultantActionDao.getNextCDBNo();
+        return cdbNo;
     }
 
     @Transactional(readOnly = true)

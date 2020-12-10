@@ -3,6 +3,7 @@ package com.ngn.spring.project.cdb.certification;
 import com.ngn.spring.project.cdb.architect.services.ArchitectServices;
 import com.ngn.spring.project.cdb.engineer.service.EngineerServices;
 import com.ngn.spring.project.cdb.survey.service.SurveyServices;
+import com.ngn.spring.project.cdb.trade.service.SpecializedService;
 import net.sf.jasperreports.engine.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,9 @@ public class PrintController {
 
     @Autowired
     EngineerServices engineerServices;
+
+    @Autowired
+    SpecializedService specializedService;
 
 
     @RequestMapping(value = "/printCertificate", method = RequestMethod.GET)
@@ -74,6 +78,15 @@ public class PrintController {
             if (cdbNo.startsWith("BE-")) {
                 cdbNo = request.getParameter("cdbNo");
                 certificateDTO = engineerServices.getEngineerPrintDetails(request, cdbNo);
+                initialRegistrationDate = certificateDTO.getInitialRegistrationDate();
+                ownerName = certificateDTO.getOwnerName();
+                ownerCID = certificateDTO.getOwnerCID();
+                regExpiryDate = certificateDTO.getRegExpiryDate();
+                dzongkhagName = certificateDTO.getDzongkhagName();
+            }
+            if (cdbNo.startsWith("SP-")) {
+                cdbNo = request.getParameter("cdbNo");
+                certificateDTO = specializedService.getSpecializedTradePrintDetails(request, cdbNo);
                 initialRegistrationDate = certificateDTO.getInitialRegistrationDate();
                 ownerName = certificateDTO.getOwnerName();
                 ownerCID = certificateDTO.getOwnerCID();

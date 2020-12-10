@@ -119,7 +119,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="card hide" id="cIncorporation">
+                                            <div class="card hidden" id="cIncorporation">
                                                 <div class="bg-blue card-status card-status-left"></div>
                                                 <div class="card-header">
                                                     <h3 class="card-title">Attach Certificates of Incorporation</h3>
@@ -259,10 +259,10 @@
                                     </form>
                                     <div class="col-lg-12 form-group">
                                         <button type="button" onclick="nextTab('feesStructure','generalInformation')"
-                                                class="btn btn-azure col-lg-offset-9">
+                                                class="btn btn-azure col-lg-offset-9" id="btn1">
                                             <i class="fa fa-arrow-circle-left"></i>Back
                                         </button>
-                                        <button type="button" disabled onclick="nextTab('generalInformation','categoryDtls')"
+                                        <button type="button"  onclick="nextTab('generalInformation','categoryDtls')"
                                                 class="btn btn-primary" id="nextGIBtn">
                                             <i class="fa fa-arrow-circle-right"></i>Next
                                         </button>
@@ -287,11 +287,11 @@
                                     </form>
                                     <div class="col-lg-12 form-group">
                                         <button type="button" onclick="backTab('categoryDtls','generalInformation')"
-                                                class="btn btn-azure col-lg-offset-9">
+                                                class="btn btn-azure col-lg-offset-9" id="btn2">
                                             <i class="fa fa-arrow-circle-left"></i>Back
                                         </button>
                                         <button type="button" onclick="nextTab('categoryDtls','humanResourceCriteria')"
-                                                class="btn btn-primary">
+                                                class="btn btn-primary" id="btn3">
                                             <i class="fa fa-arrow-circle-right"></i>Next
                                         </button>
                                     </div>
@@ -350,10 +350,10 @@
                                     </form>
                                     <div class="col-lg-12 form-group">
                                         <button type="button" onclick="backTab('humanResourceCriteria','categoryDtls')"
-                                                class="btn btn-azure col-lg-offset-9">
+                                                class="btn btn-azure col-lg-offset-9" id="btn4">
                                             <i class="fa fa-arrow-circle-left"></i>Back
                                         </button>
-                                        <button type="button" disabled
+                                        <button type="button"
                                                 onclick="nextTab('humanResourceCriteria','consultantEquipmentDtls')"
                                                 class="btn btn-primary" id="nextHRBtn">
                                             <i class="fa fa-arrow-circle-right"></i>Next
@@ -400,10 +400,10 @@
                                                 </div>
                                             </form>
                                             <div class="col-lg-12 form-group">
-                                                <button type="button" onclick="backTab('consultantEquipmentDtls','humanResourceCriteria')" class="btn btn-azure col-lg-offset-9">
+                                                <button type="button" onclick="backTab('consultantEquipmentDtls','humanResourceCriteria')"id="btn5" class="btn btn-azure col-lg-offset-9">
                                                     <i class="fa fa-arrow-circle-left"></i>&nbsp; Back
                                                 </button>
-                                                <button type="button" disabled class="btn btn-primary" id="btnValEqNext" onclick="saveAndPreview('consultantEquipmentDtls', 'saveAndPreview')">
+                                                <button type="button"  class="btn btn-primary" id="btnValEqNext" onclick="saveAndPreview('consultantEquipmentDtls', 'saveAndPreview')">
                                                     Save & Preview &nbsp;
                                                     <i class="fa fa-life-saver"></i>
                                                 </button>
@@ -504,8 +504,7 @@
                                             <p align="center"><strong>For any other Human Resource they are allowed to
                                                 involve only in a single project of work</strong></p>
 
-                                            <p align="center"><font size="5px;">Details of CID No: <span
-                                                    id="cidchecked"></span></font></p>
+                                            <p align="center"><font size="5px;">Details of CID No:</font><label class="form-label" id="cidNo"></label></p>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-9 mt-8">
@@ -542,9 +541,84 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-12" align="center">
-                                                <p><span id="dcbinfo"><b>Human Resource is not registered in any of the
+                                                <p id="notEngagedId" style="display: none"><span id="dcbinfo"><b>Human Resource is not registered in any of the
                                                     CDB firm</b><br><br> This person is not engaged in any work or project<br>This person is not a civil servant</span>
                                                 </p>
+                                                <div class="tab-pane employeeDetails" style="display: none" id="engagedId">
+                                                    <p ><span><b>The Individual holding CID/permit no.<label id="cidNumber"></label>(<label id="hrName"></label>) is engaged in following project(s):</b></span>
+                                                    </p>
+                                                    <form action="" method="post" class="">
+                                                        <div id="employeeDetails" style="">
+                                                            <i><strong>Employee Engagement Details</strong></i>
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-body">
+                                                                    <span>Contractor</span>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-bordered table-hover"
+                                                                               id="employeeDTLS">
+                                                                            <thead>
+                                                                            <tr style="background-color: #e6f9ff">
+                                                                                <th>SLNo</th>
+                                                                                <th>Work </th>
+                                                                                <th>Procuring Agency</th>
+                                                                                <th>CDB Number</th>
+                                                                                <th>Firm Name</th>
+                                                                            </tr>
+                                                                            </thead>
+                                                                            <tbody>
+
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-body">
+                                                                    <span>Consultant</span>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-bordered table-hover"
+                                                                               id="employeeDTLS1">
+                                                                            <thead>
+                                                                            <tr style="background-color: #e6f9ff">
+                                                                                <th>SLNo</th>
+                                                                                <th>Work </th>
+                                                                                <th>Procuring Agency</th>
+                                                                                <th>CDB Number</th>
+                                                                                <th>Firm Name</th>
+                                                                            </tr>
+                                                                            </thead>
+                                                                            <tbody>
+
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-body">
+                                                                    <span>Specialized Firm</span>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-bordered table-hover"
+                                                                               id="employeeDTLS2">
+                                                                            <thead>
+                                                                            <tr style="background-color: #e6f9ff">
+                                                                                <th>SLNo</th>
+                                                                                <th>Work </th>
+                                                                                <th>Procuring Agency</th>
+                                                                                <th>CDB Number</th>
+                                                                                <th>Firm Name</th>
+                                                                            </tr>
+                                                                            </thead>
+                                                                            <tbody>
+
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -561,12 +635,21 @@
                                             </p>
                                         </div>
                                     </div>
+                                    <div class="col-md-12 col-lg-12 col-sm-12">
+                                        <div class="col-md-1 col-lg-1 col-sm-2">
                                     <button type="button" class="btn btn-primary"
                                             onclick="javascript:printDiv('modal-print')">Print
                                     </button>
-                                    <button type="button" class="btn btn-success" id="closeModal"
-                                            onclick="checkBtn('checkver1')" data-dismiss="modal">OK
+                                            </div>
+                                        <div class="col-md-4 col-lg-4 col-sm-4">
+                                    <button type="button" class="btn btn-success" id="closeModal" style="display: none"
+                                            onclick="checkBtn('owner')" data-dismiss="modal">OK
                                     </button>
+                                    <button type="button" class="btn btn-success " id="closeModal1"  style="display: none"
+                                            onclick="checkBtn('Hr')" data-dismiss="modal">OK
+                                    </button>
+                                    </div>
+                                  </div>
                                 </div>
                             </div>
                         </div>
@@ -591,10 +674,9 @@
                                             <p align="center"><strong><u><font size="3px;">Caution</font></u></strong>
                                             </p>
 
-                                            <p align="center"><strong>An equipment is allowed to execute only one work
-                                                at a time for the perticular firm.</strong></p>
+                                            <p align="center"><strong>An equipment is allowed to execute only one work at a time for the perticular firm.</strong></p>
 
-                                            <p align="center"><font size="5px;">Details of Registration No: <span
+                                            <p align="center"><font size="5px;">Details of Registration No:<span
                                                     id="regchecked"></span></font></p>
                                         </div>
                                         <div class="form-group">
@@ -616,33 +698,31 @@
                                                     </div>
                                                     <div class="col-lg-12 form-group mb-0">
                                                         <label class="col-lg-3 form-label">Vehicle Type</label>
-                                                        <label class="col-lg-8 form-label">Tractor</label>
+                                                        <label class="col-lg-8 form-label">Light Vehicle</label>
                                                     </div>
                                                 </div>
                                                 <p align="center">
-                                                    <span id="regcheckerrorspa" class="has-error"></span>
-
-                                                <p align="center"></p>
-
+                                                    <span id="regcheckerrorspa" class="has-error"></span></p>
+                                                <p align="center">In case of RSTA registered equipment kindly verify with RSTA if there are any mismatch in ownership as the RSTA data is currently under migration and stabilization.</p>
                                                 <p align="center"><strong><span id="engagementStatus"></span></strong>
+                                                    Show engagement status here.....
                                                 </p>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <p align="center"><strong>Print this page as an evidence to prove that
-                                                particular HR is engaged or not in a work or project</strong></p>
-
+                                                particular Equipment is engaged or not in a work or project</strong></p>
                                             <p align="center">
-                                                Printed on: 28-05-2019 <span id="dateSpan1"
-                                                                             style="display: none;"></span>
-                                                By:Tshewang Tenzin
+                                                Printed on:  <%=new Date()%>
+
+                                                By: ${auth.fullName}
                                             </p>
                                         </div>
                                     </div>
                                     <button type="button" class="btn btn-primary"
                                             onclick="javascript:printDiv('modal-print-equipment')">Print
                                     </button>
-                                    <button type="button" class="btn btn-success" onclick="checkBtn('checkeq0')"
+                                    <button type="button" class="btn btn-success" onclick="checkBtn('equipment')"
                                             id="closeModalEquipment" data-dismiss="modal">OK
                                     </button>
                                 </div>

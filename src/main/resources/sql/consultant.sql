@@ -67,6 +67,7 @@ ConsultantActionDao.paymentUpdate = CALL ProCrpConsultantNewRegistrationFinalDat
 ConsultantActionDao.getHRAttachments=SELECT a.DocumentName documentName,DocumentPath documentPath, FileType fileType FROM crpconsultanthumanresourceattachment a WHERE a.CrpConsultantHumanResourceId = :hrId
 ConsultantActionDao.getEQAttachments= SELECT a.DocumentName documentName,DocumentPath documentPath, FileType fileType FROM crpconsultantequipmentattachment a WHERE a.CrpConsultantEquipmentId = :eqId
 ConsultantActionDao.getIncAttachment = SELECT DocumentName AS documentName, DocumentPath documentPath,FileType AS fileType FROM crpconsultantattachment WHERE CrpConsultantId =:consultantId
+
 /*New Queries*/
 ConsultantActionDao.getNextCDBNo=SELECT DISTINCT a.`CDBNo`+1 AS cdbNo  FROM crpconsultantfinal a ORDER BY CONVERT(a.`CDBNo`, DECIMAL) DESC  LIMIT 1
 
@@ -131,5 +132,6 @@ ConsultantRCDao.getCategoryClassFinal=SELECT Id AS id,CrpConsultantFinalId AS co
 
 ConsultantRCActionDao.paymentUpdate = CALL ProCrpConsultantRenewalPaymentApproval(:consultantId,:userId,:appStatusId,:createdBy)
 
+ConsultantRCActionDao.getEmployeeDetailsFromCDB = SELECT con.NameOfFirm consultantFirmname,con.CDBNo consultantCDBNo,co.NameOfFirm contractorFirmname,co.CDBNo contractorCDBNo,s.NameOfFirm spFirmname, s.SPNo spCDBNo FROM crpcontractorhumanresourcefinal c LEFT JOIN crpconsultanthumanresourcefinal crp ON c.CIDNo = crp.CIDNo LEFT JOIN crpspecializedtradehumanresourcefinal sf ON sf.CIDNo = c.CIDNo LEFT JOIN crpspecializedtradefinal s ON s.Id = sf.CrpSpecializedTradeFinalId LEFT JOIN crpconsultantfinal con ON con.Id = crp.CrpConsultantFinalId LEFT JOIN crpcontractorfinal co ON co.Id = c.CrpContractorFinalId WHERE c.CIDNo =:cidNo
 
 ConsultantRCActionDao.getProposedCategories=

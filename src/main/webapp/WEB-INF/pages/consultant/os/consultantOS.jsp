@@ -150,9 +150,9 @@
 
                                         <div class="tab-pane services">
                                             <div class="panel-body table-responsive div-actual" >
-                      <span>
-                        Would you like to avail listed below along with this application? Please tick on the check box if you wish to.
-                      </span>
+                                              <span>
+                                                  Would you like to avail listed below along with this application? Please tick on the check box if you wish to.
+                                              </span>
                                                 <table >
                                                     <tbody>
                                                     <tr>
@@ -251,7 +251,6 @@
                                                             <div class="col-lg-6 col-md-6 ">
                                                                 <label class="col-lg-4 form-label">Ownership Type
                                                                     <span class="text-danger">*</span></label>
-
                                                                 <form:select id="ownershipList" class="form-control col-lg-7"
                                                                              required="true" path="ownershipList" name="consultant.ownershipTypeId">
                                                                     <form:option value="" label="Select Ownership Type"/>
@@ -259,11 +258,9 @@
                                                                                   itemLabel="text"/>
                                                                 </form:select>
                                                             </div>
-
                                                             <div class="col-lg-6 col-md-6">
                                                                 <label class="col-lg-4 form-label">Country <span
                                                                         class="text-danger">*</span></label>
-
                                                                 <select class="form-control col-lg-7" required="true"
                                                                         name="consultant.pCountryId" id="pCountryId">
                                                                     <c:forEach var="item" items="${countryList}">
@@ -302,7 +299,7 @@
                                                 <div class="card hide" id="cIncorporation">
                                                     <div class="bg-blue card-status card-status-left"></div>
                                                     <div class="card-header">
-                                                        <h3 class="card-title">Attach Certificates of Incorporation</h3>
+                                                        <h3 class="card-title">Attach Certificates of Incorporation/Sole Proprietorship</h3>
                                                     </div>
                                                     <div class="card-body">
                                                         <div class="col-lg-12">
@@ -418,6 +415,44 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-12 col-md-12 ">
+                                                            <label class="col-lg-3 col-md-3 form-label" for="ownershipChangeRemarks">Reason for Change of Owner:
+                                                                <span class="text-danger">*</span></label>
+                                                            <input type="text" class="col-lg-6 form-control"
+                                                                   name="consultant.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true"
+                                                                   placeholder="Text..">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="card hide" id="cOwnershipId">
+                                                    <div class="bg-blue card-status card-status-left"></div>
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">Attach Certificates of Ownership change</h3>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="col-lg-12">
+                                                            <div class=""><input id="addMoreCertOwner" type="button"
+                                                                                 value="Add More Certificate"
+                                                                                 class="btn btn-primary"></div>
+                                                            <table class="table table-bordered table-center table-responsive-lg auto-index"
+                                                                   id="certificateTblOwner">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>Sl no</th>
+                                                                    <th>Document Name</th>
+                                                                    <th>Document Attached</th>
+                                                                    <th>File Size</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <div class="card ">
@@ -429,7 +464,7 @@
                                                         <div class="col-lg-12">
                                                             <div class="col-lg-6 col-md-6 form-group">
                                                                 <label class="col-lg-4 form-label">Dzongkhag</label>
-                                                                <select id="pDzongkhagId"
+                                                               <%-- <select id="pDzongkhagId"
                                                                         class="form-control input-sm col-lg-8"
                                                                         name="consultant.pDzongkhagId">
                                                                     <option value="">Select Dzongkhag</option>
@@ -437,20 +472,21 @@
                                                                         <option value="${item.value}"><c:out
                                                                                 value="${item.text}"/></option>
                                                                     </c:forEach>
-                                                                </select>
+                                                                </select>--%>
+                                                                <input type="text" class="col-lg-7 form-control" id="pDzongkhagId"
+                                                                       name="consultant.pDzongkhagId" required="true" class="form-control col-lg-8">
                                                             </div>
                                                             <div class="col-lg-6 col-md-6 form-group">
                                                                 <label class="col-lg-4 form-label">Gewog </label>
-                                                                <select name="consultant.pGewogId" id="pGewogId" class="form-control col-lg-8">
-                                                                </select>
+                                                                <input type="text" class="col-lg-7 form-control" id="pGewogId"
+                                                                       name="consultant.pGewogId" required="true" class="form-control col-lg-8">
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-12">
                                                             <div class="col-lg-6 col-md-6 form-group">
                                                                 <label class="col-lg-4 form-label">Village </label>
-                                                                <select name="consultant.pVillageId" id="pVillageId" class="form-control col-lg-8">
-
-                                                                </select>
+                                                                <input type="text" class="col-lg-7 form-control" id="pVillageId"
+                                                                       name="consultant.pVillageId" required="true" class="form-control col-lg-8">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -652,13 +688,15 @@
                                                                     <th style="width: 5%">Title</th>
                                                                     <th style="width: 15%">Name</th>
                                                                     <th style="width: 15%">ID/Work Permit No.</th>
-                                                                    <th style="width: 10%">Sex</th>
+                                                                    <th style="width: 10%">Gender</th>
                                                                     <th style="width: 10%">Country</th>
                                                                     <th style="width: 10%">Designation</th>
                                                                     <th style="width: 10%">Qualification</th>
                                                                     <th style="width: 10%">Trade / Fields</th>
                                                                     <th style="width: 10%">Service Type</th>
+                                                                    <th style="width: 10%">Joining Date</th>
                                                                     <th style="width: 20%">Attachments (CV/UT/AT)</th>
+                                                                    <th style="width: 25%">Delete Request?</th>
                                                                     <th style="width: 5%">Action</th>
                                                                 </tr>
                                                                 </thead>
@@ -728,7 +766,6 @@
                                                 </button>
                                             </div>
                                         </div>
-
                                         <div class="tab-pane saveAndPreview">
 
                                             <div>
@@ -1048,7 +1085,7 @@
                                 <span class="input-group-addon pr-5"><i
                                         class="fa fa-calendar"></i></span>
                                                 <input type="date" name="consultantHRs[0].joiningDate"
-                                                       value="" id="joiningDate"
+                                                       value="" id="hr10"
                                                        class="form-control datepicker">
                                             </div>
                                         </div>
@@ -1066,7 +1103,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 col-lg-12">
-                                            <input type="button" id="addMoreHr" value="Add More File"
+                                            <input type="button" id="addMore" value="Add More File"
                                                    class="btn btn-primary hrFile">
 
                                             <div class="table-responsive">
@@ -1082,11 +1119,11 @@
                                                     <tbody id="fileListhrsection" class="files">
                                                     <tr>
                                                         <td><input type="hidden" class="hraId">
-                                                            <input type='text' required="" value="CID"
+                                                            <input type='text' required="true" value="CID"
                                                                    class='form-control docName'
                                                                    name='consultantHRs[0].consultantHRAs[0].documentName'/>
                                                         </td>
-                                                        <td><input type='file' required="" class='file'
+                                                        <td><input type='file' required="true" class='file'
                                                                    name='consultantHRs[0].consultantHRAs[0].attachment'
                                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                         </td>
@@ -1096,29 +1133,29 @@
                                                     </tr>
                                                     <tr>
                                                         <td><input type="hidden" class="hraId">
-                                                            <input type='text' required="" value="Certificate"
+                                                            <input type='text' required="true" value="Certificate"
                                                                    class='form-control docName'
                                                                    name='consultantHRs[0].consultantHRAs[0].documentName'/>
                                                         </td>
-                                                        <td><input type='file' required="" class='file'
+                                                        <td><input type='file' required="true" class='file'
                                                                    name='consultantHRs[0].consultantHRAs[0].attachment'
                                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                         </td>
-                                                        <td class='file-size'></td>
+                                                      <%--  <td class='file-size'></td>--%>
                                                         <td class='del_row'><a class='p-2'><i
                                                                 class='fa fa-trash text-danger '></i></a></td>
                                                     </tr>
                                                     <tr>
                                                         <td><input type="hidden" class="hraId">
-                                                            <input type='text' required="" value="Others"
+                                                            <input type='text' required="true" value="Others"
                                                                    class='form-control docName'
                                                                    name='consultantHRs[0].consultantHRAs[0].documentName'/>
                                                         </td>
-                                                        <td><input type='file' required="" class='file'
+                                                        <td><input type='file' required="true" class='file'
                                                                    name='consultantHRs[0].consultantHRAs[0].attachment'
                                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                         </td>
-                                                        <td class='file-size'></td>
+                                                       <%-- <td class='file-size'></td>--%>
                                                         <td class='del_row'><a class='p-2'><i
                                                                 class='fa fa-trash text-danger '></i></a></td>
                                                     </tr>
@@ -1130,10 +1167,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-primary" onclick="getModalData('hrDtlsTable','hr',9)" type="button">
-                                    OK
-                                </button>
-                                <button data-dismiss="modal" class="btn btn-warning" type="button">Close</button>
+                                <button class="btn btn-primary" onclick="getModalData('hrDtlsTable','hr',10)" type="button">OK</button>
+                                <button data-dismiss="modal" class="btn btn-warning" target="#addHRModal" type="button">Close</button>
                             </div>
                         </div>
                     </div>
@@ -1281,7 +1316,6 @@
         </div>
     </div>
 </c:if>
-
 <script type="text/javascript" src="<c:url value="/resources/JqueryAjaxFormSubmit.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/jquery.form.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/cdb/consultant/consultantOS.js"/>"></script>

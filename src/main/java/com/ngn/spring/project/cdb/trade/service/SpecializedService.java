@@ -3,6 +3,7 @@ package com.ngn.spring.project.cdb.trade.service;
 import bt.gov.ditt.sso.client.dto.UserSessionDetailDTO;
 import com.ngn.spring.project.base.BaseService;
 import com.ngn.spring.project.cdb.architect.dto.ArchitectDto;
+import com.ngn.spring.project.cdb.certification.CertificateDTO;
 import com.ngn.spring.project.cdb.common.CommonDao;
 import com.ngn.spring.project.cdb.common.CommonService;
 import com.ngn.spring.project.cdb.common.dto.PersonalInfoDTO;
@@ -737,26 +738,31 @@ public class SpecializedService extends BaseService{
     public ResponseMessage isCIDUnique(String cidNo) {
         ResponseMessage responseMessage = new ResponseMessage();
         String cidStatus = "";
-        String isCIDUnique=dao.isCIDUnique(cidNo);
-        if(isCIDUnique.equalsIgnoreCase("262a3f11-adbd-11e4-99d7-080027dcfac6") || isCIDUnique.equalsIgnoreCase("36f9627a-adbd-11e4-99d7-080027dcfac6") || isCIDUnique.equalsIgnoreCase("463c2d4c-adbd-11e4-99d7-080027dcfac6") || isCIDUnique.equalsIgnoreCase("6195664d-c3c5-11e4-af9f-080027dcfac6")){
-            if(isCIDUnique.equalsIgnoreCase("262a3f11-adbd-11e4-99d7-080027dcfac6")){
+        String isCIDUnique = dao.isCIDUnique(cidNo);
+        if (isCIDUnique.equalsIgnoreCase("262a3f11-adbd-11e4-99d7-080027dcfac6") || isCIDUnique.equalsIgnoreCase("36f9627a-adbd-11e4-99d7-080027dcfac6") || isCIDUnique.equalsIgnoreCase("463c2d4c-adbd-11e4-99d7-080027dcfac6") || isCIDUnique.equalsIgnoreCase("6195664d-c3c5-11e4-af9f-080027dcfac6")) {
+            if (isCIDUnique.equalsIgnoreCase("262a3f11-adbd-11e4-99d7-080027dcfac6")) {
                 cidStatus = ApplicationStatus.UNDER_PROCESS.getName();
             }
-            if(isCIDUnique.equalsIgnoreCase("36f9627a-adbd-11e4-99d7-080027dcfac6")){
+            if (isCIDUnique.equalsIgnoreCase("36f9627a-adbd-11e4-99d7-080027dcfac6")) {
                 cidStatus = ApplicationStatus.VERIFIED.getName();
             }
-            if(isCIDUnique.equalsIgnoreCase("463c2d4c-adbd-11e4-99d7-080027dcfac6")){
+            if (isCIDUnique.equalsIgnoreCase("463c2d4c-adbd-11e4-99d7-080027dcfac6")) {
                 cidStatus = ApplicationStatus.APPROVED.getName();
             }
-            if(isCIDUnique.equalsIgnoreCase("6195664d-c3c5-11e4-af9f-080027dcfac6")){
+            if (isCIDUnique.equalsIgnoreCase("6195664d-c3c5-11e4-af9f-080027dcfac6")) {
                 cidStatus = ApplicationStatus.APPROVED_FOR_PAYMENT.getName();
             }
-            responseMessage.setText("Application for this CID is "+ cidStatus+ "."+" Please wait until the process is complete.");
+            responseMessage.setText("Application for this CID is " + cidStatus + "." + " Please wait until the process is complete.");
             responseMessage.setStatus(1);
-        }else{
+        } else {
             responseMessage.setStatus(0);
         }
         return responseMessage;
+    }
+    @Transactional
+    public CertificateDTO getSpecializedTradePrintDetails(HttpServletRequest request, String cdbNo) {
+        return dao.getSpecializedTradePrintDetails(request,cdbNo);
+
     }
 
 }

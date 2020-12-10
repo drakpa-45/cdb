@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 /**
@@ -152,7 +153,7 @@ public class ConsultantRCActionService extends BaseService{
         consultantRCActionDao.saveOrUpdate(consultant);
 
         paymentUpdateDTO.setConsultantId(consultant.getConsultantId());
-        consultantRCActionDao.paymentUpdate(consultant.getConsultantId(), loggedInUser.getUserID(), approvedApplicationStatusId, consultant.getCreatedBy());
+      //  consultantRCActionDao.paymentUpdate(consultant.getConsultantId(), loggedInUser.getUserID(), approvedApplicationStatusId, consultant.getCreatedBy());
 
         responseMessage.setStatus(SUCCESSFUL_STATUS);
         responseMessage.setText("Consultant application number :" + paymentUpdateDTO.getAppNo() + " Payment Approved");
@@ -164,4 +165,8 @@ public class ConsultantRCActionService extends BaseService{
         MailSender.sendMail(consultant.getRegEmail(), "cdb@gov.bt", null, mailContent, "Application approved");
         return responseMessage;
     }
+
+
+
+
 }

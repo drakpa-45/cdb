@@ -7,6 +7,8 @@ import com.ngn.spring.project.cdb.specializedFirm.SpecializedFirmService;
 import com.ngn.spring.project.cdb.specializedFirm.dto.SpFirmHrDTO;
 import com.ngn.spring.project.cdb.specializedFirm.model.SpFirmAttachment;
 import com.ngn.spring.project.cdb.specializedFirm.model.SpecializedFirm;
+import com.ngn.spring.project.cdb.specializedFirm.model.SpecializedFirmFinal;
+import com.ngn.spring.project.cdb.specializedFirm.renewal.SpecializedFirmRService;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
 import com.ngn.spring.project.global.global.MailSender;
 import com.ngn.spring.project.lib.LoggedInUser;
@@ -39,6 +41,9 @@ public class SpecializedFirmActionService extends BaseService {
     @Autowired
     private SpecializedFirmService specializedFirmService;
 
+    @Autowired
+    private SpecializedFirmRService cRenewalService;
+
     @Transactional(readOnly = true)
     public List gTaskList(String userId,String status,String service){
         return specializedFirmActionDao.gTaskList(userId,status,service);
@@ -53,7 +58,17 @@ public class SpecializedFirmActionService extends BaseService {
     public ResponseMessage getSpecializedFirmData(String referenceNo,Character flag){
             SpecializedFirmInfoDTO specializedFirmDTO = new SpecializedFirmInfoDTO();
             SpecializedFirm specializedFirm = specializedFirmService.getSpecializedFirm(referenceNo);
-            specializedFirmDTO.setSpecializedFirm(specializedFirm);
+
+     //   SpecializedFirmFinal specializedFirmFinal = cRenewalService.getSpecializedFirmFinal(specializedFirm.getCdbNo());
+      //  specializedFirmDTO.setOldDzongkhag(commonService.getValue("cmndzongkhag", "NameEn", "Id", specializedFirmFinal.getRegDzongkhagId()).toString());
+      //  specializedFirmDTO.setOldFirmName(specializedFirmFinal.getFirmName());
+      //  specializedFirmDTO.setOldEstbAddress(specializedFirmFinal.getRegAddress());
+
+        specializedFirmDTO.setOwnershipChangeRemarks(specializedFirm.getOwnershipChangeRemarks());
+        specializedFirmDTO.setpGewogTxt(specializedFirm.getpGewogId());
+        specializedFirmDTO.setpVillageTxt(specializedFirm.getpVillageId());
+        specializedFirmDTO.setCountryTxt(commonService.getValue("cmncountry", "Name", "Id", specializedFirm.getpCountryId()).toString());
+        specializedFirmDTO.setSpecializedFirm(specializedFirm);
 
         if(flag != 'P'){
             List<CategoryClassDTO> categoryClassDTOs = specializedFirmActionDao.getFeeCategoryClass(specializedFirm.getCrpSpecializedTradeId());

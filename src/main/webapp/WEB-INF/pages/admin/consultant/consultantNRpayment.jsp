@@ -22,6 +22,7 @@
                             <div class="tab-content border p-3 col-lg-12">
                                 <form action="" method="post" id="consultantPaymentForm">
                                     <input type="hidden" id="appNoPayment"  value="${appNo}" name="appNo"/>
+                                    <input type="hidden" id="appNo"  value="${appNo}" name="appNo"/>
 
                                     <div class="">
                                         <div class="card tab2">

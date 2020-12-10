@@ -98,6 +98,18 @@ public class ConsultantRCActionController extends BaseController {
         return cRCActionService.getEQs(appNo);
     }
 
+/*    @ResponseBody
+    @RequestMapping(value = "/getEmployeeDetailsFromCDB", method = RequestMethod.GET)
+    public List getEmployeeDetailsFromCDB(HttpServletRequest request, String cidNo) throws Exception{
+        return commonService.getEmployeeDetailsFromCDB(cidNo);
+    }*/
+
+    @ResponseBody
+    @RequestMapping(value = "/checkEquipment", method = RequestMethod.GET)
+    public Object checkEquipment(HttpServletRequest request, String registrationNo) throws Exception{
+        return commonService.checkEquipment(registrationNo);
+    }
+
     @ResponseBody
     @RequestMapping(value = "/verify", method = RequestMethod.POST)
     public ResponseMessage verify(HttpServletRequest request, BigInteger appNo, String vRemarks) {

@@ -16,7 +16,6 @@
             <c:if test="${res.status eq 0}">
                 <span class="error"> ${res.text}</span>
             </c:if>
-
         </div>
     </div>
 </c:if>
@@ -27,13 +26,11 @@
                 <div class="card-header">
                     <h3 class="card-title font-weight-bold">Specialized Firm >> Other Services>> CDB No: ${cdbNo}</h3>
                 </div>
-
                 <div class="card-body">
                     <div class="form-group row" >
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center">
                             <span class="error" id="err-expired-audit-memo" style="color:#ff0000; font-size: 10px"></span>
                         </div>
-
                     </div>
                     <c:if test="${renewalCheck.status eq 0}">
                         <div class="form-group row">
@@ -140,19 +137,18 @@
                                             </div>
                                             <div class="col-lg-12 form-group">
                                                 <div class="col-md-offset-11 col-lg-offset-10 col-xs-offset-10">
-                                                    <button type="button" onclick="nextTab('feesStructure')"
+                                                    <button type="button" id="btn1" onclick="nextTab('feesStructure')"
                                                             class="btn btn-primary">
                                                         <i class="fa fa-arrow-right mr-2"></i>Next
                                                     </button>
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="tab-pane services">
                                             <div class="panel-body table-responsive div-actual" >
-                      <span>
-                        Would you like to avail listed below along with this application? Please tick on the check box if you wish to.
-                      </span>
+                                                 <span>
+                                                      Would you like to avail listed below along with this application? Please tick on the check box if you wish to.
+                                                 </span>
                                                 <table >
                                                     <tbody>
                                                     <tr>
@@ -283,7 +279,7 @@
                                                             <div class="col-lg-6 col-lg-6">
                                                                 <label class="col-lg-4 form-label">Proposed Firm
                                                                     Name <span class="text-danger">*</span></label>
-                                                                <input type="text" class="col-lg-7 form-control" id="firmName" readonly
+                                                                <input type="text" class="col-lg-7 form-control" id="firmName"
                                                                        name="specializedFirm.firmName" required="true" placeholder="Text..">
                                                             </div>
                                                         </div>
@@ -294,12 +290,6 @@
                                                                        name="specializedFirm.tpn" id="tpn"
                                                                        placeholder="Text..">
                                                             </div>
-                                                            <div class="col-lg-6 col-lg-6" style="display: none" id="newFirmName">
-                                                                <label class="col-lg-4 form-label">New Proposed Firm
-                                                                    Name <span class="text-danger">*</span></label>
-                                                                <input type="text" class="col-lg-7 form-control"
-                                                                       name="specializedFirm.newFirmName" required="true" placeholder="Text..">
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -307,7 +297,7 @@
                                                 <div class="card hide" id="cIncorporation">
                                                     <div class="bg-blue card-status card-status-left"></div>
                                                     <div class="card-header">
-                                                        <h3 class="card-title">Attach Certificates of Incorporation</h3>
+                                                        <h3 class="card-title">Attach Certificates of Incorporation/Sole Proprietorship</h3>
                                                     </div>
                                                     <div class="card-body">
                                                         <div class="col-lg-12">
@@ -423,17 +413,44 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <div class="col-lg-6 col-md-6 ">
-                                                                <label class="col-lg-4 form-label" for="ownershipChangeRemarks">Reason for Change of Owner
+                                                            <div class="col-lg-12 col-md-12 ">
+                                                                <label class="col-lg-3 col-md-3 form-label" for="ownershipChangeRemarks">Reason for Change of Owner:
                                                                     <span class="text-danger">*</span></label>
-                                                                <input type="text" class="col-lg-7 form-control"
+                                                                <input type="text" class="col-lg-6 form-control"
                                                                        name="specializedFirm.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true"
                                                                        placeholder="Text..">
                                                             </div>
                                                         </div>
+                                                                <h5 class="text-orange">Attach Certificates of Ownership change</h5>
+                                                            <div class="card-body">
+                                                                <div class="col-lg-12">
+                                                                    <div class=""><input id="addMoreCertOwner" type="button" value="Add More Certificate" class="btn btn-primary"></div>
+                                                                    <table class="table table-bordered table-hover" id="certificateTblOwner">
+                                                                        <thead>
+                                                                        <tr>
+                                                                            <th>Document Name</th>
+                                                                            <th>Document Attached</th>
+                                                                            <th>File Size</th>
+                                                                            <th>Delete</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody class="files">
+                                                                        <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
+                                                                            <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                                            <td class='file-size'></td>
+                                                                            <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                                        </tr>
+                                                                        <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
+                                                                            <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                                            <td class='file-size'></td>
+                                                                            <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                                        </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
                                                     </div>
                                                 </div>
-
                                                 <div class="card ">
                                                     <div class="bg-blue card-status card-status-left"></div>
                                                     <div class="card-header">
@@ -457,8 +474,6 @@
                                                             </div>
                                                             <div class="col-lg-6 col-md-6 form-group">
                                                                 <label class="col-lg-4 form-label">Gewog:</label>
-                                                               <%-- <select name="specializedFirm.pGewogId" id="pGewogId" class="form-control col-lg-8">
-                                                                </select>--%>
                                                                 <input type="text" class="col-lg-7 form-control" id="pGewogId"
                                                                        name="specializedFirm.pGewogId" required="true" class="form-control col-lg-8">
                                                             </div>
@@ -466,7 +481,6 @@
                                                         <div class="col-lg-12">
                                                             <div class="col-lg-6 col-md-6 form-group">
                                                                 <label class="col-lg-4 form-label">Village: </label>
-                                                                <%--<select name="specializedFirm.pVillageId" id="pVillageId" class="form-control col-lg-8"></select>--%>
                                                                 <input type="text" class="col-lg-7 form-control" id="pVillageId"
                                                                        name="specializedFirm.pVillageId" required="true" class="form-control col-lg-8">
                                                             </div>
@@ -486,7 +500,7 @@
                                                                     Address <span
                                                                             class="text-danger">*</span></label>
                                                                 <input type="text" class="col-lg-7 form-control"
-                                                                       name="specializedFirm.estAddress" id="estAddress" required="true" readonly
+                                                                       name="specializedFirm.estAddress" id="estAddress" required="true"
                                                                        placeholder="Text..">
                                                             </div>
                                                             <div class="col-lg-6 col-md-6">
@@ -495,27 +509,6 @@
                                                                 <form:select id="regDzongkhagId"
                                                                              class="form-control input-sm col-lg-7" required="true"
                                                                              path="dzongkhagList" name="specializedFirm.regDzongkhagId">
-                                                                    <form:option value="" label="Select Dzongkhag"/>
-                                                                    <form:options items="${dzongkhagList}" itemValue="value"
-                                                                                  itemLabel="text"/>
-                                                                </form:select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <div class="col-lg-6 col-md-6 " id="editEstbAddress" style="display: none;">
-                                                                <label class="col-lg-4 form-label" for="estAddress">New Establishment
-                                                                    Address <span
-                                                                            class="text-danger">*</span></label>
-                                                                <input type="text" class="col-lg-7 form-control"
-                                                                       name="specializedFirm.editEstbAddress"  required="true"
-                                                                       placeholder="Text..">
-                                                            </div>
-                                                            <div class="col-lg-6 col-md-6" id="newRegDzoId"  style="display: none;">
-                                                                <label class="col-lg-4 form-label">New Estb. Dzongkhag <span
-                                                                        class="text-danger">*</span></label>
-                                                                <form:select
-                                                                             class="form-control input-sm col-lg-7" required="true"
-                                                                             path="dzongkhagList" name="specializedFirm.newRegDzoId">
                                                                     <form:option value="" label="Select Dzongkhag"/>
                                                                     <form:options items="${dzongkhagList}" itemValue="value"
                                                                                   itemLabel="text"/>
@@ -557,12 +550,12 @@
 
                                             </div>
                                             <div class="col-lg-12 form-group">
-                                                <button type="button" onclick="backTab('generalInformation')"
+                                                <button type="button" id="btn2" onclick="backTab('generalInformation')"
                                                         class="btn btn-azure col-lg-offset-9">
                                                     <i class="fa fa-arrow-left"></i>
                                                     Back
                                                 </button>
-                                                <button type="button"
+                                                <button type="button" id="btn3"
                                                         onclick="nextTab('generalInformation')"
                                                         class="btn btn-primary nextTab">
                                                     <i class="fa fa-arrow-right"></i>
@@ -573,6 +566,8 @@
 
                                         <div class="tab-pane category_details hide">
                                             <div class="div-actual">
+                                                    <b class="text-orange">Note: If you are upgrading/down grade class,it is necessary to attach Letter of Undertaking</b> &nbsp; &nbsp;
+                                               <br />
                                                 <table id="specializedFirmCCTbl" class="table table-bordered table-hover">
                                                     <thead style="background-color: #F2F2F2">
                                                     <tr>
@@ -609,8 +604,45 @@
                                                     </tbody>
                                                 </table>
                                             </div>
+                                            <br />
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <b class="text-orange">Attach your UnderTaking Below</b> &nbsp; &nbsp;
+                                                        <br />
+                                                        <input type="button" id="addMoreCertCategory" value="Add More File" class="btn btn-primary eqFile">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-bordered table-hover" id="certificateTblCategory">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>Document Name</th>
+                                                                    <th>Document Attached</th>
+                                                                    <th>File Size</th>
+                                                                    <th>Delete</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody class="files">
+                                                                <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
+                                                                    <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                                    <td class='file-size'></td>
+                                                                    <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                                </tr>
+                                                                <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
+                                                                    <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                                    <td class='file-size'></td>
+                                                                    <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                                </tr>
+                                                                    <%--  <tr><td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/> </td>
+                                                                          <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
+                                                                          <td class='file-size'></td>
+                                                                          <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                                      </tr>--%>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             <div class="col-lg-12 form-group nextBackBtn">
-                                                <button type="button"
+                                                <button type="button" id="btn4"
                                                         onclick="backTab('category_details')"
                                                         class="btn btn-azure col-lg-offset-9">
                                                     <i class="fa fa-arrow-circle-left"></i> &nbsp; Back
@@ -643,7 +675,9 @@
                                                                     <th style="width: 10%">Qualification</th>
                                                                     <th style="width: 10%">Trade / Fields</th>
                                                                     <th style="width: 10%">Service Type</th>
+                                                                    <th style="width: 10%">Joining Date</th>
                                                                     <th style="width: 20%">Attachments (CV/UT/AT)</th>
+                                                                    <th style="width: 25%">Delete Request?</th>
                                                                     <th style="width: 5%">Action</th>
                                                                 </tr>
                                                                 </thead>
@@ -661,7 +695,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 form-group nextBackBtn">
-                                                <button type="button"
+                                                <button type="button" id="btn5"
                                                         onclick="backTab('human_resource_criteria')"
                                                         class="btn btn-azure col-lg-offset-9 backTab">
                                                     <i class="fa fa-arrow-circle-left"></i> &nbsp;Back
@@ -702,7 +736,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 form-group nextBackBtn">
-                                                <button type="button" onclick="backTab('equipment_details')" class="btn btn-azure col-lg-offset-9">
+                                                <button type="button" id="btn6" onclick="backTab('equipment_details')" class="btn btn-azure col-lg-offset-9">
                                                     <i class="fa fa-arrow-circle-left"></i>&nbsp; Back
                                                 </button>
                                                 <button type="button" class="btn btn-primary" id="btnValEqNext"
@@ -712,9 +746,7 @@
                                                 </button>
                                             </div>
                                         </div>
-
                                         <div class="tab-pane saveAndPreview">
-
                                             <div>
                                                 <div id="submitSection" style="">
                                                     <div class="panel panel-default">
@@ -1032,7 +1064,7 @@
                                 <span class="input-group-addon pr-5"><i
                                         class="fa fa-calendar"></i></span>
                                                 <input type="date" name="spFirmHRs[0].joiningDate"
-                                                       value="" id="joiningDate"
+                                                       value="" id="hr10"
                                                        class="form-control datepicker">
                                             </div>
                                         </div>
@@ -1114,7 +1146,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-primary" onclick="getModalData('hrDtlsTable','hr',9)" type="button">
+                                <button class="btn btn-primary" onclick="getModalData('hrDtlsTable','hr',10)" type="button">
                                     OK
                                 </button>
                                 <button data-dismiss="modal" class="btn btn-warning" type="button">Close</button>
