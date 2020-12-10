@@ -1,5 +1,7 @@
 package com.ngn.spring.project.cdb.profile;
 
+import com.fasterxml.jackson.databind.deser.Deserializers;
+import com.ngn.spring.project.base.BaseService;
 import com.ngn.spring.project.cdb.admin.contractor.registration.ContractorNRActionService;
 import com.ngn.spring.project.cdb.common.CommonService;
 import com.ngn.spring.project.cdb.consultant.model.ConsultantFinal;
@@ -24,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
  * ====================================================================
  */
 @Service
-public class ProfileService {
+public class ProfileService extends BaseService{
     @Autowired
     private CommonService commonService;
     @Autowired
@@ -57,7 +59,9 @@ public class ProfileService {
     @Transactional(readOnly = true)
     public Object getApplicationDetailsSpecializedFirm(String cdbNo) {
         SpecializedFirmFinal specializedFirm = specializedFirmRService.getSpecializedFirmFinal(cdbNo);
-        specializedFirm.setDzongkhagName(commonService.getValue("cmndzongkhag", "NameEn", "Id", specializedFirm.getpDzongkhagId()).toString());
+        if(!emptyNullCheck(specializedFirm.getpDzongkhagId())){
+            specializedFirm.setDzongkhagName(commonService.getValue("cmndzongkhag", "NameEn", "Id", specializedFirm.getpDzongkhagId()).toString());
+        }
         specializedFirm.setRegDzongkhagName(commonService.getValue("cmndzongkhag", "NameEn", "Id", specializedFirm.getRegDzongkhagId()).toString());
         specializedFirm.setOwnershipName(commonService.getValue("cmnlistitem", "Name", "Id", specializedFirm.getOwnershipTypeId()).toString());
         specializedFirm.setCountryName(commonService.getValue("cmncountry", "Name", "Id", specializedFirm.getpCountryId()).toString());
