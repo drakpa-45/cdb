@@ -8,9 +8,9 @@ function addRow(tableId) {
     var isValid = true;
     $tableBody.find(':input').each(function () {
         if (isValid == true) {
-            isValid = $('#consultantRenewalForm').validate().element(this);
+            isValid = $('#consultantOSForm').validate().element(this);
         } else {
-            $('#consultantRenewalForm').validate().element(this);
+            $('#consultantOSForm').validate().element(this);
         }
 
     });
@@ -22,7 +22,11 @@ function addRow(tableId) {
     }
 }
 function removeRow(tableId) {
-    $('#' + tableId + ' tr:last').remove();
+    if($('#' + tableId + ' tbody tr').length > 1) {
+        $('#' + tableId + ' tr:last').remove();
+    }else{
+        warningMsg("Cannot delete last row. You must have atleast one row for information!");
+    }
 }
 function showAcknowledgement() {
 
@@ -65,6 +69,7 @@ function nextTab(presentClass) {
         $('.nextBackBtn').removeClass('hide');
     }
 }
+
 function backTab(presentClass) {
     var $this =  $('#'+presentClass);
     var prevClass = "";
@@ -82,19 +87,24 @@ function backTab(presentClass) {
     $("." + prevClass + ">a").find(".fa-check").remove();
 }
 
-
 function openModal(modalId) {
-    $("#" + modalId).modal('show');
+    $("#" + modalId).modal({backdrop: 'static', keyboard: false});
+   // $("#" + modalId).modal('show');
 }
+
 //region model
 var hr_modal = $("#hrModal").html();
 var eq_modal = $("#eqModal").html();
 var j= 0;
+var bodyId = $('#hrDtlsTableId > tr').length;
+
 function getModalData(tableId, prefix, totalCol) {
+    $('#'+tableId).find('.tbd').remove();
     var td = "";
     $('#modalForm').validate();
     var modal = $('#' + prefix + '1').closest('.modal');
     if (modal.find(':input').valid() == false) {
+        warningMsg('Please provide your information');
         return false;
     }
     for (var i = 1; i <= totalCol; i++) {
@@ -113,13 +123,17 @@ function getModalData(tableId, prefix, totalCol) {
             name = $this.prop('name');
         }
 
-        var tdVal = "<input type='hidden' name='" + name + "' value='" + value + "'/>" + text;
+        /*var tdVal = "<input type='hidden' name='" + name + "' value='" + value + "'/>" + text;
+        td = td + "<td>" + tdVal + "</td>";*/
+        var tdVal = "<input type='hidden' class='"+$this.attr('id')+"' name='" + name + "' value='" + value + "'/>" + text;
         td = td + "<td>" + tdVal + "</td>";
     }
     td = td + "<td ><span class='doc'></span> <div class='hidden hr_attachment'></div></td>";
 
-    var tr = "<tr id='"+j+"'>" + td + "<td><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
-        "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td></tr>";
+    td = td + "<td ><input type='radio' class='deleteRequest'  name='consultantHRs[0].deleteRequest' id='deleteRequest"+bodyId+"' value='yes'><span style='color:#ff0000'>Yes</span>" +
+    "<input type='radio' class='deleteRequest'  name='consultantHRs[0].deleteRequest' id='deleteRequest"+bodyId+"' value='no'><span style='color:#ff0000'>No</span></td>";
+
+    var tr = "<tr id='"+j+"'>" + td + "<td class=' '><a class='p-2 edit-"+prefix+"'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td></tr>";
 
     $("#" + tableId).append(tr).find(".noRecord").hide();
     if(prefix == 'hr'){
@@ -129,6 +143,7 @@ function getModalData(tableId, prefix, totalCol) {
         cloneEqFiles(tableId,modal,j);
     }
     j= j+1;
+    bodyId ++;
 }
 
 function cloneHrFiles(tableId,modal,i){
@@ -165,7 +180,6 @@ function cloneEqFiles(tableId,modal,i){
         var index = $(this).closest('tr').index();
         $(this).attr('name', 'equipments[0].consultantEQAs['+index+'].attachment');
     });
-
     uplTbl.find('.docName').each(function(e){
         var index = $(this).closest('tr').index();
         docName = docName +"<input type='hidden' name='equipments[0].consultantEQAs["+index+"].documentName' value='"+$(this).val()+"'/><b>"+$(this).val() +'</b><br>';
@@ -189,8 +203,8 @@ function enableSubmit(){
     else{
         $('#btnSubmit').prop('disabled',true);
     }
-
 }
+
 function showConfirmation(){
     $('#confirmationModel').modal('show');
     //$('#actiontype').val('submit');
@@ -220,9 +234,7 @@ function submitApplication(){
 function _baseURL() {
     return cdbGlobal.baseURL() + "/public_access/consultantOS";
 }
-
 //endregion
-
 var consultantOS = (function () {
     "use strict";
 
@@ -230,7 +242,7 @@ var consultantOS = (function () {
         "<td><input type='text' class='form-control' name='cAttachments[0].documentName'/> </td>"+
         "<td><input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
         "<td class='file-size'></td>" +
-        "<td><a class='p-2'><i class='fa fa-pencil text-green'></i></a><a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a></td>" +
+        "<td><a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a></td>" +
         "</tr>";
 
     function sCertIncorporation() {
@@ -240,18 +252,96 @@ var consultantOS = (function () {
             if (~option.indexOf("Incorporated")) {
                 $('#cIncorporation').removeClass('hide');
                 certificateTbl.append(cert);
-            }else{
+            } else{
                 $('#cIncorporation').addClass('hide');
                 certificateTbl.empty();
             }
         });
     }
 
+    function sCertOwner() {
+        var certificateTbl = $('#certificateTblOwner').find('tbody');
+        $('#cOwnershipId').removeClass('hide');
+        certificateTbl.append(cert);
+    }
+
+    function getHRsFinal(){
+        $('#updateHR').on('click',function(){
+            if($(this).is(':checked')){
+                $('.human_resource_criteria').removeClass('hide');
+                $.ajax({
+                    url: _baseURL() + '/getConsultantHRsFinal',
+                    type: 'GET',
+                    data: {consultantId:$('#consultantIdFinal').val(),ownerOrHR:'H'},
+                    success: function (res) {
+                        var consultantHrs = res;
+                        var hrTr = "";
+                        //var openModal = "openModal('CheckModal')";
+                        for (var i in consultantHrs) {
+                            var attachments = '';
+                            for (var j in consultantHrs[i].hrAttachments){
+                                attachments = attachments + "<span class='hra'><input type='hidden' class='hraId' value='"+consultantHrs[i].hrAttachments[j].id+"'>" +
+                                "<a href='"+_baseURL() + "/viewDownload?documentPath="+consultantHrs[i].hrAttachments[j].documentPath+"' target='_blank'>"+consultantHrs[i].hrAttachments[j].documentName+"</a></span><br>";
+                            }
+                            hrTr = hrTr + "<tr class=''>" +
+                            "<td class='salutationName'><input type='hidden' class='consultantHRid' name='consultantHRs[0].id' value='"+consultantHrs[i].id +"'/>" +
+                            "<input type='hidden' class='joiningDate' value='"+consultantHrs[i].joiningDate +"'/>"+
+                            consultantHrs[i].salutationName + "</td>" +
+                            "<td class='name'>" + consultantHrs[i].name + "</td>" +
+                            "<td class='cidNo'>" + consultantHrs[i].cidNo + "</td>" +
+                            "<td class='sex'>" + consultantHrs[i].sex + "</td>" +
+                            "<td class='countryName'>" + consultantHrs[i].countryName + "</td>" +
+                            "<td class='designationName'>" + consultantHrs[i].designationName + "</td>" +
+                            "<td class='qualificationName'>" + consultantHrs[i].qualificationName + "</td>" +
+                            "<td class='tradeName'>" + consultantHrs[i].tradeName + "</td>" +
+                            "<td class='serviceTypeName'>" + consultantHrs[i].serviceTypeName + "</td>" +
+                            "<td class='joiningDate'>" + consultantHrs[i].joinDate + "</td>" +
+                            "<td class='attachments'>" + attachments + "</td>" +
+                            "<td> <input type='radio' class='deleteRequest' name='consultantHRs[0].deleteRequest' id='deleteRequest "+i+"' value='yes' ><span style='color:#ff0000'>Yes</span>" +
+                            "<input type='radio' class='deleteRequest'  name='consultantHRs[0].deleteRequest' id='deleteRequest"+bodyId+"' value='no'><span style='color:#ff0000'>No</span></td>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit-row'>Edit</button></td>" +
+                            "</tr>";
+                        }
+                        $('#hrDtlsTable').find('tbody').append(hrTr);
+                    }
+                });
+            }else{
+                $('.human_resource_criteria').addClass('hide');
+            }
+        })
+    }
+
     function delTableRow(){
         $('body').on('click','.del_row',function(e){
             e.preventDefault();
-            $(this).closest('tr').remove();
+            if($(this).last() == true){
+                warningMsg("Cannot delete last row. You must have atleast one document!");
+            }else{
+                $(this).closest('tr').remove();
+            }
         });
+    }
+
+    function deleteRequest(id){
+      /*  $('#hrDtlsTable').on('click',$(this),function(){
+            alert('send delete request');
+            var $this = $(this).find('.deleteRequest').prop('id');
+            alert($this);
+            $this.prop('checked',true);
+            if($this.is(':checked')){
+                alert('val 1');
+                $('#deleteRequest').val(1);
+            } else{
+                $('#deleteRequest').val(0);
+            }
+        });*/
+        alert(id);
+        if('#'+id.is(':checked')){
+            alert('val 1');
+            $('#'+id).val(1);
+        } else{
+            $('#'+id).val(0);
+        }
     }
 
     function addMoreCert(){
@@ -259,6 +349,16 @@ var consultantOS = (function () {
             var certificateTbl = $('#certificateTbl').find('tbody').append(cert);
             /*var row = certificateTbl.find('tr:eq(0)').html();
              certificateTbl.append('<tr>'+row.find(':input').val('')+'</tr>');*/
+        });
+    }
+
+    function addMoreFile(){
+        $('.hrFile').on('click',function(e){
+            var uplTbl = $('#hrUploadTbl').find('tbody');
+            var tr = "<tr><td><input type='text' class='form-control docName' name='consultantHRs[0].consultantHRAs[0].documentName'/> </td>" +
+                "<td><input type='file' class='file' name='consultantHRs[0].consultantHRAs[0].attachment' data-preview-file-type='any'/> </td>" +
+                "<td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td> </td></tr>";
+            uplTbl.append(tr);
         });
     }
 
@@ -271,10 +371,16 @@ var consultantOS = (function () {
                     $('#ownershipList').prop('disabled',false);
                     $('#firmName').prop('disabled', false);
                     $('#changeOfFirmName').prop('disabled', true);
+                    $('#ownerPartner').removeClass('hide');
+                    $('#changeOfOwnerId').prop('disabled', true);
+                    getOwnerFinal();
+                    sCertOwner();
                 }else{
                     $('#ownershipList').prop('disabled',true);
                     $('#firmName').prop('disabled', true);
                     $('#changeOfFirmName').prop('disabled', false);
+                    $('#changeOfOwnerId').prop('disabled', false);
+                    $('#ownerPartner').addClass('hide');
                 }
             }else if(id == 'changeOfFirmName' ){
                 if($this.is(':checked')) {
@@ -294,8 +400,10 @@ var consultantOS = (function () {
                 if($this.is(':checked')) {
                     $('#ownerPartner').removeClass('hide');
                     getOwnerFinal();
+                    sCertOwner();
                 }else{
                     $('#ownerPartner').addClass('hide');
+                    $('#cOwnershipId').addClass('hide');
                 }
             }
         });
@@ -327,7 +435,6 @@ var consultantOS = (function () {
                 $('#consultantIdFinal').val(consultant.id);
             }
         });
-
     }
 
     function viewDownloadAttachment(){
@@ -342,53 +449,6 @@ var consultantOS = (function () {
         });
     }
 
-    function getHRsFinal(){
-        $('#updateHR').on('click',function(){
-            if($(this).is(':checked')){
-                $('.human_resource_criteria').removeClass('hide');
-                $.ajax({
-                    url: _baseURL() + '/getConsultantHRsFinal',
-                    type: 'GET',
-                    data: {consultantId:$('#consultantIdFinal').val(),ownerOrHR:'H'},
-                    success: function (res) {
-                        var consultantHrs = res;
-                        var hrTr = "";
-                        //var openModal = "openModal('CheckModal')";
-                        for (var i in consultantHrs) {
-
-                            var attachments = '';
-                            for (var j in consultantHrs[i].hrAttachments){
-                                attachments = attachments + "<span class='hra'><input type='hidden' class='hraId' value='"+consultantHrs[i].hrAttachments[j].id+"'>" +
-                                "<a href='"+_baseURL() + "/viewDownload?documentPath="+consultantHrs[i].hrAttachments[j].documentPath+"' target='_blank'>"+consultantHrs[i].hrAttachments[j].documentName+"</a></span><br>";
-                            }
-                            hrTr = hrTr + "<tr class=''>" +
-                            "<td class='salutationName'><input type='hidden' class='consultantHRid' name='consultantHRs[0].id' value='"+consultantHrs[i].id +"'/>" +
-                            "<input type='hidden' class='joiningDate' value='"+consultantHrs[i].joiningDate +"'/>"+
-                            consultantHrs[i].salutationName + "</td>" +
-                            "<td class='name'>" + consultantHrs[i].name + "</td>" +
-                            "<td class='cidNo'>" + consultantHrs[i].cidNo + "</td>" +
-                            "<td class='sex'>" + consultantHrs[i].sex + "</td>" +
-                            "<td class='countryName'>" + consultantHrs[i].countryName + "</td>" +
-                            "<td class='designationName'>" + consultantHrs[i].designationName + "</td>" +
-                            "<td class='qualificationName'>" + consultantHrs[i].qualificationName + "</td>" +
-                            "<td class='tradeName'>" + consultantHrs[i].tradeName + "</td>" +
-                            "<td class='serviceTypeName'>" + consultantHrs[i].serviceTypeName + "</td>" +
-                            "<td class='attachments'>" + attachments + "</td>" +
-                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
-                            "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
-                            "</tr>";
-                        }
-                        $('#hrDtlsTable').find('tbody').append(hrTr);
-                    }
-
-                });
-
-            }else{
-                $('.human_resource_criteria').addClass('hide');
-            }
-        })
-    }
-
     function getOwnerFinal(){
         $.ajax({
             url: _baseURL() + '/getConsultantHRsFinal',
@@ -396,7 +456,6 @@ var consultantOS = (function () {
             data: {consultantId:$('#consultantIdFinal').val(),ownerOrHR:'O'},
             success: function (res) {
                 var consultantHrs = res;
-
                 for (var i in consultantHrs) {
                     var tblRow = $('#partnerDtls').find('tbody tr:eq(' + (parseInt(i)) + ')');
                     tblRow.find('#countryList').val(tblRow.find('#countryList option:contains("' + consultantHrs[i].countryName + '")').val());
@@ -412,7 +471,6 @@ var consultantOS = (function () {
                     }
                 }
             }
-
         });
     }
 
@@ -428,7 +486,6 @@ var consultantOS = (function () {
                         var equipments = res;
                         var eqTr = "";
                         for (var i in equipments) {
-
                             var attachment = '';
                             for (var j in equipments[i].eqAttachments){
                                 attachment = attachment + "<a href='"+_baseURL() + "/viewDownload?documentPath="+equipments[i].eqAttachments[j].documentPath+"' target='_blank'>"+equipments[i].eqAttachments[j].documentName+"</a><br>";
@@ -440,13 +497,12 @@ var consultantOS = (function () {
                             "<td>" + equipments[i].registrationNo + "</td>" +
                             "<td>" + equipments[i].quantity + "</td>" +
                             "<td>" + attachment + "</td>" +
-                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row_eq'>Edit</button>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit-eq'>Edit</button>" +
                             "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
                             "</tr>";
                         }
                         $('#equipmentTbl').find('tbody').html(eqTr);
                     }
-
                 });
             }else{
                 $('.equipment_details').addClass('hide');
@@ -454,7 +510,6 @@ var consultantOS = (function () {
             //positionTab('equipment_details');
         })
     }
-
 
     function addMoreEqFile(){
         $('#addMoreEq').on('click',function(e){
@@ -468,7 +523,6 @@ var consultantOS = (function () {
 
     function getClassCategory(){
         $('#upgradeDowngrade').on('click',function() {
-
             if ($(this).is(':checked')) {
                 $('.category_details').removeClass('hide');
                 $.ajax({
@@ -556,10 +610,9 @@ var consultantOS = (function () {
                             }
                         }
                     }
-
                 });
 
-            }else{
+            } else{
                 $('.category_details').addClass('hide');
             }
             //positionTab('category_details');
@@ -578,7 +631,7 @@ var consultantOS = (function () {
     }
 
     function editInModal(){
-        $('body').on('click','.edit_row',function(e){
+        $('body').on('click','.edit-row',function(e){
             e.preventDefault();
             var row = $(this).closest('tr');
             var hrModal = $('#addHRModal');
@@ -592,7 +645,7 @@ var consultantOS = (function () {
             hrModal.find('#hr7').val(hrModal.find('#hr7 option:contains("'+row.find('.qualificationName').text()+'")').val());
             hrModal.find('#hr8').val(hrModal.find('#hr8 option:contains("'+row.find('.tradeName').text()+'")').val());
             hrModal.find('#hr9').val(hrModal.find('#hr9 option:contains("'+row.find('.serviceTypeName').text()+'")').val());
-            hrModal.find('#joiningDate').val(row.find('.joiningDate').val());
+            hrModal.find('#hr10').val(row.find('.hr10').val());
             var hraTr = "";
             row.find('.hra').each(function(){
                 var name = $(this).find('a').text();
@@ -605,12 +658,31 @@ var consultantOS = (function () {
             });
             hrModal.find('#hrUploadTbl tbody').empty().html(hraTr);
            //row.remove();
+            row.addClass('tbd'); //add class to be deleted
+            openModal('addHRModal');
+        });
+
+        $('body').on('click','.edit-hr',function(e){
+            e.preventDefault();
+            var row = $(this).closest('tr');
+            var hrModal = $('#addHRModal');
+            hrModal.find('#hr5').val(row.find('.hr5').val());
+            hrModal.find('#hr3').val(row.find('.hr3').val());
+            hrModal.find('#hr1').val(row.find('.hr1').val());
+            hrModal.find('#hr2').val(row.find('.hr2').val());
+            hrModal.find('#hr4').val(row.find('.hr4').val());
+            hrModal.find('#hr6').val(row.find('.hr6').val());
+            hrModal.find('#hr7').val(row.find('.hr7').val());
+            hrModal.find('#hr8').val(row.find('.hr8').val());
+            hrModal.find('#hr9').val(row.find('.hr9').val());
+            hrModal.find('#hr10').val(row.find('.hr10').val());
+            row.addClass('tbd'); //add class to be deleted
             openModal('addHRModal');
         });
     }
 
     function editInModalEQ(){
-        $('body').on('click','.edit_row_eq',function(e){
+        $('body').on('click','.edit-eq',function(e){
             e.preventDefault();
             var row = $(this).closest('tr');
             var modal = $('#eqModal');
@@ -673,6 +745,19 @@ var consultantOS = (function () {
             $('#upgradeDowngrade').prop('disabled',true);
             $('#err-expired-audit-memo').html(auditMemo);
         }
+    }
+
+    function enableRegistrationNo(){
+        $('.equipmentId ').on('change',function(e){
+            var isRegistration = $(this).find("option:selected").hasClass("1");
+           // alert(isRegistration);
+            if(isRegistration === true){
+                $('#eq2').prop('disabled',false);
+                $('#eq3').val(1).prop('disabled',true);
+            }else{
+                $('#eq2').prop('disabled',true);
+            }
+        })
     }
 
     function showFileSize() {
@@ -749,9 +834,11 @@ var consultantOS = (function () {
         editInModalEQ();
         checkDuplicateHR();
         addMoreEqFile();
+        addMoreFile();
+       // deleteRequest();
         showFileSize();
+        enableRegistrationNo();
     }
-
     return {
         init:init
     };

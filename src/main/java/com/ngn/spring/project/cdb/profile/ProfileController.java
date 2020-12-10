@@ -96,7 +96,7 @@ public class ProfileController {
         if(type.split("999")[0].equalsIgnoreCase("SpecializedTrade")){
             model.addAttribute("registrationDetails", commonService.populateSpApplicantDetails(type.split("999")[1]));
             model.addAttribute("App_Details", commonService.populateSpApplicantDetails(type.split("999")[1]));
-            return "trade/spTrade_profile";
+            return "trade/spTrade_printInformation";
         }
 
         if(type.split("999")[0].equalsIgnoreCase("Survey")){

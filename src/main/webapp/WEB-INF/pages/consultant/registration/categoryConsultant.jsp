@@ -20,7 +20,7 @@
         <c:forEach items="${categoryList}" var="category" varStatus="i">
             <tr>
                 <td>
-                    <input type="hidden" id="asone" value="${category.id}" name="categories[${i.index}].serviceCateID">
+                    <input type="checkbox" style="zoom:1.6" class=" categoryCheck" id="asone" value="${category.id}"  name="categories[${i.index}].serviceCateID">  &nbsp;
                     ${category.code}-${category.name}
                 </td>
                 <td>
@@ -29,19 +29,19 @@
                             <c:when test="${(category.code eq 'A') && (c.value eq 'e6372584-bc15-11e4-81ac-080027dcfac6')}">
                                 <a href="javascript:void(0)" style="color: #006699" title='${c.obj1}' data-toggle="tooltip" data-placement="top" class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
                                 <%--<input type="hidden" id="asone1" value="${c.text}" name="categories[${i.index}].appliedServices">--%>
-                               <input type="checkbox" id="asone" value="${c.id}" class="ticked" name="categories[${i.index}].appliedServiceID">${c.text}&nbsp; &nbsp; &nbsp;
+                               <input type="checkbox" id="asone" value="${c.id}" class="ticked appliedClassID" disabled name="categories[${i.index}].appliedServiceID">${c.text} &nbsp; &nbsp; &nbsp;
                             </c:when>
                             <c:when test="${(category.code eq 'C') && (c.value eq 'f39b9245-bc15-11e4-81ac-080027dcfac6')}">
                                 <a href="javascript:void(0)" style="color: #006699" title='${c.obj1}' data-toggle="tooltip" data-placement="top" class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                <input type="checkbox" id="asone"  value="${c.id}" class="ticked" name="categories[${i.index}].appliedServiceID">${c.text}&nbsp; &nbsp; &nbsp;
+                                <input type="checkbox" id="asone"  value="${c.id}"  class="ticked appliedClassID" disabled  name="categories[${i.index}].appliedServiceID">${c.text} &nbsp; &nbsp; &nbsp;
                             </c:when>
                             <c:when test="${(category.code eq 'E') && (c.value eq  'fb2aa1a7-bc15-11e4-81ac-080027dcfac6')}">
                                 <a href="javascript:void(0)" style="color: #006699" title='${c.obj1}' data-toggle="tooltip" data-placement="top"  class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                               <input type="checkbox" id="asone"  value="${c.id}" class="ticked" name="categories[${i.index}].appliedServiceID">${c.text}&nbsp; &nbsp; &nbsp;
+                               <input type="checkbox" id="asone"  value="${c.id}"  class="ticked appliedClassID" disabled name="categories[${i.index}].appliedServiceID">${c.text} &nbsp; &nbsp; &nbsp;
                             </c:when>
                             <c:when test="${(category.code eq 'S') && (c.value eq  '2adfae00-be66-11e9-9ac2-0026b988eaa8')}">
                                <a href="javascript:void(0)" style="color: #006699" title='${c.obj1}' data-toggle="tooltip" data-placement="top"  class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                <input type="checkbox" id="asone" value="${c.id}" class="ticked" name="categories[${i.index}].appliedServiceID">${c.text}&nbsp; &nbsp; &nbsp;
+                                <input type="checkbox" id="asone" value="${c.id}"  class="ticked appliedClassID" disabled name="categories[${i.index}].appliedServiceID">${c.text} &nbsp; &nbsp; &nbsp;
                             </c:when>
                         </c:choose>
                     </c:forEach>
@@ -52,7 +52,7 @@
     </table>
 </div>
 <div class="col-lg-12 form-group">
-    <button type="button" onclick="previousTab('general_Information', 'category_details')" class="btn btn-azure col-lg-offset-9">
+    <button type="button" id="btn3" onclick="backTab('category_details', 'general_Information')" class="btn btn-azure col-lg-offset-9">
         <i class="fa fa-arrow-circle-left"></i> &nbsp; Back
     </button>
     <button type="button" id="btnValCCNext" class="btn btn-primary">Next &nbsp;

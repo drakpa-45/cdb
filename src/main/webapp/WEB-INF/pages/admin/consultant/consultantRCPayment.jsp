@@ -136,7 +136,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="card tab2">
+                                      <%--  <div class="card tab2">
                                             <div class="bg-blue card-status card-status-left"></div>
                                             <div class="card-header"></div>
                                             <div class="card-body">
@@ -174,7 +174,7 @@
                                                     </table>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>--%>
 
                                         <div class="card tab2">
                                             <div class="bg-blue card-status card-status-left"></div>
@@ -346,9 +346,9 @@
                                     <div class="col-lg-12 form-group">
                                         <button type="submit" class="btn btn-primary" id="btnSave">
                                             <i class="fa fa-file-text mr-1"></i>Save and Generate Certificate</button>
-                                        <button type="button" class="btn btn-primary" id="btnSendBack"><i
+                                       <%-- <button type="button" class="btn btn-primary" id="btnSendBack"><i
                                                 class="fa fa-backward"></i>&nbsp;&nbsp;Send back
-                                        </button>
+                                        </button>--%>
                                         <a href="<c:url value="/admin/consultant"/>" class="btn btn-orange">
                                             <i class="fa fa-ban"></i>Cancel
                                         </a>

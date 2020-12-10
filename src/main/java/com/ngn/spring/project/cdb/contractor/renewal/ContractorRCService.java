@@ -2,6 +2,7 @@ package com.ngn.spring.project.cdb.contractor.renewal;
 
 import com.ngn.spring.project.base.BaseService;
 import com.ngn.spring.project.cdb.admin.dto.CategoryClassDTO;
+import com.ngn.spring.project.cdb.admin.dto.ContractorInfoDTO;
 import com.ngn.spring.project.cdb.admin.dto.EquipmentDTO;
 import com.ngn.spring.project.cdb.common.CommonService;
 import com.ngn.spring.project.cdb.common.dto.ServiceFeeDTO;
@@ -127,7 +128,6 @@ public class ContractorRCService extends BaseService {
             conCategory.setAppliedClassID(c.getaClassId());
             contractorNRService.saveCC(conCategory, loggedInUser);
         });
-
         //endregion
 
         //region change of owner or partner
@@ -534,8 +534,6 @@ public class ContractorRCService extends BaseService {
         contractorHRs.forEach(h->h.setHrAttachments(contractorRCDao.getHRAttachmentsFinal(h.getId())));
         return  contractorHRs;
     }
-
-
 
     @Transactional(readOnly = true)
     public List<EquipmentDTO> getEquipmentFinal(String contractorId){

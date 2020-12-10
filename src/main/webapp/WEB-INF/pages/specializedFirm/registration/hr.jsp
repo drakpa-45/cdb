@@ -121,7 +121,7 @@
                                 <th style="width: 5%">Salutation</th>
                                 <th style="width: 10%">Name</th>
                                 <th style="width: 10%">ID/Work Permit No.</th>
-                                <th style="width: 5%">Sex</th>
+                                <th style="width: 5%">Gender</th>
                                 <th style="width: 10%">Country</th>
                                 <th style="width: 10%">Designation</th>
                                 <th style="width: 10%">Qualification</th>
@@ -315,7 +315,7 @@
 </div>
 <!-- HR modal close -->
 <div class="col-lg-12 form-group">
-    <button type="button" onclick="backTab('humanResourceCriteria','category_details')" class="btn btn-azure col-lg-offset-9">
+    <button type="button"id="btn4" onclick="backTab('humanResourceCriteria','category_details')" class="btn btn-azure col-lg-offset-9">
         <i class="fa fa-arrow-circle-left"></i> &nbsp;Back</button>
     <button type="button" id="btnValHRNext"
     <%--onclick="nextTab('humanResourceCriteria','consultantEquipmentDtls')"--%>

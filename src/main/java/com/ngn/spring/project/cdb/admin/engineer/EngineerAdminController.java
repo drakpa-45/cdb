@@ -132,8 +132,8 @@ public class EngineerAdminController extends BaseController {
         dto.setServiceTypeId(request.getParameter("servicefor"));
         dto=services.approveAndGenerateCertificate(dto, getLoggedInUser().getUserID(), request);
         if(dto.getUpdateStatus().equalsIgnoreCase("Success")){
-            model.addAttribute("acknowledgement_message", "<br /><div class='alert alert-info col-12 text-center'>You have approved payment for application : <b>"+dto.getReferenceNo()+"</b>. You may print certificate and issue. Thank you</div>");
-        } else{
+            model.addAttribute("acknowledgement_message", "<br /><div class='alert alert-info col-12 text-center'>You have approved payment for application : <b>"+dto.getReferenceNo()+"</b>.And your CDB Number is: <b>"+dto.getCdbNo()+"</b>. You may print certificate and issue. Thank you</div>");
+        }else{
             model.addAttribute("acknowledgement_message", "<br /><div class='alert alert-danger col-12 text-center'>Not able to approve this application. "+dto.getUpdateStatus()+" Please try again</div>");
         }
         return "/architect/acknowledgement";
@@ -144,12 +144,12 @@ public class EngineerAdminController extends BaseController {
         model.addAttribute("printList", services.getPrintList());
         return "engineer/engineerPrint";
     }
+
     @RequestMapping(value = "/emptylayout/printarchitectInfo", method = RequestMethod.GET)
     public String printarchitectInfo(HttpServletRequest request,ArchitectDto dto,Model model, String cdbNo){
         model.addAttribute("registrationDetails", commonService.populateEngineerApplicantDetails(cdbNo));
         model.addAttribute("App_Details", commonService.populateEngineerApplicantDetails(cdbNo));
         return "engineer/engineer_printInformation";
-
        // return "jasperreport";
     }
 }

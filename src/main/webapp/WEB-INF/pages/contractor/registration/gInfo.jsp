@@ -133,7 +133,7 @@
                         </td>
                         <td>
                             <label class="custom-control custom-checkbox ml-6">
-                                <input type="checkbox" class="custom-control-input showCert" name="contractor.contractorHRs[0].siCertificate" value="1">
+                                <input type="checkbox" class="custom-control-input showCert" id="siCertificate" name="contractor.contractorHRs[0].siCertificate" value="1">
                                 <i class="custom-control-label"></i>
                             </label>
                         </td>

@@ -37,7 +37,7 @@
     </div>
 </div>
 <div class="col-lg-12 form-group">
-    <button type="button" onclick="previousTab('general_Information', 'category_details')" class="btn btn-azure col-lg-offset-9">
+    <button type="button" id="btn3" onclick="previousTab('general_Information', 'category_details')" class="btn btn-azure col-lg-offset-9">
         <i class="fa fa-arrow-circle-left"></i> &nbsp; Back
     </button>
     <button type="button" id="btnValCCNext" class="btn btn-primary">Next &nbsp;

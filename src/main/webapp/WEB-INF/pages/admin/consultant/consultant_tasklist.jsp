@@ -38,11 +38,12 @@
                                 <tr>
                                     <th>Sl No.</th>
                                     <th>Application Number</th>
+                                    <th>Status</th>
+                                    <th>CDB Number</th>
                                     <th>Service Name</th>
                                     <th>Firm Name</th>
                                     <th>Contact Number</th>
-                                    <th>Status</th>
-                                    <th>Action Date</th>
+                                    <th>Submitted Date</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -52,10 +53,11 @@
                                         <td>${i.index+1}</td>
                                         <%--<td><a href="<c:url value="/admin/contractor/${task.applicationNo}"/>" class="font-weight-bold">${task.applicationNo}</a></td>--%>
                                         <td><a>${task.applicationNo}</a></td>
+                                        <td><span class="status-icon bg-success"></span> ${task.appStatus} </td>
+                                        <td>${task.cdbNo}</td>
                                         <td>${task.serviceName}</td>
                                         <td>${task.firmName} </td>
                                         <td>${task.contactNo}</td>
-                                        <td><span class="status-icon bg-success"></span> ${task.appStatus} </td>
                                         <td>${task.applicationDate}</td>
                                         <td><input type="button" class="btn btn-info gMToggle groupTask" value="Take Action"> </td>
                                     </tr>
@@ -75,29 +77,29 @@
                                 <tr>
                                     <th>Sl No.</th>
                                     <th>Application Number</th>
+                                    <th>Status</th>
+                                    <th>CDB Number</th>
                                     <th>Service Name</th>
                                     <th>Firm Name</th>
                                     <th>Contact Number</th>
-                                    <th>Status</th>
-                                    <th>Action Date</th>
+                                    <th>Submitted Date</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody class="text-center">
-
                                 <c:forEach items="${myTaskList}" var="task" varStatus="i">
                                     <tr>
                                         <td>${i.index+1}</td>
                                         <td><a href="<c:url value="/admin/consultant/${task.applicationNo}"/>" class="font-weight-bold">${task.applicationNo}</a></td>
+                                        <td><span class="status-icon bg-success"></span> ${task.appStatus} </td>
+                                        <td>${task.cdbNo}</td>
                                         <td>${task.serviceName}</td>
                                         <td>${task.firmName} </td>
                                         <td>${task.contactNo}</td>
-                                        <td><span class="status-icon bg-success"></span> ${task.appStatus} </td>
                                         <td>${task.applicationDate}</td>
                                         <td><div class="btn btn-info gMToggle myTask"> Send back</div> </td>
                                     </tr>
                                 </c:forEach>
-
                                 </tbody>
                             </table>
                         </div>

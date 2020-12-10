@@ -95,6 +95,7 @@ public class ConsultantNRService extends BaseService {
         }
 
         String consultantID = saveGI(consultant, loggedInUser);
+
         //region save attachment
         if(consultantDTO.getcAttachments() != null) {
             for (ConsultantAttachment attachment : consultantDTO.getcAttachments()){

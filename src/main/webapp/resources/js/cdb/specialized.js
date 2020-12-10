@@ -155,9 +155,11 @@ function SubmitApplicationDetials(){
     $("#specializedTradeForm").ajaxSubmit(options);
     $('#concirmationModel').modal('hide');
 }
+
 function closemodel(modelId){
     $('#'+modelId).modal('hide');
 }
+
 function SubmitApproveVerifyApplicationDetials(firmId,targetId){
     var url=_baseURL() +'/saveArchitect';
     var options = {target:'acknowledgementmessage',url:url,type:'POST',enctype: 'multipart/form-data', data: $('#architectForm').serialize()};
@@ -252,12 +254,11 @@ function validateFeesDetails(){
 $('#architect_table').DataTable({
     responsive: true
 });
-function printCertificate(arNo){
 
-    /*var url= '/cdb/admin_architect/emptylayout/printCertificate';
-    var options = {target:'#content_main_div',url:url,type:'POST', data: $('#architectverificationForm').serialize()};
-    $("#architectverificationForm").ajaxSubmit(options);*/
+function printCertificate(cdbNo){
+    window.open('/cdb/print/printCertificate?cdbNo=' + cdbNo);
 }
+
 function printInfo(cdbNo){
     var url= '/cdb/admin_architect/emptylayout/printarchitectInfo?cdbNo='+cdbNo;
     $('#content_main_div_public_user').load(url);
@@ -278,6 +279,7 @@ function SubmitRenewalApplicationDetials(){
     $("#specializedTraderenewalForm").ajaxSubmit(options);
     $('#concirmationRenewalModel').modal('hide');
 }
+
 function viewAttachment(uuid,type,docType){
     //var url= '${pageContext.request.contextPath}/FileDownloadServlet?uuid='+uuid+'&type='+type;
     var url= '/cdb/public_access_trade/emptylayout/donwloadFiles?uuid='+uuid+'&type='+type+ '&docType='+docType;
@@ -324,6 +326,7 @@ var cert = "<tr><td></td>" +
 $('#addMoreCert').on('click',function(e){
     var certificateTbl = $('#certificateTbl').find('tbody').append(cert);
 });
+
 function validatePartnership(){
     var retutype=true;
     if($('#ownershiptype').val()==""){

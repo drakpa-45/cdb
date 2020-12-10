@@ -76,6 +76,14 @@ public class SpecializedFirmOSActionController extends BaseController {
         return cNRActionService.getSpecializedFirmData(appNo, flag);
     }
 
+    @ResponseBody
+    @RequestMapping(value ="/getSpFirm", method = RequestMethod.GET)
+    public Object getSpecializedFirmFinal(HttpServletRequest request){
+        String cdbNo = request.getParameter("cdbNo");
+        return specializedFirmRService.getSpecializedFirmFinal(cdbNo);
+    }
+
+
     @RequestMapping(value = "/viewDownload", method = RequestMethod.GET)
     public void viewDownload(HttpServletRequest request, HttpServletResponse response, String documentPath) throws Exception {
         commonService.viewDownloadFile(documentPath, response);

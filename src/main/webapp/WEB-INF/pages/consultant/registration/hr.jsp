@@ -188,7 +188,7 @@
                                 <th style="width: 5%">Salutation</th>
                                 <th style="width: 10%">Name</th>
                                 <th style="width: 10%">ID/Work Permit No.</th>
-                                <th style="width: 5%">Sex</th>
+                                <th style="width: 5%">Gender</th>
                                 <th style="width: 10%">Country</th>
                                 <th style="width: 10%">Designation</th>
                                 <th style="width: 10%">Qualification</th>
@@ -228,7 +228,7 @@
                         <label class="col-lg-2">Nationality
                             <span class="text-danger">*</span>:</label>
                         <div class="col-lg-4">
-                            <select name="consultantHRs[0].countryId" id="hr5" required="" class="form-control custom-select text-left select-beast country">
+                            <select name="consultantHRs[0].countryId" id="hr5" required="true" class="form-control custom-select text-left select-beast country">
                              <%--   <option value="">Select Country</option>--%>
                                 <c:forEach var="item" items="${countryList}">
                                     <option value="${item.value}"><c:out value="${item.text}"/></option>
@@ -249,7 +249,7 @@
                         <label class="col-lg-2">Salutation
                             <span class="text-danger">*</span>:</label>
                         <div class="col-lg-4">
-                            <select name="consultantHRs[0].salutationId" id="hr1" required="" class="form-control custom-select text-left select-beast">
+                            <select name="consultantHRs[0].salutationId" id="hr1" required="true" class="form-control custom-select text-left select-beast">
                                 <option value="">Select Salutation</option>
                                 <c:forEach var="item" items="${salutationList}">
                                     <option value="${item.value}"><c:out value="${item.text}"/></option>
@@ -261,14 +261,14 @@
                         <div class="col-lg-4">
                             <div class="input-icon">
                                 <span class="input-icon-addon"><i class="fe fe-user"></i></span>
-                                <input type="text" name="consultantHRs[0].name" id="hr2" class="form-control name" required="" placeholder="Name">
+                                <input type="text" name="consultantHRs[0].name" id="hr2" class="form-control name" required="true" placeholder="Name">
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-lg-2">Gender<span class="text-danger">*</span>:</label>
                         <div class="col-lg-4">
-                            <select name="consultantHRs[0].sex" id="hr4" required="" class="form-control custom-select text-left select-beast sex">
+                            <select name="consultantHRs[0].sex" id="hr4" required="true" class="form-control custom-select text-left select-beast sex">
                                 <option value="">Select Gender</option>
                                 <option value="M">Male</option>
                                 <option value="F">Female</option>
@@ -277,7 +277,7 @@
                         <label class="col-lg-2">Designation
                             <span class="text-danger">*</span>:</label>
                         <div class="col-lg-4">
-                            <select name="consultantHRs[0].designationId" id="hr6" required="" class="form-control custom-select text-left select-beast">
+                            <select name="consultantHRs[0].designationId" id="hr6" required="true" class="form-control custom-select text-left select-beast">
                                 <option value="">Select Designation</option>
                                 <c:forEach var="item" items="${designationList}">
                                     <option value="${item.value}"><c:out value="${item.text}"/></option>
@@ -290,7 +290,7 @@
                             <span class="text-danger">*</span>:</label>
 
                         <div class="col-lg-4">
-                            <select name="consultantHRs[0].qualificationId" id="hr7" required="" class="form-control custom-select text-left select-beast">
+                            <select name="consultantHRs[0].qualificationId" id="hr7" required="true" class="form-control custom-select text-left select-beast">
                                 <option value="">Select Qualification</option>
                                 <c:forEach var="item" items="${qualificationList}">
                                     <option value="${item.value}"><c:out value="${item.text}"/></option>
@@ -301,7 +301,7 @@
                             <span class="text-danger">*</span>:</label>
 
                         <div class="col-lg-4">
-                            <select name="consultantHRs[0].tradeId" id="hr8" required="" class="form-control custom-select text-left select-beast">
+                            <select name="consultantHRs[0].tradeId" id="hr8" required="true" class="form-control custom-select text-left select-beast">
                                 <option value="">Select Trade</option>
                                 <c:forEach var="item" items="${tradeList}">
                                     <option value="${item.value}"><c:out value="${item.text}"/></option>
@@ -323,7 +323,7 @@
                         <div class="col-lg-4">
                             <div class="input-group margin-bottom-sm">
                                 <span class="input-group-addon pr-5"><i class="fa fa-calendar"></i></span>
-                                <input type="date" name="consultantHRs[0].joiningDate" value="" id="hr10" class="form-control datepicker">
+                                <input type="date" name="consultantHRs[0].joiningDate" value="" required="true" id="hr10" class="form-control datepicker">
                             </div>
                         </div>
                     </div>
@@ -374,14 +374,14 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-primary" onclick="getModalData('hrDtlsTable','hr',10)" type="button">OK</button>
-                <button data-dismiss="modal" class="btn btn-warning" type="button">Close</button>
+                <button data-dismiss="modal" class="btn btn-warning" target="#addHRModal" type="button">Close</button>
             </div>
         </div>
     </div>
 </div>
 <!-- HR modal close -->
 <div class="col-lg-12 form-group">
-    <button type="button" onclick="previousTab('category_details','humanResourceCriteria')" class="btn btn-azure col-lg-offset-9">
+    <button type="button" id="btn4" onclick="backTab('humanResourceCriteria','category_details')" class="btn btn-azure col-lg-offset-9">
         <i class="fa fa-arrow-circle-left"></i> &nbsp;Back</button>
     <button type="button" id="btnValHRNext"
     <%--onclick="nextTab('humanResourceCriteria','consultantEquipmentDtls')"--%>

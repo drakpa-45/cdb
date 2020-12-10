@@ -82,7 +82,7 @@
                                             </div>
 
                                             <div role="tabpanel" class="tab-pane equipment_details" id="equipment_details">
-                                                <h3 class="pt-3 text-center hide">Contractor Equipment Details</h3>
+                                                <h3 class="pt-3 text-center hide"> Equipment Details</h3>
                                                 <jsp:include page="equipment.jsp"/>
                                             </div>
 

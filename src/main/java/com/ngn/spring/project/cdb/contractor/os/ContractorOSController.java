@@ -86,6 +86,7 @@ public class ContractorOSController extends BaseController {
     public String save(HttpServletRequest request,ContractorDTO contractorDTO, RenewalServiceType renewalService
             ,RedirectAttributes redirectAttributes) throws Exception{
         loggedInUser = gLoggedInUser(request);
+       // responseMessage =otherService.save(contractorDTO,renewalService,loggedInUser);
         responseMessage =otherService.save(contractorDTO,renewalService,loggedInUser);
         if(responseMessage.getStatus() == 1){
             redirectAttributes.addFlashAttribute("acknowledgement_message",responseMessage.getText());

@@ -234,7 +234,7 @@ var spFirmRC = (function () {
 
     var cert = "<tr><td></td>" +
         "<td><input type='text' class='form-control' name='cAttachments[0].documentName'/> </td>"+
-        "<td><input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
+        "<td><input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/pdf,image/gif, image/jpeg, image/jpg'></td>" +
         "<td class='file-size'></td>" +
         "<td><a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a></td>" +
         "</tr>";
@@ -295,33 +295,24 @@ var spFirmRC = (function () {
             if(id == 'Incorporation' ){
                 if($this.is(':checked')){
                     $('#ownershipList').prop('disabled',false);
-                    // $('#firmName').prop('disabled', true);
-                    $('#newFirmName').show();
+                    $('#firmName').prop('disabled', false);
                     $('#changeOfFirmName').prop('disabled', true);
                 }else{
                     $('#ownershipList').prop('disabled',true);
-                    //  $('#firmName').prop('disabled', false);
-                    $('#newFirmName').hide();
+                    $('#firmName').prop('disabled', true);
                     $('#changeOfFirmName').prop('disabled', false);
                 }
             }else if(id == 'changeOfFirmName' ){
                 if($this.is(':checked')) {
-                    //    $('#firmName').prop('disabled', true);
-                    $('#newFirmName').show();
+                    $('#firmName').prop('disabled', false);
                 }else{
-                    //  $('#firmName').prop('disabled', false);
-                    $('#newFirmName').hide();
+                    $('#firmName').prop('disabled', true);
                 }
             }else if(id == 'changeOfLocation' ){
                 if($this.is(':checked')) {
-                    $('#editEstbAddress').show();
-                    $('#newRegDzoId').show();
-                    $('#estAddress').prop('disabled', true);
-                    $('#regDzongkhagId').prop('disabled', true);
-
+                    $('#estAddress').prop('disabled', false);
+                    $('#regDzongkhagId').prop('disabled', false);
                 }else{
-                    $('#editEstbAddress').hide();
-                    $('#newRegDzoId').hide();
                     $('#estAddress').prop('disabled', false);
                     $('#regDzongkhagId').prop('disabled', false);
                 }
@@ -350,7 +341,7 @@ var spFirmRC = (function () {
                 $('#tradeLicenseNo').val(spFirm.tradeLicenseNo).prop('disabled',true);
                 $('#firmName').val(spFirm.firmName).prop('disabled',true);
                 $('#tpn').val(spFirm.tpn).prop('disabled',true);
-                $('#pDzongkhagId').val(spFirm.pDzongkhagId).prop('disabled',true);
+                $('#pDzongkhagId').val(spFirm.dzongkhagName).prop('disabled',true);
                 $('#pGewogId').val(spFirm.pGewogId).prop('disabled',true);
                 $('#pVillageId').val(spFirm.pVillageId).prop('disabled',true);
                 $('#estAddress').val(spFirm.regAddress).prop('disabled',true);
@@ -365,6 +356,35 @@ var spFirmRC = (function () {
 
     }
 
+
+    function getIncAttachmentFinal(){
+        $.ajax({
+            url: _baseURL() + '/getIncAttachmentFinal',
+            type: 'GET',
+            data: {contractorId:$('#contractorIdFinal').val(),ownerOrHR:'O'},
+            success: function (data) {
+
+                if(data){
+                    $('#cIncorporation').removeClass('hide');
+                    var tr = '';
+                    for(var i in data){
+                        tr = tr + "<tr>"+
+                        "<td></td>" +
+                        "<td>"+data[i].documentName+"</td>"+
+                        "<td><a href='"+_baseURL() + "/viewDownload?documentPath="+data[i].documentPath+"' target='_blank'> View </a></td>" +
+                        "<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
+                        "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                        "</tr>";
+                    }
+                    $('#IncCertificateTbl').find('tbody').html(tr);
+                }else{
+                    $('#cIncorporation').addClass('hide');
+                }
+            }
+
+        });
+    }
+
     function viewDownloadAttachment(){
         $('body').on('click','.vAttachment',function(){
             var id = $(this).closest('tr').find('.spFirmHRid').val();
@@ -377,6 +397,15 @@ var spFirmRC = (function () {
         });
     }
 
+    function addMoreFile(){
+        $('#addMoreHr').on('click',function(e){
+            var uplTbl = $('#hrUploadTbl').find('tbody');
+            var tr = "<tr><td><input type='text' required class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/> </td>" +
+                "<td><input type='file' required class='file' name='spFirmHRs[0].spFirmHRAs[0].attachment' accept='application/pdf,image/gif, image/jpeg, image/jpg'/> </td><td class='file-size'></td>" +
+                "<td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td></tr>";
+            uplTbl.append(tr);
+        });
+    }
     function getHRsFinal(){
         $('#updateHR').on('click',function(){
             if($(this).is(':checked')){
@@ -463,7 +492,6 @@ var spFirmRC = (function () {
                         var equipments = res;
                         var eqTr = "";
                         for (var i in equipments) {
-
                             var attachment = '';
                             for (var j in equipments[i].eqAttachments){
                                 attachment = attachment + "<span class='attachment'><input type='hidden' class='eqId' value='"+equipments[i].eqAttachments[j].id+"'>" +
@@ -494,7 +522,7 @@ var spFirmRC = (function () {
         $('#addMoreEq').on('click',function(e){
             var uplTbl = $('#eqUploadTbl').find('tbody');
             var tr = "<tr><td><input type='text' required class='form-control docName' name='equipments[0].spFirmEQAs[0].documentName'/> </td>" +
-                "<td><input type='file' required class='file' name='equipments[0].spFirmEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td><td class='file-size'></td>" +
+                "<td><input type='file' required class='file' name='equipments[0].spFirmEQAs[0].attachment' accept='application/pdfimage/gif, image/jpeg, image/jpg'/> </td><td class='file-size'></td>" +
                 "<td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td></tr>";
             uplTbl.append(tr);
         });
@@ -684,6 +712,7 @@ var spFirmRC = (function () {
         checkDuplicateHR();
         editInModalEQ();
         addMoreEqFile();
+        addMoreFile();
     }
 
     return {

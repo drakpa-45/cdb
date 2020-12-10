@@ -327,8 +327,8 @@ var contractorRC = (function () {
                 $('#firmName').val(contractor.firmName).prop('disabled',true);
                 $('#tpn').val(contractor.tpn).prop('disabled',true);
                 $('#pDzongkhagId').val(contractor.pDzongkhagId).prop('disabled',true);
-                $('#pGewogId').val(contractor.pGewog).prop('disabled',true);
-                $('#pVillageId').val(contractor.pVillage).prop('disabled',true);
+                $('#pGewogId').val(contractor.pGewogId).prop('disabled',true);
+                $('#pVillageId').val(contractor.pVillageId).prop('disabled',true);
                 $('#estAddress').val(contractor.estAddress).prop('disabled',true);
                 $('#regDzongkhagId').val(contractor.regDzongkhagId).prop('disabled',true);
                 $('#regEmail').val(contractor.regEmail).prop('disabled',true);
@@ -336,10 +336,43 @@ var contractorRC = (function () {
                 $('#regPhoneNo').val(contractor.regPhoneNo).prop('disabled',true);
                 $('#regFaxNo').val(contractor.regFaxNo).prop('disabled',true);
                 $('#contractorIdFinal').val(contractor.id);
+
+                if(contractor.ownershipTypeId != '1e243ef0-c652-11e4-b574-080027dcfac6'){
+                    getIncAttachmentFinal();
+                }
             }
         });
 
     }
+
+    function getIncAttachmentFinal(){
+        $.ajax({
+            url: _baseURL() + '/getIncAttachmentFinal',
+            type: 'GET',
+            data: {contractorId:$('#contractorIdFinal').val(),ownerOrHR:'O'},
+            success: function (data) {
+
+                if(data){
+                    $('#cIncorporation').removeClass('hide');
+                    var tr = '';
+                    for(var i in data){
+                        tr = tr + "<tr>"+
+                        "<td></td>" +
+                        "<td>"+data[i].documentName+"</td>"+
+                        "<td><a href='"+_baseURL() + "/viewDownload?documentPath="+data[i].documentPath+"' target='_blank'> View </a></td>" +
+                        "<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
+                        "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                        "</tr>";
+                    }
+                    $('#IncCertificateTbl').find('tbody').html(tr);
+                }else{
+                    $('#cIncorporation').addClass('hide');
+                }
+            }
+
+        });
+    }
+
 
     function viewDownloadAttachment(){
         $('body').on('click','.vAttachment',function(){

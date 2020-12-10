@@ -41,6 +41,18 @@ function saveAndPreview(presentClass, nextClass) {
     $("." + nextClass).addClass("active");
     $("." + presentClass + ">a").append("<i class='fa fa-check ml-1'></i>");
 
+    $('#btn1').hide();
+    $('#btn2').hide();
+    $('#btnValGINext').hide();
+    $('#btnValCCNext').hide();
+    $('#btn3').hide();
+    $('#btn4').hide();
+    $('#btnValHRNext').hide();
+    $('#btn5').hide();
+    $('#btnValEqNext').hide();
+    $('#btn6').hide();
+
+    window.scroll(0, 0);
     //$("#" + nextClass).prepend(content);
 }
 
@@ -557,7 +569,7 @@ var specializedFirm = (function () {
     }
 
     function addMoreFile(){
-        $('#addMoreHr').on('click',function(e){
+        $('.hrFile').on('click',function(e){
             var uplTbl = $('#hrUploadTbl').find('tbody');
             var tr = "<tr><td><input type='text' required class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/> </td>" +
                 "<td><input type='file' required class='file' name='spFirmHRs[0].spFirmHRAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td><td class='file-size'></td>" +

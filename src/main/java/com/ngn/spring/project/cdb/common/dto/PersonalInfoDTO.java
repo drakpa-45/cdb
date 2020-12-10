@@ -1,5 +1,9 @@
 package com.ngn.spring.project.cdb.common.dto;
 
+import com.ngn.spring.project.cdb.consultant.model.Consultant;
+
+import java.util.List;
+
 /**
  * ==================================================================================
  * Created by user on 3/7/2020.
@@ -27,6 +31,8 @@ public class PersonalInfoDTO {
 
     private String cdbNo;
     private String remarks;
+
+    private List<EmployeeDetailsDTO> employeeDetailsDTOs;
 
     public String getDob() {
         return dob;
@@ -154,5 +160,13 @@ public class PersonalInfoDTO {
 
     public void setRemarks(String remarks) {
         remarks = remarks;
+    }
+
+    public List<EmployeeDetailsDTO> getEmployeeDetailsDTOs() {
+        return employeeDetailsDTOs;
+    }
+
+    public void setEmployeeDetailsDTOs(List<EmployeeDetailsDTO> employeeDetailsDTOs) {
+        this.employeeDetailsDTOs = employeeDetailsDTOs;
     }
 }

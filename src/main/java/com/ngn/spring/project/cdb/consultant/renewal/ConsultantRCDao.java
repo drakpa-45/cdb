@@ -4,7 +4,10 @@ import com.ngn.spring.project.base.BaseDao;
 import com.ngn.spring.project.cdb.admin.dto.AttachmentDTO;
 import com.ngn.spring.project.cdb.admin.dto.CategoryClassDTO;
 import com.ngn.spring.project.cdb.admin.dto.EquipmentDTO;
+import com.ngn.spring.project.cdb.common.dto.EmployeeDetailsDTO;
+import com.ngn.spring.project.cdb.common.dto.PersonalInfoDTO;
 import com.ngn.spring.project.cdb.common.dto.ServiceFeeDTO;
+import com.ngn.spring.project.cdb.consultant.model.Consultant;
 import com.ngn.spring.project.cdb.consultant.model.ConsultantFinal;
 import com.ngn.spring.project.cdb.consultant.registration.dto.ConsultantHrDTO;
 import com.ngn.spring.project.cdb.contractor.registration.dto.ContractorHrDTO;
@@ -132,4 +135,5 @@ public class ConsultantRCDao extends BaseDao {
         return hibernateQuery(sqlQuery, CategoryClassDTO.class)
                 .setParameter("appNo", appNo).list();
     }
+
 }

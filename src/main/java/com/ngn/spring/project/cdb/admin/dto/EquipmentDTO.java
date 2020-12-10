@@ -1,5 +1,7 @@
 package com.ngn.spring.project.cdb.admin.dto;
 
+import com.ngn.spring.project.cdb.common.dto.VehicleDetails;
+
 import java.util.List;
 
 /**
@@ -28,7 +30,10 @@ public class EquipmentDTO {
 
     private String equipmentName;
 
+
     List<AttachmentDTO> eqAttachments;
+
+    List<VehicleDetails> vehicleDetailses;
 
     public String getId() {
         return id;
@@ -140,5 +145,13 @@ public class EquipmentDTO {
 
     public void setSpecializedFirmId(String specializedFirmId) {
         this.specializedFirmId = specializedFirmId;
+    }
+
+    public List<VehicleDetails> getVehicleDetailses() {
+        return vehicleDetailses;
+    }
+
+    public void setVehicleDetailses(List<VehicleDetails> vehicleDetailses) {
+        this.vehicleDetailses = vehicleDetailses;
     }
 }

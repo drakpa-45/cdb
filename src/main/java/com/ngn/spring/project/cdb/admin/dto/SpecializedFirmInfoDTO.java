@@ -29,6 +29,10 @@ public class SpecializedFirmInfoDTO {
     private String pGewogTxt;
     private String pVillageTxt;
     private String estDzongkhagTxt;
+    private String oldFirmName;
+    private String oldEstbAddress;
+    private String oldDzongkhag;
+    private String ownershipChangeRemarks;
 
     private String cdbNo;
 
@@ -142,5 +146,37 @@ public class SpecializedFirmInfoDTO {
 
     public void setCdbNo(String cdbNo) {
         this.cdbNo = cdbNo;
+    }
+
+    public String getOldFirmName() {
+        return oldFirmName;
+    }
+
+    public void setOldFirmName(String oldFirmName) {
+        this.oldFirmName = oldFirmName;
+    }
+
+    public String getOldEstbAddress() {
+        return oldEstbAddress;
+    }
+
+    public void setOldEstbAddress(String oldEstbAddress) {
+        this.oldEstbAddress = oldEstbAddress;
+    }
+
+    public String getOldDzongkhag() {
+        return oldDzongkhag;
+    }
+
+    public void setOldDzongkhag(String oldDzongkhag) {
+        this.oldDzongkhag = oldDzongkhag;
+    }
+
+    public String getOwnershipChangeRemarks() {
+        return ownershipChangeRemarks;
+    }
+
+    public void setOwnershipChangeRemarks(String ownershipChangeRemarks) {
+        this.ownershipChangeRemarks = ownershipChangeRemarks;
     }
 }

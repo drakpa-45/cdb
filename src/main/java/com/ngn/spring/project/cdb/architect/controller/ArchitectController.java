@@ -172,13 +172,13 @@ public class ArchitectController extends BaseController {
             model.addAttribute("fee_details", spservices.getFeesDetals("Specialized"));
            // model.addAttribute("checkOngoingApplication", spservices.checkOngoingApplication(type.split("999")[1]));
             String checkForOwnership=spservices.checkOwnerShipType(type.split("999")[1]);
-            if(checkForOwnership.equalsIgnoreCase("Incorporated")) {
+           /* if(checkForOwnership.equalsIgnoreCase("Incorporated")) {
               //  model.addAttribute("appDetails", spservices.populateSpIncoApplicantDetails(type.split("999")[1]));
                 return "trade/tradeInco_renewal_Index";
-            } else {
+            } else {*/
                 model.addAttribute("registrationDetails", commonService.populateSpApplicantDetails(type.split("999")[1]));
                 return "trade/sptrade_renewal_index";
-            }
+          //  }
         }
     }
 

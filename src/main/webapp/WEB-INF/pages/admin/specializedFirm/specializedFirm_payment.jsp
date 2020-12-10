@@ -219,7 +219,7 @@
 
                                                             <div class="col-lg-4">
                                                                 <input type="text" name="paymentRemarks"
-                                                                       value="" id="paymentRemarks"
+                                                                       value="" id="paymentRemarks" required="true"
                                                                        class="form-control">
                                                             </div>
                                                         </div>
@@ -241,7 +241,7 @@
                                                                 <select name="modeOfPayment"
                                                                         id="contractorType" required="true"
                                                                         class="form-control chzn-select">
-                                                                    <option value="select">-Select-</option>
+                                                                    <option value="">-Select-</option>
 
                                                                     <option value="CDb-Cash">CDB-Cash
                                                                     </option>

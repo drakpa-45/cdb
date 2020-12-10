@@ -20,7 +20,7 @@ function saveAndPreview(presentClass, nextClass) {
     $('.tab-content').removeClass("active").addClass("active");
     $("." + nextClass).addClass("active");
     $("." + presentClass + ">a").append("<i class='fa fa-check ml-1'></i>");
-
+    window.moveTo(0, 0);
     //$("#" + nextClass).prepend(content);
 }
 
@@ -60,6 +60,14 @@ var contractorNRAction = (function () {
                     }
                 }
             });
+        });
+    }
+
+    function checkEquipment(){
+        $('body').on('click','.equipmentCheck',function(){
+            //var modal = $(this).closest('.modal').attr('id');
+            $("#CheckModalEquipment").modal('show');
+            $check = $(this).closest('tr').find('.check');
         });
     }
 
@@ -190,7 +198,7 @@ var contractorNRAction = (function () {
                             "<td>"+owner+"</td>" +
                             "<td>" + equipments[i].quantity + "</td>" +
                             "<td style='text-align: center'>"+attachment+"</td>" +
-                            "<td><input type='button' name='humanResource' value='Check for Equipment' class='equipmentCheck btn btn-success'></td>" +
+                            "<td><input type='button' name='humanResource' value='Check for Equipment' disabled class='equipmentCheck btn btn-success'></td>" +
                             verifiedApprovedEq+"</tr>";
                         }
                         $('#equipmentTbl').find('tbody').html(eqTr);
@@ -534,6 +542,7 @@ var contractorNRAction = (function () {
         validateOwner();
         validateHr();
         validateEq();
+        checkEquipment();
     }
     return {
         verify: verify,

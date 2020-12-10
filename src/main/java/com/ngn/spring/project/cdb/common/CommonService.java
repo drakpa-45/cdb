@@ -2,11 +2,14 @@ package com.ngn.spring.project.cdb.common;
 
 import com.ngn.spring.project.auth.LoginDTO;
 import com.ngn.spring.project.base.BaseService;
+import com.ngn.spring.project.cdb.admin.consultant.renewal.ConsultantRCActionService;
+import com.ngn.spring.project.cdb.admin.dto.EquipmentDTO;
 import com.ngn.spring.project.cdb.architect.dao.ArchitectDao;
 import com.ngn.spring.project.cdb.architect.dto.ArchitectDto;
 import com.ngn.spring.project.cdb.architect.dto.ArchitectFeesDto;
 import com.ngn.spring.project.cdb.common.dto.FileDetailDTO;
 import com.ngn.spring.project.cdb.common.dto.PersonalInfoDTO;
+import com.ngn.spring.project.cdb.common.dto.VehicleDetails;
 import com.ngn.spring.project.cdb.consultant.registration.dto.ConsultantDTO;
 import com.ngn.spring.project.cdb.engineer.dao.EngineerDao;
 import com.ngn.spring.project.cdb.survey.dao.SurveyDao;
@@ -37,10 +40,7 @@ import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.Properties;
-import java.util.ResourceBundle;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -68,6 +68,9 @@ public class CommonService extends BaseService {
 
     @Autowired
     private EngineerDao engineerDao;
+
+    @Autowired
+    private ConsultantRCActionService cRCActionService;
     /**
      * To get the country list
      * @return List
@@ -198,10 +201,8 @@ public class CommonService extends BaseService {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-        }
-
-    }
+             }
+         }
 
     public ResponseMessage downloadFile(byte[] file, String fileName, HttpServletResponse response) throws IOException {
         ResponseMessage responseMessage = new ResponseMessage();
@@ -263,19 +264,16 @@ public class CommonService extends BaseService {
         FileCopyUtils.copy(file, response.getOutputStream());
         responseMessage.setStatus(1);
         responseMessage.setText("File downloaded successfully.");
-
         return responseMessage;
 
     }
-
 
     public String getFileEXT(MultipartFile attachment){
         String originalFN = attachment.getOriginalFilename();
         return originalFN.substring(originalFN.lastIndexOf("."));
     }
 
-
-    //TODO-- fetch from API DCR
+    //TODO-- fetch from API DCRC
     public ResponseMessage getPersonalInfo(String cid){
         ResourceBundle resourceBundle1 = ResourceBundle.getBundle("wsEndPointURL_en_US");
         String dcrcCitizenEndPointUrl =resourceBundle1.getString("getCitizenDetails.endPointURL");
@@ -289,6 +287,7 @@ public class CommonService extends BaseService {
         }else{
             personalInfoDTO.setCdbNo("Not Registered");
         }
+
         try {
             OkHttpClient httpClient = new OkHttpClient();
             httpClient.setConnectTimeout(10000, TimeUnit.MILLISECONDS);
@@ -319,21 +318,23 @@ public class CommonService extends BaseService {
             personalInfoDTO.setVillageId(citizendetailsObj.getVillageSerialNo());
             personalInfoDTO.setVillageName(citizendetailsObj.getVillageName());
             personalInfoDTO.setDob(citizendetailsObj.getDob());
+            personalInfoDTO.setCidNo(citizendetailsObj.getCid());
 
             responseMessage = new ResponseMessage();
             responseMessage.setStatus(SUCCESSFUL_STATUS);
             responseMessage.setDto(personalInfoDTO);
             return responseMessage;
         }catch(Exception e){
-            personalInfoDTO.setFullName(" ");
+           /* personalInfoDTO.setFullName(" ");
             responseMessage = new ResponseMessage();
-            responseMessage.setStatus(UNSUCCESSFUL_STATUS);
-            responseMessage.setText("Could not connect to DCRC API. Please wait for the connection OR enter the information correctly.");
+            responseMessage.setStatus(SUCCESSFUL_STATUS);*/
+            /*responseMessage.setText("Could not connect to DCRC API. Please wait for the connection OR enter the information correctly.");
             responseMessage.setDto(personalInfoDTO);
-            return responseMessage;
+            return responseMessage;*/
 
-           /* personalInfoDTO.setFullName("Full Name");
+            personalInfoDTO.setFullName("Full Name");
             personalInfoDTO.setSex("M");
+            personalInfoDTO.setCidNo("11214002875");
             personalInfoDTO.setDzongkhagNmae("Thimphu");
             personalInfoDTO.setGowegId("3004");
             personalInfoDTO.setGowegName("Thimthrom");
@@ -341,8 +342,12 @@ public class CommonService extends BaseService {
             personalInfoDTO.setVillageName("Thimthrom");
             String dzong1=commonDao.getValue("cmndzongkhag","Id","NameEn","Thimphu").toString();
             personalInfoDTO.setDzongkhagId(dzong1);
+            personalInfoDTO.setEmployeeDetailsDTOs(commonDao.getEmployeeDetailsFromCDB(cid));
             // System.out.print("Exception in CommonDaoImpl # getPersonalDetails: "+e);
-            e.printStackTrace();*/
+            e.printStackTrace();
+            responseMessage.setStatus(SUCCESSFUL_STATUS);
+            responseMessage.setDto(personalInfoDTO);
+            return responseMessage;
 
         }
     }
@@ -506,6 +511,58 @@ public class CommonService extends BaseService {
     @Transactional(readOnly = true)
     public boolean isExpiredApplication(String cdbNo){
         return cdbNo == null?false:commonDao.isExpiredApplication(cdbNo);
+    }
 
+    @Transactional(readOnly = true)
+    public ResponseMessage checkEquipment(String regNo) {
+        ResourceBundle resourceBundle1 = ResourceBundle.getBundle("wsEndPointURL_en_US");
+        String rstaendpointURL =resourceBundle1.getString("getEquipmentDetailsFromRSTA.endPointURL");
+        String rstaaccessToken =resourceBundle1.getString("getEquipmentDetailsFromRSTA.accessToken");
+        EquipmentDTO equipmentDTO = new EquipmentDTO();
+
+        List<VehicleDetails> vehicleDetailses = new ArrayList<VehicleDetails>();
+
+        try {
+            OkHttpClient httpClient = new OkHttpClient();
+            httpClient.setConnectTimeout(10000, TimeUnit.MILLISECONDS);
+            httpClient.setReadTimeout(10000, TimeUnit.MILLISECONDS);
+            org.wso2.client.api.ApiClient apiClient = new org.wso2.client.api.ApiClient();
+            apiClient.setHttpClient(httpClient);
+            apiClient.setBasePath(rstaendpointURL);
+            apiClient.setAccessToken(rstaaccessToken);
+
+            DefaultApi api = new DefaultApi(apiClient);
+            CitizenDetailsResponse citizenDetailsResponse = api.citizendetailsCidGet(regNo);
+            CitizendetailsObj citizendetailsObj = citizenDetailsResponse.getCitizenDetailsResponse().getCitizenDetail().get(0);
+
+          /*  equipmentDTO.setRegistrationNo(regNo);
+            equipmentDTO.setRegisteredRegion(citizendetailsObj.getGender());
+            equipmentDTO.setVehicleType(citizendetailsObj.getCid());
+            equipmentDTO.setOwnerName(citizendetailsObj.getDzongkhagName());
+*/
+            equipmentDTO.setVehicleDetailses(vehicleDetailses);
+            responseMessage = new ResponseMessage();
+            responseMessage.setStatus(SUCCESSFUL_STATUS);
+            responseMessage.setDto(equipmentDTO);
+            return responseMessage;
+        }catch(Exception e){
+
+           /* equipmentDTO.setFullName(" ");
+            responseMessage = new ResponseMessage();
+            responseMessage.setStatus(SUCCESSFUL_STATUS);*/
+            /*responseMessage.setText("Could not connect to RSTA API. Please wait for the connection OR enter the information correctly.");
+            responseMessage.setDto(personalInfoDTO);
+            return responseMessage;*/
+
+            vehicleDetailses.get(0).setRegistrationNo(regNo);
+            vehicleDetailses.get(0).setRegisteredRegion("Thimphu");
+            vehicleDetailses.get(0).setVehicleType("Medium");
+            vehicleDetailses.get(0).setOwnerName("Drakpa");
+            e.printStackTrace();
+            equipmentDTO.setVehicleDetailses(vehicleDetailses);
+            responseMessage.setStatus(SUCCESSFUL_STATUS);
+            responseMessage.setDto(equipmentDTO);
+            return responseMessage;
+        }
     }
 }

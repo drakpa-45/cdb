@@ -30,7 +30,7 @@
 
 <div class="form-group">
     <div class="col-md-offset-11 col-lg-offset-10 col-xs-offset-10">
-        <button type="button"
+        <button type="button" id="btn1"
                 onclick="nextTab('fees_structure','general_Information')"
                 class="btn btn-primary">Next &nbsp;
             <i class="fa fa-arrow-circle-right"></i>

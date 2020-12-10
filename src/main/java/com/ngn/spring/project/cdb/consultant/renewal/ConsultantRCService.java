@@ -118,7 +118,7 @@ public class ConsultantRCService extends BaseService {
         //region edit in crpconsultant information
         consultant.setId(consultantId);
         String referenceNo = saveRC(consultant,loggedInUser);
-    //    List<CategoryClassDTO> classDTOs =  saveRCFeeCCUpgrade(consultant,consultantDTO.getCategories(),loggedInUser,request);
+      //  List<CategoryClassDTO> classDTOs =  saveRCFeeCCUpgrade(consultant,consultantDTO.getCategories(),loggedInUser,request);
         //endregion
 
         //region Upgrade or downgrade
@@ -131,6 +131,18 @@ public class ConsultantRCService extends BaseService {
             });
         }*/
         //endregion
+
+/*
+        //region Upgrade or downgrade
+        classDTOs.stream().filter(c->c.getCategoryId() != null).forEach(c -> {
+            ConsultantCategory conCategory = new ConsultantCategory();
+            conCategory.setConsultantID(consultantId);
+            conCategory.setServiceCateID(c.getCategoryId());
+            conCategory.setAppliedServiceID(c.getaClassId());
+            consultantNRService.saveCC(conCategory, loggedInUser,request);
+        });
+        //endregion
+        */
 
         //region change of owner or partner
         if(renewalServiceType.getChangeOfOwner() != null){
@@ -296,14 +308,20 @@ public class ConsultantRCService extends BaseService {
             //upgrade or downgrade or change of category
                 final List<String> finalAppliedServices = appliedServices;
                 List<ConsultantCategory> conCategoryR = categories.stream().filter(c -> finalAppliedServices != null).filter(c->getRegisteredClass(consultantFinalId,c.getServiceCateID()).equals(appliedServices.toString())).collect(Collectors.toList());
-                conCategoryR.addAll(categories.stream().filter(c -> appliedServices == null).collect(Collectors.toList()));
+                conCategoryR.addAll(categories.stream().filter(c -> c.getServiceCateID() != null && appliedServices != null).collect(Collectors.toList()));
             List<ConsultantCategory> conCategoryUD = categories.stream().filter(c -> !conCategoryR.contains(c)).collect(Collectors.toList());
 
-            conCategoryR.stream().forEach(r -> {
+               /* List<ConsultantCategory> conCategoryR = categories.stream().filter(c-> c.getServiceCateID() != null).filter(c -> getRegisteredClass(consultantFinalId, c.getServiceCateID()).equals(c.getServiceCateID())).collect(Collectors.toList());
+                conCategoryR.addAll(categories.stream().filter(c -> c.getServiceCateID() != null && c.getAppliedServiceID() == null).collect(Collectors.toList()));
+                List<ConsultantCategory> conCategoryUD = categories.stream().filter(c -> !conCategoryR.contains(c)).collect(Collectors.toList());
+                */
+
+                conCategoryR.stream().forEach(r -> {
                 String classId = getRegisteredClass(consultantFinalId, r.getServiceCateID());
                 renewal.add(new CategoryClassDTO(r.getServiceCateID(), classId, classId));
             });
-            conCategoryUD.stream().forEach(r->ccUpDown.add(new CategoryClassDTO(r.getServiceCateID(),r.getAppliedServiceID(),getRegisteredClass(consultantFinalId, r.getServiceCateID()))));
+
+            conCategoryUD.stream().forEach(r->ccUpDown.add(new CategoryClassDTO(r.getServiceCateID(),getRegisteredClass(consultantFinalId, r.getServiceCateID()))));
             ccRenewal = renewal;
         } else { // no upgrade or downgrade or change of category
             ccRenewal = getCategoryClassFinal(consultantFinalId);

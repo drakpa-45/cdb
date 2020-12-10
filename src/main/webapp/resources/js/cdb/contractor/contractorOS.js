@@ -8,12 +8,12 @@ function addRow(tableId) {
     var isValid = true;
     $tableBody.find(':input').each(function () {
         if (isValid == true) {
-            isValid = $('#contractorRenewalForm').validate().element(this);
+            isValid = $('#contractorOSForm').validate().element(this);
         } else {
-            $('#contractorRenewalForm').validate().element(this);
+            $('#contractorOSForm').validate().element(this);
         }
-
     });
+
     if (isValid == true) {
         var $trLast = $tableBody.find("tr:last");
         var $trNew = $trLast.clone();
@@ -316,8 +316,8 @@ var contractorOS = (function () {
                 $('#firmName').val(contractor.firmName).prop('disabled',true);
                 $('#tpn').val(contractor.tpn).prop('disabled',true);
                 $('#pDzongkhagId').val(contractor.pDzongkhagId).prop('disabled',true);
-                $('#pGewogId').val(contractor.pGewog).prop('disabled',true);
-                $('#pVillageId').val(contractor.pVillage).prop('disabled',true);
+                $('#pGewogId').val(contractor.pGewogId).prop('disabled',true);
+                $('#pVillageId').val(contractor.pVillageId).prop('disabled',true);
                 $('#estAddress').val(contractor.estAddress).prop('disabled',true);
                 $('#regDzongkhagId').val(contractor.regDzongkhagId).prop('disabled',true);
                 $('#regEmail').val(contractor.regEmail).prop('disabled',true);

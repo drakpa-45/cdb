@@ -478,14 +478,14 @@ public class EngineerDao extends BaseDao {
         try {
             sqlQuery = "SELECT f.CDBNo cdbNo,f.ReferenceNo refNo,f.Id CrpEngineerId,f.CIDNo cidNo,f.Name fullname,f.Village village,f.Gewog gewog,f.CmnDzongkhagId cmnDzongkhagId,d.NameEn dzongkhagId,c.Name countryId,s.Name salutation,\n" +
                     "i.Name updateStatus,f.CmnSalutationId salutationId,f.Email email,f.MobileNo mobileNo,f.EmployerName employeeName,f.EmployerAddress employeeAddress,f.CmnQualificationId qualificationId, q.Name qualification,f.CmnServiceSectorTypeId serviceSectorTypeId,\n" +
-                    "f.GraduationYear graduationyr,t.Name serviceSectorType,f.NameOfUniversity universityName,f.CmnUniversityCountryId cmnUniversityCountryId,uc.Name universityCountry,f.RegistrationApprovedDate registrationApproveDate,f.RegistrationExpiryDate regExpDate\n" +
+                    "f.GraduationYear graduationyr,t.Name serviceSectorType,td.Name trade, f.CmnTradeId cmnTradeId,f.NameOfUniversity universityName,f.CmnUniversityCountryId cmnUniversityCountryId,uc.Name universityCountry,f.RegistrationApprovedDate registrationApproveDate,f.RegistrationExpiryDate regExpDate\n" +
                     "FROM crpengineerfinal f \n" +
                     "LEFT JOIN cmnlistitem i ON i.Id=f.CmnApplicationRegistrationStatusId \n" +
                     "LEFT JOIN cmnlistitem s ON s.Id=f.CmnSalutationId\n" +
                     "LEFT JOIN cmncountry c ON c.Id=f.CmnCountryId\n" +
                     "LEFT JOIN cmncountry uc ON uc.Id=f.CmnUniversityCountryId\n" +
                     "LEFT JOIN cmnlistitem q ON q.Id=f.CmnQualificationId LEFT JOIN cmnlistitem t ON t.Id=f.CmnServiceSectorTypeId \n" +
-                    "LEFT JOIN cmndzongkhag d ON d.Id=f.CmnDzongkhagId WHERE f.CDBNo = ?";
+                    "LEFT JOIN cmnlistitem td ON td.Id=f.CmnTradeId LEFT JOIN cmndzongkhag d ON d.Id=f.CmnDzongkhagId WHERE f.CDBNo = ?";
             dto = (ArchitectDto) hibernateQuery(sqlQuery, ArchitectDto.class).setParameter(1, cdbNo).list().get(0);
         } catch (Exception e) {
             System.out.print("Exception in EngineerDao # populateEngineerApplicantDetails: " + e);

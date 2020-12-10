@@ -41,6 +41,19 @@ function saveAndPreview(presentClass, nextClass) {
     $("." + nextClass).addClass("active");
     $("." + presentClass + ">a").append("<i class='fa fa-check ml-1'></i>");
 
+    $('#btn1').hide();
+    $('#btn2').hide();
+    $('#btnValGINext').hide();
+    $('#btnValCCNext').hide();
+    $('#btn3').hide();
+    $('#btn4').hide();
+    $('#btnValHRNext').hide();
+    $('#btn5').hide();
+    $('#btnValEqNext').hide();
+    $('#btn6').hide();
+
+    window.scroll(0, 0);
+
    //$("#" + nextClass).prepend(content);
 }
 
@@ -138,18 +151,19 @@ function cloneEqFiles(tableId,modal,i){
 }
 
 function nextTab(presentClass, nextClass) {
-
-    $("." + presentClass + ">a").addClass('bg-blue-light text-white');
+    $("." + presentClass + ">a").addClass('bg-blue text-white');
     $('.tab-pane').removeClass("active");
     $('.tab-content').removeClass("active");
     $("." + nextClass).addClass("active");
     $("." + presentClass + ">a").append("<i class='fa fa-check ml-1'></i>");
 }
-
-function backTab(tabNo) {
-    tabNo = tabNo - 1;
-    $(".card").hide();
-    $(".tab" + tabNo).show();
+function backTab(presentClass, prevClass) {
+    $("." + presentClass + ">a").removeClass('bg-blue text-white');
+    $('.tab-pane').removeClass("active");
+    $('.tab-content').removeClass("active");
+    $("." + prevClass).addClass("active");
+    $("." + presentClass + ">a").find(".fa-check").remove();
+    $("." + prevClass + ">a").find(".fa-check").remove();
 }
 
 function previousTab(previousClass, presentClass) {
@@ -159,7 +173,6 @@ function previousTab(previousClass, presentClass) {
     $("." + previousClass).addClass("active");
     $("#classppended" + previousClass).remove();
 }
-
 
 function showConfirmation(){
     $('#confirmationModel').modal('show');
@@ -174,12 +187,13 @@ function submitApplication(){
     cdbGlobal.formIndexing($('#eqdatatable').find('tbody'));
     cdbGlobal.formIndexing($('#hrDtlsTable').find('tbody'));
     $("#addHRModal").find(":input").prop('disabled',true);
+    $("#eqModal").find(":input").prop('disabled',true);
 
     var itemId = [];
-/*    $.each($("input[name='itemId']:checked"), function(){
+    $.each($("input[name='itemId']:checked"), function(){
         itemId = ($(this).val());
         // alert(itemId);
-    });*/
+    });
 
     var consultantForm = $("#consultantForm");
     var url=cdbGlobal.baseURL() + "/consultantNR/save?itemId="+itemId;
@@ -244,15 +258,32 @@ var consultant = (function () {
                 } else {
                     $('#consultantForm').validate().element(this);
                 }
-
             });
-          /*  if($('.categoryCheck').is(':checked') == false){
-                isValid = false;
+
+            if($('.categoryCheck').is(':checked') == false){
                 warningMsg("Please choose at least one category.");
-            }*/
-            //var isValid = $('#contractorForm').validate().element('#gInfo :input');
+                isValid = false;
+            }
+
+            if($('.appliedClassID').is(':checked') == false){
+                warningMsg("Please choose at least one category.");
+                isValid = false;
+            }
+
             if (isValid == true) {
-                nextTab('category_details', 'human_resource_criteria')
+                    nextTab('category_details', 'human_resource_criteria')
+            }
+           return isValid;
+        });
+
+    }
+
+    function enableClassCategory(){
+        $('.categoryCheck').on('click',function(e){
+            if($(this).is(':checked')){
+                $(this).closest('tr').find('.appliedClassID').prop('disabled',false).prop('required',true);
+            }else{
+                $(this).closest('tr').find('.appliedClassID').val('').prop('disabled',true).prop('required',false);
             }
         });
     }
@@ -388,10 +419,12 @@ var consultant = (function () {
                 $('#cIncorporation').removeClass('hide');
                 certificateTbl.html(cert);
                 $('#siCertificate').prop('checked', false);
+                $('#addMorebtn').prop('disabled',false);
             }else{
                 $('#cIncorporation').addClass('hide');
                 certificateTbl.empty();
                 $('#siCertificate').prop('checked', true);
+                $('#addMorebtn').prop('disabled',true);
             }
         });
     }
@@ -404,26 +437,21 @@ var consultant = (function () {
         });
     }
 
-    function enableRegistrationNo(){
+ /*   function enableRegistrationNo(){
         $('.equipmentId').on('change',function(e){
+            alert('inside enable eq');
             var isRegistration = $(this).find("option:selected").hasClass("1");
-            if(isRegistration === true){
-                $(this).closest('tr').find('.registrationNo').prop('disabled',false);
-            }else{
-                $(this).closest('tr').find('.registrationNo').prop('disabled',true);
+            if(isRegistration == true){
+               $('#eq2').prop('disabled',false).prop('required',true);
+                $('#eq3').val(1).prop('disabled',true);
+            } else{
+                $('#eq2').val('').prop('disabled',true);
+                $('#eq3').val('').prop('disabled',false);
             }
         })
-    }
+    }*/
 
-    function enableClassCategory(){
-        $('.categoryCheck').on('click',function(e){
-            if($(this).is(':checked')){
-                $(this).closest('tr').find('.appliedClassID').prop('disabled',false);
-            }else{
-                $(this).closest('tr').find('.appliedClassID').val('').prop('disabled',true);
-            }
-        })
-    }
+
 
     function getPersonalInfo(){
         $('#partnerDtls').on('change','.hr-cid', function (e) {
@@ -460,7 +488,6 @@ var consultant = (function () {
             getTrainingDtl($this.val());
         })
     }
-
 
     function getPersonalInfoHR(){
         $('#addHRModal').on('change','.hr-cid', function (e) {
@@ -546,6 +573,7 @@ var consultant = (function () {
 
     function edit_HR(){
         $('body').on('click','.edit-hr',function(e){
+            alert();
             e.preventDefault();
             var row = $(this).closest('tr');
             var hrModal = $('#addHRModal');
@@ -577,7 +605,6 @@ var consultant = (function () {
         });
     }
 
-
     function confirmEmail(){
         $('#confirmEmail').on('blur',function(e){
             if(!$(this)){
@@ -588,7 +615,6 @@ var consultant = (function () {
                 warningMsg("Confirmation email does not match.");
                // $(this).focus();
             }
-
         })
     }
 
@@ -597,9 +623,10 @@ var consultant = (function () {
             //console.log("Saving value " + $(this).val());
             $(this).data('val', $(this).val());
         }).on('change','.hr-cid',function(){
-
             var $this = $(this);
             var isHrExist = false;
+
+            var designation = $('#designation').val();
 
             var country = '';
             var hrOrPartner = $this.closest('table').attr('id');
@@ -612,16 +639,16 @@ var consultant = (function () {
             }
 
             $('#partnerDtls').find('.ownerCidNo').each(function(e){
-                if(hrOrPartner == 'H' && $this.val() == $(this).val()){
-                    warningMsg("This is CID is already added your Owner/Partner list!!!");
+                if(hrOrPartner == 'H' && $this.val() == $(this).val() && designation !='030aacf0-24af-11e6-967f-9c2a70cc8e06'){
+                    warningMsg("This CID is already added your Owner/Partner list!!!");
                     $this.val('');
                     isHrExist = true;
                     return false;
                 }
             });
-            $('#hrDtlsTable').find('tbody tr td:nth-child(3)').each(function(){
+            $('#eqdatatable').find('tbody tr td:nth-child(3)').each(function(){
                 if($this.val() == $(this).text()){
-                    warningMsg("This is CID is already added your HR list!!!");
+                    warningMsg("This CID is already added your HR list!!!");
                     $this.val('');
                     isHrExist = true;
                     return false;

@@ -46,15 +46,14 @@ public class ConsultantNRActionController extends BaseController {
             model.remove("appNo");
             return "redirect:/admin/consultant";
         }
-        model.addAttribute("appNo", appNo);
-        model.addAttribute("cdbNo", consultantActionService.getCDBNoFromAppNo(appNo));
+        //model.addAttribute("appNo", appNo);
+     //   model.addAttribute("cdbNo", consultantActionService.getCDBNoFromAppNo(appNo));
         String appStatus = consultantActionService.getApplicationStatus(appNo);
         if(appStatus.equals(ApplicationStatus.APPROVED_FOR_PAYMENT.getCode())){
             return "admin/consultant/consultantNRpayment";
         }
         return "admin/consultant/consultantNRAction";
     }
-
 
     @ResponseBody
     @RequestMapping(value = "/getConsultantInfo", method = RequestMethod.GET)
@@ -91,8 +90,11 @@ public class ConsultantNRActionController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/paymentUpdate", method = RequestMethod.POST)
-    public ResponseMessage paymentUpdate(HttpServletRequest request, PaymentUpdateDTO paymentUpdateDTO) throws Exception{
+    public ResponseMessage paymentUpdate(ModelMap model, HttpServletRequest request, PaymentUpdateDTO paymentUpdateDTO) throws Exception{
         loggedInUser = gLoggedInUser(request);
+        String appNo = request.getParameter("appNo");
+        String cdbNo = consultantActionService.getCDBNoFromAppNo(appNo);
+        paymentUpdateDTO.setCdbNo(cdbNo);
         return consultantActionService.paymentUpdate(paymentUpdateDTO, loggedInUser);
     }
 

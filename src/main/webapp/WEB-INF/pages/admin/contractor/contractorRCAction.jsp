@@ -1,3 +1,4 @@
+<%@ page import="java.util.Date" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -21,6 +22,8 @@
                 <security:authorize access="hasRole('ROLE_APPROVER')">Approval</security:authorize>
             </h3>
             <span style="font-size: small;color: #444444"> >> CDB No: ${cdbNo} >> Application Number : ${appNo}</span>
+
+            <input type="hidden"name="cdbNo" value="${cdbNo}" id="cdbNo" >
         </div>
 
         <div class="card-body">
@@ -185,10 +188,14 @@
                                                 <label class="col-lg-4 form-label">TPN Number</label>
                                                 <label class="col-lg-8 form-label" id="tpn"></label>
                                             </div>
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-4 form-label">Old Proposed Firm
+                                                    Name</label>
+                                                <label class="col-lg-8 form-label" id="oldfirmName"></label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="card hide" id="cIncorporation">
                                     <div class="bg-blue card-status card-status-left"></div>
                                     <div class="card-header">
@@ -196,120 +203,22 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12">
-                                            <div class=""><input id="addMoreCert" type="button"
+                                            <%--<div class=""><input id="addMoreCert" type="button"
                                                                  value="Add More Certificate"
-                                                                 class="btn btn-primary"></div>
+                                                                 class="btn btn-primary"></div>--%>
                                             <table class="table table-bordered table-center table-responsive-lg auto-index"
-                                                   id="certificateTbl">
+                                                   id="IncCertificateTbl">
                                                 <thead>
                                                 <tr>
                                                     <th>Sl no</th>
                                                     <th>Document Name</th>
                                                     <th>Document Attached</th>
-                                                    <th>File Size</th>
-                                                    <th>Action</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
 
                                                 </tbody>
                                             </table>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="card hide" id="ownerPartner">
-                                    <div class="bg-blue card-status card-status-left"></div>
-                                    <div class="card-header">
-                                        <h3 class="card-title">Name of Owner, Partners and/or others
-                                            with Controlling Interest</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="col-lg-12">
-                                            <table class="table table-bordered table-center table-responsive-lg"
-                                                   id="partnerDtls">
-                                                <thead>
-                                                <tr>
-                                                    <th>Nationality</th>
-                                                    <th>CID/Work Permit No.</th>
-                                                    <th>Salutation</th>
-                                                    <th>Name</th>
-                                                    <th>Gender</th>
-                                                    <th>Designation</th>
-                                                    <th>Show<br>in<br>certificate</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td class="country">
-                                                        <select id="countryList" class="form-control"
-                                                                     name="contractor.contractorHRs[0].countryId"
-                                                                     required="true" >
-
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text"
-                                                               name="contractor.contractorHRs[0].cidNo"
-                                                               class="form-control hr-cid"
-                                                               placeholder="Text..">
-                                                    </td>
-                                                    <td>
-                                                        <select id="salutation"
-                                                                     name="contractor.contractorHRs[0].salutationId"
-                                                                     class="form-control input-sm"
-                                                                     required="true">
-
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control name"
-                                                               name="contractor.contractorHRs[0].name"
-                                                               placeholder="Text..">
-                                                    </td>
-                                                    <td>
-                                                        <select id="gender"
-                                                                name="contractor.contractorHRs[0].sex"
-                                                                class="form-control sex">
-                                                            <option value="">Select Gender</option>
-                                                            <option value="M">Male</option>
-                                                            <option value="F">Female</option>
-                                                        </select>
-
-                                                    </td>
-                                                    <td>
-                                                        <select id="designation"
-                                                                     name="contractor.contractorHRs[0].designationId"
-                                                                     class="form-control input-sm"
-                                                                     required="true">
-
-                                                        </select>
-
-                                                    </td>
-                                                    <td>
-                                                        <label class="custom-control custom-checkbox ml-6">
-                                                            <input type="checkbox"
-                                                                   class="custom-control-input showCert"
-                                                                   name="contractor.contractorHRs[0].siCertificate"
-                                                                   value="1">
-                                                            <i class="custom-control-label"></i>
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                            <div class="col-lg-12 text-right">
-                                                <button type="button"
-                                                        class="btn btn-outline-primary btn-sm"
-                                                        onclick="addRow('partnerDtls')">
-                                                    <i class="fe fe-plus mr-2"></i>Add More
-                                                </button>
-                                                <button type="button"
-                                                        class="btn btn-outline-danger btn-sm"
-                                                        onclick="removeRow('partnerDtls')">
-                                                    <i class="fe fe-trash mr-2"></i>Remove Last Row
-                                                </button>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -342,6 +251,43 @@
                                 <div class="card tab2">
                                     <div class="bg-blue card-status card-status-left"></div>
                                     <div class="card-header">
+                                        <h3 class="card-title">Name of Owner, Partners and/or others with
+                                            Controlling Interest</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="col-lg-12">
+                                            <table class="table table-bordered table-center table-responsive-lg"
+                                                   id="partnerDtls">
+                                                <thead>
+                                                <tr>
+                                                    <th>Sl No</th>
+                                                    <th>Nationality</th>
+                                                    <th>CID/Work Permit No.</th>
+                                                    <th>Salutation</th>
+                                                    <th>Name</th>
+                                                    <th>Gender</th>
+                                                    <th>Designation</th>
+                                                    <th>Show in certificate</th>
+                                                    <th>CHECK FOR THE CID</th>
+                                                    <security:authorize access="hasRole('ROLE_VERIFIER')">
+                                                        <th style="width: 10%">Verify</th>
+                                                    </security:authorize>
+                                                    <security:authorize access="hasRole('ROLE_APPROVER')">
+                                                        <th style="width: 10%">Verify</th>
+                                                        <th style="width: 10%">Approve</th>
+                                                    </security:authorize>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card tab2">
+                                    <div class="bg-blue card-status card-status-left"></div>
+                                    <div class="card-header">
                                         <h3 class="card-title">Establishment Addresses</h3>
                                     </div>
                                     <div class="card-body">
@@ -355,6 +301,18 @@
                                                 <label class="col-lg-5 form-label">Dzongkhag</label>
                                                 <label class="col-lg-7 form-label"
                                                        id="estDzongkhag"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-5 form-label">Previous Establishment
+                                                    Address</label>
+                                                <label class="col-lg-7 form-label" id="oldestAddress"></label>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-5 form-label">Previous Dzongkhag</label>
+                                                <label class="col-lg-7 form-label"
+                                                       id="oldestDzongkhag"></label>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
@@ -380,6 +338,35 @@
                                     </div>
                                 </div>
 
+                                <div class="card tab2">
+                                    <div class="bg-blue card-status card-status-left"></div>
+                                    <div class="card-header">
+                                        <h3 class="card-title">Induction course Details</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="col-lg-12">
+                                            <table class="table table-bordered table-center table-responsive-lg auto-index"
+                                                   id="inductionCourseDtl">
+                                                <thead>
+                                                <tr>
+                                                    <th>Sl No</th>
+                                                    <th>Training type</th>
+                                                    <th>Training Dates</th>
+                                                    <th>Module</th>
+                                                    <th>Participant</th>
+                                                    <th>CID No</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr class="noRecord">
+                                                    <td colspan="6">No Record Found</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="col-lg-12 form-group">
                                 <button type="button" onclick="backTab('generalInformation')"
@@ -395,7 +382,6 @@
                                 </button>
                             </div>
                         </div>
-
                         <div class="tab-pane category_details hide">
                             <div class="div-actual">
                                 <table id="contractorCCTbl" class="table table-bordered table-hover">
@@ -452,90 +438,7 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody class="existing-hr">
-                                                <%--<tr>
-                                                    <td>
-                                                        <select name="contractorHRs[0].salutationId" required=""
-                                                                class="form-control-sm custom-select-sm salutationId">
-                                                            <option value="">SELECT</option>
-                                                            <c:forEach var="item" items="${salutationList}">
-                                                                <option value="${item.value}"><c:out
-                                                                        value="${item.text}"/></option>
-                                                            </c:forEach>
-                                                        </select>
-                                                    </td>
 
-                                                    <td>
-                                                        <input type="text" name="contractorHRs[0].name"
-                                                               size="10" class="form-control-sm name"
-                                                               placeholder="Name">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" name="contractorHRs[0].cidNo"
-                                                               class="form-control-sm cidNo" required=""
-                                                               placeholder="CID/Work Permit No">
-                                                    </td>
-                                                    <td><select name="contractorHRs[0].sex"
-                                                                class="form-control-sm custom-select-sm sex">
-                                                        <option value="">SELECT</option>
-                                                        <option value="M">Male</option>
-                                                        <option value="F">Female</option>
-                                                    </select>
-                                                    </td>
-                                                    <td><select name="contractorHRs[0].countryId" required=""
-                                                                class="form-control-sm custom-select-sm countryId">
-                                                        <option value="">SELECT</option>
-                                                        <c:forEach var="item" items="${countryList}">
-                                                            <option value="${item.value}"><c:out
-                                                                    value="${item.text}"/></option>
-                                                        </c:forEach>
-                                                    </select>
-                                                    </td>
-                                                    <td>
-                                                        <select name="contractorHRs[0].designationId"
-                                                                class="form-control-sm designationId custom-select-sm">
-                                                            <option value="">SELECT</option>
-                                                            <c:forEach var="item" items="${designationList}">
-                                                                <option value="${item.value}"><c:out
-                                                                        value="${item.text}"/></option>
-                                                            </c:forEach>
-
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <select name="contractorHRs[0].qualificationId"
-                                                                 class="form-control-sm custom-select-sm qualificationId">
-                                                            <option value="">SELECT</option>
-                                                            <c:forEach var="item" items="${qualificationList}">
-                                                                <option value="${item.value}"><c:out
-                                                                        value="${item.text}"/></option>
-                                                            </c:forEach>
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <select name="contractorHRs[0].tradeId"
-                                                                class="form-control-sm custom-select-sm tradeId">
-                                                            <option value="">SELECT</option>
-                                                            <c:forEach var="item" items="${tradeList}">
-                                                                <option value="${item.value}"><c:out
-                                                                        value="${item.text}"/></option>
-                                                            </c:forEach>
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <select name="contractorHRs[0].serviceTypeId"
-                                                                class="form-control-sm custom-select-sm serviceTypeId">
-                                                            <option value="">SELECT</option>
-                                                            <c:forEach var="item" items="${serviceTypeList}">
-                                                                <option value="${item.value}"><c:out
-                                                                        value="${item.text}"/></option>
-                                                            </c:forEach>
-                                                        </select>
-                                                    </td>
-                                                    <td>
-
-                                                    </td>
-                                                    <td><a class='p-2'><i class='fa fa-pencil text-green'></i></a><a class='p-2'><i class='fa fa-trash text-danger'></i></a></td>
-                                                </tr>--%>
                                                 <tr><th colspan="11"> Existing Human Resource List</th></tr>
                                                 </tbody>
                                                 <tbody class="newly-added-hr">
@@ -568,7 +471,7 @@
 
                         <div class="tab-pane equipment_details hide">
                             <div class="div-actual">
-                                <i><strong>Contractor Equipment Details</strong></i>
+                                <i><strong> Equipment Details</strong></i>
 
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-striped"
@@ -596,12 +499,6 @@
                                         </tbody>
                                     </table>
 
-                                    <div class="col-lg-12 text-right">
-                                        <button type="button" class="btn btn-info btn-sm"
-                                                data-toggle="modal" data-target="#eqModal"><i
-                                                class="fa fa-plus"></i> Add More Equipment
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
                             <div class="col-lg-12 form-group nextBackBtn">
@@ -669,9 +566,9 @@
                                     <button type="button" class="btn btn-primary" id="btnApprove"><i
                                             class="fa fa-check"></i>&nbsp;&nbsp;Approve
                                     </button>
-                                    <button type="button" class="btn btn-primary" id="btnSendBack"><i
+                                   <%-- <button type="button" class="btn btn-primary" id="btnSendBack"><i
                                             class="fa fa-backward"></i>&nbsp;&nbsp;Send back
-                                    </button>
+                                    </button>--%>
                                 </security:authorize>
                                 <button type="button" class="btn btn-danger " id="btnReject"><i
                                         class="fa fa-times mr-1"></i>Reject
@@ -708,6 +605,97 @@
                     <button type="button" class="btn btn-success" onclick="submitApplication()">Yes</button>
                     <button type="button" class="btn btn-warning" onclick="closemodel('confirmationModel')"><span class="fa fa-times"></span> No
                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%--HR Modal--%>
+    <div id="hrModal" class="modal fade in " tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" style=" max-width: 900px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 id="myModalLabel" class="modal-title"><i class="fa fa-info-circle fa-lg"></i> Personal
+                        Check<span id="cid"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div id="modal-print">
+                                <div class="form-group">
+                                    <p align="center"><strong><u>Caution</u></strong></p>
+
+                                    <p align="center"><strong>An engineer is allowed to execute only two work at
+                                        a time for that particular firm.</strong></p>
+
+                                    <p align="center"><strong>For any other Human Resource they are allowed to
+                                        involve only in a single project of work</strong></p>
+
+                                    <p align="center"><font size="5px;">Details of CID No: <span
+                                            id="cidchecked"></span></font></p>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-9 mt-8">
+                                        <span class=""><b>From DCRC database</b></span>
+
+                                        <div class="col-lg-12 form-group mb-0 pt-4">
+                                            <label class="col-lg-3 form-label">Sex</label>
+                                            <label class="col-lg-8 form-label" id="sexM"></label>
+                                        </div>
+                                        <div class="col-lg-12 form-group mb-0">
+                                            <label class="col-lg-3 form-label">Name</label>
+                                            <label class="col-lg-8 form-label" id="nameM"></label>
+                                        </div>
+                                        <div class="col-lg-12 form-group mb-0">
+                                            <label class="col-lg-3 form-label">Dzongkhag</label>
+                                            <label class="col-lg-8 form-label" id="dzongkhagM"></label>
+                                        </div>
+                                        <div class="col-lg-12 form-group mb-0">
+                                            <label class="col-lg-3 form-label">Gewog</label>
+                                            <label class="col-lg-8 form-label" id="gewogM"></label>
+                                        </div>
+                                        <div class="col-lg-12 form-group mb-0">
+                                            <label class="col-lg-3 form-label">Village</label>
+                                            <label class="col-lg-8 form-label" id="villageM"></label>
+                                        </div>
+                                        <div class="col-lg-12 form-group mb-0">
+                                            <label class="col-lg-3 form-label">DOB</label>
+                                            <label class="col-lg-8 form-label" id="dobM"></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3" align="center">
+                                        <br><br><span id="photoM"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12" align="center">
+                                        <p><span id="dcbinfo"><b>Human Resource is not registered in any of the
+                                            CDB firm</b><br><br> This person is not engaged in any work or project<br>This person is not a civil servant</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <p align="center">With regard to Corporate Employee please verify with the
+                                        concern agencies. There may be certain inconsistency.</p>
+                                    <hr>
+                                    <p align="center"><strong>Print this page as an evidence to prove that
+                                        particular HR is engaged or not in a work or project</strong></p>
+
+                                    <p align="center">
+                                        Printed on:  <%=new Date()%>
+
+                                        By: ${auth.fullName}
+                                    </p>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary"
+                                    onclick="javascript:printDiv('modal-print')">Print
+                            </button>
+                            <button type="button" class="btn btn-success" id="closeModal"
+                                    onclick="checkBtn('checkver1')" data-dismiss="modal">OK
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

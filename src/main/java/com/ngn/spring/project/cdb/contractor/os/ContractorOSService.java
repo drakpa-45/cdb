@@ -2,6 +2,7 @@ package com.ngn.spring.project.cdb.contractor.os;
 
 import com.ngn.spring.project.base.BaseService;
 import com.ngn.spring.project.cdb.admin.dto.CategoryClassDTO;
+import com.ngn.spring.project.cdb.admin.dto.EquipmentDTO;
 import com.ngn.spring.project.cdb.common.CommonService;
 import com.ngn.spring.project.cdb.contractor.registration.ContractorNRService;
 import com.ngn.spring.project.cdb.contractor.registration.dto.ContractorDTO;
@@ -77,6 +78,8 @@ public class ContractorOSService extends BaseService {
         ContractorFinal contractorFinal = (ContractorFinal)responseMessage.getDto();
 
         Contractor contractor = new Contractor();
+        contractor.setpGewog(contractorFinal.getpGewogId());
+        contractor.setpVillage(contractorFinal.getpVillageId());
         BeanUtils.copyProperties(contractorFinal,contractor);
 
         String contractorId = commonService.getRandomGeneratedId();
@@ -144,7 +147,6 @@ public class ContractorOSService extends BaseService {
             appliedServicesList.add(appliedService);
         }
         //endregion
-
         //region update HR
         if(renewalServiceType.getUpdateHR() != null){
             List<ContractorHR> hrList = contractorDTO.getContractorHRs();
@@ -159,7 +161,6 @@ public class ContractorOSService extends BaseService {
                 if(emptyNullCheck(contractorHR.getCidNo())){
                     continue;
                 }
-
                 contractorHR.setContractorID(contractorId);
                 contractorHR.setIsPartnerOrOwner(FALSE_INT);
                 contractorNRService.saveHR(contractorHR, loggedInUser);
@@ -169,21 +170,53 @@ public class ContractorOSService extends BaseService {
                         continue;
                     }
                     contractorHRA.setContractorHrId(contractorHR.getId());
-
                     contractorNRService.saveHRA(contractorHRA, loggedInUser);
                 }
             }
-
             //to save deleted hr
             List<String> deletedHRs =existingHRs.stream().filter(h->!currentHRs.contains(h)).collect(Collectors.toList());
             if(deletedHRs !=null && !deletedHRs.isEmpty()){
                 deletedHRs.stream().forEach(contractorRCDao::saveDeleteHrRequest);
             }
-
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "8");
             appliedServicesList.add(appliedService);
         }
         //endregion
+
+        //region update EQ
+        if(renewalServiceType.getUpdateEq() != null){
+            List<ContractorEQ> eqList = contractorDTO.getEquipments();
+            List<String> existingEQs = new ArrayList<>();
+            List<String> currentEQs = new ArrayList<>();
+            getEquipmentFinal(contractorFinal.getId()).forEach(h->existingEQs.add(h.getId()));
+            for(ContractorEQ contractorEQ:eqList){
+                if(emptyNullCheck(contractorEQ.getId())){
+                    contractorEQ.setId(commonService.getRandomGeneratedId());
+                }
+                currentEQs.add(contractorEQ.getId());
+                if(emptyNullCheck(contractorEQ.getEquipmentId())){
+                    continue;
+                }
+                contractorEQ.setContractorId(contractorId);
+                contractorNRService.saveEQ(contractorEQ, loggedInUser);
+                //Save Human resource attachment
+                for (ContractorEQAttachment contractorEQA : contractorEQ.getContractorEQAs()) {
+                    if(contractorEQA.getAttachment() == null){ //No changes, so no need to save
+                        continue;
+                    }
+                    contractorEQA.setEquipmentId(contractorEQ.getId());
+                    contractorNRService.saveEQA(contractorEQA, loggedInUser);
+                }
+            }
+
+            //to save deleted hr
+            List<String> deletedEQs =existingEQs.stream().filter(h->!currentEQs.contains(h)).collect(Collectors.toList());
+            if(deletedEQs !=null && !deletedEQs.isEmpty()){
+                deletedEQs.stream().forEach(contractorRCDao::saveDeleteEqRequest);
+            }
+            appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "9");
+            appliedServicesList.add(appliedService);
+        }
 
         //region save applied service and payment
         appliedServicesList.stream().filter(c-> !c.isEmpty()).forEach(
@@ -237,7 +270,7 @@ public class ContractorOSService extends BaseService {
         BigDecimal totalCCUpDownFee = BigDecimal.ZERO;
         final List<CategoryClassDTO> ccUpDown = new ArrayList<>();  //upgrade downgrade
         String contractorFinalId = (String)commonService.getValue("crpcontractorfinal","Id","CDBNo",contractor.getCdbNo());
-
+/*
         if(categories != null && !categories.isEmpty()){
             categories.stream().forEach(r->ccUpDown.add(new CategoryClassDTO(r.getProjectCateID(),r.getAppliedClassID()
                     ,contractorRCService.getRegisteredClass(contractorFinalId, r.getProjectCateID()))));
@@ -246,7 +279,41 @@ public class ContractorOSService extends BaseService {
                 classDTO.setvAmount(fee);
                 totalCCUpDownFee = totalCCUpDownFee.add(fee);
             }
+        }*/
+
+        //since project category is cannot be null
+        categories = categories.stream().filter(c-> c.getProjectCateID() != null).collect(Collectors.toList());
+
+        BigDecimal totalRenewalFee = BigDecimal.ZERO;
+        List<CategoryClassDTO> ccRenewal; //renewal
+
+        if(categories != null && !categories.isEmpty()){
+            final List<CategoryClassDTO> renewal = new ArrayList<>(); //renewal
+            //upgrade or downgrade or change of category
+            List<ConCategory> conCategoryR = categories.stream().filter(c-> c.getAppliedClassID() != null).filter(c -> getRegisteredClass(contractorFinalId, c.getProjectCateID()).equals(c.getAppliedClassID())).collect(Collectors.toList());
+            conCategoryR.addAll(categories.stream().filter(c -> c.getProjectCateID() != null && c.getAppliedClassID() == null).collect(Collectors.toList()));
+            List<ConCategory> conCategoryUD = categories.stream().filter(c -> !conCategoryR.contains(c)).collect(Collectors.toList());
+
+            conCategoryR.stream().forEach(r->{
+                String classId = getRegisteredClass(contractorFinalId, r.getProjectCateID());
+                renewal.add(new CategoryClassDTO(r.getProjectCateID(),classId,classId));
+            });
+            conCategoryUD.stream().forEach(r->ccUpDown.add(new CategoryClassDTO(r.getProjectCateID(),r.getAppliedClassID(),getRegisteredClass(contractorFinalId, r.getProjectCateID()))));
+            ccRenewal = renewal;
+        }else{ // no upgrade or downgrade or change of category
+            ccRenewal = getCategoryClassFinal(contractorFinalId);
         }
+        for(CategoryClassDTO classDTO : ccRenewal){
+            BigDecimal renewalFee = ((FeeStructureDTO) contractorNRService.gFeeStructure(classDTO.getaClassId()).get(0)).getRenewalFee();
+            classDTO.setvAmount(BigDecimal.valueOf(00.00));
+            totalRenewalFee = totalRenewalFee.add(renewalFee);
+        }
+        for(CategoryClassDTO classDTO : ccUpDown){
+            BigDecimal fee = ((FeeStructureDTO) contractorNRService.gFeeStructure(classDTO.getaClassId()).get(0)).getRegistrationFee();
+            classDTO.setvAmount(fee);
+            totalCCUpDownFee = totalCCUpDownFee.add(fee);
+        }
+
 
         //save upgrade downgrade change of category
         if(!Objects.equals(totalCCUpDownFee, BigDecimal.ZERO)){
@@ -268,9 +335,7 @@ public class ContractorOSService extends BaseService {
 
             contractorRCService.saveServicePaymentDetail(servicePaymentUD.getId(), ccUpDown,loggedInUser);
         }
-
     }
-
 
     public String getOngoingAppStatusMsg(String cdbNo){
         ContractorDTOFetch ongoingApp = contractorNRService.getContractorOngoingApp(cdbNo);
@@ -353,7 +418,6 @@ public class ContractorOSService extends BaseService {
             responseMessage.setText("You are applying for renewal of contractor CDB certificate on time. So, no penalty will be" +
                     "charged. However, there will be renewal fee according to service you applied and your category and classes.");
         }
-
         */
         //endregion
         responseMessage.setStatus(SUCCESSFUL_STATUS);
@@ -363,5 +427,22 @@ public class ContractorOSService extends BaseService {
         //responseMessage.setVal2(lateFee.toString());
         return responseMessage;
     }
+    @Transactional(readOnly = true)
+    public List<EquipmentDTO> getEquipmentFinal(String contractorId){
+        List<EquipmentDTO> equipmentDTOs = contractorRCDao.getEquipmentFinal(contractorId);
+        equipmentDTOs.forEach(e->e.setEqAttachments(contractorRCDao.getEQAttachmentsFinal(e.getId())));
+        return equipmentDTOs;
+    }
 
+    @Transactional(readOnly = true)
+    public String getRegisteredClass(String contractorFinalId,String categoryId){
+        String condition = "CrpContractorFinalId = '"+contractorFinalId+"' AND CmnProjectCategoryId = '"+categoryId+"'";
+        String classId = (String)commonService.getValue("crpcontractorworkclassificationfinal", "CmnApprovedClassificationId", condition);
+        return classId == null?"":classId;
+    }
+
+    @Transactional(readOnly = true)
+    public List<CategoryClassDTO> getCategoryClassFinal(String contractorId) {
+        return contractorRCDao.getCategoryClassFinal(contractorId);
+    }
 }

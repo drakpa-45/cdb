@@ -245,7 +245,7 @@
                     <div class ="form-group">
                         <label class = "col-lg-2">Equipment <span class="text-danger">*</span>:</label>
                         <div class = "col-lg-4">
-                            <select name="equipments[0].equipmentId" class="form-control custom-select text-left equipmentId" required="" id="eq1">
+                            <select name="equipments[0].equipmentId" class="form-control custom-select text-left equipmentId" required="" id="eq1" onchange="enableRegistrationNo()">
                                 <option value="">Select Equipment</option>
                                 <c:forEach var="item" items="${equipmentList}">
                                     <option value="${item.value}" class="${item.obj1}"><c:out value="${item.text}"/></option>
@@ -254,7 +254,7 @@
                         </div>
                         <label class = "col-lg-3">Registration No <span class="text-danger">*</span>:</label>
                         <div class = "col-lg-3">
-                            <input type="text" name="equipments[0].registrationNo" class="form-control registrationNo" <%--required="true"--%> disabled id="eq2">
+                            <input type="text" name="equipments[0].registrationNo" class="form-control registrationNo" onchange="validateNo(this.value)" <%--required="true"--%> id="eq2">
                         </div>
                     </div>
 
@@ -281,12 +281,12 @@
                                     </thead>
                                     <tbody class="files">
                                     <tr><td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/> </td>
-                                        <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
+                                        <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
                                         <td class='file-size'></td>
                                         <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                     </tr>
                                     <tr><td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/> </td>
-                                        <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
+                                        <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
                                         <td class='file-size'></td>
                                         <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                     </tr>
@@ -303,7 +303,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-primary" onclick="getModalData('eqdatatable','eq',3)" type="button">OK</button>
+                <button class="btn btn-primary" onclick="getModalData('eqdatatable','eq',3)" type="button">OK</button>
                 <button data-dismiss="modal" class="btn btn-warning" type="button">Close</button>
             </div>
         </div>
@@ -311,7 +311,7 @@
 </div>
 
 <div class="col-lg-12 form-group">
-    <button type="button" onclick="previousTab('human_resource_criteria','equipment_details')" class="btn btn-azure col-lg-offset-9">
+    <button type="button" id="btn5" onclick="backTab('equipment_details','human_resource_criteria')" class="btn btn-azure col-lg-offset-9">
         <i class="fa fa-arrow-circle-left"></i>&nbsp; Back
     </button>
     <button type="button" class="btn btn-primary" id="btnValEqNext">
@@ -320,4 +320,45 @@
     </button>
 </div>
 
+<script>
+    function validateNo(vNo) {
+            if (validateVehNo(vNo)) {
+                return true;
+            } else {
+                $('#eq2').val('');
+                errorMsg('oops!! please check your vehicle Number format');
+                return false;
+            }
+    }
+    function validateVehNo() {
+        var vNo = $('#eq2').val();
+        const re = /\w[BPG]-\d-\w\d{4}$/;
+        return re.test(vNo);
+    }
+    function checkDuplicateEQ(){
+        var $this = $(this);
+        var isEqExist = false;
+        $('#eqdatatable').find('tbody tr td:nth-child(3)').each(function(){
+            if($this.val() == $(this).text()){
+                warningMsg("This Registration Number is already exists in your list!!!");
+                $this.val('');
+                isEqExist = true;
+                return isEqExist;
+            }
+        });
+    }
+
+    function enableRegistrationNo(){
+        $('.equipmentId').on('change',function(e){
+            var isRegistration = $(this).find("option:selected").hasClass("1");
+            if(isRegistration == true){
+                $('#eq2').prop('disabled',false).prop('required',true);
+                $('#eq3').val(1).prop('disabled',true);
+            } else{
+                $('#eq2').val('').prop('disabled',true);
+                $('#eq3').val('').prop('disabled',false);
+            }
+        })
+    }
+</script>
 <%--</form>--%>

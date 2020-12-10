@@ -300,7 +300,7 @@
                                             <div class="card hide" id="cIncorporation">
                                                 <div class="bg-blue card-status card-status-left"></div>
                                                 <div class="card-header">
-                                                    <h3 class="card-title">Attach Certificates of Incorporation</h3>
+                                                    <h3 class="card-title">Attach Certificates of Incorporation / Sole Proprietorship</h3>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="col-lg-12">
@@ -401,6 +401,44 @@
                                                                 <i class="fe fe-trash mr-2"></i>Remove Last Row
                                                             </button>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-lg-12 col-md-12 ">
+                                                        <label class="col-lg-3 col-md-3 form-label" for="ownershipChangeRemarks">Reason for Change of Owner:
+                                                            <span class="text-danger">*</span></label>
+                                                        <input type="text" class="col-lg-6 form-control"
+                                                               name="consultant.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true"
+                                                               placeholder="Text..">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="card hide" id="cOwnershipId">
+                                                <div class="bg-blue card-status card-status-left"></div>
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Attach Certificates of Ownership change</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="col-lg-12">
+                                                        <div class=""><input id="addMoreCertOwner" type="button"
+                                                                             value="Add More Certificate"
+                                                                             class="btn btn-primary"></div>
+                                                        <table class="table table-bordered table-center table-responsive-lg auto-index"
+                                                               id="certificateTblOwner">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Sl no</th>
+                                                                <th>Document Name</th>
+                                                                <th>Document Attached</th>
+                                                                <th>File Size</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+
+                                                            </tbody>
+                                                        </table>
                                                     </div>
                                                 </div>
                                             </div>
@@ -622,7 +660,9 @@
                                                                 <th style="width: 10%">Qualification</th>
                                                                 <th style="width: 10%">Trade / Fields</th>
                                                                 <th style="width: 10%">Service Type</th>
+                                                                <th style="width: 10%">Joining Date</th>
                                                                 <th style="width: 20%">Attachments (CV/UT/AT)</th>
+                                                                <th style="width: 25%">Delete Request?</th>
                                                                 <th style="width: 5%">Action</th>
                                                             </tr>
                                                             </thead>
@@ -1013,7 +1053,7 @@
                                 <span class="input-group-addon pr-5"><i
                                         class="fa fa-calendar"></i></span>
                                                 <input type="date" name="consultantHRs[0].joiningDate"
-                                                       value="" id="joiningDate"
+                                                       value="" id="hr10"
                                                        class="form-control datepicker">
                                             </div>
                                         </div>
@@ -1031,7 +1071,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 col-lg-12">
-                                            <input type="button" id="addMoreHr" value="Add More File"
+                                            <input type="button" id="addMore" value="Add More File"
                                                    class="btn btn-primary hrFile">
 
                                             <div class="table-responsive">
@@ -1095,7 +1135,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-primary" onclick="getModalData('hrDtlsTable','hr',9)" type="button">
+                                <button class="btn btn-primary" onclick="getModalData('hrDtlsTable','hr',10)" type="button">
                                     OK
                                 </button>
                                 <button data-dismiss="modal" class="btn btn-warning" type="button">Close</button>

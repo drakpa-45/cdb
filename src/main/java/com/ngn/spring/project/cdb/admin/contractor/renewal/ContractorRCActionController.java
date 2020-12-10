@@ -46,6 +46,9 @@ public class ContractorRCActionController extends BaseController {
     @Autowired
     private CommonService commonService;
 
+    @Autowired
+    private ContractorRCService cRenewalService;
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(ModelMap model, HttpServletRequest request, HttpServletResponse response, @ModelAttribute("appNo")String appNo) {
 

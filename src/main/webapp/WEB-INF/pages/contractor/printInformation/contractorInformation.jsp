@@ -11,7 +11,7 @@
                 <input type="hidden" id="isExpired" value="<%=request.getSession().getAttribute("isExpired")%>"/>
                 <input type="hidden" id="contractorIdFinal" value="${appDetail.id}">
                 <div class="form-group ">
-                    <hr />
+                    <div><span style="color: orangered"><center><u>CONTRACTOR DETAILS</u></center></span></div>
                     <div class="col-md-6 table-responsive">
                         <table class="table table-condensed">
                             <tbody>

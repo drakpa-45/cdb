@@ -3,10 +3,7 @@ package com.ngn.spring.project.cdb.common;
 import com.ngn.spring.project.auth.LoginDTO;
 import com.ngn.spring.project.base.BaseDao;
 import com.ngn.spring.project.cdb.architect.dto.ArchitectDto;
-import com.ngn.spring.project.cdb.common.dto.FileDetailDTO;
-import com.ngn.spring.project.cdb.common.dto.PersonalInfoDTO;
-import com.ngn.spring.project.cdb.common.dto.ServiceFeeDTO;
-import com.ngn.spring.project.cdb.common.dto.TrackRecordDTO;
+import com.ngn.spring.project.cdb.common.dto.*;
 import com.ngn.spring.project.cdb.trade.dto.TradeFeesDto;
 import com.ngn.spring.project.commonDto.TasklistDto;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
@@ -434,7 +431,6 @@ public class CommonDao extends BaseDao {
     public String getCDBNo(String cid) {
         String cdbNo="", consquery="",existingCDBNo="";
 try {
-
     consquery = "SELECT ARNo FROM crparchitectfinal WHERE CIDNo =?";
     existingCDBNo = (String)hibernateQuery(consquery).setParameter(1, cid).uniqueResult();
     if(existingCDBNo !=null) {
@@ -456,6 +452,7 @@ try {
     if(existingCDBNo !=null) {
         cdbNo = existingCDBNo;
     }
+
 }catch (Exception e){
     e.printStackTrace();
 }
@@ -507,6 +504,12 @@ try {
             e.printStackTrace();
         }
         return return_value;
+    }
+    @Transactional
+    public List getEmployeeDetailsFromCDB(String cidNo) {
+        sqlQuery = properties.getProperty("ConsultantRCActionDao.getEmployeeDetailsFromCDB");
+        return hibernateQuery(sqlQuery, EmployeeDetailsDTO.class)
+                .setParameter("cidNo", cidNo).list();
     }
 }
 
