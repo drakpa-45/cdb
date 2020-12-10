@@ -221,8 +221,8 @@ public class SpecializedService extends BaseService{
         TradeDto dto = dao.getTradeDetails(appNo);
         if (dto.getServiceTypeId().equalsIgnoreCase("New Registration")) {
             //generate cdb nunber
-            specializedTradeNo = dao.generatespecializedTradeNo(dto);
-            dto.setCdbNo(specializedTradeNo);
+           // specializedTradeNo = dao.generatespecializedTradeNo(dto);
+            dto.setCdbNo("NULL");
         }
     if(dto.getServiceTypeId().equalsIgnoreCase("Cancellation of Registration")) {
         String reasonCancel=dao.getCancellationRemarks(appNo);
@@ -318,9 +318,12 @@ public class SpecializedService extends BaseService{
             } else {
                 if(dto.getServiceTypeId().equalsIgnoreCase("registration")){
                     dto1.setServiceTypeId(dto.getServiceTypeId());
+                    //generate cdb nunber
+                    String specializedTradeNo = dao.generatespecializedTradeNo(dto);
+                    dto1.setCdbNo(specializedTradeNo);
+                    dto.setCdbNo(specializedTradeNo);
                     insert=commonService.insertuserDetails(commonDto, userID, request);
                     if(!insert.equalsIgnoreCase("Insert_Fail")){
-                        dto1.setCdbNo(dto.getCdbNo());
                         dto1.setRemarks(dto.getRemarks());
                         String password=insert.split("/")[1];
                         insert=dao.insertspTradeFinalDetails(dto1, userID, insert.split("/")[0]);
@@ -687,6 +690,9 @@ public class SpecializedService extends BaseService{
             Long noOfLateDays = ChronoUnit.DAYS.between(gracePeriodDate, curDate)-1;
             Long  acNoOfLateDays = ChronoUnit.DAYS.between(expiryDate, curDate)-1;
             lateFee = new BigDecimal((noOfLateDays*100));
+            if(lateFee.doubleValue()>3000){
+                lateFee= BigDecimal.valueOf(3000);
+            }
             responseMessage.setText("Seems like your registration is already expired on <b>"+expiryDate+
                     "</b>. The total number of days late is <b>"+acNoOfLateDays+"</b> days." +
                     " However 30 days is considered as grace period which means the late fees that would be imposed within that period will be waived. Penalty amount is Nu. 100 per day.<br>" +
@@ -726,4 +732,31 @@ public class SpecializedService extends BaseService{
     private SpecializedFirmFinal getSpecializedTradeFinal(String cdbNo) {
         return dao.getSpecializedTradeFinal(cdbNo);
     }
+
+    @Transactional(readOnly = true)
+    public ResponseMessage isCIDUnique(String cidNo) {
+        ResponseMessage responseMessage = new ResponseMessage();
+        String cidStatus = "";
+        String isCIDUnique=dao.isCIDUnique(cidNo);
+        if(isCIDUnique.equalsIgnoreCase("262a3f11-adbd-11e4-99d7-080027dcfac6") || isCIDUnique.equalsIgnoreCase("36f9627a-adbd-11e4-99d7-080027dcfac6") || isCIDUnique.equalsIgnoreCase("463c2d4c-adbd-11e4-99d7-080027dcfac6") || isCIDUnique.equalsIgnoreCase("6195664d-c3c5-11e4-af9f-080027dcfac6")){
+            if(isCIDUnique.equalsIgnoreCase("262a3f11-adbd-11e4-99d7-080027dcfac6")){
+                cidStatus = ApplicationStatus.UNDER_PROCESS.getName();
+            }
+            if(isCIDUnique.equalsIgnoreCase("36f9627a-adbd-11e4-99d7-080027dcfac6")){
+                cidStatus = ApplicationStatus.VERIFIED.getName();
+            }
+            if(isCIDUnique.equalsIgnoreCase("463c2d4c-adbd-11e4-99d7-080027dcfac6")){
+                cidStatus = ApplicationStatus.APPROVED.getName();
+            }
+            if(isCIDUnique.equalsIgnoreCase("6195664d-c3c5-11e4-af9f-080027dcfac6")){
+                cidStatus = ApplicationStatus.APPROVED_FOR_PAYMENT.getName();
+            }
+            responseMessage.setText("Application for this CID is "+ cidStatus+ "."+" Please wait until the process is complete.");
+            responseMessage.setStatus(1);
+        }else{
+            responseMessage.setStatus(0);
+        }
+        return responseMessage;
+    }
+
 }

@@ -82,22 +82,24 @@ public class ProfileController {
 
     @RequestMapping(value ="/printInformation", method = RequestMethod.GET)
     public String printInformation(ModelMap model,HttpServletRequest request, HttpServletResponse response) {
-        String type=request.getParameter("param");
-        if(type == null){
+        //String type=request.getParameter("param");
+        String cdbNo=request.getParameter("cdbNo");
+      /*  if(type == null){
             type = request.getSession().getAttribute("CDBNo").toString();
-        }
+        }*/
 
-        if(type.split("999")[0].equalsIgnoreCase("Architect")){
+      /*  if(type.split("999")[0].equalsIgnoreCase("Architect")){
             model.addAttribute("registrationDetails", commonService.populateApplicantDetails(type.split("999")[1]));
             model.addAttribute("App_Details", commonService.populateApplicantDetails(type.split("999")[1]));
             return "architect/architect_profile";
+        }*/
+        if(cdbNo.startsWith("SP-")){
+            model.addAttribute("registrationDetails", commonService.populateSpApplicantDetails(cdbNo));
+            model.addAttribute("App_Details", commonService.populateSpApplicantDetails(cdbNo));
+            return "trade/spTrade_printInformation";
         }
 
-        if(type.split("999")[0].equalsIgnoreCase("SpecializedTrade")){
-            model.addAttribute("registrationDetails", commonService.populateSpApplicantDetails(type.split("999")[1]));
-            model.addAttribute("App_Details", commonService.populateSpApplicantDetails(type.split("999")[1]));
-            return "trade/spTrade_profile";
-        }
+     /*
 
         if(type.split("999")[0].equalsIgnoreCase("Survey")){
             model.addAttribute("registrationDetails", commonService.populateSurveyApplicantDetails(type.split("999")[1]));
@@ -124,7 +126,7 @@ public class ProfileController {
             model.addAttribute("registrationDetails", commonService.populateEngineerApplicantDetails(type.split("999")[1]));
             model.addAttribute("App_Details", commonService.populateEngineerApplicantDetails(type.split("999")[1]));
             return "engineer/engineer_profile";
-        }
+        }*/
         return null;
     }
 }

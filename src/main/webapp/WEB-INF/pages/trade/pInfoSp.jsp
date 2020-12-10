@@ -20,9 +20,9 @@
             <div class="col-lg-12 col-lg-md col-sm-12 col-xs-12">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                     <div class="form-group row">
-                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Salutation<span class="text-danger">*</span>:</label>
+                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Salutation: <span class="text-danger">*</span></label>
                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                            <form:select id="salutation_id" path="salutationList" name="salutation" onclick="remove_err('salutation_err')" class="form-control">
+                            <form:select id="salutation" path="salutationList" name="salutation" class="form-control">
                                 <form:option value="">Select</form:option>
                                 <form:options items="${salutationList}" itemValue="value" itemLabel="text"></form:options>
                             </form:select>
@@ -83,29 +83,29 @@
                     <span id="mail_err" class="text-danger"></span>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                    <label>Mobile No: <span class="text-danger">*</span></label>
-                    <input type="text" class=" form-control number" onclick="remove_err('mobileNo_err')" id="mobileNo" name="mobileNo" maxlength="8">
+                    <label>Mobile Number: <span class="text-danger">*</span></label>
+                    <input type="number" class=" form-control number"  id="mobileNo" min="0" name="mobileNo" onkeypress="return preventDot(event);"/>
                     <span id="mobileNo_err" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                     <label>Telephone Number:</label>
-                    <input id="TphoneNo" type="text" class="form-control" name="telephoneNo" placeholder="enter telephone number">
+                    <input id="TphoneNo" type="number" class="form-control" name="telephoneNo" onkeypress="return preventDot(event);">
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                    <label>Tpn No:</label>
-                    <input type="text" class=" form-control number" id="tpn" name="tpn" maxlength="8">
+                    <label>TPN Number:</label>
+                    <input type="text" class="form-control" id="tpn" name="tpn">
                 </div>
             </div>
             <div class="col-lg-12">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                    <label>Office/Employer Name</label>
-                    <input type="text" class="form-control" name="employeeName" placeholder="Employer Name">
+                    <label>Office/Employer Name: </label>
+                    <input type="text" class="form-control" name="employeeName">
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                    <label>Office/Employer Address</label>
-                    <textarea class="form-control" name="employeeAddress" placeholder="Office/Employer Address"></textarea>
+                    <label>Office/Employer Address: </label>
+                    <textarea class="form-control" name="employeeAddress"></textarea>
                 </div>
             </div>
         </div>

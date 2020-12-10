@@ -23,4 +23,8 @@
 <%--<script src="<c:url value="/resources/assets/js/dashboard.js"/>"></script>--%>
 <script src="<c:url value='/resources/js/sweetalert/sweetalert.min.js' />"></script>
 <script src="<c:url value="/resources/js/cdb.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/dataTable/tableExport.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/dataTable/tableExport.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/dataTableJar/jsPDF/jspdf.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/dataTableJar/jsPDF-AutoTable/jspdf.plugin.autotable.js"/>"></script>
 <%--<script src="<c:url value="/resources/js/script_loader.js"/>"></script>--%>
