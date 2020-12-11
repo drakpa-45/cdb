@@ -74,7 +74,7 @@
                                                 <div class="form-group row">
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                                         <label>Enter your valid CID Number/work permit number:<span class="text-danger">*</span></label>
-                                                        <input type="number" onclick="getPersonalInfo(this.value)" name="app_çid" class="form-control" id="app_çid">
+                                                        <input type="number" name="app_çid" class="form-control number" id="app_çid" onkeypress="return preventDot(event);" onchange="checkStatus(this.value)" onKeyPress="if(this.value.length==8) return false;" min="0">
                                                         <span id="app_çid_err" class="text-danger"></span>
                                                     </div>
                                                 </div>
@@ -108,7 +108,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
-                                                                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Cid No:</label>
+                                                                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">CID Number:</label>
                                                                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                             <input type="text" id="cidNo" name="cidNo" class="form-control number">
                                                                         </div>
@@ -221,8 +221,8 @@
                                                                     <span id="email_err" class="text-danger"></span>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                    <label>Mobile No: <span class="text-danger">*</span></label>
-                                                                    <input type="text" class=" form-control number" onclick="remove_err('mobileNo_err')" id="mobileNo" name="mobileNo"  maxlength="8">
+                                                                    <label>Mobile Number: <span class="text-danger">*</span></label>
+                                                                    <input type="number" class=" form-control number" onclick="remove_err('mobileNo_err')" id="mobileNo" name="mobileNo" onKeyPress="if(this.value.length==8) return false;" onkeypress="return preventDot(event);"/>
                                                                     <span id="mobileNo_err" class="text-danger"></span>
                                                                 </div>
                                                             </div>

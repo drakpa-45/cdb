@@ -215,12 +215,8 @@
                                                                 <td>${appDetails.applicationDate}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td><strong>Remarks: </strong></td>
-                                                                <td>${appDetails.remarks}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><strong>CreatedBy: </strong></td>
-                                                                <td>${appDetails.createdBy}<b style="color: blueviolet">(Applicant's CID Number)</b></td>
+                                                                <td><strong>Created By: </strong></td>
+                                                                <td>${appDetails.createdBy}<b style="color: blueviolet">(${appDetails.fullname})</b></td>
                                                             </tr>
                                                         </table>
                                                     </td>
@@ -268,7 +264,7 @@
                                                                 <td>${appDetails.approvaldate}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td><strong>Approval Remarks: </strong></td>
+                                                                <td><strong>Approver Remarks: </strong></td>
                                                                 <td>${appDetails.approiverremarks}</td>
                                                             </tr>
                                                             <tr>

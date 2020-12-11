@@ -1,6 +1,7 @@
 package com.ngn.spring.project.cdb.admin.engineer;
 
 import com.ngn.spring.project.base.BaseController;
+import com.ngn.spring.project.cdb.admin.dto.TasksDTO;
 import com.ngn.spring.project.cdb.architect.dto.ArchitectDto;
 import com.ngn.spring.project.cdb.common.CommonService;
 import com.ngn.spring.project.cdb.engineer.service.EngineerServices;
@@ -30,18 +31,22 @@ public class EngineerAdminController extends BaseController {
     private CommonService commonService;
 
     @RequestMapping(value = "/engineer_tasklist", method = RequestMethod.GET)
-    public String index(ModelMap model, HttpServletRequest request) {
+    public String index(ModelMap model, HttpServletRequest request,TasksDTO tasksDTO) {
         loggedInUser = gLoggedInUser(request);
         String type=request.getParameter("param");
-        if(type.equalsIgnoreCase("new")){
+        if(type == null || type.isEmpty()){
+            type = (String) request.getSession().getAttribute("SERVICE");
+        }
+        else if(type.equalsIgnoreCase("new")){
             type="55a922e1-cbbf-11e4-83fb-080027dcfac6";
         }
-        if(type.equalsIgnoreCase("renew")){
+        else if(type.equalsIgnoreCase("renew")){
             type="45bc628b-cbbe-11e4-83fb-080027dcfac6";
         }
-        if(type.equalsIgnoreCase("cancellation")){
+        else if(type.equalsIgnoreCase("cancellation")){
             type="acf4b324-cbbe-11e4-83fb-080027dcfac6";
         }
+
         if(request.isUserInRole("ROLE_APPROVER")) {
             model.addAttribute("groupTaskList", services.getTaskList(ApplicationStatus.VERIFIED.getCode(), "Group", getLoggedInUser().getUserID(),type));
             model.addAttribute("myTaskList", services.getTaskList(ApplicationStatus.VERIFIED.getCode(),"mytask",getLoggedInUser().getUserID(),type));
@@ -59,8 +64,38 @@ public class EngineerAdminController extends BaseController {
     @RequestMapping(value = "/emptylayout/openApplication", method = RequestMethod.GET)
     public String send2MyOrGroupTask(HttpServletRequest request,String appNo,String type,Model model) {
         if(type.equalsIgnoreCase("release")){
-            services.assignMyTask(appNo, getLoggedInUser().getUserID(), type);
-            return "redirect:/admin_engineer/engineer_tasklist";
+            String cmnServiceTypeId = request.getParameter("param");
+            String assignMyTask = services.assignMyTask(appNo, getLoggedInUser().getUserID(), type);
+            if(assignMyTask.equalsIgnoreCase("Success")){
+                if(cmnServiceTypeId == null || cmnServiceTypeId.isEmpty()){
+                    cmnServiceTypeId = (String) request.getSession().getAttribute("SERVICE");
+                }
+                else if(cmnServiceTypeId.equalsIgnoreCase("new")){
+                    cmnServiceTypeId="55a922e1-cbbf-11e4-83fb-080027dcfac6";
+                }
+                else if(cmnServiceTypeId.equalsIgnoreCase("renew")){
+                    cmnServiceTypeId="45bc628b-cbbe-11e4-83fb-080027dcfac6";
+                }
+                else if(cmnServiceTypeId.equalsIgnoreCase("cancellation")){
+                    cmnServiceTypeId="acf4b324-cbbe-11e4-83fb-080027dcfac6";
+                }
+
+                if(request.isUserInRole("ROLE_APPROVER")) {
+                    model.addAttribute("groupTaskList", services.getTaskList(ApplicationStatus.VERIFIED.getCode(), "Group", getLoggedInUser().getUserID(),cmnServiceTypeId));
+                    model.addAttribute("myTaskList", services.getTaskList(ApplicationStatus.VERIFIED.getCode(),"mytask",getLoggedInUser().getUserID(),cmnServiceTypeId));
+                }else if(request.isUserInRole("ROLE_VERIFIER")){
+                    model.addAttribute("groupTaskList", services.getTaskList(ApplicationStatus.UNDER_PROCESS.getCode(),"Group",getLoggedInUser().getUserID(),cmnServiceTypeId));
+                    model.addAttribute("myTaskList", services.getTaskList(ApplicationStatus.UNDER_PROCESS.getCode(),"mytask",getLoggedInUser().getUserID(),cmnServiceTypeId));
+
+                }else if(request.isUserInRole("ROLE_PAYMENT")){
+                    model.addAttribute("groupTaskList", services.getTaskList(ApplicationStatus.APPROVED_FOR_PAYMENT.getCode(), "Group", getLoggedInUser().getUserID(),cmnServiceTypeId));
+                    model.addAttribute("myTaskList", services.getTaskList(ApplicationStatus.APPROVED_FOR_PAYMENT.getCode(),"mytask",getLoggedInUser().getUserID(),cmnServiceTypeId));
+                }
+                return "admin/engineer_tasklist";
+
+            }else{
+                return null;
+            }
         }else{
             services.assignMyTask(appNo, getLoggedInUser().getUserID(),type);
             model.addAttribute("modeOfPayment",services.getModePayment());
@@ -132,7 +167,7 @@ public class EngineerAdminController extends BaseController {
         dto.setServiceTypeId(request.getParameter("servicefor"));
         dto=services.approveAndGenerateCertificate(dto, getLoggedInUser().getUserID(), request);
         if(dto.getUpdateStatus().equalsIgnoreCase("Success")){
-            model.addAttribute("acknowledgement_message", "<br /><div class='alert alert-info col-12 text-center'>You have approved payment for application : <b>"+dto.getReferenceNo()+"</b>.And your CDB Number is: <b>"+dto.getCdbNo()+"</b>. You may print certificate and issue. Thank you</div>");
+            model.addAttribute("acknowledgement_message", "<br /><div class='alert alert-info col-12 text-center'>You have approved payment for application : <b>"+dto.getReferenceNo()+"."+"</b>.And your CDB Number is: <b>"+dto.getCdbNo()+"</b>. You may print certificate and issue. Thank you</div>");
         }else{
             model.addAttribute("acknowledgement_message", "<br /><div class='alert alert-danger col-12 text-center'>Not able to approve this application. "+dto.getUpdateStatus()+" Please try again</div>");
         }
