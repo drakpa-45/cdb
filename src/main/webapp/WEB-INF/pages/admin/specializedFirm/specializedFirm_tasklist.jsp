@@ -51,7 +51,7 @@
                                 <c:forEach items="${groupTaskList}" var="task" varStatus="i">
                                     <tr>
                                         <td>${i.index+1}</td>
-                                        <td><a>${task.applicationNo}</a></td>
+                                        <td><a href="<c:url value="/admin/specializedFirm/${task.applicationNo}/flag=M"/>" class="font-weight-bold">${task.applicationNo}</a><%--<a>${task.applicationNo}</a>--%></td>
                                         <td><span class="status-icon bg-success"></span> ${task.appStatus} </td>
                                         <td>${task.cdbNo}</td>
                                         <td>${task.serviceName}</td>
@@ -90,7 +90,7 @@
                                 <c:forEach items="${myTaskList}" var="task" varStatus="i">
                                     <tr>
                                         <td>${i.index+1}</td>
-                                        <td><a href="<c:url value="/admin/specializedFirm/${task.applicationNo}"/>" class="font-weight-bold">${task.applicationNo}</a></td>
+                                        <td><a href="<c:url value="/admin/specializedFirm/${task.applicationNo}/flag=M"/>" class="font-weight-bold">${task.applicationNo}</a></td>
                                         <td><span class="status-icon bg-success"></span> ${task.appStatus} </td>
                                         <td>${task.cdbNo}</td>
                                         <td>${task.serviceName}</td>

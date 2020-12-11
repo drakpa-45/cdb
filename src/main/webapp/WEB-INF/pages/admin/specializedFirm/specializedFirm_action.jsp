@@ -548,15 +548,23 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-12" align="center">
-                                                <p id="notEngagedId" style="display: none"><span id="dcbinfo"><b>Human Resource is not registered in any of the
+                                                <%--<p id="notEngagedId" style="display: none"><span id="dcbinfo"><b>Human Resource is not registered in any of the
                                                     CDB firm</b><br><br> This person is not engaged in any work or project<br>This person is not a civil servant</span>
-                                                </p>
+                                                </p>--%>
                                                 <div class="tab-pane employeeDetails" style="display: none" id="engagedId">
                                                     <p ><span><b>The Individual holding CID/permit no.<label id="cidNumber"></label>(<label id="hrName"></label>) is engaged in following project(s):</b></span>
                                                     </p>
                                                     <form action="" method="post" class="">
                                                         <div id="employeeDetails" style="">
                                                             <i><strong>Employee Engagement Details</strong></i>
+
+                                                            <div class="form-group">
+                                                                <div class="col-lg-12" align="center">
+                                                                    <hr />
+                                                                    <p><span id="dcbinfo"></span></p>
+                                                                </div>
+                                                            </div>
+
                                                             <div class="panel panel-default">
                                                                 <div class="panel-body">
                                                                     <span>Contractor</span>

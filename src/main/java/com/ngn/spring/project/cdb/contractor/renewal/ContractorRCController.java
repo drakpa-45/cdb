@@ -141,8 +141,8 @@ public class ContractorRCController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value ="/getPersonalInfo", method = RequestMethod.GET)
-    public ResponseMessage getPersonalInfo(String cidNo){
-        return commonService.getPersonalInfo(cidNo);
+    public ResponseMessage getPersonalInfo(String cidNo,String type){
+        return commonService.getPersonalInfo(cidNo, type);
     }
 
 }

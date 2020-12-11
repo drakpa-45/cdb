@@ -31,5 +31,4 @@ public class BaseService {
         return str == null || str.isEmpty();
     }
 
-
 }

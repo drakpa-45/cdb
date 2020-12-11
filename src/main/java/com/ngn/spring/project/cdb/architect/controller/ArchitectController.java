@@ -68,9 +68,9 @@ public class ArchitectController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/architects/getPersonalInfo", method = RequestMethod.GET)
-    public ResponseMessage getPersonalInfo(String cid) {
+    public ResponseMessage getPersonalInfo(String cid,String type) {
         try{
-            ResponseMessage personal=commonService.getPersonalInfo(cid);
+            ResponseMessage personal=commonService.getPersonalInfo(cid, type);
             return personal;
         }catch (Exception e){
             System.out.print(e);

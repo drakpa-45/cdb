@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigInteger;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -505,11 +507,128 @@ try {
         }
         return return_value;
     }
+
     @Transactional
-    public List getEmployeeDetailsFromCDB(String cidNo) {
-        sqlQuery = properties.getProperty("ConsultantRCActionDao.getEmployeeDetailsFromCDB");
-        return hibernateQuery(sqlQuery, EmployeeDetailsDTO.class)
-                .setParameter("cidNo", cidNo).list();
+    public List<EmployeeDetailsDTO> validateWorkEngagementCidNo(String cidNo) {
+       // sqlQuery = properties.getProperty("ConsultantRCActionDao.getEmployeeDetailsFromCDB");
+       /* sqlQuery = properties.getProperty("CommonDao.validateWorkEngagementCidNo");
+        return (List<EmployeeDetailsDTO>) hibernateQuery(sqlQuery, EmployeeDetailsDTO.class).setParameter("cidNo", cidNo);
+*/
+        List<EmployeeDetailsDTO> employeeDetailsDTOs = new ArrayList<>();
+        try {
+            sqlQuery = " SELECT DISTINCT(t5.Id) id, GROUP_CONCAT(t4.CDBNo SEPARATOR ', ' ) cdbNo,\n" +
+                    "CASE WHEN T5.migratedworkid IS NULL THEN CONCAT(T6.Code,'/',YEAR(T5.UploadedDate),'/',T5.WorkId) ELSE T5.migratedworkid END AS workId,\n" +
+                    "T6.Name AS procuringAgency\n" +
+                    "FROM etlcontractorhumanresource t1\n" +
+                    "LEFT JOIN etltenderbiddercontractor t2 ON t1.EtlTenderBidderContractorId=t2.Id\n" +
+                    "LEFT JOIN etltenderbiddercontractordetail t3 ON t3.EtlTenderBidderContractorId=t2.Id\n" +
+                    "LEFT JOIN crpcontractorfinal t4 ON t4.Id=t3.CrpContractorFinalId\n" +
+                    "LEFT JOIN etltender t5 ON t5.Id=t2.EtlTenderId\n" +
+                    "LEFT JOIN cmnprocuringagency t6 ON t6.Id=t5.CmnProcuringAgencyId\n" +
+                    "WHERE t2.ActualStartDate IS NOT NULL AND t5.CmnWorkExecutionStatusId ='1ec69344-a256-11e4-b4d2-080027dcfac6' AND t1.CIDNo =?\n" +
+                    "GROUP BY id";
+            employeeDetailsDTOs = (List<EmployeeDetailsDTO>) hibernateQuery(sqlQuery, EmployeeDetailsDTO.class).setParameter(1, cidNo).list();
+        } catch (Exception e) {
+            System.out.print("Exception in CommonDao # validateWorkEngagementCidNo:" + e);
+            e.printStackTrace();
+        }
+        return employeeDetailsDTOs;
+    }
+
+    @Transactional
+    public String getCdbNoForContractor(LoginDTO loginDTO) {
+        String cdbNo="";
+        String consquery="SELECT f.CDBNo cdbNo FROM sysuser s LEFT JOIN crpcontractorfinal f ON f.SysUserId=s.Id WHERE s.username=?";
+        Query arNo = sqlQuery(consquery).setParameter(1, loginDTO.getUsername());
+        if(arNo.list().size()>0)
+            cdbNo="Contractor999"+ arNo.list().get(0);
+        if(cdbNo==""){
+            //get cdbno for others
+        }
+        return cdbNo;
+    }
+
+    @Transactional
+    public List<TasklistDto> populateapplicationHistoryConsultant(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        try {
+            sqlQuery = "SELECT a.ReferenceNo applicationNo, e.serviceName, a.NameOfFirm firmName, a.CDBNo cdbNo,\n" +
+                    "a.MobileNo contactNo, b.Name AS appStatus,a.ApplicationDate applicationDate \n" +
+                    "FROM crpconsultant a  INNER JOIN cmnlistitem b ON b.Id  = a.CmnApplicationRegistrationStatusId\n" +
+                    "INNER JOIN (\n" +
+                    "SELECT c.CrpConsultantId,MIN(d.referenceNo)minRef, GROUP_CONCAT(d.Name ORDER BY d.referenceno ASC)serviceName  \n" +
+                    "FROM crpconsultantappliedservice c \n" +
+                    "INNER JOIN crpservice d ON d.Id = c.CmnServiceTypeId GROUP BY c.CrpConsultantId\n" +
+                    ") e ON e.CrpConsultantId = a.CrpConsultantId \n" +
+                    "WHERE a.CDBNo=?";
+            dto = (List<TasklistDto>) hibernateQuery(sqlQuery, TasklistDto.class).setParameter(1, cdbNo).list();
+        } catch (Exception e) {
+            System.out.print("Exception in CommonDao # populateapplicationHistoryConsultant: " + e);
+            e.printStackTrace();
+        }
+        return dto;
+    }
+    @Transactional
+    public List<TasklistDto> populateapplicationHistoryContractor(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        try {
+            sqlQuery = "SELECT a.ReferenceNo applicationNo, e.serviceName, a.NameOfFirm firmName,\n" +
+                    "a.MobileNo contactNo, b.Name AS appStatus,a.ApplicationDate applicationDate \n" +
+                    "FROM crpcontractor a  INNER JOIN cmnlistitem b ON b.Id  = a.CmnApplicationRegistrationStatusId\n" +
+                    "INNER JOIN (\n" +
+                    "SELECT c.CrpContractorId,MIN(d.referenceNo)minRef, GROUP_CONCAT(d.Name ORDER BY d.referenceno ASC)serviceName  \n" +
+                    "FROM crpcontractorappliedservice c \n" +
+                    "INNER JOIN crpservice d ON d.Id = c.CmnServiceTypeId GROUP BY c.CrpContractorId\n" +
+                    ") e ON e.CrpContractorId = a.CrpContractorId \n" +
+                    "WHERE a.CDBNo=?";
+            dto = (List<TasklistDto>) hibernateQuery(sqlQuery, TasklistDto.class).setParameter(1, cdbNo).list();
+        } catch (Exception e) {
+            System.out.print("Exception in CommonDao # populateapplicationHistoryContractor: " + e);
+            e.printStackTrace();
+        }
+        return dto;
+    }
+
+    @Transactional
+    public List<TasklistDto> populaterejectedApplicationConsultant(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        try {
+            sqlQuery = "SELECT a.ReferenceNo applicationNo, e.serviceName, a.NameOfFirm firmName, a.CDBNo cdbNo,a.RemarksByRejector remarks,\n" +
+                    "a.MobileNo contactNo, b.Name AS appStatus,a.ApplicationDate applicationDate \n" +
+                    "FROM crpconsultant a  INNER JOIN cmnlistitem b ON b.Id  = a.CmnApplicationRegistrationStatusId\n" +
+                    "INNER JOIN (\n" +
+                    "SELECT c.CrpConsultantId,MIN(d.referenceNo)minRef, GROUP_CONCAT(d.Name ORDER BY d.referenceno ASC)serviceName  \n" +
+                    "FROM crpconsultantappliedservice c \n" +
+                    "INNER JOIN crpservice d ON d.Id = c.CmnServiceTypeId GROUP BY c.CrpConsultantId\n" +
+                    ") e ON e.CrpConsultantId = a.CrpConsultantId \n" +
+                    "WHERE a.CmnApplicationRegistrationStatusId = 'de662a61-b049-11e4-89f3-080027dcfac6' AND a.CDBNo=?";
+            dto = (List<TasklistDto>) hibernateQuery(sqlQuery, TasklistDto.class).setParameter(1, cdbNo).list();
+        } catch (Exception e) {
+            System.out.print("Exception in CommonDao # populaterejectedApplicationConsultant: " + e);
+            e.printStackTrace();
+        }
+        return dto;
+    }
+
+    @Transactional
+    public List<TasklistDto> populaterejectedApplicationContractor(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        try {
+            sqlQuery = "SELECT a.ReferenceNo applicationNo, e.serviceName, a.NameOfFirm firmName,,a.RemarksByRejector remarks,\n" +
+                    "a.MobileNo contactNo, b.Name AS appStatus,a.ApplicationDate applicationDate \n" +
+                    "FROM crpcontractor a  INNER JOIN cmnlistitem b ON b.Id  = a.CmnApplicationRegistrationStatusId\n" +
+                    "INNER JOIN (\n" +
+                    "SELECT c.CrpContractorId,MIN(d.referenceNo)minRef, GROUP_CONCAT(d.Name ORDER BY d.referenceno ASC)serviceName  \n" +
+                    "FROM crpcontractorappliedservice c \n" +
+                    "INNER JOIN crpservice d ON d.Id = c.CmnServiceTypeId GROUP BY c.CrpContractorId\n" +
+                    ") e ON e.CrpContractorId = a.CrpContractorId \n" +
+                    "WHERE a.CmnApplicationRegistrationStatusId = 'de662a61-b049-11e4-89f3-080027dcfac6' AND a.CDBNo=?";
+            dto = (List<TasklistDto>) hibernateQuery(sqlQuery, TasklistDto.class).setParameter(1, cdbNo).list();
+        } catch (Exception e) {
+            System.out.print("Exception in CommonDao # populaterejectedApplicationContractor: " + e);
+            e.printStackTrace();
+        }
+        return dto;
     }
 }
 
