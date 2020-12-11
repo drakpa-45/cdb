@@ -84,14 +84,14 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                     <label>Mobile Number: <span class="text-danger">*</span></label>
-                    <input type="number" class=" form-control number"  id="mobileNo" min="0" name="mobileNo" onkeypress="return preventDot(event);"/>
+                    <input type="number" class="form-control number"  id="mobileNo" min="0" name="mobileNo" onKeyPress="if(this.value.length==8) return false;" onkeypress="return preventDot(event);"/>
                     <span id="mobileNo_err" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                     <label>Telephone Number:</label>
-                    <input id="TphoneNo" type="number" class="form-control" name="telephoneNo" onkeypress="return preventDot(event);">
+                    <input id="TphoneNo" type="number" class="form-control" name="telephoneNo" onkeyup="return preventDot(event);">
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                     <label>TPN Number:</label>

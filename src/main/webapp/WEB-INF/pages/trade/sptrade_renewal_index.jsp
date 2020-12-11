@@ -129,7 +129,7 @@
                                                                         <div class="form-group row">
                                                                             <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Salutation<span class="text-danger">*</span>:</label>
                                                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                                <form:select path="salutationList"  name="salutation" onclick="remove_err('salutation_err')" id="salutation" class="form-control">
+                                                                                <form:select path="salutationList"  name="salutation" onclick="remove_err('salutation_err')" id="" class="form-control">
                                                                                     <form:option value="${registrationDetails.salutationId}">${registrationDetails.salutation}</form:option>
                                                                                     <form:options items="${salutationList}" itemValue="value" itemLabel="text"></form:options>
                                                                                 </form:select>
@@ -163,7 +163,7 @@
                                                                         <div class="form-group row">
                                                                             <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Village:</label>
                                                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                                <input type="text" readonly maxlength="100" id="village" name="village" class="form-control" value="${registrationDetails.village}">${registrationDetails.village}
+                                                                                <input type="text" readonly maxlength="100" id="village" name="village" class="form-control" value="${registrationDetails.village}">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -188,7 +188,7 @@
                                                                     </div>
                                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                         <label>Mobile No: <span class="text-danger">*</span></label>
-                                                                        <input type="text" class=" form-control number" value="${registrationDetails.mobileNo}" id="mobileNo" name="mobileNo">
+                                                                        <input type="number" class="form-control number" value="${registrationDetails.mobileNo}" id="mobileNo" onKeyPress="if(this.value.length==8) return false;" onkeypress="return preventDot(event);" min="0">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-12">
@@ -323,7 +323,7 @@
                                                                 </div>
                                                                 <div class="form-group row">
                                                                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                                                        <input type="file" name="files" id="file1"  accept="application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document" class="alert badge-danger" onchange="validateAttachment(this.value,'file1','filecheck1')">
+                                                                        <input type="file" name="files" id="file1" class="alert badge-danger" required="true" accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document' onchange="validateAttachment(this.value,'file1','filecheck1')">
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                                                         <button class="btn btn-success fa-pull-right" type="button" onclick="addmoreattachemnts()"><i class="fa fa-plus"> Add More Documents</i></button>

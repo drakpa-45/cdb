@@ -64,6 +64,31 @@ function validateFees(){
     return retutype;
 }
 
+function preventDot(e) {
+    var key = e.charCode ? e.charCode : e.keyCode;
+    if (key == 46)
+    { return false; }
+}
+
+function checkStatus(cidNo){
+    var url= _baseURL() +'/isCIDUnique';
+    var $this = $('#app_çid');
+    $.ajax({
+        url:url,
+        type: 'GET',
+        data: {cidNo: cidNo},
+        success: function (res) {
+            if (res.status == '1') {
+                $this.val('').focus();
+                warningMsg(res.text);
+                $this.val('').focus();
+            }else{
+
+            }
+        }
+    });
+}
+
 function validatepersonalSection(){
     var retutype=true;
     if($('#trade').val()==""){
@@ -128,9 +153,10 @@ function validateeducaion(){
         $('#regEmail').focus();
         retutype=false;
     }
-
     return retutype;
 }
+
+
 function remove_err(errId){
     $('#'+errId).html('');
 }
@@ -180,7 +206,7 @@ function submitRegistrationForm(){
         $('#formId').val('engineerForm');
         $('#targetId').val('acknowledgementmessage');
         $('#url').val(_baseURL() + '/saveEngineer');
-        $('#messages').html('You are about to submit application. Are you sure to proceed ?');
+        $('#messages').html('You are about to submit your application. Do you want to proceed?');
         returntpe;
     }
 }
@@ -277,6 +303,23 @@ function printInfo(cdbNo){
     $('#content_main_div_public_user').load(url);
 }
 
+function PrintInfo() {
+    var divToPrint = document.getElementById('printInfo');
+    var popupWin = window.open('', '_blank', 'width=1000,height=1000');
+    popupWin.document.open();
+    popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
+    popupWin.document.close();
+    //  var url = '${pageContext.request.contextPath}/ruralTimber/afterPrintingApp';
+    var options = {
+        target: '#registrtaionFormCard',
+        url: url,
+        type: 'POST',
+        enctype: 'form-data',
+        data: $('#printingForm').serialize()
+    };
+    $("#printingForm").submit();
+}
+
 $('#submitbtn').prop('disabled',true);
 function enablesubmit(){
     if($('#submitcheckbox').prop('checked')){
@@ -289,7 +332,7 @@ function enablesubmit(){
 
 function submitForm(){
     $('#concirmationRenewalModel').modal('show');
-    $('#messages').html('You are about to submit application. Are you sure to proceed ?');
+    $('#messages').html('You are about to submit application. Do you want to proceed?');
 }
 function SubmitApplicationDetials(){
     var url='/cdb/public_access/emptylayout/saveEngineer';

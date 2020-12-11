@@ -158,7 +158,7 @@
                                                             </div>
                                                             <div class="form-group row">
                                                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                                                    <input type="file" name="files" id="file1" class="alert badge-danger"required="true" accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document' onchange="validateAttachment(this.value,'file1','filecheck1')">
+                                                                    <input type="file" name="files" id="file1" class="alert badge-danger" required="true" accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document' onchange="validateAttachment(this.value,'file1','filecheck1')">
                                                                 </div>
                                                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                                                     <button class="btn btn-success fa-pull-right" type="button" onclick="addmoreattachemnts()"><i class="fa fa-plus"> Add More Documents</i></button>

@@ -127,14 +127,15 @@ public class SpecializedController extends BaseController {
                         String saveWrk = services.saveWrkClassification(dto, tradeFeesDto, null, request);
                         if (saveWrk.equalsIgnoreCase("success")) {
                             services.saveDoc(files, resdto.getCrpSpecializedTradeId(), "RegistrationOfSpecializedTrade", null);
-                            personal.setResponseText("Your application for <label class='control-label'>Registration of Specialized Trade</label> has been successfully submitted and your application number is <b>" + resdto.getReferenceNo() +"."+ "<p>You will receive an email as well as SMS notification once taken further action.</p><label class='control-label'>You can track your application using above Application Number.</label>");
+                            personal.setResponseText("Your application for <label class='control-label'>Registration of Specialized Trade</label> has been submitted successfully and your application number is <b>" + resdto.getReferenceNo() + "</b> <br><p>You will receive an email as well as SMS notification once taken further action.</p><label class='control-label'>You can track your application using above Application Number.</label>");
                         } else {
                             model.addAttribute("status", "failed");
                             return null;
                         }
                     }
                     model.addAttribute("cidDetails", services.fetchdtls(resdto));
-                    model.addAttribute("acknowledgement_message", "Your application for <label class='control-label'>Registration of Specialized Trade</label> has been successfully submitted and your application number is <b>" + resdto.getReferenceNo() + "."+"<label class='control-label'>You will receive an email as well as SMS notification once taken further action.</label><label class='control-label'>&nbsp; You can track your application using above Application Number.</label>");
+                    model.addAttribute("acknowledgement_message", "<center>Your application for <label class='control-label'>Registration of Specialized Trade</label> has been submitted successfully and your application number is <b>" + resdto.getReferenceNo() + ".</center> <center>"+"You will receive an email as well as SMS notification once taken further action.</center> <center><label class='control-label'>You can track your application using above Application Number.</label></center>");
+//                    ("acknowledgement_message", "<center>Your application for <label class='control-label'>Registration of Specialized Trade</label> has been submitted successfully and your application number is <b>" + resdto.getReferenceNo() + ".</center> <center>"+"You will receive an email as well as SMS notification once taken further action.</center> <center><label class='control-label'>You can track your application using above Application Number.</label></center>");
 
                     String mailContent = "<b>Application No: "+resdto.getReferenceNo()+" is submitted successfully on "+new Date()+" with Construction Development Board (CDB)." +
                             "This is to acknowledge for the registration of the Specialized Trade with Construction Development Board (CDB)." +
@@ -149,7 +150,7 @@ public class SpecializedController extends BaseController {
                     }
                     return "/trade/tradePrintPage";
                 } else{
-                    model.addAttribute("acknowledgement_message", "<div class ='text-danger'>Your application for <label class='control-label'>Registration Of Specialized Trade/Firm</label> is failed. Please try again by providing valid information for all required fields.</div>");
+                    model.addAttribute("acknowledgement_message", "<div class ='text-danger'>Your application for <label class='control-label'>Registration of Specialized Trade/Firm</label> has failed. Please try again by providing valid information for all required fields.</div>");
                     return "/architect/acknowledgement";
                 }
             //}
@@ -174,7 +175,7 @@ public class SpecializedController extends BaseController {
                 if (saveWrk.equalsIgnoreCase("success")) {
                     services.saveDoc(files, resdto.getCrpSpecializedTradeId(), "RenewalOfSpecialTrade", loginDTO.getUserId());
                     //personal.setResponseText("Your application for <label class='control-label'>Renewal Of SpecialTrade</label> has been submitted and your application number is <b>" + resdto.getReferenceNo() + "</b> <br><p>You will receive an email as well as sms notification once take further action.</p><label class='control-label'>You can track your application using above Application Number. <br /> Thank you.</label>");
-                    model.addAttribute("acknowledgement_message", "Your application for <label class='control-label'>Renewal of SpecialTrade</label> has been submitted and your application number is <b>" + resdto.getReferenceNo() + "</b> <br><p>You will receive an email as well as sms notification once take further action.</p><label class='control-label'>You can track your application using above Application Number. <br /> Thank you.</label>");
+                    model.addAttribute("acknowledgement_message", "Your application for <label class='control-label'>Renewal of SpecialTrade</label> has been submitted successfully and your application number is <b>" + resdto.getReferenceNo() + "</b> <br><p>You will receive an email as well as SMS notification once take further action.</p><label class='control-label'>You can track your application using above Application Number. <br /> Thank you.</label>");
                     return "/architect/acknowledgement";
                 } else {
                     model.addAttribute("status", "failed");

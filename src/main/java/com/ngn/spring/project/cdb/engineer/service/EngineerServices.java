@@ -169,8 +169,9 @@ public class EngineerServices extends BaseService{
         return commonService.getModePayment();
     }
 
-    public void assignMyTask(String appNo, String userID, String type) {
-        dao.assignMyTask(appNo, userID,type);
+    public String assignMyTask(String appNo, String userID, String type) {
+        String assignMyTask = dao.assignMyTask(appNo, userID,type);
+        return assignMyTask;
     }
 
     public ArchitectDto getEngineerDetails(String appNo) {
@@ -548,7 +549,7 @@ public class EngineerServices extends BaseService{
         statusList.add(ApplicationStatus.CANCELLATION.getCode());
         if (statusList.contains(cFinal.getCmnApplicationRegistrationStatusId())) {
             responseMessage.setStatus(UNSUCCESSFUL_STATUS);
-            responseMessage.setText("You are not allow to avail this service as your certificate is " +
+            responseMessage.setText("You are not allowed to avail this service as your certificate is " +
                     "<b> " + ApplicationStatus.valueOf(cFinal.getCmnApplicationRegistrationStatusId()).getName() + "</b>");
             return responseMessage;
         }
@@ -592,7 +593,7 @@ public class EngineerServices extends BaseService{
             responseMessage.setText("Seems like your registration is already expired on <b>"+expiryDate+
                     "</b>. The total number of days late is <b>"+acNoOfLateDays+"</b> days." +
                     " However 30 days is considered as grace period which means the late fees that would be imposed within that period will be waived. Penalty amount is Nu. 100 per day.<br>" +
-                    "Total number of days after grace period is <b>"+noOfLateDays+"</b>. Total of Nu. "+lateFee+" will be imposed as penalty for late renewal of your cdb Certificate till today. " +
+                    "Total number of days after grace period is <b>"+noOfLateDays+"</b>. Total of Nu. "+lateFee+" will be imposed penalty for late renewal of your CDB Certificate till today. " +
                     "However your penalty will be calculated till date of approval.");
             waiveOffLateFee = (acNoOfLateDays - noOfLateDays)*100;
             lateFeeDTO.setNoOfDaysLate(acNoOfLateDays.intValue());
@@ -628,6 +629,34 @@ public class EngineerServices extends BaseService{
     private CrpengineerFinalEntity getEngineerFinal(String cdbNo) {
         return dao.getEngineerFinal(cdbNo);
     }
+
+
+    @Transactional(readOnly = true)
+    public ResponseMessage isCIDUnique(String cidNo) {
+        ResponseMessage responseMessage = new ResponseMessage();
+        String cidStatus = "";
+        String isCIDUnique = dao.isCIDUnique(cidNo);
+        if (isCIDUnique.equalsIgnoreCase("262a3f11-adbd-11e4-99d7-080027dcfac6") || isCIDUnique.equalsIgnoreCase("36f9627a-adbd-11e4-99d7-080027dcfac6") || isCIDUnique.equalsIgnoreCase("463c2d4c-adbd-11e4-99d7-080027dcfac6") || isCIDUnique.equalsIgnoreCase("6195664d-c3c5-11e4-af9f-080027dcfac6")) {
+            if (isCIDUnique.equalsIgnoreCase("262a3f11-adbd-11e4-99d7-080027dcfac6")) {
+                cidStatus = ApplicationStatus.UNDER_PROCESS.getName();
+            }
+            if (isCIDUnique.equalsIgnoreCase("36f9627a-adbd-11e4-99d7-080027dcfac6")) {
+                cidStatus = ApplicationStatus.VERIFIED.getName();
+            }
+            if (isCIDUnique.equalsIgnoreCase("463c2d4c-adbd-11e4-99d7-080027dcfac6")) {
+                cidStatus = ApplicationStatus.APPROVED.getName();
+            }
+            if (isCIDUnique.equalsIgnoreCase("6195664d-c3c5-11e4-af9f-080027dcfac6")) {
+                cidStatus = ApplicationStatus.APPROVED_FOR_PAYMENT.getName();
+            }
+            responseMessage.setText("Application for this CID is " + cidStatus + "." + " Please wait until the process is complete.");
+            responseMessage.setStatus(1);
+        } else {
+            responseMessage.setStatus(0);
+        }
+        return responseMessage;
+    }
+
 
     @Transactional
     public CertificateDTO getEngineerPrintDetails(HttpServletRequest request, String cdbNo) {

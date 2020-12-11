@@ -82,6 +82,17 @@ public class EngineerController extends BaseController {
             return  null;
         }
     }
+    @ResponseBody
+    @RequestMapping(value = "/engineer/isCIDUnique", method = RequestMethod.GET)
+    public ResponseMessage isCIDUnique(HttpServletRequest request, String cidNo) {
+        try{
+            ResponseMessage isCIDUnique=services.isCIDUnique(cidNo);
+            return isCIDUnique;
+        }catch (Exception e){
+            System.out.print(e);
+            return  null;
+        }
+    }
 
     @RequestMapping(value = "/public_access/emptylayout/saveEngineer",method = RequestMethod.POST)
     public String saveSurvey(ArchitectDto dto,@RequestParam("files") MultipartFile[] files, HttpServletRequest request,ModelMap model) {
@@ -100,7 +111,7 @@ public class EngineerController extends BaseController {
                     services.saveDoc(files, resdto.getCrpEngineerId(), "RegistrationOfEngineer", "CITIZEN");
                     personal.setResponseText("Your application for <label class='control-label'>Registration of Engineer</label> has been submitted and your application number is <b>" + resdto.getReferenceNo() + "</b> <br><p>You will receive an email as well as sms notification once take further action.</p><label class='control-label'>You can track your application using above Application Number.</label>");
 
-                    String mailContent = "<b>Application No: "+resdto.getReferenceNo()+" is submitted sucessfully on "+new Date()+" with Construction Development Board (CDB)." +
+                    String mailContent = "<b>Application No: "+resdto.getReferenceNo()+" is submitted successfully on "+new Date()+" with Construction Development Board (CDB)." +
                             "This is to acknowledge for the registration of the Engineer with Construction Development Board (CDB)." +
                             " Your application will processed in due course. You can check the status of the application using CID no or Application number provided." +
                             " You will also be notified via email when your application is approved." +
@@ -112,7 +123,7 @@ public class EngineerController extends BaseController {
                         e.printStackTrace();
                     }
                 }
-                model.addAttribute("acknowledgement_message", "Your application for <label class='control-label'>Registration Of Engineer</label> has been submitted and your application number is <b>" + resdto.getReferenceNo() + "</b> <br><p>You will receive an email as well as sms notification once take further action.</p><label class='control-label'>You can track your application using above Application Number.</label>");
+                model.addAttribute("acknowledgement_message", "Your application for <label class='control-label'>Registration of Engineer</label> has been submitted successfully and your application number is <b>" + resdto.getReferenceNo() + "."+"</b> <br><p>You will receive an email as well as SMS notification once taken further action.</p><label class='control-label'>You can track your application using above Application Number.</label>");
                 return "/architect/acknowledgement";
         }catch (Exception e){
             System.out.print(e);
@@ -131,9 +142,9 @@ public class EngineerController extends BaseController {
             ArchitectDto resdto=(ArchitectDto)personal.getDto();
             if(personal.getStatus()==1){
                 services.saveDoc(files,resdto.getCrpEngineerId(),"RenewalOfEngineer",loginDTO.getUserId());
-                personal.setResponseText("Your application for <label class='control-label'>Renewal of Engineer</label> has been submitted and your application number is <b>"+resdto.getReferenceNo()+"</b> <br><p>You will receive an email as well as sms notification once take further action.</p><label class='control-label'>You can track your application using above Application Number. <br /> Thank you.</label>");
+                personal.setResponseText("Your application for <label class='control-label'>Renewal of Engineer</label> has been submitted successfully and your application number is <b>"+resdto.getReferenceNo()+"</b> <br><p>You will receive an email as well as SMS notification once take further action.</p><label class='control-label'>You can track your application using above Application Number. <br /> Thank you.</label>");
             }
-            model.addAttribute("acknowledgement_message", "Your application for <label class='control-label'>Renewal of Engineer</label> has been submitted and your application number is <b>"+resdto.getReferenceNo()+"</b> <br><p>You will receive an email as well as sms notification once take further action.</p><label class='control-label'>You can track your application using above Application Number. <br /> Thank you.</label>");
+            model.addAttribute("acknowledgement_message", "Your application for <label class='control-label'>Renewal of Engineer</label> has been submitted successfully and your application number is <b>"+resdto.getReferenceNo()+"</b> <br><p>You will receive an email as well as SMS notification once take further action.</p><label class='control-label'>You can track your application using above Application Number. <br /> Thank you.</label>");
             return "/architect/acknowledgement";
         }catch (Exception e){
             System.out.print(e);
@@ -150,7 +161,7 @@ public class EngineerController extends BaseController {
         try{
             ResponseMessage personal=services.saveEngineercancellation(dto, loginDTO.getUserId());
             ArchitectDto resdto=(ArchitectDto)personal.getDto();
-            model.addAttribute("acknowledgement_message", "Your application for <label class='control-label'>Cancellation Of Engineer </label> has been submitted and your application number is <b>"+resdto.getReferenceNo()+"</b> <br><p>You will receive an email as well as sms notification once take further action.</p><label class='control-label'>You can track your application using above Application Number. <br /> Thank you.</label>");
+            model.addAttribute("acknowledgement_message", "Your application for <label class='control-label'>Cancellation of Engineer </label> has been submitted successfully and your application number is <b>"+resdto.getReferenceNo()+"</b> <br><p>You will receive an email as well as sms notification once take further action.</p><label class='control-label'>You can track your application using above Application Number. <br /> Thank you.</label>");
             return "/architect/acknowledgement";
         }catch (Exception e){
             System.out.print(e);

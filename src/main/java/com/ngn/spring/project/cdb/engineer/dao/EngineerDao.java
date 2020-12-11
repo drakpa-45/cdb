@@ -71,15 +71,21 @@ public class EngineerDao extends BaseDao {
     }
 
     @Transactional(readOnly = false)
-    public void assignMyTask(String appNo, String lockUserId, String type) {
-        String lockByUserId = "";
+    public String assignMyTask(String appNo, String lockUserId, String type) {
+        String lockByUserId = "",assignMyTask="";
         if(type.equalsIgnoreCase("release")){
-             lockByUserId ="null";
+
+            lockByUserId =null;
         }else{
             lockByUserId=lockUserId;
         }
         sqlQuery = properties.getProperty("EngineerDao.send2MyOrGroupTask");
-        hibernateQuery(sqlQuery).setParameter("appNo", appNo).setParameter("lockUserId", lockByUserId).executeUpdate();
+         int save = hibernateQuery(sqlQuery).setParameter("appNo", appNo).setParameter("lockUserId", lockByUserId).executeUpdate();
+        if(save>0){
+            return "Success";
+        }else{
+            return "Failed";
+        }
     }
 
     @Transactional(readOnly = false)
@@ -566,6 +572,18 @@ public class EngineerDao extends BaseDao {
         sqlQuery = properties.getProperty("EngineerDao.getEngineerPrintDetails");
         dto=(CertificateDTO) hibernateQuery(sqlQuery, CertificateDTO.class).setParameter(1, cdbNo).list().get(0);
         return dto;
+    }
+
+    public String isCIDUnique(String cidNo) {
+        String isCIDUnique = "";
+        try {
+            sqlQuery = "SELECT c.CmnApplicationRegistrationStatusId FROM crpengineer c WHERE c.CIDNo=?";
+            isCIDUnique = (String) hibernateQuery(sqlQuery).setParameter(1, cidNo).list().get(0);
+        } catch (Exception e) {
+            System.out.print("Exception in EngineerDao # isCIDUnique:" + e);
+            e.printStackTrace();
+        }
+        return isCIDUnique;
     }
 }
 
