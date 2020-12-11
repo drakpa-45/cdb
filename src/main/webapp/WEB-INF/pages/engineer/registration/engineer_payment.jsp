@@ -252,7 +252,7 @@
                                                             <td>${appDetails.applicationDate}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td><strong>Created By: </strong></td>
+                                                            <td><strong>Submitted By: </strong></td>
                                                             <td>${appDetails.createdBy} <b style="color: blueviolet">(${appDetails.fullname})</b></td>
                                                         </tr>
                                                     </table>

@@ -82,6 +82,18 @@ public class SurveyController extends BaseController {
         }
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/survey/isCIDUnique", method = RequestMethod.GET)
+    public ResponseMessage isCIDUnique(HttpServletRequest request, String cidNo) {
+        try{
+            ResponseMessage isCIDUnique=services.isCIDUnique(cidNo);
+            return isCIDUnique;
+        }catch (Exception e){
+            System.out.print(e);
+            return  null;
+        }
+    }
+
     @RequestMapping(value = "/public_access/emptylayout/saveSurvey",method = RequestMethod.POST)
     public String saveSurvey(ArchitectDto dto,@RequestParam("files") MultipartFile[] files, HttpServletRequest request,ModelMap model) {
         UserSessionDetailDTO user = (UserSessionDetailDTO)request.getSession().getAttribute(SSOClientConstants.SSO_SESSION_OBJ_KEY);

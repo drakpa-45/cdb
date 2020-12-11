@@ -11,7 +11,7 @@ function nextTab(presentClass, nextClass){
         $.ajax({
             url:url,
             type: 'GET',
-            data: {cid: cid},
+            data: {cid: cid, type: "fetch"},
             success: function (res) {
                 if (res.status == '1') {
                     var dto = res.dto;
@@ -49,9 +49,27 @@ function nextTab(presentClass, nextClass){
     else if(presentClass=="feesStructurerenewal"){
         changeNextTab(presentClass, nextClass)
     }
-
-
 }
+
+function checkStatus(cidNo){
+    var url= _baseURL() +'/isCIDUnique';
+    var $this = $('#app_çid');
+    $.ajax({
+        url:url,
+        type: 'GET',
+        data: {cidNo: cidNo},
+        success: function (res) {
+            if (res.status == '1') {
+                $this.val('').focus();
+                warningMsg(res.text);
+                $this.val('').focus();
+            }else{
+
+            }
+        }
+    });
+}
+
 function validateFees(){
     var retutype=true;
     if($('#app_çid').val()==""){

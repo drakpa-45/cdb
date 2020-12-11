@@ -157,7 +157,12 @@
                                                                         <input type="hidden" value="${appDetails.serviceSectorType}" readonly maxlength="100" id="service" name="serviceSectorType" class="form-control">${appDetails.serviceSectorType}
                                                                     </div>
                                                                 </div>
-
+                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                                                                    <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Trade: </label>
+                                                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                        <input type="hidden" value="${appDetails.trade}" readonly maxlength="100" id="service" name="trade" class="form-control">${appDetails.trade}
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -348,8 +353,8 @@
                                                                                             <td>${appDetails.applicationDate}</td>
                                                                                         </tr>
                                                                                         <tr>
-                                                                                            <td><strong>Created By: </strong></td>
-                                                                                            <td>${appDetails.createdBy}<b style="color: blueviolet;">(Applicant's CID Number)</b></td>
+                                                                                            <td><strong>Submitted By: </strong></td>
+                                                                                            <td>${appDetails.createdBy}<b style="color: blueviolet;">(${appDetails.fullname})</b></td>
                                                                                         </tr>
                                                                                     </table>
                                                                                 </td>

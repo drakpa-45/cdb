@@ -89,6 +89,17 @@ public class ArchitectController extends BaseController {
             return  null;
         }
     }
+    @ResponseBody
+    @RequestMapping(value = "/architects/isCIDUnique", method = RequestMethod.GET)
+    public ResponseMessage isCIDUnique(HttpServletRequest request, String cidNo) {
+        try{
+            ResponseMessage isCIDUnique=services.isCIDUnique(cidNo);
+            return isCIDUnique;
+        }catch (Exception e){
+            System.out.print(e);
+            return  null;
+        }
+    }
 
     @RequestMapping(value = "/public_access/emptylayout/saveArchitect",method = RequestMethod.POST)
     public String saveArchitect(ArchitectDto dto,@RequestParam("files") MultipartFile[] files, HttpServletRequest request,ModelMap model) {
