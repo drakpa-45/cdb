@@ -301,7 +301,7 @@
                                                             <td>${appDetails.approvaldate}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td><strong>Approval Remarks: </strong></td>
+                                                            <td><strong>Approver Remarks: </strong></td>
                                                             <td>${appDetails.approiverremarks}</td>
                                                         </tr>
                                                         <tr>

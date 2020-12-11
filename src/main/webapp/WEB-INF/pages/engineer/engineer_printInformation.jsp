@@ -25,7 +25,7 @@
             <div class="row form-froup">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table" id="engpdf">
                             <tbody>
                                 <tr>
                                     <td colspan="2" class="font-blue-madison bold warning">Personal Information</td>
@@ -162,12 +162,38 @@
                                 </tbody>
                             </table>
                         </div>
-                        <button class="btn btn-info" type="button" id="prntid" onclick="printAndDowoload()"><i class="fa fa-download"></i>Print</button><br /><br />
+                        <button class="btn btn-info" type="button" id="prntid" onclick="printAndDowoload()"><i class="fa fa-download"></i>Print</button>
+                        <a href="#" onClick="doExportItem('#engpdf',
+                                        {type: 'pdf',
+                                         engpdf: {orientation: 'l',
+                                         margins: {right: 20, left: 20, top: 15, bottom: 15},
+                                         autotable: {styles: {rowHeight: 16, halign: 'left'},
+                                         tableWidth: 'auto'}
+                                         }});">
+                            <button type="button" class="btn btn-outline-danger"><i class="fa fa-save"></i>Generate PDF</button></a>
                 </div>
             </div>
         </div>
     </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#engpdf').DataTable({
+                responsive: true
+            });
+
+        });
+        function doExportItem(selector, params){
+            var options={
+                tableName: 'engpdf',
+                worksheetName: 'EngRegistration',
+                fileName: 'EngRegistration'
+            };
+            $.extend(true, options, params);
+            $(selector).tableExport(options);
+        }
+    </script>
     <script type="text/javascript" src="<c:url value="/resources/JqueryAjaxFormSubmit.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/jquery.form.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/cdb/survey.js"/>"></script>
