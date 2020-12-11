@@ -10,6 +10,7 @@ import com.ngn.spring.project.cdb.certification.CertificateDTO;
 import com.ngn.spring.project.cdb.survey.entity.CrpsurveyFinalEntity;
 import com.ngn.spring.project.cdb.survey.entity.SurveyDocument;
 import com.ngn.spring.project.cdb.survey.entity.SurveyServiceEntity;
+import com.ngn.spring.project.commonDto.TasklistDto;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
 import com.ngn.spring.project.lib.LoggedInUser;
 import org.hibernate.query.Query;
@@ -70,15 +71,20 @@ public class SurveyDao extends BaseDao {
     }
 
     @Transactional(readOnly = false)
-    public void assignMyTask(String appNo, String lockUserId, String type) {
+    public String assignMyTask(String appNo, String lockUserId, String type) {
         String lockByUserId = "";
         if(type.equalsIgnoreCase("release")){
-             lockByUserId ="null";
+             lockByUserId =null;
         }else{
             lockByUserId=lockUserId;
         }
         sqlQuery = properties.getProperty("SurveyDao.send2MyOrGroupTask");
-        hibernateQuery(sqlQuery).setParameter("appNo", appNo).setParameter("lockUserId", lockByUserId).executeUpdate();
+        int save=hibernateQuery(sqlQuery).setParameter("appNo", appNo).setParameter("lockUserId", lockByUserId).executeUpdate();
+        if(save>0){
+            return "Success";
+        }else{
+            return "Failed";
+        }
     }
 
     @Transactional(readOnly = false)
@@ -550,6 +556,71 @@ public class SurveyDao extends BaseDao {
         CertificateDTO dto =new CertificateDTO();
         sqlQuery = properties.getProperty("SurveyorDao.getSurveyPrintDetails");
         dto=(CertificateDTO) hibernateQuery(sqlQuery, CertificateDTO.class).setParameter(1, cdbNo).list().get(0);
+        return dto;
+    }
+
+    public String isCIDUnique(String cidNo) {
+        String isCIDUnique = "";
+        try {
+            sqlQuery = "SELECT c.CmnApplicationRegistrationStatusId FROM crpsurvey c WHERE c.CIDNo=?";
+            isCIDUnique = (String) hibernateQuery(sqlQuery).setParameter(1, cidNo).list().get(0);
+        } catch (Exception e) {
+            System.out.print("Exception in SurveyorDao # isCIDUnique:" + e);
+            e.printStackTrace();
+        }
+        return isCIDUnique;
+    }
+
+    @Transactional
+    public List<TasklistDto> populateapplicationHistorySurvey(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        try {
+            sqlQuery = "SELECT \n" +
+                    "a.ReferenceNo applicationNo,\n" +
+                    "a.ApplicationDate appDate,\n" +
+                    "b.Name AS appStatus, \n" +
+                    "CASE\n" +
+                    "WHEN s.CmnServiceTypeId = '55a922e1-cbbf-11e4-83fb-080027dcfac6' THEN 'New Registration'\n" +
+                    "WHEN s.CmnServiceTypeId ='45bc628b-cbbe-11e4-83fb-080027dcfac6' THEN 'Renewal'\n" +
+                    "WHEN s.CmnServiceTypeId = 'acf4b324-cbbe-11e4-83fb-080027dcfac6' THEN 'Cancellation'\n" +
+                    "ELSE 'No Services'\n" +
+                    "END AS serviceName\n" +
+                    "FROM\n" +
+                    "crpsurveyfinal a \n" +
+                    "INNER JOIN cmnlistitem b  \n" +
+                    "ON b.Id = a.CmnApplicationRegistrationStatusId INNER JOIN crpsurveyappliedservice s \n" +
+                    "ON s.CrpSurveyId = a.Id WHERE a.ARNo =?\n" +
+                    "ORDER BY a.ReferenceNo DESC;";
+            dto = (List<TasklistDto>) hibernateQuery(sqlQuery, TasklistDto.class).setParameter(1, cdbNo).list();
+        } catch (Exception e) {
+            System.out.print("Exception in CommonDao # populateapplicationHistorySurvey: " + e);
+            e.printStackTrace();
+        }
+        return dto;
+    }
+
+    @Transactional
+    public List<TasklistDto> populaterejectedApplicationSurvey(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        try {
+            sqlQuery = "SELECT a.ReferenceNo applicationNo,a.ApplicationDate appDate,b.Name AS appStatus, \n" +
+                    "CASE\n" +
+                    "WHEN s.CmnServiceTypeId = '55a922e1-cbbf-11e4-83fb-080027dcfac6' THEN 'New Registration'\n" +
+                    "WHEN s.CmnServiceTypeId ='45bc628b-cbbe-11e4-83fb-080027dcfac6' THEN 'Renewal'\n" +
+                    "WHEN s.CmnServiceTypeId = 'acf4b324-cbbe-11e4-83fb-080027dcfac6' THEN 'Cancellation'\n" +
+                    "ELSE 'No Services'\n" +
+                    "END AS serviceName\n" +
+                    "FROM\n" +
+                    "crpsurveyfinal a \n" +
+                    "INNER JOIN cmnlistitem b  \n" +
+                    "ON b.Id = a.CmnApplicationRegistrationStatusId INNER JOIN crpsurveyappliedservice s \n" +
+                    "ON s.CrpSurveyId = a.Id WHERE a.CmnApplicationRegistrationStatusId = 'de662a61-b049-11e4-89f3-080027dcfac6' AND a.ARNo = ?\n" +
+                    "ORDER BY a.ReferenceNo DESC";
+            dto = (List<TasklistDto>) hibernateQuery(sqlQuery, TasklistDto.class).setParameter(1, cdbNo).list();
+        } catch (Exception e) {
+            System.out.print("Exception in CommonDao # populaterejectedApplicationSurvey: " + e);
+            e.printStackTrace();
+        }
         return dto;
     }
 }

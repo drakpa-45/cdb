@@ -56,11 +56,12 @@ public class SpecializedFirmTaskListController extends BaseController {
         return "redirect:/admin/specializedFirm";
     }
 
-    @RequestMapping(value = "/specializedFirm/{appNo}", method = RequestMethod.GET)
-    public String redirectToAction(RedirectAttributes attributes,@PathVariable String appNo, HttpServletRequest request) {
+    @RequestMapping(value = "/specializedFirm/{appNo}/{flag}", method = RequestMethod.GET)
+    public String redirectToAction(RedirectAttributes attributes,@PathVariable String appNo,@PathVariable String flag, HttpServletRequest request) {
         String service = (String)request.getSession().getAttribute("SERVICE");
         //String appStatus = contractorNRActionService.getApplicationStatus(appNo);
         attributes.addFlashAttribute("appNo", appNo);
+        SpecializedFirmActionService.send2MyOrGroupTask(appNo,flag,getLoggedInUser().getUserID());
         switch (service){
             case "NR":
                 return "redirect:/admin/specializedFirm/action";

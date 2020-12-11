@@ -168,8 +168,9 @@ public class SurveyServices extends BaseService {
         return commonService.getModePayment();
     }
 
-    public void assignMyTask(String appNo, String userID, String type) {
-        dao.assignMyTask(appNo, userID, type);
+    public String assignMyTask(String appNo, String userID, String type) {
+        String assignMyTask = dao.assignMyTask(appNo, userID,type);
+        return assignMyTask;
     }
 
     public ArchitectDto getSurveyDetails(String appNo) {
@@ -177,8 +178,8 @@ public class SurveyServices extends BaseService {
         if (dto.getServiceTypeId().equalsIgnoreCase("New Registration")) {
             if (dto.getServiceSectorType().equalsIgnoreCase("Government") || dto.getServiceSectorType().equalsIgnoreCase("Private") && dto.getUpdateStatus().equalsIgnoreCase("6195664d-c3c5-11e4-af9f-080027dcfac6")) {
                 //generate cdb nunber
-                String surveyNo = dao.generateSurveyNo(dto.getCountryId(), dto.getServiceSectorType());
-                dto.setCdbNo(surveyNo);
+             //   String surveyNo = dao.generateSurveyNo(dto.getCountryId(), dto.getServiceSectorType());
+                dto.setCdbNo("NULL");
             }
          /*   else
             if(dto.getUpdateStatus().equalsIgnoreCase("6195664d-c3c5-11e4-af9f-080027dcfac6")){
@@ -309,6 +310,9 @@ public class SurveyServices extends BaseService {
         //  if(dto.getServiceSectorType().equalsIgnoreCase("Goverment")) {
         if (dto.getServiceTypeId().equalsIgnoreCase("registration")) {
             insert = dao.insertuserDetails(dto1, userID, request);
+            String surveyNo = dao.generateSurveyNo(dto1.getCountryId(), dto1.getServiceSectorType());
+            dto.setCdbNo(surveyNo);
+            dto1.setCdbNo(surveyNo);
             if (!insert.equalsIgnoreCase("Insert_Fail")) {
                 dto1.setCdbNo(dto.getCdbNo());
                 String password = insert.split("/")[1];
@@ -596,6 +600,9 @@ public class SurveyServices extends BaseService {
             Long noOfLateDays = ChronoUnit.DAYS.between(gracePeriodDate, curDate)-1;
             Long  acNoOfLateDays = ChronoUnit.DAYS.between(expiryDate, curDate)-1;
             lateFee = new BigDecimal((noOfLateDays*100));
+            if(lateFee.doubleValue()>3000){
+                lateFee= BigDecimal.valueOf(3000);
+            }
             responseMessage.setText("Seems like your registration is already expired on <b>"+expiryDate+
                     "</b>. The total number of days late is <b>"+acNoOfLateDays+"</b> days." +
                     " However 30 days is considered as grace period which means the late fees that would be imposed within that period will be waived. Penalty amount is Nu. 100 per day.<br>" +
@@ -640,5 +647,31 @@ public class SurveyServices extends BaseService {
     @Transactional
     public CertificateDTO getSurveyPrintDetails(HttpServletRequest request, String cdbNo) {
         return dao.getSurveyPrintDetails(request,cdbNo);
+    }
+
+    @Transactional(readOnly = true)
+    public ResponseMessage isCIDUnique(String cidNo) {
+        ResponseMessage responseMessage = new ResponseMessage();
+        String cidStatus = "";
+        String isCIDUnique = dao.isCIDUnique(cidNo);
+        if (isCIDUnique.equalsIgnoreCase("262a3f11-adbd-11e4-99d7-080027dcfac6") || isCIDUnique.equalsIgnoreCase("36f9627a-adbd-11e4-99d7-080027dcfac6") || isCIDUnique.equalsIgnoreCase("463c2d4c-adbd-11e4-99d7-080027dcfac6") || isCIDUnique.equalsIgnoreCase("6195664d-c3c5-11e4-af9f-080027dcfac6")) {
+            if (isCIDUnique.equalsIgnoreCase("262a3f11-adbd-11e4-99d7-080027dcfac6")) {
+                cidStatus = ApplicationStatus.UNDER_PROCESS.getName();
+            }
+            if (isCIDUnique.equalsIgnoreCase("36f9627a-adbd-11e4-99d7-080027dcfac6")) {
+                cidStatus = ApplicationStatus.VERIFIED.getName();
+            }
+            if (isCIDUnique.equalsIgnoreCase("463c2d4c-adbd-11e4-99d7-080027dcfac6")) {
+                cidStatus = ApplicationStatus.APPROVED.getName();
+            }
+            if (isCIDUnique.equalsIgnoreCase("6195664d-c3c5-11e4-af9f-080027dcfac6")) {
+                cidStatus = ApplicationStatus.APPROVED_FOR_PAYMENT.getName();
+            }
+            responseMessage.setText("Application for this CID is " + cidStatus + "." + " Please wait until the process is complete.");
+            responseMessage.setStatus(1);
+        } else {
+            responseMessage.setStatus(0);
+        }
+        return responseMessage;
     }
 }

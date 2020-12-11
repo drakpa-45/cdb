@@ -253,11 +253,7 @@
                                                             <td>${appDetails.applicationDate}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td><strong>Remarks: </strong></td>
-                                                            <td>${appDetails.remarks}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><strong>Created By: </strong></td>
+                                                            <td><strong>Submitted By: </strong></td>
                                                             <td>${appDetails.createdBy}</td>
                                                         </tr>
                                                     </table>

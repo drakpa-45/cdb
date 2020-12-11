@@ -12,7 +12,7 @@ function nextTab(presentClass, nextClass,type){
             $.ajax({
                 url:url,
                 type: 'GET',
-                data: {cid: cid},
+                data: {cid: cid,type: "fetch"},
                 success: function (res) {
                     if (res.status == '1') {
                         var dto = res.dto;

@@ -57,10 +57,11 @@ public class ContractorTaskListController extends BaseController {
         return "redirect:/admin/contractor";
     }
 
-    @RequestMapping(value = "/contractor/{appNo}", method = RequestMethod.GET)
-    public String redirectToAction(HttpServletRequest request,RedirectAttributes attributes,@PathVariable String appNo) {
+    @RequestMapping(value = "/contractor/{appNo}/{flag}", method = RequestMethod.GET)
+    public String redirectToAction(HttpServletRequest request,RedirectAttributes attributes,@PathVariable String appNo,@PathVariable String flag) {
         String service = (String)request.getSession().getAttribute("SERVICE");
         //String appStatus = contractorNRActionService.getApplicationStatus(appNo);
+        contractorNRActionService.send2MyOrGroupTask(appNo,flag,getLoggedInUser().getUserID());
         attributes.addFlashAttribute("appNo", appNo);
         switch (service){
             case "NR":

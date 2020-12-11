@@ -71,38 +71,37 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <div class="col-lg-12"><h4>
-                           Rejected Application
-                        </h4>
-                            <b> Note: You need to reapply the following services within 10 days. Your reapply link will be
-                                disabled after 10 days</b>
-                            </br></br>
-                            <div class="table-responsive">
-                                <table class="card-table table table-bordered table-vcenter" id="rejectedTblId">
-                                    <thead>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-12"><h4>
+                        Rejected Application
+                    </h4>
+                        <b> Note: You need to reapply the following services within 10 days. Your reapply link will be
+                            disabled after 10 days</b>
+                        </br></br>
+                        <div class="table-responsive">
+                            <table class="card-table table table-bordered table-vcenter" id="rejectedTblId">
+                                <thead>
+                                <tr>
+                                    <th>Sl No.</th>
+                                    <th>Application Number</th>
+                                    <th>Service Name</th>
+                                    <th>Application Status</th>
+                                    <th>Applied Date</th>
+                                </tr>
+                                </thead>
+                                <tbody class="text-center">
+                                <c:forEach items="${rejectedApplications}" var="history" varStatus="i">
                                     <tr>
-                                        <th>Sl No.</th>
-                                        <th>Application Number</th>
-                                        <th>Service Name</th>
-                                        <th>Application Status</th>
-                                        <th>Applied Date</th>
+                                        <td>${i.index+1}</td>
+                                        <td> ${history.applicationNo}</td>
+                                        <td>${history.serviceName}</td>
+                                        <td>${history.appStatus}</td>
+                                        <td>${history.appDate} </td>
                                     </tr>
-                                    </thead>
-                                    <tbody class="text-center">
-                                    <c:forEach items="${rejectedApplications}" var="history" varStatus="i">
-                                        <tr>
-                                            <td>${i.index+1}</td>
-                                            <td> ${history.applicationNo}</td>
-                                            <td>${history.serviceName}</td>
-                                            <td>${history.appStatus}</td>
-                                            <td>${history.appDate} </td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
+                                </c:forEach>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

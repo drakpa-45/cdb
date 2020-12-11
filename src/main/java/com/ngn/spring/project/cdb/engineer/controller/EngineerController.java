@@ -8,8 +8,6 @@ import com.ngn.spring.project.cdb.architect.dto.ArchitectDto;
 import com.ngn.spring.project.cdb.common.CommonService;
 import com.ngn.spring.project.cdb.engineer.model.EngineerAttachment;
 import com.ngn.spring.project.cdb.engineer.service.EngineerServices;
-import com.ngn.spring.project.cdb.survey.entity.SurveyDocument;
-import com.ngn.spring.project.cdb.survey.service.SurveyServices;
 import com.ngn.spring.project.global.global.MailSender;
 import com.ngn.spring.project.lib.ResponseMessage;
 import org.apache.commons.io.IOUtils;
@@ -61,9 +59,9 @@ public class EngineerController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/engineer/getPersonalInfo", method = RequestMethod.GET)
-    public ResponseMessage getPersonalInfo(String cid) {
+    public ResponseMessage getPersonalInfo(String cid,String type) {
         try{
-            ResponseMessage personal=commonService.getPersonalInfo(cid);
+            ResponseMessage personal=commonService.getPersonalInfo(cid, type);
             return personal;
         }catch (Exception e){
             System.out.print(e);

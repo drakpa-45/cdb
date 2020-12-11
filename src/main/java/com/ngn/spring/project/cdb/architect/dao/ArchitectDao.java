@@ -9,6 +9,7 @@ import com.ngn.spring.project.cdb.architect.entity.CrparchitectEntity;
 import com.ngn.spring.project.cdb.architect.entity.CrparchitectFinalEntity;
 import com.ngn.spring.project.cdb.architect.entity.ServiceEntity;
 import com.ngn.spring.project.cdb.certification.CertificateDTO;
+import com.ngn.spring.project.commonDto.TasklistDto;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
 import org.hibernate.query.Query;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -67,16 +68,20 @@ public class ArchitectDao extends BaseDao {
     }
 
     @Transactional(readOnly = false)
-    public void assignMyTask(String appNo, String lockUserId, String type) {
+    public String assignMyTask(String appNo, String lockUserId, String type) {
         String lockByUserId = "";
         if(type.equalsIgnoreCase("release")){
-            lockByUserId ="null";
+            lockByUserId =null;
         }else{
             lockByUserId=lockUserId;
         }
         sqlQuery = properties.getProperty("ArchitectDao.send2MyOrGroupTask");
-        hibernateQuery(sqlQuery).setParameter("appNo", appNo) .setParameter("lockUserId", lockByUserId).executeUpdate();
-
+        int save = hibernateQuery(sqlQuery).setParameter("appNo", appNo) .setParameter("lockUserId", lockByUserId).executeUpdate();
+        if(save>0){
+            return "Success";
+        }else{
+            return "Failed";
+        }
     }
 
     @Transactional(readOnly = false)
@@ -201,7 +206,7 @@ public class ArchitectDao extends BaseDao {
             if(dto.getPaymentmode().equalsIgnoreCase("Not Applicable")){
                 retval = "Success";
             }else {
-                org.hibernate.query.Query query1 = sqlQuery("INSERT INTO crparchitectregistrationpayment (Id,CrpArchitectFinalId,Amount,CreatedBy,CreatedOn,Mode_Of_Payment) VALUES(?,(SELECT Id FROM crparchitectfinal WHERE  ReferenceNo =?),?,?,CURRENT_TIMESTAMP,?) ");
+                org.hibernate.query.Query query1 = sqlQuery("INSERT INTO crparchitectregistrationpayment (Id,CrpArchitectFinalId,Amount,CreatedBy,Mode_Of_Payment,CreatedOn) VALUES(?,(SELECT Id FROM crparchitectfinal WHERE  ReferenceNo =?),?,?,?,CURRENT_TIMESTAMP) ");
                 query1.setParameter(1, UUID.randomUUID().toString()).setParameter(2, dto.getReferenceNo()).setParameter(3, dto.getTotalAmt()).setParameter(4, userID).setParameter(5, dto.getPaymentmode());
                 int save = query1.executeUpdate();
                 if (save > 0) {
@@ -271,7 +276,7 @@ public class ArchitectDao extends BaseDao {
                     "NameOfUniversity,ReferenceNo,RegistrationApprovedDate,RegistrationExpiryDate,RemarksByFinalApprover,SysUserId," +
                     "SysFinalApproverUserId,Village,InitialDate,SysFinalApprovedDate,CreatedOn) VALUES(?,?,?,?,?,?,?,?,?," +
                     "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_DATE,CURRENT_DATE,CURRENT_TIMESTAMP)");
-            query1.setParameter(1, dto.getApplicationDate()).setParameter(2, dto.getCdbNo()).setParameter(3, dto.getCidNo()).setParameter(4, dto.getUpdateStatus()).setParameter(5, dto.getCountryId()).setParameter(6, dto.getDzongkhagId()).setParameter(7, dto.getQualificationId()).setParameter(8, dto.getSalutation()).setParameter(9, dto.getServiceSectorTypeId())
+            query1.setParameter(1, dto.getApplicationDate()).setParameter(2, dto.getCdbNo()).setParameter(3, dto.getCidNo()).setParameter(4,  ApplicationStatus.APPROVED.getCode()).setParameter(5, dto.getCountryId()).setParameter(6, dto.getDzongkhagId()).setParameter(7, dto.getQualificationId()).setParameter(8, dto.getSalutation()).setParameter(9, dto.getServiceSectorTypeId())
                     .setParameter(10, dto.getUniversityCountry()).setParameter(11, userID).setParameter(12, dto.getEmail()).setParameter(13, dto.getEmployeeAddress()).setParameter(14, dto.getEmployeeName()).setParameter(15, dto.getGewog()).setParameter(16, dto.getGraduationyr().toString().substring(0,4)).setParameter(17, dto.getCrpArchitectId()).setParameter(18, dto.getMobileNo()).setParameter(19, dto.getFullname())
                     .setParameter(20, dto.getUniversityName()).setParameter(21, dto.getReferenceNo()).setParameter(22, dto.getApprovaldate()).setParameter(23,dto.getRegExpDate()).setParameter(24,dto.getRemarks()).setParameter(25, sysuserId)
                     .setParameter(26, userID).setParameter(27, dto.getVillage());
@@ -526,6 +531,71 @@ public class ArchitectDao extends BaseDao {
         CertificateDTO dto =new CertificateDTO();
         sqlQuery = properties.getProperty("ArchitectDao.getArchitetPrintDetails");
         dto=(CertificateDTO) hibernateQuery(sqlQuery, CertificateDTO.class).setParameter(1, cdbNo).list().get(0);
+        return dto;
+    }
+
+    public String isCIDUnique(String cidNo) {
+        String isCIDUnique = "";
+        try {
+            sqlQuery = "SELECT c.CmnApplicationRegistrationStatusId FROM crparchitect c WHERE c.CIDNo=?";
+            isCIDUnique = (String) hibernateQuery(sqlQuery).setParameter(1, cidNo).list().get(0);
+        } catch (Exception e) {
+            System.out.print("Exception in ArchitectDao # isCIDUnique:" + e);
+            e.printStackTrace();
+        }
+        return isCIDUnique;
+    }
+
+    @Transactional
+    public List<TasklistDto> populateapplicationHistoryArchitect(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        try {
+            sqlQuery = "SELECT \n" +
+                    "a.ReferenceNo applicationNo,\n" +
+                    "a.ApplicationDate appDate,\n" +
+                    "b.Name AS appStatus, \n" +
+                    "CASE\n" +
+                    "WHEN s.CmnServiceTypeId = '55a922e1-cbbf-11e4-83fb-080027dcfac6' THEN 'New Registration'\n" +
+                    "WHEN s.CmnServiceTypeId ='45bc628b-cbbe-11e4-83fb-080027dcfac6' THEN 'Renewal'\n" +
+                    "WHEN s.CmnServiceTypeId = 'acf4b324-cbbe-11e4-83fb-080027dcfac6' THEN 'Cancellation'\n" +
+                    "ELSE 'No Services'\n" +
+                    "END AS serviceName\n" +
+                    "FROM\n" +
+                    "crparchitectfinal a \n" +
+                    "INNER JOIN cmnlistitem b  \n" +
+                    "ON b.Id = a.CmnApplicationRegistrationStatusId INNER JOIN crparchitectappliedservice s \n" +
+                    "ON s.CrpArchitectId = a.Id WHERE a.ARNo =?\n" +
+                    "ORDER BY a.ReferenceNo DESC;";
+            dto = (List<TasklistDto>) hibernateQuery(sqlQuery, TasklistDto.class).setParameter(1, cdbNo).list();
+        } catch (Exception e) {
+            System.out.print("Exception in CommonDao # populateapplicationHistoryArchitect: " + e);
+            e.printStackTrace();
+        }
+        return dto;
+    }
+
+    @Transactional
+    public List<TasklistDto> populaterejectedApplicationArchitect(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        try {
+            sqlQuery = "SELECT a.ReferenceNo applicationNo,a.ApplicationDate appDate,b.Name AS appStatus, \n" +
+                    "CASE\n" +
+                    "WHEN s.CmnServiceTypeId = '55a922e1-cbbf-11e4-83fb-080027dcfac6' THEN 'New Registration'\n" +
+                    "WHEN s.CmnServiceTypeId ='45bc628b-cbbe-11e4-83fb-080027dcfac6' THEN 'Renewal'\n" +
+                    "WHEN s.CmnServiceTypeId = 'acf4b324-cbbe-11e4-83fb-080027dcfac6' THEN 'Cancellation'\n" +
+                    "ELSE 'No Services'\n" +
+                    "END AS serviceName\n" +
+                    "FROM\n" +
+                    "crparchitectfinal a \n" +
+                    "INNER JOIN cmnlistitem b  \n" +
+                    "ON b.Id = a.CmnApplicationRegistrationStatusId INNER JOIN crparchitectappliedservice s \n" +
+                    "ON s.CrpArchitectId = a.Id WHERE a.CmnApplicationRegistrationStatusId = 'de662a61-b049-11e4-89f3-080027dcfac6' AND a.ARNo = ?\n" +
+                    "ORDER BY a.ReferenceNo DESC";
+            dto = (List<TasklistDto>) hibernateQuery(sqlQuery, TasklistDto.class).setParameter(1, cdbNo).list();
+        } catch (Exception e) {
+            System.out.print("Exception in CommonDao # populaterejectedApplicationArchitect: " + e);
+            e.printStackTrace();
+        }
         return dto;
     }
 }

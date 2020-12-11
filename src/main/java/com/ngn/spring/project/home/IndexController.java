@@ -28,6 +28,7 @@ public class IndexController extends BaseController {
 
     @Autowired
     private CommonService commonService;
+
     @RequestMapping(value ="", method = RequestMethod.GET)
     public String index(ModelMap model,HttpServletRequest request, HttpServletResponse response) {
         return "index";
@@ -79,12 +80,10 @@ public class IndexController extends BaseController {
 
         String getCdbNoForSp = commonService.getCdbNoForSp(loginDTO);
         String getCdbNoForSurvey = commonService.getCdbNoForSurvey(loginDTO);
+        String getCdbNoForArchitect = commonService.getCdbNoForArchitect(loginDTO);
+        String getConsultantCdbNo = commonService.getConsultantCdbNo(loginDTO);
+        String getCdbNoForContractor = commonService.getCdbNoForContractor(loginDTO);
 
-       // BigInteger getCdbNoForConsultant = commonService.getCdbNoForConsultant(loginDTO);
-
-        /*String getCdbNoForSp = null;
-        String getCdbNoForSurvey = null;
-        String getCdbNoForConsultant = null;*/
 
         model.addAttribute("newsAndNotifications", commonService.getdashboardDetails(cdbdet.split("999")[0]));
         model.addAttribute("rejectedApplications", commonService.populaterejectedApplications(cdbdet,getCdbNoForSp,getCdbNoForSurvey));
@@ -100,22 +99,45 @@ public class IndexController extends BaseController {
             }else{
                 cdbdet=commonService.getCdbNo(loginDTO);
                 session.setAttribute("isExpired", commonService.isExpiredApplication(cdbdet));
+                model.addAttribute("applicationHistory", commonService.populateapplicationHistorySpecializedFirm(cdbdet.split("999")[1]));
+                model.addAttribute("rejectedApplications", commonService.populaterejectedApplicationSpecializedFirm(cdbdet.split("999")[1]));
                 session.setAttribute("App_Details", cdbdet);
                 session.setAttribute("CDBNo", cdbdet);
-                return "index_public";
+                return "index_public_specializedFirm";
             }
         } else if(getCdbNoForSurvey != null) {
             cdbdet=commonService.getSurveyCdbNo(loginDTO);
             session.setAttribute("App_Details", cdbdet);
             session.setAttribute("isExpired", commonService.isExpiredApplication(cdbdet));
             model.addAttribute("registrationDetails", commonService.populateSurveyApplicantDetails(cdbdet.split("999")[1]));
+            model.addAttribute("applicationHistory", commonService.populateapplicationHistorySurvey(cdbdet.split("999")[1]));
+            model.addAttribute("rejectedApplications", commonService.populaterejectedApplicationSurvey(cdbdet.split("999")[1]));
             return "index_public_survey";
-        }/*else if(getCdbNoForConsultant!=null){
-            cdbdet=commonService.getConsultantCdbNo(loginDTO);
+        } else if(getCdbNoForArchitect != null) {
+            cdbdet=commonService.getArchitectCDBNo(loginDTO);
             session.setAttribute("App_Details", cdbdet);
-            model.addAttribute("registrationDetails", commonService.populateConsultantApplicantDetails(cdbdet.split("999")[1]));
-            return "index_public";
-        }*/else{
+            session.setAttribute("isExpired", commonService.isExpiredApplication(cdbdet));
+          //  model.addAttribute("registrationDetails", commonService.populateArchitectApplicantDetails(cdbdet.split("999")[1]));
+            model.addAttribute("applicationHistory", commonService.populateapplicationHistoryArchitect(cdbdet.split("999")[1]));
+            model.addAttribute("rejectedApplications", commonService.populaterejectedApplicationArchitect(cdbdet.split("999")[1]));
+            return "index_public_architect";
+        }else if(getConsultantCdbNo!=null){
+            cdbdet=commonService.getCdbNo(loginDTO);
+            session.setAttribute("isExpired", commonService.isExpiredApplication(cdbdet));
+            model.addAttribute("applicationHistory", commonService.populateapplicationHistoryConsultant(cdbdet.split("999")[1]));
+            model.addAttribute("rejectedApplications", commonService.populaterejectedApplicationConsultant(cdbdet.split("999")[1]));
+            session.setAttribute("App_Details", cdbdet);
+            session.setAttribute("CDBNo", cdbdet);
+            return "index_public_consultant";
+        }else if(getCdbNoForContractor!=null){
+            cdbdet=commonService.getCdbNo(loginDTO);
+            session.setAttribute("isExpired", commonService.isExpiredApplication(cdbdet));
+            model.addAttribute("applicationHistory", commonService.populateapplicationHistoryContractor(cdbdet.split("999")[1]));
+            model.addAttribute("rejectedApplications", commonService.populaterejectedApplicationContractor(cdbdet.split("999")[1]));
+            session.setAttribute("App_Details", cdbdet);
+            session.setAttribute("CDBNo", cdbdet);
+            return "index_public_contractor";
+        }else{
             cdbdet=commonService.getCdbNo(loginDTO);
             session.setAttribute("App_Details", cdbdet);
             session.setAttribute("CDBNo", cdbdet);
@@ -134,5 +156,4 @@ public class IndexController extends BaseController {
         model.addAttribute("ackMessage",acknowledgement_message);
         return "acknowledgement";
     }
-
 }

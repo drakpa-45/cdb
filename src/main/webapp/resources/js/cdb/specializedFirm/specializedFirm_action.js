@@ -53,7 +53,7 @@ var specializedFirm_action = (function () {
             $.ajax({
                 url: cdbGlobal.baseURL() + "/specializedFirm/getPersonalInfo",
                 type: 'GET',
-                data: {cidNo: cidNo},
+                data: {cidNo: cidNo,type:'check'},
                 success: function (res) {
                     if (res.status == '1') {
                         var dto = res.dto;
@@ -70,8 +70,17 @@ var specializedFirm_action = (function () {
 
                         var employeeDetailsDTO = dto.employeeDetailsDTOs;
                         var empDtls ="",empDtls1="",empDtls2="";
-                        alert(employeeDetailsDTO != null);
-                        if(employeeDetailsDTO !=null){
+                        var name = employeeDetailsDTO.workId;
+                        if(!name==''|| !name=='null'){
+                            for(var i in employeeDetailsDTO){
+                                $('#dcbinfo').append("<br/> This person is engaged with cdb number <b>"+employeeDetailsDTO.cdbNo+"</b> in <b>"+employeeDetailsDTO.procuringAgency+"</b> with work Id:<b>"+employeeDetailsDTO.workId+"</b>");
+                            }
+                        }
+                        else{
+                            $('#dcbinfo').append("<br/> This person is not engaged in any work or project");
+                        }
+
+                      /*  if(employeeDetailsDTO !=null){
                             $('#engagedId').show();
                             for(var i in employeeDetailsDTO){
                                 empDtls = empDtls +
@@ -106,75 +115,7 @@ var specializedFirm_action = (function () {
                             $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
                         } else{
                             $('#notEngagedId').show();
-                        }
-                    }
-                }
-            });
-        });
-
-        $('body').on('click','.checkCidHr',function(){
-            var cidNo = $(this).closest('tr').find('.cidNo').text();
-            $check = $(this).closest('tr').find('.check');
-            if(!cidNo){
-                return;
-            }
-            $.ajax({
-                url: cdbGlobal.baseURL() + "/specializedFirm/getPersonalInfo",
-                type: 'GET',
-                data: {cidNo: cidNo},
-                success: function (res) {
-                    if (res.status == '1') {
-                        var dto = res.dto;
-                        $('#nameM').text(dto.fullName);
-                        $('#sexM').text(dto.sex);
-                        $('#dzongkhagM').text(dto.dzongkhagNmae);
-                        $('#gewogM').text(dto.gowegName);
-                        $('#villageM').text(dto.villageName);
-                        $('#dobM').text(dto.dob);
-                        var imagelink='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo='+cidNo;
-                        $('#photoM').html("<img src='"+imagelink+"'  width='200px'  height='200px' class='pull-right'/>");
-                        $("#hrModal").modal('show');
-                        $("#closeModal1").modal('show');
-
-                        var employeeDetailsDTO = dto.employeeDetailsDTOs;
-                        var empDtls ="",empDtls1="",empDtls2="";
-                        alert(employeeDetailsDTO != null);
-                        if(employeeDetailsDTO !=null){
-                            $('#engagedId').show();
-                            for(var i in employeeDetailsDTO){
-                                empDtls = empDtls +
-                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
-                                "<td>" +  + "</td>" +
-                                "<td>" + + "</td>" +
-                                "<td>" + employeeDetailsDTO[i].contractorCDBNo+ "</td>" +
-                                "<td>" + employeeDetailsDTO[i].contractorFirmname + "</td>" +"</tr>";
-                            }
-                            $('#employeeDTLS').find('tbody').html(empDtls);
-
-                            for(var i in employeeDetailsDTO){
-                                empDtls1 = empDtls1 +
-                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
-                                "<td>" +  + "</td>" +
-                                "<td>" + + "</td>" +
-                                "<td>" + employeeDetailsDTO[i].consultantCDBNo+ "</td>" +
-                                "<td>" + employeeDetailsDTO[i].consultantFirmname + "</td>" +"</tr>";
-                            }
-                            $('#employeeDTLS1').find('tbody').html(empDtls1);
-
-                            for(var i in employeeDetailsDTO){
-                                empDtls2 = empDtls2 +
-                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
-                                "<td>" +  + "</td>" +
-                                "<td>" + + "</td>" +
-                                "<td>" + employeeDetailsDTO[i].spCDBNo+ "</td>" +
-                                "<td>" + employeeDetailsDTO[i].spFirmname + "</td>" +"</tr>";
-                            }
-                            $('#employeeDTLS2').find('tbody').html(empDtls2);
-
-                            $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
-                        } else{
-                            $('#notEngagedId').show();
-                        }
+                        }*/
                     }
                 }
             });

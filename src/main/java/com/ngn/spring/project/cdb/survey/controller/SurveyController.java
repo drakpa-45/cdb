@@ -60,9 +60,9 @@ public class SurveyController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/survey/getPersonalInfo", method = RequestMethod.GET)
-    public ResponseMessage getPersonalInfo(String cid) {
+    public ResponseMessage getPersonalInfo(String cid,String type) {
         try{
-            ResponseMessage personal=commonService.getPersonalInfo(cid);
+            ResponseMessage personal=commonService.getPersonalInfo(cid, type);
             return personal;
         }catch (Exception e){
             System.out.print(e);
@@ -76,6 +76,18 @@ public class SurveyController extends BaseController {
         try{
             ResponseMessage isMailUnique=services.isMailUnique(request);
             return isMailUnique;
+        }catch (Exception e){
+            System.out.print(e);
+            return  null;
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/survey/isCIDUnique", method = RequestMethod.GET)
+    public ResponseMessage isCIDUnique(HttpServletRequest request, String cidNo) {
+        try{
+            ResponseMessage isCIDUnique=services.isCIDUnique(cidNo);
+            return isCIDUnique;
         }catch (Exception e){
             System.out.print(e);
             return  null;

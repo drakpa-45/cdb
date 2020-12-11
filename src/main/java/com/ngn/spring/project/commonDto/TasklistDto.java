@@ -26,6 +26,9 @@ public class TasklistDto {
     private String cdbNo;
     private Timestamp rejectedDate;
     private String remarks;
+    private String serviceName;
+    private String appStatus;
+    private BigInteger applicationNo;
 
     public String getApplication_Number() {
         return Application_Number;
@@ -153,5 +156,29 @@ public class TasklistDto {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
+    public String getAppStatus() {
+        return appStatus;
+    }
+
+    public void setAppStatus(String appStatus) {
+        this.appStatus = appStatus;
+    }
+
+    public BigInteger getApplicationNo() {
+        return applicationNo;
+    }
+
+    public void setApplicationNo(BigInteger applicationNo) {
+        this.applicationNo = applicationNo;
     }
 }
