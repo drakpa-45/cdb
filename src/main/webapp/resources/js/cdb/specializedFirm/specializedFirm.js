@@ -500,7 +500,7 @@ var specializedFirm = (function () {
                     url: _baseURL() + '/getPersonalInfo',
                     type: 'GET',
                     async:false,
-                    data: {cidNo: $this.val(),type:"fetch"},
+                    data: {cidNo: $this.val(),type:"fetch "},
                     success: function (res) {
                         if (res.status == '1') {
                             var dto = res.dto;
