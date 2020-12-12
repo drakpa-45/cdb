@@ -593,7 +593,7 @@ public class SurveyDao extends BaseDao {
                     "ORDER BY a.ReferenceNo DESC;";
             dto = (List<TasklistDto>) hibernateQuery(sqlQuery, TasklistDto.class).setParameter(1, cdbNo).list();
         } catch (Exception e) {
-            System.out.print("Exception in CommonDao # populateapplicationHistorySurvey: " + e);
+            System.out.print("Exception in SurveyorDao # populateapplicationHistorySurvey: " + e);
             e.printStackTrace();
         }
         return dto;
@@ -618,7 +618,23 @@ public class SurveyDao extends BaseDao {
                     "ORDER BY a.ReferenceNo DESC";
             dto = (List<TasklistDto>) hibernateQuery(sqlQuery, TasklistDto.class).setParameter(1, cdbNo).list();
         } catch (Exception e) {
-            System.out.print("Exception in CommonDao # populaterejectedApplicationSurvey: " + e);
+            System.out.print("Exception in SurveyorDao # populaterejectedApplicationSurvey: " + e);
+            e.printStackTrace();
+        }
+        return dto;
+    }
+
+    @Transactional
+    public ArchitectDto updateFinalTable(ArchitectDto dto, String userID, HttpServletRequest request) {
+        try {
+            Query query1 = sqlQuery("UPDATE crpsurveyfinal SET  CmnApplicationRegistrationStatusId = ?,DeregisteredRemarks = ?,EditedBy = ?,CreatedOn = CURRENT_TIMESTAMP,EditedOn = CURRENT_TIMESTAMP,DeRegisteredDate = CURRENT_DATE WHERE ReferenceNo = ?");
+            query1.setParameter(1,  ApplicationStatus.DEREGISTERED.getCode()).setParameter(2, dto.getRemarks()).setParameter(3,userID).setParameter(4, dto.getReferenceNo());
+            int save = query1.executeUpdate();
+            if (save > 0) {
+                dto.setUpdateStatus("Success");
+            }
+        } catch (Exception e) {
+            System.out.print("Exception in SurveyorDao # updateFinalTable: " + e);
             e.printStackTrace();
         }
         return dto;

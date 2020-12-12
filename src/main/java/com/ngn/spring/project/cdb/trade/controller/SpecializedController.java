@@ -95,7 +95,6 @@ public class SpecializedController extends BaseController {
             return  null;
         }
     }
-
     @ResponseBody
     @RequestMapping(value = "/trade/isCIDUnique", method = RequestMethod.GET)
     public ResponseMessage isCIDUnique(HttpServletRequest request, String cidNo) {

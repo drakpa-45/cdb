@@ -359,12 +359,11 @@ function SubmitApplicationDetials(){
     $('#concirmationModel').modal('hide');
 }
 function SubmitRenewalApplicationDetials(){
-
         var url= '/cdb/public_access/emptylayout/submitRenwalApplication';
         var options = {target:'#content_main_div_public_user',url:url,type:'POST', data: $('#architectrenewalForm').serialize()};
         $("#architectrenewalForm").ajaxSubmit(options);
         $('#concirmationRenewalModel').modal('hide');
-        returntpe;
+
 }
 function viewAttachment(uuid,type,path,name){
     //var url= '${pageContext.request.contextPath}/FileDownloadServlet?uuid='+uuid+'&type='+type;

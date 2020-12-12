@@ -598,5 +598,21 @@ public class ArchitectDao extends BaseDao {
         }
         return dto;
     }
+
+    @Transactional
+    public ArchitectDto updateFinalTable(ArchitectDto dto, String userID, HttpServletRequest request) {
+        try {
+            Query query1 = sqlQuery("UPDATE crparchitectfinal SET  CmnApplicationRegistrationStatusId = ?,DeregisteredRemarks = ?,EditedBy = ?,CreatedOn = CURRENT_TIMESTAMP,EditedOn = CURRENT_TIMESTAMP,DeRegisteredDate = CURRENT_DATE WHERE ReferenceNo = ?");
+            query1.setParameter(1,  ApplicationStatus.DEREGISTERED.getCode()).setParameter(2, dto.getRemarks()).setParameter(3,userID).setParameter(4, dto.getReferenceNo());
+            int save = query1.executeUpdate();
+            if (save > 0) {
+                dto.setUpdateStatus("Success");
+            }
+        } catch (Exception e) {
+            System.out.print("Exception in EngineerDao # updateFinalTable: " + e);
+            e.printStackTrace();
+        }
+        return dto;
+    }
 }
 

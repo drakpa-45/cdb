@@ -223,7 +223,7 @@ public class ArchitectController extends BaseController {
         return null;
     }
 
-    @RequestMapping(value ="/emptylayout/submitRenwalApplication", method = RequestMethod.POST)
+    @RequestMapping(value ="/public_access/emptylayout/submitRenwalApplication", method = RequestMethod.POST)
     public String submitRenwalApplication(ArchitectDto dto,@RequestParam("files") MultipartFile[] files,ModelMap model,HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         LoginDTO loginDTO =(LoginDTO)session.getAttribute("loginDetails");
@@ -249,7 +249,6 @@ public class ArchitectController extends BaseController {
       public String submitcancellation(ArchitectDto dto,ModelMap model,HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         LoginDTO loginDTO =(LoginDTO)session.getAttribute("loginDetails");
-
         try{
             ResponseMessage personal=services.saveArchitectcancellation(dto, loginDTO.getUserId());
             ArchitectDto resdto=(ArchitectDto)personal.getDto();

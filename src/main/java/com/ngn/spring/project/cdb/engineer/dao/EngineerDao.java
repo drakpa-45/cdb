@@ -501,7 +501,6 @@ public class EngineerDao extends BaseDao {
 
     @Transactional
     public ArchitectDto updateFinalTable(ArchitectDto dto, String userID, HttpServletRequest request) {
-
         try {
             Query query1 = sqlQuery("UPDATE crpengineerfinal SET  CmnApplicationRegistrationStatusId = ?,DeregisteredRemarks = ?,EditedBy = ?,CreatedOn = CURRENT_TIMESTAMP,EditedOn = CURRENT_TIMESTAMP,DeRegisteredDate = CURRENT_DATE WHERE ReferenceNo = ?");
             query1.setParameter(1,  ApplicationStatus.DEREGISTERED.getCode()).setParameter(2, dto.getRemarks()).setParameter(3,userID).setParameter(4, dto.getReferenceNo());

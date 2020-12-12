@@ -234,10 +234,10 @@ public class EngineerServices extends BaseService{
     public ArchitectDto approveEngineerRegistration(ArchitectDto dto, String userID, HttpServletRequest request) {
         dto= dao.updateApproval(dto, userID,request);
         if(dto.getUpdateStatus().equalsIgnoreCase("Success")){
-            if(dto.getUpdateStatus().equalsIgnoreCase("Success")){
                  if(dto.getServiceTypeId().equalsIgnoreCase("cancel")){
                     dto=dao.updateFinalTable(dto,userID,request);
                      if(dto.getUpdateStatus().equalsIgnoreCase("Success")){
+                         dao.updateSysuser(dto.getEmail());
                          String mailContent = "Dear User,<br>Your application for Cancellation of CDB certificate is cancelled with application number : "+dto.getReferenceNo();
                          try {
                              MailSender.sendMail(dto.getEmail(),"cdb@gov.bt",null,mailContent,"Application Cancelled");
@@ -263,10 +263,6 @@ public class EngineerServices extends BaseService{
             else{
                 dto.setUpdateStatus("Failed to update workflow table for verification. ");
             }
-        }
-        else{
-            dto.setUpdateStatus("Failed to update the application table for verification. ");
-        }
         return dto;
     }
 
@@ -424,6 +420,7 @@ public class EngineerServices extends BaseService{
         entity.setCmnServiceSectorTypeId(dto.getServiceSectorType());
         entity.setCountryId(dto.getCountryId());
         entity.setEmail(dto.getEmail());
+        entity.setTradeId(dto.getTrade());
         entity.setMobileNo(dto.getMobileNo());
         entity.setEmployerName(dto.getEmployeeName());
         entity.setEmployerAddress(dto.getEmployeeAddress());
@@ -431,6 +428,7 @@ public class EngineerServices extends BaseService{
         entity.setGraduationYear(dto.getGraduationYear());
         entity.setUniversityCountry(dto.getUniversityCountry());
         entity.setUniversityName(dto.getUniversityName());
+        entity.setWaiveOffLateFee(0);
         entity.setCreatedOn(new Date());
         entity.setCreatedBy(user);
         return  entity;
@@ -470,6 +468,7 @@ public class EngineerServices extends BaseService{
             entity.setCmnServiceSectorTypeId(dto.getServiceSectorType());
             entity.setCountryId(dto.getCountryId());
             entity.setEmail(dto.getEmail());
+            entity.setTradeId(dto1.getTrade());
             entity.setMobileNo(dto.getMobileNo());
             entity.setEmployerName(dto.getEmployeeName());
             entity.setEmployerAddress(dto.getEmployeeAddress());
@@ -477,6 +476,7 @@ public class EngineerServices extends BaseService{
             entity.setGraduationYear(dto1.getGraduationYear());
             entity.setUniversityCountry(dto.getUniversityCountry());
             entity.setUniversityName(dto.getUniversityName());
+            entity.setWaiveOffLateFee(0);
             entity.setCreatedOn(new Date());
             entity.setCreatedBy(userID);
             dao.save(entity);
@@ -491,8 +491,6 @@ public class EngineerServices extends BaseService{
             engineerAppliedServiceEntity.setEditedOn(new Date());
             engineerAppliedServiceEntity.setEngineerId(generateID);
            dao.saveSservies(engineerAppliedServiceEntity);
-
-            dao.updateSysuser(dto.getEmail());
 
             responseMessage.setStatus(1);
             dto.setReferenceNo(entity.getReferenceNo());
