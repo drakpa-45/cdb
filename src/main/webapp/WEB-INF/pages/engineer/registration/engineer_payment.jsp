@@ -54,7 +54,7 @@
                                    Payment Approver
                                 </c:if>
                             </h3>
-                            <span style="font-size: small;color: #444444"> >> Application Number : ${appDetails.referenceNo}</span>
+                            <span class="font-weight-bold" style="font-size: small;color: #444444"> >> Application Number : ${appDetails.referenceNo}</span>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -162,7 +162,6 @@
                                                 <input type="hidden" value="${appDetails.serviceSectorType}" readonly maxlength="100" id="service" name="serviceSectorType" class="form-control">${appDetails.serviceSectorType}
                                             <input type="hidden" value="${appDetails.serviceSectorTypeId}" readonly maxlength="100" id="service" name="serviceSectorTypeId" class="form-control">
                                         </div>
-
                                     </div>
                                     <input type="hidden" class=" form-control number" value="${appDetails.cdbNo}" readonly name="cdbNo">
                                     <div class="col-lg-12">
@@ -173,6 +172,12 @@
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                             <label>Office/Employer Name:</label>
                                                 <input type="hidden" value="${appDetails.employeeName}" readonly maxlength="100" id="country" name="country" class="form-control">${appDetails.employeeName}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                                            <label>Trade:</label>
+                                            <input type="hidden" value="${appDetails.cmnTradeId}" readonly maxlength="100" id="trade" name="trade" class="form-control">${appDetails.trade}
                                         </div>
                                     </div>
                                 </div>

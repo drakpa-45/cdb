@@ -52,7 +52,7 @@
                         <%--<form id="architectForm" action="#" method="post" enctype="multipart/form-data">--%>
                         <div class="card-header">
                             <h3 class="card-title font-weight-bold">Registration of Engineer</h3>
-                            <span style="font-size: small;color: #444444"> >> Application Number : ${appDetails.referenceNo}</span>
+                            <span class="font-weight-bold" style="font-size: small;color: #444444"> >> Application Number : ${appDetails.referenceNo}</span>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -159,6 +159,12 @@
                                                                     <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Type: </label>
                                                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                                         <input type="hidden" value="${appDetails.serviceSectorType}" readonly maxlength="100" id="service" name="serviceSectorType" class="form-control">${appDetails.serviceSectorType}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                                                                    <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Trade: </label>
+                                                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                                        <input type="hidden" value="${appDetails.cmnTradeId}" readonly id="service" name="trade" class="form-control">${appDetails.trade}
                                                                     </div>
                                                                 </div>
                                                             </div>

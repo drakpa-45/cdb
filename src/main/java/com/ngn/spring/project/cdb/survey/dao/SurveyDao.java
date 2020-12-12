@@ -336,14 +336,14 @@ public class SurveyDao extends BaseDao {
             Query query1 = sqlQuery("INSERT INTO crpsurveyfinal (ApplicationDate,ARNo,CIDNo,CmnApplicationRegistrationStatusId,CmnCountryId,CmnDzongkhagId,CmnQualificationId,CmnSalutationId,CmnServiceSectorTypeId," +
                     "CmnUniversityCountryId,CreatedBy,Email,EmployerAddress,EmployerName,Gewog,GraduationYear,Id,MobileNo,Name," +
                     "NameOfUniversity,ReferenceNo,RegistrationExpiryDate,RemarksByFinalApprover,SysUserId," +
-                    "SysFinalApproverUserId,Village,InitialDate,SysFinalApprovedDate,CreatedOn,RegistrationApprovedDate) VALUES(?,?,?,?,?,?,?,?,?," +
+                    "SysFinalApproverUserId,Village,CmnTradeId,InitialDate,SysFinalApprovedDate,CreatedOn,RegistrationApprovedDate) VALUES(?,?,?,?,?,?,?,?,?," +
                     "?,?,?,?,?,?,?,?,?,?," +
                     "?,?,?,?,?,?," +
-                    "?,CURRENT_DATE,CURRENT_DATE,CURRENT_TIMESTAMP,CURRENT_DATE)");
+                    "?,?,CURRENT_DATE,CURRENT_DATE,CURRENT_TIMESTAMP,CURRENT_DATE)");
             query1.setParameter(1, dto.getApplicationDate()).setParameter(2, dto.getCdbNo()).setParameter(3, dto.getCidNo()).setParameter(4, ApplicationStatus.APPROVED.getCode()).setParameter(5, dto.getCountryId()).setParameter(6, dto.getDzongkhagId()).setParameter(7, dto.getQualificationId()).setParameter(8, dto.getSalutation()).setParameter(9, dto.getServiceSectorType())
                     .setParameter(10, dto.getUniversityCountry()).setParameter(11, userID).setParameter(12, dto.getEmail()).setParameter(13, dto.getEmployeeAddress()).setParameter(14, dto.getEmployeeName()).setParameter(15, dto.getGewog()).setParameter(16, dto.getGraduationyr().toString().substring(0, 4)).setParameter(17, dto.getCrpSurveyId()).setParameter(18, dto.getMobileNo()).setParameter(19, dto.getFullname())
                     .setParameter(20, dto.getUniversityName()).setParameter(21, dto.getReferenceNo()).setParameter(22, dto.getRegExpDate()).setParameter(23, dto.getRemarks()).setParameter(24, sysuserId)
-                    .setParameter(25, userID).setParameter(26, dto.getVillage());
+                    .setParameter(25, userID).setParameter(26, dto.getVillage()).setParameter(27, dto.getTrade());
             int save = query1.executeUpdate();
 
             Query querydoc = sqlQuery("INSERT INTO `crpsurveyattachmentfinal` (`Id`,`CrpSurveyFinalId`,`DocumentName`,`DocumentPath`,`FileType`,`CreatedBy`,`CreatedOn`) SELECT a.`Id`,a.`CrpSurveyId`,a.`DocumentName`,a.`DocumentPath`,a.`FileType`,?,CURRENT_TIMESTAMP FROM `crpsurveyattachment` a  LEFT JOIN `crpsurvey` ar ON a.`CrpSurveyId`=ar.`Id` WHERE ar.`ReferenceNo`=? ");
@@ -482,14 +482,14 @@ public class SurveyDao extends BaseDao {
         try {
             sqlQuery = "SELECT f.ARNo cdbNo,f.ReferenceNo refNo,f.Id CrpSurveyId,f.CIDNo cidNo,f.Name fullname,f.Village village,f.Gewog gewog,d.NameEn dzongkhagId,c.Name countryId,s.Name salutation,\n" +
                     "i.Name updateStatus,f.CmnSalutationId salutationId,f.Email email,f.MobileNo mobileNo,f.EmployerName employeeName,f.EmployerAddress employeeAddress,f.CmnQualificationId qualificationId, q.Name qualification,f.CmnServiceSectorTypeId serviceSectorTypeId,\n" +
-                    "f.GraduationYear graduationyr,t.Name serviceSectorType,f.NameOfUniversity universityName,f.CmnUniversityCountryId cmnUniversityCountryId,uc.Name universityCountry,f.RegistrationApprovedDate registrationApproveDate,f.RegistrationExpiryDate regExpDate\n" +
+                    "f.GraduationYear graduationyr,td.Name trade, f.CmnTradeId cmnTradeId,t.Name serviceSectorType,f.NameOfUniversity universityName,f.CmnUniversityCountryId cmnUniversityCountryId,uc.Name universityCountry,f.RegistrationApprovedDate registrationApproveDate,f.RegistrationExpiryDate regExpDate\n" +
                     "FROM crpsurveyfinal f \n" +
                     "LEFT JOIN cmnlistitem i ON i.Id=f.CmnApplicationRegistrationStatusId \n" +
                     "LEFT JOIN cmnlistitem s ON s.Id=f.CmnSalutationId\n" +
                     "LEFT JOIN cmncountry c ON c.Id=f.CmnCountryId\n" +
                     "LEFT JOIN cmncountry uc ON uc.Id=f.CmnUniversityCountryId\n" +
                     "LEFT JOIN cmnlistitem q ON q.Id=f.CmnQualificationId LEFT JOIN cmnlistitem t ON t.Id=f.CmnServiceSectorTypeId \n" +
-                    "LEFT JOIN cmndzongkhag d ON d.Id=f.CmnDzongkhagId WHERE f.ARNo=?";
+                    "LEFT JOIN cmndzongkhag d ON d.Id=f.CmnDzongkhagId LEFT JOIN cmnlistitem td ON td.Id=f.CmnTradeId WHERE f.ARNo=?";
             dto = (ArchitectDto) hibernateQuery(sqlQuery, ArchitectDto.class).setParameter(1, cdbNo).list().get(0);
         } catch (Exception e) {
             System.out.print("Exception in SurveyDao # populateSurveyApplicantDetails: " + e);

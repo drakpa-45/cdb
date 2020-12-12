@@ -119,7 +119,7 @@ public class IndexController extends BaseController {
             cdbdet=commonService.getArchitectCDBNo(loginDTO);
             session.setAttribute("App_Details", cdbdet);
             session.setAttribute("isExpired", commonService.isExpiredApplication(cdbdet));
-          //  model.addAttribute("registrationDetails", commonService.populateArchitectApplicantDetails(cdbdet.split("999")[1]));
+         //  model.addAttribute("registrationDetails", commonService.populateArchitectApplicantDetails(cdbdet.split("999")[1]));
             model.addAttribute("applicationHistory", commonService.populateapplicationHistoryArchitect(cdbdet.split("999")[1]));
             model.addAttribute("rejectedApplications", commonService.populaterejectedApplicationArchitect(cdbdet.split("999")[1]));
             return "index_public_architect";

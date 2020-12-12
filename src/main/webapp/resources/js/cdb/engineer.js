@@ -263,10 +263,11 @@ function approveAndGenerateCertificate(type){
         $("#engineerverificationForm").ajaxSubmit(options);
     }
     else {
-        validateFeesDetails();
-        var url= '/cdb/admin_engineer/emptylayout/approveAndGenerateCertificate?servicefor='+type;
-        var options = {target:'#content_main_div',url:url,type:'POST', data: $('#engineerverificationForm').serialize()};
-        $("#engineerverificationForm").ajaxSubmit(options);
+        if(validateFeesDetails()==true){
+            var url= '/cdb/admin_engineer/emptylayout/approveAndGenerateCertificate?servicefor='+type;
+            var options = {target:'#content_main_div',url:url,type:'POST', data: $('#engineerverificationForm').serialize()};
+            $("#engineerverificationForm").ajaxSubmit(options);
+        }
     }
 }
 function validateFeesDetails(){

@@ -316,14 +316,12 @@ public class EngineerDao extends BaseDao {
             Query query1 = sqlQuery("INSERT INTO crpengineerfinal (ApplicationDate,CDBNo,CIDNo,CmnApplicationRegistrationStatusId,CmnCountryId,CmnDzongkhagId,CmnQualificationId,CmnSalutationId,CmnServiceSectorTypeId," +
                     "CmnUniversityCountryId,CreatedBy,Email,EmployerAddress,EmployerName,Gewog,GraduationYear,Id,MobileNo,Name," +
                     "NameOfUniversity,ReferenceNo,RegistrationExpiryDate,RemarksByFinalApprover,SysUserId," +
-                    "SysFinalApproverUserId,Village,InitialDate,SysFinalApprovedDate,CreatedOn,RegistrationApprovedDate) VALUES(?,?,?,?,?,?,?,?,?," +
-                    "?,?,?,?,?,?,?,?,?,?," +
-                    "?,?,?,?,?,?," +
-                    "?,CURRENT_DATE,CURRENT_DATE,CURRENT_TIMESTAMP,CURRENT_DATE)");
+                    "SysFinalApproverUserId,Village,CmnTradeId,InitialDate,SysFinalApprovedDate,CreatedOn,RegistrationApprovedDate) VALUES(?,?,?,?,?,?,?,?,?," +
+                    "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_DATE,CURRENT_DATE,CURRENT_TIMESTAMP,CURRENT_DATE)");
             query1.setParameter(1, dto.getApplicationDate()).setParameter(2, dto.getCdbNo()).setParameter(3, dto.getCidNo()).setParameter(4, ApplicationStatus.APPROVED.getCode()).setParameter(5, dto.getCountryId()).setParameter(6, dto.getDzongkhagId()).setParameter(7, dto.getQualificationId()).setParameter(8, dto.getSalutation()).setParameter(9, dto.getServiceSectorTypeId())
                     .setParameter(10, dto.getUniversityCountry()).setParameter(11, userID).setParameter(12, dto.getEmail()).setParameter(13, dto.getEmployeeAddress()).setParameter(14, dto.getEmployeeName()).setParameter(15, dto.getGewog()).setParameter(16, dto.getGraduationyr().toString().substring(0, 4)).setParameter(17, dto.getCrpEngineerId()).setParameter(18, dto.getMobileNo()).setParameter(19, dto.getFullname())
                     .setParameter(20, dto.getUniversityName()).setParameter(21, dto.getReferenceNo()).setParameter(22, dto.getRegExpDate()).setParameter(23, dto.getRemarks()).setParameter(24, sysuserId)
-                    .setParameter(25, userID).setParameter(26, dto.getVillage());
+                    .setParameter(25, userID).setParameter(26, dto.getVillage()).setParameter(27,dto.getTrade());
             int save = query1.executeUpdate();
             if(save>0) {
                 Query querydoc = sqlQuery("INSERT INTO `crpengineerattachmentfinal` (`Id`,`CrpEngineerFinalId`,`DocumentName`,`DocumentPath`,`FileType`,`CreatedBy`,`CreatedOn`) SELECT a.`Id`,a.`CrpEngineerId`,a.`DocumentName`,a.`DocumentPath`,a.`FileType`,?,CURRENT_TIMESTAMP FROM `crpengineerattachment` a  LEFT JOIN `crpengineer` ar ON a.`CrpEngineerId`=ar.`Id` WHERE ar.`ReferenceNo`=? ");
@@ -604,7 +602,7 @@ public class EngineerDao extends BaseDao {
                     "FROM\n" +
                     "crpengineerfinal a \n" +
                     "INNER JOIN cmnlistitem b  \n" +
-                    "ON b.Id = a.CmnApplicationRegistrationStatusId INNER JOIN crparchitectappliedservice s \n" +
+                    "ON b.Id = a.CmnApplicationRegistrationStatusId INNER JOIN crpengineerappliedservice s \n" +
                     "ON s.CrpEngineerId = a.Id WHERE a.CDBNo =?\n" +
                     "ORDER BY a.ReferenceNo DESC;";
             dto = (List<TasklistDto>) hibernateQuery(sqlQuery, TasklistDto.class).setParameter(1, cdbNo).list();
@@ -632,9 +630,9 @@ public class EngineerDao extends BaseDao {
                     "FROM\n" +
                     "crpengineer a \n" +
                     "INNER JOIN cmnlistitem b  \n" +
-                    "ON b.Id = a.CmnApplicationRegistrationStatusId INNER JOIN crparchitectappliedservice s \n" +
+                    "ON b.Id = a.CmnApplicationRegistrationStatusId INNER JOIN crpengineerappliedservice s \n" +
                     "ON s.CrpEngineerId = a.Id WHERE a.CmnApplicationRegistrationStatusId = 'de662a61-b049-11e4-89f3-080027dcfac6' AND  s.CmnServiceTypeId ='45bc628b-cbbe-11e4-83fb-080027dcfac6' OR s.CmnServiceTypeId = 'acf4b324-cbbe-11e4-83fb-080027dcfac6' AND a.CDBNo =?\n" +
-                    "ORDER BY a.ReferenceNo DESC;";
+                    "ORDER BY a.ReferenceNo DESC";
             dto = (List<TasklistDto>) hibernateQuery(sqlQuery, TasklistDto.class).setParameter(1, cdbNo).list();
         } catch (Exception e) {
             System.out.print("Exception in EngineerDao # populaterejectedApplicationEngineer: " + e);
