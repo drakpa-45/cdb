@@ -1103,5 +1103,49 @@ public class SpecializedDao extends BaseDao {
         }
         return dto;
     }
+
+    @Transactional
+    public List<TasklistDto> populateapplicationHistorySptrade(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        try {
+            sqlQuery = "SELECT a.ReferenceNo applicationNo,a.ApplicationDate applicationDate,a.SPNo cdbNo, \n" +
+                    "b.Name AS appStatus,\n" +
+                    "CASE\n" +
+                    "WHEN s.CmnServiceTypeId = '55a922e1-cbbf-11e4-83fb-080027dcfac6' THEN 'New Registration'\n" +
+                    "WHEN s.CmnServiceTypeId ='45bc628b-cbbe-11e4-83fb-080027dcfac6' THEN 'Renewal'\n" +
+                    "WHEN s.CmnServiceTypeId = 'acf4b324-cbbe-11e4-83fb-080027dcfac6' THEN 'Cancellation'\n" +
+                    "ELSE 'No Services'\n" +
+                    "END AS serviceName\n" +
+                    "FROM crpspecializedtradefinal a INNER JOIN cmnlistitem b ON b.Id = a.CmnApplicationRegistrationStatusId  \n" +
+                    "INNER JOIN crpspecializedtradeappliedservice s ON s.CrpSpecializedTradeId = a.CrpSpecializedTradeId WHERE  a.SPNo =? GROUP BY a.ReferenceNo  ORDER BY a.ReferenceNo DESC";
+            dto = (List<TasklistDto>) hibernateQuery(sqlQuery, TasklistDto.class).setParameter(1, cdbNo).list();
+        } catch (Exception e) {
+            System.out.print("Exception in SpecializedDao # populateapplicationHistorySptrade: " + e);
+            e.printStackTrace();
+        }
+        return dto;
+    }
+
+    @Transactional
+    public List<TasklistDto> populaterejectedApplicationSptrade(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        try {
+            sqlQuery = "SELECT a.ReferenceNo applicationNo,a.ApplicationDate applicationDate,a.SPNo cdbNo, \n" +
+                    "b.Name AS appStatus,\n" +
+                    "CASE\n" +
+                    "WHEN s.CmnServiceTypeId = '55a922e1-cbbf-11e4-83fb-080027dcfac6' THEN 'New Registration'\n" +
+                    "WHEN s.CmnServiceTypeId ='45bc628b-cbbe-11e4-83fb-080027dcfac6' THEN 'Renewal'\n" +
+                    "WHEN s.CmnServiceTypeId = 'acf4b324-cbbe-11e4-83fb-080027dcfac6' THEN 'Cancellation'\n" +
+                    "ELSE 'No Services'\n" +
+                    "END AS serviceName\n" +
+                    "FROM crpspecializedtrade a INNER JOIN cmnlistitem b ON b.Id = a.CmnApplicationRegistrationStatusId  \n" +
+                    "INNER JOIN crpspecializedtradeappliedservice s ON s.CrpSpecializedTradeId = a.CrpSpecializedTradeId WHERE a.CmnApplicationRegistrationStatusId = 'de662a61-b049-11e4-89f3-080027dcfac6' AND  s.CmnServiceTypeId ='45bc628b-cbbe-11e4-83fb-080027dcfac6' OR s.CmnServiceTypeId = 'acf4b324-cbbe-11e4-83fb-080027dcfac6' AND a.SPNo =? GROUP BY a.ReferenceNo  ORDER BY a.ReferenceNo DESC";
+            dto = (List<TasklistDto>) hibernateQuery(sqlQuery, TasklistDto.class).setParameter(1, cdbNo).list();
+        } catch (Exception e) {
+            System.out.print("Exception in SpecializedDao # populaterejectedApplicationSptrade: " + e);
+            e.printStackTrace();
+        }
+        return dto;
+    }
 }
 

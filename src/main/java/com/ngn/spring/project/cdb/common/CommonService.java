@@ -643,4 +643,38 @@ public class CommonService extends BaseService {
         dto= arDao.populaterejectedApplicationArchitect(cdbNo);
         return dto;
     }
+
+    public String getCdbNoForEngineer(LoginDTO loginDTO) {
+        String app_type=commonDao.getCdbNoForEngineer(loginDTO);
+        return app_type;
+    }
+
+    public String getEngineerCDBNo(LoginDTO loginDTO) {
+        String app_type=commonDao.getEngineerCDBNo(loginDTO);
+        return app_type;
+    }
+
+    public List<TasklistDto> populateapplicationHistoryEngineer(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        dto= engineerDao.populateapplicationHistoryEngineer(cdbNo);
+        return dto;
+    }
+
+    public List<TasklistDto> populaterejectedApplicationEngineer(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        dto= engineerDao.populaterejectedApplicationEngineer(cdbNo);
+        return dto;
+    }
+
+    public List<TasklistDto> populateapplicationHistorySptrade(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        dto= spDao.populateapplicationHistorySptrade(cdbNo);
+        return dto;
+    }
+
+    public List<TasklistDto> populaterejectedApplicationSptrade(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        dto= spDao.populaterejectedApplicationSptrade(cdbNo);
+        return dto;
+    }
 }

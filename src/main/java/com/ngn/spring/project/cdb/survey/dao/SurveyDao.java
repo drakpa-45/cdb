@@ -611,10 +611,10 @@ public class SurveyDao extends BaseDao {
                     "ELSE 'No Services'\n" +
                     "END AS serviceName\n" +
                     "FROM\n" +
-                    "crpsurveyfinal a \n" +
+                    "crpsurvey a \n" +
                     "INNER JOIN cmnlistitem b  \n" +
                     "ON b.Id = a.CmnApplicationRegistrationStatusId INNER JOIN crpsurveyappliedservice s \n" +
-                    "ON s.CrpSurveyId = a.Id WHERE a.CmnApplicationRegistrationStatusId = 'de662a61-b049-11e4-89f3-080027dcfac6' AND a.ARNo = ?\n" +
+                    "ON s.CrpSurveyId = a.Id WHERE a.CmnApplicationRegistrationStatusId = 'de662a61-b049-11e4-89f3-080027dcfac6' AND  s.CmnServiceTypeId ='45bc628b-cbbe-11e4-83fb-080027dcfac6' OR s.CmnServiceTypeId = 'acf4b324-cbbe-11e4-83fb-080027dcfac6' AND a.ARNo = ?\n" +
                     "ORDER BY a.ReferenceNo DESC";
             dto = (List<TasklistDto>) hibernateQuery(sqlQuery, TasklistDto.class).setParameter(1, cdbNo).list();
         } catch (Exception e) {

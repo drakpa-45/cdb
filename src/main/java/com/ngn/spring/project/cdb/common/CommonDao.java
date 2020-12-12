@@ -651,6 +651,27 @@ try {
         }
         return cdbNo;
     }
+
+    @Transactional
+    public String getCdbNoForEngineer(LoginDTO loginDTO) {
+        String cdbNo="";
+        String surveyquery="SELECT f.CDBNo cdbNo FROM sysuser s LEFT JOIN crpengineerfinal f ON f.SysUserId=s.Id WHERE s.username=?";
+        Query spNo = sqlQuery(surveyquery).setParameter(1, loginDTO.getUsername());
+        return (String) spNo.list().get(0);
+    }
+
+    @Transactional
+    public String getEngineerCDBNo(LoginDTO loginDTO) {
+        String cdbNo="";
+        String architectquery="SELECT f.CDBNo cdbNo FROM sysuser s LEFT JOIN crpengineerfinal f ON f.SysUserId=s.Id WHERE s.username=? ";
+        Query arNo = sqlQuery(architectquery).setParameter(1, loginDTO.getUsername());
+        if(arNo.list().size()>0)
+            cdbNo="Engineer999"+ arNo.list().get(0);
+        if(cdbNo==""){
+            //get cdbno for others
+        }
+        return cdbNo;
+    }
 }
 
 
