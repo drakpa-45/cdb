@@ -271,6 +271,7 @@ public class ArchitectServices extends BaseService{
         dto1.setServiceTypeId(dto.getServiceTypeId());
         dto1.setServiceSectorTypeId(dto.getServiceSectorTypeId());
         dto1.setCdbNo(dto.getCdbNo());
+        dto1.setTrade(dto.getTrade());
 
             dto1.setRemarks(dto.getRemarks());
             dto1.setPaymentmode(dto.getPaymentmode());

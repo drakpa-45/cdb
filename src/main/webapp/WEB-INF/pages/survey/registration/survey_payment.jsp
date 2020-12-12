@@ -170,6 +170,12 @@
                                                 <input type="hidden" value="${appDetails.employeeName}" readonly maxlength="100" id="country" name="country" class="form-control">${appDetails.employeeName}
                                         </div>
                                     </div>
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                                            <label>Trade:</label>
+                                            <input type="hidden" value="${appDetails.cmnTradeId}" readonly maxlength="100" id="trade" name="trade" class="form-control">${appDetails.trade}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                                     <input type="hidden" class=" form-control number" value="${appDetails.cdbNo}" readonly name="cdbNo">

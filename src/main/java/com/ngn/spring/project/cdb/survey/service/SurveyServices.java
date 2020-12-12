@@ -307,6 +307,7 @@ public class SurveyServices extends BaseService {
         dto1.setTotalAmt(dto.getTotalAmt());
         dto1.setNoOfDaysAfterGracePeriod(dto.getNoOfDaysAfterGracePeriod());
         dto1.setNoOfDaysLate(dto.getNoOfDaysLate());
+        dto1.setTrade(dto.getTrade());
         //  if(dto.getServiceSectorType().equalsIgnoreCase("Goverment")) {
         if (dto.getServiceTypeId().equalsIgnoreCase("registration")) {
             insert = dao.insertuserDetails(dto1, userID, request);

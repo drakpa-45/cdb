@@ -31,5 +31,4 @@
     <!--<bean id="userDao" class="com.ngn.project.attendance.dao.UserDao">
         <property name="dataSource" ref="dataSource"/>
     </bean>-->
-
 </beans>

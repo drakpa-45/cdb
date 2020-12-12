@@ -274,12 +274,12 @@ public class ArchitectDao extends BaseDao {
             org.hibernate.query.Query query1 = sqlQuery("INSERT INTO crparchitectfinal (ApplicationDate,ARNo,CIDNo,CmnApplicationRegistrationStatusId,CmnCountryId,CmnDzongkhagId,CmnQualificationId,CmnSalutationId,CmnServiceSectorTypeId," +
                     "CmnUniversityCountryId,CreatedBy,Email,EmployerAddress,EmployerName,Gewog,GraduationYear,Id,MobileNo,Name," +
                     "NameOfUniversity,ReferenceNo,RegistrationApprovedDate,RegistrationExpiryDate,RemarksByFinalApprover,SysUserId," +
-                    "SysFinalApproverUserId,Village,InitialDate,SysFinalApprovedDate,CreatedOn) VALUES(?,?,?,?,?,?,?,?,?," +
-                    "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_DATE,CURRENT_DATE,CURRENT_TIMESTAMP)");
+                    "SysFinalApproverUserId,Village,CmnTradeId,InitialDate,SysFinalApprovedDate,CreatedOn) VALUES(?,?,?,?,?,?,?,?,?," +
+                    "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_DATE,CURRENT_DATE,CURRENT_TIMESTAMP)");
             query1.setParameter(1, dto.getApplicationDate()).setParameter(2, dto.getCdbNo()).setParameter(3, dto.getCidNo()).setParameter(4,  ApplicationStatus.APPROVED.getCode()).setParameter(5, dto.getCountryId()).setParameter(6, dto.getDzongkhagId()).setParameter(7, dto.getQualificationId()).setParameter(8, dto.getSalutation()).setParameter(9, dto.getServiceSectorTypeId())
                     .setParameter(10, dto.getUniversityCountry()).setParameter(11, userID).setParameter(12, dto.getEmail()).setParameter(13, dto.getEmployeeAddress()).setParameter(14, dto.getEmployeeName()).setParameter(15, dto.getGewog()).setParameter(16, dto.getGraduationyr().toString().substring(0,4)).setParameter(17, dto.getCrpArchitectId()).setParameter(18, dto.getMobileNo()).setParameter(19, dto.getFullname())
                     .setParameter(20, dto.getUniversityName()).setParameter(21, dto.getReferenceNo()).setParameter(22, dto.getApprovaldate()).setParameter(23,dto.getRegExpDate()).setParameter(24,dto.getRemarks()).setParameter(25, sysuserId)
-                    .setParameter(26, userID).setParameter(27, dto.getVillage());
+                    .setParameter(26, userID).setParameter(27, dto.getVillage()).setParameter(28,dto.getTrade());
             int save = query1.executeUpdate();
             if(save>0) {
                 org.hibernate.query.Query querydoc = sqlQuery("INSERT INTO `crparchitectattachmentfinal` (`Id`,`CrpArchitectFinalId`,`DocumentName`,`DocumentPath`,`FileType`,`CreatedBy`,`CreatedOn`) SELECT a.`Id`,a.`CrpArchitectId`,a.`DocumentName`,a.`DocumentPath`,a.`FileType`,?,CURRENT_TIMESTAMP FROM `crparchitectattachment` a  LEFT JOIN `crparchitect` ar ON a.`CrpArchitectId`=ar.`Id` WHERE ar.`ReferenceNo`=? ");
@@ -308,14 +308,14 @@ public class ArchitectDao extends BaseDao {
         try {
             sqlQuery="SELECT f.ARNo cdbNo,f.ReferenceNo refNo,f.Id CrpArchitectId,f.CIDNo cidNo,f.Name fullname,f.Village village,f.Gewog gewog,f.CmnDzongkhagId cmnDzongkhagId,d.NameEn dzongkhagId,c.Name countryId,s.Name salutation,\n" +
                     "i.Name updateStatus,f.CmnSalutationId salutationId,f.Email email,f.MobileNo mobileNo,f.EmployerName employeeName,f.EmployerAddress employeeAddress,f.CmnQualificationId qualificationId, q.Name qualification,f.CmnServiceSectorTypeId serviceSectorTypeId,\n" +
-                    "f.GraduationYear graduationyr,t.Name serviceSectorType,f.NameOfUniversity universityName,f.CmnUniversityCountryId cmnUniversityCountryId,uc.Name universityCountry,f.RegistrationApprovedDate registrationApproveDate,f.RegistrationExpiryDate regExpDate\n" +
+                    "f.GraduationYear graduationyr,t.Name serviceSectorType,td.Name trade, f.CmnTradeId cmnTradeId,f.NameOfUniversity universityName,f.CmnUniversityCountryId cmnUniversityCountryId,uc.Name universityCountry,f.RegistrationApprovedDate registrationApproveDate,f.RegistrationExpiryDate regExpDate\n" +
                     "FROM crparchitectfinal f \n" +
                     "LEFT JOIN cmnlistitem i ON i.Id=f.CmnApplicationRegistrationStatusId \n" +
                     "LEFT JOIN cmnlistitem s ON s.Id=f.CmnSalutationId\n" +
                     "LEFT JOIN cmncountry c ON c.Id=f.CmnCountryId\n" +
                     "LEFT JOIN cmncountry uc ON uc.Id=f.CmnUniversityCountryId\n" +
                     "LEFT JOIN cmnlistitem q ON q.Id=f.CmnQualificationId LEFT JOIN cmnlistitem t ON t.Id=f.CmnServiceSectorTypeId \n" +
-                    "LEFT JOIN cmndzongkhag d ON d.Id=f.CmnDzongkhagId WHERE f.ARNo = ? ";
+                    "LEFT JOIN cmndzongkhag d ON d.Id=f.CmnDzongkhagId LEFT JOIN cmnlistitem td ON td.Id=f.CmnTradeId WHERE f.ARNo = ? ";
             dto=(ArchitectDto) hibernateQuery(sqlQuery, ArchitectDto.class).setParameter(1, cdbNo).list().get(0);
         } catch (Exception e) {
             System.out.print("Exception in ArchitectDao # populateApplicantDetails: " + e);
