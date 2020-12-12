@@ -124,31 +124,31 @@
 <br><br>
 <div>
     <button class="btn btn-outline-info" type="button" id="prntid" onclick="printAndDowoload()"><i class="fa fa-download"></i>Print</button>
-    <a href="#" onClick="doExportItem('#spdf',
-                                        {type: 'pdf',
-                                         jspdf: {orientation: 'l',
-                                         margins: {right: 20, left: 20, top: 15, bottom: 15},
-                                         autotable: {styles: {rowHeight: 16, halign: 'left'},
-                                         tableWidth: 'auto'}
-                                         }});">
-        <button type="button" class="btn btn-outline-danger"><i class="fa fa-save"></i>Generate PDF</button></a>
+    <button class="btn btn-outline-danger" type="button" onclick="doExportItem()"><i class="fa fa-save"></i>Generate PFD</button>
 </div>
 
 <script>
-    $(document).ready(function() {
-        $('#spdf').DataTable({
-            responsive: true
+    function doExportItem(){
+        var HTML_Width = $("#spdf").width();
+        var HTML_Height = $("#spdf").height();
+        var top_left_margin = 15;
+        var PDF_Width = HTML_Width+(top_left_margin*2);
+        var PDF_Height = (PDF_Width*1.5)+(top_left_margin*2);
+        var canvas_image_width = HTML_Width;
+        var canvas_image_height = HTML_Height;
+        var totalPDFPages = Math.ceil(HTML_Height / PDF_Height)-1;
+        html2canvas($("#spdf")[0],{allowTaint:true}).then(function(canvas) {
+            canvas.getContext('2d');
+            console.log(canvas.height+"  "+canvas.width);
+            var imgData = canvas.toDataURL("image/jpeg", 1.0);
+            var pdf = new jsPDF('p', 'pt',  [PDF_Width, PDF_Height]);
+            pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin,canvas_image_width,0);
+            for (var i = 1; i <= totalPDFPages; i++) {
+                pdf.addPage(PDF_Width, PDF_Height);
+                pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+            }
+            pdf.save("form.pdf");
         });
-
-    });
-    function doExportItem(selector, params){
-        var options={
-            tableName: 'khklh',
-            worksheetName: 'TradeRegistration',
-            fileName: 'TradeRegistration'
-        };
-        $.extend(true, options, params);
-        $(selector).tableExport(options);
     }
 </script>
 <script type="text/javascript" src="<c:url value="/resources/JqueryAjaxFormSubmit.js"/>"></script>
