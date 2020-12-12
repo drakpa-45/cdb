@@ -7,21 +7,10 @@
 
 <html>
 <head>
-    <style>
-        /* unvisited link */
-        .hcolor:link {
-            color: black;
-        }
-        /* selected link */
-        .hcolor:active {
-            color: blue;
-        }
-    </style>
+    <link href ="css/cdb.css" type ="text/html/css" rel ="stylesheet"/>
 </head>
+<body>
 <div class="header py-4" style="background: #120f65;">
-
-    <link href ="css/cdb.css" type ="text/css" rel ="stylesheet"/>
-
     <div class="container ">
         <div class="d-flex">
             <a class="header-brand" href="<c:url value="/index"/>">
@@ -49,7 +38,6 @@
         </div>
     </div>
 </div>
-
 <div class="collapse d-lg-flex header p-0 shadow-sm" id="headerMenuCollapse">
     <div class="container">
         <div class="row pull-right">
@@ -244,5 +232,15 @@
         </div>
     </div>
 </div>
-
+<style>
+    /* unvisited link */
+    .hcolor:link {
+        color: black;
+    }
+    /* selected link */
+    .hcolor:active {
+        color: blue;
+    }
+</style>
+</body>
 </html>

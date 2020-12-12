@@ -12,7 +12,6 @@
     <title></title>
 </head>
 <body>
-
 <div class="row">
     <div class="col-12">
         <div class="mb-0 page-header">
@@ -20,7 +19,6 @@
                 Construction Development Board
             </h1>
         </div>
-
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title font-weight-bold">Task List</h3>
@@ -98,7 +96,6 @@
                                             <a href="#" onclick="openAndClaimApplication('${task.applicationNo}','open')" data-toggle="tooltip"  data-placement="top" >
                                                     ${task.applicationNo} (${task.serviceSectorType})
                                             </a>
-                                            <a></a>
                                         </td>
                                         <td>${task.serviceName}</td>
                                         <td>${task.cdbNo}</td>
