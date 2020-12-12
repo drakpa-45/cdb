@@ -166,6 +166,44 @@
                                                             </div>
                                                             <span id="fileadd"></span>
                                                             <br/>
+                                                            <div class="form-froup">
+                                                                <div class="col-lg-12">
+                                                                    <strong>Terms and Condition</strong>
+                                                                    <div class="form-group">
+                                                                        <div class="col-lg-12" id="">
+                                                                            <c:forEach var="att" items="${undertaking}" varStatus="counter">
+                                                                                <li>${att.name}</li>
+                                                                            </c:forEach>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-lg-12"> I/We declare and confirm that: </label>
+                                                                <div id="termsAndCon">
+                                                                    <ul>
+                                                                        <li>
+                                                                            All information and attachments with this application are true and correct;
+                                                                        </li>
+                                                                        <li>
+                                                                            I am/We are aware that any false information provided herein shall result in rejection of my application and suspension of any registration granted;
+                                                                        </li>
+                                                                        <li>I/We shall not make refund claims of expenditure incurred in processing this application;
+                                                                        </li>
+                                                                        <li>I/We have read and understood the legal instruments issued by CDB (Manuals, Guidelines, Codes etc.)  and shall perform in line with these instruments and any other laws in force.
+                                                                        </li>
+                                                                        <li>I/We understand that the failure to comply with aforementioned legal instruments  will be subject to the penalties provided for in these instruments and applicable laws in force; and
+                                                                        </li>
+                                                                        <li>I/We hereby declare that issuance of CDB certificate does not in any way constitute an obligation on the part of CDB or any other government agencies to provide contract works.</li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-lg-12">
+                                                                    <span><input type="checkbox" id="submitcheckbox" onclick="enablesubmit()" name="tnc" class="required"  style="width:15px;height:15px;"></span>
+                                                                    <span class="bold"> I/We agree to the above Terms & Conditions.</span>
+                                                                </label>
+                                                            </div>
                                                             <input type="hidden" name="addedeqCount" id="addedeqCount">
                                                         </div>
                                                     </div>
