@@ -292,6 +292,7 @@ public class EngineerServices extends BaseService{
                 insert = dao.insertuserDetails(dto1, userID, request);
                 String engineerNo=dao.generateEngineerNo(dto1.getCountryId(), dto1.getServiceSectorType());
                 dto1.setCdbNo(engineerNo);
+                dto.setCdbNo(engineerNo);
                 if (!insert.equalsIgnoreCase("Insert_Fail")) {
                     dto1.setCdbNo(dto.getCdbNo());
                     String password = insert.split("/")[1];
