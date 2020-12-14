@@ -202,11 +202,8 @@
                                                                 <%-- <input type="text" onclick="remove_err('paymentReceiptDate_err')" class=" form-control datepicker"
                                                                         readonly name="paymentReceiptDate" id="paymentReceiptDate">--%>
                                                             <div class="input-group margin-bottom-sm">
-                                                                                <span class="input-group-addon pr-5"><i
-                                                                                        class="fa fa-calendar"></i></span>
-                                                                <input type="date" name="paymentReceiptDate"
-                                                                       value="" id="paymentReceiptDate"
-                                                                       class="form-control">
+                                                                                <span class="input-group-addon pr-5"><i class="fa fa-calendar"></i></span>
+                                                                <input type="date" name="paymentReceiptDate" value="" id="paymentReceiptDate" class="form-control">
                                                             </div>
                                                             <span id="paymentReceiptDate_err" class="text-danger"></span>
                                                         </div>
@@ -223,7 +220,7 @@
                                                                 <input type="text" class=" form-control number" value="0.00" readonly name="totalAmt">
                                                             </c:if>
                                                             <c:if test="${appDetails.serviceSectorType=='Private'}">
-                                                                <input type="text" class=" form-control number" value="2000.0" readonly name="totalAmt">
+                                                                <input type="text" class=" form-control number" value="1000.0" readonly name="totalAmt">
                                                             </c:if>
                                                         </div>
                                                     </div>

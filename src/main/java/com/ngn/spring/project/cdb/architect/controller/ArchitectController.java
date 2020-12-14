@@ -234,7 +234,7 @@ public class ArchitectController extends BaseController {
                 services.saveDoc(files,resdto.getCrpArchitectId(),"RenewalOfArchitect",loginDTO.getUserId());
                 personal.setResponseText("Your application for <label class='control-label'>Renewal Of Architect</label> has been submitted and your application number is <b>"+resdto.getReferenceNo()+"</b> <br><p>You will receive an email as well as sms notification once take further action.</p><label class='control-label'>You can track your application using above Application Number. <br /> Thank you.</label>");
             }
-            model.addAttribute("acknowledgement_message", "Your application for <label class='control-label'>Renewal Of Architecture</label> has been submitted and your application number is <b>"+resdto.getReferenceNo()+"</b> <br><p>You will receive an email as well as sms notification once take further action.</p><label class='control-label'>You can track your application using above Application Number. <br /> Thank you.</label>");
+            model.addAttribute("acknowledgement_message", "Your application for <label class='control-label'>Renewal Of Architect</label> has been submitted and your application number is <b>"+resdto.getReferenceNo()+"</b> <br><p>You will receive an email as well as sms notification once take further action.</p><label class='control-label'>You can track your application using above Application Number. <br /> Thank you.</label>");
             return "/architect/acknowledgement";
         }catch (Exception e){
             System.out.print(e);

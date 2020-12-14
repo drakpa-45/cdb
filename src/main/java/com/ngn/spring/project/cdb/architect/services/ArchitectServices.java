@@ -426,7 +426,7 @@ public class ArchitectServices extends BaseService{
         entity.setVillage(dto.getVillage());
         entity.setCmnServiceSectorTypeId(dto.getServiceSectorType());
         entity.setCmnCountryId(dto.getCountryId());
-        //entity.setTPN(dto.getTrade());//trade field is not there in db
+        entity.setCmnTradeId(dto.getTrade());//trade field is not there in db
         entity.setEmail(dto.getEmail());
         entity.setMobileNo(dto.getMobileNo());
         entity.setEmployerName(dto.getEmployeeName());

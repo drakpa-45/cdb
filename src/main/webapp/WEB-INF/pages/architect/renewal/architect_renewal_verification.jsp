@@ -138,12 +138,12 @@
                                                                         <input type="hidden" value="${appDetails.serviceSectorType}" readonly maxlength="100" id="service" name="serviceSectorType" class="form-control">${appDetails.serviceSectorType}
                                                                     </div>
                                                                 </div>
-                                                               <%-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                    <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Expiry Date: </label>
+                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                                                                    <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Trade: </label>
                                                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                        <input type="hidden" value="${appDetails.regExpDate}" readonly id="regExpDate" class="form-control">${appDetails.regExpDate}
+                                                                        <input type="hidden" value="${appDetails.cmnTradeId}" readonly maxlength="100" id="trade" name="trade" class="form-control">${appDetails.trade}
                                                                     </div>
-                                                                </div>--%>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
