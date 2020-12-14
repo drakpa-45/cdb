@@ -91,6 +91,12 @@
                                                             <input type="hidden" class=" form-control number" value="${appDetails.mobileNo}" readonly id="mobileNo" name="mobileNo" maxlength="8">${appDetails.mobileNo}
                                                         </div>
                                                     </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Trade:</label>
+                                                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                            <input type="hidden" class=" form-control number" value="${appDetails.cmnTradeId}" readonly id="trade" name="trade" maxlength="8">${appDetails.trade}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                     <img src='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo=${appDetails.cidNo}' width='200px' height='200px' class='pull-right'/>
@@ -193,7 +199,12 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                     <label>Renewal Amount:</label>
-                                                    <input type="text" class=" form-control number" value="1000" readonly name="renewalAmt" id="renewalAmt">
+                                                    <c:if test="${appDetails.serviceSectorType=='Government'}">
+                                                        <input type="text" class=" form-control number" value="0.00" readonly name="totalAmt">
+                                                    </c:if>
+                                                    <c:if test="${appDetails.serviceSectorType=='Private'}">
+                                                        <input type="text" class=" form-control number" value="1000.0" readonly name="totalAmt">
+                                                    </c:if>
                                                 </div>
                                             </div>
                                             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
