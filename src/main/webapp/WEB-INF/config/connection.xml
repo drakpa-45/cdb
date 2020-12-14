@@ -11,14 +11,14 @@
         <property name="validationQuery" value="SELECT 1"/>
     </bean>-->
 
-   <!-- <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
-        &lt;!&ndash;<property name="url" value="jdbc:mysql://172.30.16.28:3306/EGIF_DB"/>&ndash;&gt;
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <!--<property name="url" value="jdbc:mysql://172.30.16.28:3306/EGIF_DB"/>-->
         <property name="url" value="jdbc:mysql://localhost:3306/cdb_local_new"/>
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
         <property name="username" value="ccruser"/>
         <property name="password" value="ccruser2020@!"/>
         <property name="validationQuery" value="SELECT 1"/>
-    </bean>-->
+    </bean>
     <!--<bean id="userDao" class="com.ngn.project.attendance.dao.UserDao">
         <property name="dataSource" ref="dataSource"/>
     </bean>-->

@@ -50,6 +50,7 @@ ContractorActionDao.getNextCDBNo = SELECT DISTINCT a.`CDBNo`+1 AS cdbNo  FROM cr
 ContractorActionDao.getHRAttachments = SELECT a.`DocumentName` documentName,`DocumentPath` documentPath, `FileType` fileType FROM `crpcontractorhumanresourceattachment` a WHERE a.`CrpContractorHumanResourceId` = :hrId
 ContractorActionDao.getEQAttachments = SELECT a.`DocumentName` documentName,`DocumentPath` documentPath, `FileType` fileType FROM `crpcontractorequipmentattachment` a WHERE a.`CrpContractorEquipmentId`  = :eqId
 ContractorActionDao.getIncAttachment = SELECT DocumentName AS documentName, DocumentPath documentPath,FileType AS fileType, AttachmentFor as attachmentFor FROM crpcontractorattachment WHERE CrpContractorId =:contractorId
+ContractorActionDao.getCDBNoFromAppNo = SELECT b.cdbno FROM  crpcontractor a INNER JOIN crpcontractorfinal b ON a.email = b.email WHERE a.referenceNo =:appNo
 /* Contractor renewal dao*/
 ContractorRCDao.getContractorStatus =select bb.Id value,bb.Name text,bb.ReferenceNo obj1 from `crpcontractorfinal` aa inner join cmnlistitem bb on aa.`CmnApplicationRegistrationStatusId`=bb.Id where cdbNo = :cdbNo
 ContractorRCDao.getServicesFee = SELECT Id,ReferenceNo, Name AS serviceName, ContractorAmount AS feeAmount  FROM `crpservice` WHERE ((:refNo is null and ReferenceNo IN (4,6,7,8,9,10,12)) or ReferenceNo = :refNo)

@@ -376,9 +376,9 @@ var contractorOS = (function () {
                     for(var i in data){
                         tr = tr + "<tr>"+
                         "<td></td>" +
-                        "<td>"+data[i].documentName+"</td>"+
-                        "<td><a href='"+_baseURL() + "/viewDownload?documentPath="+data[i].documentPath+"' target='_blank'> View </a></td>" +
-                        "<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
+                        "<td ><input type='text' class='form-control docName' name='cAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>"+
+                        "<td class='attachment'><a href='"+_baseURL() + "/viewDownload?documentPath="+data[i].documentPath+"' target='_blank'> View </a></td>" +
+                        "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
                         "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
                         "</tr>";
                     }
@@ -392,8 +392,13 @@ var contractorOS = (function () {
     }
 
 
-    function editIncAttachment($this){
-        $this.closest('tr').find('')
+    function editIncAttachment(){
+        $('#IncCertificateTbl').on('click','.edit_row',function(){
+            $(this).closest('tr').find('.docName').prop('disabled',false);
+            var attachment = $(this).closest('tr').find('.attachment');
+            attachment.html("<input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'>");
+
+        })
     }
 
     function viewDownloadAttachment(){
@@ -753,6 +758,7 @@ var contractorOS = (function () {
         enableRegistrationNo();
         addMoreEqFile();
         addMoreFile();
+        editIncAttachment();
     }
 
     return {
