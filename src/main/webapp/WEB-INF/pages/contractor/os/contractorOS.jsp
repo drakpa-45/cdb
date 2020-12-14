@@ -743,6 +743,7 @@
                                                                 <th style="width: 10%">Trade / Fields</th>
                                                                 <th style="width: 10%">Service Type</th>
                                                                 <th style="width: 20%">Attachments (CV/UT/AT)</th>
+                                                                <th style="width: 20%">Delete Request</th>
                                                                 <th style="width: 5%">Action</th>
                                                             </tr>
                                                             </thead>

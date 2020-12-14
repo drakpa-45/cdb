@@ -54,6 +54,8 @@ public class ContractorHR extends BaseModel implements Serializable{
     private Integer verified;
     @Column(name = "Approved")
     private Integer Approved;
+    @Transient
+    private Integer deleteRequest;
 
     @Transient
     private List<ContractorHRAttachment> contractorHRAs;
@@ -192,5 +194,13 @@ public class ContractorHR extends BaseModel implements Serializable{
 
     public void setContractorHRAs(List<ContractorHRAttachment> contractorHRAs) {
         this.contractorHRAs = contractorHRAs;
+    }
+
+    public Integer getDeleteRequest() {
+        return deleteRequest;
+    }
+
+    public void setDeleteRequest(Integer deleteRequest) {
+        this.deleteRequest = deleteRequest;
     }
 }

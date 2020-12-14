@@ -440,8 +440,8 @@ var contractorOS = (function () {
                             "<td class='tradeName'>" + contractorHrs[i].tradeName + "</td>" +
                             "<td class='serviceTypeName'>" + contractorHrs[i].serviceTypeName + "</td>" +
                             "<td class='attachments'>" + attachments + "</td>" +
-                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
-                            "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                            "<td><input type='checkbox' name='contractorHRs[0].deleteRequest' value='1'></td>"+
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button></td>" +
                             "</tr>";
                         }
                         $('#hrDtlsTable').find('tbody').append(hrTr);
