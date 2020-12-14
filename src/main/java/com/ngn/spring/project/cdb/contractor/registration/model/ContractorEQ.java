@@ -43,6 +43,9 @@ public class ContractorEQ extends BaseModel implements Serializable {
     private Integer approved;
 
     @Transient
+    private Integer deleteRequest;
+
+    @Transient
     private ContractorEQAttachment contractorEQA;
 
     @Transient
@@ -133,5 +136,13 @@ public class ContractorEQ extends BaseModel implements Serializable {
 
     public void setContractorEQAs(List<ContractorEQAttachment> contractorEQAs) {
         this.contractorEQAs = contractorEQAs;
+    }
+
+    public Integer getDeleteRequest() {
+        return deleteRequest;
+    }
+
+    public void setDeleteRequest(Integer deleteRequest) {
+        this.deleteRequest = deleteRequest;
     }
 }

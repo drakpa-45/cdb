@@ -558,6 +558,9 @@
                                     </div>
                                     <div class="tab-pane category_details hide">
                                         <div class="div-actual">
+                                            <div class="card">
+                                                Note: If you are upgrading/down grade class,it is necessary to attach Letter of Undertaking
+                                            </div>
                                             <table id="contractorCCTbl" class="table table-bordered table-hover">
                                                 <thead style="background-color: #F2F2F2">
                                                 <tr>
@@ -683,26 +686,16 @@
                                                         <tr>
                                                             <th>Document Name</th>
                                                             <th>Document Attached</th>
-                                                            <th>File Size</th>
                                                             <th>Delete</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody class="files">
-                                                        <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
+                                                        <tr><td>
+                                                            <input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='C'/>
+                                                            <input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
                                                             <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
-                                                            <td class='file-size'></td>
                                                             <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                         </tr>
-                                                        <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
-                                                            <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
-                                                            <td class='file-size'></td>
-                                                            <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
-                                                        </tr>
-                                                            <%--  <tr><td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/> </td>
-                                                                  <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
-                                                                  <td class='file-size'></td>
-                                                                  <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
-                                                              </tr>--%>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -781,6 +774,7 @@
                                                         <th>Registration Number</th>
                                                         <th>Quantity</th>
                                                         <th>Attachment</th>
+                                                        <th>Delete Request</th>
                                                         <th>Action</th>
                                                     </tr>
                                                     </thead>
@@ -955,7 +949,7 @@
                                                                         Ethics' and shall perform in line with Code
                                                                         of Ethics and any other legislation in
                                                                         force. Failure to comply, will be subject to
-                                                                        the penalities provided for in the
+                                                                        the penalties provided for in the
                                                                         applicable legislation of the country.
                                                                     </li>
                                                                     <li>I/We hereby declare that issue of CDB

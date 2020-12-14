@@ -119,7 +119,7 @@ function getModalData(tableId, prefix, totalCol) {
     }
     td = td + "<td ><span class='doc'></span> <div class='hidden hr_attachment'></div></td>";
 
-    var tr = "<tr id='"+j+"'>" + td + "<td><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
+    var tr = "<tr id='"+j+"'>" + td + "<td></td><td><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
         "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td></tr>";
 
     $("#" + tableId).append(tr).find(".noRecord").hide();
@@ -503,14 +503,13 @@ var contractorOS = (function () {
 
                             eqTr = eqTr +
                             "<tr>" +
-                            "<td class='eq1'><input type='hidden' class='contractorEQid' name='contractorEQs[0].id' value='"+equipments[i].id +"'/>"
+                            "<td class='eq1'><input type='hidden' class='contractorEQid' name='equipments[0].id' value='"+equipments[i].id +"'/>"
                             + equipments[i].equipmentName + "</td>" +
                             "<td class='eq2'>" + equipments[i].registrationNo + "</td>" +
                             "<td class='qty'>" + equipments[i].quantity + "</td>" +
                             "<td>" + attachment + "</td>" +
-                            //"<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
-                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
-                            "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                            "<td><input type='checkbox' name='equipments[0].deleteRequest' value='1'></td>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button></td>" +
                             "</tr>";
                         }
                         $('#equipmentTbl').find('tbody').html(eqTr);
@@ -536,22 +535,22 @@ var contractorOS = (function () {
                         var categories = res;
                         for (var i in categories) {
                             if (categories[i].categoryId == "6cd737d4-a2b7-11e4-b4d2-080027dcfac6") {
-                                $('#W1').find('.categoryCheck').prop('checked', true);
+                                $('#W1').find('.categoryCheck').prop('checked', false);
                                 $('#W1').find('.appliedClassID').val(categories[i].aClassId);
                                 $('#W1').find('.existingClassID').val(categories[i].aClassId);
                             }
                             if (categories[i].categoryId == "8176bd2d-a2b7-11e4-b4d2-080027dcfac6") {
-                                $('#W2').find('.categoryCheck').prop('checked', true);
+                                $('#W2').find('.categoryCheck').prop('checked', false);
                                 $('#W2').find('.appliedClassID').val(categories[i].aClassId);
                                 $('#W2').find('.existingClassID').val(categories[i].aClassId);
                             }
                             if (categories[i].categoryId == "8afc0568-a2b7-11e4-b4d2-080027dcfac6") {
-                                $('#W3').find('.categoryCheck').prop('checked', true);
+                                $('#W3').find('.categoryCheck').prop('checked', false);
                                 $('#W3').find('.appliedClassID').val(categories[i].aClassId);
                                 $('#W3').find('.existingClassID').val(categories[i].aClassId);
                             }
                             if (categories[i].categoryId == "9090a82a-a2b7-11e4-b4d2-080027dcfac6") {
-                                $('#W4').find('.categoryCheck').prop('checked', true);
+                                $('#W4').find('.categoryCheck').prop('checked', false);
                                 $('#W4').find('.appliedClassID').val(categories[i].aClassId);
                                 $('#W4').find('.existingClassID').val(categories[i].aClassId);
                             }
