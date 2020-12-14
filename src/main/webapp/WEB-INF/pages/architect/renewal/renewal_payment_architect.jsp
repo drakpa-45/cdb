@@ -260,8 +260,8 @@
                                                             <td>${appDetails.remarks}</td>
                                                         </tr>--%>
                                                         <tr>
-                                                            <td><strong>CreatedBy: </strong></td>
-                                                            <td>${appDetails.createdBy}</td>
+                                                            <td><strong>Submitted By: </strong></td>
+                                                            <td>${appDetails.createdBy} (${appDetails.fullname})</td>
                                                         </tr>
                                                     </table>
                                                 </td>

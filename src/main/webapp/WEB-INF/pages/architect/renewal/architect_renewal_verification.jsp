@@ -292,7 +292,7 @@
                                                                                             <td>
                                                                                                 <strong>CreatedBy: </strong>
                                                                                             </td>
-                                                                                            <td>${appDetails.createdBy} <b style="color: blueviolet;">(Applicant's CID Number)</b></td>
+                                                                                            <td>${appDetails.createdBy} <b style="color: blueviolet;">(${appDetails.fullname})</b></td>
                                                                                         </tr>
                                                                                     </table>
                                                                                 </td>

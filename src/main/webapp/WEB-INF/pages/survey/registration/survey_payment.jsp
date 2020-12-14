@@ -157,7 +157,6 @@
                                             <label>Type: </label>
                                                 <input type="hidden" value="${appDetails.serviceSectorType}" readonly maxlength="100" id="service" name="serviceSectorType" class="form-control">${appDetails.serviceSectorType}
                                         </div>
-
                                     </div>
 
                                     <div class="col-lg-12">
@@ -255,7 +254,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td><strong>CreatedBy: </strong></td>
-                                                            <td>${appDetails.createdBy}<b style="color: blueviolet">(Applicant's CID number)</b></td>
+                                                            <td>${appDetails.createdBy}<b style="color: blueviolet">(${appDetails.fullname})</b></td>
                                                         </tr>
                                                     </table>
                                                 </td>

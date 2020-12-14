@@ -198,7 +198,12 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                     <label>Renewal Amount:</label>
-                                                    <input type="text" class=" form-control number" value="1000" readonly name="renewalAmt" id="renewalAmt">
+                                                    <c:if test="${appDetails.serviceSectorType=='Government'}">
+                                                        <input type="text" class=" form-control number" value="0.00" readonly name="totalAmt">
+                                                    </c:if>
+                                                    <c:if test="${appDetails.serviceSectorType=='Private'}">
+                                                        <input type="text" class=" form-control number" value="1000.0" readonly name="totalAmt">
+                                                    </c:if>
                                                 </div>
                                             </div>
                                             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
@@ -255,7 +260,7 @@
                                                         </tr>--%>
                                                         <tr>
                                                             <td><strong>CreatedBy: </strong></td>
-                                                            <td>${appDetails.createdBy} <b style="color: blueviolet">(Applicant's CID number)</b></td>
+                                                            <td>${appDetails.createdBy} <b style="color: blueviolet">(${appDetails.fullname})</b></td>
                                                         </tr>
                                                     </table>
                                                 </td>

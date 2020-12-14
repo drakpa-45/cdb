@@ -136,7 +136,7 @@
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Trade: </label>
                                                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                        <input type="hidden" value="${appDetails.trade}" readonly maxlength="100" id="service" name="serviceSectorType" class="form-control">${appDetails.trade}
+                                                                        <input type="hidden" value="${appDetails.trade}" readonly maxlength="100" id="trade" name="trade" class="form-control">${appDetails.trade}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -367,7 +367,7 @@
                                                                                             <td>
                                                                                                 <strong>CreatedBy: </strong>
                                                                                             </td>
-                                                                                            <td>${appDetails.createdBy} <b style="color: blueviolet">(Applicant's CID number)</b></td>
+                                                                                            <td>${appDetails.createdBy} <b style="color: blueviolet">(${appDetails.fullname})</b></td>
                                                                                         </tr>
                                                                                     </table>
                                                                                 </td>

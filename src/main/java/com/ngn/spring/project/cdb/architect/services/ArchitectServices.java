@@ -585,6 +585,9 @@ public class ArchitectServices extends BaseService{
                 lateFee= BigDecimal.valueOf(3000);
             }
             if(cFinal.getCmnServiceSectorTypeId().equalsIgnoreCase("6e1cd096-bea8-11e4-9757-080027dcfac6")){
+                lateFee= BigDecimal.valueOf(00.00);
+            }
+            if(cFinal.getCmnServiceSectorTypeId().equalsIgnoreCase("6e1cd096-bea8-11e4-9757-080027dcfac6")){
                 responseMessage.setText("Seems like your registration is already expired on <b>"+expiryDate+
                         "</b>. The total number of days late is <b>"+acNoOfLateDays+"</b> days." +
                         " However 30 days is considered as grace period which means the late fees that would be imposed within that period will be waived. Penalty amount is Nu. 100 per day.<br>" +
@@ -600,7 +603,12 @@ public class ArchitectServices extends BaseService{
             lateFeeDTO.setNoOfDaysLate(acNoOfLateDays.intValue());
             lateFeeDTO.setNoOfDaysAfterGracePeriod(noOfLateDays.intValue());
             lateFeeDTO.setWaiveOffLateFee(new BigDecimal(waiveOffLateFee));
-            lateFeeDTO.setPaymentAmount(lateFee);
+            if(cFinal.getCmnServiceSectorTypeId().equalsIgnoreCase("6e1cd096-bea8-11e4-9757-080027dcfac6")){
+                lateFeeDTO.setPaymentAmount(BigDecimal.valueOf(00.00));
+            }else {
+                lateFeeDTO.setPaymentAmount(lateFee);
+
+            }
         } else{
             responseMessage.setText("You are applying for renewal of Surveyor CDB certificate on time. So, no penalty will be" +
                     "charged. However, there will be renewal fee according to service you applied and your category and classes.");

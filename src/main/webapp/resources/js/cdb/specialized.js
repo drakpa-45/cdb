@@ -610,7 +610,7 @@ function checkForEngagement(cidNo){
         $.ajax({
             url: cdbGlobal.baseURL() + "/trade/getPersonalInfo",
             type: 'GET',
-            data: {cid: cidNo},
+            data: {cid: cidNo,type:"check"},
             success: function (res) {
                 //   alert('asdf');
                 if (res.status == '1') {
