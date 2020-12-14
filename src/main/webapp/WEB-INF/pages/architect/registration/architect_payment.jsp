@@ -332,9 +332,8 @@
                             <br>
                             <div class="form-group row pull-right">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                                    <button class="btn btn-warning" type="button" id="showrejectsection" onclick="updateReject()"><span class="fa fa-times"></span> Reject
-                                    </button>
                                     <c:if test="${appDetails.updateStatus=='262a3f11-adbd-11e4-99d7-080027dcfac6'}">
+                                        <button class="btn btn-warning" type="button" id="showrejectsection" onclick="updateReject()"><span class="fa fa-times"></span> Reject</button>
                                         <button type="button" onclick="previousTab('categoryDtls','saveAndPreview')" class="btn btn-success">
                                             <i class="fa fa-arrow-circle-left"></i> Previous
                                         </button>
@@ -343,6 +342,7 @@
                                         </button>
                                     </c:if>
                                     <c:if test="${appDetails.updateStatus=='36f9627a-adbd-11e4-99d7-080027dcfac6'}">
+                                        <button class="btn btn-warning" type="button" id="showrejectsection" onclick="updateReject()"><span class="fa fa-times"></span> Reject</button>
                                         <button type="button" onclick="previousTab('categoryDtls','saveAndPreview')" class="btn btn-success">
                                             <i class="fa fa-arrow-circle-left"></i> Previous
                                         </button>

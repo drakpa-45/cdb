@@ -560,14 +560,12 @@ public class EngineerServices extends BaseService{
             return responseMessage;
         }
         //endregion
-
         String ongoingApp = getOngoingAppStatusMsg(cdbNo);
         if(ongoingApp != null){
             responseMessage.setStatus(UNSUCCESSFUL_STATUS);
             responseMessage.setText(ongoingApp);
             return responseMessage;
         }
-
         if(!isRenewal){
             responseMessage.setStatus(SUCCESSFUL_STATUS);
             responseMessage.setText("");
