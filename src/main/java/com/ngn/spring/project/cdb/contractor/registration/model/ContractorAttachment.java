@@ -29,6 +29,8 @@ public class ContractorAttachment extends BaseModel implements Serializable {
     private String documentName;
     @Column(name = "DocumentPath")
     private String documentPath;
+    @Column(name = "AttachmentFor")
+    private String attachmentFor;
     @Column(name = "FileType")
     private String fileType;
 

@@ -398,6 +398,24 @@
                                     <tbody>
                                     </tbody>
                                 </table>
+                                <table class="table table-bordered table-hover" id="certificateTblCategory">
+                                    <thead>
+                                    <tr>
+                                        <th>Document Name</th>
+                                        <th>Document Attached</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="files">
+                                    <tr><td>
+                                        <input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='C'/>
+                                        <input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
+                                        <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                        <td class='file-size'></td>
+                                        <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                             <div class="col-lg-12 form-group nextBackBtn">
                                 <button type="button"

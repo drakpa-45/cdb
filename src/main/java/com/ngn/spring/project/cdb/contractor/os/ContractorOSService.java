@@ -85,10 +85,14 @@ public class ContractorOSService extends BaseService {
         String contractorId = commonService.getRandomGeneratedId();
         String appliedService;
 
+        //insert undertaking letter
+        if(contractorDTO.getcAttachments() != null && !contractorDTO.getcAttachments().isEmpty())
+            contractorRCService.updateIncorporation(contractorDTO.getcAttachments(), loggedInUser, contractor.getContractorId());
+
         //region incorporation (Name are also allowed to change)
         if(renewalServiceType.getIncorporation() != null){
             String ownershipTypeId = contractorDTO.getContractor().getOwnershipTypeId();
-            contractorRCService.updateIncorporation(contractorDTO.getcAttachments(), loggedInUser, contractor.getContractorId());
+            //contractorRCService.updateIncorporation(contractorDTO.getcAttachments(), loggedInUser, contractor.getContractorId());
             contractor.setOwnershipTypeId(ownershipTypeId);
             contractor.setFirmName(contractorDTO.getContractor().getFirmName());
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "12");
@@ -183,14 +187,14 @@ public class ContractorOSService extends BaseService {
         //region update EQ
         if(renewalServiceType.getUpdateEq() != null){
             List<ContractorEQ> eqList = contractorDTO.getEquipments();
-            List<String> existingEQs = new ArrayList<>();
-            List<String> currentEQs = new ArrayList<>();
-            getEquipmentFinal(contractorFinal.getId()).forEach(h->existingEQs.add(h.getId()));
             for(ContractorEQ contractorEQ:eqList){
+                if(contractorEQ.getDeleteRequest() != null && contractorEQ.getDeleteRequest() == 1) {
+                    //to save deleted hr
+                    contractorRCDao.saveDeleteEqRequest(contractorEQ.getId());
+                }
                 if(emptyNullCheck(contractorEQ.getId())){
                     contractorEQ.setId(commonService.getRandomGeneratedId());
                 }
-                currentEQs.add(contractorEQ.getId());
                 if(emptyNullCheck(contractorEQ.getEquipmentId())){
                     continue;
                 }
@@ -206,11 +210,6 @@ public class ContractorOSService extends BaseService {
                 }
             }
 
-            //to save deleted hr
-            List<String> deletedEQs =existingEQs.stream().filter(h->!currentEQs.contains(h)).collect(Collectors.toList());
-            if(deletedEQs !=null && !deletedEQs.isEmpty()){
-                deletedEQs.stream().forEach(contractorRCDao::saveDeleteEqRequest);
-            }
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "9");
             appliedServicesList.add(appliedService);
         }
