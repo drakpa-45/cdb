@@ -400,7 +400,7 @@
                                                 </div>
                                             </form>
                                             <div class="col-lg-12 form-group">
-                                                <button type="button" onclick="backTab('consultantEquipmentDtls','humanResourceCriteria')"id="btn5" class="btn btn-azure col-lg-offset-9">
+                                                <button type="button" onclick="backTab('consultantEquipmentDtls','humanResourceCriteria')" id="btn5" class="btn btn-azure col-lg-offset-9">
                                                     <i class="fa fa-arrow-circle-left"></i>&nbsp; Back
                                                 </button>
                                                 <button type="button"  class="btn btn-primary" id="btnValEqNext" onclick="saveAndPreview('consultantEquipmentDtls', 'saveAndPreview')">

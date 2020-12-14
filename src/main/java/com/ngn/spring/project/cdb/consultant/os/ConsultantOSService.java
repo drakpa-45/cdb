@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,11 +67,12 @@ public class ConsultantOSService extends BaseService {
      * The main save method for consultant which calls specific save methods
      * @param consultantDTO   --  ConsultantDTO
      * @param loggedInUser    --  Current logged in user
+     * @param request
      * @return ResponseMessage  -- response message
      * @throws Exception
      */
     @Transactional(readOnly = false)
-    public ResponseMessage save(ConsultantDTO consultantDTO,RenewalServiceType renewalServiceType, LoggedInUser loggedInUser) throws Exception {
+    public ResponseMessage save(ConsultantDTO consultantDTO, RenewalServiceType renewalServiceType, LoggedInUser loggedInUser, HttpServletRequest request) throws Exception {
 
         if(renewalServiceType == null){
             return responseMessage;
@@ -143,15 +145,33 @@ public class ConsultantOSService extends BaseService {
         }
 
         //region Upgrade or downgrade
-      /*  if(renewalServiceType.getUpgradeDowngrade() != null){
+        if(renewalServiceType.getUpgradeDowngrade() != null){
             List<ConsultantCategory> categories = consultantDTO.getCategories();
             //region save contractor category
-            categories.stream().filter(c->c.getProjectCateID() != null).forEach(c -> {
+            String serviceCateID[] = request.getParameterValues("serviceCateID");
+            String appliedClassID[] = request.getParameterValues("appliedClassID");
+
+            for (int i =0; i<serviceCateID.length-1;i++) {
+                ConsultantCategory conCategory = new ConsultantCategory();
+                categories.get(i).setConsultantID(consultantId);
+                for (int j =0; j<serviceCateID.length-1;j++) {
+                    conCategory.setId(commonService.getRandomGeneratedId());
+                    conCategory.setConsultantID(consultantId);
+                    conCategory.setServiceCateID(serviceCateID[i]);
+                    conCategory.setAppliedServiceID(appliedClassID[i]);
+                    conCategory.setCreatedBy(loggedInUser.getUserID());
+                    conCategory.setCreatedOn(loggedInUser.getServerDate());
+                }
+                //saveCC(categories,serviceCateID,appliedClassID, loggedInUser, request);
+            }
+            saveCCUpgrade(consultant, serviceCateID,appliedClassID, loggedInUser);
+
+           /* categories.stream().filter(c->c.getProjectCateID() != null).forEach(c -> {
                 c.setContractorID(contractorId);
               //  consultantNRService.saveCC(c, loggedInUser);
             });
-            saveCCUpgrade(contractor, consultantDTO.getCategories(), loggedInUser);
-        }*/
+            saveCCUpgrade(contractor, consultantDTO.getCategories(), loggedInUser);*/
+        }
         //endregion
 
         //region change of owner or partner
@@ -269,6 +289,19 @@ public class ConsultantOSService extends BaseService {
         return responseMessage;
     }
 
+   /* private void saveCC(List<ConsultantCategory> consultantCategory, String[] serviceCateID, String[] appliedClassID, LoggedInUser loggedInUser, HttpServletRequest request) {
+        ConsultantCategory conCategory = new ConsultantCategory();
+        for (int i =0; i<serviceCateID.length;i++) {
+            conCategory.setId(commonService.getRandomGeneratedId());
+            conCategory.setConsultantID(consultantCategory.get(i).getConsultantID());
+            conCategory.setServiceCateID(consultantCategory.getServiceCateID());
+            conCategory.setAppliedServiceID(s);
+            conCategory.setCreatedBy(loggedInUser.getUserID());
+            conCategory.setCreatedOn(loggedInUser.getServerDate());
+        }
+    }*/
+
+
     @Transactional(readOnly = true)
     public List<EquipmentDTO> getEquipmentFinal(String consultantId){
         List<EquipmentDTO> equipmentDTOs = consultantRCDao.getEquipmentFinal(consultantId);
@@ -306,7 +339,7 @@ public class ConsultantOSService extends BaseService {
         return referenceNo;
     }
 
-    public void saveCCUpgrade(Consultant consultant,List<ConCategory> categories, LoggedInUser loggedInUser){
+   /* public void saveCCUpgrade(Consultant consultant,List<ConCategory> categories, LoggedInUser loggedInUser){
         BigDecimal totalCCUpDownFee = BigDecimal.ZERO;
         final List<CategoryClassDTO> ccUpDown = new ArrayList<>();  //upgrade downgrade
         String contractorFinalId = (String)commonService.getValue("crpconsultantfinal","Id","CDBNo",consultant.getCdbNo());
@@ -340,6 +373,84 @@ public class ConsultantOSService extends BaseService {
 
             consultantRCService.saveServicePaymentDetail(servicePaymentUD.getId(), ccUpDown,loggedInUser);
         }
+    }*/
+
+    private void saveCCUpgrade(Consultant consultant, String[] serviceCateID, String[] appliedClassID, LoggedInUser loggedInUser) {
+        BigDecimal totalCCUpDownFee = BigDecimal.ZERO;
+        final List<CategoryClassDTO> ccUpDown = new ArrayList<>();  //upgrade downgrade
+        String consultantFinalId = (String) commonService.getValue("crpconsultantfinal", "Id", "CDBNo", consultant.getCdbNo());
+
+        List<ConsultantCategory> categories = new ArrayList<>();
+        BigDecimal totalRenewalFee = BigDecimal.ZERO;
+        List<CategoryClassDTO> ccRenewal; //renewal
+
+        if (serviceCateID != null) {
+            final List<CategoryClassDTO> renewal = new ArrayList<>(); //renewal
+            //upgrade or downgrade or change of category
+           // List<ConsultantCategory> conCategoryR = categories.stream().filter(c -> appliedClassID != null).filter(c -> getRegisteredClass(consultantFinalId, serviceCateID).equals(appliedClassID)).collect(Collectors.toList());
+
+            List<ConsultantCategory> conCategoryR = null;
+            for(int i =0; i<=serviceCateID.length;i++){
+              //  conCategoryR = getRegisteredClass(consultantFinalId,serviceCateID[i]);
+                String condition = "CrpConsultantFinalId = '"+consultantFinalId+"' AND CmnServiceCategoryId = '"+serviceCateID[i]+"'";
+                List<ConsultantCategory> classId = null;
+                conCategoryR = (List<ConsultantCategory>) commonService.getValue("crpconsultantworkclassification", "CmnApprovedServiceId", condition);
+            }
+            List<ConsultantCategory> conCategoryUD = null;
+
+            conCategoryR.addAll(conCategoryR.stream().filter(c -> serviceCateID != null && appliedClassID != null).collect(Collectors.toList()));
+            final List<ConsultantCategory> finalConCategoryR = conCategoryR;
+            conCategoryUD = conCategoryR.stream().filter(c -> !finalConCategoryR.contains(c)).collect(Collectors.toList());
+
+            conCategoryR.stream().forEach(r -> {
+                String classId = getRegisteredClass(consultantFinalId, r.getServiceCateID());
+                renewal.add(new CategoryClassDTO(r.getServiceCateID(), classId, classId));
+            });
+            conCategoryUD.stream().forEach(r -> ccUpDown.add(new CategoryClassDTO(r.getServiceCateID(), r.getAppliedServiceID(), getRegisteredClass(consultantFinalId, r.getServiceCateID()))));
+            ccRenewal = renewal;
+        } else { // no upgrade or downgrade or change of category
+            ccRenewal = getCategoryClassFinal(consultantFinalId);
+        }
+
+        for (CategoryClassDTO classDTO : ccRenewal) {
+            BigDecimal renewalFee = ((FeeStructureDTO) consultantNRService.gFeeStructure(classDTO.getaClassId()).get(0)).getRenewalFee();
+            classDTO.setvAmount(BigDecimal.valueOf(00.00));
+            totalRenewalFee = totalRenewalFee.add(renewalFee);
+        }
+
+        for (CategoryClassDTO classDTO : ccUpDown) {
+            if (classDTO.getCategoryId() != null) {
+                BigDecimal fee = ((FeeStructureDTO) consultantNRService.gFeeStructure(classDTO.getaClassId()).get(0)).getRegistrationFee();
+                classDTO.setvAmount(fee);
+                totalCCUpDownFee = totalCCUpDownFee.add(fee);
+            }
+        }
+
+        //save upgrade downgrade change of category
+        if (!Objects.equals(totalCCUpDownFee, BigDecimal.ZERO)) {
+            String appliedServiceId = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "7"); //upgrade downgrade service id
+            ConsultantAppliedS consultantAppliedS = new ConsultantAppliedS();
+            consultantAppliedS.setConsultantId(consultant.getId());
+            consultantAppliedS.setServiceTypeId(appliedServiceId);
+            consultantNRService.saveAppliedService(consultantAppliedS, loggedInUser);
+
+            ConsultantServicePayment servicePaymentUD = new ConsultantServicePayment();
+            servicePaymentUD.setId(commonService.getRandomGeneratedId());
+            servicePaymentUD.setConsultantId(consultant.getId());
+            servicePaymentUD.setCmnServiceTypeId(appliedServiceId); //upgrade downgrade
+            servicePaymentUD.setTotalAmount(totalCCUpDownFee);
+            servicePaymentUD.setPaymentAmount(totalCCUpDownFee);
+            servicePaymentUD.setCreatedBy(loggedInUser.getUserID());
+            servicePaymentUD.setCreatedOn(loggedInUser.getServerDate());
+            consultantRCDao.saveUpdate(servicePaymentUD);
+
+            consultantRCService.saveServicePaymentDetail(servicePaymentUD.getId(), ccUpDown, loggedInUser);
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public List<CategoryClassDTO> getCategoryClassFinal(String contractorId) {
+        return consultantRCDao.getCategoryClassFinal(contractorId);
     }
 
     public String getOngoingAppStatusMsg(String cdbNo){
@@ -411,5 +522,13 @@ public class ConsultantOSService extends BaseService {
         cAttachment.setCreatedBy(loggedInUser.getUserID());
         cAttachment.setCreatedOn(loggedInUser.getServerDate());
         consultantDao.saveUpdate(cAttachment);
+    }
+
+    @Transactional(readOnly = true)
+    public String getRegisteredClass(String consultantFinalId,String categoryId){
+        String condition = "CrpConsultantFinalId = '"+consultantFinalId+"' AND CmnServiceCategoryId = '"+categoryId+"'";
+        String classId = "";
+        classId = (String)commonService.getValue("crpconsultantworkclassification", "CmnApprovedServiceId", condition);
+        return classId == null?"":classId;
     }
 }

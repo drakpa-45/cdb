@@ -56,6 +56,7 @@ public class SpecializedFirmRCActionController extends BaseController {
         model.addAttribute("appNo", appNo);
         model.addAttribute("cdbNo", cNRActionService.getCDBNoFromAppNo(appNo));
         String appStatus = cNRActionService.getApplicationStatus(appNo);
+        model.addAttribute("modeOfPayment", commonService.getModePayment());
         if (appStatus.equals(ApplicationStatus.APPROVED_FOR_PAYMENT.getCode())) {
             return "admin/specializedFirm/spFirmRCPayment";
         } else {
@@ -79,7 +80,8 @@ public class SpecializedFirmRCActionController extends BaseController {
     @RequestMapping(value ="/getSpFirm", method = RequestMethod.GET)
     public Object getSpecializedFirmFinal(HttpServletRequest request){
         String cdbNo = request.getParameter("cdbNo");
-        return specializedFirmRService.getSpecializedFirmFinal(cdbNo);
+      //  return specializedFirmRService.getSpecializedFirmFinal(cdbNo);
+        return null;
     }
 
     @RequestMapping(value = "/viewDownload", method = RequestMethod.GET)

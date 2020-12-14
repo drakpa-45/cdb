@@ -12,17 +12,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
-<div id="print">
+<div>
 <div class="mt-5">
-    <div class="container mb-9">
+    <div class="container mb-12">
         <div class="card" id="registrtaionFormCard">
             <form action="#" id="printingForm" method="post" enctype="form-data">
                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                     <br />
-                        <div class="card tab2">
-                            <div class="bg-blue card-status card-status-left"></div>
+                        <div class="card tab2" id="print">
                             <div class="card-header">
-                                <label class='control-label'>${acknowledgement_message}</label>
+                                <label class=>${acknowledgement_message}</label>
                             </div>
                             <div class="card-body">
                                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">

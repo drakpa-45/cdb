@@ -12,7 +12,6 @@
     <title></title>
 </head>
 <body>
-
 <div class="row">
     <div class="col-12">
         <div class="mb-0 page-header">
@@ -20,7 +19,6 @@
                 Construction Development Board
             </h1>
         </div>
-
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title font-weight-bold">Task List</h3>
@@ -39,6 +37,7 @@
                                     <th>Sl No.</th>
                                     <th>Application Number</th>
                                     <th>Applicant Name</th>
+                                    <th>CDB Number</th>
                                     <th>Contact Number</th>
                                     <th>Status</th>
                                     <th>Action Date</th>
@@ -55,7 +54,8 @@
                                             <a></a>
                                         </td>
                                         <td>${task.serviceName}</td>
-                                            <td>${task.contactNo}</td>
+                                        <td>${task.cdbNo}</td>
+                                        <td>${task.contactNo}</td>
                                         <td><span class="status-icon bg-success"></span> ${task.appStatus} </td>
                                         <td>${task.applicationDate}</td>
                                     </tr>
@@ -76,6 +76,7 @@
                                     <th>Sl No.</th>
                                     <th>Application Number</th>
                                     <th>Applicant Name</th>
+                                    <th>CDB Number</th>
                                     <th>Contact Number</th>
                                     <th>Status</th>
                                     <th>Action Date</th>
@@ -90,14 +91,14 @@
                                             <span class="text-danger badge-pill">
                                                 <i class="fa fa-times"></i>
                                             </span>
-                                            </a></td>
+                                            </a><input type="hidden" value="${task.cmnServiceTypeId}" id="cmnServiceTypeId"></td>
                                         <td>
                                             <a href="#" onclick="openAndClaimApplication('${task.applicationNo}','open')" data-toggle="tooltip"  data-placement="top" >
                                                     ${task.applicationNo} (${task.serviceSectorType})
                                             </a>
-                                            <a></a>
                                         </td>
                                         <td>${task.serviceName}</td>
+                                        <td>${task.cdbNo}</td>
                                         <td>${task.contactNo}</td>
                                         <td><span class="status-icon bg-success"></span> ${task.appStatus} </td>
                                         <td>${task.applicationDate}</td>
@@ -120,9 +121,17 @@
         responsive: true
     });
     function openAndClaimApplication(appNo,type){
-        var url= '${pageContext.request.contextPath}/admin_architect/emptylayout/openApplication?appNo='+appNo+'&type='+type;
-       // var url='${pageContext.request.contextPath}/loadpagetoemptylayout/openAndClaimApplication?page_type='+page_type+'&serviceId='+serviceId+'&Application_Number='+appNo+'&action_type='+actiontype;
-        $('#content_main_div').load(url);
+        var cmnServiceTypeId = $('#cmnServiceTypeId').val();
+        var param ='';
+        if(cmnServiceTypeId = '55a922e1-cbbf-11e4-83fb-080027dcfac6'){
+            param="new";
+        }else if(cmnServiceTypeId = '45bc628b-cbbe-11e4-83fb-080027dcfac6'){
+            param = "renew";
+        }else if(cmnServiceTypeId = 'acf4b324-cbbe-11e4-83fb-080027dcfac6'){
+            param = "cancellation";
+        }
+        var url= '${pageContext.request.contextPath}/admin_architect/emptylayout/openApplication?appNo='+appNo+'&type='+type+'&param='+param;
+      $('#content_main_div').load(url);
         /*$.ajax({
             url: cdbGlobal.baseURL() + '/admin_architect/openApplication/',
             type: 'POST',

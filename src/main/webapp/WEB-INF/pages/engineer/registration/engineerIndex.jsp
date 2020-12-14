@@ -7,6 +7,10 @@
   Time: 11:52 PM
   To change this template use File | Settings | File Templates.
 --%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -74,7 +78,7 @@
                                                 <div class="form-group row">
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                                         <label>Enter your valid CID Number/work permit number:<span class="text-danger">*</span></label>
-                                                        <input type="number" onclick="getPersonalInfo(this.value)" name="app_çid" class="form-control" id="app_çid">
+                                                        <input type="number" name="app_çid" class="form-control number sp-character" id="app_çid"  onchange="checkStatus(this.value)" min="0">
                                                         <span id="app_çid_err" class="text-danger"></span>
                                                     </div>
                                                 </div>
@@ -108,7 +112,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
-                                                                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Cid No:</label>
+                                                                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">CID Number:</label>
                                                                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                             <input type="text" id="cidNo" name="cidNo" class="form-control number">
                                                                         </div>
@@ -221,8 +225,8 @@
                                                                     <span id="email_err" class="text-danger"></span>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                    <label>Mobile No: <span class="text-danger">*</span></label>
-                                                                    <input type="text" class=" form-control number" onclick="remove_err('mobileNo_err')" id="mobileNo" name="mobileNo"  maxlength="8">
+                                                                    <label>Mobile Number: <span class="text-danger">*</span></label>
+                                                                    <input type="number" class="form-control number sp-character" onclick="remove_err('mobileNo_err')" id="mobileNo" name="mobileNo" onKeyPress="if(this.value.length==8) return false;" min="0"/>
                                                                     <span id="mobileNo_err" class="text-danger"></span>
                                                                 </div>
                                                             </div>
@@ -255,7 +259,7 @@
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <label>Year of graduation <span class="text-danger">*</span></label>
-                                                                    <input type="number" class=" form-control number" maxlength="4" onclick="remove_err('graduationYear_err')" id="graduationYear" name="graduationYear" placeholder="year..">
+                                                                    <input type="number" class=" form-control number" onclick="remove_err('graduationYear_err')" id="graduationYear" name="graduationYear" placeholder="Year" onKeyPress="if(this.value.length==4) return false;" min="0">
                                                                     <span id="graduationYear_err" class="text-danger"></span>
                                                                 </div>
                                                             </div>
@@ -300,7 +304,7 @@
                                                             </div>
                                                             <div class="form-group row">
                                                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                                                    <input type="file" name="files" id="file1" class="alert badge-danger" accept="application/msword,application/pdf,image/gif, image/jpeg, image/jpg,image/png" required onchange="validateAttachment(this.value,'file1','filecheck1')">
+                                                                    <input type="file" name="files" id="file1" class="alert badge-danger" required="true" accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document' onchange="validateAttachment(this.value,'file1','filecheck1')">
                                                                 </div>
                                                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                                                     <button class="btn btn-success fa-pull-right" type="button" onclick="addmoreattachemnts()"><i class="fa fa-plus"> Add More Documents</i></button>
@@ -342,7 +346,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="col-lg-12">
-                                                                <span><input type="checkbox" id="submitcheckbox" onclick="enablesubmit()" name="tnc" class="required"  style="width:15px;height:15px;"></span>
+                                                                    <span><input type="checkbox" id="submitcheckbox" onclick="enablesubmit()" name="tnc" class="required"  style="width:15px;height:15px;"></span>
                                                                     <span class="bold"> I/We agree to the above Terms & Conditions.</span>
                                                                 </label>
                                                             </div>

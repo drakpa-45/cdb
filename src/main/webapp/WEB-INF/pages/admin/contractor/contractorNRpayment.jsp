@@ -26,6 +26,7 @@
                             <div class="tab-content border p-3 col-lg-12">
                                 <form action="" method="post" id="contractorPaymentForm">
                                     <input type="hidden" id="appNoPayment"  value="${appNo}" name="appNo"/>
+                                    <input type="hidden" id="appNo"  value="${appNo}" name="appNo"/>
 
                                     <div class="">
                                         <div class="card tab2">
@@ -139,6 +140,31 @@
                                         <div class="card tab2">
                                             <div class="bg-blue card-status card-status-left"></div>
                                             <div class="card-header">
+                                                <h3 class="card-title">Permanent Address</h3>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="col-lg-12">
+                                                    <div class="col-lg-6 col-md-6 form-group">
+                                                        <label class="col-lg-4 form-label">Dzongkhag</label>
+                                                        <label class="col-lg-8 form-label" id="pDzongkhag"></label>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 form-group">
+                                                        <label class="col-lg-4 form-label">Gewog </label>
+                                                        <label class="col-lg-8 form-label" id="pGewog"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="col-lg-6 col-md-6 form-group">
+                                                        <label class="col-lg-4 form-label">Village </label>
+                                                        <label class="col-lg-8 form-label" id="pVillage"></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card tab2">
+                                            <div class="bg-blue card-status card-status-left"></div>
+                                            <div class="card-header">
                                                 <h3 class="card-title">Category Details</h3>
                                             </div>
                                             <div class="card-body">
@@ -241,41 +267,11 @@
                                                             </label>
 
                                                             <div class="col-lg-4">
-                                                                <select name="modeOfPayment"
-                                                                        id="contractorType" required="true"
-                                                                        class="form-control chzn-select">
-                                                                    <option value="">-Select-</option>
-
-                                                                    <option value="CDb-Cash">CDB-Cash
-                                                                    </option>
-
-                                                                    <option value="RRCO-Thimphu">
-                                                                        RRCO-Thimphu
-                                                                    </option>
-
-                                                                    <option value="RRCO- Phuntsholing">RRCO-
-                                                                        Phuntsholing
-                                                                    </option>
-
-                                                                    <option value="RRCO-Gelephu">
-                                                                        RRCO-Gelephu
-                                                                    </option>
-
-                                                                    <option value="RRCO-Mongar">
-                                                                        RRCO-Mongar
-                                                                    </option>
-
-                                                                    <option value="RRCO-Wangdiphodrang">
-                                                                        RRCO-Wangdiphodrang
-                                                                    </option>
-
-                                                                    <option value="RRCO-Samdrupjongkhar">
-                                                                        RRCO-Samdrupjongkhar
-                                                                    </option>
-
-                                                                    <option value="RRCO-Samdrupjongkhar">
-                                                                        Not Applicable
-                                                                    </option>
+                                                                <select name="modeOfPayment" class="chosen-select form-control" onchange="checkForApplicable(this.value)" id="paymentmode" required>
+                                                                    <option value="">--Select--</option>
+                                                                    <c:forEach var="plist" items="${modeOfPayment}" varStatus="counter">
+                                                                        <option value="${plist.name}">${plist.name}</option>
+                                                                    </c:forEach>
                                                                 </select>
                                                                 <span class="help-block" id=""></span>
                                                             </div>

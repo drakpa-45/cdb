@@ -500,7 +500,7 @@ var specializedFirm = (function () {
                     url: _baseURL() + '/getPersonalInfo',
                     type: 'GET',
                     async:false,
-                    data: {cidNo: $this.val()},
+                    data: {cidNo: $this.val(),type:"fetch"},
                     success: function (res) {
                         if (res.status == '1') {
                             var dto = res.dto;
@@ -607,7 +607,7 @@ var specializedFirm = (function () {
                 $.ajax({
                     url: _baseURL() + '/getPersonalInfo',
                     type: 'GET',
-                    data: {cidNo: $this.val()},
+                    data: {cidNo: $this.val(), type: "fetch"},
                     success: function (res) {
                         if (res.status == '1') {
                             var dto = res.dto;
@@ -628,9 +628,9 @@ var specializedFirm = (function () {
                 return;
             }
             if($(this).val() != $('#regEmail').val()){
-              //  $(this).focus();
+                $(this).val('').focus();
                 warningMsg("Confirmation email does not match.");
-              //  $(this).focus();
+                $(this).val('').focus();
                 return;
             }
         });

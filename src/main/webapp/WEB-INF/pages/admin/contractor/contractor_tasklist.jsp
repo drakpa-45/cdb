@@ -46,7 +46,7 @@
                                     <tr>
                                         <td>${i.index+1}</td>
                                         <%--<td><a href="<c:url value="/admin/contractor/${task.applicationNo}"/>" class="font-weight-bold">${task.applicationNo}</a></td>--%>
-                                        <td><a>${task.applicationNo}</a></td>
+                                        <td><a href="<c:url value="/admin/contractor/${task.applicationNo}/flag=M"/>" class="font-weight-bold">${task.applicationNo}</a></td>
                                         <td>${task.serviceName}</td>
                                         <td>${task.firmName} </td>
                                         <td>${task.contactNo}</td>
@@ -55,7 +55,6 @@
                                         <td><input type="button" class="btn btn-info gMToggle groupTask" value="Take Action"> </td>
                                     </tr>
                                 </c:forEach>
-
                                 </tbody>
                             </table>
                         </div>
@@ -79,11 +78,10 @@
                                 </tr>
                                 </thead>
                                 <tbody class="text-center">
-
                                 <c:forEach items="${myTaskList}" var="task" varStatus="i">
                                     <tr>
                                         <td>${i.index+1}</td>
-                                        <td><a href="<c:url value="/admin/contractor/${task.applicationNo}"/>" class="font-weight-bold">${task.applicationNo}</a></td>
+                                        <td><a href="<c:url value="/admin/contractor/${task.applicationNo}/flag=M"/>" class="font-weight-bold">${task.applicationNo}</a></td>
                                         <td>${task.serviceName}</td>
                                         <td>${task.firmName} </td>
                                         <td>${task.contactNo}</td>
@@ -92,7 +90,6 @@
                                         <td><div class="btn btn-info gMToggle myTask"> Send back</div> </td>
                                     </tr>
                                 </c:forEach>
-
                                 </tbody>
                             </table>
                         </div>

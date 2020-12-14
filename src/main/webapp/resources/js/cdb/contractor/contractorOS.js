@@ -226,11 +226,10 @@ function _baseURL() {
 
 var contractorOS = (function () {
     "use strict";
-
     var cert = "<tr><td></td>" +
         "<td><input type='text' class='form-control' name='cAttachments[0].documentName'/> </td>"+
         "<td><input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
-        "<td><a class='p-2'><i class='fa fa-pencil text-green'></i></a><a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a></td>" +
+        "<td><a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a></td>" +
         "</tr>";
 
     function sCertIncorporation() {
@@ -254,9 +253,33 @@ var contractorOS = (function () {
         });
     }
 
+    var certCategory = "<tr>" +
+        "<td><input type='text' class='form-control' name='cAttachments[0].documentName'/> </td>"+
+        "<td><input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
+        "<td class='file-size'></td>" +
+        "<td><a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a></td>" +
+        "</tr>";
+
     function addMoreCert(){
         $('#addMoreCert').on('click',function(e){
-            var certificateTbl = $('#IncCertificateTbl').find('tbody').append(cert);
+            var certificateTbl = $('#certificateTbl').find('tbody').append(cert);
+            /*var row = certificateTbl.find('tr:eq(0)').html();
+             certificateTbl.append('<tr>'+row.find(':input').val('')+'</tr>');*/
+        });
+    }
+
+    function addMoreCertCategory(){
+        $('#addMoreCertCategory').on('click',function(e){
+            var certificateTbl = $('#certificateTblCategory').find('tbody').append(certCategory);
+            /*var row = certificateTbl.find('tr:eq(0)').html();
+             certificateTbl.append('<tr>'+row.find(':input').val('')+'</tr>');*/
+        });
+    }
+
+
+    function addMoreCertOwner(){
+        $('#addMoreCertOwner').on('click',function(e){
+            var certificateTbl = $('#certificateTblOwner').find('tbody').append(certCategory);
             /*var row = certificateTbl.find('tr:eq(0)').html();
              certificateTbl.append('<tr>'+row.find(':input').val('')+'</tr>');*/
         });
@@ -271,10 +294,15 @@ var contractorOS = (function () {
                     $('#ownershipList').prop('disabled',false);
                     $('#firmName').prop('disabled', false);
                     $('#changeOfFirmName').prop('disabled', true);
+                    $('#ownerPartner').removeClass('hide');
+                    $('#changeOfOwnerId').prop('disabled', true);
+                    getOwnerFinal();
                 }else{
                     $('#ownershipList').prop('disabled',true);
                     $('#firmName').prop('disabled', true);
                     $('#changeOfFirmName').prop('disabled', false);
+                    $('#changeOfOwnerId').prop('disabled', false);
+                    $('#ownerPartner').addClass('hide');
                 }
             }else if(id == 'changeOfFirmName' ){
                 if($this.is(':checked')) {
@@ -296,6 +324,7 @@ var contractorOS = (function () {
                     getOwnerFinal();
                 }else{
                     $('#ownerPartner').addClass('hide');
+                    $('#cOwnershipId').addClass('hide');
                 }
             }
         });
@@ -719,6 +748,8 @@ var contractorOS = (function () {
         changeFile();
         changeFileEq();
         addMoreCert();
+        addMoreCertOwner();
+        addMoreCertCategory();
         allowEditHrEqExpired();
         enableRegistrationNo();
         addMoreEqFile();

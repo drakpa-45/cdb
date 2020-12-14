@@ -20,3 +20,4 @@
 <link href="<c:url value="/resources/assets/css/dashboard.css"/>" rel="stylesheet" />
 <link href="<c:url value="/resources/css/datepicker.css"/>" rel="stylesheet" />
 <link href="<c:url value="/resources/css/cdb.css"/>" rel="stylesheet" />
+<script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>

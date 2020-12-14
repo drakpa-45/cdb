@@ -80,6 +80,10 @@ public class ProfileController {
             model.addAttribute("App_Details", commonService.populateSpApplicantDetails(cdbNo));
             return "trade/spTrade_printInformation";
         }
+        if(cdbNo.startsWith("SF-")){
+            model.addAttribute("appDetail", profileService.getApplicationDetailsSpecializedFirm(cdbNo));;
+            return "specializedFirm/printInformation/specializedFirmInformation";
+        }
         return null;
     }
 }

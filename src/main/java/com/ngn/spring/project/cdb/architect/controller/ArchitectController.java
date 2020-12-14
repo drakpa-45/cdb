@@ -11,12 +11,14 @@ import com.ngn.spring.project.cdb.common.CommonService;
 import com.ngn.spring.project.cdb.engineer.service.EngineerServices;
 import com.ngn.spring.project.cdb.survey.service.SurveyServices;
 import com.ngn.spring.project.cdb.trade.service.SpecializedService;
+import com.ngn.spring.project.global.enu.ApplicationStatus;
 import com.ngn.spring.project.global.global.MailSender;
 import com.ngn.spring.project.lib.ResponseMessage;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -68,9 +70,9 @@ public class ArchitectController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/architects/getPersonalInfo", method = RequestMethod.GET)
-    public ResponseMessage getPersonalInfo(String cid) {
+    public ResponseMessage getPersonalInfo(String cid,String type) {
         try{
-            ResponseMessage personal=commonService.getPersonalInfo(cid);
+            ResponseMessage personal=commonService.getPersonalInfo(cid, type);
             return personal;
         }catch (Exception e){
             System.out.print(e);
@@ -84,6 +86,17 @@ public class ArchitectController extends BaseController {
         try{
             ResponseMessage isMailUnique=services.isMailUnique(request);
             return isMailUnique;
+        }catch (Exception e){
+            System.out.print(e);
+            return  null;
+        }
+    }
+    @ResponseBody
+    @RequestMapping(value = "/architects/isCIDUnique", method = RequestMethod.GET)
+    public ResponseMessage isCIDUnique(HttpServletRequest request, String cidNo) {
+        try{
+            ResponseMessage isCIDUnique=services.isCIDUnique(cidNo);
+            return isCIDUnique;
         }catch (Exception e){
             System.out.print(e);
             return  null;
@@ -210,8 +223,7 @@ public class ArchitectController extends BaseController {
         return null;
     }
 
-    @PreAuthorize("isAuthenticated()")
-    @RequestMapping(value ={"/public_access/emptylayout/submitRenwalApplication"}, method = RequestMethod.POST)
+    @RequestMapping(value ="/public_access/emptylayout/submitRenwalApplication", method = RequestMethod.POST)
     public String submitRenwalApplication(ArchitectDto dto,@RequestParam("files") MultipartFile[] files,ModelMap model,HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         LoginDTO loginDTO =(LoginDTO)session.getAttribute("loginDetails");
@@ -237,7 +249,6 @@ public class ArchitectController extends BaseController {
       public String submitcancellation(ArchitectDto dto,ModelMap model,HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         LoginDTO loginDTO =(LoginDTO)session.getAttribute("loginDetails");
-
         try{
             ResponseMessage personal=services.saveArchitectcancellation(dto, loginDTO.getUserId());
             ArchitectDto resdto=(ArchitectDto)personal.getDto();
@@ -250,6 +261,13 @@ public class ArchitectController extends BaseController {
             return "/architect/acknowledgement";
         }
     }
+
+    @RequestMapping(value ={"/public_access/emptylayout/openRejectedApplication"}, method = RequestMethod.GET)
+    public String fetchRejectedAppDetails(HttpServletRequest request,String appNo,Model model) {
+        ArchitectDto dto = services.fetchRejectedAppDetails(appNo);
+            model.addAttribute("appDetails", dto);
+              return "architect/rejectedApplications/rejectedIndex";
+        }
 
     private Boolean isEmailUnique(String email) {
         return commonService.isEmailUnique(email);

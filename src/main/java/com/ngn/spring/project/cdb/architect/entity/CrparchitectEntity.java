@@ -26,6 +26,7 @@ public class CrparchitectEntity implements Serializable {
     private String ARNo;
     private String CmnServiceSectorTypeId;
     private String CIDNo;
+    private String CmnTradeId;
     private String CmnSalutationId;
     private String Name;
     private String CmnCountryId;
@@ -131,6 +132,14 @@ public class CrparchitectEntity implements Serializable {
 
     public void setCIDNo(String CIDNo) {
         this.CIDNo = CIDNo;
+    }
+
+    public String getCmnTradeId() {
+        return CmnTradeId;
+    }
+
+    public void setCmnTradeId(String cmnTradeId) {
+        CmnTradeId = cmnTradeId;
     }
 
     public String getCmnSalutationId() {

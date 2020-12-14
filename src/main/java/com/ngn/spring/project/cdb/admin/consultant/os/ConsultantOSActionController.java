@@ -60,6 +60,7 @@ public class ConsultantOSActionController extends BaseController {
         model.addAttribute("appNo", appNo);
         model.addAttribute("cdbNo", cNRActionService.getCDBNoFromAppNo(appNo));
         String appStatus = cNRActionService.getApplicationStatus(appNo);
+        model.addAttribute("modeOfPayment", commonService.getModePayment());
         if (appStatus.equals(ApplicationStatus.APPROVED_FOR_PAYMENT.getCode())) {
             return "admin/consultant/consultantRCPayment";
         } else {

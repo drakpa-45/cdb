@@ -29,7 +29,6 @@ function removeRow(tableId) {
     }
 }
 function showAcknowledgement() {
-
     $("#registrtaionFormCard").hide();
     $("#acknowledgementCard").show();
 }
@@ -122,7 +121,6 @@ function getModalData(tableId, prefix, totalCol) {
             text = value;
             name = $this.prop('name');
         }
-
         /*var tdVal = "<input type='hidden' name='" + name + "' value='" + value + "'/>" + text;
         td = td + "<td>" + tdVal + "</td>";*/
         var tdVal = "<input type='hidden' class='"+$this.attr('id')+"' name='" + name + "' value='" + value + "'/>" + text;
@@ -150,7 +148,6 @@ function cloneHrFiles(tableId,modal,i){
     var hrId = "<input type='hidden' name='"+$('#addHRModal').find('#hrId').attr('name')+"' value='"+$('#addHRModal').find('#hrId').val()+"'>";
     var uplTbl = $('#hrUploadTbl').find('tbody');
     var docName = '';
-
     uplTbl.find('.file').each(function(e){
         var index = $(this).closest('tr').index();
         $(this).attr('name', 'consultantHRs[0].consultantHRAs['+index+'].attachment');
@@ -220,7 +217,17 @@ function submitApplication(){
     $("#addHRModal").find(":input").prop('disabled',true);
 
     var consultantForm = $("#consultantOSForm");
-    var url=_baseURL() + "/save";
+
+    var appliedClassID = [];
+    $.each($("input[name='appliedClassID']:checked"), function(){
+        appliedClassID = ($(this).val());
+    });
+    var serviceCateID = [];
+    $.each($("input[name='serviceCateID']:checked"), function(){
+        serviceCateID = ($(this).val());
+    });
+
+    var url=_baseURL() + '/save?appliedClassID='+appliedClassID + '&serviceCateID=' + serviceCateID;
     var options = {
         target:'#registrtaionFormCard',
         url:url,
@@ -362,6 +369,29 @@ var consultantOS = (function () {
         });
     }
 
+    var certCategory = "<tr>" +
+        "<td><input type='text' class='form-control' name='cAttachments[0].documentName'/> </td>"+
+        "<td><input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
+        "<td class='file-size'></td>" +
+        "<td><a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a></td>" +
+        "</tr>";
+
+    function addMoreCertCategory(){
+        $('#addMoreCertCategory').on('click',function(e){
+            var certificateTbl = $('#certificateTblCategory').find('tbody').append(certCategory);
+            /*var row = certificateTbl.find('tr:eq(0)').html();
+             certificateTbl.append('<tr>'+row.find(':input').val('')+'</tr>');*/
+        });
+    }
+
+    function addMoreCertOwner(){
+        $('#addMoreCertOwner').on('click',function(e){
+            var certificateTbl = $('#certificateTblOwner').find('tbody').append(certCategory);
+            /*var row = certificateTbl.find('tr:eq(0)').html();
+             certificateTbl.append('<tr>'+row.find(':input').val('')+'</tr>');*/
+        });
+    }
+
     function service_check(){
         $('body').on('click','.service_check',function(){
             var id = $(this).prop('id');
@@ -374,7 +404,6 @@ var consultantOS = (function () {
                     $('#ownerPartner').removeClass('hide');
                     $('#changeOfOwnerId').prop('disabled', true);
                     getOwnerFinal();
-                    sCertOwner();
                 }else{
                     $('#ownershipList').prop('disabled',true);
                     $('#firmName').prop('disabled', true);
@@ -400,7 +429,7 @@ var consultantOS = (function () {
                 if($this.is(':checked')) {
                     $('#ownerPartner').removeClass('hide');
                     getOwnerFinal();
-                    sCertOwner();
+                   // sCertOwner();
                 }else{
                     $('#ownerPartner').addClass('hide');
                     $('#cOwnershipId').addClass('hide');
@@ -423,9 +452,9 @@ var consultantOS = (function () {
                 $('#tradeLicenseNo').val(consultant.tradeLicenseNo).prop('disabled',true);
                 $('#firmName').val(consultant.firmName).prop('disabled',true);
                 $('#tpn').val(consultant.tpn).prop('disabled',true);
-                $('#pDzongkhagId').val(consultant.pDzongkhagId).prop('disabled',true);
-                $('#pGewogId').val(consultant.pGewog).prop('disabled',true);
-                $('#pVillageId').val(consultant.pVillage).prop('disabled',true);
+                $('#pDzongkhagId').val(consultant.regDzongkhagName).prop('disabled',true);
+                $('#pGewogId').val(consultant.pGewogId).prop('disabled',true);
+                $('#pVillageId').val(consultant.pVillageId).prop('disabled',true);
                 $('#estAddress').val(consultant.estAddress).prop('disabled',true);
                 $('#regDzongkhagId').val(consultant.regDzongkhagId).prop('disabled',true);
                 $('#regEmail').val(consultant.regEmail).prop('disabled',true);
@@ -534,84 +563,83 @@ var consultantOS = (function () {
                         var categories = res;
                         for (var i in categories) {
                             if (categories[i].apClassId == "2dc059a3-bc17-11e4-81ac-080027dcfac6") {
-                                $('#asone').prop('checked', true);
+                                $('#asone').prop('checked', true).prop('disabled',false);
                             }
                             if (categories[i].apClassId == "378c8114-bc17-11e4-81ac-080027dcfac6") {
-                                $('#astwo').prop('checked', true);
+                                $('#astwo').prop('checked', true).prop('disabled',false);
                             }
                             if (categories[i].apClassId == "42914a22-bc17-11e4-81ac-080027dcfac6") {
-                                $('#asthree').prop('checked', true);
+                                $('#asthree').prop('checked', true).prop('disabled',false);
                             }
 
                             if (categories[i].apClassId == "51f58a70-bc17-11e4-81ac-080027dcfac6") {
-                                $('#cvsone').prop('checked', true);
+                                $('#cvsone').prop('checked', true).prop('disabled',false);
                             }
                             if (categories[i].apClassId == "5b147a4d-bc17-11e4-81ac-080027dcfac6") {
-                                $('#cvstwo').prop('checked', true);
+                                $('#cvstwo').prop('checked', true).prop('disabled',false);
                             }
                             if (categories[i].apClassId == "6516bfdd-bc17-11e4-81ac-080027dcfac6") {
-                                $('#cvsthree').prop('checked', true);
+                                $('#cvsthree').prop('checked', true).prop('disabled',false);
                             }
                             if (categories[i].apClassId == "7b84fd72-bc17-11e4-81ac-080027dcfac6") {
-                                $('#cvsfour').prop('checked', true);
+                                $('#cvsfour').prop('checked', true).prop('disabled',false);
                             }
                             if (categories[i].apClassId == "a8ee79e6-bc17-11e4-81ac-080027dcfac6") {
-                                $('#cvsfive').prop('checked', true);
+                                $('#cvsfive').prop('checked', true).prop('disabled',false);
                             }
                             if (categories[i].apClassId == "be34bd47-bc17-11e4-81ac-080027dcfac6") {
-                                $('#cvssix').prop('checked', true);
+                                $('#cvssix').prop('checked', true).prop('disabled',false);
                             }
                             if (categories[i].apClassId == "cc3bfc36-bc17-11e4-81ac-080027dcfac6") {
-                                $('#cvsseven').find('.categoryCheck').prop('checked', true);
+                                $('#cvsseven').prop('checked', true).prop('disabled',false);
                             }
 
                             if (categories[i].apClassId == "ded7b309-bc17-11e4-81ac-080027dcfac6") {
-                                $('#eesone').prop('checked', true);
+                                $('#eesone').prop('checked', true).prop('disabled',false);
                             }
                             if (categories[i].apClassId == "ef1e617f-bc17-11e4-81ac-080027dcfac6") {
-                                $('#eestwo').prop('checked', true);
+                                $('#eestwo').prop('checked', true).prop('disabled',false);
                             }
                             if (categories[i].apClassId == "1a4e9b6f-bc18-11e4-81ac-080027dcfac6") {
-                                $('#eesthree').prop('checked', true);
+                                $('#eesthree').prop('checked', true).prop('disabled',false);
                             }
                             if (categories[i].apClassId == "271c4483-bc18-11e4-81ac-080027dcfac6") {
-                                $('#eesfour').prop('checked', true);
+                                $('#eesfour').prop('checked', true).prop('disabled',false);
                             }
                             if (categories[i].apClassId == "30a3dd3c-bc18-11e4-81ac-080027dcfac6") {
-                                $('#eesfive').prop('checked', true);
+                                $('#eesfive').prop('checked', true).prop('disabled',false);
                             }
                             if (categories[i].apClassId == "3ceb09ba-bc18-11e4-81ac-080027dcfac6") {
-                                $('#eessix').prop('checked', true);
+                                $('#eessix').prop('checked', true).prop('disabled',false);
                             }
                             if (categories[i].apClassId == "4461b1b0-bc18-11e4-81ac-080027dcfac6") {
-                                $('#eesseven').prop('checked', true);
+                                $('#eesseven').prop('checked', true).prop('disabled',false);
                             }
 
                             if (categories[i].apClassId == "8a6ea970-be66-11e9-9ac2-0026b988eaa8") {
-                                $('#sone').prop('checked', true);
+                                $('#sone').prop('checked', true).prop('disabled',false);
                             }
                             if (categories[i].apClassId == "b20d9185-be66-11e9-9ac2-0026b988eaa8") {
-                                $('#stwo').prop('checked', true);
+                                $('#stwo').prop('checked', true).prop('disabled',false);
                             }
                             if (categories[i].apClassId == "fb9e92cb-be66-11e9-9ac2-0026b988eaa8") {
-                                $('#sthree').prop('checked', true);
+                                $('#sthree').prop('checked', true).prop('disabled',false);
                             }
                             if (categories[i].apClassId == "1129c568-be67-11e9-9ac2-0026b988eaa8") {
-                                $('#sfour').prop('checked', true);
+                                $('#sfour').prop('checked', true).prop('disabled',false);
                             }
                             if (categories[i].apClassId == "3aba7cc5-be67-11e9-9ac2-0026b988eaa8") {
-                                $('#sfive').prop('checked', true);
+                                $('#sfive').prop('checked', true).prop('disabled',false);
                             }
                             if (categories[i].apClassId == "5fa269a3-be67-11e9-9ac2-0026b988eaa8") {
-                                $('#ssix').prop('checked', true);
+                                $('#ssix').prop('checked', true).prop('disabled',false);
                             }
                             if (categories[i].apClassId == "4cd73d78-be67-11e9-9ac2-0026b988eaa8") {
-                                $('#sseven').prop('checked', true);
+                                $('#sseven').prop('checked', true).prop('disabled',false);
                             }
                         }
                     }
                 });
-
             } else{
                 $('.category_details').addClass('hide');
             }
@@ -624,10 +652,9 @@ var consultantOS = (function () {
             if($(this).is(':checked')){
                 $(this).closest('tr').find('.appliedClassID').prop('disabled',false).prop('required',true);
             }else{
-                $(this).closest('tr').find('.appliedClassID').val('')
-                    .prop('disabled',true).prop('required',false).removeClass('error');
+                $(this).closest('tr').find('.appliedClassID').prop('disabled',true).prop('required',false);
             }
-        })
+        });
     }
 
     function editInModal(){
@@ -817,6 +844,57 @@ var consultantOS = (function () {
         })
     }
 
+    function getPersonalInfo(){
+        $('#partnerDtls').on('change','.hr-cid', function (e) {
+            var $this = $(this);
+            var country = $this.closest('tr').find('.country #countryList').val();
+            if(country == '8f897032-c6e6-11e4-b574-080027dcfac6') { //if bhutanese fetch from DCRC
+                $.ajax({
+                    url: cdbGlobal.baseURL() + '/consultantNR/getPersonalInfo',
+                    type: 'GET',
+                    data: {cidNo: $this.val()},
+                    success: function (res) {
+                        if (res.status == '1') {
+                            var dto = res.dto;
+                            // var index = $this.closest("tr").index();
+                            $this.closest('tr').find('.name').val(dto.fullName).prop('readonly', true);
+                            $this.closest('tr').find('.sex').val(dto.sex).prop('readonly', true);
+                        }
+                        else{
+                            warningMsg(res.text);
+                            $this.closest('tr').find('.name').prop('readonly', false);
+                            $this.closest('tr').find('.sex').prop('readonly', false);
+                        }
+                    }
+                });
+            }
+            getTrainingDtl($this.val());
+        })
+    }
+
+    function getPersonalInfoHR(){
+        $('#addHRModal').on('change','.hr-cid', function (e) {
+            var $this = $(this);
+            var country = $('#hr5').val();
+            if(country == '8f897032-c6e6-11e4-b574-080027dcfac6') { //if bhutanese fetch from DCRC
+                $.ajax({
+                    url:cdbGlobal.baseURL() + '/consultantNR/getPersonalInfo',
+                    type: 'GET',
+                    data: {cidNo: $this.val()},
+                    success: function (res) {
+                        if (res.status == '1') {
+                            var dto = res.dto;
+                            // var index = $this.closest("tr").index();
+                            $('#hr2').val(dto.fullName).prop('readonly', true);
+                            $('#hr4').val(dto.sex).prop('readonly', true);
+                            $('#hr11').val(dto.cdbNo).prop('readonly', true);
+                        }
+                    }
+                });
+            }
+        })
+    }
+
     function init(){
         viewDownloadAttachment();
         getConsultant();
@@ -830,11 +908,15 @@ var consultantOS = (function () {
         editInModal();
         changeFile();
         addMoreCert();
+        addMoreCertOwner();
+        addMoreCertCategory();
         allowEditHrEqExpired();
         editInModalEQ();
         checkDuplicateHR();
         addMoreEqFile();
         addMoreFile();
+        getPersonalInfo();
+        getPersonalInfoHR();
        // deleteRequest();
         showFileSize();
         enableRegistrationNo();

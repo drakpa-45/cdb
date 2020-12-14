@@ -241,7 +241,6 @@
                                         </div>
 
                                         <div class="tab-pane generalInformation">
-
                                             <div class="div-actual">
                                                 <div class="card" id="gInfo">
                                                     <div class="bg-blue card-status card-status-left"></div>
@@ -288,9 +287,7 @@
                                                         <div class="form-group row">
                                                             <div class="col-lg-6 col-md-6">
                                                                 <label class="col-lg-4 form-label">TPN Number</label>
-                                                                <input type="text" class="col-lg-7 form-control"
-                                                                       name="consultant.tpn" id="tpn"
-                                                                       placeholder="Text..">
+                                                                <input type="text" class="col-lg-7 form-control" name="consultant.tpn" id="tpn" placeholder="Text..">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -414,47 +411,45 @@
                                                                 </button>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-lg-12 col-md-12 ">
-                                                            <label class="col-lg-3 col-md-3 form-label" for="ownershipChangeRemarks">Reason for Change of Owner:
-                                                                <span class="text-danger">*</span></label>
-                                                            <input type="text" class="col-lg-6 form-control"
-                                                                   name="consultant.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true"
-                                                                   placeholder="Text..">
+                                                        <div class="form-group row">
+                                                            <div class="col-lg-12 col-md-12 ">
+                                                                <label class="col-lg-3 col-md-3 form-label" for="ownershipChangeRemarks">Reason for Change of Owner:
+                                                                    <span class="text-danger">*</span></label>
+                                                                <input type="text" class="col-lg-6 form-control"
+                                                                       name="specializedFirm.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true"
+                                                                       placeholder="Text..">
+                                                            </div>
+                                                        </div>
+                                                        <h5 class="text-orange">Attach Certificates of Ownership change</h5>
+                                                        <div class="card-body">
+                                                            <div class="col-lg-12">
+                                                                <div class=""><input id="addMoreCertOwner" type="button" value="Add More Certificate" class="btn btn-primary"></div>
+                                                                <table class="table table-bordered table-hover" id="certificateTblOwner">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th>Document Name</th>
+                                                                        <th>Document Attached</th>
+                                                                        <th>File Size</th>
+                                                                        <th>Delete</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody class="files">
+                                                                    <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
+                                                                        <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                                        <td class='file-size'></td>
+                                                                        <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                                    </tr>
+                                                                    <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
+                                                                        <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                                        <td class='file-size'></td>
+                                                                        <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <div class="card hide" id="cOwnershipId">
-                                                    <div class="bg-blue card-status card-status-left"></div>
-                                                    <div class="card-header">
-                                                        <h3 class="card-title">Attach Certificates of Ownership change</h3>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div class="col-lg-12">
-                                                            <div class=""><input id="addMoreCertOwner" type="button"
-                                                                                 value="Add More Certificate"
-                                                                                 class="btn btn-primary"></div>
-                                                            <table class="table table-bordered table-center table-responsive-lg auto-index"
-                                                                   id="certificateTblOwner">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th>Sl no</th>
-                                                                    <th>Document Name</th>
-                                                                    <th>Document Attached</th>
-                                                                    <th>File Size</th>
-                                                                    <th>Action</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
                                                 <div class="card ">
                                                     <div class="bg-blue card-status card-status-left"></div>
                                                     <div class="card-header">
@@ -567,7 +562,6 @@
                                                 </button>
                                             </div>
                                         </div>
-
                                         <div class="tab-pane category_details hide">
                                             <div class="div-actual">
                                                 <table id="consultantCCTbl" class="table table-bordered table-hover">
@@ -577,88 +571,213 @@
                                                         <td>Apply for Class</td>
                                                     </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        <%-- TODO:: kept as static since loading dynamic hampers the performance --%>
+                                                    <%--<tbody>
+                                                        &lt;%&ndash; TODO:: kept as static since loading dynamic hampers the performance &ndash;%&gt;
                                                     <tr>
                                                         <td>
-                                                            <input type="hidden" id="cateId0" value="e6372584-bc15-11e4-81ac-080027dcfac6" name="categories[0].serviceCateID">
+                                                            <input type="hidden" >
+                                                            <input type="checkbox" style="zoom:1.6" class=" categoryCheck" id="cateId0" value="e6372584-bc15-11e4-81ac-080027dcfac6" name="categories[0].serviceCateID">
                                                             Architectural Services
                                                         </td>
                                                         <td>
                                                             <a href="javascript:void(0)" style="color: #006699" title='Architectural and Interior Design' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="asone" value="2dc059a3-bc17-11e4-81ac-080027dcfac6" class="categoryCheck" name="itemId">A1 &nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox" id="asone" value="2dc059a3-bc17-11e4-81ac-080027dcfac6" style="zoom:1.5" disabled class="categoryCheck" name="itemId">A1 &nbsp; &nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='Urban Planning' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="astwo" class="categoryCheck"  value="378c8114-bc17-11e4-81ac-080027dcfac6" name="itemId">A2&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox" id="astwo" class="categoryCheck" style="zoom:1.5" disabled value="378c8114-bc17-11e4-81ac-080027dcfac6" name="itemId">A2&nbsp; &nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='Landscaping and Site Development' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="asthree"class="categoryCheck"  value="42914a22-bc17-11e4-81ac-080027dcfac6" name="itemId">A3
+                                                            <input type="checkbox" id="asthree"class="categoryCheck" style="zoom:1.5" disabled value="42914a22-bc17-11e4-81ac-080027dcfac6" name="itemId">A3
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type="hidden" id="cateId1" value="f39b9245-bc15-11e4-81ac-080027dcfac6" name="categories[1].serviceCateID">
+                                                        <td>
+                                                            <input type="checkbox" style="zoom:1.6" class=" categoryCheck" id="cateId1" value="f39b9245-bc15-11e4-81ac-080027dcfac6" name="categories[1].serviceCateID">
                                                             Civil Engineering Services
                                                         </td>
                                                         <td>
                                                             <a href="javascript:void(0)" style="color: #006699" title='Structural Design' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="cvsone"class="categoryCheck"  name="itemId" value="51f58a70-bc17-11e4-81ac-080027dcfac6">C1&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox" id="cvsone"class="categoryCheck" style="zoom:1.5" disabled  name="itemId" value="51f58a70-bc17-11e4-81ac-080027dcfac6">C1&nbsp; &nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='Geo-Tech Studies' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="cvstwo" class="categoryCheck"  name="itemId" value="5b147a4d-bc17-11e4-81ac-080027dcfac6">C2&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox" id="cvstwo" class="categoryCheck" style="zoom:1.5" disabled  name="itemId" value="5b147a4d-bc17-11e4-81ac-080027dcfac6">C2&nbsp; &nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='Social & ENviroment Studies' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox"  id="cvsthree" class="categoryCheck"  name="itemId" value="6516bfdd-bc17-11e4-81ac-080027dcfac6">C3&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox"  id="cvsthree" class="categoryCheck" style="zoom:1.5" disabled  name="itemId" value="6516bfdd-bc17-11e4-81ac-080027dcfac6">C3&nbsp; &nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='Roads, Bridges, Buildings & Air Ports' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="cvsfour"class="categoryCheck"  name="itemId" value="7b84fd72-bc17-11e4-81ac-080027dcfac6">C4&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox" id="cvsfour"class="categoryCheck" style="zoom:1.5" disabled  name="itemId" value="7b84fd72-bc17-11e4-81ac-080027dcfac6">C4&nbsp; &nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='Irrigation, Hydraulics, WaterSupply, Sanitation, Sewerage & Solid Waste' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="cvsfive"class="categoryCheck"  name="itemId" value="a8ee79e6-bc17-11e4-81ac-080027dcfac6">C5&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox" id="cvsfive"class="categoryCheck" style="zoom:1.5" disabled name="itemId" value="a8ee79e6-bc17-11e4-81ac-080027dcfac6">C5&nbsp; &nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='Construction Management, Site Supervision & Surveying' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="cvssix" class="categoryCheck" name="itemId" value="be34bd47-bc17-11e4-81ac-080027dcfac6">C6&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox" id="cvssix" class="categoryCheck"style="zoom:1.5" disabled name="itemId" value="be34bd47-bc17-11e4-81ac-080027dcfac6">C6&nbsp; &nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='Water Resources & Hydro Power Projects' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="cvsseven"class="categoryCheck"  name="itemId" value="cc3bfc36-bc17-11e4-81ac-080027dcfac6">C7
+                                                            <input type="checkbox" id="cvsseven"class="categoryCheck" style="zoom:1.5" disabled name="itemId" value="cc3bfc36-bc17-11e4-81ac-080027dcfac6">C7
                                                         </td>
                                                     </tr>
 
                                                     <tr>
-                                                        <td><input type="hidden" id="cateId2" value="fb2aa1a7-bc15-11e4-81ac-080027dcfac6" name="categories[2].serviceCateID">
+                                                        <td>
+                                                            <input type="checkbox" style="zoom:1.6" class=" categoryCheck" id="cateId2" value="fb2aa1a7-bc15-11e4-81ac-080027dcfac6" name="categories[2].serviceCateID">
                                                             Electrical Engineering Services
                                                         </td>
                                                         <td>
                                                             <a href="javascript:void(0)" style="color: #006699" title='Investigation & Design of Hydro Power Projects' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="eesone"class="categoryCheck"  name="itemId" value="ded7b309-bc17-11e4-81ac-080027dcfac6">E1&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox" id="eesone"class="categoryCheck"style="zoom:1.5" disabled  name="itemId" value="ded7b309-bc17-11e4-81ac-080027dcfac6">E1&nbsp; &nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='Operation & Maintenance of Hydro Power Projects' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox"   id="eestwo" class="categoryCheck" name="itemId" value="ef1e617f-bc17-11e4-81ac-080027dcfac6">E2&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox"   id="eestwo" class="categoryCheck"style="zoom:1.5" disabled name="itemId" value="ef1e617f-bc17-11e4-81ac-080027dcfac6">E2&nbsp; &nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='Urban & Rural Electrification, Transmission Line, Communication & Scada' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox"  id="eesthree"class="categoryCheck"  name="itemId" value="1a4e9b6f-bc18-11e4-81ac-080027dcfac6">E3&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox"  id="eesthree"class="categoryCheck"style="zoom:1.5" disabled  name="itemId" value="1a4e9b6f-bc18-11e4-81ac-080027dcfac6">E3&nbsp; &nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='Construction Management & Site Supervision' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="eesfour"class="categoryCheck"  name="itemId" value="271c4483-bc18-11e4-81ac-080027dcfac6">E4&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox" id="eesfour"class="categoryCheck"style="zoom:1.5" disabled  name="itemId" value="271c4483-bc18-11e4-81ac-080027dcfac6">E4&nbsp; &nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='Sub-station' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="eesfive" class="categoryCheck" name="itemId" value="30a3dd3c-bc18-11e4-81ac-080027dcfac6">E5&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox" id="eesfive" class="categoryCheck"style="zoom:1.5" disabled name="itemId" value="30a3dd3c-bc18-11e4-81ac-080027dcfac6">E5&nbsp; &nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='Energy Efficiency Services' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="eessix"class="categoryCheck"  name="itemId" value="3ceb09ba-bc18-11e4-81ac-080027dcfac6">E6&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox" id="eessix"class="categoryCheck"style="zoom:1.5" disabled  name="itemId" value="3ceb09ba-bc18-11e4-81ac-080027dcfac6">E6&nbsp; &nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='House Wiring' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="eesseven" class="categoryCheck" name="itemId" value="4461b1b0-bc18-11e4-81ac-080027dcfac6">E7
+                                                            <input type="checkbox" id="eesseven" class="categoryCheck"style="zoom:1.5" disabled name="itemId" value="4461b1b0-bc18-11e4-81ac-080027dcfac6">E7
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type="hidden" id="cateId3" value="2adfae00-be66-11e9-9ac2-0026b988eaa8" name="categories[3].serviceCateID">
+                                                        <td>
+                                                            <input type="checkbox" style="zoom:1.6" class=" categoryCheck" id="cateId3" value="2adfae00-be66-11e9-9ac2-0026b988eaa8" name="categories[3].serviceCateID">
                                                             Surveying Services
                                                         </td>
                                                         <td>
                                                             <a href="javascript:void(0)" style="color: #006699" title='Cadastral' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="sone"class="categoryCheck"  name="itemId" value="8a6ea970-be66-11e9-9ac2-0026b988eaa8">S1&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox" id="sone"class="categoryCheck" style="zoom:1.5" disabled name="itemId" value="8a6ea970-be66-11e9-9ac2-0026b988eaa8">S1&nbsp; &nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='Topographic' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox"   id="stwo"class="categoryCheck"  name="itemId" value="b20d9185-be66-11e9-9ac2-0026b988eaa8">S2&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox"   id="stwo"class="categoryCheck"style="zoom:1.5" disabled  name="itemId" value="b20d9185-be66-11e9-9ac2-0026b988eaa8">S2&nbsp; &nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='Geodetic & Precision' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox"  id="sthree"class="categoryCheck"  name="itemId" value="fb9e92cb-be66-11e9-9ac2-0026b988eaa8">S3&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox"  id="sthree"class="categoryCheck" style="zoom:1.5" disabled name="itemId" value="fb9e92cb-be66-11e9-9ac2-0026b988eaa8">S3&nbsp; &nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='Photogrammetric' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="sfour"class="categoryCheck"  name="itemId" value="1129c568-be67-11e9-9ac2-0026b988eaa8">S4&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox" id="sfour"class="categoryCheck"style="zoom:1.5" disabled  name="itemId" value="1129c568-be67-11e9-9ac2-0026b988eaa8">S4&nbsp; &nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='Instrument Calibration, Maintenance and Certification' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="sfive"class="categoryCheck"  name="itemId" value="3aba7cc5-be67-11e9-9ac2-0026b988eaa8">S5&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox" id="sfive"class="categoryCheck" style="zoom:1.5" disabled name="itemId" value="3aba7cc5-be67-11e9-9ac2-0026b988eaa8">S5&nbsp; &nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='GIS & Remote Sensing' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="ssix"class="categoryCheck"  name="itemId" value="5fa269a3-be67-11e9-9ac2-0026b988eaa8">S6&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox" id="ssix"class="categoryCheck" style="zoom:1.5" disabled name="itemId" value="5fa269a3-be67-11e9-9ac2-0026b988eaa8">S6&nbsp; &nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='Bathymetric' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="sseven"class="categoryCheck"  name="itemId" value="4cd73d78-be67-11e9-9ac2-0026b988eaa8">S7
+                                                            <input type="checkbox" id="sseven"class="categoryCheck" style="zoom:1.5" disabled name="itemId" value="4cd73d78-be67-11e9-9ac2-0026b988eaa8">S7
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>--%>
+
+                                                    <tbody>
+                                                        <%-- TODO:: kept as static since loading dynamic hampers the performance --%>
+                                                    <tr>
+                                                        <td>
+                                                           <%-- <input type="checkbox" style="zoom:1.6" class=" categoryCheck" id="cateId0" value="e6372584-bc15-11e4-81ac-080027dcfac6" name="categories[0].serviceCateID">--%>
+                                                               <input type="checkbox" style="zoom:1.6" class=" categoryCheck" id="cateId0" value="e6372584-bc15-11e4-81ac-080027dcfac6" name="serviceCateID">
+                                                            Architectural Services
+                                                        </td>
+                                                        <td>
+                                                            <a href="javascript:void(0)" style="color: #006699" title='Architectural and Interior Design' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox" id="asone" class="appliedClassID" value="2dc059a3-bc17-11e4-81ac-080027dcfac6" style="zoom:1.5" disabled  name="appliedClassID">A1 &nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <a href="javascript:void(0)" style="color: #006699" title='Urban Planning' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox" id="astwo" class="appliedClassID" style="zoom:1.5" disabled value="378c8114-bc17-11e4-81ac-080027dcfac6" name="appliedClassID">A2&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <a href="javascript:void(0)" style="color: #006699" title='Landscaping and Site Development' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox" id="asthree"class="appliedClassID" style="zoom:1.5" disabled value="42914a22-bc17-11e4-81ac-080027dcfac6" name="appliedClassID">A3
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input type="checkbox" style="zoom:1.6" class=" categoryCheck" id="cateId1" value="f39b9245-bc15-11e4-81ac-080027dcfac6" name="serviceCateID">
+                                                            Civil Engineering Services
+                                                        </td>
+                                                        <td>
+                                                            <a href="javascript:void(0)" style="color: #006699" title='Structural Design' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox" id="cvsone"class="appliedClassID" style="zoom:1.5" disabled  name="appliedClassID" value="51f58a70-bc17-11e4-81ac-080027dcfac6">C1&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <a href="javascript:void(0)" style="color: #006699" title='Geo-Tech Studies' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox" id="cvstwo" class="appliedClassID" style="zoom:1.5" disabled  name="appliedClassID" value="5b147a4d-bc17-11e4-81ac-080027dcfac6">C2&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <a href="javascript:void(0)" style="color: #006699" title='Social & ENviroment Studies' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox"  id="cvsthree" class="appliedClassID" style="zoom:1.5" disabled  name="appliedClassID" value="6516bfdd-bc17-11e4-81ac-080027dcfac6">C3&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <a href="javascript:void(0)" style="color: #006699" title='Roads, Bridges, Buildings & Air Ports' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox" id="cvsfour"class="appliedClassID" style="zoom:1.5" disabled  name="appliedClassID" value="7b84fd72-bc17-11e4-81ac-080027dcfac6">C4&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <a href="javascript:void(0)" style="color: #006699" title='Irrigation, Hydraulics, WaterSupply, Sanitation, Sewerage & Solid Waste' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox" id="cvsfive"class="appliedClassID" style="zoom:1.5" disabled name="appliedClassID" value="a8ee79e6-bc17-11e4-81ac-080027dcfac6">C5&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <a href="javascript:void(0)" style="color: #006699" title='Construction Management, Site Supervision & Surveying' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox" id="cvssix" class="appliedClassID"style="zoom:1.5" disabled name="appliedClassID" value="be34bd47-bc17-11e4-81ac-080027dcfac6">C6&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <a href="javascript:void(0)" style="color: #006699" title='Water Resources & Hydro Power Projects' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox" id="cvsseven"class="appliedClassID" style="zoom:1.5" disabled name="appliedClassID" value="cc3bfc36-bc17-11e4-81ac-080027dcfac6">C7
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input type="checkbox" style="zoom:1.6" class=" categoryCheck" id="cateId2" value="fb2aa1a7-bc15-11e4-81ac-080027dcfac6" name="serviceCateID">
+                                                            Electrical Engineering Services
+                                                        </td>
+                                                        <td>
+                                                            <a href="javascript:void(0)" style="color: #006699" title='Investigation & Design of Hydro Power Projects' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox" id="eesone"class="appliedClassID"style="zoom:1.5" disabled  name="appliedClassID" value="ded7b309-bc17-11e4-81ac-080027dcfac6">E1&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <a href="javascript:void(0)" style="color: #006699" title='Operation & Maintenance of Hydro Power Projects' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox"   id="eestwo" class="appliedClassID"style="zoom:1.5" disabled name="appliedClassID" value="ef1e617f-bc17-11e4-81ac-080027dcfac6">E2&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <a href="javascript:void(0)" style="color: #006699" title='Urban & Rural Electrification, Transmission Line, Communication & Scada' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox"  id="eesthree"class="appliedClassID"style="zoom:1.5" disabled  name="appliedClassID" value="1a4e9b6f-bc18-11e4-81ac-080027dcfac6">E3&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <a href="javascript:void(0)" style="color: #006699" title='Construction Management & Site Supervision' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox" id="eesfour"class="appliedClassID"style="zoom:1.5" disabled  name="appliedClassID" value="271c4483-bc18-11e4-81ac-080027dcfac6">E4&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <a href="javascript:void(0)" style="color: #006699" title='Sub-station' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox" id="eesfive" class="appliedClassID"style="zoom:1.5" disabled name="appliedClassID" value="30a3dd3c-bc18-11e4-81ac-080027dcfac6">E5&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <a href="javascript:void(0)" style="color: #006699" title='Energy Efficiency Services' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox" id="eessix"class="appliedClassID"style="zoom:1.5" disabled  name="appliedClassID" value="3ceb09ba-bc18-11e4-81ac-080027dcfac6">E6&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <a href="javascript:void(0)" style="color: #006699" title='House Wiring' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox" id="eesseven" class="appliedClassID"style="zoom:1.5" disabled name="appliedClassID" value="4461b1b0-bc18-11e4-81ac-080027dcfac6">E7
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input type="checkbox" style="zoom:1.6" class=" categoryCheck" id="cateId3" value="2adfae00-be66-11e9-9ac2-0026b988eaa8" name="serviceCateID">
+                                                            Surveying Services
+                                                        </td>
+                                                        <td>
+                                                            <a href="javascript:void(0)" style="color: #006699" title='Cadastral' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox" id="sone"class="appliedClassID" style="zoom:1.5" disabled name="appliedClassID" value="8a6ea970-be66-11e9-9ac2-0026b988eaa8">S1&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <a href="javascript:void(0)" style="color: #006699" title='Topographic' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox"   id="stwo"class="appliedClassID"style="zoom:1.5" disabled  name="appliedClassID" value="b20d9185-be66-11e9-9ac2-0026b988eaa8">S2&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <a href="javascript:void(0)" style="color: #006699" title='Geodetic & Precision' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox"  id="sthree"class="appliedClassID" style="zoom:1.5" disabled name="appliedClassID" value="fb9e92cb-be66-11e9-9ac2-0026b988eaa8">S3&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <a href="javascript:void(0)" style="color: #006699" title='Photogrammetric' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox" id="sfour"class="appliedClassID"style="zoom:1.5" disabled  name="appliedClassID" value="1129c568-be67-11e9-9ac2-0026b988eaa8">S4&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <a href="javascript:void(0)" style="color: #006699" title='Instrument Calibration, Maintenance and Certification' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox" id="sfive"class="appliedClassID" style="zoom:1.5" disabled name="appliedClassID" value="3aba7cc5-be67-11e9-9ac2-0026b988eaa8">S5&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <a href="javascript:void(0)" style="color: #006699" title='GIS & Remote Sensing' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox" id="ssix"class="appliedClassID" style="zoom:1.5" disabled name="appliedClassID" value="5fa269a3-be67-11e9-9ac2-0026b988eaa8">S6&nbsp; &nbsp; &nbsp; &nbsp;
+                                                            <a href="javascript:void(0)" style="color: #006699" title='Bathymetric' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                                            <input type="checkbox" id="sseven"class="appliedClassID" style="zoom:1.5" disabled name="appliedClassID" value="4cd73d78-be67-11e9-9ac2-0026b988eaa8">S7
                                                         </td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <b class="text-orange">Attach your UnderTaking Below</b> &nbsp; &nbsp;
+                                                    <br />
+                                                    <input type="button" id="addMoreCertCategory" value="Add More File" class="btn btn-primary eqFile">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered table-hover" id="certificateTblCategory">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Document Name</th>
+                                                                <th>Document Attached</th>
+                                                                <th>File Size</th>
+                                                                <th>Delete</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody class="files">
+                                                            <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
+                                                                <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                                <td class='file-size'></td>
+                                                                <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                            </tr>
+                                                            <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
+                                                                <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                                <td class='file-size'></td>
+                                                                <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                            </tr>
+                                                                <%--  <tr><td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/> </td>
+                                                                      <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
+                                                                      <td class='file-size'></td>
+                                                                      <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                                  </tr>--%>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="col-lg-12 form-group nextBackBtn">
                                                 <button type="button"

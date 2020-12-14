@@ -669,7 +669,7 @@
                                                                     <th style="width: 5%">Title</th>
                                                                     <th style="width: 15%">Name</th>
                                                                     <th style="width: 15%">ID/Work Permit No.</th>
-                                                                    <th style="width: 10%">Sex</th>
+                                                                    <th style="width: 10%">Gender</th>
                                                                     <th style="width: 10%">Country</th>
                                                                     <th style="width: 10%">Designation</th>
                                                                     <th style="width: 10%">Qualification</th>
@@ -685,9 +685,8 @@
                                                                 </tbody>
                                                             </table>
                                                             <div class="col-lg-12 text-right">
-                                                                <button type="button" class="btn btn-info btn-sm"
-                                                                        data-toggle="modal" data-target="#addHRModal"><i
-                                                                        class="fa fa-plus"></i> Add More HR
+                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addHRModal">
+                                                                    <i class="fa fa-plus"></i> Add More HR
                                                                 </button>
                                                             </div>
                                                         </div>
@@ -949,11 +948,10 @@
                                         <input type="hidden" id="hrId" name="spFirmHRs[0].id">
                                         <label class="col-lg-2">Nationality
                                             <span class="text-danger">*</span>:</label>
-
                                         <div class="col-lg-4">
                                             <select name="spFirmHRs[0].countryId" id="hr5" required=""
                                                     class="form-control custom-select text-left select-beast country">
-                                                <option value="">Select Country</option>
+                                                <%--<option value="">Select Country</option>--%>
                                                 <c:forEach var="item" items="${countryList}">
                                                     <option value="${item.value}"><c:out value="${item.text}"/></option>
                                                 </c:forEach>
@@ -986,7 +984,6 @@
                                         </div>
                                         <label class="col-lg-2">Name
                                             <span class="text-danger">*</span>:</label>
-
                                         <div class="col-lg-4">
                                             <div class="input-icon">
                                                 <span class="input-icon-addon"><i class="fe fe-user"></i></span>
@@ -1084,7 +1081,6 @@
                                         <div class="col-md-12 col-lg-12">
                                             <input type="button" id="addMoreHr" value="Add More File"
                                                    class="btn btn-primary hrFile">
-
                                             <div class="table-responsive">
                                                 <table class="table table-bordered table-hover" id="hrUploadTbl">
                                                     <thead>

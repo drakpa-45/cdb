@@ -30,16 +30,13 @@
                         <div class="form-group">
                             <div class="col-lg-12">
                                 This application is verified and forwarded for approval,.<br>
-
                                 <p>Click on tasklist button to go back to tasklist.</p>
                             </div>
                         </div>
-
                         <div class="col-lg-12">
                             Thanks You.
                             <div class="col-lg-12 mt-3">
-                                <input type="button" class="btn btn-primary" id="btnLogin1" onclick="window.print();"
-                                       value="Print">
+                                <input type="button" class="btn btn-primary" id="btnLogin1" onclick="window.print();" value="Print">
                             </div>
                         </div>
                     </div>
@@ -157,7 +154,12 @@
                                                                         <input type="hidden" value="${appDetails.serviceSectorType}" readonly maxlength="100" id="service" name="serviceSectorType" class="form-control">${appDetails.serviceSectorType}
                                                                     </div>
                                                                 </div>
-
+                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                                                                    <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Trade: </label>
+                                                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                        <input type="hidden" value="${appDetails.trade}" readonly maxlength="100" id="service" name="trade" class="form-control">${appDetails.trade}
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -277,7 +279,6 @@
                                                                         </table>
                                                                     </div>
                                                                 </div>
-
                                                             </div>
                                                             <input type="hidden" class=" form-control number" value="${appDetails.cdbNo}" readonly name="cdbNo">
                                                             <c:if test="${appDetails.updateStatus=='6195664d-c3c5-11e4-af9f-080027dcfac6'}">
@@ -326,7 +327,6 @@
                                                                                 </select>
                                                                                 <span id="paymentmode_err" class="text-danger"></span>
                                                                             </div>
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -348,8 +348,8 @@
                                                                                             <td>${appDetails.applicationDate}</td>
                                                                                         </tr>
                                                                                         <tr>
-                                                                                            <td><strong>Created By: </strong></td>
-                                                                                            <td>${appDetails.createdBy}<b style="color: blueviolet;">(Applicant's CID Number)</b></td>
+                                                                                            <td><strong>Submitted By: </strong></td>
+                                                                                            <td>${appDetails.createdBy}<b style="color: blueviolet;">(${appDetails.fullname})</b></td>
                                                                                         </tr>
                                                                                     </table>
                                                                                 </td>
@@ -390,7 +390,6 @@
                                                                     <span id="remarks_err" class="text-danger"></span>
                                                                 </div>
                                                             <br/>
-
                                                         </div>
                                                     </div>
                                                 </div>

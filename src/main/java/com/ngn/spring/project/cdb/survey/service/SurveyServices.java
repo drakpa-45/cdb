@@ -168,8 +168,9 @@ public class SurveyServices extends BaseService {
         return commonService.getModePayment();
     }
 
-    public void assignMyTask(String appNo, String userID, String type) {
-        dao.assignMyTask(appNo, userID, type);
+    public String assignMyTask(String appNo, String userID, String type) {
+        String assignMyTask = dao.assignMyTask(appNo, userID,type);
+        return assignMyTask;
     }
 
     public ArchitectDto getSurveyDetails(String appNo) {
@@ -177,8 +178,8 @@ public class SurveyServices extends BaseService {
         if (dto.getServiceTypeId().equalsIgnoreCase("New Registration")) {
             if (dto.getServiceSectorType().equalsIgnoreCase("Government") || dto.getServiceSectorType().equalsIgnoreCase("Private") && dto.getUpdateStatus().equalsIgnoreCase("6195664d-c3c5-11e4-af9f-080027dcfac6")) {
                 //generate cdb nunber
-                String surveyNo = dao.generateSurveyNo(dto.getCountryId(), dto.getServiceSectorType());
-                dto.setCdbNo(surveyNo);
+             //   String surveyNo = dao.generateSurveyNo(dto.getCountryId(), dto.getServiceSectorType());
+                dto.setCdbNo("NULL");
             }
          /*   else
             if(dto.getUpdateStatus().equalsIgnoreCase("6195664d-c3c5-11e4-af9f-080027dcfac6")){
@@ -230,7 +231,17 @@ public class SurveyServices extends BaseService {
     public ArchitectDto approveSurveyRegistration(ArchitectDto dto, String userID, HttpServletRequest request) {
         dto = dao.updateApproval(dto, userID, request);
         if (dto.getUpdateStatus().equalsIgnoreCase("Success")) {
-            if (dto.getUpdateStatus().equalsIgnoreCase("Success")) {
+            if(request.getParameter("servicefor").equalsIgnoreCase("cancel")){
+                dto=dao.updateFinalTable(dto,userID,request);
+                engineerDao.updateSysuser(dto.getEmail());
+                //send sms and email notification
+                String mailContent = "Dear User,<br>Your application for  Cancellation of Certificate is approved with application number : " + dto.getReferenceNo();
+                try {
+                    MailSender.sendMail(dto.getEmail(), "cdb@gov.bt", null, mailContent, "CDB certificate Cancelled");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }else {
                 //send sms and email notification
                 String mailContent = "Dear User,<br>Your application for application number : " + dto.getReferenceNo() + " is approved." +
                         "<br>You may pay the required fee online through following link:<br>" +
@@ -242,12 +253,10 @@ public class SurveyServices extends BaseService {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
             } else {
                 dto.setUpdateStatus("Failed to update workflow table for verification. ");
             }
-        } else {
-            dto.setUpdateStatus("Failed to update the application table for verification. ");
-        }
         return dto;
         /*ArchitectDto dto1=dao.getsurveyapplicationdetails(dto);
         if(dto.getServiceTypeId().equalsIgnoreCase("cancel")){
@@ -306,9 +315,13 @@ public class SurveyServices extends BaseService {
         dto1.setTotalAmt(dto.getTotalAmt());
         dto1.setNoOfDaysAfterGracePeriod(dto.getNoOfDaysAfterGracePeriod());
         dto1.setNoOfDaysLate(dto.getNoOfDaysLate());
+        dto1.setTrade(dto.getTrade());
         //  if(dto.getServiceSectorType().equalsIgnoreCase("Goverment")) {
         if (dto.getServiceTypeId().equalsIgnoreCase("registration")) {
             insert = dao.insertuserDetails(dto1, userID, request);
+            String surveyNo = dao.generateSurveyNo(dto1.getCountryId(), dto.getServiceSectorType());
+            dto.setCdbNo(surveyNo);
+            dto1.setCdbNo(surveyNo);
             if (!insert.equalsIgnoreCase("Insert_Fail")) {
                 dto1.setCdbNo(dto.getCdbNo());
                 String password = insert.split("/")[1];
@@ -393,17 +406,23 @@ public class SurveyServices extends BaseService {
             dao.saveSservies(surveyAppliedServiceEntity);
 
             BigDecimal payAmount = dto.getPaymentAmt();
+            if(payAmount == null || dto.getServiceSectorType().equalsIgnoreCase("6e1cd096-bea8-11e4-9757-080027dcfac6")){
+                payAmount = BigDecimal.valueOf(00.00);
+            }
             BigDecimal totalAmount;
             if(payAmount.doubleValue() > 3000.00){
                 dto.setPaymentAmt(BigDecimal.valueOf(3000.00));
-                totalAmount = BigDecimal.valueOf(dto.getPaymentAmt().floatValue() + 1000);
+                totalAmount = BigDecimal.valueOf(payAmount.floatValue() + 1000);
                 dto.setTotalAmt(totalAmount);
             }else{
                 dto.setPaymentAmt(dto.getPaymentAmt());
-                totalAmount = BigDecimal.valueOf(dto.getPaymentAmt().floatValue() + 1000);
+                if(dto.getServiceSectorType().equalsIgnoreCase("6e1cd096-bea8-11e4-9757-080027dcfac6")){
+                    totalAmount = BigDecimal.valueOf(payAmount.floatValue());
+                }else{
+                    totalAmount = BigDecimal.valueOf(payAmount.floatValue() + 1000);
+                }
                 dto.setTotalAmt(totalAmount);
             }
-
             dao.insertInPaymentServiceDetails(dto, userID);
 
             responseMessage.setStatus(1);
@@ -433,7 +452,7 @@ public class SurveyServices extends BaseService {
         entity.setVillage(dto.getVillage());
         entity.setCmnServiceSectorTypeId(dto.getServiceSectorType());
         entity.setCmnCountryId(dto.getCountryId());
-        //entity.setTPN(dto.getTrade());//trade field is not there in db
+        entity.setCmnTradeId(dto.getTrade());
         entity.setEmail(dto.getEmail());
         entity.setMobileNo(dto.getMobileNo());
         entity.setEmployerName(dto.getEmployeeName());
@@ -500,8 +519,6 @@ public class SurveyServices extends BaseService {
             surveyrAppliedServiceEntity.setEditedOn(new Date());
             surveyrAppliedServiceEntity.setSurveyId(generateID);
             dao.saveSservies(surveyrAppliedServiceEntity);
-
-            engineerDao.updateSysuser(dto.getEmail());
 
             responseMessage.setStatus(1);
             dto.setReferenceNo(new BigInteger(entity.getReferenceNo()));
@@ -596,11 +613,21 @@ public class SurveyServices extends BaseService {
             Long noOfLateDays = ChronoUnit.DAYS.between(gracePeriodDate, curDate)-1;
             Long  acNoOfLateDays = ChronoUnit.DAYS.between(expiryDate, curDate)-1;
             lateFee = new BigDecimal((noOfLateDays*100));
-            responseMessage.setText("Seems like your registration is already expired on <b>"+expiryDate+
-                    "</b>. The total number of days late is <b>"+acNoOfLateDays+"</b> days." +
-                    " However 30 days is considered as grace period which means the late fees that would be imposed within that period will be waived. Penalty amount is Nu. 100 per day.<br>" +
-                    "Total number of days after grace period is <b>"+noOfLateDays+"</b>. Total of Nu. "+lateFee+" will be imposed as penalty for late renewal of your cdb Certificate till today. " +
-                    "However your penalty will be calculated till date of approval.");
+            if(lateFee.doubleValue()>3000){
+                lateFee= BigDecimal.valueOf(3000);
+            }
+            if(cFinal.getCmnServiceSectorTypeId().equalsIgnoreCase("6e1cd096-bea8-11e4-9757-080027dcfac6")){
+                responseMessage.setText("Seems like your registration is already expired on <b>"+expiryDate+
+                        "</b>. The total number of days late is <b>"+acNoOfLateDays+"</b> days." +
+                        " However 30 days is considered as grace period which means the late fees that would be imposed within that period will be waived. Penalty amount is Nu. 100 per day.<br>" +
+                        "Total number of days after grace period is <b>"+noOfLateDays+"</b>. <h4>Since you are government employee renewal and late fees will not be imposed.</h4>");
+            }else {
+                responseMessage.setText("Seems like your registration is already expired on <b>" + expiryDate +
+                        "</b>. The total number of days late is <b>" + acNoOfLateDays + "</b> days." +
+                        " However 30 days is considered as grace period which means the late fees that would be imposed within that period will be waived. Penalty amount is Nu. 100 per day.<br>" +
+                        "Total number of days after grace period is <b>" + noOfLateDays + "</b>. Total of Nu. " + lateFee + " will be imposed as penalty for late renewal of your cdb Certificate till today. " +
+                        "However your penalty will be calculated till date of approval.");
+            }
             waiveOffLateFee = (acNoOfLateDays - noOfLateDays)*100;
             lateFeeDTO.setNoOfDaysLate(acNoOfLateDays.intValue());
             lateFeeDTO.setNoOfDaysAfterGracePeriod(noOfLateDays.intValue());
@@ -640,5 +667,31 @@ public class SurveyServices extends BaseService {
     @Transactional
     public CertificateDTO getSurveyPrintDetails(HttpServletRequest request, String cdbNo) {
         return dao.getSurveyPrintDetails(request,cdbNo);
+    }
+
+    @Transactional(readOnly = true)
+    public ResponseMessage isCIDUnique(String cidNo) {
+        ResponseMessage responseMessage = new ResponseMessage();
+        String cidStatus = "";
+        String isCIDUnique = dao.isCIDUnique(cidNo);
+        if (isCIDUnique.equalsIgnoreCase("262a3f11-adbd-11e4-99d7-080027dcfac6") || isCIDUnique.equalsIgnoreCase("36f9627a-adbd-11e4-99d7-080027dcfac6") || isCIDUnique.equalsIgnoreCase("463c2d4c-adbd-11e4-99d7-080027dcfac6") || isCIDUnique.equalsIgnoreCase("6195664d-c3c5-11e4-af9f-080027dcfac6")) {
+            if (isCIDUnique.equalsIgnoreCase("262a3f11-adbd-11e4-99d7-080027dcfac6")) {
+                cidStatus = ApplicationStatus.UNDER_PROCESS.getName();
+            }
+            if (isCIDUnique.equalsIgnoreCase("36f9627a-adbd-11e4-99d7-080027dcfac6")) {
+                cidStatus = ApplicationStatus.VERIFIED.getName();
+            }
+            if (isCIDUnique.equalsIgnoreCase("463c2d4c-adbd-11e4-99d7-080027dcfac6")) {
+                cidStatus = ApplicationStatus.APPROVED.getName();
+            }
+            if (isCIDUnique.equalsIgnoreCase("6195664d-c3c5-11e4-af9f-080027dcfac6")) {
+                cidStatus = ApplicationStatus.APPROVED_FOR_PAYMENT.getName();
+            }
+            responseMessage.setText("Application for this CID is " + cidStatus + "." + " Please wait until the process is complete.");
+            responseMessage.setStatus(1);
+        } else {
+            responseMessage.setStatus(0);
+        }
+        return responseMessage;
     }
 }

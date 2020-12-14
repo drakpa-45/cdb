@@ -497,8 +497,6 @@ public class SpecializedService extends BaseService{
             serviceEntity.setCrpSpecializedTradeId(generateID);
             dao.saveAservies(serviceEntity);
 
-            engineerDao.updateSysuser(dto.getEmail());
-
             responseMessage.setStatus(1);
             dto.setReferenceNo(new BigInteger(entity.getReferenceNo()));
             dto.setCrpSpecializedTradeId(generateID);
@@ -585,11 +583,21 @@ public class SpecializedService extends BaseService{
     @Transactional
     public TradeDto updateApproval(TradeDto dto, String userID, HttpServletRequest request) {
         dto= dao.updateApproval(dto, userID, request);
-        if(dto.getUpdateStatus().equalsIgnoreCase("Success")){
-            if(dto.getUpdateStatus().equalsIgnoreCase("Success")){
+        if(dto.getUpdateStatus().equalsIgnoreCase("Success")) {
+            if(request.getParameter("servicefor").equalsIgnoreCase("cancel")){
+                dto=dao.updateFinalTable(dto,userID,request);
+                engineerDao.updateSysuser(dto.getEmail());
                 //send sms and email notification
-                String mailContent = "Dear User,<br>Your application for application number : "+dto.getReferenceNo()+" is approved."+
-                        "<br>You may pay the required fee online through following link:<br>"  +
+                String mailContent = "Dear User,<br>Your application for  Cancellation of Certificate is approved with application number : " + dto.getReferenceNo();
+                try {
+                    MailSender.sendMail(dto.getEmail(), "cdb@gov.bt", null, mailContent, "CDB certificate Cancelled");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }else {
+                //send sms and email notification
+                String mailContent = "Dear User,<br>Your application for application number : " + dto.getReferenceNo() + " is approved." +
+                        "<br>You may pay the required fee online through following link:<br>" +
                         "<a target='_blank' href='https://www.citizenservices.gov.bt/G2CPaymentAggregatorStg'>https://www.citizenservices.gov.bt/G2CPaymentAggregatorStg</a>" +
                         "<br>Or You may visit our CDB counters to pay the fee." +
                         "<br><br>Note: Only after payment confirmation, your application will be done final approval. And you will get the login credential to log into system.";
@@ -598,8 +606,7 @@ public class SpecializedService extends BaseService{
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }else{
-                dto.setUpdateStatus("Failed to update workflow table for updateApproval. ");}
+            }
         } else{
             dto.setUpdateStatus("Failed to update the application table for updateApproval. ");}
         return dto;

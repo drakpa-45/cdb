@@ -11,7 +11,7 @@ function nextTab(presentClass, nextClass){
         $.ajax({
             url:url,
             type: 'GET',
-            data: {cid: cid},
+            data: {cid: cid,type: "fetch"},
             success: function (res) {
                 if (res.status == '1') {
                     var dto = res.dto;
@@ -57,11 +57,44 @@ function validateFees(){
         warningMsg("Please provide your CID Number.");
         retutype=false;
     }
-   /* if($('#app_çid').val()!="" && $('#app_çid').val().length!=11){
-        $('#app_çid_err').html('Your CID Number Should be 11 digit');
-        retutype=false;
-    }*/
-    return retutype;
+   ///* if($('#app_çid').val()!="" && $('#app_çid').val().length!=11){
+   //     $('#app_çid_err').html('Your CID Number Should be 11 digit');
+   //     retutype=false;
+   //}*/
+   return retutype;
+}
+
+/*document.querySelector(".sp-character").addEventListener("keypress", function (evt) {
+    if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
+    {
+        evt.preventDefault();
+    }
+});
+
+document.querySelector(".mb-character").addEventListener("keypress", function (evt) {
+    if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
+    {
+        evt.preventDefault();
+    }
+});*/
+
+function checkStatus(cidNo){
+    var url= _baseURL() +'/isCIDUnique';
+    var $this = $('#app_çid');
+    $.ajax({
+        url:url,
+        type: 'GET',
+        data: {cidNo: cidNo},
+        success: function (res) {
+            if (res.status == '1') {
+                $this.val('').focus();
+                warningMsg(res.text);
+                $this.val('').focus();
+            }else{
+
+            }
+        }
+    });
 }
 
 function validatepersonalSection(){
@@ -104,7 +137,7 @@ function validateeducaion(){
     }
     if($('#graduationYear').val()==""){
         $('#graduationYear').focus();
-        warningMsg("Please mention year of graduation.");
+        warningMsg("Please mention your graduation year.");
         $('#graduationYear').focus();
         retutype=false;
     }
@@ -128,9 +161,17 @@ function validateeducaion(){
         $('#regEmail').focus();
         retutype=false;
     }
-
     return retutype;
 }
+
+$("#graduationYear").datepicker({
+    format: "yyyy",
+    viewMode: "years",
+    minViewMode: "years",
+    autoclose:true,
+    endDate: "currentDate"
+});
+
 function remove_err(errId){
     $('#'+errId).html('');
 }
@@ -167,6 +208,7 @@ function addmoreattachemnts(){
 function deleteate(id){
     $('#addedfile'+id).remove();
 }
+
 function submitRegistrationForm(){
     var returntpe=true;
     if($('#file1').val()==""){
@@ -180,11 +222,19 @@ function submitRegistrationForm(){
         $('#formId').val('engineerForm');
         $('#targetId').val('acknowledgementmessage');
         $('#url').val(_baseURL() + '/saveEngineer');
-        $('#messages').html('You are about to submit application. Are you sure to proceed ?');
+        $('#messages').html('You are about to submit your application. Do you want to proceed?');
         returntpe;
     }
 }
 
+function enablesubmit(){
+    if($('#submitcheckbox').prop('checked')){
+        $('#submitbtn').prop('disabled',false);
+    }
+    else{
+        $('#submitbtn').prop('disabled',true);
+    }
+}
 function closemodel(modelId){
     $('#'+modelId).modal('hide');
 }
@@ -237,10 +287,11 @@ function approveAndGenerateCertificate(type){
         $("#engineerverificationForm").ajaxSubmit(options);
     }
     else {
-        validateFeesDetails();
-        var url= '/cdb/admin_engineer/emptylayout/approveAndGenerateCertificate?servicefor='+type;
-        var options = {target:'#content_main_div',url:url,type:'POST', data: $('#engineerverificationForm').serialize()};
-        $("#engineerverificationForm").ajaxSubmit(options);
+        if(validateFeesDetails()==true){
+            var url= '/cdb/admin_engineer/emptylayout/approveAndGenerateCertificate?servicefor='+type;
+            var options = {target:'#content_main_div',url:url,type:'POST', data: $('#engineerverificationForm').serialize()};
+            $("#engineerverificationForm").ajaxSubmit(options);
+        }
     }
 }
 function validateFeesDetails(){
@@ -277,19 +328,26 @@ function printInfo(cdbNo){
     $('#content_main_div_public_user').load(url);
 }
 
-$('#submitbtn').prop('disabled',true);
-function enablesubmit(){
-    if($('#submitcheckbox').prop('checked')){
-        $('#submitbtn').prop('disabled',false);
-    }
-    else{
-        $('#submitbtn').prop('disabled',true);
-    }
+function PrintInfo() {
+    var divToPrint = document.getElementById('printInfo');
+    var popupWin = window.open('', '_blank', 'width=1000,height=1000');
+    popupWin.document.open();
+    popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
+    popupWin.document.close();
+    //  var url = '${pageContext.request.contextPath}/ruralTimber/afterPrintingApp';
+    var options = {
+        target: '#registrtaionFormCard',
+        url: url,
+        type: 'POST',
+        enctype: 'form-data',
+        data: $('#printingForm').serialize()
+    };
+    $("#printingForm").submit();
 }
 
 function submitForm(){
     $('#concirmationRenewalModel').modal('show');
-    $('#messages').html('You are about to submit application. Are you sure to proceed ?');
+    $('#messages').html('You are about to submit application. Do you want to proceed?');
 }
 function SubmitApplicationDetials(){
     var url='/cdb/public_access/emptylayout/saveEngineer';
@@ -348,7 +406,7 @@ function isMailUnique(mailId){
             if (res.status == '1') {
                 //  $('#mail_err').html('This Email is already registered. Please provide unique Email Address');
                 $this.val('').focus();
-                warningMsg("This email has already been registered.");
+                warningMsg("This email is already registered with CDB.");
                 $this.val('').focus();
             }else{
                 $('#mail_err').html('');
@@ -370,12 +428,6 @@ function validate() {
     }
 }
 
-function validateEmail() {
-    var email = $('#regEmail').val();
-    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-}
-
 function checkForApplicable(value){
     if(value=="Not Applicable"){
         $('#paymentForm').hide();
@@ -394,18 +446,23 @@ function printAndDowoload() {
     popupWin.document.close();
 }
 
+function validateEmail() {
+    var email = $('#regEmail').val();
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
 function checkForEngagement(cidNo){
     $('body').on('click','.checkCid',function(){
         //var modal = $(this).closest('.modal').attr('id');
         var cidNo = $('#cidNo').val();
-      //  alert(cidNo);
         if(!cidNo){
             return;
         }
         $.ajax({
             url: cdbGlobal.baseURL() + "/engineer/getPersonalInfo",
             type: 'GET',
-            data: {cid: cidNo},
+            data: {cid: cidNo, type:"check"},
             success: function (res) {
             //   alert('asdf');
                 if (res.status == '1') {

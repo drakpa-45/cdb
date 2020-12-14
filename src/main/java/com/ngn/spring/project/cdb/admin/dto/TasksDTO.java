@@ -21,6 +21,7 @@ public class TasksDTO {
     private Date applicationDate;
     private String serviceSectorType;
     private String cdbNo;
+    private String cmnServiceTypeId;
 
     public BigInteger getApplicationNo() {
         return applicationNo;
@@ -92,5 +93,13 @@ public class TasksDTO {
 
     public void setCdbNo(String cdbNo) {
         this.cdbNo = cdbNo;
+    }
+
+    public String getCmnServiceTypeId() {
+        return cmnServiceTypeId;
+    }
+
+    public void setCmnServiceTypeId(String cmnServiceTypeId) {
+        this.cmnServiceTypeId = cmnServiceTypeId;
     }
 }

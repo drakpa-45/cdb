@@ -259,23 +259,19 @@ var consultant = (function () {
                     $('#consultantForm').validate().element(this);
                 }
             });
-
             if($('.categoryCheck').is(':checked') == false){
                 warningMsg("Please choose at least one category.");
                 isValid = false;
             }
-
             if($('.appliedClassID').is(':checked') == false){
                 warningMsg("Please choose at least one category.");
                 isValid = false;
             }
-
             if (isValid == true) {
                     nextTab('category_details', 'human_resource_criteria')
             }
            return isValid;
         });
-
     }
 
     function enableClassCategory(){
@@ -461,21 +457,13 @@ var consultant = (function () {
                 $.ajax({
                     url: _baseURL() + '/getPersonalInfo',
                     type: 'GET',
-                    data: {cidNo: $this.val()},
+                    data: {cidNo: $this.val(),type:"fetch"},
                     success: function (res) {
                         if (res.status == '1') {
                             var dto = res.dto;
                           // var index = $this.closest("tr").index();
                             $this.closest('tr').find('.name').val(dto.fullName).prop('readonly', true);
                             $this.closest('tr').find('.sex').val(dto.sex).prop('readonly', true);
-                            if (parseInt(index) == 0) {
-                                $('#pDzongkhagId').val(dto.dzongkhagId).change();
-                                $('#pGewogId').val(dto.gowegId).change();
-                                $('#pVillageId').val(dto.villageId);
-                                $('#pDzongkhagId').val(dto.dzongkhagId);
-                                $('#pGewogId').html("<option value='"+dto.goweg+"'>"+dto.goweg+"</option>");
-                                $('#pVillageId').val("<option value='"+dto.village+"'>"+dto.village+"</option>");
-                            }
                         }
                         else{
                             warningMsg(res.text);
@@ -497,7 +485,7 @@ var consultant = (function () {
                 $.ajax({
                     url: _baseURL() + '/getPersonalInfo',
                     type: 'GET',
-                    data: {cidNo: $this.val()},
+                    data: {cidNo: $this.val(),type:"fetch"},
                     success: function (res) {
                         if (res.status == '1') {
                             var dto = res.dto;
@@ -573,7 +561,6 @@ var consultant = (function () {
 
     function edit_HR(){
         $('body').on('click','.edit-hr',function(e){
-            alert();
             e.preventDefault();
             var row = $(this).closest('tr');
             var hrModal = $('#addHRModal');
@@ -611,9 +598,9 @@ var consultant = (function () {
                 return;
             }
             if($(this).val() != $('#regEmail').val()){
-              // $(this).focus();
+               $(this).focus().val('');
                 warningMsg("Confirmation email does not match.");
-               // $(this).focus();
+                $(this).focus().val('');
             }
         })
     }
@@ -646,9 +633,9 @@ var consultant = (function () {
                     return false;
                 }
             });
-            $('#eqdatatable').find('tbody tr td:nth-child(3)').each(function(){
+            $('#hrDtlsTable').find('tbody tr td:nth-child(3)').each(function(){
                 if($this.val() == $(this).text()){
-                    warningMsg("This CID is already added your HR list!!!");
+                    warningMsg("This CID is already exists in your HR list!!!");
                     $this.val('');
                     isHrExist = true;
                     return false;

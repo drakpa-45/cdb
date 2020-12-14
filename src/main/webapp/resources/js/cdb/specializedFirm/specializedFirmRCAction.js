@@ -524,6 +524,7 @@ var specializedFirmRCAction = (function () {
 
                 $('#serviceTbl').find('tbody').empty().append(tr);
                 $('#serviceTbl').find('tfoot').html(tfoot);
+                $('#paymentAmount').val(tApplAmount);
             }
         });
     }

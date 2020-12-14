@@ -12,6 +12,7 @@ import com.ngn.spring.project.cdb.engineer.model.EngineerAppliedServiceEntity;
 import com.ngn.spring.project.cdb.engineer.model.EngineerAttachment;
 import com.ngn.spring.project.cdb.survey.entity.SurveyDocument;
 import com.ngn.spring.project.cdb.survey.entity.SurveyServiceEntity;
+import com.ngn.spring.project.commonDto.TasklistDto;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
 import org.hibernate.query.Query;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -71,15 +72,21 @@ public class EngineerDao extends BaseDao {
     }
 
     @Transactional(readOnly = false)
-    public void assignMyTask(String appNo, String lockUserId, String type) {
-        String lockByUserId = "";
+    public String assignMyTask(String appNo, String lockUserId, String type) {
+        String lockByUserId = "",assignMyTask="";
         if(type.equalsIgnoreCase("release")){
-             lockByUserId ="null";
+
+            lockByUserId =null;
         }else{
             lockByUserId=lockUserId;
         }
         sqlQuery = properties.getProperty("EngineerDao.send2MyOrGroupTask");
-        hibernateQuery(sqlQuery).setParameter("appNo", appNo).setParameter("lockUserId", lockByUserId).executeUpdate();
+         int save = hibernateQuery(sqlQuery).setParameter("appNo", appNo).setParameter("lockUserId", lockByUserId).executeUpdate();
+        if(save>0){
+            return "Success";
+        }else{
+            return "Failed";
+        }
     }
 
     @Transactional(readOnly = false)
@@ -177,7 +184,7 @@ public class EngineerDao extends BaseDao {
                     selectquery = "SELECT MAX(CDBNo) cdbNo FROM crpengineerfinal WHERE CDBNo NOT LIKE 'N%' AND CDBNo LIKE '%(P)%'";
                 }
             } else {
-                firstpart = "NB-";
+                firstpart = "NBE-";
                 if (surtype.equalsIgnoreCase("Government")) {
                     secondpart = "(G)";
                     selectquery = "SELECT MAX(CDBNo) cdbNo FROM crpengineerfinal WHERE CDBNo LIKE 'N%' AND CDBNo LIKE '%(G)%'";
@@ -309,14 +316,12 @@ public class EngineerDao extends BaseDao {
             Query query1 = sqlQuery("INSERT INTO crpengineerfinal (ApplicationDate,CDBNo,CIDNo,CmnApplicationRegistrationStatusId,CmnCountryId,CmnDzongkhagId,CmnQualificationId,CmnSalutationId,CmnServiceSectorTypeId," +
                     "CmnUniversityCountryId,CreatedBy,Email,EmployerAddress,EmployerName,Gewog,GraduationYear,Id,MobileNo,Name," +
                     "NameOfUniversity,ReferenceNo,RegistrationExpiryDate,RemarksByFinalApprover,SysUserId," +
-                    "SysFinalApproverUserId,Village,InitialDate,SysFinalApprovedDate,CreatedOn,RegistrationApprovedDate) VALUES(?,?,?,?,?,?,?,?,?," +
-                    "?,?,?,?,?,?,?,?,?,?," +
-                    "?,?,?,?,?,?," +
-                    "?,CURRENT_DATE,CURRENT_DATE,CURRENT_TIMESTAMP,CURRENT_DATE)");
+                    "SysFinalApproverUserId,Village,CmnTradeId,InitialDate,SysFinalApprovedDate,CreatedOn,RegistrationApprovedDate) VALUES(?,?,?,?,?,?,?,?,?," +
+                    "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,CURRENT_DATE,CURRENT_DATE,CURRENT_TIMESTAMP,CURRENT_DATE)");
             query1.setParameter(1, dto.getApplicationDate()).setParameter(2, dto.getCdbNo()).setParameter(3, dto.getCidNo()).setParameter(4, ApplicationStatus.APPROVED.getCode()).setParameter(5, dto.getCountryId()).setParameter(6, dto.getDzongkhagId()).setParameter(7, dto.getQualificationId()).setParameter(8, dto.getSalutation()).setParameter(9, dto.getServiceSectorTypeId())
                     .setParameter(10, dto.getUniversityCountry()).setParameter(11, userID).setParameter(12, dto.getEmail()).setParameter(13, dto.getEmployeeAddress()).setParameter(14, dto.getEmployeeName()).setParameter(15, dto.getGewog()).setParameter(16, dto.getGraduationyr().toString().substring(0, 4)).setParameter(17, dto.getCrpEngineerId()).setParameter(18, dto.getMobileNo()).setParameter(19, dto.getFullname())
                     .setParameter(20, dto.getUniversityName()).setParameter(21, dto.getReferenceNo()).setParameter(22, dto.getRegExpDate()).setParameter(23, dto.getRemarks()).setParameter(24, sysuserId)
-                    .setParameter(25, userID).setParameter(26, dto.getVillage());
+                    .setParameter(25, userID).setParameter(26, dto.getVillage()).setParameter(27,dto.getTrade());
             int save = query1.executeUpdate();
             if(save>0) {
                 Query querydoc = sqlQuery("INSERT INTO `crpengineerattachmentfinal` (`Id`,`CrpEngineerFinalId`,`DocumentName`,`DocumentPath`,`FileType`,`CreatedBy`,`CreatedOn`) SELECT a.`Id`,a.`CrpEngineerId`,a.`DocumentName`,a.`DocumentPath`,a.`FileType`,?,CURRENT_TIMESTAMP FROM `crpengineerattachment` a  LEFT JOIN `crpengineer` ar ON a.`CrpEngineerId`=ar.`Id` WHERE ar.`ReferenceNo`=? ");
@@ -496,7 +501,6 @@ public class EngineerDao extends BaseDao {
 
     @Transactional
     public ArchitectDto updateFinalTable(ArchitectDto dto, String userID, HttpServletRequest request) {
-
         try {
             Query query1 = sqlQuery("UPDATE crpengineerfinal SET  CmnApplicationRegistrationStatusId = ?,DeregisteredRemarks = ?,EditedBy = ?,CreatedOn = CURRENT_TIMESTAMP,EditedOn = CURRENT_TIMESTAMP,DeRegisteredDate = CURRENT_DATE WHERE ReferenceNo = ?");
             query1.setParameter(1,  ApplicationStatus.DEREGISTERED.getCode()).setParameter(2, dto.getRemarks()).setParameter(3,userID).setParameter(4, dto.getReferenceNo());
@@ -565,6 +569,74 @@ public class EngineerDao extends BaseDao {
         CertificateDTO dto =new CertificateDTO();
         sqlQuery = properties.getProperty("EngineerDao.getEngineerPrintDetails");
         dto=(CertificateDTO) hibernateQuery(sqlQuery, CertificateDTO.class).setParameter(1, cdbNo).list().get(0);
+        return dto;
+    }
+
+    public String isCIDUnique(String cidNo) {
+        String isCIDUnique = "";
+        try {
+            sqlQuery = "SELECT c.CmnApplicationRegistrationStatusId FROM crpengineer c WHERE c.CIDNo=?";
+            isCIDUnique = (String) hibernateQuery(sqlQuery).setParameter(1, cidNo).list().get(0);
+        } catch (Exception e) {
+            System.out.print("Exception in EngineerDao # isCIDUnique:" + e);
+            e.printStackTrace();
+        }
+        return isCIDUnique;
+    }
+
+    @Transactional
+    public List<TasklistDto> populateapplicationHistoryEngineer(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        try {
+            sqlQuery = "SELECT \n" +
+                    "a.ReferenceNo applicationNo,\n" +
+                    "a.ApplicationDate appDate,\n" +
+                    "b.Name AS appStatus, \n" +
+                    "CASE\n" +
+                    "WHEN s.CmnServiceTypeId = '55a922e1-cbbf-11e4-83fb-080027dcfac6' THEN 'New Registration'\n" +
+                    "WHEN s.CmnServiceTypeId ='45bc628b-cbbe-11e4-83fb-080027dcfac6' THEN 'Renewal'\n" +
+                    "WHEN s.CmnServiceTypeId = 'acf4b324-cbbe-11e4-83fb-080027dcfac6' THEN 'Cancellation'\n" +
+                    "ELSE 'No Services'\n" +
+                    "END AS serviceName\n" +
+                    "FROM\n" +
+                    "crpengineerfinal a \n" +
+                    "INNER JOIN cmnlistitem b  \n" +
+                    "ON b.Id = a.CmnApplicationRegistrationStatusId INNER JOIN crpengineerappliedservice s \n" +
+                    "ON s.CrpEngineerId = a.Id WHERE a.CDBNo =?\n" +
+                    "ORDER BY a.ReferenceNo DESC;";
+            dto = (List<TasklistDto>) hibernateQuery(sqlQuery, TasklistDto.class).setParameter(1, cdbNo).list();
+        } catch (Exception e) {
+            System.out.print("Exception in EngineerDao # populateapplicationHistoryEngineer: " + e);
+            e.printStackTrace();
+        }
+        return dto;
+    }
+
+    @Transactional
+    public List<TasklistDto> populaterejectedApplicationEngineer(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        try {
+            sqlQuery = "SELECT \n" +
+                    "a.ReferenceNo applicationNo,\n" +
+                    "a.ApplicationDate appDate,\n" +
+                    "b.Name AS appStatus, \n" +
+                    "CASE\n" +
+                    "WHEN s.CmnServiceTypeId = '55a922e1-cbbf-11e4-83fb-080027dcfac6' THEN 'New Registration'\n" +
+                    "WHEN s.CmnServiceTypeId ='45bc628b-cbbe-11e4-83fb-080027dcfac6' THEN 'Renewal'\n" +
+                    "WHEN s.CmnServiceTypeId = 'acf4b324-cbbe-11e4-83fb-080027dcfac6' THEN 'Cancellation'\n" +
+                    "ELSE 'No Services'\n" +
+                    "END AS serviceName\n" +
+                    "FROM\n" +
+                    "crpengineer a \n" +
+                    "INNER JOIN cmnlistitem b  \n" +
+                    "ON b.Id = a.CmnApplicationRegistrationStatusId INNER JOIN crpengineerappliedservice s \n" +
+                    "ON s.CrpEngineerId = a.Id WHERE a.CmnApplicationRegistrationStatusId = 'de662a61-b049-11e4-89f3-080027dcfac6' AND  s.CmnServiceTypeId ='45bc628b-cbbe-11e4-83fb-080027dcfac6' OR s.CmnServiceTypeId = 'acf4b324-cbbe-11e4-83fb-080027dcfac6' AND a.CDBNo =?\n" +
+                    "ORDER BY a.ReferenceNo DESC";
+            dto = (List<TasklistDto>) hibernateQuery(sqlQuery, TasklistDto.class).setParameter(1, cdbNo).list();
+        } catch (Exception e) {
+            System.out.print("Exception in EngineerDao # populaterejectedApplicationEngineer: " + e);
+            e.printStackTrace();
+        }
         return dto;
     }
 }

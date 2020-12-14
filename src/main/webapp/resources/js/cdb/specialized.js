@@ -12,7 +12,7 @@ function nextTab(presentClass, nextClass,type){
             $.ajax({
                 url:url,
                 type: 'GET',
-                data: {cid: cid},
+                data: {cid: cid,type: "fetch"},
                 success: function (res) {
                     if (res.status == '1') {
                         var dto = res.dto;
@@ -150,7 +150,7 @@ function submitRegistrationForm(){
     var returntpe=true;
     if($('#file1').val()==""){
         $('#file1').focus();
-        warningMsg('Please attach your documents');
+        warningMsg('Please attach your document');
         $('#file1').focus();
         returntpe=false;
     }else {
@@ -159,8 +159,18 @@ function submitRegistrationForm(){
         $('#formId').val('specializedTradeForm');
         $('#targetId').val('acknowledgementmessage');
         $('#url').val(_baseURL() + '/saveSpecializedTrade');
-        $('#messages').html('You are about to submit application. Are you sure to proceed ?');
+        $('#messages').html('You are about to submit your application. Do you want to proceed?');
         returntpe;
+    }
+}
+
+$('#submitbtn').prop('disabled',true);
+function enablesubmit(){
+    if($('#submitcheckbox').prop('checked')){
+        $('#submitbtn').prop('disabled',false);
+    }
+    else{
+        $('#submitbtn').prop('disabled',true);
     }
 }
 
@@ -290,9 +300,27 @@ function printInfo(cdbNo){
     $('#content_main_div_public_user').load(url);
 }
 
+//function submitForm(){
+//    $('#concirmationRenewalModel').modal('show');
+//    $('#messages').html('You are about to submit application. Do you want to proceed?');
+//}
+
 function submitForm(){
-    $('#concirmationRenewalModel').modal('show');
-    $('#messages').html('You are about to submit application. Are you sure to proceed ?');
+    var returntpe=true;
+    if($('#file1').val()==""){
+        $('#file1').focus();
+        warningMsg('Please attach your document');
+        $('#file1').focus();
+        returntpe=false;
+    }else {
+        $('#concirmationRenewalModel').modal('show');
+        $('#actiontype').val('submit');
+        $('#formId').val('specializedTradeForm');
+        $('#targetId').val('acknowledgementmessage');
+        $('#url').val(_baseURL() + '/saveSpecializedTrade');
+        $('#messages').html('You are about to submit your application. Do you want to proceed?');
+        returntpe;
+    }
 }
 
 function SubmitRenewalApplicationDetials(){
@@ -332,6 +360,23 @@ function PrintDiv() {
     popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
     popupWin.document.close();
   //  var url = '${pageContext.request.contextPath}/ruralTimber/afterPrintingApp';
+    var options = {
+        target: '#registrtaionFormCard',
+        url: url,
+        type: 'POST',
+        enctype: 'form-data',
+        data: $('#printingForm').serialize()
+    };
+    $("#printingForm").submit();
+}
+
+function PrintInfo() {
+    var divToPrint = document.getElementById('printInfo');
+    var popupWin = window.open('', '_blank', 'width=1000,height=1000');
+    popupWin.document.open();
+    popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
+    popupWin.document.close();
+    //  var url = '${pageContext.request.contextPath}/ruralTimber/afterPrintingApp';
     var options = {
         target: '#registrtaionFormCard',
         url: url,
@@ -402,12 +447,6 @@ function validateEstbAddrss() {
     if ($('#regMobileNo').val() == "" && $('#regMobileNo').length>8) {
         $('#regMobileNo').focus();
         warningMsg('Please provide your mobile number');
-        $('#regMobileNo').focus();
-        retutype = false;
-    }
-    if ($('#regMobileNo').length>8) {
-        $('#regMobileNo').focus();
-        warningMsg('Max length of mobile number is 8');
         $('#regMobileNo').focus();
         retutype = false;
     }

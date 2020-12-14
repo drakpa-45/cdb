@@ -39,6 +39,7 @@
                                     <th>Sl No.</th>
                                     <th>Application Number</th>
                                     <th>Applicant Name</th>
+                                    <th>CDB Number</th>
                                     <th>Contact Number</th>
                                     <th>Status</th>
                                     <th>Action Date</th>
@@ -55,7 +56,8 @@
                                             <a></a>
                                         </td>
                                         <td>${task.serviceName}</td>
-                                            <td>${task.contactNo}</td>
+                                        <td>${task.cdbNo}</td>
+                                        <td>${task.contactNo}</td>
                                         <td><span class="status-icon bg-success"></span> ${task.appStatus} </td>
                                         <td>${task.applicationDate}</td>
                                     </tr>
@@ -76,6 +78,7 @@
                                     <th>Sl No.</th>
                                     <th>Application Number</th>
                                     <th>Applicant Name</th>
+                                    <th>CDB Number</th>
                                     <th>Contact Number</th>
                                     <th>Status</th>
                                     <th>Action Date</th>
@@ -98,6 +101,7 @@
                                             <a></a>
                                         </td>
                                         <td>${task.serviceName}</td>
+                                        <td>${task.cdbNo}</td>
                                         <td>${task.contactNo}</td>
                                         <td><span class="status-icon bg-success"></span> ${task.appStatus} </td>
                                         <td>${task.applicationDate}</td>

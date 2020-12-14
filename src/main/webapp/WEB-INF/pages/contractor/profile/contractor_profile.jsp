@@ -10,11 +10,12 @@
 			<div class="panel-body">
                 <input type="hidden" id="isExpired" value="<%=request.getSession().getAttribute("isExpired")%>"/>
                 <input type="hidden" id="contractorIdFinal" value="${appDetail.id}">
-                <div class="form-group ">
+                <div class="form-group fa-pull-right">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                        <button class="btn btn-sm btn-primary pull-right" type="button" onclick="printInfo('${appDetail.cdbNo}')"><i class="fa fa-print"></i> Print Information</button> &nbsp;&nbsp;&nbsp;
-                        <button class="btn btn-sm btn-success pull-right" type="button" onclick="printCertificate()"><i class="fa fa-edit"></i> Print Certificate</button>&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-sm btn-primary" type="button" onclick="printInfo('${appDetail.cdbNo}')"><i class="fa fa-print"></i> Print Information</button> &nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-sm btn-success" type="button" onclick="printCertificate()"><i class="fa fa-edit"></i> Print Certificate</button>&nbsp;&nbsp;&nbsp;
                     </div>
+                </div>
                     <hr />
                     <div class="col-md-6 table-responsive">
                         <table class="table table-condensed">

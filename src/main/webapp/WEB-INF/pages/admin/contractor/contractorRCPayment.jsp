@@ -232,41 +232,11 @@
                                                             </label>
 
                                                             <div class="col-lg-4">
-                                                                <select name="modeOfPayment"
-                                                                        id="contractorType"
-                                                                        class="form-control chzn-select">
-                                                                    <option value="select">-Select-</option>
-
-                                                                    <option value="CDb-Cash">CDB-Cash
-                                                                    </option>
-
-                                                                    <option value="RRCO-Thimphu">
-                                                                        RRCO-Thimphu
-                                                                    </option>
-
-                                                                    <option value="RRCO- Phuntsholing">RRCO-
-                                                                        Phuntsholing
-                                                                    </option>
-
-                                                                    <option value="RRCO-Gelephu">
-                                                                        RRCO-Gelephu
-                                                                    </option>
-
-                                                                    <option value="RRCO-Mongar">
-                                                                        RRCO-Mongar
-                                                                    </option>
-
-                                                                    <option value="RRCO-Wangdiphodrang">
-                                                                        RRCO-Wangdiphodrang
-                                                                    </option>
-
-                                                                    <option value="RRCO-Samdrupjongkhar">
-                                                                        RRCO-Samdrupjongkhar
-                                                                    </option>
-
-                                                                    <option value="RRCO-Samdrupjongkhar">
-                                                                        Not Applicable
-                                                                    </option>
+                                                                <select name="modeOfPayment" class="chosen-select form-control" onchange="checkForApplicable(this.value)" id="paymentmode" required>
+                                                                    <option value="">--Select--</option>
+                                                                    <c:forEach var="plist" items="${modeOfPayment}" varStatus="counter">
+                                                                        <option value="${plist.name}">${plist.name}</option>
+                                                                    </c:forEach>
                                                                 </select>
                                                                 <span class="help-block" id=""></span>
                                                             </div>

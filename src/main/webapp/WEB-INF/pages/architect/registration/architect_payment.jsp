@@ -175,6 +175,12 @@
                                             <input type="hidden" value="${appDetails.employeeName}" readonly maxlength="100" id="country" name="country" class="form-control">${appDetails.employeeName}
                                         </div>
                                     </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                                            <label>Trade:</label>
+                                            <input type="hidden" value="${appDetails.cmnTradeId}" readonly maxlength="100" id="trade" name="trade" class="form-control">${appDetails.trade}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -253,11 +259,7 @@
                                                             <td>${appDetails.applicationDate}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td><strong>Remarks: </strong></td>
-                                                            <td>${appDetails.remarks}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><strong>Created By: </strong></td>
+                                                            <td><strong>Submitted By: </strong></td>
                                                             <td>${appDetails.createdBy}</td>
                                                         </tr>
                                                     </table>
@@ -330,9 +332,8 @@
                             <br>
                             <div class="form-group row pull-right">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                                    <button class="btn btn-warning" type="button" id="showrejectsection" onclick="updateReject()"><span class="fa fa-times"></span> Reject
-                                    </button>
                                     <c:if test="${appDetails.updateStatus=='262a3f11-adbd-11e4-99d7-080027dcfac6'}">
+                                        <button class="btn btn-warning" type="button" id="showrejectsection" onclick="updateReject()"><span class="fa fa-times"></span> Reject</button>
                                         <button type="button" onclick="previousTab('categoryDtls','saveAndPreview')" class="btn btn-success">
                                             <i class="fa fa-arrow-circle-left"></i> Previous
                                         </button>
@@ -341,6 +342,7 @@
                                         </button>
                                     </c:if>
                                     <c:if test="${appDetails.updateStatus=='36f9627a-adbd-11e4-99d7-080027dcfac6'}">
+                                        <button class="btn btn-warning" type="button" id="showrejectsection" onclick="updateReject()"><span class="fa fa-times"></span> Reject</button>
                                         <button type="button" onclick="previousTab('categoryDtls','saveAndPreview')" class="btn btn-success">
                                             <i class="fa fa-arrow-circle-left"></i> Previous
                                         </button>

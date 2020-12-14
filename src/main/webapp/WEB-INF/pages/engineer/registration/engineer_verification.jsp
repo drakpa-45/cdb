@@ -52,7 +52,7 @@
                         <%--<form id="architectForm" action="#" method="post" enctype="multipart/form-data">--%>
                         <div class="card-header">
                             <h3 class="card-title font-weight-bold">Registration of Engineer</h3>
-                            <span style="font-size: small;color: #444444"> >> Application Number : ${appDetails.referenceNo}</span>
+                            <span class="font-weight-bold" style="font-size: small;color: #444444"> >> Application Number : ${appDetails.referenceNo}</span>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -95,7 +95,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
-                                                                        <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Cid No:</label>
+                                                                        <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">CID Number:</label>
                                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                                             <input type="hidden" readonly id="cidNo" value="${appDetails.cidNo}" name="cidNo" class="form-control number">${appDetails.cidNo}
                                                                         </div>
@@ -159,6 +159,12 @@
                                                                     <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Type: </label>
                                                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                                         <input type="hidden" value="${appDetails.serviceSectorType}" readonly maxlength="100" id="service" name="serviceSectorType" class="form-control">${appDetails.serviceSectorType}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                                                                    <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Trade: </label>
+                                                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                                        <input type="hidden" value="${appDetails.cmnTradeId}" readonly id="service" name="trade" class="form-control">${appDetails.trade}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -347,7 +353,7 @@
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td><strong>Created By: </strong></td>
-                                                                                            <td>${appDetails.createdBy} <b style="color: blueviolet">(Applicant's CID number)</b></td>
+                                                                                            <td>${appDetails.createdBy} <b style="color: blueviolet">(${appDetails.fullname})</b></td>
                                                                                         </tr>
                                                                                     </table>
                                                                                 </td>
@@ -426,6 +432,7 @@
                     <%--HR Modal--%>
                     <div id="hrModal" class="modal fade in " tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" style=" max-width: 900px;">
+
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h4 id="myModalLabel" class="modal-title"><i class="fa fa-info-circle fa-lg"></i> Personal
@@ -433,8 +440,8 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="panel panel-default">
-                                        <div class="panel-body">
-                                            <div id="modal-print">
+                                        <div class="panel-body" id="printInfo">
+
                                                 <div class="form-group">
                                                     <p align="center"><strong><u>Caution</u></strong></p>
 
@@ -502,7 +509,7 @@
                                                 </div>
                                             </div>
                                             <button type="button" class="btn btn-primary"
-                                                    onclick="javascript:printDiv('modal-print')">Print
+                                                    onclick="PrintInfo()">Print
                                             </button>
                                             <button type="button" class="btn btn-success" id="closeModal"
                                                     onclick="checkBtn('checkver1')" data-dismiss="modal">OK

@@ -559,8 +559,15 @@ public class ConsultantRCService extends BaseService {
 
     @Transactional(readOnly = true)
     public ConsultantFinal getConsultantFinal(String cdbNo){
-        return consultantRCDao.getConsultantFinal(cdbNo);
+        ConsultantFinal consultantFinal =  consultantRCDao.getConsultantFinal(cdbNo);
+        if(!emptyNullCheck(consultantFinal.getpDzongkhagId())) {
+            consultantFinal.setDzongkhagName(commonService.getValue("cmndzongkhag", "NameEn", "Id", consultantFinal.getpDzongkhagId()).toString());
+        }
+        consultantFinal.setRegDzongkhagName(commonService.getValue("cmndzongkhag", "NameEn", "Id", consultantFinal.getRegDzongkhagId()).toString());
+        consultantFinal.setOldDzongkhag(commonService.getValue("cmndzongkhag", "NameEn", "Id", consultantFinal.getRegDzongkhagId()).toString());
+        return consultantFinal;
     }
+
 
     public String getRegisteredClass(String consultantFinalId,String categoryId){
         String condition = "CrpConsultantFinalId = '"+consultantFinalId+"' AND CmnServiceCategoryId = '"+categoryId+"'";

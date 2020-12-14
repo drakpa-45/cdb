@@ -69,6 +69,7 @@ public class CommonService extends BaseService {
     @Autowired
     private EngineerDao engineerDao;
 
+
     @Autowired
     private ConsultantRCActionService cRCActionService;
     /**
@@ -274,7 +275,7 @@ public class CommonService extends BaseService {
     }
 
     //TODO-- fetch from API DCRC
-    public ResponseMessage getPersonalInfo(String cid){
+    public ResponseMessage getPersonalInfo(String cid, String type){
         ResourceBundle resourceBundle1 = ResourceBundle.getBundle("wsEndPointURL_en_US");
         String dcrcCitizenEndPointUrl =resourceBundle1.getString("getCitizenDetails.endPointURL");
         String dcrcCitizenaccessToken =resourceBundle1.getString("getCitizenDetails.accessToken");
@@ -342,7 +343,9 @@ public class CommonService extends BaseService {
             personalInfoDTO.setVillageName("Thimthrom");
             String dzong1=commonDao.getValue("cmndzongkhag","Id","NameEn","Thimphu").toString();
             personalInfoDTO.setDzongkhagId(dzong1);
-            personalInfoDTO.setEmployeeDetailsDTOs(commonDao.getEmployeeDetailsFromCDB(cid));
+            if(type.equalsIgnoreCase("check")){
+                personalInfoDTO.setEmployeeDetailsDTOs(commonDao.validateWorkEngagementCidNo(cid));
+            }
             // System.out.print("Exception in CommonDaoImpl # getPersonalDetails: "+e);
             e.printStackTrace();
             responseMessage.setStatus(SUCCESSFUL_STATUS);
@@ -564,5 +567,114 @@ public class CommonService extends BaseService {
             responseMessage.setDto(equipmentDTO);
             return responseMessage;
         }
+    }
+
+    public List<TasklistDto> populateapplicationHistorySpecializedFirm(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        dto= spDao.populateapplicationHistorySpecializedFirm(cdbNo);
+        return dto;
+    }
+
+    public String getCdbNoForContractor(LoginDTO loginDTO) {
+        String app_type=commonDao.getCdbNoForContractor(loginDTO);
+        return app_type;
+    }
+
+    public List<TasklistDto> populateapplicationHistoryConsultant(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        dto= commonDao.populateapplicationHistoryConsultant(cdbNo);
+        return dto;
+    }
+
+    public List<TasklistDto> populateapplicationHistoryContractor(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        dto= commonDao.populateapplicationHistoryContractor(cdbNo);
+        return dto;
+    }
+
+    public List<TasklistDto> populaterejectedApplicationSpecializedFirm(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        dto= spDao.populaterejectedApplicationSpecializedFirm(cdbNo);
+        return dto;
+    }
+
+    public List<TasklistDto> populaterejectedApplicationConsultant(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        dto= commonDao.populaterejectedApplicationConsultant(cdbNo);
+        return dto;
+    }
+
+    public List<TasklistDto> populaterejectedApplicationContractor(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        dto= commonDao.populaterejectedApplicationContractor(cdbNo);
+        return dto;
+    }
+
+    public List<TasklistDto> populateapplicationHistorySurvey(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        dto= suDao.populateapplicationHistorySurvey(cdbNo);
+        return dto;
+    }
+
+    public List<TasklistDto> populaterejectedApplicationSurvey(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        dto= suDao.populaterejectedApplicationSurvey(cdbNo);
+        return dto;
+    }
+
+    public String getCdbNoForArchitect(LoginDTO loginDTO) {
+        String app_type=commonDao.getCdbNoForArchitect(loginDTO);
+        return app_type;
+    }
+
+    public String getArchitectCDBNo(LoginDTO loginDTO) {
+        String app_type=commonDao.getArchitectCDBNo(loginDTO);
+        return app_type;
+    }
+
+    public List<TasklistDto> populateapplicationHistoryArchitect(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        dto= arDao.populateapplicationHistoryArchitect(cdbNo);
+        return dto;
+    }
+
+    public List<TasklistDto> populaterejectedApplicationArchitect(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        dto= arDao.populaterejectedApplicationArchitect(cdbNo);
+        return dto;
+    }
+
+    public String getCdbNoForEngineer(LoginDTO loginDTO) {
+        String app_type=commonDao.getCdbNoForEngineer(loginDTO);
+        return app_type;
+    }
+
+    public String getEngineerCDBNo(LoginDTO loginDTO) {
+        String app_type=commonDao.getEngineerCDBNo(loginDTO);
+        return app_type;
+    }
+
+    public List<TasklistDto> populateapplicationHistoryEngineer(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        dto= engineerDao.populateapplicationHistoryEngineer(cdbNo);
+        return dto;
+    }
+
+    public List<TasklistDto> populaterejectedApplicationEngineer(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        dto= engineerDao.populaterejectedApplicationEngineer(cdbNo);
+        return dto;
+    }
+
+    public List<TasklistDto> populateapplicationHistorySptrade(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        dto= spDao.populateapplicationHistorySptrade(cdbNo);
+        return dto;
+    }
+
+    public List<TasklistDto> populaterejectedApplicationSptrade(String cdbNo) {
+        List<TasklistDto> dto=new ArrayList<TasklistDto>();
+        dto= spDao.populaterejectedApplicationSptrade(cdbNo);
+        return dto;
     }
 }
