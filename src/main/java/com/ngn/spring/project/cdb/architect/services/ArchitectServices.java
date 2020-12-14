@@ -236,6 +236,8 @@ public class ArchitectServices extends BaseService{
         dto= dao.updateApproval(dto, userID, request);
         if(dto.getUpdateStatus().equalsIgnoreCase("Success")) {
             if(request.getParameter("servicefor").equalsIgnoreCase("cancel")){
+                dto=dao.updateFinalTable(dto,userID,request);
+                engineerDao.updateSysuser(dto.getEmail());
                 //send sms and email notification
                 String mailContent = "Dear User,<br>Your application for  Cancellation of Certificate is approved with application number : " + dto.getReferenceNo();
                 try {
@@ -481,8 +483,6 @@ public class ArchitectServices extends BaseService{
             engineerAppliedServiceEntity.setEditedOn(new Date());
             engineerAppliedServiceEntity.setArchitectId(generateID);
             dao.saveAservies(engineerAppliedServiceEntity);
-
-            engineerDao.updateSysuser(dto.getEmail());
 
             responseMessage.setStatus(1);
             dto.setReferenceNo(new BigInteger(entity.getReferenceNo()));

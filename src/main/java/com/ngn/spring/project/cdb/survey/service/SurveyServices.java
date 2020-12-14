@@ -231,7 +231,17 @@ public class SurveyServices extends BaseService {
     public ArchitectDto approveSurveyRegistration(ArchitectDto dto, String userID, HttpServletRequest request) {
         dto = dao.updateApproval(dto, userID, request);
         if (dto.getUpdateStatus().equalsIgnoreCase("Success")) {
-            if (dto.getUpdateStatus().equalsIgnoreCase("Success")) {
+            if(request.getParameter("servicefor").equalsIgnoreCase("cancel")){
+                dto=dao.updateFinalTable(dto,userID,request);
+                engineerDao.updateSysuser(dto.getEmail());
+                //send sms and email notification
+                String mailContent = "Dear User,<br>Your application for  Cancellation of Certificate is approved with application number : " + dto.getReferenceNo();
+                try {
+                    MailSender.sendMail(dto.getEmail(), "cdb@gov.bt", null, mailContent, "CDB certificate Cancelled");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }else {
                 //send sms and email notification
                 String mailContent = "Dear User,<br>Your application for application number : " + dto.getReferenceNo() + " is approved." +
                         "<br>You may pay the required fee online through following link:<br>" +
@@ -243,12 +253,10 @@ public class SurveyServices extends BaseService {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
             } else {
                 dto.setUpdateStatus("Failed to update workflow table for verification. ");
             }
-        } else {
-            dto.setUpdateStatus("Failed to update the application table for verification. ");
-        }
         return dto;
         /*ArchitectDto dto1=dao.getsurveyapplicationdetails(dto);
         if(dto.getServiceTypeId().equalsIgnoreCase("cancel")){
@@ -505,8 +513,6 @@ public class SurveyServices extends BaseService {
             surveyrAppliedServiceEntity.setEditedOn(new Date());
             surveyrAppliedServiceEntity.setSurveyId(generateID);
             dao.saveSservies(surveyrAppliedServiceEntity);
-
-            engineerDao.updateSysuser(dto.getEmail());
 
             responseMessage.setStatus(1);
             dto.setReferenceNo(new BigInteger(entity.getReferenceNo()));
