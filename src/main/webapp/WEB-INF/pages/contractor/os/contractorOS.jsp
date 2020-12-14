@@ -152,12 +152,11 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="tab-pane services">
                                         <div class="panel-body table-responsive div-actual" >
-                      <span>
-                        Would you like to avail listed below along with this application? Please tick on the check box if you wish to.
-                      </span>
+                                          <span>
+                                            Would you like to avail listed below along with this application? Please tick on the check box if you wish to.
+                                          </span>
                                             <table >
                                                 <tbody>
                                                 <tr>
@@ -246,7 +245,6 @@
                                     </div>
 
                                     <div class="tab-pane generalInformation">
-
                                         <div class="div-actual">
                                             <div class="card" id="gInfo">
                                                 <div class="bg-blue card-status card-status-left"></div>
@@ -260,15 +258,13 @@
                                                             <form:select id="ownershipList" class="form-control col-lg-7"
                                                                          required="true" path="ownershipList" name="contractor.ownershipTypeId">
                                                                 <form:option value="" label="Select Ownership Type"/>
-                                                                <form:options items="${ownershipList}" itemValue="value"
-                                                                              itemLabel="text"/>
+                                                                <form:options items="${ownershipList}" itemValue="value" itemLabel="text"/>
                                                             </form:select>
                                                         </div>
 
                                                         <div class="col-lg-6 col-md-6">
                                                             <label class="col-lg-4 form-label">Country <span
                                                                     class="text-danger">*</span></label>
-
                                                             <select class="form-control col-lg-7" required="true"
                                                                     name="contractor.pCountryId" id="pCountryId">
                                                                 <c:forEach var="item" items="${countryList}">
@@ -307,13 +303,13 @@
                                             <div class="card hide" id="cIncorporation">
                                                 <div class="bg-blue card-status card-status-left"></div>
                                                 <div class="card-header">
-                                                    <h3 class="card-title">Attach Certificates of Incorporation</h3>
+                                                    <h3 class="card-title">Attach Certificates of Incorporation/Sole Proprietorship</h3>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="col-lg-12">
                                                         <div class=""><input id="addMoreCert" type="button" value="Add More Certificate" class="btn btn-primary"> </div>
                                                         <table class="table table-bordered table-center table-responsive-lg auto-index"
-                                                               id="IncCertificateTbl">
+                                                               id="certificateTbl">
                                                             <thead>
                                                             <tr>
                                                                 <th>Sl no</th>
@@ -421,9 +417,45 @@
                                                             </button>
                                                         </div>
                                                     </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-12 col-md-12 ">
+                                                            <label class="col-lg-3 col-md-3 form-label" for="ownershipChangeRemarks">Reason for Change of Owner:
+                                                                <span class="text-danger">*</span></label>
+                                                            <input type="text" class="col-lg-6 form-control"
+                                                                   name="specializedFirm.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true"
+                                                                   placeholder="Text..">
+                                                        </div>
+                                                    </div>
+                                                    <h5 class="text-orange">Attach Certificates of Ownership change</h5>
+                                                    <div class="card-body">
+                                                        <div class="col-lg-12">
+                                                            <div class=""><input id="addMoreCertOwner" type="button" value="Add More Certificate" class="btn btn-primary"></div>
+                                                            <table class="table table-bordered table-hover" id="certificateTblOwner">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>Document Name</th>
+                                                                    <th>Document Attached</th>
+                                                                    <th>File Size</th>
+                                                                    <th>Delete</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody class="files">
+                                                                <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
+                                                                    <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                                    <td class='file-size'></td>
+                                                                    <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                                </tr>
+                                                                <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
+                                                                    <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                                    <td class='file-size'></td>
+                                                                    <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-
                                             <div class="card ">
                                                 <div class="bg-blue card-status card-status-left"></div>
                                                 <div class="card-header">
@@ -488,32 +520,22 @@
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="col-lg-6 col-md-6">
-                                                            <label class="col-lg-4 form-label">Email <span
-                                                                    class="text-danger">*</span></label>
-                                                            <input type="email" class=" form-control col-lg-7"
-                                                                   name="contractor.regEmail" id="regEmail" required="true"
-                                                                   placeholder="Text..">
+                                                            <label class="col-lg-4 form-label">Email <span class="text-danger">*</span></label>
+                                                            <input type="email" class=" form-control col-lg-7" name="contractor.regEmail" id="regEmail" required="true" placeholder="Text..">
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 ">
-                                                            <label class="col-lg-4 form-label">Mobile No <span
-                                                                    class="text-danger">*</span></label>
-                                                            <input type="text" class=" form-control col-lg-7"
-                                                                   name="contractor.regMobileNo" id="regMobileNo" required="true"
-                                                                   placeholder="Text..">
+                                                            <label class="col-lg-4 form-label">Mobile No <span class="text-danger">*</span></label>
+                                                            <input type="text" class=" form-control col-lg-7" name="contractor.regMobileNo" id="regMobileNo" required="true" placeholder="Text..">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="col-lg-6 col-md-6">
                                                             <label class="col-lg-4 form-label">Telephone No </label>
-                                                            <input type="text" class="form-control col-lg-7"
-                                                                   name="contractor.regPhoneNo" id="regPhoneNo"
-                                                                   placeholder="Text..">
+                                                            <input type="text" class="form-control col-lg-7" name="contractor.regPhoneNo" id="regPhoneNo" placeholder="Text..">
                                                         </div>
                                                         <div class="col-lg-6 col-md-6">
                                                             <label class="col-lg-4 form-label">Fax No </label>
-                                                            <input type="text" class="form-control col-lg-7"
-                                                                   name="contractor.regFaxNo" id="regFaxNo"
-                                                                   placeholder="Text..">
+                                                            <input type="text" class="form-control col-lg-7" name="contractor.regFaxNo" id="regFaxNo" placeholder="Text..">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -534,7 +556,6 @@
                                             </button>
                                         </div>
                                     </div>
-
                                     <div class="tab-pane category_details hide">
                                         <div class="div-actual">
                                             <table id="contractorCCTbl" class="table table-bordered table-hover">
@@ -650,7 +671,42 @@
                                                 </tr>
                                                 </tbody>
                                             </table>
-
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <b class="text-orange">Attach your UnderTaking Below</b> &nbsp; &nbsp;
+                                                <br />
+                                                <input type="button" id="addMoreCertCategory" value="Add More File" class="btn btn-primary eqFile">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-hover" id="certificateTblCategory">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Document Name</th>
+                                                            <th>Document Attached</th>
+                                                            <th>File Size</th>
+                                                            <th>Delete</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody class="files">
+                                                        <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
+                                                            <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                            <td class='file-size'></td>
+                                                            <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                        </tr>
+                                                        <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
+                                                            <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                            <td class='file-size'></td>
+                                                            <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                        </tr>
+                                                            <%--  <tr><td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/> </td>
+                                                                  <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
+                                                                  <td class='file-size'></td>
+                                                                  <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                              </tr>--%>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-lg-12 form-group nextBackBtn">
                                             <button type="button"
@@ -695,8 +751,7 @@
                                                         </table>
                                                         <div class="col-lg-12 text-right">
                                                             <button type="button" class="btn btn-info btn-sm"
-                                                                    data-toggle="modal" data-target="#addHRModal"><i
-                                                                    class="fa fa-plus"></i> Add More HR
+                                                                    data-toggle="modal" data-target="#addHRModal"><i class="fa fa-plus"></i> Add More HR
                                                             </button>
                                                         </div>
                                                     </div>
@@ -704,14 +759,10 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-12 form-group nextBackBtn">
-                                            <button type="button"
-                                                    onclick="backTab('human_resource_criteria')"
-                                                    class="btn btn-azure col-lg-offset-9 backTab">
+                                            <button type="button" onclick="backTab('human_resource_criteria')" class="btn btn-azure col-lg-offset-9 backTab">
                                                 <i class="fa fa-arrow-circle-left"></i> &nbsp;Back
                                             </button>
-                                            <button type="button" id="btnValHRNext"
-                                                    onclick="nextTab('human_resource_criteria')"
-                                                    class="btn btn-primary nextTab">Next &nbsp;
+                                            <button type="button" id="btnValHRNext" onclick="nextTab('human_resource_criteria')" class="btn btn-primary nextTab">Next &nbsp;
                                                 <i class="fa fa-arrow-circle-right"></i>
                                             </button>
                                         </div>
@@ -720,7 +771,6 @@
                                     <div class="tab-pane equipment_details hide">
                                         <div class="div-actual">
                                             <i><strong>Contractor Equipment Details</strong></i>
-
                                             <div class="table-responsive">
                                                 <table class="table table-bordered table-striped"
                                                        id="equipmentTbl">

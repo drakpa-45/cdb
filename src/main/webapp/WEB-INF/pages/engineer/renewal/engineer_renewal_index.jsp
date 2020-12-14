@@ -121,7 +121,7 @@
                                                     <input type="hidden" id="expdate" value="${registrationDetails.regExpDate}">
                                                     <input type="hidden" name="noOfDaysLate" id="totalNoDaysLate1" value="${renewalCheck.dto1.noOfDaysLate}">
                                                     <input type="hidden" name="paymentAmt" id="totalpenaltyamount1" value="${renewalCheck.dto1.paymentAmount}">
-                                                    <input type="hidden" name="noOfDaysAfterGracePeriod" id="totalNoDaysLate1" value="${renewalCheck.dto1.noOfDaysAfterGracePeriod}">
+                                                    <input type="hidden" name="noOfDaysAfterGracePeriod" id="noOfDaysAfterGracePeriod" value="${renewalCheck.dto1.noOfDaysAfterGracePeriod}">
                                                     <div class="form-group row pull-right">
                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                                                             <button type="button"  onclick="nextTab('feesStructurerenewal','personalInformation')" class="btn btn-primary">
@@ -396,7 +396,7 @@
                                                     </div>
                                                 </div>
                                                 </c:if>
-                                                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"  class="modal in" id="concirmationRenewalModel">
+                                                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"  class="modal in" id="concirmationModel">
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-header">

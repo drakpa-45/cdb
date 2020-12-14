@@ -64,7 +64,7 @@ function validateFees(){
    return retutype;
 }
 
-document.querySelector(".sp-character").addEventListener("keypress", function (evt) {
+/*document.querySelector(".sp-character").addEventListener("keypress", function (evt) {
     if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
     {
         evt.preventDefault();
@@ -76,7 +76,7 @@ document.querySelector(".mb-character").addEventListener("keypress", function (e
     {
         evt.preventDefault();
     }
-});
+});*/
 
 function checkStatus(cidNo){
     var url= _baseURL() +'/isCIDUnique';
@@ -454,17 +454,15 @@ function validateEmail() {
 
 function checkForEngagement(cidNo){
     $('body').on('click','.checkCid',function(){
-
         //var modal = $(this).closest('.modal').attr('id');
         var cidNo = $('#cidNo').val();
-        alert(cidNo);
         if(!cidNo){
             return;
         }
         $.ajax({
             url: cdbGlobal.baseURL() + "/engineer/getPersonalInfo",
             type: 'GET',
-            data: {cid: cidNo},
+            data: {cid: cidNo, type:"check"},
             success: function (res) {
             //   alert('asdf');
                 if (res.status == '1') {

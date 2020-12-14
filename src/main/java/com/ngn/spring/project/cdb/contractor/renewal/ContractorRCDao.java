@@ -132,5 +132,4 @@ public class ContractorRCDao extends BaseDao {
         sqlQuery = properties.getProperty("ContractorRCDao.getIncAttachmentFinal");
         return hibernateQuery(sqlQuery, ContractorAttachment.class).setParameter("contractorFinalId", contractorFinalId).list();
     }
-
 }

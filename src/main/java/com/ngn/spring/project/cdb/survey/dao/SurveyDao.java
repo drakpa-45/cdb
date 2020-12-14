@@ -215,7 +215,7 @@ public class SurveyDao extends BaseDao {
                     selectquery = "SELECT MAX(ARNo) cdbNo FROM crpsurveyfinal WHERE ARNo NOT LIKE 'N%' AND ARNo LIKE '%(P)%'";
                 }
             } else {
-                firstpart = "NB-";
+                firstpart = "NBS-";
                 if (surtype.equalsIgnoreCase("Government")) {
                     secondpart = "(G)";
                     selectquery = "SELECT MAX(ARNo) cdbNo FROM crpsurveyfinal WHERE ARNo LIKE 'N%' AND ARNo LIKE '%(G)%'";

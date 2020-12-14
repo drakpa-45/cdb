@@ -7,7 +7,7 @@
 
 <html>
 <head>
-    <link href ="css/cdb.css" type ="text/css" rel ="stylesheet"/>
+    <link href ="css/cdb.css" type ="text/css/html" rel ="stylesheet"/>
 </head>
 <body>
 <div class="header py-4" style="background: #120f65;">

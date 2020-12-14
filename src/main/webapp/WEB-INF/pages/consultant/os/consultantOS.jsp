@@ -241,7 +241,6 @@
                                         </div>
 
                                         <div class="tab-pane generalInformation">
-
                                             <div class="div-actual">
                                                 <div class="card" id="gInfo">
                                                     <div class="bg-blue card-status card-status-left"></div>
@@ -288,9 +287,7 @@
                                                         <div class="form-group row">
                                                             <div class="col-lg-6 col-md-6">
                                                                 <label class="col-lg-4 form-label">TPN Number</label>
-                                                                <input type="text" class="col-lg-7 form-control"
-                                                                       name="consultant.tpn" id="tpn"
-                                                                       placeholder="Text..">
+                                                                <input type="text" class="col-lg-7 form-control" name="consultant.tpn" id="tpn" placeholder="Text..">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -565,7 +562,6 @@
                                                 </button>
                                             </div>
                                         </div>
-
                                         <div class="tab-pane category_details hide">
                                             <div class="div-actual">
                                                 <table id="consultantCCTbl" class="table table-bordered table-hover">
