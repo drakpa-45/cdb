@@ -150,33 +150,30 @@ public class ContractorOSService extends BaseService {
         //region update HR
         if(renewalServiceType.getUpdateHR() != null){
             List<ContractorHR> hrList = contractorDTO.getContractorHRs();
-            List<String> existingHRs = new ArrayList<>();
-            List<String> currentHRs = new ArrayList<>();
-            contractorRCService.getContractorHRsFinal(contractorFinal.getId(), 'H').forEach(h->existingHRs.add(h.getId()));
             for(ContractorHR contractorHR:hrList){
-                if(emptyNullCheck(contractorHR.getId())){
-                    contractorHR.setId(commonService.getRandomGeneratedId());
-                }
-                currentHRs.add(contractorHR.getId());
-                if(emptyNullCheck(contractorHR.getCidNo())){
-                    continue;
-                }
-                contractorHR.setContractorID(contractorId);
-                contractorHR.setIsPartnerOrOwner(FALSE_INT);
-                contractorNRService.saveHR(contractorHR, loggedInUser);
-                //Save Human resource attachment
-                for (ContractorHRAttachment contractorHRA : contractorHR.getContractorHRAs()) {
-                    if(contractorHRA.getAttachment() == null){ //No changes, so no need to save
+                if(contractorHR.getDeleteRequest() != null && contractorHR.getDeleteRequest() == 1){
+                    //to save deleted hr
+                    contractorRCDao.saveDeleteHrRequest(contractorHR.getId());
+                }else{
+                    if(emptyNullCheck(contractorHR.getId())){
+                        contractorHR.setId(commonService.getRandomGeneratedId());
+                    }
+                    //currentHRs.add(contractorHR.getId());
+                    if(emptyNullCheck(contractorHR.getCidNo())){
                         continue;
                     }
-                    contractorHRA.setContractorHrId(contractorHR.getId());
-                    contractorNRService.saveHRA(contractorHRA, loggedInUser);
+                    contractorHR.setContractorID(contractorId);
+                    contractorHR.setIsPartnerOrOwner(FALSE_INT);
+                    contractorNRService.saveHR(contractorHR, loggedInUser);
+                    //Save Human resource attachment
+                    for (ContractorHRAttachment contractorHRA : contractorHR.getContractorHRAs()) {
+                        if(contractorHRA.getAttachment() == null){ //No changes, so no need to save
+                            continue;
+                        }
+                        contractorHRA.setContractorHrId(contractorHR.getId());
+                        contractorNRService.saveHRA(contractorHRA, loggedInUser);
+                    }
                 }
-            }
-            //to save deleted hr
-            List<String> deletedHRs =existingHRs.stream().filter(h->!currentHRs.contains(h)).collect(Collectors.toList());
-            if(deletedHRs !=null && !deletedHRs.isEmpty()){
-                deletedHRs.stream().forEach(contractorRCDao::saveDeleteHrRequest);
             }
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "8");
             appliedServicesList.add(appliedService);
