@@ -57,18 +57,26 @@ function validateFees(){
         warningMsg("Please provide your CID Number.");
         retutype=false;
     }
-   /* if($('#app_çid').val()!="" && $('#app_çid').val().length!=11){
-        $('#app_çid_err').html('Your CID Number Should be 11 digit');
-        retutype=false;
-    }*/
-    return retutype;
+   ///* if($('#app_çid').val()!="" && $('#app_çid').val().length!=11){
+   //     $('#app_çid_err').html('Your CID Number Should be 11 digit');
+   //     retutype=false;
+   //}*/
+   return retutype;
 }
 
-function preventDot(e) {
-    var key = e.charCode ? e.charCode : e.keyCode;
-    if (key == 46)
-    { return false; }
-}
+document.querySelector(".sp-character").addEventListener("keypress", function (evt) {
+    if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
+    {
+        evt.preventDefault();
+    }
+});
+
+document.querySelector(".mb-character").addEventListener("keypress", function (evt) {
+    if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
+    {
+        evt.preventDefault();
+    }
+});
 
 function checkStatus(cidNo){
     var url= _baseURL() +'/isCIDUnique';
@@ -129,7 +137,7 @@ function validateeducaion(){
     }
     if($('#graduationYear').val()==""){
         $('#graduationYear').focus();
-        warningMsg("Please mention year of graduation.");
+        warningMsg("Please mention your graduation year.");
         $('#graduationYear').focus();
         retutype=false;
     }
@@ -156,6 +164,13 @@ function validateeducaion(){
     return retutype;
 }
 
+$("#graduationYear").datepicker({
+    format: "yyyy",
+    viewMode: "years",
+    minViewMode: "years",
+    autoclose:true,
+    endDate: "currentDate"
+});
 
 function remove_err(errId){
     $('#'+errId).html('');
@@ -193,6 +208,7 @@ function addmoreattachemnts(){
 function deleteate(id){
     $('#addedfile'+id).remove();
 }
+
 function submitRegistrationForm(){
     var returntpe=true;
     if($('#file1').val()==""){
@@ -211,6 +227,14 @@ function submitRegistrationForm(){
     }
 }
 
+function enablesubmit(){
+    if($('#submitcheckbox').prop('checked')){
+        $('#submitbtn').prop('disabled',false);
+    }
+    else{
+        $('#submitbtn').prop('disabled',true);
+    }
+}
 function closemodel(modelId){
     $('#'+modelId).modal('hide');
 }
@@ -321,16 +345,6 @@ function PrintInfo() {
     $("#printingForm").submit();
 }
 
-$('#submitbtn').prop('disabled',true);
-function enablesubmit(){
-    if($('#submitcheckbox').prop('checked')){
-        $('#submitbtn').prop('disabled',false);
-    }
-    else{
-        $('#submitbtn').prop('disabled',true);
-    }
-}
-
 function submitForm(){
     $('#concirmationRenewalModel').modal('show');
     $('#messages').html('You are about to submit application. Do you want to proceed?');
@@ -392,7 +406,7 @@ function isMailUnique(mailId){
             if (res.status == '1') {
                 //  $('#mail_err').html('This Email is already registered. Please provide unique Email Address');
                 $this.val('').focus();
-                warningMsg("This email has already been registered.");
+                warningMsg("This email is already registered with CDB.");
                 $this.val('').focus();
             }else{
                 $('#mail_err').html('');
@@ -414,12 +428,6 @@ function validate() {
     }
 }
 
-function validateEmail() {
-    var email = $('#regEmail').val();
-    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-}
-
 function checkForApplicable(value){
     if(value=="Not Applicable"){
         $('#paymentForm').hide();
@@ -438,11 +446,18 @@ function printAndDowoload() {
     popupWin.document.close();
 }
 
+function validateEmail() {
+    var email = $('#regEmail').val();
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
 function checkForEngagement(cidNo){
     $('body').on('click','.checkCid',function(){
+
         //var modal = $(this).closest('.modal').attr('id');
         var cidNo = $('#cidNo').val();
-      //  alert(cidNo);
+        alert(cidNo);
         if(!cidNo){
             return;
         }

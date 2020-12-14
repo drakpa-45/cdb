@@ -219,8 +219,8 @@
                                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                         <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Trade <span class="text-danger">*</span></label>
                                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                          <%--  <input type="text" maxlength="100" id="trade" name="trade" readonly class="form-control" value="${registrationDetails.trade}">
-                                                                            <input type="hidden" maxlength="100" id="cmnTradeId" name="trade" class="form-control" value="${registrationDetails.cmnTradeId}">--%>
+                                                                            <input type="text" maxlength="100" id="trade" name="cmnTradeId" readonly class="form-control" value="${registrationDetails.trade}">
+                                                                            <input type="hidden" maxlength="100" id="cmnTradeId" name="trade" class="form-control" value="${registrationDetails.cmnTradeId}">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -250,11 +250,11 @@
                                                                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                         <label>Email: <span class="text-danger">*</span></label>
-                                                                        <input id="email" type="email" class="form-control" value="${registrationDetails.email}" name="email">
+                                                                        <input id="email" type="email" class="form-control" value="${registrationDetails.email}" name="email" readonly>
                                                                     </div>
                                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                         <label>Mobile No: <span class="text-danger">*</span></label>
-                                                                        <input type="number" maxlength="8" class=" form-control number" value="${registrationDetails.mobileNo}" id="mobileNo" name="mobileNo">
+                                                                        <input type="number" class="form-control number" value="${registrationDetails.mobileNo}" id="mobileNo" name="mobileNo" onKeyPress="if(this.value.length==8) return false;" min="0">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-12">
@@ -286,7 +286,7 @@
                                                                     </div>
                                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                         <label>Year of graduation: <span class="text-danger">*</span></label>
-                                                                        <input type="number" class=" form-control number" value="${fn:substring(registrationDetails.graduationyr, 0, 4)}" id="graduationYear" name="graduationYear">
+                                                                        <input type="number" class=" form-control number" value="${fn:substring(registrationDetails.graduationyr, 0, 4)}" id="graduationYear" name="graduationYear" onKeyPress="if(this.value.length==4) return false;" min="0">
                                                                         <span id="graduationYear_err" class="text-danger"></span>
                                                                     </div>
                                                                 </div>
@@ -330,7 +330,7 @@
                                                                 </div>
                                                                 <div class="form-group row">
                                                                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                                                        <input type="file" name="files" id="file1" class="alert badge-danger" required="true" onchange="validateAttachment(this.value,'file1','filecheck1')" accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
+                                                                        <input type="file" name="files" id="file1" class="alert badge-danger" required="true" accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document' onchange="validateAttachment(this.value,'file1','filecheck1')">
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                                                         <button class="btn btn-success fa-pull-right" type="button" onclick="addmoreattachemnts()"><i class="fa fa-plus"> Add More Documents</i></button>
@@ -373,8 +373,8 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="col-lg-12">
-                                                                        <span><input type="checkbox" id="submitcheckbox" name="tnc" class="required" onclick="enablesubmit()" style="width:15px;height:15px;"></span>
-                                                                        <span class="bold"> I agree to the above Terms Conditions</span>
+                                                                        <span><input type="checkbox" id="submitcheckbox" onclick="enablesubmit()" name="tnc" class="required"  style="width:15px;height:15px;"></span>
+                                                                        <span class="bold"> I/We agree to the above Terms & Conditions.</span>
                                                                     </label>
                                                                 </div>
                                                                 <input type="hidden" name="addedeqCount" id="addedeqCount">
@@ -387,9 +387,9 @@
                                                             <input type="hidden" name="cdbNo" value="${registrationDetails.cdbNo}">
                                                             <input type="hidden" name="CrpEngineerId" value="${registrationDetails.crpEngineerId}">
                                                             <button type="button" onclick="previousTab('categoryDtls','saveAndPreview')"  class="btn btn-success">
-                                                                <i class="fa fa-arrow-left"></i>  Previous
+                                                                <i class="fa fa-arrow-left"></i> Previous
                                                             </button>
-                                                            <button type="button" onclick="submitForm()"  class="btn btn-primary" id="submitbtn">
+                                                            <button type="button" disabled onclick="submitRegistrationForm()" class="btn btn-primary" id="submitbtn">
                                                                 <i class="fa fa-save"></i> Submit
                                                             </button>
                                                         </div>
