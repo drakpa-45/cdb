@@ -442,7 +442,7 @@ var contractor = (function () {
         });
     }
 
-    function enableRegistrationNo(){
+ /*   function enableRegistrationNo(){
         $('.equipmentId').on('change',function(e){
             var isRegistration = $(this).find("option:selected").hasClass("1");
             if(isRegistration === true){
@@ -451,7 +451,7 @@ var contractor = (function () {
                 $(this).closest('.form-group').find('.registrationNo').prop('disabled',true).prop('required',false).removeClass('error');
             }
         })
-    }
+    }*/
 
     function enableClassCategory(){
         $('.categoryCheck').on('click',function(e){
@@ -505,7 +505,7 @@ var contractor = (function () {
     }
 
     function addMoreFile(){
-        $('#addMoreHr').on('click',function(e){
+        $('.hrFile').on('click',function(e){
             var uplTbl = $('#hrUploadTbl').find('tbody');
             var tr = "<tr><td><input type='text' required class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/> </td>" +
                 "<td><input type='file' required class='file' name='contractorHRs[0].contractorHRAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td><td class='file-size'></td>" +
@@ -568,7 +568,7 @@ var contractor = (function () {
         });
     }
 
-    /*function getPersonalInfo(){
+    function getPersonalInfo(){
         $('#partnerDtls').on('blur','.hr-cid', function () {
             var $this = $(this);
             var country = $this.closest('tr').find('.country #countryList').val();
@@ -577,7 +577,7 @@ var contractor = (function () {
                     url: _baseURL() + '/getPersonalInfo',
                     type: 'GET',
                     async:false,
-                    data: {cidNo: $this.val()},
+                    data: {cidNo: $this.val(),type:"fetch"},
                     success: function (res) {
                         if (res.status == '1') {
                             var dto = res.dto;
@@ -585,30 +585,54 @@ var contractor = (function () {
                             $this.closest('tr').find('.name').val(dto.fullName).prop('readonly', true);
                             $this.closest('tr').find('.sex').val(dto.sex).prop('readonly', true);
                             //$('#pDzongkhagId').val(dto.dzongkhagId);
-                            if (parseInt(index) == 0) {
+                           /* if (parseInt(index) == 0) {
                                 $('#pDzongkhagId').val(dto.dzongkhagId);
                                 $('#pGewogId').html("<option value='"+dto.gowegName+"'>"+dto.gowegName+"</option>");
                                 $('#pVillageId').html("<option value='"+dto.villageName+"'>"+dto.villageName+"</option>");
-                            }
+                            }*/
+                        } else{
+                            warningMsg(res.text);
+                            $this.closest('tr').find('.name').prop('readonly', false);
+                            $this.closest('tr').find('.sex').prop('readonly', false);
                         }
                     }
                 });
             }
             getTrainingDtl($this.val());
         })
-    }*/
+    }
 
-    function getPersonalInfo($this,country,hrOrPartner){
+    function getPersonalInfoHR(){
+        $('#addHRModal').on('change','.hr-cid', function (e) {
+            var $this = $(this);
+            var country = $('#hr5').val();
+            if(country == '8f897032-c6e6-11e4-b574-080027dcfac6') { //if bhutanese fetch from DCRC
+                $.ajax({
+                    url: _baseURL() + '/getPersonalInfo',
+                    type: 'GET',
+                    data: {cidNo: $this.val(),type:"fetch"},
+                    success: function (res) {
+                        if (res.status == '1') {
+                            var dto = res.dto;
+                            // var index = $this.closest("tr").index();
+                            $('#hr2').val(dto.fullName).prop('readonly', true);
+                            $('#hr4').val(dto.sex).prop('readonly', true);
+                            $('#hr11').val(dto.cdbNo).prop('readonly', true);
+                        }
+                    }
+                });
+            }
+        })
+    }
 
+   /* function getPersonalInfo($this,country,hrOrPartner){
         if(country == '8f897032-c6e6-11e4-b574-080027dcfac6') { //if bhutanese fetch from DCRC
-
             $.ajax({
                 url: _baseURL() + '/getPersonalInfo',
                 type: 'GET',
                 //async:false,
                 data: {cidNo: $this.val()},
                 success: function (res) {
-
                     if (res.status == '1') {
                         var dto = res.dto;
                        // var index = $this.closest("tr").index();
@@ -638,8 +662,7 @@ var contractor = (function () {
         }else{
             getTrainingDtl($this);
         }
-
-    }
+    }*/
 
     function confirmEmail(){
         $('#confirmEmail').on('blur',function(e){
@@ -647,9 +670,9 @@ var contractor = (function () {
                return;
             }
             if($(this).val() != $('#regEmail').val()){
-               // $(this).focus();
+               $(this).focus().val('');
                 warningMsg("Confirmation email does not match.");
-              //  $(this).focus();
+                $(this).focus().val('');
             }
         })
     }
@@ -719,6 +742,7 @@ var contractor = (function () {
         confirmEmail();
         edit_HR();
         edit_EQ();
+        getPersonalInfoHR();
         checkDuplicateEQ();
     }
     return {

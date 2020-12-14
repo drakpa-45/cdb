@@ -89,7 +89,7 @@ public class ConsultantOSController extends BaseController {
     public String save(HttpServletRequest request,ConsultantDTO consultantDTO, RenewalServiceType renewalService
             ,RedirectAttributes redirectAttributes) throws Exception{
         loggedInUser = gLoggedInUser(request);
-        responseMessage =otherService.save(consultantDTO,renewalService,loggedInUser);
+        responseMessage =otherService.save(consultantDTO,renewalService,loggedInUser,request);
         if(responseMessage.getStatus() == 1){
             redirectAttributes.addFlashAttribute("acknowledgement_message",responseMessage.getText());
         } else{

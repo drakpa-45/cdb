@@ -49,6 +49,7 @@ public class SpecializedFirmActionController extends BaseController {
         model.addAttribute("appNo", appNo);
 
         String appStatus = specializedFirmActionService.getApplicationStatus(appNo);
+        model.addAttribute("modeOfPayment", commonService.getModePayment());
         if(appStatus.equals(ApplicationStatus.APPROVED_FOR_PAYMENT.getCode())){
             return "admin/specializedFirm/specializedFirm_payment";
         }
@@ -98,6 +99,9 @@ public class SpecializedFirmActionController extends BaseController {
     @RequestMapping(value = "/paymentUpdate", method = RequestMethod.POST)
     public ResponseMessage paymentUpdate(HttpServletRequest request, PaymentUpdateDTO paymentUpdateDTO) throws Exception{
         loggedInUser = gLoggedInUser(request);
+        String appNo = request.getParameter("appNo");
+        String cdbNo = specializedFirmActionService.getCDBNoFromAppNo(appNo);
+        paymentUpdateDTO.setCdbNo(cdbNo);
         return specializedFirmActionService.paymentUpdate(paymentUpdateDTO, loggedInUser);
     }
 

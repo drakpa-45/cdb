@@ -814,6 +814,56 @@ var consultantRC = (function () {
         })
     }
 
+    function getPersonalInfo(){
+        $('#partnerDtls').on('change','.hr-cid', function (e) {
+            var $this = $(this);
+            var country = $this.closest('tr').find('.country #countryList').val();
+            if(country == '8f897032-c6e6-11e4-b574-080027dcfac6') { //if bhutanese fetch from DCRC
+                $.ajax({
+                    url: cdbGlobal.baseURL() + '/consultantNR/getPersonalInfo',
+                    type: 'GET',
+                    data: {cidNo: $this.val()},
+                    success: function (res) {
+                        if (res.status == '1') {
+                            var dto = res.dto;
+                            // var index = $this.closest("tr").index();
+                            $this.closest('tr').find('.name').val(dto.fullName).prop('readonly', true);
+                            $this.closest('tr').find('.sex').val(dto.sex).prop('readonly', true);
+                        }
+                        else{
+                            warningMsg(res.text);
+                            $this.closest('tr').find('.name').prop('readonly', false);
+                            $this.closest('tr').find('.sex').prop('readonly', false);
+                        }
+                    }
+                });
+            }
+        })
+    }
+
+    function getPersonalInfoHR(){
+        $('#addHRModal').on('change','.hr-cid', function (e) {
+            var $this = $(this);
+            var country = $('#hr5').val();
+            if(country == '8f897032-c6e6-11e4-b574-080027dcfac6') { //if bhutanese fetch from DCRC
+                $.ajax({
+                    url:cdbGlobal.baseURL() + '/consultantNR/getPersonalInfo',
+                    type: 'GET',
+                    data: {cidNo: $this.val()},
+                    success: function (res) {
+                        if (res.status == '1') {
+                            var dto = res.dto;
+                            // var index = $this.closest("tr").index();
+                            $('#hr2').val(dto.fullName).prop('readonly', true);
+                            $('#hr4').val(dto.sex).prop('readonly', true);
+                            $('#hr11').val(dto.cdbNo).prop('readonly', true);
+                        }
+                    }
+                });
+            }
+        })
+    }
+
     function init(){
         viewDownloadAttachment();
         getConsultant();
@@ -832,6 +882,8 @@ var consultantRC = (function () {
         editInModalEQ();
         checkDuplicateHR();
         addMoreEqFile();
+        getPersonalInfo();
+        getPersonalInfoHR();
         addMoreFile();
         showFileSize();
         enableRegistrationNo();

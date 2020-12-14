@@ -87,7 +87,10 @@ public class ContractorNRActionService extends BaseService {
             contractorDTO.setContractorHRs(contractorHRs);
             contractorDTO.setAppHistoryDTOs(appHistoryDTOs);
             String cdbNo = contractorNRActionDao.getNextCDBNo();
-            contractorDTO.setCdbNo(cdbNo);
+            contractorDTO.setCdbNo("NULL");
+        }
+        if(contractor.getpDzongkhagId() != null) {
+            contractorDTO.setpDzongkhagTxt(commonService.getValue("cmndzongkhag", "NameEn", "Id", contractor.getpDzongkhagId()).toString());
         }
         contractorDTO.setEstDzongkhagTxt(commonService.getValue("cmndzongkhag", "NameEn", "Id", contractor.getRegDzongkhagId()).toString());
         contractorDTO.setOwnershipTypeTxt(commonService.getValue("cmnlistitem", "Name", "Id", contractor.getOwnershipTypeId()).toString());
@@ -151,7 +154,7 @@ public class ContractorNRActionService extends BaseService {
         contractorNRActionDao.paymentUpdate(contractor.getContractorId(),loggedInUser.getUserID(),approvedApplicationStatusId,contractor.getCreatedBy());
         responseMessage.setStatus(SUCCESSFUL_STATUS);
         responseMessage.setText("Contractor application number :"+paymentUpdateDTO.getAppNo()+" Payment Approved");
-        String mailContent = "Dear User,Your application for application number : "+paymentUpdateDTO.getAppNo()+" is approved."+
+        String mailContent = "Dear User,Your application for application number : "+paymentUpdateDTO.getAppNo()+" is approved. And CDB Number is: <b>"+paymentUpdateDTO.getCdbNo()+"</b>"+
                 "You can login to the system for renewal other services using following credential:" +
                 "Username : your registered email" +
                 "Password : 123" +
@@ -200,7 +203,9 @@ public class ContractorNRActionService extends BaseService {
      */
     @Transactional(readOnly = true)
     public String getCDBNoFromAppNo(String appNo){
-        return (String)commonService.getValue("crpcontractor","CDBNo","ReferenceNo",appNo);
+        String cdbNo = contractorNRActionDao.getNextCDBNo();
+        return cdbNo;
+       // return (String)commonService.getValue("crpcontractor","CDBNo","ReferenceNo",appNo);
     }
 
     @Transactional(readOnly = true)

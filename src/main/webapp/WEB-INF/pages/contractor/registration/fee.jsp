@@ -26,7 +26,7 @@
         </c:forEach>
         </tbody>
     </table>
-    <b class="text-azure">Note: The license validity for non-bhutanese contractor is One year</b>
+    <b class="text-azure">Note: The license validity for non-Bhutanese contractor is One year</b>
 </div>
 
 <div class="form-group">

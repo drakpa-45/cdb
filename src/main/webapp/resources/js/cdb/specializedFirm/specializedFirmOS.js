@@ -314,7 +314,8 @@ var specializedFirmOS = (function () {
             var uplTbl = $('#hrUploadTbl').find('tbody');
             var tr = "<tr><td><input type='text' class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/> </td>" +
                 "<td><input type='file' class='file' name='spFirmHRs[0].spFirmHRAs[0].attachment' data-preview-file-type='any'/> </td>" +
-                "<td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td> </td></tr>";
+                "<td></td>" +
+                "<td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td></tr>";
             uplTbl.append(tr);
         });
     }
@@ -445,7 +446,6 @@ var specializedFirmOS = (function () {
                         }
                         $('#hrDtlsTable').find('tbody').append(hrTr);
                     }
-
                 });
 
             }else{
@@ -488,29 +488,49 @@ var specializedFirmOS = (function () {
             var country = $this.closest('tr').find('.country #countryList').val();
             if(country == '8f897032-c6e6-11e4-b574-080027dcfac6') { //if bhutanese fetch from DCRC
                 $.ajax({
-                    url: _baseURL() + '/getPersonalInfo',
+                    url:cdbGlobal.baseURL() +'/specializedFirm/getPersonalInfo',
                     type: 'GET',
                     async:false,
-                    data: {cidNo: $this.val()},
+                    data: {cidNo: $this.val(),type:"fetch"},
                     success: function (res) {
+                        alert(res.status);
                         if (res.status == '1') {
                             var dto = res.dto;
                             // var index = $this.closest("tr").index();
                             $this.closest('tr').find('.name').val(dto.fullName).prop('readonly', true);
                             $this.closest('tr').find('.sex').val(dto.sex).prop('readonly', true);
-                            if (parseInt(index) == 0) {
-                                /* $('#pDzongkhagId').val(dto.dzongkhagId).change();
-                                 $('#pGewogId').val(dto.gowegId).change();
-                                 $('#pVillageId').val(dto.villageId);*/
-                                $('#pDzongkhagId').val(dto.dzongkhagId);
-                                $('#pGewogId').html("<option value='"+dto.goweg+"'>"+dto.goweg+"</option>");
-                                $('#pVillageId').val("<option value='"+dto.village+"'>"+dto.village+"</option>");
-                            }
+                        }
+                        else{
+                            warningMsg(res.text);
+                            $this.closest('tr').find('.name').prop('readonly', false);
+                            $this.closest('tr').find('.sex').prop('readonly', false);
                         }
                     }
                 });
             }
-            getTrainingDtl($this.val());
+        })
+    }
+
+    function getPersonalInfoHR(){
+        $('#addHRModal').on('change','.hr-cid', function (e) {
+            var $this = $(this);
+            var country = $('#hr5').val();
+            if(country == '8f897032-c6e6-11e4-b574-080027dcfac6') { //if bhutanese fetch from DCRC
+                $.ajax({
+                    url: cdbGlobal.baseURL() +'/specializedFirm/getPersonalInfo',
+                    type: 'GET',
+                    data: {cidNo: $this.val(), type: "fetch"},
+                    success: function (res) {
+                        if (res.status == '1') {
+                            var dto = res.dto;
+                            // var index = $this.closest("tr").index();
+                            $('#hr2').val(dto.fullName).prop('readonly', true);
+                            $('#hr4').val(dto.sex).prop('readonly', true);
+                            $('#hr11').val(dto.cdbNo).prop('readonly', true);
+                        }
+                    }
+                });
+            }
         })
     }
 
@@ -810,6 +830,7 @@ var specializedFirmOS = (function () {
         addMoreFile();
         editInModalEQ();
         addMoreEqFile();
+        getPersonalInfoHR();
     }
     return {
         init:init

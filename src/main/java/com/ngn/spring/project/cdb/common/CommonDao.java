@@ -552,8 +552,8 @@ try {
     public List<TasklistDto> populateapplicationHistoryConsultant(String cdbNo) {
         List<TasklistDto> dto=new ArrayList<TasklistDto>();
         try {
-            sqlQuery = "SELECT a.ReferenceNo applicationNo, e.serviceName, a.NameOfFirm firmName, a.CDBNo cdbNo,\n" +
-                    "a.MobileNo contactNo, b.Name AS appStatus,a.ApplicationDate applicationDate \n" +
+            sqlQuery = "SELECT a.ReferenceNo applicationNo, e.serviceName,\n" +
+                    "b.Name AS appStatus,a.ApplicationDate appDate \n" +
                     "FROM crpconsultant a  INNER JOIN cmnlistitem b ON b.Id  = a.CmnApplicationRegistrationStatusId\n" +
                     "INNER JOIN (\n" +
                     "SELECT c.CrpConsultantId,MIN(d.referenceNo)minRef, GROUP_CONCAT(d.Name ORDER BY d.referenceno ASC)serviceName  \n" +
@@ -572,8 +572,8 @@ try {
     public List<TasklistDto> populateapplicationHistoryContractor(String cdbNo) {
         List<TasklistDto> dto=new ArrayList<TasklistDto>();
         try {
-            sqlQuery = "SELECT a.ReferenceNo applicationNo, e.serviceName, a.NameOfFirm firmName,\n" +
-                    "a.MobileNo contactNo, b.Name AS appStatus,a.ApplicationDate applicationDate \n" +
+            sqlQuery = "SELECT a.ReferenceNo applicationNo, e.serviceName,\n" +
+                    "b.Name AS appStatus,a.ApplicationDate appDate \n" +
                     "FROM crpcontractor a  INNER JOIN cmnlistitem b ON b.Id  = a.CmnApplicationRegistrationStatusId\n" +
                     "INNER JOIN (\n" +
                     "SELECT c.CrpContractorId,MIN(d.referenceNo)minRef, GROUP_CONCAT(d.Name ORDER BY d.referenceno ASC)serviceName  \n" +
@@ -593,8 +593,8 @@ try {
     public List<TasklistDto> populaterejectedApplicationConsultant(String cdbNo) {
         List<TasklistDto> dto=new ArrayList<TasklistDto>();
         try {
-            sqlQuery = "SELECT a.ReferenceNo applicationNo, e.serviceName, a.NameOfFirm firmName, a.CDBNo cdbNo,a.RemarksByRejector remarks,\n" +
-                    "a.MobileNo contactNo, b.Name AS appStatus,a.ApplicationDate applicationDate \n" +
+            sqlQuery = "SELECT a.ReferenceNo applicationNo, e.serviceName,a.RemarksByRejector remarks,\n" +
+                    "b.Name AS appStatus,a.ApplicationDate appDate \n" +
                     "FROM crpconsultant a  INNER JOIN cmnlistitem b ON b.Id  = a.CmnApplicationRegistrationStatusId\n" +
                     "INNER JOIN (\n" +
                     "SELECT c.CrpConsultantId,MIN(d.referenceNo)minRef, GROUP_CONCAT(d.Name ORDER BY d.referenceno ASC)serviceName  \n" +
@@ -614,8 +614,8 @@ try {
     public List<TasklistDto> populaterejectedApplicationContractor(String cdbNo) {
         List<TasklistDto> dto=new ArrayList<TasklistDto>();
         try {
-            sqlQuery = "SELECT a.ReferenceNo applicationNo, e.serviceName, a.NameOfFirm firmName,,a.RemarksByRejector remarks,\n" +
-                    "a.MobileNo contactNo, b.Name AS appStatus,a.ApplicationDate applicationDate \n" +
+            sqlQuery = "SELECT a.ReferenceNo applicationNo, e.serviceName,a.RemarksByRejector remarks,\n" +
+                    "b.Name AS appStatus,a.ApplicationDate appDate \n" +
                     "FROM crpcontractor a  INNER JOIN cmnlistitem b ON b.Id  = a.CmnApplicationRegistrationStatusId\n" +
                     "INNER JOIN (\n" +
                     "SELECT c.CrpContractorId,MIN(d.referenceNo)minRef, GROUP_CONCAT(d.Name ORDER BY d.referenceno ASC)serviceName  \n" +

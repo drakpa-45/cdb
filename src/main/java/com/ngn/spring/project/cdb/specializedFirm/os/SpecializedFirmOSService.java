@@ -22,6 +22,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -84,6 +85,12 @@ public class SpecializedFirmOSService extends BaseService {
         String specializedFirmId = commonService.getRandomGeneratedId();
         String appliedService;
 
+        if(spFirmDTO.getcAttachments() != null) {
+            for (SpFirmAttachment attachment : spFirmDTO.getcAttachments()){
+                attachment.setSpecializedTradeId(specializedFirmId);
+                saveAttachment(attachment,loggedInUser);
+            }
+        }
         //region incorporation (Name are also allowed to change)
         if(renewalServiceType.getIncorporation() != null){
             String ownershipTypeId = spFirmDTO.getSpecializedFirm().getOwnershipTypeId();
@@ -236,7 +243,21 @@ public class SpecializedFirmOSService extends BaseService {
         return responseMessage;
     }
 
-
+    @Transactional(readOnly = false)
+    public void saveAttachment(SpFirmAttachment cAttachment,LoggedInUser loggedInUser) throws Exception {
+        MultipartFile attachment = cAttachment.getAttachment();
+        String docName = cAttachment.getDocumentName()+commonService.getFileEXT(attachment);
+        String specificLoc = UPLOAD_LOC+"//CertIncorporation";
+        String docPath = commonService.uploadDocument(attachment, specificLoc, docName);
+        String attachmentId = commonService.getRandomGeneratedId();
+        cAttachment.setId(attachmentId);
+        cAttachment.setDocumentPath(docPath);
+        cAttachment.setDocumentName(docName);
+        cAttachment.setFileType(attachment.getContentType());
+        cAttachment.setCreatedBy(loggedInUser.getUserID());
+        cAttachment.setCreatedOn(loggedInUser.getServerDate());
+        specializedFirmRDao.saveUpdate(cAttachment);
+    }
     public String saveOS(SpecializedFirm specializedFirm,LoggedInUser loggedInUser){
         String referenceNo = commonService.getNextID("crpspecializedtrade", "ReferenceNo").toString();
         specializedFirm.setReferenceNo(referenceNo);

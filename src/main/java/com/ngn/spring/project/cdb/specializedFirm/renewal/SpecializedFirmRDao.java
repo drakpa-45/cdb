@@ -100,21 +100,24 @@ public class SpecializedFirmRDao extends BaseDao {
 
     @Transactional(readOnly = true)
     public SpecializedFirmFinal getSpecializedFirmFinal(String cdbNo) {
-        CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
-        CriteriaQuery<SpecializedFirmFinal> cQuery = builder.createQuery(SpecializedFirmFinal.class);
-        Root<SpecializedFirmFinal> root = cQuery.from(SpecializedFirmFinal.class);
-        cQuery.select(root).where(builder.equal(root.get("cdbNo"), cdbNo));
-        SpecializedFirmFinal specializedFirmFinal = getCurrentSession().createQuery(cQuery).getSingleResult();
-        em.detach(specializedFirmFinal);
+        SpecializedFirmFinal specializedFirmFinal = null;
+       try {
+            CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
+            CriteriaQuery<SpecializedFirmFinal> cQuery = builder.createQuery(SpecializedFirmFinal.class);
+            Root<SpecializedFirmFinal> root = cQuery.from(SpecializedFirmFinal.class);
+            cQuery.select(root).where(builder.equal(root.get("cdbNo"), cdbNo));
+             specializedFirmFinal = getCurrentSession().createQuery(cQuery).getSingleResult();
+            em.detach(specializedFirmFinal);
+        }catch (Exception e){
+           e.printStackTrace();
+       }
         return specializedFirmFinal;
     }
-
     @Transactional
     public void saveDeleteHrRequest(String hrId) {
         sqlQuery = properties.getProperty("SpecializedFirmRCDao.saveDeleteHrRequest");
         hibernateQuery(sqlQuery).setParameter("hrId", hrId).executeUpdate();
     }
-
 
     @Transactional
     public void saveDeleteEqRequest(String eqId) {

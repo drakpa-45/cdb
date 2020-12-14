@@ -35,7 +35,7 @@ function saveAndPreview(presentClass, nextClass) {
     $('#btn4').hide();
     $('#btn5').hide();
 
-    window.scroll(0, 0);
+    window.moveTo(0, 0);
     //$("#" + nextClass).prepend(content);
 }
 
@@ -58,7 +58,7 @@ var consultant_action = (function () {
             $.ajax({
                 url: cdbGlobal.baseURL() + "/consultantNR/getPersonalInfo",
                 type: 'GET',
-                data: {cidNo: cidNo},
+                data: {cidNo: cidNo,type:"check"},
                 success: function (res) {
                     if (res.status == '1') {
                         var dto = res.dto;
@@ -128,7 +128,7 @@ var consultant_action = (function () {
             $.ajax({
                 url: cdbGlobal.baseURL() + "/consultantNR/getPersonalInfo",
                 type: 'GET',
-                data: {cidNo: cidNo},
+                data: {cidNo: cidNo,type:"check"},
                 success: function (res) {
                     if (res.status == '1') {
                         var dto = res.dto;

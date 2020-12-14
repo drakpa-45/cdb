@@ -2,10 +2,15 @@
  * Created by user on 2/14/2020.
  */
 var $check = null;
-function checkBtn(checkBoxId)
-{
+function checkBtn(checkBoxId) {
     $check.prop('checked',true);
-
+      if (checkBoxId == "owner") {
+     $('#nextGIBtn').prop('disabled', false);
+     } else if(checkBoxId == 'equipment'){
+     $('#btnValEqNext').prop('disabled', false);
+     }else{
+     $('#nextHRBtn').prop('disabled', false);
+     }
 }
 
 function saveAndPreview(presentClass, nextClass) {
@@ -21,7 +26,14 @@ function saveAndPreview(presentClass, nextClass) {
     $("." + nextClass).addClass("active");
     $("." + presentClass + ">a").append("<i class='fa fa-check ml-1'></i>");
     window.moveTo(0, 0);
-    //$("#" + nextClass).prepend(content);
+    $('#nextGIBtn').hide();
+    $('#nextHRBtn').hide();
+    $('#btnValEqNext').hide();
+    $('#btn1').hide();
+    $('#btn2').hide();
+    $('#btn3').hide();
+    $('#btn4').hide();
+    $('#btn5').hide();
 }
 
 var contractorNRAction = (function () {
@@ -44,7 +56,7 @@ var contractorNRAction = (function () {
             $.ajax({
                 url: cdbGlobal.baseURL() + "/contractorNR/getPersonalInfo",
                 type: 'GET',
-                data: {cidNo: cidNo},
+                data: {cidNo: cidNo,type:"check"},
                 success: function (res) {
                     if (res.status == '1') {
                         var dto = res.dto;
@@ -57,6 +69,115 @@ var contractorNRAction = (function () {
                         var imagelink='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo='+cidNo;
                         $('#photoM').html("<img src='"+imagelink+"'  width='200px'  height='200px' class='pull-right'/>");
                         $("#hrModal").modal('show');
+                        $("#closeModal").modal('show');
+
+                        var employeeDetailsDTO = dto.employeeDetailsDTOs;
+                        var empDtls ="",empDtls1="",empDtls2="";
+                        alert(employeeDetailsDTO != null);
+                        if(employeeDetailsDTO !=null){
+                            $('#engagedId').show();
+                            for(var i in employeeDetailsDTO){
+                                empDtls = empDtls +
+                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
+                                "<td>" +  + "</td>" +
+                                "<td>" + + "</td>" +
+                                "<td>" + employeeDetailsDTO[i].contractorCDBNo+ "</td>" +
+                                "<td>" + employeeDetailsDTO[i].contractorFirmname + "</td>" +"</tr>";
+                            }
+                            $('#employeeDTLS').find('tbody').html(empDtls);
+
+                            for(var i in employeeDetailsDTO){
+                                empDtls1 = empDtls1 +
+                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
+                                "<td>" +  + "</td>" +
+                                "<td>" + + "</td>" +
+                                "<td>" + employeeDetailsDTO[i].consultantCDBNo+ "</td>" +
+                                "<td>" + employeeDetailsDTO[i].consultantFirmname + "</td>" +"</tr>";
+                            }
+                            $('#employeeDTLS1').find('tbody').html(empDtls1);
+
+                            for(var i in employeeDetailsDTO){
+                                empDtls2 = empDtls2 +
+                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
+                                "<td>" +  + "</td>" +
+                                "<td>" + + "</td>" +
+                                "<td>" + employeeDetailsDTO[i].spCDBNo+ "</td>" +
+                                "<td>" + employeeDetailsDTO[i].spFirmname + "</td>" +"</tr>";
+                            }
+                            $('#employeeDTLS2').find('tbody').html(empDtls2);
+
+                            $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
+                        } else{
+                            $('#notEngagedId').show();
+                        }
+                    }
+                }
+            });
+        });
+
+        $('body').on('click','.checkCidHr',function(){
+            var cidNo = $(this).closest('tr').find('.cidNo').text();
+            $check = $(this).closest('tr').find('.check');
+            if(!cidNo){
+                return;
+            }
+            $.ajax({
+                url: cdbGlobal.baseURL() + "/contractorNR/getPersonalInfo",
+                type: 'GET',
+                data: {cidNo: cidNo,type:"check"},
+                success: function (res) {
+                    if (res.status == '1') {
+                        var dto = res.dto;
+                        $('#nameM').text(dto.fullName);
+                        $('#sexM').text(dto.sex);
+                        $('#dzongkhagM').text(dto.dzongkhagNmae);
+                        $('#gewogM').text(dto.gowegName);
+                        $('#villageM').text(dto.villageName);
+                        $('#dobM').text(dto.dob);
+                        var imagelink='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo='+cidNo;
+                        $('#photoM').html("<img src='"+imagelink+"'  width='200px'  height='200px' class='pull-right'/>");
+                        $("#hrModal").modal('show');
+                        $("#closeModal1").modal('show');
+
+                        var employeeDetailsDTO = dto.employeeDetailsDTOs;
+                        var empDtls ="",empDtls1="",empDtls2="";
+                        alert(employeeDetailsDTO != null);
+                        if(employeeDetailsDTO !=null){
+                            $('#engagedId').show();
+                            for(var i in employeeDetailsDTO){
+                                empDtls = empDtls +
+                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
+                                "<td>" +  + "</td>" +
+                                "<td>" + + "</td>" +
+                                "<td>" + employeeDetailsDTO[i].contractorCDBNo+ "</td>" +
+                                "<td>" + employeeDetailsDTO[i].contractorFirmname + "</td>" +"</tr>";
+                            }
+                            $('#employeeDTLS').find('tbody').html(empDtls);
+
+                            for(var i in employeeDetailsDTO){
+                                empDtls1 = empDtls1 +
+                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
+                                "<td>" +  + "</td>" +
+                                "<td>" + + "</td>" +
+                                "<td>" + employeeDetailsDTO[i].consultantCDBNo+ "</td>" +
+                                "<td>" + employeeDetailsDTO[i].consultantFirmname + "</td>" +"</tr>";
+                            }
+                            $('#employeeDTLS1').find('tbody').html(empDtls1);
+
+                            for(var i in employeeDetailsDTO){
+                                empDtls2 = empDtls2 +
+                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
+                                "<td>" +  + "</td>" +
+                                "<td>" + + "</td>" +
+                                "<td>" + employeeDetailsDTO[i].spCDBNo+ "</td>" +
+                                "<td>" + employeeDetailsDTO[i].spFirmname + "</td>" +"</tr>";
+                            }
+                            $('#employeeDTLS2').find('tbody').html(empDtls2);
+
+                            $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
+                        } else{
+                            $('#notEngagedId').show();
+                        }
                     }
                 }
             });
@@ -111,9 +232,9 @@ var contractorNRAction = (function () {
                                 verifiedApproved = verifiedApproved + "<td>(✔)</td>";
                             }else if(contractorHrs[i].verified == '1'){
                                 verifiedApproved = verifiedApproved + "<td>(✔)</td>";
-                                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' value='1'  required=''></td>";
+                                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' value='1'  disabled required=''></td>";
                             }else{
-                                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' value='1'  required=''></td>";
+                                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' value='1' disabled required=''></td>";
                             }
                             if (contractorHrs[i].isPartnerOrOwner == '1') {
                                 owner = contractorHrs[i].name;
@@ -150,7 +271,7 @@ var contractorNRAction = (function () {
                                 "<td>" + contractorHrs[i].serviceTypeName + "</td>" +
                                     //"<td><a href='javascript:void(0);' class='vAttachment'>View/Download</a> </td>" +
                                 "<td>"+attachments+"</td>" +
-                                "<td><input type='button'  value='Check for this CID' class='checkCid btn btn-success'></td>" +
+                                "<td><input type='button'  value='Check for this CID' class='checkCidHr btn btn-success'></td>" +
                                 verifiedApproved+"</tr>";
                             }
                         }
@@ -182,9 +303,9 @@ var contractorNRAction = (function () {
                             }
                             else if(equipments[i].verified == '1'){
                                 verifiedApprovedEq = verifiedApprovedEq + "<td>(✔)</td>";
-                                verifiedApprovedEq = verifiedApprovedEq + "<td><input type='checkbox' style='zoom:1.6' name='approveEq' value='1'  class='check' required=''></td>";
+                                verifiedApprovedEq = verifiedApprovedEq + "<td><input type='checkbox' style='zoom:1.6' name='approveEq' value='1' disabled class='check' required=''></td>";
                             }else{
-                                verifiedApprovedEq = verifiedApprovedEq + "<td><input type='checkbox' style='zoom:1.6' name='verifyEq' value='1'  class='check' required=''></td>";
+                                verifiedApprovedEq = verifiedApprovedEq + "<td><input type='checkbox' style='zoom:1.6' name='verifyEq' value='1' disabled class='check' required=''></td>";
                             }
                             var attachment = '';
                             for (var j in equipments[i].eqAttachments){
@@ -198,7 +319,7 @@ var contractorNRAction = (function () {
                             "<td>"+owner+"</td>" +
                             "<td>" + equipments[i].quantity + "</td>" +
                             "<td style='text-align: center'>"+attachment+"</td>" +
-                            "<td><input type='button' name='humanResource' value='Check for Equipment' disabled class='equipmentCheck btn btn-success'></td>" +
+                            "<td><input type='button' name='humanResource' value='Check for Equipment' class='equipmentCheck btn btn-success'></td>" +
                             verifiedApprovedEq+"</tr>";
                         }
                         $('#equipmentTbl').find('tbody').html(eqTr);
@@ -337,6 +458,9 @@ var contractorNRAction = (function () {
                         $('#tradeLicenseNo').text(contractor.tradeLicenseNo);
                         $('#firmName').text(contractor.firmName);
                         $('#tpn').text(contractor.tpn);
+                        $('#pDzongkhag').text(contractorDTO.pDzongkhagTxt);
+                        $('#pGewog').text(contractor.pGewog);
+                        $('#pVillage').text(contractor.pVillage);
                         $('#estAddress').text(contractor.estAddress);
                         $('#estDzongkhag').text(contractorDTO.estDzongkhagTxt);
                         $('#regEmail').text(contractor.regEmail);

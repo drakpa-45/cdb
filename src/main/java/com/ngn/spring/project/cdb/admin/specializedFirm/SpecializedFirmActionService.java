@@ -91,7 +91,7 @@ public class SpecializedFirmActionService extends BaseService {
             specializedFirmDTO.setCategories(categoryClassDTOs);
             specializedFirmDTO.setSpFirmHRs(specializedFirmHRs);
             String cdbNo = specializedFirmActionDao.getNextCDBNo();
-            specializedFirmDTO.setCdbNo(cdbNo);
+            specializedFirmDTO.setCdbNo("NULL");
             specializedFirmDTO.setAppHistoryDTOs(appHistoryDTOs);
         }
 
@@ -228,7 +228,9 @@ public class SpecializedFirmActionService extends BaseService {
      */
     @Transactional(readOnly = true)
     public String getCDBNoFromAppNo(String appNo){
-        return (String)commonService.getValue("crpspecializedtrade","SPNo","ReferenceNo",appNo);
+        String cdbNo = specializedFirmActionDao.getNextCDBNo();
+        return cdbNo;
+       // return (String)commonService.getValue("crpspecializedtrade","SPNo","ReferenceNo",appNo);
     }
 
     @Transactional(readOnly = true)
@@ -249,5 +251,4 @@ public class SpecializedFirmActionService extends BaseService {
     private List<SpFirmAttachment> getIncAttachment(String crpSpecializedTradeId) {
         return  specializedFirmActionDao.getIncAttachment(crpSpecializedTradeId);
     }
-
 }

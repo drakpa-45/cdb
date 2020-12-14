@@ -306,7 +306,6 @@ public class ConsultantNRService extends BaseService {
     public void saveCC(ConsultantCategory consultantCategory, LoggedInUser loggedInUser, HttpServletRequest request) {
         String aServices[] = consultantCategory.getAppliedServiceID().split(",");
         List<String> aServiceList = Arrays.asList(aServices);
-
         aServiceList.stream().filter(s -> !s.isEmpty()).forEach(s -> {
                     ConsultantCategory conCategory = new ConsultantCategory();
                     conCategory.setId(commonService.getRandomGeneratedId());
