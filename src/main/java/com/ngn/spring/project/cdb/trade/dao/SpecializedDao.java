@@ -1108,7 +1108,7 @@ public class SpecializedDao extends BaseDao {
     public List<TasklistDto> populateapplicationHistorySptrade(String cdbNo) {
         List<TasklistDto> dto=new ArrayList<TasklistDto>();
         try {
-            sqlQuery = "SELECT a.ReferenceNo applicationNo,a.ApplicationDate applicationDate,a.SPNo cdbNo, \n" +
+            sqlQuery = "SELECT a.ReferenceNo applicationNo,a.ApplicationDate appDate,\n" +
                     "b.Name AS appStatus,\n" +
                     "CASE\n" +
                     "WHEN s.CmnServiceTypeId = '55a922e1-cbbf-11e4-83fb-080027dcfac6' THEN 'New Registration'\n" +
@@ -1130,7 +1130,7 @@ public class SpecializedDao extends BaseDao {
     public List<TasklistDto> populaterejectedApplicationSptrade(String cdbNo) {
         List<TasklistDto> dto=new ArrayList<TasklistDto>();
         try {
-            sqlQuery = "SELECT a.ReferenceNo applicationNo,a.ApplicationDate applicationDate,a.SPNo cdbNo, \n" +
+            sqlQuery = "SELECT a.ReferenceNo applicationNo,a.ApplicationDate appDate, \n" +
                     "b.Name AS appStatus,\n" +
                     "CASE\n" +
                     "WHEN s.CmnServiceTypeId = '55a922e1-cbbf-11e4-83fb-080027dcfac6' THEN 'New Registration'\n" +

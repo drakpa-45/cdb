@@ -426,7 +426,6 @@ var contractorOS = (function () {
                         var hrTr = "";
                         //var openModal = "openModal('CheckModal')";
                         for (var i in contractorHrs) {
-
                             var attachments = '';
                             for (var j in contractorHrs[i].hrAttachments){
                                 attachments = attachments + "<span class='hra'><input type='hidden' class='hraId' value='"+contractorHrs[i].hrAttachments[j].id+"'>" +
@@ -451,9 +450,7 @@ var contractorOS = (function () {
                         }
                         $('#hrDtlsTable').find('tbody').append(hrTr);
                     }
-
                 });
-
             }else{
                 $('.human_resource_criteria').addClass('hide');
             }

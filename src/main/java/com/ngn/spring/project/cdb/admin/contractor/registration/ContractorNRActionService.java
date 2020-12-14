@@ -105,7 +105,7 @@ public class ContractorNRActionService extends BaseService {
         String contractorId = (String)commonService.getValue("crpcontractor","CrpContractorId","ReferenceNo",appNo.toString());
         contractorNRActionDao.verify(contractorId, loggedInUser.getUserID(), vRemarks);
         responseMessage.setStatus(SUCCESSFUL_STATUS);
-        responseMessage.setText("Contractor application number :" + appNo + " verified successfully.");
+        responseMessage.setText("Contractor application number :<b>" + appNo + "</b> verified successfully.");
         return responseMessage;
     }
 
@@ -122,7 +122,7 @@ public class ContractorNRActionService extends BaseService {
                 "<br><br>Note: Only after payment confirmation, your application will be done final approval. And you will get the login credential to log into system. ";
         MailSender.sendMail(emailId, "cdb@gov.bt", null, mailContent, "Application approved");
         responseMessage.setStatus(SUCCESSFUL_STATUS);
-        responseMessage.setText("Contractor application number :"+appNo+" approved successfully.");
+        responseMessage.setText("Contractor application number :<b>"+appNo+"</b> approved successfully.");
         return responseMessage;
     }
 
@@ -150,11 +150,10 @@ public class ContractorNRActionService extends BaseService {
         contractorNRActionDao.saveOrUpdate(contractor);
 
         paymentUpdateDTO.setContractorId(contractor.getContractorId());
-
         contractorNRActionDao.paymentUpdate(contractor.getContractorId(),loggedInUser.getUserID(),approvedApplicationStatusId,contractor.getCreatedBy());
         responseMessage.setStatus(SUCCESSFUL_STATUS);
-        responseMessage.setText("Contractor application number :"+paymentUpdateDTO.getAppNo()+" Payment Approved");
-        String mailContent = "Dear User,Your application for application number : "+paymentUpdateDTO.getAppNo()+" is approved. And CDB Number is: <b>"+paymentUpdateDTO.getCdbNo()+"</b>"+
+        responseMessage.setText("Contractor application number :<b>"+paymentUpdateDTO.getAppNo().charAt(0)+"</b> Payment Approved. And CDB Number is: <b>"+paymentUpdateDTO.getCdbNo()+"</b>");
+        String mailContent = "Dear User,Your application for application number : <b>"+paymentUpdateDTO.getAppNo().charAt(0)+"</b> is approved. And CDB Number is: <b>"+paymentUpdateDTO.getCdbNo()+"</b>"+
                 "You can login to the system for renewal other services using following credential:" +
                 "Username : your registered email" +
                 "Password : 123" +

@@ -221,7 +221,7 @@
                                                                 <input type="text" class=" form-control number" value="0.00" readonly name="totalAmt">
                                                             </c:if>
                                                             <c:if test="${appDetails.serviceSectorType=='Private'}">
-                                                                <input type="text" class=" form-control number" value="2000.0" readonly name="totalAmt">
+                                                                <input type="text" class=" form-control number" value="1000.0" readonly name="totalAmt">
                                                             </c:if>
                                                         </div>
                                                     </div>

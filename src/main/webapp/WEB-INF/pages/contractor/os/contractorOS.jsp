@@ -807,7 +807,6 @@
                                     </div>
 
                                     <div class="tab-pane saveAndPreview">
-
                                         <div>
                                             <div id="submitSection" style="">
                                                 <div class="panel panel-default">

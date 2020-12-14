@@ -617,6 +617,9 @@ public class SurveyServices extends BaseService {
                 lateFee= BigDecimal.valueOf(3000);
             }
             if(cFinal.getCmnServiceSectorTypeId().equalsIgnoreCase("6e1cd096-bea8-11e4-9757-080027dcfac6")){
+                lateFee= BigDecimal.valueOf(00.00);
+            }
+            if(cFinal.getCmnServiceSectorTypeId().equalsIgnoreCase("6e1cd096-bea8-11e4-9757-080027dcfac6")){
                 responseMessage.setText("Seems like your registration is already expired on <b>"+expiryDate+
                         "</b>. The total number of days late is <b>"+acNoOfLateDays+"</b> days." +
                         " However 30 days is considered as grace period which means the late fees that would be imposed within that period will be waived. Penalty amount is Nu. 100 per day.<br>" +

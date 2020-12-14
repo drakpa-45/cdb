@@ -38,6 +38,7 @@ public class SurveyDao extends BaseDao {
         sqlQuery = properties.getProperty("SurveyDao.gFeeStructure");
         return hibernateQuery(sqlQuery, ArchitectFeesDto.class).list();
     }
+
     @Transactional
     public BigInteger getMaxId() {
         sqlQuery = properties.getProperty("SurveyDao.getMaxId");

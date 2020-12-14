@@ -111,7 +111,6 @@ public class AtchitectAdminController extends BaseController {
                 } else {
                     return "architect/registration/architect_verification";
                 }
-
             } else if (dto.getServiceTypeId().equalsIgnoreCase("Renewal of CDB Certificate")) {
                 if (request.isUserInRole("ROLE_PAYMENT")) {
                     return "architect/renewal/renewal_payment_architect";
