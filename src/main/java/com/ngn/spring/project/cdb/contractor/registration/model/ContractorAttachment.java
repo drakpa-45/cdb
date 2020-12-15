@@ -29,6 +29,8 @@ public class ContractorAttachment extends BaseModel implements Serializable {
     private String documentName;
     @Column(name = "DocumentPath")
     private String documentPath;
+    @Column(name = "AttachmentFor")
+    private String attachmentFor;
     @Column(name = "FileType")
     private String fileType;
 
@@ -82,5 +84,13 @@ public class ContractorAttachment extends BaseModel implements Serializable {
 
     public void setAttachment(MultipartFile attachment) {
         this.attachment = attachment;
+    }
+
+    public String getAttachmentFor() {
+        return attachmentFor;
+    }
+
+    public void setAttachmentFor(String attachmentFor) {
+        this.attachmentFor = attachmentFor;
     }
 }

@@ -10,8 +10,6 @@
 
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <body>
-
-
 <div class="mt-5">
     <div class="container mb-9">
         <div class="row">
@@ -238,26 +236,6 @@
                                                                             </c:forEach>
                                                                             </tbody>
                                                                         </table>
-                                                                        <%-- <table id="category" class="table table-bordered table-hover">
-                                                                             <thead style="background-color: #F2F2F2">
-                                                                             <tr>
-                                                                                 <th></th>
-                                                                                 <th>Catagory</th>
-                                                                             </tr>
-                                                                             </thead>
-                                                                             <tbody>
-                                                                             <c:forEach items="${appDetails.doc}" var="category" varStatus="i">
-                                                                                 <tr>
-                                                                                         &lt;%&ndash;${category.arrayId}&ndash;%&gt;
-                                                                                         &lt;%&ndash;${i.index}&ndash;%&gt;
-                                                                                     <td><input class="form-control categoryCheck" type="checkbox"
-                                                                                                name="terms[${i.index}].appliedCategoryId" value="${appDetails.id}"
-                                                                                                style="width: 17px; height: 17px;" readonly></td>
-                                                                                     <td>${appDetails.code}-${appDetails.name}</td>
-                                                                                 </tr>
-                                                                             </c:forEach>
-                                                                             </tbody>
-                                                                         </table>--%>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -283,15 +261,9 @@
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td>
-                                                                                                <strong>Remarks: </strong>
+                                                                                                <strong>Submitted By: </strong>
                                                                                             </td>
-                                                                                            <td>${appDetails.remarks}</td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <strong>CreatedBy: </strong>
-                                                                                            </td>
-                                                                                            <td>${appDetails.createdBy}<b style="color: blueviolet">(Applicant's CID Number)</b></td>
+                                                                                            <td>${appDetails.createdBy}<b style="color: blueviolet">(${appDetails.fullname})</b></td>
                                                                                         </tr>
                                                                                     </table>
                                                                                 </td>

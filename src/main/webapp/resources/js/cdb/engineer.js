@@ -64,7 +64,6 @@ function validateFees(){
    return retutype;
 }
 
-
 function checkStatus(cidNo){
     var url= _baseURL() +'/isCIDUnique';
     var $this = $('#app_çid');
@@ -466,17 +465,15 @@ function validateEmail() {
 
 function checkForEngagement(cidNo){
     $('body').on('click','.checkCid',function(){
-
         //var modal = $(this).closest('.modal').attr('id');
         var cidNo = $('#cidNo').val();
-        alert(cidNo);
         if(!cidNo){
             return;
         }
         $.ajax({
             url: cdbGlobal.baseURL() + "/engineer/getPersonalInfo",
             type: 'GET',
-            data: {cid: cidNo},
+            data: {cid: cidNo, type:"check"},
             success: function (res) {
             //   alert('asdf');
                 if (res.status == '1') {

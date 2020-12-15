@@ -168,4 +168,10 @@ public class ContractorNRActionDao extends BaseDao {
         sqlQuery = properties.getProperty("ContractorActionDao.getIncAttachment");
         return hibernateQuery(sqlQuery, ContractorAttachment.class).setParameter("contractorId", contractorId).list();
     }
+
+    public String getCDBNoFromAppNo(String appNo) {
+        sqlQuery = properties.getProperty("ContractorActionDao.getCDBNoFromAppNo");
+        return hibernateQuery(sqlQuery).setParameter("appNo", appNo).list().get(0).toString();
+
+    }
 }

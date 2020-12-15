@@ -53,7 +53,6 @@ public class SpecialisedTradeAdminController extends BaseController {
            model.addAttribute("groupTaskList", services.getTaskList(ApplicationStatus.APPROVED_FOR_PAYMENT.getCode(), "Group", getLoggedInUser().getUserID(),type));
             model.addAttribute("myTaskList", services.getTaskList(ApplicationStatus.APPROVED_FOR_PAYMENT.getCode(),"mytask",getLoggedInUser().getUserID(),type));
         }
-       // model.addAttribute("myTaskList", contractorActionService.gMyTaskList(loggedInUser.getUserID()));
         return "admin/specialisedTrade_tasklist";
     }
 
@@ -62,8 +61,38 @@ public class SpecialisedTradeAdminController extends BaseController {
         String appNo = request.getParameter("appNo");
 
         if (type.equalsIgnoreCase("release")) {
-            services.assignMyTask(appNo, getLoggedInUser().getUserID(), type);
-            return "redirect:/admin_specializedTrade/specializedTrade_tasklist";
+            String cmnServiceTypeId = request.getParameter("param");
+            String assignMyTask = services.assignMyTask(appNo, getLoggedInUser().getUserID(), type);
+            if(assignMyTask.equalsIgnoreCase("Success")){
+                if(cmnServiceTypeId == null || cmnServiceTypeId.isEmpty()){
+                    cmnServiceTypeId = (String) request.getSession().getAttribute("SERVICE");
+                }
+                else if(cmnServiceTypeId.equalsIgnoreCase("new")){
+                    cmnServiceTypeId="55a922e1-cbbf-11e4-83fb-080027dcfac6";
+                }
+                else if(cmnServiceTypeId.equalsIgnoreCase("renew")){
+                    cmnServiceTypeId="45bc628b-cbbe-11e4-83fb-080027dcfac6";
+                }
+                else if(cmnServiceTypeId.equalsIgnoreCase("cancellation")){
+                    cmnServiceTypeId="acf4b324-cbbe-11e4-83fb-080027dcfac6";
+                }
+
+                if(request.isUserInRole("ROLE_APPROVER")) {
+                    model.addAttribute("groupTaskList", services.getTaskList(ApplicationStatus.VERIFIED.getCode(), "Group", getLoggedInUser().getUserID(),cmnServiceTypeId));
+                    model.addAttribute("myTaskList", services.getTaskList(ApplicationStatus.VERIFIED.getCode(),"mytask",getLoggedInUser().getUserID(),cmnServiceTypeId));
+                }else if(request.isUserInRole("ROLE_VERIFIER")){
+                    model.addAttribute("groupTaskList", services.getTaskList(ApplicationStatus.UNDER_PROCESS.getCode(),"Group",getLoggedInUser().getUserID(),cmnServiceTypeId));
+                    model.addAttribute("myTaskList", services.getTaskList(ApplicationStatus.UNDER_PROCESS.getCode(),"mytask",getLoggedInUser().getUserID(),cmnServiceTypeId));
+
+                }else if(request.isUserInRole("ROLE_PAYMENT")){
+                    model.addAttribute("groupTaskList", services.getTaskList(ApplicationStatus.APPROVED_FOR_PAYMENT.getCode(), "Group", getLoggedInUser().getUserID(),cmnServiceTypeId));
+                    model.addAttribute("myTaskList", services.getTaskList(ApplicationStatus.APPROVED_FOR_PAYMENT.getCode(),"mytask",getLoggedInUser().getUserID(),cmnServiceTypeId));
+                }
+                return "admin/specialisedTrade_tasklist";
+
+            }else{
+                return null;
+            }
         } else {
             services.assignMyTask(appNo, getLoggedInUser().getUserID(), type);
             model.addAttribute("modeOfPayment", services.getModePayment());

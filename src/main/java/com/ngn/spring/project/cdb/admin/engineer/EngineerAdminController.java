@@ -153,7 +153,7 @@ public class EngineerAdminController extends BaseController {
         if(dto.getUpdateStatus().equalsIgnoreCase("Success")){
             if(request.getParameter("servicefor").equalsIgnoreCase("cancel")){
                 model.addAttribute("acknowledgement_message", "<br /><div class='alert alert-info col-12 text-center'>You have approved application for the cancellation of certificate with application number: <b>"+dto.getReferenceNo()+"</b>. The details are updated and certificate is cancelled. Thank you</div>");
-            } else{
+            }else{
                 model.addAttribute("acknowledgement_message", "<br /><div class='alert alert-info col-12 text-center'>You have approved application with application number: <b>"+dto.getReferenceNo()+"</b>. The application has been forwarded for further payment approval. Thank you</div>");
             }
         }else{

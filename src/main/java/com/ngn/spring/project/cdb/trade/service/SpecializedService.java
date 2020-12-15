@@ -165,8 +165,9 @@ public class SpecializedService extends BaseService{
     public List getTaskList(String status,String type,String userId,String servicetype) {
         return dao.getTaskList(status, type, userId, servicetype);
     }
-    public void assignMyTask(String appNo, String userID, String type) {
-        dao.assignMyTask(appNo, userID,type);
+    public String assignMyTask(String appNo, String userID, String type) {
+        String assignMyTask = dao.assignMyTask(appNo, userID,type);
+        return assignMyTask;
     }
 
     public List<TradeDto> getPrintList() {

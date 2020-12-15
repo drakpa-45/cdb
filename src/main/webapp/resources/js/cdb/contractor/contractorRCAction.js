@@ -212,6 +212,8 @@ var contractorRCAction = (function () {
                         }
                         $('#partnerDtls').find('tbody').html(partnerHrTr);
 
+                        getContractorFinal(applicationNo);
+
                     } else {
                         warningMsg(res.text);
                     }
@@ -286,6 +288,25 @@ var contractorRCAction = (function () {
         }
         //$('#partnerDtls').find('tbody').html(partnerHrTr);
         $('#hrDtlsTable').find('.'+tBodyClass).append(hrTr);
+    }
+
+    function getContractorFinal(appNo){
+        $.ajax({
+            url: _baseURL() + '/getContractorFinal',
+            type: 'GET',
+            data: {appNo: appNo},
+            success: function (res) {
+                var contractor = res;
+                $('#oldfirmName').html(contractor.firmName);
+                $('#estAddressExist').html(contractor.estAddress);
+                $('#estDzongkhagExist').val(contractor.regDzongkhagId).prop('disabled',true);
+                $('#regEmailExist').html(contractor.regEmail);
+                $('#regMobileNoExist').html(contractor.regMobileNo);
+                $('#regPhoneNoExist').html(contractor.regPhoneNo);
+                $('#regFaxNoExist').html(contractor.regFaxNo);
+
+            }
+        });
     }
 
     function addEQ(tBodyClass, contractorEQs){
@@ -506,15 +527,26 @@ var contractorRCAction = (function () {
     function incorporation(data){
         if(data){
             $('#cIncorporation').removeClass('hide');
-            var tr = '';
+            var cIncTr = '';
+            var categoryTr = '';
             for(var i in data){
-                tr = tr + "<tr>"+
-                "<td></td>" +
-                "<td>"+data[i].documentName+"</td>"+
-                "<td><a href='"+_baseURL() + "/viewDownload?documentPath="+data[i].documentPath+"' target='_blank'> View </a></td>" +
-                "</tr>";
+                if(data[i].attachmentFor == 'I') {
+                    cIncTr = cIncTr + "<tr>" +
+                    "<td></td>" +
+                    "<td>" + data[i].documentName + "</td>" +
+                    "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                    "</tr>";
+                }
+                if(data[i].attachmentFor == 'C'){
+                    categoryTr = categoryTr + "<tr>" +
+                    "<td></td>" +
+                    "<td>" + data[i].documentName + "</td>" +
+                    "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                    "</tr>";
+                }
             }
-            $('#IncCertificateTbl').find('tbody').html(tr);
+            $('#IncCertificateTbl').find('tbody').html(cIncTr);
+            $('#certificateTblCategory').find('tbody').html(categoryTr);
         }else{
             $('#cIncorporation').addClass('hide');
         }

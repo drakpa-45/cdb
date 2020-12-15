@@ -149,7 +149,7 @@ public class ArchitectDao extends BaseDao {
                 }
             }
             else{
-                firstpart="NB-";
+                firstpart="NBA-";
                 if(artype.equalsIgnoreCase("Government")){
                     secondpart="(G)";
                     selectquery="SELECT MAX(ARNo) cdbNo FROM crparchitectfinal WHERE ARNo LIKE 'N%' AND ARNo LIKE '%(G)%'";

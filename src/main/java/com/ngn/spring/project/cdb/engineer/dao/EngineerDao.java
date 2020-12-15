@@ -184,7 +184,7 @@ public class EngineerDao extends BaseDao {
                     selectquery = "SELECT MAX(CDBNo) cdbNo FROM crpengineerfinal WHERE CDBNo NOT LIKE 'N%' AND CDBNo LIKE '%(P)%'";
                 }
             } else {
-                firstpart = "NB-";
+                firstpart = "NBE-";
                 if (surtype.equalsIgnoreCase("Government")) {
                     secondpart = "(G)";
                     selectquery = "SELECT MAX(CDBNo) cdbNo FROM crpengineerfinal WHERE CDBNo LIKE 'N%' AND CDBNo LIKE '%(G)%'";

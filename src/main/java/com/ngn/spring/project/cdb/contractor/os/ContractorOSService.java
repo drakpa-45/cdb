@@ -85,10 +85,14 @@ public class ContractorOSService extends BaseService {
         String contractorId = commonService.getRandomGeneratedId();
         String appliedService;
 
+        //insert undertaking letter
+        if(contractorDTO.getcAttachments() != null && !contractorDTO.getcAttachments().isEmpty())
+            contractorRCService.updateIncorporation(contractorDTO.getcAttachments(), loggedInUser, contractor.getContractorId());
+
         //region incorporation (Name are also allowed to change)
         if(renewalServiceType.getIncorporation() != null){
             String ownershipTypeId = contractorDTO.getContractor().getOwnershipTypeId();
-            contractorRCService.updateIncorporation(contractorDTO.getcAttachments(), loggedInUser, contractor.getContractorId());
+            //contractorRCService.updateIncorporation(contractorDTO.getcAttachments(), loggedInUser, contractor.getContractorId());
             contractor.setOwnershipTypeId(ownershipTypeId);
             contractor.setFirmName(contractorDTO.getContractor().getFirmName());
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "12");
@@ -150,33 +154,30 @@ public class ContractorOSService extends BaseService {
         //region update HR
         if(renewalServiceType.getUpdateHR() != null){
             List<ContractorHR> hrList = contractorDTO.getContractorHRs();
-            List<String> existingHRs = new ArrayList<>();
-            List<String> currentHRs = new ArrayList<>();
-            contractorRCService.getContractorHRsFinal(contractorFinal.getId(), 'H').forEach(h->existingHRs.add(h.getId()));
             for(ContractorHR contractorHR:hrList){
-                if(emptyNullCheck(contractorHR.getId())){
-                    contractorHR.setId(commonService.getRandomGeneratedId());
-                }
-                currentHRs.add(contractorHR.getId());
-                if(emptyNullCheck(contractorHR.getCidNo())){
-                    continue;
-                }
-                contractorHR.setContractorID(contractorId);
-                contractorHR.setIsPartnerOrOwner(FALSE_INT);
-                contractorNRService.saveHR(contractorHR, loggedInUser);
-                //Save Human resource attachment
-                for (ContractorHRAttachment contractorHRA : contractorHR.getContractorHRAs()) {
-                    if(contractorHRA.getAttachment() == null){ //No changes, so no need to save
+                if(contractorHR.getDeleteRequest() != null && contractorHR.getDeleteRequest() == 1){
+                    //to save deleted hr
+                    contractorRCDao.saveDeleteHrRequest(contractorHR.getId());
+                }else{
+                    if(emptyNullCheck(contractorHR.getId())){
+                        contractorHR.setId(commonService.getRandomGeneratedId());
+                    }
+                    //currentHRs.add(contractorHR.getId());
+                    if(emptyNullCheck(contractorHR.getCidNo())){
                         continue;
                     }
-                    contractorHRA.setContractorHrId(contractorHR.getId());
-                    contractorNRService.saveHRA(contractorHRA, loggedInUser);
+                    contractorHR.setContractorID(contractorId);
+                    contractorHR.setIsPartnerOrOwner(FALSE_INT);
+                    contractorNRService.saveHR(contractorHR, loggedInUser);
+                    //Save Human resource attachment
+                    for (ContractorHRAttachment contractorHRA : contractorHR.getContractorHRAs()) {
+                        if(contractorHRA.getAttachment() == null){ //No changes, so no need to save
+                            continue;
+                        }
+                        contractorHRA.setContractorHrId(contractorHR.getId());
+                        contractorNRService.saveHRA(contractorHRA, loggedInUser);
+                    }
                 }
-            }
-            //to save deleted hr
-            List<String> deletedHRs =existingHRs.stream().filter(h->!currentHRs.contains(h)).collect(Collectors.toList());
-            if(deletedHRs !=null && !deletedHRs.isEmpty()){
-                deletedHRs.stream().forEach(contractorRCDao::saveDeleteHrRequest);
             }
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "8");
             appliedServicesList.add(appliedService);
@@ -186,14 +187,14 @@ public class ContractorOSService extends BaseService {
         //region update EQ
         if(renewalServiceType.getUpdateEq() != null){
             List<ContractorEQ> eqList = contractorDTO.getEquipments();
-            List<String> existingEQs = new ArrayList<>();
-            List<String> currentEQs = new ArrayList<>();
-            getEquipmentFinal(contractorFinal.getId()).forEach(h->existingEQs.add(h.getId()));
             for(ContractorEQ contractorEQ:eqList){
+                if(contractorEQ.getDeleteRequest() != null && contractorEQ.getDeleteRequest() == 1) {
+                    //to save deleted hr
+                    contractorRCDao.saveDeleteEqRequest(contractorEQ.getId());
+                }
                 if(emptyNullCheck(contractorEQ.getId())){
                     contractorEQ.setId(commonService.getRandomGeneratedId());
                 }
-                currentEQs.add(contractorEQ.getId());
                 if(emptyNullCheck(contractorEQ.getEquipmentId())){
                     continue;
                 }
@@ -209,11 +210,6 @@ public class ContractorOSService extends BaseService {
                 }
             }
 
-            //to save deleted hr
-            List<String> deletedEQs =existingEQs.stream().filter(h->!currentEQs.contains(h)).collect(Collectors.toList());
-            if(deletedEQs !=null && !deletedEQs.isEmpty()){
-                deletedEQs.stream().forEach(contractorRCDao::saveDeleteEqRequest);
-            }
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "9");
             appliedServicesList.add(appliedService);
         }
@@ -270,44 +266,22 @@ public class ContractorOSService extends BaseService {
         BigDecimal totalCCUpDownFee = BigDecimal.ZERO;
         final List<CategoryClassDTO> ccUpDown = new ArrayList<>();  //upgrade downgrade
         String contractorFinalId = (String)commonService.getValue("crpcontractorfinal","Id","CDBNo",contractor.getCdbNo());
-/*
-        if(categories != null && !categories.isEmpty()){
-            categories.stream().forEach(r->ccUpDown.add(new CategoryClassDTO(r.getProjectCateID(),r.getAppliedClassID()
-                    ,contractorRCService.getRegisteredClass(contractorFinalId, r.getProjectCateID()))));
-            for(CategoryClassDTO classDTO : ccUpDown){
-                BigDecimal fee = ((FeeStructureDTO) contractorNRService.gFeeStructure(classDTO.getaClassId()).get(0)).getRegistrationFee();
-                classDTO.setvAmount(fee);
-                totalCCUpDownFee = totalCCUpDownFee.add(fee);
-            }
-        }*/
 
-        //since project category is cannot be null
+        //since project category cannot be null
         categories = categories.stream().filter(c-> c.getProjectCateID() != null).collect(Collectors.toList());
-
-        BigDecimal totalRenewalFee = BigDecimal.ZERO;
-        List<CategoryClassDTO> ccRenewal; //renewal
-
         if(categories != null && !categories.isEmpty()){
-            final List<CategoryClassDTO> renewal = new ArrayList<>(); //renewal
-            //upgrade or downgrade or change of category
-            List<ConCategory> conCategoryR = categories.stream().filter(c-> c.getAppliedClassID() != null).filter(c -> getRegisteredClass(contractorFinalId, c.getProjectCateID()).equals(c.getAppliedClassID())).collect(Collectors.toList());
-            conCategoryR.addAll(categories.stream().filter(c -> c.getProjectCateID() != null && c.getAppliedClassID() == null).collect(Collectors.toList()));
-            List<ConCategory> conCategoryUD = categories.stream().filter(c -> !conCategoryR.contains(c)).collect(Collectors.toList());
+            for(ConCategory category : categories){
+                if(category.getAppliedClassID() == null || category.getAppliedClassID().equals(category.getExistingClassID())){
+                    // fee not application since class is same or no change
+                }else{
+                    ccUpDown.add(new CategoryClassDTO(category.getProjectCateID(),category.getAppliedClassID()
+                            ,category.getExistingClassID()));
+                    BigDecimal fee = ((FeeStructureDTO) contractorNRService.gFeeStructure(category.getAppliedClassID()).get(0)).getRegistrationFee();
+                    totalCCUpDownFee = totalCCUpDownFee.add(fee);
+                }
+            }
+        }
 
-            conCategoryR.stream().forEach(r->{
-                String classId = getRegisteredClass(contractorFinalId, r.getProjectCateID());
-                renewal.add(new CategoryClassDTO(r.getProjectCateID(),classId,classId));
-            });
-            conCategoryUD.stream().forEach(r->ccUpDown.add(new CategoryClassDTO(r.getProjectCateID(),r.getAppliedClassID(),getRegisteredClass(contractorFinalId, r.getProjectCateID()))));
-            ccRenewal = renewal;
-        }else{ // no upgrade or downgrade or change of category
-            ccRenewal = getCategoryClassFinal(contractorFinalId);
-        }
-        for(CategoryClassDTO classDTO : ccRenewal){
-            BigDecimal renewalFee = ((FeeStructureDTO) contractorNRService.gFeeStructure(classDTO.getaClassId()).get(0)).getRenewalFee();
-            classDTO.setvAmount(BigDecimal.valueOf(00.00));
-            totalRenewalFee = totalRenewalFee.add(renewalFee);
-        }
         for(CategoryClassDTO classDTO : ccUpDown){
             BigDecimal fee = ((FeeStructureDTO) contractorNRService.gFeeStructure(classDTO.getaClassId()).get(0)).getRegistrationFee();
             classDTO.setvAmount(fee);

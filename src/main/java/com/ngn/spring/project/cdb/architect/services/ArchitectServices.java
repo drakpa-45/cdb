@@ -283,7 +283,7 @@ public class ArchitectServices extends BaseService{
             dto1.setNoOfDaysLate(dto.getNoOfDaysLate());
             if(dto.getServiceTypeId().equalsIgnoreCase("registration")){
                 insert=dao.insertuserDetails(dto1, userID, request);
-                String architectNo=dao.generateArchitectNo(dto1.getCountryId(),dto1.getServiceSectorType());
+                String architectNo=dao.generateArchitectNo(dto1.getCountryId(),dto.getServiceSectorType());
                 dto.setCdbNo(architectNo);
                 dto1.setCdbNo(architectNo);
                 if(!insert.equalsIgnoreCase("Insert_Fail")){
@@ -370,6 +370,9 @@ public class ArchitectServices extends BaseService{
             dao.saveAservies(engineerAppliedServiceEntity);
 
             BigDecimal payAmount = dto.getPaymentAmt();
+            if(payAmount == null || dto.getServiceSectorType().equalsIgnoreCase("6e1cd096-bea8-11e4-9757-080027dcfac6")){
+                payAmount = BigDecimal.valueOf(00.00);
+            }
             BigDecimal totalAmount;
 
             if(payAmount.doubleValue() > 3000.00){
@@ -378,10 +381,13 @@ public class ArchitectServices extends BaseService{
                 dto.setTotalAmt(totalAmount);
             }else{
                 dto.setPaymentAmt(dto.getPaymentAmt());
-                totalAmount = BigDecimal.valueOf(dto.getPaymentAmt().floatValue() + 1000);
+                if(dto.getServiceSectorType().equalsIgnoreCase("6e1cd096-bea8-11e4-9757-080027dcfac6")){
+                    totalAmount = BigDecimal.valueOf(payAmount.floatValue());
+                }else{
+                    totalAmount = BigDecimal.valueOf(payAmount.floatValue() + 1000);
+                }
                 dto.setTotalAmt(totalAmount);
             }
-
             dao.insertInPaymentServiceDetails(dto, userID);
 
             responseMessage.setStatus(1);
@@ -420,7 +426,7 @@ public class ArchitectServices extends BaseService{
         entity.setVillage(dto.getVillage());
         entity.setCmnServiceSectorTypeId(dto.getServiceSectorType());
         entity.setCmnCountryId(dto.getCountryId());
-        //entity.setTPN(dto.getTrade());//trade field is not there in db
+        entity.setCmnTradeId(dto.getTrade());//trade field is not there in db
         entity.setEmail(dto.getEmail());
         entity.setMobileNo(dto.getMobileNo());
         entity.setEmployerName(dto.getEmployeeName());
@@ -578,16 +584,31 @@ public class ArchitectServices extends BaseService{
             if(lateFee.doubleValue()>3000){
                 lateFee= BigDecimal.valueOf(3000);
             }
-            responseMessage.setText("Seems like your registration is already expired on <b>"+expiryDate+
-                    "</b>. The total number of days late is <b>"+acNoOfLateDays+"</b> days." +
-                    " However 30 days is considered as grace period which means the late fees that would be imposed within that period will be waived. Penalty amount is Nu. 100 per day.<br>" +
-                    "Total number of days after grace period is <b>"+noOfLateDays+"</b>. Total of Nu. "+lateFee+" will be imposed as penalty for late renewal of your cdb Certificate till today. " +
-                    "However your penalty will be calculated till date of approval.");
+            if(cFinal.getCmnServiceSectorTypeId().equalsIgnoreCase("6e1cd096-bea8-11e4-9757-080027dcfac6")){
+                lateFee= BigDecimal.valueOf(00.00);
+            }
+            if(cFinal.getCmnServiceSectorTypeId().equalsIgnoreCase("6e1cd096-bea8-11e4-9757-080027dcfac6")){
+                responseMessage.setText("Seems like your registration is already expired on <b>"+expiryDate+
+                        "</b>. The total number of days late is <b>"+acNoOfLateDays+"</b> days." +
+                        " However 30 days is considered as grace period which means the late fees that would be imposed within that period will be waived. Penalty amount is Nu. 100 per day.<br>" +
+                        "Total number of days after grace period is <b>"+noOfLateDays+"</b>. <h4>Since you are government employee renewal and late fees will not be imposed.</h4>");
+            }else {
+                responseMessage.setText("Seems like your registration is already expired on <b>" + expiryDate +
+                        "</b>. The total number of days late is <b>" + acNoOfLateDays + "</b> days." +
+                        " However 30 days is considered as grace period which means the late fees that would be imposed within that period will be waived. Penalty amount is Nu. 100 per day.<br>" +
+                        "Total number of days after grace period is <b>" + noOfLateDays + "</b>. Total of Nu. " + lateFee + " will be imposed as penalty for late renewal of your cdb Certificate till today. " +
+                        "However your penalty will be calculated till date of approval.");
+            }
             waiveOffLateFee = (acNoOfLateDays - noOfLateDays)*100;
             lateFeeDTO.setNoOfDaysLate(acNoOfLateDays.intValue());
             lateFeeDTO.setNoOfDaysAfterGracePeriod(noOfLateDays.intValue());
             lateFeeDTO.setWaiveOffLateFee(new BigDecimal(waiveOffLateFee));
-            lateFeeDTO.setPaymentAmount(lateFee);
+            if(cFinal.getCmnServiceSectorTypeId().equalsIgnoreCase("6e1cd096-bea8-11e4-9757-080027dcfac6")){
+                lateFeeDTO.setPaymentAmount(BigDecimal.valueOf(00.00));
+            }else {
+                lateFeeDTO.setPaymentAmount(lateFee);
+
+            }
         } else{
             responseMessage.setText("You are applying for renewal of Surveyor CDB certificate on time. So, no penalty will be" +
                     "charged. However, there will be renewal fee according to service you applied and your category and classes.");

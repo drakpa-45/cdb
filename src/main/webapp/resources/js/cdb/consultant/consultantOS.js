@@ -304,8 +304,7 @@ var consultantOS = (function () {
                             "<td class='serviceTypeName'>" + consultantHrs[i].serviceTypeName + "</td>" +
                             "<td class='joiningDate'>" + consultantHrs[i].joinDate + "</td>" +
                             "<td class='attachments'>" + attachments + "</td>" +
-                            "<td> <input type='radio' class='deleteRequest' name='consultantHRs[0].deleteRequest' id='deleteRequest "+i+"' value='yes' ><span style='color:#ff0000'>Yes</span>" +
-                            "<input type='radio' class='deleteRequest'  name='consultantHRs[0].deleteRequest' id='deleteRequest"+bodyId+"' value='no'><span style='color:#ff0000'>No</span></td>" +
+                            "<td><input type='checkbox' name='consultantHRs[0].deleteRequest' value='1'></td>" +
                             "<td class='action'><button class='btn-sm btn-info btn-block edit-row'>Edit</button></td>" +
                             "</tr>";
                         }
@@ -473,7 +472,6 @@ var consultantOS = (function () {
                 url: _baseURL() + '/viewDownload',
                 type: 'GET',
                 data: {tableName:'crpconsultanthumanresourceattachment',filterCol:'CrpConsultantHumanResourceId',filterVal:id}
-
             });
         });
     }

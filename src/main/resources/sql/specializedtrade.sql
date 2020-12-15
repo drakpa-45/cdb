@@ -14,7 +14,7 @@ a.ApplicationDate initialDate,a.ReferenceNo referenceNo FROM crpspecializedtrade
 SpecializedDao.getMaxId = SELECT  a.ReferenceNo FROM crpspecializedtrade a ORDER BY a.ReferenceNo DESC LIMIT 1
 
 SpecializedDao.getTaskList=SELECT a.Name serviceName,a.ReferenceNo applicationNo,a.MobileNo contactNo,a.ApplicationDate applicationDate,a.SPNo cdbNo, \
-a.CIDNo serviceNo,b.Name AS appStatus FROM crpspecializedtrade a INNER JOIN cmnlistitem b  ON b.Id = a.CmnApplicationRegistrationStatusId  \
+a.CIDNo serviceNo,b.Name AS appStatus,s.CmnServiceTypeId cmnServiceTypeId FROM crpspecializedtrade a INNER JOIN cmnlistitem b  ON b.Id = a.CmnApplicationRegistrationStatusId  \
 INNER JOIN crpspecializedtradeappliedservice s ON s.CrpSpecializedTradeId = a.CrpSpecializedTradeId WHERE a.SysLockedByUserId IS NULL AND s.CmnServiceTypeId = ?  \
 AND a.CmnApplicationRegistrationStatusId = ? GROUP BY a.ReferenceNo  ORDER BY a.ReferenceNo DESC
 

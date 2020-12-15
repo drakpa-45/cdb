@@ -285,8 +285,8 @@ var consultant_action = (function () {
                                 verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' disabled value='1'  required=''></td>";
                             }
                             if (consultantHrs[i].isPartnerOrOwner == '1') {
-                                ownerName = consultantHrs[i].cidNo;
-                                ownerCid = consultantHrs[i].name;
+                                ownerName = consultantHrs[i].name;
+                                ownerCid = consultantHrs[i].cidNo;
                                 owner = consultantHrs[i].name;
                                 m++;
                                 partnerHrTr = partnerHrTr + "<tr><td>" + m + "</td>" +
@@ -582,7 +582,7 @@ var consultant_action = (function () {
                         var appHistoryTr = "";
                         for (var i in appHistoryDTOs) {
                             var actionTakenBy = appHistoryDTOs[i].userName;
-                            actionTakenBy = (actionTakenBy=='null')?'By Citizen':actionTakenBy
+                            actionTakenBy = (actionTakenBy=='null')? consultantHrs[i].cidNo +'('+consultantHrs[i].name+')':actionTakenBy
                             appHistoryTr = appHistoryTr +
                             "<tr><td>" + appHistoryDTOs[i].appStatus + "</td>" +
                             "<td>" + actionTakenBy + "</td>" +

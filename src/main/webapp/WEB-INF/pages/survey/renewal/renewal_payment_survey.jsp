@@ -90,6 +90,12 @@
                                                             <input type="hidden" class=" form-control number" value="${appDetails.mobileNo}" readonly id="mobileNo" name="mobileNo" maxlength="8">${appDetails.mobileNo}
                                                         </div>
                                                     </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Trade:</label>
+                                                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                            <input type="hidden" value="${appDetails.trade}" readonly maxlength="100" id="service" name="serviceSectorType" class="form-control">${appDetails.trade}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                     <img src='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo=${appDetails.cidNo}' width='200px' height='200px' class='pull-right'/>
@@ -192,7 +198,12 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                     <label>Renewal Amount:</label>
-                                                    <input type="text" class=" form-control number" value="1000" readonly name="renewalAmt" id="renewalAmt">
+                                                    <c:if test="${appDetails.serviceSectorType=='Government'}">
+                                                        <input type="text" class=" form-control number" value="0.00" readonly name="totalAmt">
+                                                    </c:if>
+                                                    <c:if test="${appDetails.serviceSectorType=='Private'}">
+                                                        <input type="text" class=" form-control number" value="1000.0" readonly name="totalAmt">
+                                                    </c:if>
                                                 </div>
                                             </div>
                                             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
@@ -249,7 +260,7 @@
                                                         </tr>--%>
                                                         <tr>
                                                             <td><strong>CreatedBy: </strong></td>
-                                                            <td>${appDetails.createdBy} <b style="color: blueviolet">(Applicant's CID number)</b></td>
+                                                            <td>${appDetails.createdBy} <b style="color: blueviolet">(${appDetails.fullname})</b></td>
                                                         </tr>
                                                     </table>
                                                 </td>
@@ -324,14 +335,14 @@
                             <br><br><br>
                             <div class="form-group row pull-right">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                                    <button class="btn btn-warning" type="button" id="showrejectsection" onclick="updateReject()"><span class="fa fa-times"></span> Reject
-                                    </button>
                                     <c:if test="${appDetails.updateStatus=='262a3f11-adbd-11e4-99d7-080027dcfac6'}">
+                                        <button class="btn btn-warning" type="button" id="showrejectsection" onclick="updateReject()"><span class="fa fa-times"></span> Reject</button>
                                         <button type="button" onclick="verifyApplication()" class="btn btn-primary">
                                             <i class="fa fa-save"></i> Verify
                                         </button>
                                     </c:if>
                                     <c:if test="${appDetails.updateStatus=='36f9627a-adbd-11e4-99d7-080027dcfac6'}">
+                                        <button class="btn btn-warning" type="button" id="showrejectsection" onclick="updateReject()"><span class="fa fa-times"></span> Reject</button>
                                         <button type="button" onclick="approveApplication('renewal')" class="btn btn-primary">
                                             <i class="fa fa-save"></i> Approve
                                         </button>

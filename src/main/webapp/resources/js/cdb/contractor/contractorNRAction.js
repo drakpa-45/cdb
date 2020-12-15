@@ -225,6 +225,7 @@ var contractorNRAction = (function () {
                         var hrTr = "";
                         var m = 0, n = 0;
                         var owner='';
+                        var ownerName ='', ownerCid='';
                         for (var i in contractorHrs) {
                             var verifiedApproved = '';
                             if(contractorHrs[i].Approved == '1'){
@@ -238,6 +239,8 @@ var contractorNRAction = (function () {
                             }
                             if (contractorHrs[i].isPartnerOrOwner == '1') {
                                 owner = contractorHrs[i].name;
+                                ownerName = contractorHrs[i].name;
+                                ownerCid = contractorHrs[i].cidNo;
                                 m++;
                                 partnerHrTr = partnerHrTr + "<tr><td>" + m + "</td>" +
                                 "<td>" + contractorHrs[i].countryName + "</td>" +
@@ -330,13 +333,12 @@ var contractorNRAction = (function () {
 
                         for (var i in appHistoryDTOs) {
                             var actionTakenBy = appHistoryDTOs[i].userName;
-                            actionTakenBy = (actionTakenBy==null)?'By Citizen':actionTakenBy;
+                            actionTakenBy = (actionTakenBy==null)?ownerCid  +'('+ ownerName+ ')':actionTakenBy;
                             appHistoryTr = appHistoryTr +
                             "<tr><td>" + appHistoryDTOs[i].appStatus + "</td>" +
                             "<td>" + actionTakenBy + "</td>" +
                             "<td>" + formatAsDate(appHistoryDTOs[i].actionDate) + "</td>" +
                             "<td>"+ appHistoryDTOs[i].remarks +"</td></tr>";
-
                         }
                         $('#appStatusTbl').find('tbody').html(appHistoryTr);
 
@@ -521,7 +523,7 @@ var contractorNRAction = (function () {
                         for (var i in appHistoryDTOs) {
                             var actionTakenBy = appHistoryDTOs[i].userName;
                             //actionTakenBy = (actionTakenBy==null)?'By Citizen':actionTakenBy
-                            actionTakenBy = (actionTakenBy==null)? contractorHrs[i].cidNo +'(Applicants CID/work permit number)':actionTakenBy
+                            actionTakenBy = (actionTakenBy==null)? contractorHrs[i].cidNo +'('+contractorHrs[i].name+')':actionTakenBy
                             appHistoryTr = appHistoryTr +
                             "<tr><td>" + appHistoryDTOs[i].appStatus + "</td>" +
                             "<td>" + actionTakenBy + "</td>" +

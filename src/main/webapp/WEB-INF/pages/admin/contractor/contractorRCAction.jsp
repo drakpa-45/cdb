@@ -288,7 +288,50 @@
                                 <div class="card tab2">
                                     <div class="bg-blue card-status card-status-left"></div>
                                     <div class="card-header">
-                                        <h3 class="card-title">Establishment Addresses</h3>
+                                        <h3 class="card-title">Existing Establishment Addresses</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-5 form-label">Establishment
+                                                    Address</label>
+                                                <label class="col-lg-7 form-label" id="estAddressExist"></label>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-5 form-label">Dzongkhag</label>
+                                                <form:select id="estDzongkhagExist"
+                                                             class="form-control input-sm col-lg-7" required="true"
+                                                             path="dzongkhagList">
+                                                    <form:option value="" label="Select Dzongkhag"/>
+                                                    <form:options items="${dzongkhagList}" itemValue="value"
+                                                                  itemLabel="text"/>
+                                                </form:select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-5 form-label">Email</label>
+                                                <label class="col-lg-7 form-label" id="regEmailExist"></label>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-5 form-label">Mobile No</label>
+                                                <label class="col-lg-7 form-label" id="regMobileNoExist"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-5 form-label">Telephone No </label>
+                                                <label class="col-lg-7 form-label" id="regPhoneNoExist"></label>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-5 form-label">Fax No </label>
+                                                <label class="col-lg-7 form-label" id="regFaxNoExist"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-header">
+                                        <h3 class="card-title">Proposed Establishment Addresses</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12">
@@ -301,28 +344,6 @@
                                                 <label class="col-lg-5 form-label">Dzongkhag</label>
                                                 <label class="col-lg-7 form-label"
                                                        id="estDzongkhag"></label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Previous Establishment
-                                                    Address</label>
-                                                <label class="col-lg-7 form-label" id="oldestAddress"></label>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Previous Dzongkhag</label>
-                                                <label class="col-lg-7 form-label"
-                                                       id="oldestDzongkhag"></label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Email</label>
-                                                <label class="col-lg-7 form-label" id="regEmail"></label>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Mobile No</label>
-                                                <label class="col-lg-7 form-label" id="regMobileNo"></label>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
@@ -396,6 +417,24 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    </tbody>
+                                </table>
+                                <table class="table table-bordered table-hover" id="certificateTblCategory">
+                                    <thead>
+                                    <tr>
+                                        <th>Document Name</th>
+                                        <th>Document Attached</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="files">
+                                    <tr><td>
+                                        <input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='C'/>
+                                        <input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
+                                        <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                        <td class='file-size'></td>
+                                        <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
