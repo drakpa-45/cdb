@@ -221,6 +221,24 @@ function submitRegistrationForm(){
     }
 }
 
+function submitForm(){
+    var returntpe=true;
+    if($('#file1').val()==""){
+        $('#file1').focus();
+        warningMsg('Please attach your document');
+        $('#file1').focus();
+        returntpe=false;
+    }else {
+        $('#concirmationRenewalModel').modal('show');
+        $('#actiontype').val('submit');
+        $('#formId').val('specializedTradeForm');
+        $('#targetId').val('acknowledgementmessage');
+        $('#url').val(_baseURL() + '/saveSpecializedTrade');
+        $('#messages').html('You are about to submit your application. Do you want to proceed?');
+        returntpe;
+    }
+}
+
 function enablesubmit(){
     if($('#submitcheckbox').prop('checked')){
         $('#submitbtn').prop('disabled',false);
