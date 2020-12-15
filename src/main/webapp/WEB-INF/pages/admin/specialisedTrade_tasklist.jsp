@@ -93,7 +93,7 @@
                                             <span class="text-danger badge-pill">
                                                 <i class="fa fa-times"></i>
                                             </span>
-                                            </a></td>
+                                            </a><input type="hidden" value="${task.cmnServiceTypeId}" id="cmnServiceTypeId"></td>
                                         <td>
                                             <a href="#" onclick="openAndClaimApplication('${task.applicationNo}','open')" data-toggle="tooltip"  data-placement="top" >
                                                     ${task.applicationNo}
@@ -124,9 +124,17 @@
         responsive: true
     });
     function openAndClaimApplication(appNo,type){
-        var url= '${pageContext.request.contextPath}/admin_specializedTrade/emptylayout/openApplication?appNo='+appNo+'&type='+type;
-       // var url='${pageContext.request.contextPath}/loadpagetoemptylayout/openAndClaimApplication?page_type='+page_type+'&serviceId='+serviceId+'&Application_Number='+appNo+'&action_type='+actiontype;
-        $('#content_main_div').load(url);
+        var cmnServiceTypeId = $('#cmnServiceTypeId').val();
+        var param ='';
+        if(cmnServiceTypeId = '55a922e1-cbbf-11e4-83fb-080027dcfac6'){
+            param="new";
+        }else if(cmnServiceTypeId = '45bc628b-cbbe-11e4-83fb-080027dcfac6'){
+            param = "renew";
+        }else if(cmnServiceTypeId = 'acf4b324-cbbe-11e4-83fb-080027dcfac6'){
+            param = "cancellation";
+        }
+        var url= '${pageContext.request.contextPath}/admin_specializedTrade/emptylayout/openApplication?appNo='+appNo+'&type='+type+'&param='+param;
+       $('#content_main_div').load(url);
         /*$.ajax({
             url: cdbGlobal.baseURL() + '/admin_architect/openApplication/',
             type: 'POST',

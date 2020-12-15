@@ -78,15 +78,20 @@ public class SpecializedDao extends BaseDao {
     }
 
     @Transactional(readOnly = false)
-    public void assignMyTask(String appNo, String lockUserId, String type) {
+    public String assignMyTask(String appNo, String lockUserId, String type) {
         String lockByUserId = "";
         if(type.equalsIgnoreCase("release")){
-            lockByUserId ="null";
+            lockByUserId =null;
         }else{
             lockByUserId=lockUserId;
         }
         sqlQuery = properties.getProperty("SpecializedDao.send2MyOrGroupTask");
-        hibernateQuery(sqlQuery).setParameter("appNo", appNo) .setParameter("lockUserId", lockByUserId).executeUpdate();
+        int save = hibernateQuery(sqlQuery).setParameter("appNo", appNo) .setParameter("lockUserId", lockByUserId).executeUpdate();
+        if(save>0){
+            return "Success";
+        }else{
+            return "Failed";
+        }
     }
 
     @Transactional(readOnly = false)
@@ -455,44 +460,38 @@ public class SpecializedDao extends BaseDao {
         TradeDto dto = new TradeDto();
         try {
             sqlQuery="SELECT \n" +
-                    "  f.SPNo cdbNo,\n" +
-                    "  f.CrpSpecializedTradeId crpSpecializedTradeId,\n" +
-                    "  f.ReferenceNo referenceNo,\n" +
-                    "  f.CIDNo cidNo,\n" +
-                    "  f.Name fullname,\n" +
-                    "  v.Village_Name village,\n" +
-                    "  g.Gewog_Name gewog,\n" +
-                    "  dd.NameEn dzongkhagId,\n" +
-                    "  c.Name countryId,\n" +
-                    "  d.NameEn cmnRegisteredDzongkhagId,\n" +
-                    "  s.Name salutation,\n" +
-                    "  f.TelephoneNo telephoneNo,\n" +
-                    "  f.TPN tpn,\n" +
-                    "  i.Name updateStatus,\n" +
-                    "  f.Email email,\n" +
-                    "  f.MobileNo mobileNo,\n" +
-                    "  f.EmployerName employeeName,\n" +
-                    "  f.EmployerAddress employeeAddress,\n" +
-                    "  f.RegistrationApprovedDate registrationApproveDate,\n" +
-                    "  f.RegistrationExpiryDate regExpDate \n" +
+                    "f.SPNo cdbNo,\n" +
+                    "f.CrpSpecializedTradeId crpSpecializedTradeId,\n" +
+                    "f.ReferenceNo referenceNo,\n" +
+                    "f.CIDNo cidNo,\n" +
+                    "f.Name fullname,\n" +
+                    "f.Village village,\n" +
+                    "f.Gewog gewog,\n" +
+                    "d.NameEn dzongkhagId,\n" +
+                    "c.Name countryId,\n" +
+                    "d.NameEn cmnRegisteredDzongkhagId,\n" +
+                    "s.Name salutation,\n" +
+                    "f.TelephoneNo telephoneNo,\n" +
+                    "f.TPN tpn,\n" +
+                    "i.Name updateStatus,\n" +
+                    "f.Email email,\n" +
+                    "f.MobileNo mobileNo,\n" +
+                    "f.EmployerName employeeName,\n" +
+                    "f.EmployerAddress employeeAddress,\n" +
+                    "f.RegistrationApprovedDate registrationApproveDate,\n" +
+                    "f.RegistrationExpiryDate regExpDate \n" +
                     "FROM\n" +
-                    "  crpspecializedtradefinal f \n" +
-                    "  LEFT JOIN cmnlistitem i \n" +
-                    "    ON i.Id = f.CmnApplicationRegistrationStatusId \n" +
-                    "  LEFT JOIN cmnlistitem s \n" +
-                    "    ON s.Id = f.CmnSalutationId \n" +
-                    "  LEFT JOIN cmndzongkhag d \n" +
-                    "    ON d.Dzongkhag_Serial_No = f.CmnRegisteredDzongkhagId \n" +
-                    "  LEFT JOIN cmncountry c \n" +
-                    "    ON c.Id = f.CmnCountryId \n" +
-                    "  LEFT JOIN sysuser su \n" +
-                    "    ON su.Email = f.Email \n" +
-                    "  LEFT JOIN cmnvillage v \n" +
-                    "    ON v.Village_Name = f.village \n" +
-                    "  LEFT JOIN cmngewog g \n" +
-                    "    ON g.Gewog_Serial_No = v.Gewog_Serial_No \n" +
-                    "  LEFT JOIN cmndzongkhag dd \n" +
-                    "    ON dd.Dzongkhag_Serial_No = g.Dzongkhag_Serial_No \n" +
+                    "crpspecializedtradefinal f \n" +
+                    "LEFT JOIN cmnlistitem i \n" +
+                    "ON i.Id = f.CmnApplicationRegistrationStatusId \n" +
+                    "LEFT JOIN cmnlistitem s \n" +
+                    "ON s.Id = f.CmnSalutationId \n" +
+                    "LEFT JOIN cmndzongkhag d \n" +
+                    "ON d.Id = f.CmnDzongkhagId \n" +
+                    "LEFT JOIN cmncountry c \n" +
+                    "ON c.Id = f.CmnCountryId \n" +
+                    "LEFT JOIN sysuser su \n" +
+                    "ON su.Email = f.Email \n" +
                     "WHERE f.SPNo = ?";
             dto=(TradeDto) hibernateQuery(sqlQuery, TradeDto.class).setParameter(1, cdbNo).list().get(0);
         } catch (Exception e) {

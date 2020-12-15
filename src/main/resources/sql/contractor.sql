@@ -81,5 +81,5 @@ LEFT JOIN `cmnlistitem` st ON st.`Id` = hr.`CmnServiceTypeId` LEFT JOIN `cmnlist
 ContractorRCActionDao.getProposedCategories = SELECT s.`CrpContractorId` contractorId,ss.Name serviceName,ss.ReferenceNo serviceRefNo,ca.Code categoryName,ex.Name exClassName,ap.Name aClassName ,d.Amount aAmount, d.`CmnCategoryId` categoryId,d.`CmnExistingClassificationId` exClassId,d.`CmnAppliedClassificationId` aClassId \
 FROM `crpcontractorservicepayment` s INNER JOIN `crpcontractorservicepaymentdetail` d ON s.`Id` = `CrpContractorServicePaymentId` INNER JOIN `crpcontractor` c ON s.`CrpContractorId` = c.Id INNER JOIN `crpservice` ss ON ss.Id = s.`CmnServiceTypeId` \
 LEFT JOIN `cmncontractorclassification` ap ON ap.Id = d.`CmnAppliedClassificationId` LEFT JOIN `cmncontractorclassification` ex ON ex.Id = d.`CmnExistingClassificationId` \
-LEFT JOIN `cmncontractorworkcategory` ca ON ca.Id = d.`CmnCategoryId` WHERE c.`ReferenceNo` = :appNo ORDER BY ca.ReferenceNo ASC
+LEFT JOIN `cmncontractorworkcategory` ca ON ca.Id = d.`CmnCategoryId` WHERE c.`ReferenceNo` =:appNo ORDER BY ca.ReferenceNo ASC
 ContractorRCActionDao.paymentUpdate = CALL ProCrpContractorRenewalPaymentApproval(:contractorId,:userId,:appStatusId,:createdBy)

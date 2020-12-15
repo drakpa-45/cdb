@@ -85,4 +85,12 @@ public class ContractorAttachment extends BaseModel implements Serializable {
     public void setAttachment(MultipartFile attachment) {
         this.attachment = attachment;
     }
+
+    public String getAttachmentFor() {
+        return attachmentFor;
+    }
+
+    public void setAttachmentFor(String attachmentFor) {
+        this.attachmentFor = attachmentFor;
+    }
 }

@@ -91,10 +91,14 @@ public class ConsultantOSService extends BaseService {
         String consultantId = commonService.getRandomGeneratedId();
         String appliedService;
 
+        //insert undertaking letter
+        if(consultantDTO.getcAttachments() != null && !consultantDTO.getcAttachments().isEmpty())
+            consultantRCService.updateIncorporation(consultantDTO.getcAttachments(), loggedInUser, consultant.getConsultantId());
+
         //region incorporation (Name are also allowed to change)
         if(renewalServiceType.getIncorporation() != null){
             String ownershipTypeId = consultantDTO.getConsultant().getOwnershipTypeId();
-            consultantRCService.updateIncorporation(consultantDTO.getcAttachments(), loggedInUser, consultant.getConsultantId());
+            //consultantRCService.updateIncorporation(consultantDTO.getcAttachments(), loggedInUser, consultant.getConsultantId());
             consultant.setOwnershipTypeId(ownershipTypeId);
             consultant.setFirmName(consultantDTO.getConsultant().getFirmName());
             consultant.setOwnershipChangeRemarks(consultantDTO.getConsultant().getOwnershipChangeRemarks());
