@@ -152,4 +152,12 @@ public class ContractorRCActionController extends BaseController {
         return contractorRCService.getServicesFee(appNo.intValue());
     }
 
+    @ResponseBody
+    @RequestMapping(value ="/getContractorFinal", method = RequestMethod.GET)
+    public Object getContractor(HttpServletRequest request, String appNo){
+        String cdbNo = cNRActionService.getCDBNoFromAppNo(appNo);
+        return contractorRCService.getContractorFinal(cdbNo);
+    }
+
+
 }

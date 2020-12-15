@@ -58,6 +58,7 @@ public class ContractorOSActionController extends BaseController {
         model.addAttribute("cdbNo", cNRActionService.getCDBNoFromAppNo(appNo));
         String appStatus = cNRActionService.getApplicationStatus(appNo);
         model.addAttribute("modeOfPayment", commonService.getModePayment());
+        model.addAttribute("dzongkhagList", commonService.gDzongkhagList());
         if (appStatus.equals(ApplicationStatus.APPROVED_FOR_PAYMENT.getCode())) {
             return "admin/contractor/contractorRCPayment";
         } else {
@@ -136,6 +137,13 @@ public class ContractorOSActionController extends BaseController {
     public List getServicesFee(HttpServletRequest request, BigInteger appNo, String remarks) throws Exception{
         //loggedInUser = gLoggedInUser(request);
         return contractorRCService.getServicesFee(appNo.intValue());
+    }
+
+    @ResponseBody
+    @RequestMapping(value ="/getContractorFinal", method = RequestMethod.GET)
+    public Object getContractor(HttpServletRequest request){
+        String cdbNo = request.getSession().getAttribute("CDBNo").toString();
+        return contractorRCService.getContractorFinal(cdbNo.split("999")[1]);
     }
 
 }

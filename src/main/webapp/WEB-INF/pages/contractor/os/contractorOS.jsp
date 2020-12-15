@@ -309,7 +309,7 @@
                                                     <div class="col-lg-12">
                                                         <div class=""><input id="addMoreCert" type="button" value="Add More Certificate" class="btn btn-primary"> </div>
                                                         <table class="table table-bordered table-center table-responsive-lg auto-index"
-                                                               id="certificateTbl">
+                                                               id="IncCertificateTbl">
                                                             <thead>
                                                             <tr>
                                                                 <th>Sl no</th>
@@ -422,7 +422,7 @@
                                                             <label class="col-lg-3 col-md-3 form-label" for="ownershipChangeRemarks">Reason for Change of Owner:
                                                                 <span class="text-danger">*</span></label>
                                                             <input type="text" class="col-lg-6 form-control"
-                                                                   name="specializedFirm.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true"
+                                                                   name="contractor.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true"
                                                                    placeholder="Text..">
                                                         </div>
                                                     </div>
@@ -578,7 +578,8 @@
                                                                value="6cd737d4-a2b7-11e4-b4d2-080027dcfac6"
                                                                style="width: 17px; height: 17px;"></td>
                                                     <td>W1-Roads and Bridges</td>
-                                                    <td><select class="form-control existingClassID" disabled="">
+                                                    <td><input type="hidden"name="categories[0].existingClassID" class="existingClassID">
+                                                        <select class="form-control existingClassID" disabled="">
                                                         <option value="">-Select-</option>
                                                         <option value="e19afe94-c3ea-11e4-af9f-080027dcfac6">L:Large
                                                         </option>
@@ -604,7 +605,8 @@
                                                                value="8176bd2d-a2b7-11e4-b4d2-080027dcfac6"
                                                                style="width: 17px; height: 17px;"></td>
                                                     <td>W2-Traditional Bhutanese Painting/Finishing Works</td>
-                                                    <td><select class="form-control existingClassID" disabled="">
+                                                    <td><input type="hidden"name="categories[1].existingClassID" class="existingClassID">
+                                                        <select class="form-control existingClassID" disabled="">
                                                         <option value="">-Select-</option>
                                                         <option value="0c14ebea-c3eb-11e4-af9f-080027dcfac6">
                                                             R:Registered
@@ -626,7 +628,8 @@
                                                     <td>W3-Buildings,Irrigation,Drainage,Flood Control,Water Supply and
                                                         Sewerage
                                                     </td>
-                                                    <td><select class="form-control existingClassID" disabled="">
+                                                    <td><input type="hidden" name="categories[2].existingClassID" class="existingClassID">
+                                                        <select class="form-control existingClassID" disabled="">
                                                         <option value="">-Select-</option>
                                                         <option value="e19afe94-c3ea-11e4-af9f-080027dcfac6">L:Large
                                                         </option>
@@ -652,7 +655,8 @@
                                                                value="9090a82a-a2b7-11e4-b4d2-080027dcfac6"
                                                                style="width: 17px; height: 17px;"></td>
                                                     <td>W4-Power and Telecommunication Works</td>
-                                                    <td><select class="form-control existingClassID" disabled="">
+                                                    <td><input type="hidden"name="categories[3].existingClassID" class="existingClassID">
+                                                        <select class="form-control existingClassID" disabled="">
                                                         <option value="">-Select-</option>
                                                         <option value="e19afe94-c3ea-11e4-af9f-080027dcfac6">L:Large
                                                         </option>

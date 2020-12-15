@@ -3,10 +3,7 @@ package com.ngn.spring.project.cdb.contractor.registration.model;
 import com.ngn.spring.project.base.BaseModel;
 import com.sun.istack.internal.NotNull;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -35,6 +32,9 @@ public class ConCategory extends BaseModel implements Serializable{
     private String verifiedClassID;
     @Column(name = "CmnApprovedClassificationId")
     private String approvedClassID;
+
+    @Transient
+    private String existingClassID;
 
     public String getId() {
         return id;
@@ -82,5 +82,13 @@ public class ConCategory extends BaseModel implements Serializable{
 
     public void setApprovedClassID(String approvedClassID) {
         this.approvedClassID = approvedClassID;
+    }
+
+    public String getExistingClassID() {
+        return existingClassID;
+    }
+
+    public void setExistingClassID(String existingClassID) {
+        this.existingClassID = existingClassID;
     }
 }

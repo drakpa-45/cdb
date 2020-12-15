@@ -212,6 +212,8 @@ var contractorRCAction = (function () {
                         }
                         $('#partnerDtls').find('tbody').html(partnerHrTr);
 
+                        getContractorFinal(applicationNo);
+
                     } else {
                         warningMsg(res.text);
                     }
@@ -286,6 +288,25 @@ var contractorRCAction = (function () {
         }
         //$('#partnerDtls').find('tbody').html(partnerHrTr);
         $('#hrDtlsTable').find('.'+tBodyClass).append(hrTr);
+    }
+
+    function getContractorFinal(appNo){
+        $.ajax({
+            url: _baseURL() + '/getContractorFinal',
+            type: 'GET',
+            data: {appNo: appNo},
+            success: function (res) {
+                var contractor = res;
+                $('#oldfirmName').html(contractor.firmName);
+                $('#estAddressExist').html(contractor.estAddress);
+                $('#estDzongkhagExist').val(contractor.regDzongkhagId).prop('disabled',true);
+                $('#regEmailExist').html(contractor.regEmail);
+                $('#regMobileNoExist').html(contractor.regMobileNo);
+                $('#regPhoneNoExist').html(contractor.regPhoneNo);
+                $('#regFaxNoExist').html(contractor.regFaxNo);
+
+            }
+        });
     }
 
     function addEQ(tBodyClass, contractorEQs){

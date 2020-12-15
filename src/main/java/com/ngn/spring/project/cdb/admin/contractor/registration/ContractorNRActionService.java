@@ -202,9 +202,10 @@ public class ContractorNRActionService extends BaseService {
      */
     @Transactional(readOnly = true)
     public String getCDBNoFromAppNo(String appNo){
-        String cdbNo = contractorNRActionDao.getNextCDBNo();
-        return cdbNo;
-       // return (String)commonService.getValue("crpcontractor","CDBNo","ReferenceNo",appNo);
+        //String cdbNo = contractorNRActionDao.getNextCDBNo();
+        //return cdbNo;
+        return contractorNRActionDao.getCDBNoFromAppNo(appNo);
+        //return (String)commonService.getValue("crpcontractor","CDBNo","ReferenceNo",appNo);
     }
 
     @Transactional(readOnly = true)
