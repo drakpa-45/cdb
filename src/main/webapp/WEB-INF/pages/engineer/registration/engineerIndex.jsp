@@ -78,7 +78,7 @@
                                                 <div class="form-group row">
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                                         <label>Enter your valid CID Number/work permit number:<span class="text-danger">*</span></label>
-                                                        <input type="number" name="app_çid" class="form-control number sp-character" id="app_çid"  onchange="checkStatus(this.value)" min="0">
+                                                        <input type="number" name="app_çid" class="form-control number sp_character" id="app_çid"  onchange="checkStatus(this.value)" min="0">
                                                         <span id="app_çid_err" class="text-danger"></span>
                                                     </div>
                                                 </div>
@@ -226,7 +226,7 @@
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <label>Mobile Number: <span class="text-danger">*</span></label>
-                                                                    <input type="number" class="form-control number sp-character" onclick="remove_err('mobileNo_err')" id="mobileNo" name="mobileNo" onKeyPress="if(this.value.length==8) return false;" min="0"/>
+                                                                    <input type="number" class="form-control number mb-character" onclick="remove_err('mobileNo_err')" id="mobileNo" name="mobileNo" onKeyPress="if(this.value.length==8) return false;" min="0"/>
                                                                     <span id="mobileNo_err" class="text-danger"></span>
                                                                 </div>
                                                             </div>
@@ -259,7 +259,7 @@
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <label>Year of graduation <span class="text-danger">*</span></label>
-                                                                    <input type="number" class=" form-control number" onclick="remove_err('graduationYear_err')" id="graduationYear" name="graduationYear" placeholder="Year" onKeyPress="if(this.value.length==4) return false;" min="0">
+                                                                    <input type="number" class=" form-control number" onclick="remove_err('graduationYear_err')" id="graduationYear" name="graduationYear"  onKeyPress="if(this.value.length==4) return false;" min="0">
                                                                     <span id="graduationYear_err" class="text-danger"></span>
                                                                 </div>
                                                             </div>
@@ -360,7 +360,7 @@
                                                         <button type="button" onclick="previousTab('categoryDtls','saveAndPreview')"  class="btn btn-success">
                                                             <i class="fa fa-arrow-left"></i>  Previous
                                                         </button>
-                                                        <button type="button" onclick="submitRegistrationForm()"  class="btn btn-primary" id="submitbtn">
+                                                        <button type="button" disabled onclick="submitRegistrationForm()"  class="btn btn-primary" id="submitbtn">
                                                             <i class="fa fa-save"></i> Submit
                                                         </button>
                                                     </div>

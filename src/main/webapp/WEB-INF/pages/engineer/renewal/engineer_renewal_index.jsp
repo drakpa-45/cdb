@@ -5,6 +5,8 @@
   Time: 9:33 AM
   To change this template use File | Settings | File Templates.
 --%>
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -121,7 +123,7 @@
                                                     <input type="hidden" id="expdate" value="${registrationDetails.regExpDate}">
                                                     <input type="hidden" name="noOfDaysLate" id="totalNoDaysLate1" value="${renewalCheck.dto1.noOfDaysLate}">
                                                     <input type="hidden" name="paymentAmt" id="totalpenaltyamount1" value="${renewalCheck.dto1.paymentAmount}">
-                                                    <input type="hidden" name="noOfDaysAfterGracePeriod" id="totalNoDaysLate1" value="${renewalCheck.dto1.noOfDaysAfterGracePeriod}">
+                                                    <input type="hidden" name="noOfDaysAfterGracePeriod" id="noOfDaysAfterGracePeriod1" value="${renewalCheck.dto1.noOfDaysAfterGracePeriod}">
                                                     <div class="form-group row pull-right">
                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                                                             <button type="button"  onclick="nextTab('feesStructurerenewal','personalInformation')" class="btn btn-primary">
@@ -254,7 +256,7 @@
                                                                     </div>
                                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                         <label>Mobile No: <span class="text-danger">*</span></label>
-                                                                        <input type="number" class="form-control number" value="${registrationDetails.mobileNo}" id="mobileNo" name="mobileNo" onKeyPress="if(this.value.length==8) return false;" min="0">
+                                                                        <input type="number" class="form-control number sp-character" value="${registrationDetails.mobileNo}" id="mobileNo" name="mobileNo" onKeyPress="if(this.value.length==8) return false;" min="0">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-12">
@@ -286,7 +288,8 @@
                                                                     </div>
                                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                         <label>Year of graduation: <span class="text-danger">*</span></label>
-                                                                        <input type="number" class=" form-control number" value="${fn:substring(registrationDetails.graduationyr, 0, 4)}" id="graduationYear" name="graduationYear" onKeyPress="if(this.value.length==4) return false;" min="0">
+                                                                        <%--<input type="number" class=" form-control number" value="${fn:substring(registrationDetails.graduationyr, 0, 4)}" id="graduationYear" name="graduationYear" onKeyPress="if(this.value.length==4) return false;" min="0">--%>
+                                                                        <input type="number" class=" form-control number" value="${fn:substring(registrationDetails.graduationyr, 0, 4)}" id="graduationYear" name="graduationYear"  onKeyPress="if(this.value.length==4) return false;" min="0">
                                                                         <span id="graduationYear_err" class="text-danger"></span>
                                                                     </div>
                                                                 </div>
@@ -396,7 +399,7 @@
                                                     </div>
                                                 </div>
                                                 </c:if>
-                                                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"  class="modal in" id="concirmationRenewalModel">
+                                                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"  class="modal in" id="concirmationModel">
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -412,8 +415,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-success" onclick="SubmitRenewalApplicationDetials()">Yes</button>
-                                                                <button type="button" class="btn btn-warning" onclick="closemodel('concirmationRenewalModel')"><span class="fa fa-times"></span> No</button>
+                                                                <button type="button" class="btn btn-success" onclick="SubmitApplicationDetials()">Yes</button>
+                                                                <button type="button" class="btn btn-warning" onclick="closemodel('concirmationModel')"><span class="fa fa-times"></span> No</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -434,7 +437,11 @@
     <script type="text/javascript" src="<c:url value="/resources/JqueryAjaxFormSubmit.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/jquery.form.js"/>"></script>
     <script src="<c:url value="/resources/js/cdb/engineer.js"/>"></script>
-    <script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script>
         //checkvalidity('','${registrationDetails.serviceSectorType}');
         var currentTime = new Date();
         var month = currentTime.getMonth() + 1;
@@ -470,6 +477,14 @@
             }
             $('#expdetails').show();
         }
-    </script>
 
+        $("#graduationYear").datepicker({
+            format: "yyyy",
+            viewMode: "years",
+            minViewMode: "years",
+            autoclose:true,
+            endDate: "currentDate"
+        });
+
+    </script>
 </body>
