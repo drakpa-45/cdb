@@ -82,6 +82,7 @@ public class SpecializedFirmOSService extends BaseService {
         SpecializedFirm specializedFirm = new SpecializedFirm();
         specializedFirm.setpGewogId(specializedFirmFinal.getpGewogId());
         specializedFirm.setpVillageId(specializedFirmFinal.getpVillageId());
+        specializedFirm.setCrpSpecializedTradeId(specializedFirmFinal.getId());
         BeanUtils.copyProperties(specializedFirmFinal,specializedFirm);
 
         String specializedFirmId = commonService.getRandomGeneratedId();
@@ -90,7 +91,6 @@ public class SpecializedFirmOSService extends BaseService {
         //insert undertaking letter
         if(spFirmDTO.getcAttachments() != null && !spFirmDTO.getcAttachments().isEmpty())
             specializedFirmRService.updateIncorporation(spFirmDTO.getcAttachments(), loggedInUser, specializedFirm.getCrpSpecializedTradeId());
-
 
         //region incorporation (Name are also allowed to change)
         if(renewalServiceType.getIncorporation() != null){
@@ -111,7 +111,6 @@ public class SpecializedFirmOSService extends BaseService {
 
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "12");
             appliedServicesList.add(appliedService);
-
         }
         //endregion
 
@@ -237,7 +236,6 @@ public class SpecializedFirmOSService extends BaseService {
                 c->specializedFirmRService.saveAppliedS(specializedFirmId,c,loggedInUser)
         );
         //endregion
-
         responseMessage.reset();
         responseMessage.setStatus(SUCCESSFUL_STATUS);
         responseMessage.setText("Your application for Renewal Of specializedFirm has been submitted and your application number is "+referenceNo+"<br>" +

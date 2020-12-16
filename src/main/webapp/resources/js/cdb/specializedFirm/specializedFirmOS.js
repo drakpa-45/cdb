@@ -556,8 +556,8 @@ var specializedFirmOS = (function () {
                             "<td>" + equipments[i].registrationNo + "</td>" +
                             "<td>" + equipments[i].quantity + "</td>" +
                             "<td>" + attachment + "</td>" +
-                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row_eq'>Edit</button>" +
-                            "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                            "<td> <input type='checkbox' name='equipments[0].deleteRequest' value='1'></td>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row_eq'>Edit</button></td>" +
                             "</tr>";
                         }
                         $('#equipmentTbl').find('tbody').html(eqTr);
@@ -680,7 +680,6 @@ var specializedFirmOS = (function () {
             row.addClass('tbd'); //add class to be deleted
             openModal('addHRModal');
         });
-
     }
 
     function editInModalEQ(){

@@ -412,31 +412,30 @@
                                                                placeholder="Text..">
                                                     </div>
                                                 </div>
-                                            </div>
-
-                                            <div class="card hide" id="cOwnershipId">
-                                                <div class="bg-blue card-status card-status-left"></div>
-                                                <div class="card-header">
-                                                    <h3 class="card-title">Attach Certificates of Ownership change</h3>
-                                                </div>
+                                                <h5 class="text-orange">Attach Certificates of Ownership change</h5>
                                                 <div class="card-body">
                                                     <div class="col-lg-12">
-                                                        <div class=""><input id="addMoreCertOwner" type="button"
-                                                                             value="Add More Certificate"
-                                                                             class="btn btn-primary"></div>
-                                                        <table class="table table-bordered table-center table-responsive-lg auto-index"
-                                                               id="certificateTblOwner">
+                                                        <div class=""><input id="addMoreCertOwner" type="button" value="Add More Certificate" class="btn btn-primary"></div>
+                                                        <table class="table table-bordered table-hover" id="certificateTblOwner">
                                                             <thead>
                                                             <tr>
-                                                                <th>Sl no</th>
                                                                 <th>Document Name</th>
                                                                 <th>Document Attached</th>
                                                                 <th>File Size</th>
-                                                                <th>Action</th>
+                                                                <th>Delete</th>
                                                             </tr>
                                                             </thead>
-                                                            <tbody>
-
+                                                            <tbody class="files">
+                                                            <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
+                                                                <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                                <td class='file-size'></td>
+                                                                <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                            </tr>
+                                                            <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
+                                                                <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                                <td class='file-size'></td>
+                                                                <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                            </tr>
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -536,6 +535,9 @@
 
                                     <div class="tab-pane category_details hide">
                                         <div class="div-actual">
+                                            <div class="card">
+                                                Note: If you are upgrading/down grade class,it is necessary to attach Letter of Undertaking
+                                            </div>
                                             <table id="consultantCCTbl" class="table table-bordered table-hover">
                                                 <thead style="background-color: #F2F2F2">
                                                 <tr>
@@ -626,6 +628,42 @@
                                                 </tbody>
                                             </table>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <b class="text-orange">Attach your UnderTaking Below</b> &nbsp; &nbsp;
+                                                <br />
+                                                <input type="button" id="addMoreCertCategory" value="Add More File" class="btn btn-primary eqFile">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-hover" id="certificateTblCategory">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Document Name</th>
+                                                            <th>Document Attached</th>
+                                                            <th>File Size</th>
+                                                            <th>Delete</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody class="files">
+                                                        <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
+                                                            <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                            <td class='file-size'></td>
+                                                            <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                        </tr>
+                                                        <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
+                                                            <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                            <td class='file-size'></td>
+                                                            <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                        </tr>
+                                                            <%--  <tr><td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/> </td>
+                                                                  <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
+                                                                  <td class='file-size'></td>
+                                                                  <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                              </tr>--%>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="col-lg-12 form-group nextBackBtn">
                                             <button type="button"
                                                     onclick="backTab('category_details')"
@@ -707,6 +745,7 @@
                                                         <th>Registration Number</th>
                                                         <th>Quantity</th>
                                                         <th>Attachment</th>
+                                                        <th>Delete Request</th>
                                                         <th>Action</th>
                                                     </tr>
                                                     </thead>
@@ -1158,6 +1197,8 @@
                                 <div class="">
                                     <div class="form-group">
                                         <label class="col-lg-2">Equipment <span class="text-danger">*</span>:</label>
+
+                                        <input type="hidden" class="id4Edit" name="equipments[0].id" /> <!-- for edit-->
 
                                         <div class="col-lg-4">
                                             <select name="equipments[0].equipmentId"

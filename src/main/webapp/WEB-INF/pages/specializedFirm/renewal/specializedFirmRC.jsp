@@ -1181,6 +1181,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 id="myModalLabel" class="modal-title">Add Equipment</h4>
+
                             <button aria-hidden="true" data-dismiss="modal" class="close" type="button"><span></span>
                             </button>
                         </div>
@@ -1188,7 +1189,7 @@
                             <div class="">
                                 <div class="form-group">
                                     <label class="col-lg-2">Equipment <span class="text-danger">*</span>:</label>
-
+                                    <input type="hidden" class="id4Edit" name="equipments[0].id" /> <!-- for edit-->
                                     <div class="col-lg-4">
                                         <select name="equipments[0].equipmentId"
                                                 class="form-control custom-select text-left equipmentId" required=""

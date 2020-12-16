@@ -986,10 +986,8 @@
                                 </div>
                             </div>
                         </form>
-
                     </div>
                     </c:if>
-
                 </div>
             </div>
 
@@ -1049,17 +1047,14 @@
                                     <div class="col-lg-4">
                                         <div class="input-icon">
                                             <span class="input-icon-addon"><i class="fe fe-user"></i></span>
-                                            <input type="text" name="contractorHRs[0].name" id="hr2"
-                                                   class="form-control name" required="" placeholder="">
+                                            <input type="text" name="contractorHRs[0].name" id="hr2" class="form-control name" required="" placeholder="">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-2">Gender<span class="text-danger">*</span>:</label>
-
                                     <div class="col-lg-4">
-                                        <select name="contractorHRs[0].sex" id="hr4" required=""
-                                                class="form-control custom-select text-left select-beast sex">
+                                        <select name="contractorHRs[0].sex" id="hr4" required="" class="form-control custom-select text-left select-beast sex">
                                             <option value="">Select Gender</option>
                                             <option value="M">Male</option>
                                             <option value="F">Female</option>
@@ -1069,8 +1064,7 @@
                                         <span class="text-danger">*</span>:</label>
 
                                     <div class="col-lg-4">
-                                        <select name="contractorHRs[0].designationId" id="hr6" required=""
-                                                class="form-control custom-select text-left select-beast">
+                                        <select name="contractorHRs[0].designationId" id="hr6" required="" class="form-control custom-select text-left select-beast">
                                             <option value="">Select Designation</option>
                                             <c:forEach var="item" items="${designationList}">
                                                 <option value="${item.value}"><c:out value="${item.text}"/></option>
@@ -1081,10 +1075,8 @@
                                 <div class="form-group">
                                     <label class="col-lg-2">Qualification
                                         <span class="text-danger">*</span>:</label>
-
                                     <div class="col-lg-4">
-                                        <select name="contractorHRs[0].qualificationId" id="hr7" required=""
-                                                class="form-control custom-select text-left select-beast">
+                                        <select name="contractorHRs[0].qualificationId" id="hr7" required="" class="form-control custom-select text-left select-beast">
                                             <option value="">Select Qualification</option>
                                             <c:forEach var="item" items="${qualificationList}">
                                                 <option value="${item.value}"><c:out value="${item.text}"/></option>
@@ -1093,10 +1085,8 @@
                                     </div>
                                     <label class="col-lg-2">Trade
                                         <span class="text-danger">*</span>:</label>
-
                                     <div class="col-lg-4">
-                                        <select name="contractorHRs[0].tradeId" id="hr8" required=""
-                                                class="form-control custom-select text-left select-beast">
+                                        <select name="contractorHRs[0].tradeId" id="hr8" required="" class="form-control custom-select text-left select-beast">
                                             <option value="">Select Trade</option>
                                             <c:forEach var="item" items="${tradeList}">
                                                 <option value="${item.value}"><c:out value="${item.text}"/></option>
@@ -1106,10 +1096,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-2">Service Type<span class="text-danger">*</span>:</label>
-
                                     <div class="col-lg-4">
-                                        <select name="contractorHRs[0].serviceTypeId" id="hr9" required="true"
-                                                class="form-control custom-select text-left select-beast">
+                                        <select name="contractorHRs[0].serviceTypeId" id="hr9" required="true" class="form-control custom-select text-left select-beast">
                                             <option value="">Select Type</option>
                                             <c:forEach var="item" items="${serviceTypeList}">
                                                 <option value="${item.value}"><c:out value="${item.text}"/></option>
@@ -1122,9 +1110,7 @@
                                         <div class="input-group margin-bottom-sm">
                                 <span class="input-group-addon pr-5"><i
                                         class="fa fa-calendar"></i></span>
-                                            <input type="date" name="contractorHRs[0].joiningDate"
-                                                   value="" id="joiningDate"
-                                                   class="form-control datepicker">
+                                            <input type="date" name="contractorHRs[0].joiningDate" value="" id="joiningDate" class="form-control datepicker">
                                         </div>
                                     </div>
                                 </div>
@@ -1134,16 +1120,13 @@
                                     <div class="col-lg-4">
                                         <div class="input-icon">
                                             <span class="input-icon-addon"><i class="fe fe-user"></i></span>
-                                            <input type="text" name="contractorHRs[0].cdbNo" id="hr11"
-                                                   class="form-control name" placeholder="cdbNo">
+                                            <input type="text" name="contractorHRs[0].cdbNo" id="hr11" class="form-control name" placeholder="cdbNo">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 col-lg-12">
-                                        <input type="button" id="addMoreHr" value="Add More File"
-                                               class="btn btn-primary hrFile">
-
+                                        <input type="button" id="addMoreHr" value="Add More File" class="btn btn-primary hrFile">
                                         <div class="table-responsive">
                                             <table class="table table-bordered table-hover" id="hrUploadTbl">
                                                 <thead>
@@ -1156,42 +1139,30 @@
                                                 <tbody id="fileListhrsection" class="files">
                                                 <tr>
                                                     <td><input type="hidden" class="hraId">
-                                                        <input type='text' required="" value="CID"
-                                                               class='form-control docName'
-                                                               name='contractorHRs[0].contractorHRAs[0].documentName'/>
+                                                        <input type='text' required="" value="CID" class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/>
                                                     </td>
-                                                    <td><input type='file' required="" class='file'
-                                                               name='contractorHRs[0].contractorHRAs[0].attachment'
+                                                    <td><input type='file' required="" class='file' name='contractorHRs[0].contractorHRAs[0].attachment'
                                                                accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                     </td>
-                                                    <td class='del_row'><a class='p-2'><i
-                                                            class='fa fa-trash text-danger '></i></a></td>
+                                                    <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                 </tr>
                                                 <tr>
                                                     <td><input type="hidden" class="hraId">
-                                                        <input type='text' required="" value="Certificate"
-                                                               class='form-control docName'
-                                                               name='contractorHRs[0].contractorHRAs[0].documentName'/>
+                                                        <input type='text' required="" value="Certificate" class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/>
                                                     </td>
-                                                    <td><input type='file' required="" class='file'
-                                                               name='contractorHRs[0].contractorHRAs[0].attachment'
+                                                    <td><input type='file' required="" class='file' name='contractorHRs[0].contractorHRAs[0].attachment'
                                                                accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                     </td>
-                                                    <td class='del_row'><a class='p-2'><i
-                                                            class='fa fa-trash text-danger '></i></a></td>
+                                                    <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                 </tr>
                                                 <tr>
                                                     <td><input type="hidden" class="hraId">
-                                                        <input type='text' required="" value="Others"
-                                                               class='form-control docName'
-                                                               name='contractorHRs[0].contractorHRAs[0].documentName'/>
+                                                        <input type='text' required="" value="Others" class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/>
                                                     </td>
                                                     <td><input type='file' required="" class='file'
-                                                               name='contractorHRs[0].contractorHRAs[0].attachment'
-                                                               accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
+                                                               name='contractorHRs[0].contractorHRAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                     </td>
-                                                    <td class='del_row'><a class='p-2'><i
-                                                            class='fa fa-trash text-danger '></i></a></td>
+                                                    <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                 </tr>
                                                 </tbody>
                                             </table>

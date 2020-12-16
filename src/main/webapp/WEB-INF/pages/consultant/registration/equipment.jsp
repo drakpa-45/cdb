@@ -243,7 +243,7 @@
             <div class="modal-body form-horizontal">
                 <div class = "">
                     <div class ="form-group">
-                        <label class = "col-lg-2">Equipment <span class="text-danger">*</span>:</label>
+                        <label class = "col-lg-2">Equipment<span class="text-danger">*</span>:</label>
                         <div class = "col-lg-4">
                             <select name="equipments[0].equipmentId" class="form-control custom-select text-left equipmentId" required="" id="eq1" onchange="enableRegistrationNo()">
                                 <option value="">Select Equipment</option>
@@ -257,7 +257,6 @@
                             <input type="text" name="equipments[0].registrationNo" class="form-control registrationNo" onchange="validateNo(this.value)" <%--required="true"--%> id="eq2">
                         </div>
                     </div>
-
                     <div class ="form-group">
                         <label class = "col-lg-2">Quantity <span class="text-danger">*</span>:</label>
                         <div class = "col-lg-4">
@@ -335,6 +334,7 @@
         const re = /\w[BPG]-\d-\w\d{4}$/;
         return re.test(vNo);
     }
+
     function checkDuplicateEQ(){
         var $this = $(this);
         var isEqExist = false;

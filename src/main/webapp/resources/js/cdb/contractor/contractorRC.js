@@ -604,7 +604,6 @@ var contractorRC = (function () {
                         }
                     }
                 });
-
             }else{
                 $('.category_details').addClass('hide');
             }

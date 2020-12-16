@@ -531,7 +531,7 @@ var spFirmRC = (function () {
                             "<td>" + equipments[i].registrationNo + "</td>" +
                             "<td>" + equipments[i].quantity + "</td>" +
                             "<td style='text-align: center'>"+attachment+"</td>" +
-                            "<td> <input type='checkbox' name='spFirmHRs[0].deleteRequest' value='1'></td>" +
+                            "<td> <input type='checkbox' name='equipments[0].deleteRequest' value='1'></td>" +
                             "<td class='action'><button class='btn-sm btn-info btn-block edit_row_eq'>Edit</button></td>" +
                             "</tr>";
                         }
