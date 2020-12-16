@@ -325,9 +325,26 @@ function printCertificate(cdbNo){
 window.open('/cdb/print/printCertificate?cdbNo=' + cdbNo);
 }
 
-function printInfo(cdbNo){
+function PrintInfo(cdbNo){
     var url= '/cdb/admin_architect/emptylayout/printarchitectInfo?cdbNo='+cdbNo;
     $('#content_main_div_public_user').load(url);
+}
+
+function PrintInfo() {
+    var divToPrint = document.getElementById('printInfo');
+    var popupWin = window.open('', '_blank', 'width=1000,height=1000');
+    popupWin.document.open();
+    popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
+    popupWin.document.close();
+    //  var url = '${pageContext.request.contextPath}/ruralTimber/afterPrintingApp';
+    var options = {
+        target: '#registrtaionFormCard',
+        url: url,
+        type: 'POST',
+        enctype: 'form-data',
+        data: $('#printingForm').serialize()
+    };
+    $("#printingForm").submit();
 }
 
 $('#submitbtn').prop('disabled',true);

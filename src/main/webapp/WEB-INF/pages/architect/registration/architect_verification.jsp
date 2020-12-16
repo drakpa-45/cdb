@@ -121,7 +121,7 @@
                                                                             <input type="hidden"  name="villageId" id="villageId">
                                                                         </div>
                                                                     </div>
-                                                                    <input type='button'  value='Check for this CID' class='checkCid btn btn-success'>
+                                                                    <input type='button' value='Check for this CID' class='checkCid btn btn-success'>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <img src='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo=${appDetails.cidNo}'  width='200px'  height='200px' class='pull-right'/>
@@ -436,7 +436,7 @@
                                 <div class="modal-body">
                                     <div class="panel panel-default">
                                         <div class="panel-body">
-                                            <div id="modal-print">
+                                            <div id="printInfo">
                                                 <div class="form-group">
                                                     <p align="center"><strong><u>Caution</u></strong></p>
 
@@ -504,7 +504,7 @@
                                                 </div>
                                             </div>
                                             <button type="button" class="btn btn-primary"
-                                                    onclick="javascript:printDiv('modal-print')">Print
+                                                    onclick="PrintInfo()">Print
                                             </button>
                                             <button type="button" class="btn btn-success" id="closeModal"
                                                     onclick="checkBtn('checkver1')" data-dismiss="modal">OK

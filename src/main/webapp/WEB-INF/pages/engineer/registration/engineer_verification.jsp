@@ -11,8 +11,6 @@
 
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <body>
-
-
 <div class="mt-5">
     <div class="container mb-9">
         <div class="row">
@@ -440,12 +438,12 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="panel panel-default">
-                                        <div class="panel-body" id="printInfo">
-
+                                        <div class="panel-body">
+                                            <div id="printInfo">
                                                 <div class="form-group">
                                                     <p align="center"><strong><u>Caution</u></strong></p>
 
-                                                    <p align="center"><strong>An surveyor is allowed to execute only two work at
+                                                    <p align="center"><strong>An engineer is allowed to execute only two work at
                                                         a time for that particular firm.</strong></p>
 
                                                     <p align="center"><strong>For any other Human Resource they are allowed to
@@ -523,6 +521,7 @@
                     <script type="text/javascript" src="<c:url value="/resources/JqueryAjaxFormSubmit.js"/>"></script>
                     <script type="text/javascript" src="<c:url value="/resources/jquery.form.js"/>"></script>
                     <script src="<c:url value="/resources/js/cdb/engineer.js"/>"></script>
+                    <script src="<c:url value="/resources/js/cdb/survey.js"/>"></script>
                 </div>
 
             </div>
