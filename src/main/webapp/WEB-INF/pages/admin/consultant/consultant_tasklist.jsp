@@ -12,7 +12,6 @@
     <title></title>
 </head>
 <body>
-
 <div class="row">
     <div class="col-12">
         <div class="mb-0 page-header">
@@ -20,12 +19,10 @@
                 Construction Development Board
             </h1>
         </div>
-
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title font-weight-bold">Task List</h3>
             </div>
-
             <div id="tasklistId">
                 <div class="card-body">
                     <div class="card">
@@ -62,7 +59,6 @@
                                         <td><input type="button" class="btn btn-info gMToggle groupTask" value="Take Action"> </td>
                                     </tr>
                                 </c:forEach>
-
                                 </tbody>
                             </table>
                         </div>
@@ -109,7 +105,6 @@
         </div>
     </div>
 </div>
-
 <script>
     $('#group_task').DataTable({
         responsive: true
