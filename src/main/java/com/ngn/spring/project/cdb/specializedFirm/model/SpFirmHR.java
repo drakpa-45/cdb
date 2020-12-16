@@ -50,6 +50,9 @@ public class SpFirmHR extends BaseModel implements Serializable {
     private Integer Approved;
 
     @Transient
+    private Integer deleteRequest;
+
+    @Transient
     private List<SpFirmtHRAttachment> spFirmHRAs;
 
     public String getId() {
@@ -186,5 +189,13 @@ public class SpFirmHR extends BaseModel implements Serializable {
 
     public void setSpFirmHRAs(List<SpFirmtHRAttachment> spFirmHRAs) {
         this.spFirmHRAs = spFirmHRAs;
+    }
+
+    public Integer getDeleteRequest() {
+        return deleteRequest;
+    }
+
+    public void setDeleteRequest(Integer deleteRequest) {
+        this.deleteRequest = deleteRequest;
     }
 }

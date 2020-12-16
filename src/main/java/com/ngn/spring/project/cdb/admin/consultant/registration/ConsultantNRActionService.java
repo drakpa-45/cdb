@@ -223,8 +223,13 @@ public class ConsultantNRActionService extends BaseService {
      */
 
     @Transactional(readOnly = true)
-    public String getCDBNoFromAppNo(String appNo){
-       //  (String)commonService.getValue("crpconsultant","CDBNo","ReferenceNo",appNo);
+      public String getCDBNoFromAppNo(String appNo){
+        return consultantActionDao.getCDBNoFromAppNo(appNo);
+    }
+
+    @Transactional(readOnly = true)
+    public String getNextCDBNo(String appNo){
+        //  (String)commonService.getValue("crpconsultant","CDBNo","ReferenceNo",appNo);
         String cdbNo = consultantActionDao.getNextCDBNo();
         return cdbNo;
     }

@@ -40,13 +40,10 @@
                             </c:if>
                         </div>
                     </div>
-
                     <c:if test="${renewalCheck.status eq 1}">
-
                         <p class="text-justify">
                             <span id="message">While renewing your certificate, you can also upgrade/downgrade work classification or change other information. Relevant fees will be applicable.</span>
                         </p>
-
                         <form action="" method="post" class="" id="contractorRenewalForm" enctype="multipart/form-data">
                             <div class="nav-tabs-custom">
                                 <ul class="m-0 nav nav-tabs">
@@ -298,17 +295,14 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="card hide" id="cIncorporation">
                                                 <div class="bg-blue card-status card-status-left"></div>
                                                 <div class="card-header">
-                                                    <h3 class="card-title">Attach Certificates of Incorporation</h3>
+                                                    <h3 class="card-title">Attach Certificates of Incorporation/Sole Proprietorship</h3>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="col-lg-12">
-                                                        <div class=""><input id="addMoreCert" type="button"
-                                                                             value="Add More Certificate"
-                                                                             class="btn btn-primary"></div>
+                                                        <div class=""><input id="addMoreCert" type="button" value="Add More Certificate" class="btn btn-primary"> </div>
                                                         <table class="table table-bordered table-center table-responsive-lg auto-index"
                                                                id="certificateTbl">
                                                             <thead>
@@ -435,6 +429,43 @@
                                                                     onclick="removeRow('partnerDtls')">
                                                                 <i class="fe fe-trash mr-2"></i>Remove Last Row
                                                             </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-12 col-md-12 ">
+                                                            <label class="col-lg-3 col-md-3 form-label" for="ownershipChangeRemarks">Reason for Change of Owner:
+                                                                <span class="text-danger">*</span></label>
+                                                            <input type="text" class="col-lg-6 form-control"
+                                                                   name="specializedFirm.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true"
+                                                                   placeholder="Text..">
+                                                        </div>
+                                                    </div>
+                                                    <h5 class="text-orange">Attach Certificates of Ownership change</h5>
+                                                    <div class="card-body">
+                                                        <div class="col-lg-12">
+                                                            <div class=""><input id="addMoreCertOwner" type="button" value="Add More Certificate" class="btn btn-primary"></div>
+                                                            <table class="table table-bordered table-hover" id="certificateTblOwner">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>Document Name</th>
+                                                                    <th>Document Attached</th>
+                                                                    <th>File Size</th>
+                                                                    <th>Delete</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody class="files">
+                                                                <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
+                                                                    <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                                    <td class='file-size'></td>
+                                                                    <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                                </tr>
+                                                                <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
+                                                                    <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                                    <td class='file-size'></td>
+                                                                    <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -671,7 +702,42 @@
                                                 </tr>
                                                 </tbody>
                                             </table>
-
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <b class="text-orange">Attach your UnderTaking Below</b> &nbsp; &nbsp;
+                                                <br />
+                                                <input type="button" id="addMoreCertCategory" value="Add More File" class="btn btn-primary eqFile">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-hover" id="certificateTblCategory">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Document Name</th>
+                                                            <th>Document Attached</th>
+                                                            <th>File Size</th>
+                                                            <th>Delete</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody class="files">
+                                                        <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
+                                                            <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                            <td class='file-size'></td>
+                                                            <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                        </tr>
+                                                        <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
+                                                            <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                            <td class='file-size'></td>
+                                                            <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                        </tr>
+                                                            <%--  <tr><td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/> </td>
+                                                                  <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
+                                                                  <td class='file-size'></td>
+                                                                  <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                              </tr>--%>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-lg-12 form-group nextBackBtn">
                                             <button type="button"
@@ -707,7 +773,9 @@
                                                                 <th style="width: 10%">Qualification</th>
                                                                 <th style="width: 10%">Trade / Fields</th>
                                                                 <th style="width: 10%">Service Type</th>
+                                                                <th style="width: 10%">Joining Date</th>
                                                                 <th style="width: 20%">Attachments (CV/UT/AT)</th>
+                                                                <th style="width: 25%">Delete Request?</th>
                                                                 <th style="width: 5%">Action</th>
                                                             </tr>
                                                             </thead>
@@ -835,6 +903,7 @@
                                                         <th>Registration Number</th>
                                                         <th>Quantity</th>
                                                         <th>Attachment</th>
+                                                        <th>Delete Request?</th>
                                                         <th>Action</th>
                                                     </tr>
                                                     </thead>
@@ -1181,7 +1250,7 @@
                                 <span class="input-group-addon pr-5"><i
                                         class="fa fa-calendar"></i></span>
                                             <input type="date" name="contractorHRs[0].joiningDate"
-                                                   value="" id="joiningDate"
+                                                   value="" id="hr10"
                                                    class="form-control datepicker">
                                         </div>
                                     </div>
@@ -1261,7 +1330,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-primary" onclick="getModalData('hrDtlsTable','hr',9)" type="button">
+                            <button class="btn btn-primary" onclick="getModalData('hrDtlsTable','hr',10)" type="button">
                                 OK
                             </button>
                             <button data-dismiss="modal" class="btn btn-warning" type="button">Close</button>

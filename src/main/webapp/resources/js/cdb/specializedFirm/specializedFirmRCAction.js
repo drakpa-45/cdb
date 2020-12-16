@@ -200,7 +200,7 @@ var specializedFirmRCAction = (function () {
 
                         incorporation(spFirmDTO.incAttachments);
 
-                        getSpFirm();
+                        getSpFirmFinal(applicationNo);
 
                         var appHistoryDTOs = spFirmDTO.appHistoryDTOs;
 
@@ -248,7 +248,6 @@ var specializedFirmRCAction = (function () {
                                 verifiedApproved+"</tr>";
                             }
                         }
-
                         $('#partnerDtls').find('tbody').html(partnerHrTr);
 
                     } else {
@@ -257,22 +256,26 @@ var specializedFirmRCAction = (function () {
                 }
             });
         }
-
     }
 
-    function getSpFirm() {
-        var cdbNo = $('#cdbNo').val();
+    function getSpFirmFinal(appNo) {
         $.ajax({
-            url: _baseURL() + '/getSpFirm?cdbNo='+cdbNo,
+            url: _baseURL() + '/getSpFirmFinal',
             type: 'GET',
+            data: {appNo: appNo},
             success: function (res) {
                 var spFirm = res;
-                $('#oldfirmName').text(spFirm.oldFirmName);
-                $('#oldestAddress').text(spFirm.oldEstbAddress);
-                $('#oldestDzongkhag').text(spFirm.oldDzongkhag);
+                $('#oldfirmName').html(spFirm.firmName);
+                $('#estAddressExist').html(spFirm.regAddress);
+                $('#estDzongkhagExist').val(spFirm.oldDzongkhag).prop('disabled',true);
+                $('#regEmailExist').html(spFirm.regEmail);
+                $('#regMobileNoExist').html(spFirm.regMobileNo);
+                $('#regPhoneNoExist').html(spFirm.regPhoneNo);
+                $('#regFaxNoExist').html(spFirm.regFaxNo);
             }
         });
     }
+
     /*function nullif(val){
         if(val == null || val == 'null'){
             val = ''

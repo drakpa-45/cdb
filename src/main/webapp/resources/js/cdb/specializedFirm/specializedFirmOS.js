@@ -24,10 +24,10 @@ function removeRow(tableId) {
     $('#' + tableId + ' tr:last').remove();
 }
 function showAcknowledgement() {
-
     $("#registrtaionFormCard").hide();
     $("#acknowledgementCard").show();
 }
+
 function saveAndPreview(presentClass, nextClass) {
     var content = '<h3 class="pt-3 text-center">Fee Structure</h3>' + $(".feesStructure > .div-actual").html() +
         '<h3 class="pt-3 text-center">General Information</h3>' + $(".generalInformation > .div-actual").html() +
@@ -134,8 +134,7 @@ function getModalData(tableId, prefix, totalCol) {
 
     td = td + "<td ><span class='doc'></span> <div class='hidden hr_attachment'></div></td>";
 
-    td = td + "<td ><input type='radio' class='deleteRequest'  name='consultantHRs[0].deleteRequest' id='deleteRequest"+bodyId+"' value='yes'><span style='color:#ff0000'>Yes</span>" +
-    "<input type='radio' class='deleteRequest'  name='consultantHRs[0].deleteRequest' id='deleteRequest"+bodyId+"' value='no'><span style='color:#ff0000'>No</span></td>";
+    td = td + "<td ><input type='checkbox' name='spFirmHRs[0].deleteRequest' value='1'></td>";
 
     var tr = "<tr id='"+j+"'>" + td + "<td class=' '><a class='p-2 edit-"+prefix+"'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td></tr>";
 
@@ -256,9 +255,9 @@ var specializedFirmOS = (function () {
         $('#ownershipList').on('change', function (e) {
             var option = $(this).find("option:selected").html();
             var certificateTbl = $('#certificateTbl').find('tbody');
-            if (~option.indexOf("Incorporated")) {
+            if (~option.indexOf("Incorporated") || ~option.indexOf("Sole Proprietorship")) {
                 $('#cIncorporation').removeClass('hide');
-                certificateTbl.append(cert);
+                certificateTbl.html(cert);
             }else{
                 $('#cIncorporation').addClass('hide');
                 certificateTbl.empty();
@@ -351,8 +350,8 @@ var specializedFirmOS = (function () {
                     $('#estAddress').prop('disabled', false);
                     $('#regDzongkhagId').prop('disabled', false);
                 }else{
-                    $('#estAddress').prop('disabled', false);
-                    $('#regDzongkhagId').prop('disabled', false);
+                    $('#estAddress').prop('disabled', true);
+                    $('#regDzongkhagId').prop('disabled', true);
                 }
             }else if(id == 'changeOfOwnerId' ){
                 if($this.is(':checked')) {
@@ -439,8 +438,7 @@ var specializedFirmOS = (function () {
                             "<td class='serviceTypeName'>" + spFirmHrs[i].serviceTypeName + "</td>" +
                             "<td class='joiningDate'>" + spFirmHrs[i].joinDate + "</td>" +
                             "<td class='attachments'>" + attachments + "</td>" +
-                            "<td> <input type='radio' class='deleteRequest' name='spFirmHRs[0].deleteRequest' id='deleteRequest "+i+"' value='yes' ><span style='color:#ff0000'>Yes</span>" +
-                            "<input type='radio' class='deleteRequest'  name='spFirmHRs[0].deleteRequest' id='deleteRequest"+bodyId+"' value='no'><span style='color:#ff0000'>No</span></td>" +
+                            "<td> <input type='checkbox' name='spFirmHRs[0].deleteRequest' value='1'></td>" +
                             "<td class='action'><button class='btn-sm btn-info btn-block edit-row'>Edit</button></td>" +
                             "</tr>";
                         }
@@ -692,6 +690,8 @@ var specializedFirmOS = (function () {
           //  alert(row.find('.specializedFirmEQid').val());
             var modal = $('#eqModal');
             modal.find('#eq1').val(row.find('.specializedFirmEQid').val());
+            modal.find('.id4Edit').val(row.find('.specializedFirmEQid').val())//for Edit
+            modal.find('#eq1').val(modal.find('#eq1 option:contains("'+row.find('td:nth-child(1)').text()+'")').val());
             modal.find('#eq2').val(row.find('td:eq(2)').text());
             modal.find('#eq3').val(row.find('td:eq(2)').text());
             var hraTr = "";
@@ -706,6 +706,17 @@ var specializedFirmOS = (function () {
             });
             modal.find('#eqUploadTbl tbody').empty().html(hraTr);
            // row.remove();
+            openModal('eqModal');
+        });
+
+        $('body').on('click','.edit-eq',function(e){
+            e.preventDefault();
+            var row = $(this).closest('tr');
+            var hrModal = $('#eqModal');
+            hrModal.find('#eq1').val(row.find('.eq1').val());
+            hrModal.find('#eq2').val(row.find('.eq2').val());
+            hrModal.find('#eq3').val(row.find('.eq3').val());
+            row.addClass('tbd'); //add class to be deleted
             openModal('eqModal');
         });
     }
@@ -831,6 +842,7 @@ var specializedFirmOS = (function () {
         editInModalEQ();
         addMoreEqFile();
         getPersonalInfoHR();
+        getPersonalInfo();
     }
     return {
         init:init

@@ -77,11 +77,10 @@ public class SpecializedFirmRCActionController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value ="/getSpFirm", method = RequestMethod.GET)
-    public Object getSpecializedFirmFinal(HttpServletRequest request){
-        String cdbNo = request.getParameter("cdbNo");
-      //  return specializedFirmRService.getSpecializedFirmFinal(cdbNo);
-        return null;
+    @RequestMapping(value ="/getSpFirmFinal", method = RequestMethod.GET)
+    public Object getSpecializedFirmFinal(HttpServletRequest request, String appNo){
+        String cdbNo = cNRActionService.getCDBNoFromAppNo(appNo);
+        return specializedFirmRService.getSpecializedFirmFinal(cdbNo);
     }
 
     @RequestMapping(value = "/viewDownload", method = RequestMethod.GET)

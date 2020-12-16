@@ -299,7 +299,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="card hide" id="cIncorporation">
                                                 <div class="bg-blue card-status card-status-left"></div>
                                                 <div class="card-header">
@@ -309,7 +308,7 @@
                                                     <div class="col-lg-12">
                                                         <div class=""><input id="addMoreCert" type="button" value="Add More Certificate" class="btn btn-primary"> </div>
                                                         <table class="table table-bordered table-center table-responsive-lg auto-index"
-                                                               id="IncCertificateTbl">
+                                                               id="certificateTbl">
                                                             <thead>
                                                             <tr>
                                                                 <th>Sl no</th>

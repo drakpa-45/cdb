@@ -38,6 +38,9 @@ public class SpFirmEQ extends BaseModel implements Serializable {
     private Integer approved;
 
     @Transient
+    private Integer deleteRequest;
+
+    @Transient
     private SpFirmEQAttachment spFirmEQA;
     @Transient
     private List<SpFirmEQAttachment> spFirmEQAs;
@@ -128,5 +131,13 @@ public class SpFirmEQ extends BaseModel implements Serializable {
 
     public void setSpFirmEQAs(List<SpFirmEQAttachment> spFirmEQAs) {
         this.spFirmEQAs = spFirmEQAs;
+    }
+
+    public Integer getDeleteRequest() {
+        return deleteRequest;
+    }
+
+    public void setDeleteRequest(Integer deleteRequest) {
+        this.deleteRequest = deleteRequest;
     }
 }

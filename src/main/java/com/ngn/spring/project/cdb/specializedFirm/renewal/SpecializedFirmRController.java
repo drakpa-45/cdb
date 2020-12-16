@@ -100,7 +100,7 @@ public class SpecializedFirmRController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value ="/getSpFirm", method = RequestMethod.GET)
+    @RequestMapping(value ="/getSpecializedFirm", method = RequestMethod.GET)
     public Object getSpecializedFirmFinal(HttpServletRequest request){
         String cdbNo = request.getSession().getAttribute("CDBNo").toString();
         return cRenewalService.getSpecializedFirmFinal(cdbNo.split("999")[1]);

@@ -4,13 +4,13 @@
 var $check = null;
 function checkBtn(checkBoxId) {
     $check.prop('checked', true);
-  /*  if (checkBoxId == "owner") {
+    if (checkBoxId == "owner") {
         $('#nextGIBtn').prop('disabled', false);
     } else if(checkBoxId == 'equipment'){
         $('#btnValEqNext').prop('disabled', false);
     }else{
         $('#nextHRBtn').prop('disabled', false);
-    }*/
+    }
 
 }
 function saveAndPreview(presentClass, nextClass) {
@@ -50,7 +50,6 @@ var consultant_action = (function () {
     function checkHR(){
         $('body').on('click','.checkCid',function(){
             var cidNo = $(this).closest('tr').find('.cidNo').text();
-
             $check = $(this).closest('tr').find('.check');
             if(!cidNo){
                 return;

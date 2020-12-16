@@ -12,7 +12,6 @@ function addRow(tableId) {
         } else {
             $('#consultantOSForm').validate().element(this);
         }
-
     });
     if (isValid == true) {
         var $trLast = $tableBody.find("tr:last");
@@ -121,15 +120,13 @@ function getModalData(tableId, prefix, totalCol) {
             text = value;
             name = $this.prop('name');
         }
-        /*var tdVal = "<input type='hidden' name='" + name + "' value='" + value + "'/>" + text;
-        td = td + "<td>" + tdVal + "</td>";*/
+
         var tdVal = "<input type='hidden' class='"+$this.attr('id')+"' name='" + name + "' value='" + value + "'/>" + text;
         td = td + "<td>" + tdVal + "</td>";
     }
     td = td + "<td ><span class='doc'></span> <div class='hidden hr_attachment'></div></td>";
 
-    td = td + "<td ><input type='radio' class='deleteRequest'  name='consultantHRs[0].deleteRequest' id='deleteRequest"+bodyId+"' value='yes'><span style='color:#ff0000'>Yes</span>" +
-    "<input type='radio' class='deleteRequest'  name='consultantHRs[0].deleteRequest' id='deleteRequest"+bodyId+"' value='no'><span style='color:#ff0000'>No</span></td>";
+    td = td + "<td ><input type='checkbox' name='contractorHRs[0].deleteRequest' value='1'></td>";
 
     var tr = "<tr id='"+j+"'>" + td + "<td class=' '><a class='p-2 edit-"+prefix+"'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td></tr>";
 
@@ -256,9 +253,9 @@ var consultantOS = (function () {
         $('#ownershipList').on('change', function (e) {
             var option = $(this).find("option:selected").html();
             var certificateTbl = $('#certificateTbl').find('tbody');
-            if (~option.indexOf("Incorporated")) {
+            if (~option.indexOf("Incorporated") || ~option.indexOf("Sole Proprietorship")) {
                 $('#cIncorporation').removeClass('hide');
-                certificateTbl.append(cert);
+                certificateTbl.html(cert);
             } else{
                 $('#cIncorporation').addClass('hide');
                 certificateTbl.empty();
@@ -524,8 +521,8 @@ var consultantOS = (function () {
                             "<td>" + equipments[i].registrationNo + "</td>" +
                             "<td>" + equipments[i].quantity + "</td>" +
                             "<td>" + attachment + "</td>" +
-                            "<td class='action'><button class='btn-sm btn-info btn-block edit-eq'>Edit</button>" +
-                            "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                            "<td><input type='checkbox' name='equipments[0].deleteRequest' value='1'></td>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button></td>"  +
                             "</tr>";
                         }
                         $('#equipmentTbl').find('tbody').html(eqTr);
@@ -707,13 +704,14 @@ var consultantOS = (function () {
     }
 
     function editInModalEQ(){
-        $('body').on('click','.edit-eq',function(e){
+        $('body').on('click','.edit_row',function(e){
             e.preventDefault();
             var row = $(this).closest('tr');
             var modal = $('#eqModal');
-            modal.find('#eq1').val(row.find('.consultantEQid').val());
-            modal.find('#eq2').val(row.find('td:eq(2)').text());
-            modal.find('#eq3').val(row.find('td:eq(2)').text());
+            modal.find('.id4Edit').val(row.find('.consultantEQid').val());
+            modal.find('#eq1').val(modal.find('#eq1 option:contains("'+row.find('td:nth-child(1)').text()+'")').val());
+            modal.find('#eq2').val(row.find('td:nth-child(2)').text());
+            modal.find('#eq3').val(row.find('td:nth-child(3)').text());
             var hraTr = "";
             row.find('.attachment').each(function(){
                 var name = $(this).find('a').text();
@@ -726,6 +724,18 @@ var consultantOS = (function () {
             });
             modal.find('#eqUploadTbl tbody').empty().html(hraTr);
            // row.remove();
+            row.addClass('tbd');
+            openModal('eqModal');
+        });
+
+        $('body').on('click','.edit-eq',function(e){
+            e.preventDefault();
+            var row = $(this).closest('tr');
+            var hrModal = $('#eqModal');
+            hrModal.find('#eq1').val(row.find('.eq1').val());
+            hrModal.find('#eq2').val(row.find('.eq2').val());
+            hrModal.find('#eq3').val(row.find('.eq3').val());
+            row.addClass('tbd'); //add class to be deleted
             openModal('eqModal');
         });
     }
@@ -736,6 +746,28 @@ var consultantOS = (function () {
             var $this = $(this);
             var row = $(this).closest('tr');
             var file= "<input type='file' required class='file' name='consultantHRs[0].consultantHRAs[0].attachment'"+
+                "accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>";
+            if($this.text() == 'Change'){
+                row.find('.docName').prop('disabled',false);
+                row.find('.aName').addClass('hide');
+                row.find('.aFile').html(file);
+                $this.text('Cancel');
+            }else{
+                row.find('.docName').prop('disabled',true);
+                row.find('.aName').removeClass('hide');
+                row.find('.aFile').empty();
+                $this.text('Change');
+            }
+
+        });
+    }
+
+    function changeFileEq(){
+        $('#eqUploadTbl').on('click','.change',function(e){
+            //e.preventDefault();
+            var $this = $(this);
+            var row = $(this).closest('tr');
+            var file= "<input type='file' required class='file' name='equipments[0].consultantEQAs[0].attachment'"+
                 "accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>";
             if($this.text() == 'Change'){
                 row.find('.docName').prop('disabled',false);

@@ -94,7 +94,7 @@ public class ConsultantNRActionController extends BaseController {
     public ResponseMessage paymentUpdate(ModelMap model, HttpServletRequest request, PaymentUpdateDTO paymentUpdateDTO) throws Exception{
         loggedInUser = gLoggedInUser(request);
         String appNo = request.getParameter("appNo");
-        String cdbNo = consultantActionService.getCDBNoFromAppNo(appNo);
+        String cdbNo = consultantActionService.getNextCDBNo(appNo);
         paymentUpdateDTO.setCdbNo(cdbNo);
         return consultantActionService.paymentUpdate(paymentUpdateDTO, loggedInUser);
     }

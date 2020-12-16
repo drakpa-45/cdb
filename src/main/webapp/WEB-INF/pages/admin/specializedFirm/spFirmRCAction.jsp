@@ -215,7 +215,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="card tab2">
                                     <div class="bg-blue card-status card-status-left"></div>
                                     <div class="card-header">
@@ -240,12 +239,10 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="card tab2">
                                     <div class="bg-blue card-status card-status-left"></div>
                                     <div class="card-header">
-                                        <h3 class="card-title">Name of Owner, Partners and/or others with
-                                            Controlling Interest</h3>
+                                        <h3 class="card-title">Name of Owner, Partners and/or others with Controlling Interest</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12">
@@ -284,12 +281,46 @@
                                         </div>
                                     </div>
                                 </div>
-
-
                                 <div class="card tab2">
                                     <div class="bg-blue card-status card-status-left"></div>
                                     <div class="card-header">
-                                        <h3 class="card-title">Establishment Addresses</h3>
+                                        <h3 class="card-title">Existing Establishment Addresses</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-5 form-label">Establishment
+                                                    Address</label>
+                                                <label class="col-lg-7 form-label" id="estAddressExist"></label>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-5 form-label">Dzongkhag</label>
+                                                <label class="col-lg-7 form-label" id="estDzongkhagExist"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-5 form-label">Email</label>
+                                                <label class="col-lg-7 form-label" id="regEmailExist"></label>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-5 form-label">Mobile No</label>
+                                                <label class="col-lg-7 form-label" id="regMobileNoExist"></label>
+                                            </div>
+                                        </div>
+                                        <%--<div class="col-lg-12">
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-5 form-label">Telephone No </label>
+                                                <label class="col-lg-7 form-label" id="regPhoneNoExist"></label>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-5 form-label">Fax No </label>
+                                                <label class="col-lg-7 form-label" id="regFaxNoExist"></label>
+                                            </div>
+                                        </div>--%>
+                                    </div>
+                                    <div class="card-header">
+                                        <h3 class="card-title">Proposed Establishment Addresses</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12">
@@ -300,30 +331,7 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-5 form-label">Dzongkhag</label>
-                                                <label class="col-lg-7 form-label"
-                                                       id="estDzongkhag"></label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Previous Establishment
-                                                    Address</label>
-                                                <label class="col-lg-7 form-label" id="oldestAddress"></label>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Previous Dzongkhag</label>
-                                                <label class="col-lg-7 form-label"
-                                                       id="oldestDzongkhag"></label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Email</label>
-                                                <label class="col-lg-7 form-label" id="regEmail"></label>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Mobile No</label>
-                                                <label class="col-lg-7 form-label" id="regMobileNo"></label>
+                                                <label class="col-lg-7 form-label" id="estDzongkhag"></label>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
@@ -338,7 +346,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="col-lg-12">
                                 <button type="button"
@@ -355,7 +362,6 @@
                                 </button>
                             </div>
                         </div>
-
                         <div class="tab-pane category_details hide">
                             <div class="div-actual">
                                 <table id="specializedFirmCCTbl" class="table table-bordered table-hover">
@@ -373,7 +379,6 @@
                                     </tbody>
                                 </table>
                             </div>
-
                             <div class="card tab2">
                                 <div class="bg-blue card-status card-status-left"></div>
                                 <div class="card-header">Service Applied and Fee</div>
@@ -402,7 +407,6 @@
                                     </table>
                                 </div>
                             </div>
-
                             <div class="col-lg-12 form-group nextBackBtn">
                                 <button type="button"
                                         onclick="backTab('category_details')"
@@ -415,7 +419,6 @@
                                 </button>
                             </div>
                         </div>
-
                         <div class="tab-pane human_resource_criteria hide">
                             <div class="div-actual">
                                 <div class="card tab4">

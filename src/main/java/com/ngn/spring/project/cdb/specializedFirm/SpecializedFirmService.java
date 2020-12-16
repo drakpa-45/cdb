@@ -130,7 +130,6 @@ public class SpecializedFirmService extends BaseService {
                 }
         );
         //endregion
-
         Integer i = 0;
         if(equipments != null && !equipments.isEmpty()) {
             for (SpFirmEQ spFirmEQ : equipments) {
@@ -141,7 +140,6 @@ public class SpecializedFirmService extends BaseService {
                 spFirmEQ.setSpecializedTradeId(specializedID);
                 spFirmEQ.setSerialNo(i.toString());
                 saveEQ(spFirmEQ, loggedInUser);
-
                 //Save equipment attachment
                 for (SpFirmEQAttachment spFirmEQA : spFirmEQ.getSpFirmEQAs()) {
                     spFirmEQA.setEquipmentId(spFirmEQId);

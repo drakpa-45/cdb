@@ -926,10 +926,8 @@
                                     </div>
                                 </div>
                             </form>
-
                         </div>
                     </c:if>
-
                 </div>
             </div>
 

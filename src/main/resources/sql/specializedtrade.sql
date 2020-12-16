@@ -95,6 +95,7 @@ specializedFirmActionDao.reject=UPDATE crpspecializedtrade c SET c.SysRejecterUs
 
 SpecializedFirmActionDao.getIncAttachment = SELECT DocumentName AS documentName, DocumentPath documentPath,FileType AS fileType FROM crpspecializedtradeattachment WHERE CrpSpecializedTradeId =:crpSpecializedTradeId
 
+SpecializedFirmActionDao.getCDBNoFromAppNo = SELECT b.SPNo FROM  crpspecializedtrade a INNER JOIN crpspecializedtradefinal b ON a.email = b.email WHERE a.referenceNo =:appNo
 /*Renewal for specializedFirm*/
 
 SpecializedFirmRCDao.getSpecializedFirmHRsFinal=SELECT hr.Id AS id,hr.CrpSpecializedTradeFinalId specializedFirmID,hr.CIDNo cidNo,hr.Name AS name,hr.Sex sex,hr.ShowInCertificate AS siCertificate,hr.DeleteRequest AS deleteRequest,hr.IsPartnerOrOwner isPartnerOrOwner,DATE_FORMAT(hr.JoiningDate, '%d-%m-%Y') joinDate,sa.Name salutationName,co.Name countryName,qu.Name qualificationName,st.Name serviceTypeName,td.Name tradeName,de.Name designationName \
