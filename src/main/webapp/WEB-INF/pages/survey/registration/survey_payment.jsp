@@ -50,7 +50,7 @@
                                             <security:authorize access="hasRole('ROLE_APPROVER')">Approval</security:authorize> --%>
                                 <c:if test="${appDetails.updateStatus=='6195664d-c3c5-11e4-af9f-080027dcfac6'}">Payment Approver</c:if>
                             </h3>
-                            <span style="font-size: small;color: #444444"> >> Application Number : ${appDetails.referenceNo}</span>
+                            <span class="font-weight-bold" style="font-size: small;color: #444444"> >> Application Number : ${appDetails.referenceNo}</span>
                         </div>
                         <div class="card-body">
                             <div class="row">

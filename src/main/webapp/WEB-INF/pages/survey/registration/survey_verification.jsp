@@ -50,7 +50,7 @@
                         <%--<form id="architectForm" action="#" method="post" enctype="multipart/form-data">--%>
                         <div class="card-header">
                             <h3 class="card-title font-weight-bold">Registration of Survey</h3>
-                            <span style="font-size: small;color: #444444"> >> Application Number : ${appDetails.referenceNo}</span>
+                            <span class="font-weight-bold" style="font-size: small;color: #444444"> >> Application Number : ${appDetails.referenceNo}</span>
                         </div>
                         <div class="card-body">
                             <div class="row">

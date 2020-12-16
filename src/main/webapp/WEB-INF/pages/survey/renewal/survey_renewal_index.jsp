@@ -265,7 +265,7 @@
                                                                     </div>
                                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                         <label>Mobile No: <span class="text-danger">*</span></label>
-                                                                        <input type="number" maxlength="8" class=" form-control number" value="${registrationDetails.mobileNo}" id="mobileNo" name="mobileNo">
+                                                                        <input type="number" maxlength="8" class=" form-control number" value="${registrationDetails.mobileNo}" id="mobileNo" name="mobileNo" onKeyPress="if(this.value.length==8) return false;" min="0">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-12">

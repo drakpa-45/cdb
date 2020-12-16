@@ -415,11 +415,12 @@ public class SurveyServices extends BaseService {
                 totalAmount = BigDecimal.valueOf(payAmount.floatValue() + 1000);
                 dto.setTotalAmt(totalAmount);
             }else{
-                dto.setPaymentAmt(dto.getPaymentAmt());
                 if(dto.getServiceSectorType().equalsIgnoreCase("6e1cd096-bea8-11e4-9757-080027dcfac6")){
                     totalAmount = BigDecimal.valueOf(payAmount.floatValue());
+                    dto.setPaymentAmt(BigDecimal.valueOf(00.00));
                 }else{
                     totalAmount = BigDecimal.valueOf(payAmount.floatValue() + 1000);
+                    dto.setPaymentAmt(dto.getPaymentAmt());
                 }
                 dto.setTotalAmt(totalAmount);
             }

@@ -61,7 +61,7 @@ public class SpecialisedTradeAdminController extends BaseController {
         String appNo = request.getParameter("appNo");
 
         if (type.equalsIgnoreCase("release")) {
-            String cmnServiceTypeId = request.getParameter("param");
+            String cmnServiceTypeId = request.getParameter("cmnServiceType");
             String assignMyTask = services.assignMyTask(appNo, getLoggedInUser().getUserID(), type);
             if(assignMyTask.equalsIgnoreCase("Success")){
                 if(cmnServiceTypeId == null || cmnServiceTypeId.isEmpty()){

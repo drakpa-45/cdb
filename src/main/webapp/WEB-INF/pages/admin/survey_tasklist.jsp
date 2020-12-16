@@ -124,16 +124,16 @@
         responsive: true
     });
     function openAndClaimApplication(appNo,type){
-        var cmnServiceTypeId = $('#cmnServiceTypeId').val();
-        var param ='';
-        if(cmnServiceTypeId = '55a922e1-cbbf-11e4-83fb-080027dcfac6'){
-            param="new";
-        }else if(cmnServiceTypeId = '45bc628b-cbbe-11e4-83fb-080027dcfac6'){
-            param = "renew";
-        }else if(cmnServiceTypeId = 'acf4b324-cbbe-11e4-83fb-080027dcfac6'){
-            param = "cancellation";
+       // var cmnServiceTypeId = $('#cmnServiceTypeId').val();
+        var cmnServiceType ='';
+        if($('#cmnServiceTypeId').val()=="55a922e1-cbbf-11e4-83fb-080027dcfac6"){
+            cmnServiceType="new";
+        }else if($('#cmnServiceTypeId').val()=="45bc628b-cbbe-11e4-83fb-080027dcfac6"){
+            cmnServiceType = "renew";
+        }else if($('#cmnServiceTypeId').val()=="acf4b324-cbbe-11e4-83fb-080027dcfac6") {
+            cmnServiceType = "cancellation";
         }
-        var url= '${pageContext.request.contextPath}/admin_survey/emptylayout/openApplication?appNo='+appNo+'&type='+type+'&param='+param;
+            var url= '${pageContext.request.contextPath}/admin_survey/emptylayout/openApplication?appNo='+appNo+'&type='+type+'&cmnServiceType='+cmnServiceType;
        $('#content_main_div').load(url);
     /*    $.ajax({
             url: cdbGlobal.baseURL() + '/admin_architect/openApplication/',

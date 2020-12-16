@@ -30,8 +30,8 @@
                 </div>
                 <div class="form-group fa-pull-right">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                        <button class="btn btn-sm btn-primary" type="button" onclick="printInfo('${appDetail.cdbNo}')"><i class="fa fa-print"></i> Print Information</button>
-                        <button class="btn btn-sm btn-success" type="button" onclick="printCertificate()"><i class="fa fa-edit"></i> Print Certificate</button>
+                        <button class="btn btn-sm btn-primary" type="button" onclick="printInfo('${App_Details.cdbNo}')"><i class="fa fa-print"></i> Print Information</button>
+                        <button class="btn btn-sm btn-success" type="button" onclick="printCertificate('${App_Details.cdbNo}')"><i class="fa fa-edit"></i> Print Certificate</button>
                     </div>
                 </div>
             </div>

@@ -7,6 +7,7 @@
   Time: 11:52 PM
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -221,7 +222,7 @@
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <label>Mobile No: <span class="text-danger">*</span></label>
-                                                                    <input type="text" class=" form-control number" onclick="remove_err('mobileNo_err')" id="mobileNo" name="mobileNo"  maxlength="8">
+                                                                    <input type="number" class=" form-control number" onclick="remove_err('mobileNo_err')" id="mobileNo" name="mobileNo" onKeyPress="if(this.value.length==8) return false;" min="0">
                                                                     <span id="mobileNo_err" class="text-danger"></span>
                                                                 </div>
                                                             </div>
@@ -254,7 +255,7 @@
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <label>Year of Graduation <span class="text-danger">*</span></label>
-                                                                    <input type="text" class=" form-control number" maxlength="4" onclick="remove_err('graduationYear_err')" id="graduationYear" name="graduationYear" placeholder="year..">
+                                                                    <input type="text" class=" form-control number" maxlength="4" onclick="remove_err('graduationYear_err')" onload="validYear()" id="graduationYear" name="graduationYear" onKeyPress="if(this.value.length==4) return false;" min="0">
                                                                     <span id="graduationYear_err" class="text-danger"></span>
                                                                 </div>
                                                             </div>
@@ -354,7 +355,7 @@
                                                         <button type="button" onclick="previousTab('categoryDtls','saveAndPreview')"  class="btn btn-success">
                                                             <i class="fa fa-arrow-circle-left"></i>  Previous
                                                         </button>
-                                                        <button type="button" onclick="submitRegistrationForm()"  class="btn btn-primary" id="submitbtn">
+                                                        <button disabled type="button" onclick="submitRegistrationForm()"  class="btn btn-primary" id="submitbtn">
                                                             <i class="fa fa-save"></i> Submit
                                                         </button>
                                                     </div>

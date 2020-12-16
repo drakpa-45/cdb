@@ -19,7 +19,7 @@ INNER JOIN crpspecializedtradeappliedservice s ON s.CrpSpecializedTradeId = a.Cr
 AND a.CmnApplicationRegistrationStatusId = ? GROUP BY a.ReferenceNo  ORDER BY a.ReferenceNo DESC
 
 SpecializedDao.getMyTaskList=SELECT a.Name serviceName,a.ReferenceNo applicationNo,a.MobileNo contactNo,a.ApplicationDate applicationDate,a.SPNo cdbNo, \
- a.CIDNo serviceNo, b.Name AS appStatus FROM crpspecializedtrade a INNER JOIN cmnlistitem b ON b.Id = a.CmnApplicationRegistrationStatusId  \
+ a.CIDNo serviceNo, b.Name AS appStatus,s.CmnServiceTypeId cmnServiceTypeId FROM crpspecializedtrade a INNER JOIN cmnlistitem b ON b.Id = a.CmnApplicationRegistrationStatusId  \
  INNER JOIN crpspecializedtradeappliedservice s ON s.CrpSpecializedTradeId = a.CrpSpecializedTradeId WHERE a.SysLockedByUserId = ? AND s.CmnServiceTypeId = ?  \
  AND a.CmnApplicationRegistrationStatusId = ? GROUP BY a.ReferenceNo  ORDER BY a.ReferenceNo DESC
 

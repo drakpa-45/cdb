@@ -64,20 +64,6 @@ function validateFees(){
    return retutype;
 }
 
-/*document.querySelector(".sp-character").addEventListener("keypress", function (evt) {
-    if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
-    {
-        evt.preventDefault();
-    }
-});
-
-document.querySelector(".mb-character").addEventListener("keypress", function (evt) {
-    if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
-    {
-        evt.preventDefault();
-    }
-});*/
-
 function checkStatus(cidNo){
     var url= _baseURL() +'/isCIDUnique';
     var $this = $('#app_çid');
@@ -96,6 +82,13 @@ function checkStatus(cidNo){
         }
     });
 }
+
+document.querySelector(".sp_character").addEventListener("keypress", function (evt) {
+    if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
+    {
+        evt.preventDefault();
+    }
+});
 
 function validatepersonalSection(){
     var retutype=true;
@@ -164,14 +157,6 @@ function validateeducaion(){
     return retutype;
 }
 
-$("#graduationYear").datepicker({
-    format: "yyyy",
-    viewMode: "years",
-    minViewMode: "years",
-    autoclose:true,
-    endDate: "currentDate"
-});
-
 function remove_err(errId){
     $('#'+errId).html('');
 }
@@ -222,6 +207,24 @@ function submitRegistrationForm(){
         $('#formId').val('engineerForm');
         $('#targetId').val('acknowledgementmessage');
         $('#url').val(_baseURL() + '/saveEngineer');
+        $('#messages').html('You are about to submit your application. Do you want to proceed?');
+        returntpe;
+    }
+}
+
+function submitForm(){
+    var returntpe=true;
+    if($('#file1').val()==""){
+        $('#file1').focus();
+        warningMsg('Please attach your document');
+        $('#file1').focus();
+        returntpe=false;
+    }else {
+        $('#concirmationRenewalModel').modal('show');
+        $('#actiontype').val('submit');
+        $('#formId').val('specializedTradeForm');
+        $('#targetId').val('acknowledgementmessage');
+        $('#url').val(_baseURL() + '/saveSpecializedTrade');
         $('#messages').html('You are about to submit your application. Do you want to proceed?');
         returntpe;
     }
@@ -324,6 +327,7 @@ function printCertificate(cdbNo){
     window.open("/cdb/print/printCertificate?cdbNo=" + cdbNo);
 }
 function printInfo(cdbNo){
+    alert(cdbNo);
     var url= '/cdb/admin_engineer/emptylayout/printarchitectInfo?cdbNo='+cdbNo;
     $('#content_main_div_public_user').load(url);
 }

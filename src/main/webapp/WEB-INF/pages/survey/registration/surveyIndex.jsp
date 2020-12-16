@@ -223,7 +223,7 @@
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <label>Mobile Number: <span class="text-danger">*</span></label>
-                                                                    <input type="text" class=" form-control number" onclick="remove_err('mobileNo_err')" id="mobileNo" name="mobileNo"  maxlength="8">
+                                                                    <input type="number" class=" form-control number" onclick="remove_err('mobileNo_err')" id="mobileNo" name="mobileNo" onKeyPress="if(this.value.length==8) return false;" min="0">
                                                                     <span id="mobileNo_err" class="text-danger"></span>
                                                                 </div>
                                                             </div>

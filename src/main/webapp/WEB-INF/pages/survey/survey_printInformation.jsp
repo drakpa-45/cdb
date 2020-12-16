@@ -13,6 +13,12 @@
 <body>
     <div class="card" id="printdiv">
         <div class="card-body">
+            <div class="form-group fa-pull-right">
+                <div class="col-md-12 col-sm-12-col-lg-12 col-xs-12 ">
+                    <button class="btn btn-sm btn-primary" type="button" onclick="printAndDowoload()"><i class="fa fa-download"></i>Print</button> &nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-sm btn-danger" type="button" onclick="doExportItem()"><i class="fa fa-edit"></i>Generate PFD</button> &nbsp;&nbsp;&nbsp;
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <strong>
@@ -161,12 +167,35 @@
                                 </tbody>
                             </table>
                         </div>
-                        <button class="btn btn-info" type="button" id="prntid" onclick="printAndDowoload()"><i class="fa fa-download"></i>Print</button><br /><br />
                      </div>
                  </div>
+            </div>
         </div>
     </div>
-    </div>
+    <script>
+        function doExportItem(){
+            var HTML_Width = $("#printdiv").width();
+            var HTML_Height = $("#printdiv").height();
+            var top_left_margin = 12;
+            var PDF_Width = HTML_Width+(top_left_margin*2);
+            var PDF_Height = (PDF_Width*1.5)+(top_left_margin*2);
+            var canvas_image_width = HTML_Width;
+            var canvas_image_height = HTML_Height;
+            var totalPDFPages = Math.ceil(HTML_Height / PDF_Height)-1;
+            html2canvas($("#printdiv")[0],{allowTaint:true}).then(function(canvas) {
+                canvas.getContext('2d');
+                console.log(canvas.height+"  "+canvas.width);
+                var imgData = canvas.toDataURL("image/jpeg", 1.0);
+                var pdf = new jsPDF('p', 'pt',  [PDF_Width, PDF_Height]);
+                pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin,canvas_image_width,0);
+                for (var i = 1; i <= totalPDFPages; i++) {
+                    pdf.addPage(PDF_Width, PDF_Height);
+                    pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+                }
+                pdf.save("form.pdf");
+            });
+        }
+    </script>
     <script type="text/javascript" src="<c:url value="/resources/JqueryAjaxFormSubmit.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/jquery.form.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/cdb/survey.js"/>"></script>

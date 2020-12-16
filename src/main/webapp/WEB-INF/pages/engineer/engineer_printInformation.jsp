@@ -15,8 +15,8 @@
     <div class="card-body">
         <div class="form-group fa-pull-right">
             <div class="col-md-12 col-sm-12-col-lg-12 col-xs-12 ">
-                <button class="btn btn-sm btn-primary " type="button" onclick="printAndDowoload()"><i class="fa fa-download"></i>Print</button> &nbsp;&nbsp;&nbsp;
-                <button class="btn btn-sm btn-danger " type="button" onclick="doExportItem()"><i class="fa fa-edit"></i>Generate PFD</button> &nbsp;&nbsp;&nbsp;
+                <button class="btn btn-sm btn-primary" type="button" onclick="printAndDowoload()"><i class="fa fa-download"></i>Print</button> &nbsp;&nbsp;&nbsp;
+                <button class="btn btn-sm btn-danger" type="button" onclick="doExportItem()"><i class="fa fa-edit"></i>Generate PFD</button> &nbsp;&nbsp;&nbsp;
             </div>
         </div>
         <div class="row">

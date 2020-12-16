@@ -27,7 +27,7 @@
                             <h3 class="card-title font-weight-bold" style="color: #002752">Specialized Trade >> Renewal >>
                                 <security:authorize access="hasRole('ROLE_PAYMENT')">Payment Approver</security:authorize>
                             </h3>
-                            <span style="font-size: small;color: #444444"> >> Application Number : ${appDetails.referenceNo} || CDB Number : ${appDetails.cdbNo}     Application Date: ${appDetails.applicationDate} </span>
+                            <span class="font-weight-bold" style="font-size: small;color: #444444"> >> Application Number : ${appDetails.referenceNo} || CDB Number : ${appDetails.cdbNo}     Application Date: ${appDetails.applicationDate} </span>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -236,7 +236,7 @@
                                                                 <td>${appDetails.remarks}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td><strong>CreatedBy: </strong></td>
+                                                                <td><strong>Submitted By: </strong></td>
                                                                 <td>${appDetails.createdBy}</td>
                                                             </tr>
                                                         </table>
