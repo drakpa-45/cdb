@@ -60,6 +60,7 @@ public class ContractorRCDao extends BaseDao {
      * @param ownerOrPartner -- 'O' only owner, 'H' only HR, 'B' for both owner and HR
      * @return List
      */
+
     @Transactional(readOnly = true)
     public List<ContractorHrDTO> getContractorHRsFinal(String contractorId, Character ownerOrPartner) {
         if (ownerOrPartner == 'B') {

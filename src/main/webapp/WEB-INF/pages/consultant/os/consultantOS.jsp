@@ -564,6 +564,9 @@
                                         </div>
                                         <div class="tab-pane category_details hide">
                                             <div class="div-actual">
+                                                <div class="card">
+                                                    Note: If you are upgrading/down grade class,it is necessary to attach Letter of Undertaking
+                                                </div>
                                                 <table id="consultantCCTbl" class="table table-bordered table-hover">
                                                     <thead style="background-color: #F2F2F2">
                                                     <tr>
@@ -859,6 +862,7 @@
                                                             <th>Registration Number</th>
                                                             <th>Quantity</th>
                                                             <th>Attachment</th>
+                                                            <th>Delete Request</th>
                                                             <th>Action</th>
                                                         </tr>
                                                         </thead>
@@ -1086,7 +1090,7 @@
                             <div class="modal-body form-horizontal">
                                 <div class="modal-div">
                                     <div class="form-group">
-                                        <input type="hidden" id="hrId" name="consultantHRs[0].id">
+                                        <input type="hidden" id="id4Edit" name="consultantHRs[0].id">
                                         <label class="col-lg-2">Nationality
                                             <span class="text-danger">*</span>:</label>
 
@@ -1307,7 +1311,7 @@
                                 <div class="">
                                     <div class="form-group">
                                         <label class="col-lg-2">Equipment <span class="text-danger">*</span>:</label>
-
+                                        <input type="hidden" class="id4Edit" name="equipments[0].id" /> <!-- for edit-->
                                         <div class="col-lg-4">
                                             <select name="equipments[0].equipmentId"
                                                     class="form-control custom-select text-left equipmentId" required=""

@@ -123,16 +123,12 @@ function getModalData(tableId, prefix, totalCol) {
             name = $this.prop('name');
         }
 
-       /* var tdVal = "<input type='hidden' name='" + name + "' value='" + value + "'/>" + text;
-         td = td + "<td>" + tdVal + "</td>";*/
-
         var tdVal = "<input type='hidden' class='"+$this.attr('id')+"' name='" + name + "' value='" + value + "'/>" + text;
         td = td + "<td>" + tdVal + "</td>";
     }
     td = td + "<td ><span class='doc'></span> <div class='hidden hr_attachment'></div></td>";
 
-    td = td + "<td ><input type='radio' class='deleteRequest'  name='consultantHRs[0].deleteRequest' id='deleteRequest"+bodyId+"' value='yes'><span style='color:#ff0000'>Yes</span>" +
-    "<input type='radio' class='deleteRequest'  name='consultantHRs[0].deleteRequest' id='deleteRequest"+bodyId+"' value='no'><span style='color:#ff0000'>No</span></td>";
+    td = td + "<td ><input type='checkbox' name='contractorHRs[0].deleteRequest' value='1'></td>";
 
     var tr = "<tr id='"+j+"'>" + td + "<td class=' '><a class='p-2 edit-"+prefix+"'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td></tr>";
 
@@ -265,7 +261,7 @@ var consultantRC = (function () {
             var certificateTbl = $('#certificateTbl').find('tbody');
             if (~option.indexOf("Incorporated") || ~option.indexOf("Sole Proprietorship")) {
                 $('#cIncorporation').removeClass('hide');
-                certificateTbl.append(cert);
+                certificateTbl.html(cert);
             }else{
                 $('#cIncorporation').addClass('hide');
                 certificateTbl.empty();
@@ -292,6 +288,21 @@ var consultantRC = (function () {
         });
     }
 
+    var certCategory = "<tr>" +
+        "<td><input type='text' class='form-control' name='cAttachments[0].documentName'/> </td>"+
+        "<td><input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
+        "<td class='file-size'></td>" +
+        "<td><a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a></td>" +
+        "</tr>";
+
+    function addMoreCertCategory(){
+        $('#addMoreCertCategory').on('click',function(e){
+            var certificateTbl = $('#certificateTblCategory').find('tbody').append(certCategory);
+            /*var row = certificateTbl.find('tr:eq(0)').html();
+             certificateTbl.append('<tr>'+row.find(':input').val('')+'</tr>');*/
+        });
+    }
+
     function addMoreCert(){
         $('#addMoreCert').on('click',function(e){
             var certificateTbl = $('#certificateTbl').find('tbody').append(cert);
@@ -301,7 +312,7 @@ var consultantRC = (function () {
     }
     function addMoreCertOwner(){
         $('#addMoreCertOwner').on('click',function(e){
-            var certificateTbl = $('#certificateTblOwner').find('tbody').append(cert);
+            var certificateTbl = $('#certificateTblOwner').find('tbody').append(certCategory);
             /*var row = certificateTbl.find('tr:eq(0)').html();
              certificateTbl.append('<tr>'+row.find(':input').val('')+'</tr>');*/
         });
@@ -319,12 +330,12 @@ var consultantRC = (function () {
                     $('#ownerPartner').removeClass('hide');
                     $('#changeOfOwnerId').prop('disabled', true);
                     getOwnerFinal();
-                    sCertOwner();
                 }else{
                     $('#ownershipList').prop('disabled',true);
                     $('#firmName').prop('disabled', true);
                     $('#changeOfFirmName').prop('disabled', false);
                     $('#changeOfOwnerId').prop('disabled', false);
+                    $('#ownerPartner').addClass('hide');
                 }
             }else if(id == 'changeOfFirmName' ){
                 if($this.is(':checked')) {
@@ -344,7 +355,7 @@ var consultantRC = (function () {
                 if($this.is(':checked')) {
                     $('#ownerPartner').removeClass('hide');
                     getOwnerFinal();
-                    sCertOwner();
+                    // sCertOwner();
                 }else{
                     $('#ownerPartner').addClass('hide');
                     $('#cOwnershipId').addClass('hide');
@@ -426,8 +437,7 @@ var consultantRC = (function () {
                             "<td class='serviceTypeName'>" + consultantHrs[i].serviceTypeName + "</td>" +
                             "<td class='joiningDate'>" + consultantHrs[i].joinDate + "</td>" +
                             "<td class='attachments'>" + attachments + "</td>" +
-                            "<td> <input type='radio' class='deleteRequest' name='consultantHRs[0].deleteRequest' id='deleteRequest "+i+"' value='yes' ><span style='color:#ff0000'>Yes</span>" +
-                            "<input type='radio' class='deleteRequest'  name='consultantHRs[0].deleteRequest' id='deleteRequest"+bodyId+"' value='no'><span style='color:#ff0000'>No</span></td>" +
+                            "<td><input type='checkbox' name='consultantHRs[0].deleteRequest' value='1'></td>" +
                             "<td class='action'><button class='btn-sm btn-info btn-block edit-row'>Edit</button></td>" +
                             "</tr>";
                         }
@@ -490,7 +500,8 @@ var consultantRC = (function () {
                             "<td>" + equipments[i].registrationNo + "</td>" +
                             "<td>" + equipments[i].quantity + "</td>" +
                             "<td style='text-align: center'>"+attachment+"</td>" +
-                            "<td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger'></i></a></td>" +
+                            "<td><input type='checkbox' name='equipments[0].deleteRequest' value='1'></td>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button></td>"  +
                             "</tr>";
                         }
                         $('#equipmentTbl').find('tbody').html(eqTr);
@@ -682,13 +693,14 @@ var consultantRC = (function () {
     }
 
     function editInModalEQ(){
-        $('body').on('click','.edit_row_eq',function(e){
+        $('body').on('click','.edit_row',function(e){
             e.preventDefault();
             var row = $(this).closest('tr');
             var modal = $('#eqModal');
-            modal.find('#eq1').val(row.find('.consultantEQid').val());
-            modal.find('#eq2').val(row.find('td:eq(2)').text());
-            modal.find('#eq3').val(row.find('td:eq(2)').text());
+            modal.find('.id4Edit').val(row.find('.consultantEQid').val());
+            modal.find('#eq1').val(modal.find('#eq1 option:contains("'+row.find('td:nth-child(1)').text()+'")').val());
+            modal.find('#eq2').val(row.find('td:nth-child(2)').text());
+            modal.find('#eq3').val(row.find('td:nth-child(3)').text());
             var hraTr = "";
             row.find('.attachment').each(function(){
                 var name = $(this).find('a').text();
@@ -703,27 +715,19 @@ var consultantRC = (function () {
             // row.remove();
             openModal('eqModal');
         });
+
+        $('body').on('click','.edit-eq',function(e){
+            e.preventDefault();
+            var row = $(this).closest('tr');
+            var hrModal = $('#eqModal');
+            hrModal.find('#eq1').val(row.find('.eq1').val());
+            hrModal.find('#eq2').val(row.find('.eq2').val());
+            hrModal.find('#eq3').val(row.find('.eq3').val());
+            row.addClass('tbd'); //add class to be deleted
+            openModal('eqModal');
+        });
     }
 
-    function allowEditHrEqExpired(){
-        if($('#isExpired').val() == 'true'){
-            $('#Incorporation').prop('disabled',true);
-            $('#changeOfFirmName').prop('disabled',true);
-            $('#changeOfLocation').prop('disabled',true);
-            $('#changeOfOwnerId').prop('disabled',true);
-            $('#upgradeDowngrade').prop('disabled',true);
-            $('#err-expired-audit-memo').val('Your application is expired. You can only avail HR update and Equipment Update.');
-        }
-        var auditMemo = $('#auditMemo').val();
-        if(auditMemo != ''){
-            $('#Incorporation').prop('disabled',true);
-            $('#changeOfFirmName').prop('disabled',true);
-            $('#changeOfLocation').prop('disabled',true);
-            $('#changeOfOwnerId').prop('disabled',true);
-            $('#upgradeDowngrade').prop('disabled',true);
-            $('#err-expired-audit-memo').html(auditMemo);
-        }
-    }
 
     function changeFile(){
         $('#hrUploadTbl').on('click','.change',function(e){
@@ -878,6 +882,7 @@ var consultantRC = (function () {
         changeFile();
         addMoreCert();
         addMoreCertOwner();
+        addMoreCertCategory();
         allowEditHrEqExpired();
         editInModalEQ();
         checkDuplicateHR();

@@ -159,4 +159,9 @@ public class ConsultantNRActionDao extends BaseDao {
         sqlQuery = properties.getProperty("ConsultantActionDao.getIncAttachment");
         return hibernateQuery(sqlQuery, ConsultantAttachment.class).setParameter("consultantId", consultantId).list();
     }
+
+    public String getCDBNoFromAppNo(String appNo) {
+        sqlQuery = properties.getProperty("ConsultantActionDao.getCDBNoFromAppNo");
+        return hibernateQuery(sqlQuery).setParameter("appNo", appNo).list().get(0).toString();
+    }
 }

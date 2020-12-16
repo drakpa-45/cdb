@@ -22,10 +22,13 @@ function addRow(tableId) {
     }
 }
 function removeRow(tableId) {
-    $('#' + tableId + ' tr:last').remove();
+    if($('#' + tableId + ' tbody tr').length > 1) {
+        $('#' + tableId + ' tr:last').remove();
+    }else{
+        warningMsg("Cannot delete last row. You must have atleast one row for information!");
+    }
 }
 function showAcknowledgement() {
-
     $("#registrtaionFormCard").hide();
     $("#acknowledgementCard").show();
 }
@@ -114,13 +117,14 @@ function getModalData(tableId, prefix, totalCol) {
             name = $this.prop('name');
         }
 
-        var tdVal = "<input type='hidden' name='" + name + "' value='" + value + "'/>" + text;
+        var tdVal = "<input type='hidden' class='"+$this.attr('id')+"' name='" + name + "' value='" + value + "'/>" + text;
         td = td + "<td>" + tdVal + "</td>";
     }
     td = td + "<td ><span class='doc'></span> <div class='hidden hr_attachment'></div></td>";
 
-    var tr = "<tr id='"+j+"'>" + td + "<td></td><td><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
-        "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td></tr>";
+    td = td + "<td ><input type='checkbox' name='contractorHRs[0].deleteRequest' value='1'></td>";
+
+    var tr = "<tr id='"+j+"'>" + td + "<td class=' '><a class='p-2 edit-"+prefix+"'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td></tr>";
 
     $("#" + tableId).append(tr).find(".noRecord").hide();
     if(prefix == 'hr'){
@@ -236,9 +240,9 @@ var contractorOS = (function () {
         $('#ownershipList').on('change', function (e) {
             var option = $(this).find("option:selected").html();
             var certificateTbl = $('#certificateTbl').find('tbody');
-            if (~option.indexOf("Incorporated")) {
+            if (~option.indexOf("Incorporated") || ~option.indexOf("Sole Proprietorship")) {
                 $('#cIncorporation').removeClass('hide');
-                certificateTbl.append(cert);
+                certificateTbl.html(cert);
             }else{
                 $('#cIncorporation').addClass('hide');
                 certificateTbl.empty();
@@ -444,7 +448,7 @@ var contractorOS = (function () {
                             "<td class='serviceTypeName'>" + contractorHrs[i].serviceTypeName + "</td>" +
                             "<td class='attachments'>" + attachments + "</td>" +
                             "<td><input type='checkbox' name='contractorHRs[0].deleteRequest' value='1'></td>"+
-                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button></td>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit-row'>Edit</button></td>" +
                             "</tr>";
                         }
                         $('#hrDtlsTable').find('tbody').append(hrTr);
@@ -592,7 +596,7 @@ var contractorOS = (function () {
     }
 
     function editInModal(){
-        $('#hrDtlsTable').on('click','.edit_row',function(e){
+        $('#hrDtlsTable').on('click','.edit-row',function(e){
             e.preventDefault();
             var row = $(this).closest('tr');
             var hrModal = $('#addHRModal');
@@ -614,11 +618,29 @@ var contractorOS = (function () {
                 hraTr = hraTr+"<tr><td><input type='hidden' class='hraId' value='"+$(this).find('.hraId').val()+"'>" +
                 "<input type='text' required class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName' value='"+name.substring(0,name.lastIndexOf('.'))+"' disabled></td>" +
                 "<td><span class='aName'> "+hra+"</span><span class='aFile'></span> </td>" +
-                    /*"<td></td>" +*/
+                    "<td></td>" +
                 "<td><button class='change'>Change</button><button class='del_row'>Delete</button></td></tr>";
             });
             hrModal.find('#hrUploadTbl tbody').empty().html(hraTr);
             row.addClass('tbd');
+            openModal('addHRModal');
+        });
+
+        $('body').on('click','.edit-hr',function(e){
+            e.preventDefault();
+            var row = $(this).closest('tr');
+            var hrModal = $('#addHRModal');
+            hrModal.find('#hr5').val(row.find('.hr5').val());
+            hrModal.find('#hr3').val(row.find('.hr3').val());
+            hrModal.find('#hr1').val(row.find('.hr1').val());
+            hrModal.find('#hr2').val(row.find('.hr2').val());
+            hrModal.find('#hr4').val(row.find('.hr4').val());
+            hrModal.find('#hr6').val(row.find('.hr6').val());
+            hrModal.find('#hr7').val(row.find('.hr7').val());
+            hrModal.find('#hr8').val(row.find('.hr8').val());
+            hrModal.find('#hr9').val(row.find('.hr9').val());
+            hrModal.find('#hr10').val(row.find('.hr10').val());
+            row.addClass('tbd'); //add class to be deleted
             openModal('addHRModal');
         });
     }
@@ -629,7 +651,6 @@ var contractorOS = (function () {
             var row = $(this).closest('tr');
             var modal = $('#eqModal');
             modal.find('.id4Edit').val(row.find('.contractorEQid').val())//for Edit
-
             modal.find('#eq1').val(modal.find('#eq1 option:contains("'+row.find('td:nth-child(1)').text()+'")').val());
             modal.find('#eq2').val(row.find('td:nth-child(2)').text());
             modal.find('#eq3').val(row.find('td:nth-child(3)').text());
@@ -645,6 +666,17 @@ var contractorOS = (function () {
             });
             modal.find('#eqUploadTbl tbody').empty().html(eqaTr);
             row.addClass('tbd');
+            openModal('eqModal');
+        });
+
+        $('body').on('click','.edit-eq',function(e){
+            e.preventDefault();
+            var row = $(this).closest('tr');
+            var hrModal = $('#eqModal');
+            hrModal.find('#eq1').val(row.find('.eq1').val());
+            hrModal.find('#eq2').val(row.find('.eq2').val());
+            hrModal.find('#eq3').val(row.find('.eq3').val());
+            row.addClass('tbd'); //add class to be deleted
             openModal('eqModal');
         });
     }
@@ -689,7 +721,6 @@ var contractorOS = (function () {
                 row.find('.aFile').empty();
                 $this.text('Change');
             }
-
         });
     }
 

@@ -342,11 +342,15 @@
             <groupId>org.wso2.client</groupId>
             <artifactId>G2C_CommonBusinessAPI</artifactId>
             <version>1.0.0-SNAPSHORT</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/G2C_CommonBusinessAPI-1.0.0-SNAPSHORT.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.wso2.client.DCRC_CitizenDetailsAPI</groupId>
             <artifactId>org.wso2.client.DCRC_CitizenDetailsAPI</artifactId>
             <version>1.0.0.SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/org.wso2.client.DCRC_CitizenDetailsAPI-1.0.0.SNAPSHOT.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.ow2.asm</groupId>
@@ -425,18 +429,24 @@
             <groupId>org.wso2.client.DCRC_RestCitizenImageAPI</groupId>
             <artifactId>org.wso2.client.DCRC_RestCitizenImageAPI</artifactId>
             <version>1.0.0-SNAPSHORT</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/org.wso2.client.DCRC_RestCitizenImageAPI-1.0.0-SNAPSHORT.jar</systemPath>
         </dependency>
 
         <dependency>
             <groupId>org.wso2.client.RBP_SCSDetailsAPI</groupId>
             <artifactId>org.wso2.client.RBP_SCSDetailsAPI</artifactId>
             <version>1.0.0-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/org.wso2.client.RBP_SCSDetailsAPI-1.0.0-SNAPSHOT.jar</systemPath>
         </dependency>
 
         <dependency>
             <groupId>org.wso2.client.RCSC_EmployeeDetailsAPI</groupId>
             <artifactId>org.wso2.client.RCSC_EmployeeDetailsAPI</artifactId>
             <version>1.0.0-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/org.wso2.client.RCSC_EmployeeDetailsAPI-1.0.0-SNAPSHOT.jar</systemPath>
         </dependency>
 
         <!-- for jasper report -->
@@ -482,7 +492,6 @@
             <artifactId>itextpdf</artifactId>
             <version>5.5.10</version>
         </dependency>
-
 
         <!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
         <dependency>

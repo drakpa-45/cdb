@@ -21,6 +21,7 @@ ConsultantActionDao.send2MyOrGroupTask=UPDATE crpconsultant a SET a.`SysLockedBy
 
 ConsultantDao.getConsultantOngoingApp = SELECT aa.`CrpConsultantId` consultantId,aa.`ReferenceNo` AS referenceNo, aa.ApplicationDate AS applicationDate, aa.CDBNo AS cdbNo,aa.Id AS appStatusId,bb.Name AS appStatusName FROM `crpconsultant` aa INNER JOIN cmnlistitem bb ON aa.`CmnApplicationRegistrationStatusId`=bb.Id WHERE  bb.Id IN ('262a3f11-adbd-11e4-99d7-080027dcfac6','36f9627a-adbd-11e4-99d7-080027dcfac6','6195664d-c3c5-11e4-af9f-080027dcfac6') AND aa.CDBNo =:cdbNo
 
+ConsultantActionDao.getCDBNoFromAppNo = SELECT b.cdbno FROM  crpconsultant a INNER JOIN crpconsultantfinal b ON a.email = b.email WHERE a.referenceNo =:appNo
 
 ConsultantActionDao.getConsultantHRs = SELECT hr.Id AS id,hr.CrpConsultantId consultantID,hr.CIDNo cidNo,hr.Name AS name, hr.Sex sex,hr.ShowInCertificate AS siCertificate, hr.Verified as verified,hr.Approved \
 ,hr.IsPartnerOrOwner isPartnerOrOwner,DATE_FORMAT(hr.JoiningDate, '%d-%m-%Y') joinDate,sa.Name salutationName,co.Name countryName,qu.Name qualificationName,st.Name serviceTypeName,td.Name tradeName,de.Name designationName \

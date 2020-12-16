@@ -263,7 +263,7 @@
                                             <i class="fa fa-arrow-circle-left"></i>Back
                                         </button>
                                         <button type="button"  onclick="nextTab('generalInformation','categoryDtls')"
-                                                class="btn btn-primary" id="nextGIBtn">
+                                                class="btn btn-primary" disabled id="nextGIBtn">
                                             <i class="fa fa-arrow-circle-right"></i>Next
                                         </button>
                                     </div>
@@ -355,7 +355,7 @@
                                         </button>
                                         <button type="button"
                                                 onclick="nextTab('humanResourceCriteria','consultantEquipmentDtls')"
-                                                class="btn btn-primary" id="nextHRBtn">
+                                                class="btn btn-primary" id="nextHRBtn" disabled>
                                             <i class="fa fa-arrow-circle-right"></i>Next
                                         </button>
                                     </div>
@@ -403,7 +403,7 @@
                                                 <button type="button" onclick="backTab('consultantEquipmentDtls','humanResourceCriteria')" id="btn5" class="btn btn-azure col-lg-offset-9">
                                                     <i class="fa fa-arrow-circle-left"></i>&nbsp; Back
                                                 </button>
-                                                <button type="button"  class="btn btn-primary" id="btnValEqNext" onclick="saveAndPreview('consultantEquipmentDtls', 'saveAndPreview')">
+                                                <button type="button"  class="btn btn-primary" disabled id="btnValEqNext" onclick="saveAndPreview('consultantEquipmentDtls', 'saveAndPreview')">
                                                     Save & Preview &nbsp;
                                                     <i class="fa fa-life-saver"></i>
                                                 </button>

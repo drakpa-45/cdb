@@ -100,6 +100,7 @@ function getModalData(tableId, prefix, totalCol) {
     var modal = $('#' + prefix + '1').closest('.modal');
     $('#modalForm').validate();
     if(modal.find(':text,:file,:checkbox,select').valid() == false){
+        warningMsg('Please provide your information');
         return false;
     }
 
@@ -119,13 +120,14 @@ function getModalData(tableId, prefix, totalCol) {
             name = $this.prop('name');
         }
 
-        var tdVal = "<input type='hidden' name='" + name + "' value='" + value + "'/>" + text;
+        var tdVal = "<input type='hidden' class='"+$this.attr('id')+"' name='" + name + "' value='" + value + "'/>" + text;
         td = td + "<td>" + tdVal + "</td>";
     }
     td = td + "<td ><span class='doc'></span> <div class='hidden hr_attachment'></div></td>";
 
-    var tr = "<tr id='"+j+"'>" + td + "<td><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
-        "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td></tr>";
+    td = td + "<td ><input type='checkbox' name='contractorHRs[0].deleteRequest' value='1'></td>";
+
+    var tr = "<tr id='"+j+"'>" + td + "<td class=' '><a class='p-2 edit-"+prefix+"'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td></tr>";
 
     $("#" + tableId).append(tr).find(".noRecord").hide();
     if(prefix == 'hr'){
@@ -247,9 +249,9 @@ var contractorRC = (function () {
         $('#ownershipList').on('change', function (e) {
             var option = $(this).find("option:selected").html();
             var certificateTbl = $('#certificateTbl').find('tbody');
-            if (~option.indexOf("Incorporated")) {
+            if (~option.indexOf("Incorporated") || ~option.indexOf("Sole Proprietorship")) {
                 $('#cIncorporation').removeClass('hide');
-                certificateTbl.append(cert);
+                certificateTbl.html(cert);
             }else{
                 $('#cIncorporation').addClass('hide');
                 certificateTbl.empty();
@@ -271,7 +273,48 @@ var contractorRC = (function () {
              certificateTbl.append('<tr>'+row.find(':input').val('')+'</tr>');*/
         });
     }
+    var certCategory = "<tr>" +
+        "<td><input type='text' class='form-control' name='cAttachments[0].documentName'/> </td>"+
+        "<td><input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
+        "<td class='file-size'></td>" +
+        "<td><a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a></td>" +
+        "</tr>";
 
+    function addMoreCertCategory(){
+        $('#addMoreCertCategory').on('click',function(e){
+            var certificateTbl = $('#certificateTblCategory').find('tbody').append(certCategory);
+            /*var row = certificateTbl.find('tr:eq(0)').html();
+             certificateTbl.append('<tr>'+row.find(':input').val('')+'</tr>');*/
+        });
+    }
+
+    function addMoreCertOwner(){
+        $('#addMoreCertOwner').on('click',function(e){
+            var certificateTbl = $('#certificateTblOwner').find('tbody').append(certCategory);
+            /*var row = certificateTbl.find('tr:eq(0)').html();
+             certificateTbl.append('<tr>'+row.find(':input').val('')+'</tr>');*/
+        });
+    }
+
+    function showFileSize() {
+        $('tbody').on('change', '.file', function () {
+            //this.files[0].size gets the size of your file.
+            var exactSize = calFileSize(this);
+            $(this).closest('tr').find('.file-size').text(exactSize);
+            //alert(this.files[0].size);
+        });
+    }
+
+    function calFileSize($this){
+        var _size = $this.files[0].size;
+        var fSExt = ['Bytes', 'KB', 'MB', 'GB'],
+            i = 0;
+        while (_size > 900) {
+            _size /= 1024;
+            i++;
+        }
+        return (Math.round(_size * 100) / 100) + ' ' + fSExt[i];
+    }
 
     function service_check(){
         $('body').on('click','.service_check',function(){
@@ -282,10 +325,16 @@ var contractorRC = (function () {
                     $('#ownershipList').prop('disabled',false);
                     $('#firmName').prop('disabled', false);
                     $('#changeOfFirmName').prop('disabled', true);
+                    $('#ownerPartner').removeClass('hide');
+                    $('#changeOfOwnerId').prop('disabled', true);
+                    getOwnerFinal();
+                    //  sCertOwner();
                 }else{
                     $('#ownershipList').prop('disabled',true);
                     $('#firmName').prop('disabled', true);
                     $('#changeOfFirmName').prop('disabled', false);
+                    $('#changeOfOwnerId').prop('disabled', false);
+                    $('#ownerPartner').addClass('hide');
                 }
             }else if(id == 'changeOfFirmName' ){
                 if($this.is(':checked')) {
@@ -298,15 +347,17 @@ var contractorRC = (function () {
                     $('#estAddress').prop('disabled', false);
                     $('#regDzongkhagId').prop('disabled', false);
                 }else{
-                    $('#estAddress').prop('disabled', false);
-                    $('#regDzongkhagId').prop('disabled', false);
+                    $('#estAddress').prop('disabled', true);
+                    $('#regDzongkhagId').prop('disabled', true);
                 }
             }else if(id == 'changeOfOwnerId' ){
                 if($this.is(':checked')) {
                     $('#ownerPartner').removeClass('hide');
                     getOwnerFinal();
+                    //  sCertOwner();
                 }else{
                     $('#ownerPartner').addClass('hide');
+                    $('#cOwnershipId').addClass('hide');
                 }
             }
         });
@@ -386,6 +437,16 @@ var contractorRC = (function () {
         });
     }
 
+    function addMoreFile(){
+        $('#addMoreHr').on('click',function(e){
+            var uplTbl = $('#hrUploadTbl').find('tbody');
+            var tr = "<tr><td><input type='text' required class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/> </td>" +
+                "<td><input type='file' required class='file' name='contractorHRs[0].contractorHRAs[0].attachment' accept='application/pdf,image/gif, image/jpeg, image/jpg'/> </td>" +
+                "<td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td></tr>";
+            uplTbl.append(tr);
+        });
+    }
+
     function getHRsFinal(){
         $('#updateHR').on('click',function(){
             if($(this).is(':checked')){
@@ -417,9 +478,10 @@ var contractorRC = (function () {
                             "<td class='qualificationName'>" + contractorHrs[i].qualificationName + "</td>" +
                             "<td class='tradeName'>" + contractorHrs[i].tradeName + "</td>" +
                             "<td class='serviceTypeName'>" + contractorHrs[i].serviceTypeName + "</td>" +
+                            "<td class='joiningDate'>" + contractorHrs[i].joinDate + "</td>" +
                             "<td class='attachments'>" + attachments + "</td>" +
-                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
-                            "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                            "<td> <input type='checkbox' name='contractorHRs[0].deleteRequest' value='1'></td>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit-row'>Edit</button></td>" +
                             "</tr>";
                         }
                         $('#hrDtlsTable').find('tbody').append(hrTr);
@@ -483,8 +545,8 @@ var contractorRC = (function () {
                             "<td>" + equipments[i].registrationNo + "</td>" +
                             "<td>" + equipments[i].quantity + "</td>" +
                             "<td style='text-align: center'>"+attachment+"</td>" +
-                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row_eq'>Edit</button>" +
-                            "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                            "<td> <input type='checkbox' name='contractorHRs[0].deleteRequest' value='1'></td>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row_eq'>Edit</button></td>" +
                             "</tr>";
                         }
                         $('#equipmentTbl').find('tbody').html(eqTr);
@@ -496,6 +558,16 @@ var contractorRC = (function () {
             }
             //positionTab('equipment_details');
         })
+    }
+
+    function addMoreEqFile(){
+        $('#addMoreEq').on('click',function(e){
+            var uplTbl = $('#eqUploadTbl').find('tbody');
+            var tr = "<tr><td><input type='text' required class='form-control docName' name='equipments[0].contractorEQAs[0].documentName'/> </td>" +
+                "<td><input type='file' required class='file' name='equipments[0].contractorEQAs[0].attachment' accept='application/pdfimage/gif, image/jpeg, image/jpg'/> </td><td class='file-size'></td>" +
+                "<td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td></tr>";
+            uplTbl.append(tr);
+        });
     }
 
     function getClassCategory(){
@@ -532,7 +604,6 @@ var contractorRC = (function () {
                         }
                     }
                 });
-
             }else{
                 $('.category_details').addClass('hide');
             }
@@ -554,7 +625,7 @@ var contractorRC = (function () {
     }
 
     function editInModal(){
-        $('body').on('click','.edit_row',function(e){
+        $('body').on('click','.edit-row',function(e){
             e.preventDefault();
             var row = $(this).closest('tr');
             var hrModal = $('#addHRModal');
@@ -583,6 +654,24 @@ var contractorRC = (function () {
             row.addClass('tbd'); //add class be be deleted
             openModal('addHRModal');
         });
+
+        $('body').on('click','.edit-hr',function(e){
+            e.preventDefault();
+            var row = $(this).closest('tr');
+            var hrModal = $('#addHRModal');
+            hrModal.find('#hr5').val(row.find('.hr5').val());
+            hrModal.find('#hr3').val(row.find('.hr3').val());
+            hrModal.find('#hr1').val(row.find('.hr1').val());
+            hrModal.find('#hr2').val(row.find('.hr2').val());
+            hrModal.find('#hr4').val(row.find('.hr4').val());
+            hrModal.find('#hr6').val(row.find('.hr6').val());
+            hrModal.find('#hr7').val(row.find('.hr7').val());
+            hrModal.find('#hr8').val(row.find('.hr8').val());
+            hrModal.find('#hr9').val(row.find('.hr9').val());
+            hrModal.find('#hr10').val(row.find('.hr10').val());
+            row.addClass('tbd'); //add class to be deleted
+            openModal('addHRModal');
+        });
     }
 
     function editInModalEQ(){
@@ -592,8 +681,9 @@ var contractorRC = (function () {
             //alert(row.find('.contractorEQid').val());
             var modal = $('#eqModal');
             modal.find('#eq1').val(row.find('.contractorEQid').val());
-            modal.find('#eq2').val(row.find('td:eq(2)').text());
-            modal.find('#eq3').val(row.find('td:eq(2)').text());
+            modal.find('#eq1').val(modal.find('#eq1 option:contains("'+row.find('td:nth-child(1)').text()+'")').val());
+            modal.find('#eq2').val(row.find('td:nth-child(2)').text());
+            modal.find('#eq3').val(row.find('td:nth-child(3)').text());
             var hraTr = "";
             row.find('.attachment').each(function(){
                 var name = $(this).find('a').text();
@@ -606,6 +696,17 @@ var contractorRC = (function () {
             });
             modal.find('#eqUploadTbl tbody').empty().html(hraTr);
             row.addClass('tbd'); //add class be be deleted
+            openModal('eqModal');
+        });
+
+        $('body').on('click','.edit-eq',function(e){
+            e.preventDefault();
+            var row = $(this).closest('tr');
+            var hrModal = $('#eqModal');
+            hrModal.find('#eq1').val(row.find('.eq1').val());
+            hrModal.find('#eq2').val(row.find('.eq2').val());
+            hrModal.find('#eq3').val(row.find('.eq3').val());
+            row.addClass('tbd'); //add class to be deleted
             openModal('eqModal');
         });
     }
@@ -632,14 +733,35 @@ var contractorRC = (function () {
         });
     }
 
-    function getPersonalInfo($this,country,hrOrPartner){
+    function changeFileEq(){
+        $('#eqUploadTbl').on('click','.change',function(e){
+            //e.preventDefault();
+            var $this = $(this);
+            var row = $(this).closest('tr');
+            var file= "<input type='file' required class='file' name='equipments[0].contractorEQAs[0].attachment'"+
+                "accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>";
+            if($this.text() == 'Change'){
+                row.find('.docName').prop('disabled',false);
+                row.find('.aName').addClass('hide');
+                row.find('.aFile').html(file);
+                $this.text('Cancel');
+            }else{
+                row.find('.docName').prop('disabled',true);
+                row.find('.aName').removeClass('hide');
+                row.find('.aFile').empty();
+                $this.text('Change');
+            }
 
+        });
+    }
+
+    function getPersonalInfo($this,country,hrOrPartner){
         if(country == '8f897032-c6e6-11e4-b574-080027dcfac6') { //if bhutanese fetch from DCRC
             $.ajax({
-                url: _baseURL() + '/getPersonalInfo',
+                url:cdbGlobal.baseURL() +'/contractorNR/getPersonalInfo',
                 type: 'GET',
                 async:false,
-                data: {cidNo: $this.val()},
+                data: {cidNo: $this.val(),type:"fetch"},
                 success: function (res) {
                     if (res.status == '1') {
                         var dto = res.dto;
@@ -662,6 +784,29 @@ var contractorRC = (function () {
                 }
             });
         }
+    }
+
+    function getPersonalInfoHR(){
+        $('#addHRModal').on('change','.hr-cid', function (e) {
+            var $this = $(this);
+            var country = $('#hr5').val();
+            if(country == '8f897032-c6e6-11e4-b574-080027dcfac6') { //if bhutanese fetch from DCRC
+                $.ajax({
+                    url: cdbGlobal.baseURL() +'/contractorNR/getPersonalInfo',
+                    type: 'GET',
+                    data: {cidNo: $this.val(), type: "fetch"},
+                    success: function (res) {
+                        if (res.status == '1') {
+                            var dto = res.dto;
+                            // var index = $this.closest("tr").index();
+                            $('#hr2').val(dto.fullName).prop('readonly', true);
+                            $('#hr4').val(dto.sex).prop('readonly', true);
+                            $('#hr11').val(dto.cdbNo).prop('readonly', true);
+                        }
+                    }
+                });
+            }
+        })
     }
 
     function checkDuplicateHR(){
@@ -713,9 +858,17 @@ var contractorRC = (function () {
         delTableRow();
         editInModal();
         changeFile();
+        changeFileEq();
         addMoreCert();
+        addMoreCertOwner();
+        addMoreCertCategory();
         checkDuplicateHR();
         editInModalEQ();
+        showFileSize();
+        addMoreFile();
+        addMoreEqFile();
+        getPersonalInfo();
+        getPersonalInfoHR();
     }
 
     return {

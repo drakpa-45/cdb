@@ -25,7 +25,6 @@ function removeRow(tableId) {
     $('#' + tableId + ' tr:last').remove();
 }
 function showAcknowledgement() {
-
     $("#registrtaionFormCard").hide();
     $("#acknowledgementCard").show();
 }
@@ -40,8 +39,6 @@ function saveAndPreview(presentClass, nextClass) {
     $("." + nextClass).addClass("active");
     $("." + presentClass + ">a").append("<i class='fa fa-check ml-1'></i>");
     //$("#" + nextClass).html(content);
-
-
 }
 
 function nextTab(presentClass) {
@@ -95,10 +92,12 @@ var hr_modal = $("#hrModal").html();
 var eq_modal = $("#eqModal").html();
 var j= 0;
 function getModalData(tableId, prefix, totalCol) {
+    $('#'+tableId).find('.tbd').remove();
     var td = "";
     var modal = $('#' + prefix + '1').closest('.modal');
     $('#modalForm').validate();
     if(modal.find(':text,:file,:checkbox,select').valid() == false){
+        warningMsg('Please provide your information');
         return false;
     }
 
@@ -117,13 +116,14 @@ function getModalData(tableId, prefix, totalCol) {
             text = value;
             name = $this.prop('name');
         }
-        var tdVal = "<input type='hidden' name='" + name + "' value='" + value + "'/>" + text;
+        var tdVal = "<input type='hidden' class='"+$this.attr('id')+"' name='" + name + "' value='" + value + "'/>" + text;
         td = td + "<td>" + tdVal + "</td>";
     }
     td = td + "<td ><span class='doc'></span> <div class='hidden hr_attachment'></div></td>";
 
-    var tr = "<tr id='"+j+"'>" + td + "<td><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
-        "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td></tr>";
+    td = td + "<td ><input type='checkbox' name='spFirmHRs[0].deleteRequest' value='1'></td>";
+
+    var tr = "<tr id='"+j+"'>" + td + "<td class=' '><a class='p-2 edit-"+prefix+"'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td></tr>";
 
     $("#" + tableId).append(tr).find(".noRecord").hide();
     if(prefix == 'hr'){
@@ -243,9 +243,9 @@ var spFirmRC = (function () {
         $('#ownershipList').on('change', function (e) {
             var option = $(this).find("option:selected").html();
             var certificateTbl = $('#certificateTbl').find('tbody');
-            if (~option.indexOf("Incorporated")) {
+            if (~option.indexOf("Incorporated") || ~option.indexOf("Sole Proprietorship")) {
                 $('#cIncorporation').removeClass('hide');
-                certificateTbl.append(cert);
+                certificateTbl.html(cert);
             }else{
                 $('#cIncorporation').addClass('hide');
                 certificateTbl.empty();
@@ -260,9 +260,31 @@ var spFirmRC = (function () {
         });
     }
 
+    var certCategory = "<tr>" +
+        "<td><input type='text' class='form-control' name='cAttachments[0].documentName'/> </td>"+
+        "<td><input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
+        "<td class='file-size'></td>" +
+        "<td><a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a></td>" +
+        "</tr>";
+
+    function addMoreCertCategory(){
+        $('#addMoreCertCategory').on('click',function(e){
+            var certificateTbl = $('#certificateTblCategory').find('tbody').append(certCategory);
+            /*var row = certificateTbl.find('tr:eq(0)').html();
+             certificateTbl.append('<tr>'+row.find(':input').val('')+'</tr>');*/
+        });
+    }
     function addMoreCert(){
         $('#addMoreCert').on('click',function(e){
             var certificateTbl = $('#certificateTbl').find('tbody').append(cert);
+            /*var row = certificateTbl.find('tr:eq(0)').html();
+             certificateTbl.append('<tr>'+row.find(':input').val('')+'</tr>');*/
+        });
+    }
+
+    function addMoreCertOwner(){
+        $('#addMoreCertOwner').on('click',function(e){
+            var certificateTbl = $('#certificateTblOwner').find('tbody').append(certCategory);
             /*var row = certificateTbl.find('tr:eq(0)').html();
              certificateTbl.append('<tr>'+row.find(':input').val('')+'</tr>');*/
         });
@@ -297,10 +319,16 @@ var spFirmRC = (function () {
                     $('#ownershipList').prop('disabled',false);
                     $('#firmName').prop('disabled', false);
                     $('#changeOfFirmName').prop('disabled', true);
+                    $('#ownerPartner').removeClass('hide');
+                    $('#changeOfOwnerId').prop('disabled', true);
+                    getOwnerFinal();
+                    //  sCertOwner();
                 }else{
                     $('#ownershipList').prop('disabled',true);
                     $('#firmName').prop('disabled', true);
                     $('#changeOfFirmName').prop('disabled', false);
+                    $('#changeOfOwnerId').prop('disabled', false);
+                    $('#ownerPartner').addClass('hide');
                 }
             }else if(id == 'changeOfFirmName' ){
                 if($this.is(':checked')) {
@@ -313,15 +341,17 @@ var spFirmRC = (function () {
                     $('#estAddress').prop('disabled', false);
                     $('#regDzongkhagId').prop('disabled', false);
                 }else{
-                    $('#estAddress').prop('disabled', false);
-                    $('#regDzongkhagId').prop('disabled', false);
+                    $('#estAddress').prop('disabled', true);
+                    $('#regDzongkhagId').prop('disabled', true);
                 }
             }else if(id == 'changeOfOwnerId' ){
                 if($this.is(':checked')) {
                     $('#ownerPartner').removeClass('hide');
                     getOwnerFinal();
+                    //  sCertOwner();
                 }else{
                     $('#ownerPartner').addClass('hide');
+                    $('#cOwnershipId').addClass('hide');
                 }
             }
         });
@@ -332,7 +362,7 @@ var spFirmRC = (function () {
             return;
         }
         $.ajax({
-            url: _baseURL() + '/getSpFirm',
+            url: _baseURL() + '/getSpecializedFirm',
             type: 'GET',
             success: function (res) {
                 var spFirm = res;
@@ -353,9 +383,7 @@ var spFirmRC = (function () {
                 $('#spFirmHRidIdFinal').val(spFirm.id);
             }
         });
-
     }
-
 
     function getIncAttachmentFinal(){
         $.ajax({
@@ -381,7 +409,6 @@ var spFirmRC = (function () {
                     $('#cIncorporation').addClass('hide');
                 }
             }
-
         });
     }
 
@@ -437,9 +464,10 @@ var spFirmRC = (function () {
                             "<td class='qualificationName'>" + specializedFirmHrs[i].qualificationName + "</td>" +
                             "<td class='tradeName'>" + specializedFirmHrs[i].tradeName + "</td>" +
                             "<td class='serviceTypeName'>" + specializedFirmHrs[i].serviceTypeName + "</td>" +
+                            "<td class='joiningDate'>" + specializedFirmHrs[i].joinDate + "</td>" +
                             "<td class='attachments'>" + attachments + "</td>" +
-                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
-                            "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                            "<td> <input type='checkbox' name='spFirmHRs[0].deleteRequest' value='1'></td>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit-row'>Edit</button></td>" +
                             "</tr>";
                         }
                         $('#hrDtlsTable').find('tbody').append(hrTr);
@@ -503,9 +531,8 @@ var spFirmRC = (function () {
                             "<td>" + equipments[i].registrationNo + "</td>" +
                             "<td>" + equipments[i].quantity + "</td>" +
                             "<td style='text-align: center'>"+attachment+"</td>" +
-                            /*"<td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger'></i></a></td>" +*/
-                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row_eq'>Edit</button>" +
-                            "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                            "<td> <input type='checkbox' name='equipments[0].deleteRequest' value='1'></td>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row_eq'>Edit</button></td>" +
                             "</tr>";
                         }
                         $('#equipmentTbl').find('tbody').html(eqTr);
@@ -579,7 +606,7 @@ var spFirmRC = (function () {
     }
 
     function editInModal(){
-        $('body').on('click','.edit_row',function(e){
+        $('body').on('click','.edit-row',function(e){
             e.preventDefault();
             var row = $(this).closest('tr');
             var hrModal = $('#addHRModal');
@@ -605,7 +632,25 @@ var spFirmRC = (function () {
                 "<td><button class='change'>Change</button><button class='del_row'>Delete</button></td></tr>";
             });
             hrModal.find('#hrUploadTbl tbody').empty().html(hraTr);
-            row.remove();
+            row.addClass('tbd');
+            openModal('addHRModal');
+        });
+
+        $('body').on('click','.edit-hr',function(e){
+            e.preventDefault();
+            var row = $(this).closest('tr');
+            var hrModal = $('#addHRModal');
+            hrModal.find('#hr5').val(row.find('.hr5').val());
+            hrModal.find('#hr3').val(row.find('.hr3').val());
+            hrModal.find('#hr1').val(row.find('.hr1').val());
+            hrModal.find('#hr2').val(row.find('.hr2').val());
+            hrModal.find('#hr4').val(row.find('.hr4').val());
+            hrModal.find('#hr6').val(row.find('.hr6').val());
+            hrModal.find('#hr7').val(row.find('.hr7').val());
+            hrModal.find('#hr8').val(row.find('.hr8').val());
+            hrModal.find('#hr9').val(row.find('.hr9').val());
+            hrModal.find('#hr10').val(row.find('.hr10').val());
+            row.addClass('tbd'); //add class to be deleted
             openModal('addHRModal');
         });
     }
@@ -616,9 +661,10 @@ var spFirmRC = (function () {
             var row = $(this).closest('tr');
             //  alert(row.find('.specializedFirmEQid').val());
             var modal = $('#eqModal');
-            modal.find('#eq1').val(row.find('.specializedFirmEQid').val());
-            modal.find('#eq2').val(row.find('td:eq(2)').text());
-            modal.find('#eq3').val(row.find('td:eq(2)').text());
+            modal.find('.id4Edit').val(row.find('.specializedFirmEQid').val())//for Edit
+            modal.find('#eq1').val(modal.find('#eq1 option:contains("'+row.find('td:nth-child(1)').text()+'")').val());
+            modal.find('#eq2').val(row.find('td:nth-child(2)').text());
+            modal.find('#eq3').val(row.find('td:nth-child(3)').text());
             var hraTr = "";
             row.find('.attachment').each(function(){
                 var name = $(this).find('a').text();
@@ -626,13 +672,24 @@ var spFirmRC = (function () {
                 hraTr = hraTr+"<tr><td><input type='hidden' class='eqId' value='"+$(this).find('.hraId').val()+"'>" +
                 "<input type='text' required class='form-control docName' name='equipments[0].spFirmEQAs[0].documentName' value='"+name.substring(0,name.lastIndexOf('.'))+"' disabled></td>" +
                 "<td><span class='aName'> "+hra+"</span><span class='aFile'></span> </td>" +
-                    /*"<td></td>" +*/
+                    "<td></td>" +
                 "<td><button class='change'>Change</button><button class='del_row'>Delete</button></td></tr>";
             });
             modal.find('#eqUploadTbl tbody').empty().html(hraTr);
-            // row.remove();
+            row.addClass('tbd'); //add class to be deleted
             openModal('eqModal');
         });
+
+            $('body').on('click','.edit-eq',function(e){
+                e.preventDefault();
+                var row = $(this).closest('tr');
+                var hrModal = $('#eqModal');
+                hrModal.find('#eq1').val(row.find('.eq1').val());
+                hrModal.find('#eq2').val(row.find('.eq2').val());
+                hrModal.find('#eq3').val(row.find('.eq3').val());
+                row.addClass('tbd'); //add class to be deleted
+                openModal('eqModal');
+            });
     }
 
     function changeFile(){
@@ -657,6 +714,27 @@ var spFirmRC = (function () {
         });
     }
 
+    function changeFileEq(){
+        $('#eqUploadTbl').on('click','.change',function(e){
+            //e.preventDefault();
+            var $this = $(this);
+            var row = $(this).closest('tr');
+            var file= "<input type='file' required class='file' name='equipments[0].spFirmEQAs[0].attachment'"+
+                "accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>";
+            if($this.text() == 'Change'){
+                row.find('.docName').prop('disabled',false);
+                row.find('.aName').addClass('hide');
+                row.find('.aFile').html(file);
+                $this.text('Cancel');
+            }else{
+                row.find('.docName').prop('disabled',true);
+                row.find('.aName').removeClass('hide');
+                row.find('.aFile').empty();
+                $this.text('Change');
+            }
+
+        });
+    }
 
     function checkDuplicateHR(){
         $('body').on('change','.hr-cid',function(){
@@ -759,7 +837,10 @@ var spFirmRC = (function () {
         delTableRow();
         editInModal();
         changeFile();
+        changeFileEq();
         addMoreCert();
+        addMoreCertOwner();
+        addMoreCertCategory();
         showFileSize();
         checkDuplicateHR();
         editInModalEQ();

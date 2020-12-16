@@ -80,6 +80,7 @@ public class ContractorOSService extends BaseService {
         Contractor contractor = new Contractor();
         contractor.setpGewog(contractorFinal.getpGewogId());
         contractor.setpVillage(contractorFinal.getpVillageId());
+        contractor.setContractorId(contractorFinal.getId());
         BeanUtils.copyProperties(contractorFinal,contractor);
 
         String contractorId = commonService.getRandomGeneratedId();
@@ -92,9 +93,21 @@ public class ContractorOSService extends BaseService {
         //region incorporation (Name are also allowed to change)
         if(renewalServiceType.getIncorporation() != null){
             String ownershipTypeId = contractorDTO.getContractor().getOwnershipTypeId();
-            //contractorRCService.updateIncorporation(contractorDTO.getcAttachments(), loggedInUser, contractor.getContractorId());
+           // contractorRCService.updateIncorporation(contractorDTO.getcAttachments(), loggedInUser, contractor.getContractorId());
             contractor.setOwnershipTypeId(ownershipTypeId);
             contractor.setFirmName(contractorDTO.getContractor().getFirmName());
+
+
+            List<ContractorHR> ownerList = contractorDTO.getContractor().getContractorHRs();
+            contractor.setOwnershipChangeRemarks(contractorDTO.getContractor().getOwnershipChangeRemarks());
+            for(ContractorHR contractorHR:ownerList){
+                String hrId = commonService.getRandomGeneratedId();
+                contractorHR.setId(hrId);
+                contractorHR.setContractorID(contractorId);
+                contractorHR.setIsPartnerOrOwner(TRUE_INT);
+                contractorNRService.saveHR(contractorHR, loggedInUser);
+            }
+
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "12");
             appliedServicesList.add(appliedService);
         }
@@ -209,10 +222,10 @@ public class ContractorOSService extends BaseService {
                     contractorNRService.saveEQA(contractorEQA, loggedInUser);
                 }
             }
-
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "9");
             appliedServicesList.add(appliedService);
         }
+        //endregion
 
         //region save applied service and payment
         appliedServicesList.stream().filter(c-> !c.isEmpty()).forEach(
@@ -229,13 +242,13 @@ public class ContractorOSService extends BaseService {
         return responseMessage;
     }
 
-
     public String saveOS(Contractor contractor,LoggedInUser loggedInUser){
         String referenceNo = commonService.getNextID("crpcontractor", "ReferenceNo").toString();
         contractor.setReferenceNo(referenceNo);
         if(contractor.getContractorId() == null){
             contractor.setContractorId(contractor.getId());
         }
+
         contractor.setLockedByUserId(null);
         contractor.setWaiveOffLateFee(BigDecimal.ZERO);
         contractor.setAppStatusId(ApplicationStatus.UNDER_PROCESS.getCode());

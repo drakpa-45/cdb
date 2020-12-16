@@ -80,23 +80,35 @@ public class SpecializedFirmOSService extends BaseService {
         SpecializedFirmFinal specializedFirmFinal = (SpecializedFirmFinal)responseMessage.getDto();
 
         SpecializedFirm specializedFirm = new SpecializedFirm();
+        specializedFirm.setpGewogId(specializedFirmFinal.getpGewogId());
+        specializedFirm.setpVillageId(specializedFirmFinal.getpVillageId());
+        specializedFirm.setCrpSpecializedTradeId(specializedFirmFinal.getId());
         BeanUtils.copyProperties(specializedFirmFinal,specializedFirm);
 
         String specializedFirmId = commonService.getRandomGeneratedId();
         String appliedService;
 
-        if(spFirmDTO.getcAttachments() != null) {
-            for (SpFirmAttachment attachment : spFirmDTO.getcAttachments()){
-                attachment.setSpecializedTradeId(specializedFirmId);
-                saveAttachment(attachment,loggedInUser);
-            }
-        }
+        //insert undertaking letter
+        if(spFirmDTO.getcAttachments() != null && !spFirmDTO.getcAttachments().isEmpty())
+            specializedFirmRService.updateIncorporation(spFirmDTO.getcAttachments(), loggedInUser, specializedFirm.getCrpSpecializedTradeId());
+
         //region incorporation (Name are also allowed to change)
         if(renewalServiceType.getIncorporation() != null){
             String ownershipTypeId = spFirmDTO.getSpecializedFirm().getOwnershipTypeId();
-            specializedFirmRService.updateIncorporation(spFirmDTO.getcAttachments(), loggedInUser, specializedFirm.getCrpSpecializedTradeId());
+          //  specializedFirmRService.updateIncorporation(spFirmDTO.getcAttachments(), loggedInUser, specializedFirm.getCrpSpecializedTradeId());
             specializedFirm.setOwnershipTypeId(ownershipTypeId);
             specializedFirm.setFirmName(spFirmDTO.getSpecializedFirm().getFirmName());
+
+            List<SpFirmHR> ownerList = spFirmDTO.getSpecializedFirm().getSpFirmHRs();
+            specializedFirm.setOwnershipChangeRemarks(spFirmDTO.getSpecializedFirm().getOwnershipChangeRemarks());
+            for(SpFirmHR spFirmHR:ownerList){
+                String hrId = commonService.getRandomGeneratedId();
+                spFirmHR.setId(hrId);
+                spFirmHR.setSpecializedID(specializedFirmId);
+                spFirmHR.setIsPartnerOrOwner(TRUE_INT);
+                specializedFirmService.saveHR(spFirmHR, loggedInUser);
+            }
+
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "12");
             appliedServicesList.add(appliedService);
         }
@@ -158,57 +170,53 @@ public class SpecializedFirmOSService extends BaseService {
         //region update HR
         if(renewalServiceType.getUpdateHR() != null){
             List<SpFirmHR> hrList = spFirmDTO.getSpFirmHRs();
-            List<String> existingHRs = new ArrayList<>();
-            List<String> currentHRs = new ArrayList<>();
-            specializedFirmRService.getSpecializedFirmHRsFinal(specializedFirmFinal.getId(), 'H').forEach(h->existingHRs.add(h.getId()));
             for(SpFirmHR spFirmHR:hrList){
-                if(emptyNullCheck(spFirmHR.getId())){
-                    spFirmHR.setId(commonService.getRandomGeneratedId());
-                }
-                currentHRs.add(spFirmHR.getId());
-                if(emptyNullCheck(spFirmHR.getCidNo())){
-                    continue;
-                }
-                spFirmHR.setSpecializedID(specializedFirmId);
-                spFirmHR.setIsPartnerOrOwner(FALSE_INT);
-                specializedFirmService.saveHR(spFirmHR, loggedInUser);
-                //Save Human resource attachment
-                for (SpFirmtHRAttachment spFirmtHRA : spFirmHR.getSpFirmHRAs()) {
-                    if(spFirmtHRA.getAttachment() == null){ //No changes, so no need to save
+                if(spFirmHR.getDeleteRequest() != null && spFirmHR.getDeleteRequest() == 1){
+                    //to save deleted hr
+                    specializedFirmRDao.saveDeleteHrRequest(spFirmHR.getId());
+                }else{
+                    if(emptyNullCheck(spFirmHR.getId())){
+                        spFirmHR.setId(commonService.getRandomGeneratedId());
+                    }
+                    //currentHRs.add(contractorHR.getId());
+                    if(emptyNullCheck(spFirmHR.getCidNo())){
                         continue;
                     }
-                    spFirmtHRA.setSpecializedHrId(spFirmHR.getId());
-                    specializedFirmService.saveHRA(spFirmtHRA, loggedInUser);
+                    spFirmHR.setSpecializedID(specializedFirmId);
+                    spFirmHR.setIsPartnerOrOwner(FALSE_INT);
+                    specializedFirmService.saveHR(spFirmHR, loggedInUser);
+                    //Save Human resource attachment
+                    for (SpFirmtHRAttachment spFirmtHRA : spFirmHR.getSpFirmHRAs()) {
+                        if(spFirmtHRA.getAttachment() == null){ //No changes, so no need to save
+                            continue;
+                        }
+                        spFirmtHRA.setSpecializedHrId(spFirmHR.getId());
+                        specializedFirmService.saveHRA(spFirmtHRA, loggedInUser);
+                    }
                 }
-            }
-            //to save deleted hr
-            List<String> deletedHRs =existingHRs.stream().filter(h->!currentHRs.contains(h)).collect(Collectors.toList());
-            if(deletedHRs !=null && !deletedHRs.isEmpty()){
-                deletedHRs.stream().forEach(specializedFirmRDao::saveDeleteHrRequest);
             }
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "8");
             appliedServicesList.add(appliedService);
         }
         //endregion
 
-        //region EQ
+        //region update EQ
         if(renewalServiceType.getUpdateEq() != null){
             List<SpFirmEQ> eqList = spFirmDTO.getEquipments();
-            List<String> existingEQs = new ArrayList<>();
-            List<String> currentEQs = new ArrayList<>();
-            getEquipmentFinal(specializedFirmFinal.getId()).forEach(h->existingEQs.add(h.getId()));
             for(SpFirmEQ spFirmEQ:eqList){
+                if(spFirmEQ.getDeleteRequest() != null && spFirmEQ.getDeleteRequest() == 1) {
+                    //to save deleted hr
+                    specializedFirmRDao.saveDeleteEqRequest(spFirmEQ.getId());
+                }
                 if(emptyNullCheck(spFirmEQ.getId())){
                     spFirmEQ.setId(commonService.getRandomGeneratedId());
                 }
-                currentEQs.add(spFirmEQ.getId());
                 if(emptyNullCheck(spFirmEQ.getEquipmentId())){
                     continue;
                 }
                 spFirmEQ.setSpecializedTradeId(specializedFirmId);
                 specializedFirmService.saveEQ(spFirmEQ, loggedInUser);
-
-                //Save Equipment attachment
+                //Save Human resource attachment
                 for (SpFirmEQAttachment spFirmEQA : spFirmEQ.getSpFirmEQAs()) {
                     if(spFirmEQA.getAttachment() == null){ //No changes, so no need to save
                         continue;
@@ -218,11 +226,6 @@ public class SpecializedFirmOSService extends BaseService {
                 }
             }
 
-            //to save deleted eq
-            List<String> deletedEQs =existingEQs.stream().filter(h->!currentEQs.contains(h)).collect(Collectors.toList());
-            if(deletedEQs !=null && !deletedEQs.isEmpty()){
-                deletedEQs.stream().forEach(specializedFirmRDao::saveDeleteEqRequest);
-            }
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "9");
             appliedServicesList.add(appliedService);
         }
@@ -233,7 +236,6 @@ public class SpecializedFirmOSService extends BaseService {
                 c->specializedFirmRService.saveAppliedS(specializedFirmId,c,loggedInUser)
         );
         //endregion
-
         responseMessage.reset();
         responseMessage.setStatus(SUCCESSFUL_STATUS);
         responseMessage.setText("Your application for Renewal Of specializedFirm has been submitted and your application number is "+referenceNo+"<br>" +

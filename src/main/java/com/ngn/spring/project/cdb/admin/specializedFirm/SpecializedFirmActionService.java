@@ -168,8 +168,8 @@ public class SpecializedFirmActionService extends BaseService {
         paymentUpdateDTO.setSpecializedFirmId(specializedFirm.getCrpSpecializedTradeId());
         specializedFirmActionDao.paymentUpdate(specializedFirm.getCrpSpecializedTradeId(),loggedInUser.getUserID(),approvedApplicationStatusId,specializedFirm.getCreatedBy());
         responseMessage.setStatus(SUCCESSFUL_STATUS);
-        responseMessage.setText("Specialized Firm application number :"+paymentUpdateDTO.getAppNo()+" Payment Approved");
-        String mailContent = "Dear User,Your application for application number : "+paymentUpdateDTO.getAppNo()+" is approved."+
+        responseMessage.setText("Specialized Firm application number :"+paymentUpdateDTO.getAppNo().charAt(0)+" Payment Approved.And CDB number is:"+paymentUpdateDTO.getCdbNo());
+        String mailContent = "Dear User,Your application for application number : "+paymentUpdateDTO.getAppNo().charAt(0)+" is approved.And CDB number is:"+paymentUpdateDTO.getCdbNo()+
                 "You can login to the system for renewal other services using following credential:" +
                 "Username : your registered email" +
                 "Password : 123" +
@@ -228,9 +228,16 @@ public class SpecializedFirmActionService extends BaseService {
      */
     @Transactional(readOnly = true)
     public String getCDBNoFromAppNo(String appNo){
-        String cdbNo = specializedFirmActionDao.getNextCDBNo();
-        return cdbNo;
+      //  String cdbNo = specializedFirmActionDao.getNextCDBNo();
+      //  return cdbNo;
+        return specializedFirmActionDao.getCDBNoFromAppNo(appNo);
        // return (String)commonService.getValue("crpspecializedtrade","SPNo","ReferenceNo",appNo);
+    }
+
+    @Transactional(readOnly = true)
+    public String getNextCDBNo(String appNo){
+          String cdbNo = specializedFirmActionDao.getNextCDBNo();
+          return cdbNo;
     }
 
     @Transactional(readOnly = true)

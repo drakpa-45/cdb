@@ -44,12 +44,13 @@ public class  ConsultantHR  extends BaseModel implements Serializable {
     private Integer isPartnerOrOwner;
     @Column(name = "JoiningDate")
     private Date joiningDate;
-    @Column(name = "DeleteRequest")
-    private String deleteRequest;
     @Column(name = "Verified")
     private Integer verified;
     @Column(name = "Approved")
     private Integer Approved;
+
+    @Transient
+    private Integer deleteRequest;
 
     @Transient
     private List<ConsultantHRAttachment> consultantHRAs;
@@ -190,11 +191,11 @@ public class  ConsultantHR  extends BaseModel implements Serializable {
         this.consultantHRAs = consultantHRAs;
     }
 
-    public String getDeleteRequest() {
+    public Integer getDeleteRequest() {
         return deleteRequest;
     }
 
-    public void setDeleteRequest(String deleteRequest) {
+    public void setDeleteRequest(Integer deleteRequest) {
         this.deleteRequest = deleteRequest;
     }
 }

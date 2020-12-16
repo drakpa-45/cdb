@@ -86,6 +86,9 @@ public class ConsultantOSService extends BaseService {
         ConsultantFinal consultantFinal = (ConsultantFinal)responseMessage.getDto();
 
         Consultant consultant = new Consultant();
+        consultant.setpGewogId(consultantFinal.getpGewogId());
+        consultant.setpVillageId(consultantFinal.getpVillageId());
+        consultant.setConsultantId(consultantFinal.getId());
         BeanUtils.copyProperties(consultantFinal,consultant);
 
         String consultantId = commonService.getRandomGeneratedId();
@@ -102,8 +105,8 @@ public class ConsultantOSService extends BaseService {
             consultant.setOwnershipTypeId(ownershipTypeId);
             consultant.setFirmName(consultantDTO.getConsultant().getFirmName());
             consultant.setOwnershipChangeRemarks(consultantDTO.getConsultant().getOwnershipChangeRemarks());
-            List<ConsultantHR> ownerList = consultantDTO.getConsultant().getConsultantHRs();
 
+            List<ConsultantHR> ownerList = consultantDTO.getConsultant().getConsultantHRs();
             for(ConsultantHR consultantHR:ownerList){
                 String hrId = commonService.getRandomGeneratedId();
                 consultantHR.setId(hrId);
@@ -139,14 +142,6 @@ public class ConsultantOSService extends BaseService {
         consultant.setId(consultantId);
         String referenceNo = saveOS(consultant, loggedInUser);
         //endregion
-
-        //region save attachment
-        if(consultantDTO.getcAttachments() != null) {
-            for (ConsultantAttachment attachment : consultantDTO.getcAttachments()){
-                attachment.setConsultantId(consultantId);
-                saveAttachment(attachment,loggedInUser);
-            }
-        }
 
         //region Upgrade or downgrade
         if(renewalServiceType.getUpgradeDowngrade() != null){
@@ -199,44 +194,30 @@ public class ConsultantOSService extends BaseService {
         //region update HR
         if(renewalServiceType.getUpdateHR() != null){
             List<ConsultantHR> hrList = consultantDTO.getConsultantHRs();
-            List<String> existingHRs = new ArrayList<>();
-            List<String> currentHRs = new ArrayList<>();
-            consultantRCService.getConsultantHRsFinal(consultantFinal.getId(), 'H').forEach(h->existingHRs.add(h.getId()));
             for(ConsultantHR consultantHR:hrList){
-                if(emptyNullCheck(consultantHR.getId())){
-                    consultantHR.setId(commonService.getRandomGeneratedId());
-                }
-                currentHRs.add(consultantHR.getId());
-                for(int i =0; i<hrList.size(); i++){
-                    if(emptyNullCheck(hrList.get(i).getDeleteRequest())){
-                        consultantHR.setDeleteRequest("0");
-                    }else if(hrList.get(i).getDeleteRequest().equalsIgnoreCase("yes")){
-                        consultantHR.setDeleteRequest("1");
-                    }else{
-                        consultantHR.setDeleteRequest("0");
+                if(consultantHR.getDeleteRequest() != null && consultantHR.getDeleteRequest() == 1){
+                    //to save deleted hr
+                    consultantRCDao.saveDeleteHrRequest(consultantHR.getId());
+                }else{
+                    if(emptyNullCheck(consultantHR.getId())){
+                        consultantHR.setId(commonService.getRandomGeneratedId());
                     }
-                }
-                if(emptyNullCheck(consultantHR.getCidNo())){
-                    continue;
-                }
-                consultantHR.setConsultantID(consultantId);
-                consultantHR.setIsPartnerOrOwner(FALSE_INT);
-
-               consultantNRService.saveHR(consultantHR, loggedInUser);
-                //Save Human resource attachment
-                for (ConsultantHRAttachment consultantHRA : consultantHR.getConsultantHRAs()) {
-                    if(consultantHRA.getAttachment() == null){ //No changes, so no need to save
+                    //currentHRs.add(contractorHR.getId());
+                    if(emptyNullCheck(consultantHR.getCidNo())){
                         continue;
                     }
-                    consultantHRA.setConsultantHrId(consultantHR.getId());
-                    consultantNRService.saveHRA(consultantHRA, loggedInUser);
+                    consultantHR.setConsultantID(consultantId);
+                    consultantHR.setIsPartnerOrOwner(FALSE_INT);
+                    consultantNRService.saveHR(consultantHR, loggedInUser);
+                    //Save Human resource attachment
+                    for (ConsultantHRAttachment consultantHRA : consultantHR.getConsultantHRAs()) {
+                        if(consultantHRA.getAttachment() == null){ //No changes, so no need to save
+                            continue;
+                        }
+                        consultantHRA.setConsultantHrId(consultantHR.getId());
+                        consultantNRService.saveHRA(consultantHRA, loggedInUser);
+                    }
                 }
-            }
-
-            //to save deleted hr
-            List<String> deletedHRs =existingHRs.stream().filter(h->!currentHRs.contains(h)).collect(Collectors.toList());
-            if(deletedHRs !=null && !deletedHRs.isEmpty()){
-                deletedHRs.stream().forEach(consultantRCDao::saveDeleteHrRequest);
             }
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "8");
             appliedServicesList.add(appliedService);
@@ -246,14 +227,14 @@ public class ConsultantOSService extends BaseService {
         //region update EQ
         if(renewalServiceType.getUpdateEq() != null){
             List<ConsultantEQ> eqList = consultantDTO.getEquipments();
-            List<String> existingEQs = new ArrayList<>();
-            List<String> currentEQs = new ArrayList<>();
-            getEquipmentFinal(consultantFinal.getId()).forEach(h->existingEQs.add(h.getId()));
             for(ConsultantEQ consultantEQ:eqList){
+                if(consultantEQ.getDeleteRequest() != null && consultantEQ.getDeleteRequest() == 1) {
+                    //to save deleted hr
+                    consultantRCDao.saveDeleteEqRequest(consultantEQ.getId());
+                }
                 if(emptyNullCheck(consultantEQ.getId())){
                     consultantEQ.setId(commonService.getRandomGeneratedId());
                 }
-                currentEQs.add(consultantEQ.getId());
                 if(emptyNullCheck(consultantEQ.getEquipmentId())){
                     continue;
                 }
@@ -268,11 +249,6 @@ public class ConsultantOSService extends BaseService {
                     consultantNRService.saveEQA(consultantEQA, loggedInUser);
                 }
             }
-            //to save deleted hr
-            List<String> deletedEQs =existingEQs.stream().filter(h->!currentEQs.contains(h)).collect(Collectors.toList());
-            if(deletedEQs !=null && !deletedEQs.isEmpty()){
-                deletedEQs.stream().forEach(consultantRCDao::saveDeleteEqRequest);
-            }
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "9");
             appliedServicesList.add(appliedService);
         }
@@ -286,7 +262,7 @@ public class ConsultantOSService extends BaseService {
 
         responseMessage.reset();
         responseMessage.setStatus(SUCCESSFUL_STATUS);
-        responseMessage.setText("Your application for Renewal Of Contractor has been submitted and your application number is "+referenceNo+"<br>" +
+        responseMessage.setText("Your application for Other service Of Consultant has been submitted and your application number is "+referenceNo+"<br>" +
                 "You will receive an email with the Application summary.<br><br>" +
                 "You can track your application using above Application Number. <br>" +
                 "Thanks You.");

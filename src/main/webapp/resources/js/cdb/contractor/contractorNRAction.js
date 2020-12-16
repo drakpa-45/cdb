@@ -73,7 +73,7 @@ var contractorNRAction = (function () {
 
                         var employeeDetailsDTO = dto.employeeDetailsDTOs;
                         var empDtls ="",empDtls1="",empDtls2="";
-                        alert(employeeDetailsDTO != null);
+                    //    alert(employeeDetailsDTO != null);
                         if(employeeDetailsDTO !=null){
                             $('#engagedId').show();
                             for(var i in employeeDetailsDTO){
@@ -141,7 +141,7 @@ var contractorNRAction = (function () {
 
                         var employeeDetailsDTO = dto.employeeDetailsDTOs;
                         var empDtls ="",empDtls1="",empDtls2="";
-                        alert(employeeDetailsDTO != null);
+                        //alert(employeeDetailsDTO != null);
                         if(employeeDetailsDTO !=null){
                             $('#engagedId').show();
                             for(var i in employeeDetailsDTO){

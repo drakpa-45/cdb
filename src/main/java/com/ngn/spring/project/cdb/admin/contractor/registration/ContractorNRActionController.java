@@ -46,8 +46,8 @@ public class ContractorNRActionController extends BaseController {
             model.remove("appNo");
             return "redirect:/admin/contractor";
         }
-        model.addAttribute("appNo", appNo);
-        model.addAttribute("cdbNo", contractorNRActionService.getCDBNoFromAppNo(appNo));
+      //  model.addAttribute("appNo", appNo);
+      //  model.addAttribute("cdbNo", contractorNRActionService.getCDBNoFromAppNo(appNo));
         String appStatus = contractorNRActionService.getApplicationStatus(appNo);
         model.addAttribute("modeOfPayment", commonService.getModePayment());
         if (appStatus.equals(ApplicationStatus.APPROVED_FOR_PAYMENT.getCode())) {
@@ -95,7 +95,7 @@ public class ContractorNRActionController extends BaseController {
     public ResponseMessage paymentUpdate(HttpServletRequest request, PaymentUpdateDTO paymentUpdateDTO) throws Exception{
         loggedInUser = gLoggedInUser(request);
         String appNo = request.getParameter("appNo");
-        String cdbNo = contractorNRActionService.getCDBNoFromAppNo(appNo);
+        String cdbNo = contractorNRActionService.getNextCDBNo(appNo);
         paymentUpdateDTO.setCdbNo(cdbNo);
         return contractorNRActionService.paymentUpdate(paymentUpdateDTO, loggedInUser);
     }

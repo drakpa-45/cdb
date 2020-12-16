@@ -187,4 +187,9 @@ public class SpecializedFirmActionDao extends BaseDao {
         sqlQuery = properties.getProperty("SpecializedFirmActionDao.getIncAttachment");
         return hibernateQuery(sqlQuery, SpFirmAttachment.class).setParameter("crpSpecializedTradeId", crpSpecializedTradeId).list();
     }
+
+    public String getCDBNoFromAppNo(String appNo) {
+        sqlQuery = properties.getProperty("SpecializedFirmActionDao.getCDBNoFromAppNo");
+        return hibernateQuery(sqlQuery).setParameter("appNo", appNo).list().get(0).toString();
+    }
 }

@@ -38,6 +38,9 @@ public class ConsultantEQ extends BaseModel implements Serializable {
     private Integer approved;
 
     @Transient
+    private Integer deleteRequest;
+
+    @Transient
     private ConsultantEQAttachment consultantEQA;
     @Transient
     private List<ConsultantEQAttachment> consultantEQAs;
@@ -128,5 +131,13 @@ public class ConsultantEQ extends BaseModel implements Serializable {
 
     public void setConsultantEQAs(List<ConsultantEQAttachment> consultantEQAs) {
         this.consultantEQAs = consultantEQAs;
+    }
+
+    public Integer getDeleteRequest() {
+        return deleteRequest;
+    }
+
+    public void setDeleteRequest(Integer deleteRequest) {
+        this.deleteRequest = deleteRequest;
     }
 }

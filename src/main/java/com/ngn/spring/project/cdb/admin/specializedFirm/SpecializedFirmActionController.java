@@ -100,7 +100,7 @@ public class SpecializedFirmActionController extends BaseController {
     public ResponseMessage paymentUpdate(HttpServletRequest request, PaymentUpdateDTO paymentUpdateDTO) throws Exception{
         loggedInUser = gLoggedInUser(request);
         String appNo = request.getParameter("appNo");
-        String cdbNo = specializedFirmActionService.getCDBNoFromAppNo(appNo);
+        String cdbNo = specializedFirmActionService.getNextCDBNo(appNo);
         paymentUpdateDTO.setCdbNo(cdbNo);
         return specializedFirmActionService.paymentUpdate(paymentUpdateDTO, loggedInUser);
     }
