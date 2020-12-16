@@ -82,6 +82,12 @@ function validateFees(){
     return retutype;
 }
 
+function preventDot(e) {
+    var key = e.charCode ? e.charCode : e.keyCode;
+    if (key == 46)
+    { return false; }
+}
+
 function validatepersonalSection(){
     var retutype=true;
 

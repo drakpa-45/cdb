@@ -77,7 +77,7 @@
                                                 <div class="form-group row">
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                                         <label>Enter your valid CID Number/work permit number:<span class="text-danger">*</span></label>
-                                                       <span><input type="number" onchange="checkStatus(this.value)" name="app_çid" class="form-control" id="app_çid"></span>
+                                                       <span><input type="number" id="app_çid" onchange="checkStatus(this.value)" name="app_çid" class="form-control number" onkeypress="return preventDot(event);"></span>
                                                         <span id="app_çid_err" class="text-danger"></span><br/>
                                                        <%-- <span><input class="form-control categoryCheck" type="checkbox" name="itemId" value="${category.id}" style="width: 17px; height: 17px;"> If you are non-Bhutanese applicant, please check here.</span>--%>
                                                     </div>

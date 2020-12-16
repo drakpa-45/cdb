@@ -75,7 +75,7 @@
                                                 <div class="form-group row">
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                                         <label>Enter your valid CID Number/work permit number:<span class="text-danger">*</span></label>
-                                                        <input type="number" name="app_çid" class="form-control number sp_character" id="app_çid"  onchange="checkStatus(this.value)" min="0">
+                                                        <input type="number" name="app_çid" class="form-control number" id="app_çid"  onchange="checkStatus(this.value)" onkeypress="return preventDot(event);" min="0">
                                                         <span id="app_çid_err" class="text-danger"></span>
                                                     </div>
                                                 </div>

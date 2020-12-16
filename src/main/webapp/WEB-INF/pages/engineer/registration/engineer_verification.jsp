@@ -521,7 +521,6 @@
                     <script type="text/javascript" src="<c:url value="/resources/JqueryAjaxFormSubmit.js"/>"></script>
                     <script type="text/javascript" src="<c:url value="/resources/jquery.form.js"/>"></script>
                     <script src="<c:url value="/resources/js/cdb/engineer.js"/>"></script>
-                    <script src="<c:url value="/resources/js/cdb/survey.js"/>"></script>
                 </div>
 
             </div>

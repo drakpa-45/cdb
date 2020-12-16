@@ -83,12 +83,11 @@ function checkStatus(cidNo){
     });
 }
 
-document.querySelector(".sp_character").addEventListener("keypress", function (evt) {
-    if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
-    {
-        evt.preventDefault();
-    }
-});
+function preventDot(e) {
+    var key = e.charCode ? e.charCode : e.keyCode;
+    if (key == 46)
+    { return false; }
+}
 
 function validatepersonalSection(){
     var retutype=true;
