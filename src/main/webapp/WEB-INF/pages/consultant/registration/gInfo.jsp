@@ -44,7 +44,7 @@
             <div class="form-group row">
                 <div class="col-lg-6 col-md-6">
                     <label class="col-lg-4 form-label">TPN Number</label>
-                    <input type="text" class="col-lg-7 form-control number" name="consultant.tpn" id="tpn" placeholder="TPN Number..">
+                    <input type="text" class="col-lg-7 form-control" name="consultant.tpn" id="tpn" placeholder="TPN Number..">
                 </div>
             </div>
         </div>
@@ -240,7 +240,7 @@
             <div class="form-group row">
                 <div class="col-lg-6 col-md-6 ">
                     <label class="col-lg-4 form-label">Mobile No <span class="text-danger">*</span></label>
-                   <input type="text" class=" form-control col-lg-7 number" name="consultant.regMobileNo" id="regMobileNo" required="true" placeholder="Mobile Number" maxlength="13">
+                   <input type="number" class="form-control col-lg-7 number" name="consultant.regMobileNo" id="regMobileNo" required="true" placeholder="Mobile Number" onKeyPress="if(this.value.length==8) return false;" min="0">
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <label class="col-lg-4 form-label">Telephone No </label>

@@ -83,12 +83,11 @@ function checkStatus(cidNo){
     });
 }
 
-document.querySelector(".sp_character").addEventListener("keypress", function (evt) {
-    if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
-    {
-        evt.preventDefault();
-    }
-});
+function preventDot(e) {
+    var key = e.charCode ? e.charCode : e.keyCode;
+    if (key == 46)
+    { return false; }
+}
 
 function validatepersonalSection(){
     var retutype=true;
@@ -160,6 +159,7 @@ function validateeducaion(){
 function remove_err(errId){
     $('#'+errId).html('');
 }
+
 function changeNextTab(presentClass, nextClass){
     $("." + presentClass + ">a").addClass('bg-blue text-white');
     $('.tab-pane').removeClass("active");
@@ -212,6 +212,39 @@ function submitRegistrationForm(){
     }
 }
 
+function updateReject(){
+    if(validateReject()){
+        var url= '/cdb/admin_engineer/emptylayout/updatereject';
+        var options = {target:'#content_main_div',url:url,type:'GET', data: $('#engineerverificationForm').serialize()};
+        $("#engineerverificationForm").ajaxSubmit(options);
+    }
+}
+
+function validateReject(){
+    var returntpe=true;
+    if($('#remarks').val()==""){
+        $('#remarks').focus();
+        warningMsg('Please mention remarks');
+        $('#remarks').focus();
+        returntpe=false;
+    }
+    return returntpe;
+}
+
+function closemodel(modelId){
+    $('#'+modelId).modal('hide');
+}
+
+function SubmitApproveVerifyApplicationDetials(firmId,targetId){
+    var url=_baseURL() +'/saveArchitect';
+    var options = {target:'acknowledgementmessage',url:url,type:'POST',enctype: 'multipart/form-data', data: $('#architectForm').serialize()};
+    $("#architectForm").ajaxSubmit(options);
+    $('#registrtaionFormCard').hide();
+    $('#acknowledgementCard').show();
+    $('#concirmationModel').modal('hide');
+
+}
+
 function submitForm(){
     var returntpe=true;
     if($('#file1').val()==""){
@@ -240,24 +273,6 @@ function enablesubmit(){
 }
 function closemodel(modelId){
     $('#'+modelId).modal('hide');
-}
-
-function updateReject(){
-    if(validateReject()){
-        var url= '/cdb/admin_engineer/emptylayout/updatereject';
-        var options = {target:'#content_main_div',url:url,type:'GET', data: $('#engineerverificationForm').serialize()};
-        $("#engineerverificationForm").ajaxSubmit(options);
-    }
-}
-function validateReject(){
-    var returntpe=true;
-    if($('#remarks').val()==""){
-        $('#remarks').focus();
-        warningMsg('Please mention remarks');
-        $('#remarks').focus();
-        returntpe=false;
-    }
-    return returntpe;
 }
 
 function verifyApplication(){
@@ -326,9 +341,9 @@ $('#architect_table').DataTable({
 function printCertificate(cdbNo){
     window.open("/cdb/print/printCertificate?cdbNo=" + cdbNo);
 }
+
 function printInfo(cdbNo){
-    alert(cdbNo);
-    var url= '/cdb/admin_engineer/emptylayout/printarchitectInfo?cdbNo='+cdbNo;
+    var url= '/cdb/admin_survey/emptylayout/printarchitectInfo?cdbNo='+cdbNo;
     $('#content_main_div_public_user').load(url);
 }
 

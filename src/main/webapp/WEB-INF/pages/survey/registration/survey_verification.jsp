@@ -442,11 +442,11 @@
                                 <div class="modal-body">
                                     <div class="panel panel-default">
                                         <div class="panel-body">
-                                            <div id="modal-print">
+                                            <div id="printInfo">
                                                 <div class="form-group">
                                                     <p align="center"><strong><u>Caution</u></strong></p>
 
-                                                    <p align="center"><strong>An surveyor is allowed to execute only two work at
+                                                    <p align="center"><strong>A surveyor is allowed to execute only two work at
                                                         a time for that particular firm.</strong></p>
 
                                                     <p align="center"><strong>For any other Human Resource they are allowed to
@@ -510,7 +510,7 @@
                                                 </div>
                                             </div>
                                             <button type="button" class="btn btn-primary"
-                                                    onclick="javascript:printDiv('modal-print')">Print
+                                                    onclick="PrintInfo()">Print
                                             </button>
                                             <button type="button" class="btn btn-success" id="closeModal"
                                                     onclick="checkBtn('checkver1')" data-dismiss="modal">OK
