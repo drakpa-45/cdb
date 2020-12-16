@@ -7,9 +7,6 @@
   Time: 11:52 PM
   To change this template use File | Settings | File Templates.
 --%>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -259,7 +256,7 @@
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <label>Year of graduation <span class="text-danger">*</span></label>
-                                                                    <input type="number" class=" form-control number" onclick="remove_err('graduationYear_err')" id="graduationYear" name="graduationYear"  onKeyPress="if(this.value.length==4) return false;" min="0">
+                                                                    <input type="number" class=" form-control number" onclick="remove_err('graduationYear_err')" id="graduationYear" name="graduationYear" onKeyPress="if(this.value.length==4) return false;" min="0">
                                                                     <span id="graduationYear_err" class="text-danger"></span>
                                                                 </div>
                                                             </div>

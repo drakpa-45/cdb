@@ -64,7 +64,7 @@ public class EngineerAdminController extends BaseController {
     @RequestMapping(value = "/emptylayout/openApplication", method = RequestMethod.GET)
     public String send2MyOrGroupTask(HttpServletRequest request,String appNo,String type,Model model) {
         if(type.equalsIgnoreCase("release")){
-            String cmnServiceTypeId = request.getParameter("param");
+            String cmnServiceTypeId = request.getParameter("cmnServiceType");
             String assignMyTask = services.assignMyTask(appNo, getLoggedInUser().getUserID(), type);
             if(assignMyTask.equalsIgnoreCase("Success")){
                 if(cmnServiceTypeId == null || cmnServiceTypeId.isEmpty()){

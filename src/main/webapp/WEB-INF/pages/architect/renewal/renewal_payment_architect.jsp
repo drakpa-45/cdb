@@ -28,7 +28,7 @@
                             <h3 class="card-title font-weight-bold" style="color: #002752">Architect >> Renewal >>
                                 <security:authorize access="hasRole('ROLE_PAYMENT')">Payment Approver</security:authorize>
                             </h3>
-                            <span style="font-size: small;color: #444444"> >> Application Number : ${appDetails.referenceNo} || CDB Number : ${appDetails.cdbNo}     Application Date: ${appDetails.applicationDate} </span>
+                            <span class="font-weight-bold" style="font-size: small;color: #444444"> >> Application Number : ${appDetails.referenceNo} || CDB Number : ${appDetails.cdbNo}     Application Date: ${appDetails.applicationDate} </span>
                         </div>
                         <div class="card-body">
                             <div class="row">

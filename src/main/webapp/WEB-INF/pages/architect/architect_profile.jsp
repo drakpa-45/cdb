@@ -28,9 +28,9 @@
                         Registration Information
                     </strong>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                    <button class="btn btn-sm btn-primary pull-right" type="button" onclick="printInfo('${App_Details.cdbNo}')"><i class="fa fa-print"></i> Print Information</button> &nbsp;&nbsp;&nbsp;
-                    <button class="btn btn-sm btn-success pull-right" type="button" onclick="printCertificate('${App_Details.cdbNo}')"><i class="fa fa-edit"></i> Print Certificate</button>&nbsp;&nbsp;&nbsp;
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pull-right">
+                    <button class="btn btn-sm btn-primary" type="button" onclick="printInfo('${App_Details.cdbNo}')"><i class="fa fa-print"></i> Print Information</button>
+                    <button class="btn btn-sm btn-success" type="button" onclick="printCertificate('${App_Details.cdbNo}')"><i class="fa fa-edit"></i> Print Certificate</button>
                 </div>
             </div>
             <hr />

@@ -157,14 +157,6 @@ function validateeducaion(){
     return retutype;
 }
 
-$("#graduationYear").datepicker({
-    format: "yyyy",
-    viewMode: "years",
-    minViewMode: "years",
-    autoclose:true,
-    endDate: "currentDate"
-});
-
 function remove_err(errId){
     $('#'+errId).html('');
 }
@@ -335,6 +327,7 @@ function printCertificate(cdbNo){
     window.open("/cdb/print/printCertificate?cdbNo=" + cdbNo);
 }
 function printInfo(cdbNo){
+    alert(cdbNo);
     var url= '/cdb/admin_engineer/emptylayout/printarchitectInfo?cdbNo='+cdbNo;
     $('#content_main_div_public_user').load(url);
 }

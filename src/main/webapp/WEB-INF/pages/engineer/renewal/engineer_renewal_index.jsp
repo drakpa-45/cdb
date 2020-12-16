@@ -438,10 +438,6 @@
     <script type="text/javascript" src="<c:url value="/resources/JqueryAjaxFormSubmit.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/jquery.form.js"/>"></script>
     <script src="<c:url value="/resources/js/cdb/engineer.js"/>"></script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script>
         //checkvalidity('','${registrationDetails.serviceSectorType}');
         var currentTime = new Date();
@@ -478,14 +474,6 @@
             }
             $('#expdetails').show();
         }
-
-        $("#graduationYear").datepicker({
-            format: "yyyy",
-            viewMode: "years",
-            minViewMode: "years",
-            autoclose:true,
-            endDate: "currentDate"
-        });
 
     </script>
 </body>

@@ -30,7 +30,7 @@
                                 <security:authorize access="hasRole('ROLE_VERIFIER')">Verification/</security:authorize>
                                 <security:authorize access="hasRole('ROLE_APPROVER')">Approval</security:authorize>
                             </h3> <input type="hidden" readonly id="referenceNo" value="${appDetails.referenceNo}" name="referenceNo" class="form-control number">
-                            <span style="font-size: small;color: #444444"> >> Application Number : ${appDetails.referenceNo} || CDB Number : ${appDetails.cdbNo}     Application Date: ${appDetails.applicationDate} </span>
+                            <span class="font-weight-bold" style="font-size: small;color: #444444"> >> Application Number : ${appDetails.referenceNo} || CDB Number : ${appDetails.cdbNo}     Application Date: ${appDetails.applicationDate} </span>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -365,7 +365,7 @@
                                                                                         </tr>--%>
                                                                                         <tr>
                                                                                             <td>
-                                                                                                <strong>CreatedBy: </strong>
+                                                                                                <strong>Submitted By: </strong>
                                                                                             </td>
                                                                                             <td>${appDetails.createdBy} <b style="color: blueviolet">(${appDetails.fullname})</b></td>
                                                                                         </tr>

@@ -152,7 +152,6 @@ public class EngineerDao extends BaseDao {
                /* Query query1 = sqlQuery("UPDATE sysuser SET STATUS = ? WHERE SysApproverUserId = ?");
                 query1.setParameter(1,0).setParameter(2, userID);
                 query1.executeUpdate();*/
-
             }else{
                 applicationStatus=ApplicationStatus.APPROVED_FOR_PAYMENT.getCode();
             }

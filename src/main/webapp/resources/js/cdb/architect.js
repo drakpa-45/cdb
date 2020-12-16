@@ -149,6 +149,7 @@ function validateeducaion(){
     }
     return retutype;
 }
+
 function remove_err(errId){
     $('#'+errId).html('');
 }
