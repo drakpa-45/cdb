@@ -74,14 +74,17 @@ public  class PrintPDFUtility {
                 parameters.put("ownerName", ownerName);
                 parameters.put("dzongkhagName", dzongkhagName);
 
-                if(cdbNo.startsWith("BA-")){
+                if(cdbNo.startsWith("BA-") || cdbNo.startsWith("NBA-")){
                     filepath = url + "/jasperFiles/architect.jasper";
                 }
-                if(cdbNo.startsWith("BS-")){
+                if(cdbNo.startsWith("BS-") || cdbNo.startsWith("NBS-")){
                     filepath = url + "/jasperFiles/surveyor.jasper";
                 }
-                if(cdbNo.startsWith("BE-")){
+                if(cdbNo.startsWith("BE-") || cdbNo.startsWith("NBE-")){
                     filepath = url + "/jasperFiles/engineer.jasper";
+                }
+                if(cdbNo.startsWith("SP-")){
+                    filepath = url + "/jasperFiles/specializedtrade.jasper";
                 }
                 JasperReport jasperreport = (JasperReport) JRLoader.loadObjectFromFile(filepath);
                 parameters.put(net.sf.jasperreports.engine.JRParameter.IS_IGNORE_PAGINATION, Boolean.FALSE);

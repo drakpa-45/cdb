@@ -11,7 +11,8 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <% String nextbtn="true";%>
 <body>
-<div class="card-body">
+  <div class="card">
+     <div class="card-body">
         <c:if test = "${fn:contains('Deregistered,Blacklisted,Revoked,Suspended', registrationDetails.updateStatus)}">
             <div class="form-group">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert alert-danger text-center">
@@ -27,9 +28,9 @@
                     Registration Information
                 </strong>
               </div>
-              <div class="col-lg-6 col-md-6 col-sm-5 col-xs-12">
-                <button class="btn btn-sm btn-primary pull-right" type="button" onclick="printInfo('${App_Details.cdbNo}')"><i class="fa fa-print"></i> Print Information</button> &nbsp;&nbsp;&nbsp;&nbsp;
-                <button class="btn btn-sm btn-success pull-right" type="button" onclick="printCertificate('${App_Details.cdbNo}')"><i class="fa fa-edit"></i> Print Certificate</button>
+              <div class="col-lg-6 col-md-6 col-sm-5 col-xs-12 pull-right">
+                <button class="btn btn-sm btn-primary" type="button" onclick="printInfo('${App_Details.cdbNo}')"><i class="fa fa-print"></i> Print Information</button>
+                <button class="btn btn-sm btn-success" type="button" onclick="printCertificate('${App_Details.cdbNo}')"><i class="fa fa-edit"></i> Print Certificate</button>
               </div>
             </div>
            <hr/>
@@ -106,6 +107,10 @@
                             <tr>
                                 <td>
                                         <tr>
+                                             <td><strong>Applied Category:</strong></td>
+                                             <td>${App_Details.name}</td>
+                                        </tr>
+                                        <tr>
                                             <td><strong>CDB Number:</strong></td>
                                             <td>${App_Details.cdbNo}</td>
                                         </tr>
@@ -131,6 +136,7 @@
             </div>
         </div>
         <% }%>
+  </div>
 </div>
 
 <script type="text/javascript" src="<c:url value="/resources/JqueryAjaxFormSubmit.js"/>"></script>

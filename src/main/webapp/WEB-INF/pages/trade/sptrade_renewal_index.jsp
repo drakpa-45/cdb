@@ -139,13 +139,13 @@
                                                                         <div class="form-group row">
                                                                             <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">CID Number:</label>
                                                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                                <input type="text" name="app_çid" class="form-control" value="${registrationDetails.cidNo}">
+                                                                                <input type="text" name="app_çid" class="form-control" value="${registrationDetails.cidNo}" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
                                                                             <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Name:</label>
                                                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                                <input type="text" name="fullname" value="${registrationDetails.fullname}" class="form-control">
+                                                                                <input type="text" name="fullname" value="${registrationDetails.fullname}" class="form-control" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
