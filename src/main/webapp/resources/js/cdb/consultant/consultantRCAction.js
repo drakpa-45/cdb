@@ -110,9 +110,9 @@ var consultantRCAction = (function () {
                 return;
             }
             $.ajax({
-                url: cdbGlobal.baseURL() + "/consultant/getPersonalInfo",
+                url: cdbGlobal.baseURL() + "/consultantNR/getPersonalInfo",
                 type: 'GET',
-                data: {cidNo: cidNo},
+                data: {cidNo: cidNo,type:"check"},
                 success: function (res) {
                     if (res.status == '1') {
                         var dto = res.dto;
@@ -125,6 +125,74 @@ var consultantRCAction = (function () {
                         var imagelink='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo='+cidNo;
                         $('#photoM').html("<img src='"+imagelink+"'  width='200px'  height='200px' class='pull-right'/>");
                         $("#hrModal").modal('show');
+                    }
+                }
+            });
+        });
+
+        $('body').on('click','.checkCidHr',function(){
+            var cidNo = $(this).closest('tr').find('.cidNo').text();
+            $check = $(this).closest('tr').find('.check');
+            if(!cidNo){
+                return;
+            }
+            $.ajax({
+                url: cdbGlobal.baseURL() + "/consultantNR/getPersonalInfo",
+                type: 'GET',
+                data: {cidNo: cidNo,type:"check"},
+                success: function (res) {
+                    if (res.status == '1') {
+                        var dto = res.dto;
+                        $('#nameM').text(dto.fullName);
+                        $('#sexM').text(dto.sex);
+                        $('#dzongkhagM').text(dto.dzongkhagNmae);
+                        $('#gewogM').text(dto.gowegName);
+                        $('#villageM').text(dto.villageName);
+                        $('#dobM').text(dto.dob);
+                        var imagelink='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo='+cidNo;
+                        $('#photoM').html("<img src='"+imagelink+"'  width='200px'  height='200px' class='pull-right'/>");
+                        $("#hrModal").modal('show');
+                        $("#closeModal1").modal('show');
+
+                        var employeeDetailsDTO = dto.employeeDetailsDTOs;
+                        var empDtls ="",empDtls1="",empDtls2="";
+                        //alert(employeeDetailsDTO != null);
+                        if(employeeDetailsDTO !=null){
+                            $('#engagedId').show();
+                            for(var i in employeeDetailsDTO){
+                                empDtls = empDtls +
+                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
+                                "<td>" +  + "</td>" +
+                                "<td>" + + "</td>" +
+                                "<td>" + employeeDetailsDTO[i].contractorCDBNo+ "</td>" +
+                                "<td>" + employeeDetailsDTO[i].contractorFirmname + "</td>" +"</tr>";
+                            }
+                            $('#employeeDTLS').find('tbody').html(empDtls);
+
+                            for(var i in employeeDetailsDTO){
+                                empDtls1 = empDtls1 +
+                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
+                                "<td>" +  + "</td>" +
+                                "<td>" + + "</td>" +
+                                "<td>" + employeeDetailsDTO[i].consultantCDBNo+ "</td>" +
+                                "<td>" + employeeDetailsDTO[i].consultantFirmname + "</td>" +"</tr>";
+                            }
+                            $('#employeeDTLS1').find('tbody').html(empDtls1);
+
+                            for(var i in employeeDetailsDTO){
+                                empDtls2 = empDtls2 +
+                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
+                                "<td>" +  + "</td>" +
+                                "<td>" + + "</td>" +
+                                "<td>" + employeeDetailsDTO[i].spCDBNo+ "</td>" +
+                                "<td>" + employeeDetailsDTO[i].spFirmname + "</td>" +"</tr>";
+                            }
+                            $('#employeeDTLS2').find('tbody').html(empDtls2);
+
+                            $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
+                        } else{
+                            $('#notEngagedId').show();
+                        }
                     }
                 }
             });
@@ -207,14 +275,35 @@ var consultantRCAction = (function () {
                             }
                         }
                         $('#partnerDtls').find('tbody').html(partnerHrTr);
+
+                        getConsultantFinal(applicationNo);
                     } else {
                         warningMsg(res.text);
                     }
                 }
             });
         }
+        getServicesFee(applicationNo);
     }
 
+    function getConsultantFinal(appNo){
+        $.ajax({
+            url: _baseURL() + '/getConsultantFinal',
+            type: 'GET',
+            data: {appNo: appNo},
+            success: function (res) {
+                var consultant = res;
+                $('#oldfirmName').html(consultant.firmName);
+                $('#estAddressExist').html(consultant.estAddress);
+                $('#estDzongkhagExist').val(consultant.regDzongkhagId).prop('disabled',true);
+                $('#regEmailExist').html(consultant.regEmail);
+                $('#regMobileNoExist').html(consultant.regMobileNo);
+                $('#regPhoneNoExist').html(consultant.regPhoneNo);
+                $('#regFaxNoExist').html(consultant.regFaxNo);
+
+            }
+        });
+    }
 
     function getHrsEQs(hrOrEq) {
         var applicationNo = $('#appNoVA').val();
@@ -254,11 +343,19 @@ var consultantRCAction = (function () {
     }
 
     function addHR(tBodyClass, consultantHrs){
-
         var hrTr = "";
 
         for (var i in consultantHrs) {
-
+            var verifiedApproved = '';
+            if(consultantHrs[i].Approved == '1'){
+                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+            }else if(consultantHrs[i].verified == '1'){
+                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' disabled value='1'  required=''></td>";
+            }else{
+                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' disabled value='1'  required=''></td>";
+            }
             var attachments = '';
             for (var j in consultantHrs[i].hrAttachments) {
                 attachments = attachments + "<span class='hra'><input type='hidden' class='hraId' value='" + consultantHrs[i].hrAttachments[j].id + "'>" +
@@ -276,19 +373,37 @@ var consultantRCAction = (function () {
             "<td class='qualificationName'>" + consultantHrs[i].qualificationName + "</td>" +
             "<td class='tradeName'>" + consultantHrs[i].tradeName + "</td>" +
             "<td class='serviceTypeName'>" + consultantHrs[i].serviceTypeName + "</td>" +
+            "<td>" + nullif(consultantHrs[i].joiningDate) + "</td>" +
             "<td class='attachments'>" + attachments + "</td>" +
-            "</tr>";
+            "<td><input type='button'  value='Check for this CID' class='checkCidHr btn btn-success'></td>" +
+            verifiedApproved+ "</tr>";
         }
         //$('#partnerDtls').find('tbody').html(partnerHrTr);
         $('#hrDtlsTable').find('.'+tBodyClass).append(hrTr);
     }
 
+    function nullif(val){
+        if(val == null || val == 'null'){
+            val = ''
+        }
+        return val;
+    }
     function addEQ(tBodyClass, consultantEQs){
 
         var eqTr = "";
 
         for (var i in consultantEQs) {
-
+            var verifiedApprovedEq = '';
+            if(consultantEQs[i].approved == '1'){
+                verifiedApprovedEq = verifiedApprovedEq + "<td>(✔)</td>";
+                verifiedApprovedEq = verifiedApprovedEq + "<td>(✔)</td>";
+            }
+            else if(consultantEQs[i].verified == '1'){
+                verifiedApprovedEq = verifiedApprovedEq + "<td>(✔)</td>";
+                verifiedApprovedEq = verifiedApprovedEq + "<td><input type='checkbox' style='zoom:1.6' name='approveEq' value='1' disabled class='check' required=''></td>";
+            }else{
+                verifiedApprovedEq = verifiedApprovedEq + "<td><input type='checkbox' style='zoom:1.6' name='verifyEq' value='1' disabled class='check' required=''></td>";
+            }
             var attachments = '';
             for (var j in consultantEQs[i].eqAttachments) {
                 attachments = attachments + "<span class='hra'><input type='hidden' class='hraId' value='" + consultantEQs[i].eqAttachments[j].id + "'>" +
@@ -299,7 +414,8 @@ var consultantRCAction = (function () {
             "<td>" + consultantEQs[i].registrationNo + "</td>" +
             "<td>" + consultantEQs[i].quantity + "</td>" +
             "<td class='attachments'>" + attachments + "</td>" +
-            "</tr>";
+            "<td><input type='button' name='humanResource' value='Check for Equipment' class='equipmentCheck btn btn-success'></td>" +
+            verifiedApprovedEq+"</tr>";
         }
         //$('#partnerDtls').find('tbody').html(partnerHrTr);
         $('#equipmentTbl').find('.'+tBodyClass).append(eqTr);
@@ -347,7 +463,13 @@ var consultantRCAction = (function () {
             $('#cIncorporation').addClass('hide');
         }
     }
-
+    function checkEquipment(){
+        $('body').on('click','.equipmentCheck',function(){
+            //var modal = $(this).closest('.modal').attr('id');
+            $("#CheckModalEquipment").modal('show');
+            $check = $(this).closest('tr').find('.check');
+        });
+    }
     function verify() {
         $('#btnVerify').on('click', function (e) {
             $.ajax({
@@ -505,9 +627,10 @@ var consultantRCAction = (function () {
         //getConsultantInfo();
         getConsultantInfoForPayment();
         paymentUpdate();
-        //checkHR();
+        checkHR();
         sendBack();
         getAppliedServices();
+        checkEquipment();
     }
     return {
         init:init

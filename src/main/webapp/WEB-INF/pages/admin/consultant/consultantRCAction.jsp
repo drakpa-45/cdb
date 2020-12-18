@@ -1,3 +1,4 @@
+<%@ page import="java.util.Date" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -264,7 +265,7 @@
                                                     <th>Gender</th>
                                                     <th>Designation</th>
                                                     <th>Show in certificate</th>
-                                                    <th>CHECK FOR THE CID</th>
+                                                    <th>Action</th>
                                                     <security:authorize access="hasRole('ROLE_VERIFIER')">
                                                         <th style="width: 10%">Verify</th>
                                                     </security:authorize>
@@ -284,7 +285,51 @@
                                 <div class="card tab2">
                                     <div class="bg-blue card-status card-status-left"></div>
                                     <div class="card-header">
-                                        <h3 class="card-title">Establishment Addresses</h3>
+                                        <h3 class="card-title">Existing Establishment Addresses</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-5 form-label">Establishment
+                                                    Address</label>
+                                                <label class="col-lg-7 form-label" id="estAddressExist"></label>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-5 form-label">Dzongkhag</label>
+                                                <%-- <form:select id="estDzongkhagExist"
+                                                              class="form-control input-sm col-lg-7" required="true"
+                                                              path="dzongkhagList">
+                                                     <form:option value="" label="Select Dzongkhag"/>
+                                                     <form:options items="${dzongkhagList}" itemValue="value"
+                                                                   itemLabel="text"/>
+                                                 </form:select>--%>
+                                                <label class="col-lg-7 form-label" id="estDzongkhagExist"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-5 form-label">Email</label>
+                                                <label class="col-lg-7 form-label" id="regEmailExist"></label>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-5 form-label">Mobile No</label>
+                                                <label class="col-lg-7 form-label" id="regMobileNoExist"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-5 form-label">Telephone No </label>
+                                                <label class="col-lg-7 form-label" id="regPhoneNoExist"></label>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 form-group">
+                                                <label class="col-lg-5 form-label">Fax No </label>
+                                                <label class="col-lg-7 form-label" id="regFaxNoExist"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-header">
+                                        <h3 class="card-title">Proposed Establishment Addresses</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12">
@@ -297,28 +342,6 @@
                                                 <label class="col-lg-5 form-label">Dzongkhag</label>
                                                 <label class="col-lg-7 form-label"
                                                        id="estDzongkhag"></label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Previous Establishment
-                                                    Address</label>
-                                                <label class="col-lg-7 form-label" id="oldestAddress"></label>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Previous Dzongkhag</label>
-                                                <label class="col-lg-7 form-label"
-                                                       id="oldestDzongkhag"></label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Email</label>
-                                                <label class="col-lg-7 form-label" id="regEmail"></label>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Mobile No</label>
-                                                <label class="col-lg-7 form-label" id="regMobileNo"></label>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
@@ -360,6 +383,37 @@
                                     <tbody>
                                     </tbody>
                                 </table>
+                                <table class="table table-bordered table-hover" id="certificateTblCategory">
+                                    <thead>
+                                    <tr>
+                                        <th>Document Name</th>
+                                        <th>Document Attached</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="files">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card tab2">
+                                <div class="bg-blue card-status card-status-left"></div>
+                                <div class="card-header">Service Applied and Fee</div>
+                                <div class="card-body">
+                                    <table class="table table-bordered table-condensed table-striped" id="serviceTbl">
+                                        <thead>
+                                        <tr>
+                                            <th style="width: 5%"></th>
+                                            <th style="width: 60%">Service Name</th>
+                                            <th style="width: 25%">Fees (Nu.)</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                        <tfoot>
+                                        </tfoot>
+                                    </table>
+                                </div>
                             </div>
                             <div class="col-lg-12 form-group nextBackBtn">
                                 <button type="button" onclick="backTab('category_details')" class="btn btn-azure col-lg-offset-9">
@@ -392,8 +446,16 @@
                                                     <th style="width: 10%">Qualification</th>
                                                     <th style="width: 10%">Trade / Fields</th>
                                                     <th style="width: 10%">Service Type</th>
+                                                    <th style="width: 10%">Joining Date</th>
                                                     <th style="width: 20%">Attachments (CV/UT/AT)</th>
-                                                    <%--<th style="width: 5%">Action</th>--%>
+                                                    <th style="width: 5%">Action</th>
+                                                    <security:authorize access="hasRole('ROLE_VERIFIER')">
+                                                        <th style="width: 10%">Verify</th>
+                                                    </security:authorize>
+                                                    <security:authorize access="hasRole('ROLE_APPROVER')">
+                                                        <th style="width: 10%">Verify</th>
+                                                        <th style="width: 10%">Approve</th>
+                                                    </security:authorize>
                                                 </tr>
                                                 </thead>
                                                 <tbody class="existing-hr">
@@ -441,7 +503,14 @@
                                             <th>Registration Number</th>
                                             <th>Quantity</th>
                                             <th>Attachment</th>
-                                            <%--<th>Action</th>--%>
+                                            <th>Action</th>
+                                            <security:authorize access="hasRole('ROLE_VERIFIER')">
+                                                <th style="width: 10%">Verify</th>
+                                            </security:authorize>
+                                            <security:authorize access="hasRole('ROLE_APPROVER')">
+                                                <th style="width: 10%">Verify</th>
+                                                <th style="width: 10%">Approve</th>
+                                            </security:authorize>
                                         </tr>
                                         </thead>
                                         <tbody class="existing-eq">
@@ -563,6 +632,175 @@
                     <button type="button" class="btn btn-success" onclick="submitApplication()">Yes</button>
                     <button type="button" class="btn btn-warning" onclick="closemodel('confirmationModel')"><span class="fa fa-times"></span> No
                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%--HR Modal--%>
+    <div id="hrModal" class="modal fade in " tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" style=" max-width: 900px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 id="myModalLabel" class="modal-title"><i class="fa fa-info-circle fa-lg"></i> Personal
+                        Check<span id="cid"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div id="modal-print">
+                                <div class="form-group">
+                                    <p align="center"><strong><u>Caution</u></strong></p>
+
+                                    <p align="center"><strong>An engineer is allowed to execute only two work at
+                                        a time for that particular firm.</strong></p>
+
+                                    <p align="center"><strong>For any other Human Resource they are allowed to
+                                        involve only in a single project of work</strong></p>
+
+                                    <p align="center"><font size="5px;">Details of CID No: <span
+                                            id="cidchecked"></span></font></p>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-9 mt-8">
+                                        <span class=""><b>From DCRC database</b></span>
+
+                                        <div class="col-lg-12 form-group mb-0 pt-4">
+                                            <label class="col-lg-3 form-label">Sex</label>
+                                            <label class="col-lg-8 form-label" id="sexM"></label>
+                                        </div>
+                                        <div class="col-lg-12 form-group mb-0">
+                                            <label class="col-lg-3 form-label">Name</label>
+                                            <label class="col-lg-8 form-label" id="nameM"></label>
+                                        </div>
+                                        <div class="col-lg-12 form-group mb-0">
+                                            <label class="col-lg-3 form-label">Dzongkhag</label>
+                                            <label class="col-lg-8 form-label" id="dzongkhagM"></label>
+                                        </div>
+                                        <div class="col-lg-12 form-group mb-0">
+                                            <label class="col-lg-3 form-label">Gewog</label>
+                                            <label class="col-lg-8 form-label" id="gewogM"></label>
+                                        </div>
+                                        <div class="col-lg-12 form-group mb-0">
+                                            <label class="col-lg-3 form-label">Village</label>
+                                            <label class="col-lg-8 form-label" id="villageM"></label>
+                                        </div>
+                                        <div class="col-lg-12 form-group mb-0">
+                                            <label class="col-lg-3 form-label">DOB</label>
+                                            <label class="col-lg-8 form-label" id="dobM"></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3" align="center">
+                                        <br><br><span id="photoM"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12" align="center">
+                                        <p><span id="dcbinfo"><b>Human Resource is not registered in any of the
+                                            CDB firm</b><br><br> This person is not engaged in any work or project<br>This person is not a civil servant</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <p align="center">With regard to Corporate Employee please verify with the
+                                        concern agencies. There may be certain inconsistency.</p>
+                                    <hr>
+                                    <p align="center"><strong>Print this page as an evidence to prove that
+                                        particular HR is engaged or not in a work or project</strong></p>
+
+                                    <p align="center">
+                                        Printed on:  <%=new Date()%>
+
+                                        By: ${auth.fullName}
+                                    </p>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary"
+                                    onclick="javascript:printDiv('modal-print')">Print
+                            </button>
+                            <button type="button" class="btn btn-success" id="closeModal"
+                                    onclick="checkBtn('checkver1')" data-dismiss="modal">OK
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%--Equipment Modal--%>
+    <div id="CheckModalEquipment" class="modal fade in" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="false">
+        <div class="modal-dialog" style=" max-width: 900px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 id="myModalLabel1" class="modal-title"><i class="fa fa-info-circle fa-lg"></i> Equipment
+                        check<span id="cid2"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div id="modal-print-equipment">
+                                <div class="form-group">
+                                    <p align="center"><strong><u><font size="3px;">Caution</font></u></strong>
+                                    </p>
+
+                                    <p align="center"><strong>An equipment is allowed to execute only one work
+                                        at a time for the perticular firm.</strong></p>
+
+                                    <p align="center"><font size="5px;">Details of Registration No: <span
+                                            id="regchecked"></span></font></p>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <p align="center"><strong>From RSTA database</strong></p>
+
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-12 form-group mb-0 pt-4">
+                                                <label class="col-lg-3 form-label">Registered No.</label>
+                                                <label class="col-lg-8 form-label" id="regNo">BP-1-D1234</label>
+                                            </div>
+                                            <div class="col-lg-12 form-group mb-0">
+                                                <label class="col-lg-3 form-label">Owner Name</label>
+                                                <label class="col-lg-8 form-label" id="ownerName">Tshewan Tenzin</label>
+                                            </div>
+                                            <div class="col-lg-12 form-group mb-0">
+                                                <label class="col-lg-3 form-label">Registered Region</label>
+                                                <label class="col-lg-8 form-label">Samtse</label>
+                                            </div>
+                                            <div class="col-lg-12 form-group mb-0">
+                                                <label class="col-lg-3 form-label">Vehicle Type</label>
+                                                <label class="col-lg-8 form-label">Tractor</label>
+                                            </div>
+                                        </div>
+                                        <p align="center">
+                                            <span id="regcheckerrorspa" class="has-error"></span>
+
+                                        <p align="center"></p>
+
+                                        <p align="center"><strong><span id="engagementStatus"></span></strong>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <p align="center"><strong>Print this page as an evidence to prove that
+                                        particular HR is engaged or not in a work or project</strong></p>
+
+                                    <p align="center">
+                                        Printed on: 28-05-2019 <span id="dateSpan1"
+                                                                     style="display: none;"></span>
+                                        By:Tshewang Tenzin
+                                    </p>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary"
+                                    onclick="javascript:printDiv('modal-print-equipment')">Print
+                            </button>
+                            <button type="button" class="btn btn-success" onclick="checkBtn('equipment')"
+                                    id="closeModalEquipment" data-dismiss="modal">OK
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

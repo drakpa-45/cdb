@@ -70,7 +70,7 @@ var specializedFirm_action = (function () {
 
                         var employeeDetailsDTO = dto.employeeDetailsDTOs;
                         var empDtls ="",empDtls1="",empDtls2="";
-                        var name = employeeDetailsDTO.workId;
+                       /* var name = employeeDetailsDTO.workId;
                         if(!name==''|| !name=='null'){
                             for(var i in employeeDetailsDTO){
                                 $('#dcbinfo').append("<br/> This person is engaged with cdb number <b>"+employeeDetailsDTO.cdbNo+"</b> in <b>"+employeeDetailsDTO.procuringAgency+"</b> with work Id:<b>"+employeeDetailsDTO.workId+"</b>");
@@ -78,7 +78,7 @@ var specializedFirm_action = (function () {
                         }
                         else{
                             $('#dcbinfo').append("<br/> This person is not engaged in any work or project");
-                        }
+                        }*/
 
                       /*  if(employeeDetailsDTO !=null){
                             $('#engagedId').show();

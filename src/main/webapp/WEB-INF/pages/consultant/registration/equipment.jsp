@@ -355,8 +355,8 @@
                 $('#eq2').prop('disabled',false).prop('required',true);
                 $('#eq3').val(1).prop('disabled',true);
             } else{
-                $('#eq2').val('').prop('disabled',true);
-                $('#eq3').val('').prop('disabled',false);
+                $('#eq2').val('').prop('disabled',true).prop('required',false);
+                $('#eq3').val('').prop('disabled',false).prop('required',true);
             }
         })
     }

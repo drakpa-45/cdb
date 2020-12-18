@@ -122,7 +122,7 @@ public class ContractorNRActionService extends BaseService {
                 "<br><br>Note: Only after payment confirmation, your application will be done final approval. And you will get the login credential to log into system. ";
         MailSender.sendMail(emailId, "cdb@gov.bt", null, mailContent, "Application approved");
         responseMessage.setStatus(SUCCESSFUL_STATUS);
-        responseMessage.setText("Contractor application number :<b>"+appNo+"</b> approved successfully.");
+        responseMessage.setText("Contractor application number :" + appNo+" approved successfully.");
         return responseMessage;
     }
 

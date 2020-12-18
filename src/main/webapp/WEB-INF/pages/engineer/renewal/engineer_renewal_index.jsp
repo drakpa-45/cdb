@@ -416,7 +416,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-success" onclick="SubmitApplicationDetials()">Yes</button>
+                                                                <button type="button" class="btn btn-success" onclick="SubmitRenewalApplicationDetials()">Yes</button>
                                                                 <button type="button" class="btn btn-warning" onclick="closemodel('concirmationModel')"><span class="fa fa-times"></span> No</button>
                                                             </div>
                                                         </div>

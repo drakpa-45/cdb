@@ -258,7 +258,7 @@
                                                     <th>Gender</th>
                                                     <th>Designation</th>
                                                     <th>Show in certificate</th>
-                                                    <th>CHECK FOR THE CID</th>
+                                                    <th>Action</th>
                                                     <security:authorize access="hasRole('ROLE_VERIFIER')">
                                                         <th style="width: 10%">Verify</th>
                                                     </security:authorize>
@@ -378,6 +378,18 @@
                                     <tbody>
                                     </tbody>
                                 </table>
+                                <table class="table table-bordered table-hover" id="certificateTblCategory">
+                                    <thead>
+                                    <tr>
+                                        <th>Document Name</th>
+                                        <th>Document Attached</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="files">
+
+                                    </tbody>
+                                </table>
                             </div>
                             <div class="card tab2">
                                 <div class="bg-blue card-status card-status-left"></div>
@@ -392,16 +404,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" style="zoom:1.6" name="incorporation"
-                                                       value="1" id="Incorporation" class="service_check">
-                                            </td>
-                                            <td>
-                                                <span>Incorporation</span>
-                                            </td>
-                                            <td>500.00</td>
-                                        </tr>
+
                                         </tbody>
                                         <tfoot></tfoot>
                                     </table>
@@ -440,8 +443,16 @@
                                                     <th style="width: 10%">Qualification</th>
                                                     <th style="width: 10%">Trade / Fields</th>
                                                     <th style="width: 10%">Service Type</th>
+                                                    <th style="width: 10%">Joining Date</th>
                                                     <th style="width: 20%">Attachments (CV/UT/AT)</th>
                                                     <th style="width: 5%">Action</th>
+                                                    <security:authorize access="hasRole('ROLE_VERIFIER')">
+                                                        <th style="width: 10%">Verify</th>
+                                                    </security:authorize>
+                                                    <security:authorize access="hasRole('ROLE_APPROVER')">
+                                                        <th style="width: 10%">Verify</th>
+                                                        <th style="width: 10%">Approve</th>
+                                                    </security:authorize>
                                                 </tr>
                                                 </thead>
                                                 <tbody class="existing-hr">
@@ -489,7 +500,14 @@
                                             <th>Registration Number</th>
                                             <th>Quantity</th>
                                             <th>Attachment</th>
-                                            <%--<th>Action</th>--%>
+                                            <th>Action</th>
+                                            <security:authorize access="hasRole('ROLE_VERIFIER')">
+                                                <th style="width: 10%">Verify</th>
+                                            </security:authorize>
+                                            <security:authorize access="hasRole('ROLE_APPROVER')">
+                                                <th style="width: 10%">Verify</th>
+                                                <th style="width: 10%">Approve</th>
+                                            </security:authorize>
                                         </tr>
                                         </thead>
                                         <tbody class="existing-eq">
@@ -591,6 +609,32 @@
             </form>
         </div>
     </div>
+
+    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+             class="modal in" id="confirmationModel">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span><b>Confirmation!</b></span>
+                </div>
+                <div class="modal-body form-horizontal">
+                    <div class="alert alert-info">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                <span id="messages"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="submitApplication()">Yes</button>
+                    <button type="button" class="btn btn-warning" onclick="closemodel('confirmationModel')"><span class="fa fa-times"></span> No
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <%--HR Modal--%>
     <div id="hrModal" class="modal fade in " tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" style=" max-width: 900px;">
@@ -681,26 +725,80 @@
             </div>
         </div>
     </div>
-    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
-             class="modal in" id="confirmationModel">
-        <div class="modal-dialog modal-lg">
+
+    <%--Equipment Modal--%>
+    <div id="CheckModalEquipment" class="modal fade in" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="false">
+        <div class="modal-dialog" style=" max-width: 900px;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span><b>Confirmation!</b></span>
+                    <h4 id="myModalLabel1" class="modal-title"><i class="fa fa-info-circle fa-lg"></i> Equipment
+                        check<span id="cid2"></span></h4>
                 </div>
-                <div class="modal-body form-horizontal">
-                    <div class="alert alert-info">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
-                                <span id="messages"></span>
+                <div class="modal-body">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div id="modal-print-equipment">
+                                <div class="form-group">
+                                    <p align="center"><strong><u><font size="3px;">Caution</font></u></strong>
+                                    </p>
+
+                                    <p align="center"><strong>An equipment is allowed to execute only one work
+                                        at a time for the perticular firm.</strong></p>
+
+                                    <p align="center"><font size="5px;">Details of Registration No: <span
+                                            id="regchecked"></span></font></p>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <p align="center"><strong>From RSTA database</strong></p>
+
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-12 form-group mb-0 pt-4">
+                                                <label class="col-lg-3 form-label">Registered No.</label>
+                                                <label class="col-lg-8 form-label" id="regNo">BP-1-D1234</label>
+                                            </div>
+                                            <div class="col-lg-12 form-group mb-0">
+                                                <label class="col-lg-3 form-label">Owner Name</label>
+                                                <label class="col-lg-8 form-label" id="ownerName">Tshewan Tenzin</label>
+                                            </div>
+                                            <div class="col-lg-12 form-group mb-0">
+                                                <label class="col-lg-3 form-label">Registered Region</label>
+                                                <label class="col-lg-8 form-label">Samtse</label>
+                                            </div>
+                                            <div class="col-lg-12 form-group mb-0">
+                                                <label class="col-lg-3 form-label">Vehicle Type</label>
+                                                <label class="col-lg-8 form-label">Tractor</label>
+                                            </div>
+                                        </div>
+                                        <p align="center">
+                                            <span id="regcheckerrorspa" class="has-error"></span>
+
+                                        <p align="center"></p>
+
+                                        <p align="center"><strong><span id="engagementStatus"></span></strong>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <p align="center"><strong>Print this page as an evidence to prove that
+                                        particular HR is engaged or not in a work or project</strong></p>
+
+                                    <p align="center">
+                                        Printed on: 28-05-2019 <span id="dateSpan1"
+                                                                     style="display: none;"></span>
+                                        By:Tshewang Tenzin
+                                    </p>
+                                </div>
                             </div>
+                            <button type="button" class="btn btn-primary"
+                                    onclick="javascript:printDiv('modal-print-equipment')">Print
+                            </button>
+                            <button type="button" class="btn btn-success" onclick="checkBtn('equipment')"
+                                    id="closeModalEquipment" data-dismiss="modal">OK
+                            </button>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" onclick="submitApplication()">Yes</button>
-                    <button type="button" class="btn btn-warning" onclick="closemodel('confirmationModel')"><span class="fa fa-times"></span> No
-                    </button>
                 </div>
             </div>
         </div>

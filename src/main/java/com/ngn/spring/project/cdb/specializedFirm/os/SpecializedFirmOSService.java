@@ -82,15 +82,15 @@ public class SpecializedFirmOSService extends BaseService {
         SpecializedFirm specializedFirm = new SpecializedFirm();
         specializedFirm.setpGewogId(specializedFirmFinal.getpGewogId());
         specializedFirm.setpVillageId(specializedFirmFinal.getpVillageId());
-        specializedFirm.setCrpSpecializedTradeId(specializedFirmFinal.getId());
+        //specializedFirm.setCrpSpecializedTradeId(specializedFirmFinal.getId());
         BeanUtils.copyProperties(specializedFirmFinal,specializedFirm);
 
         String specializedFirmId = commonService.getRandomGeneratedId();
         String appliedService;
-
+        specializedFirm.setCrpSpecializedTradeId(specializedFirmId);
         //insert undertaking letter
         if(spFirmDTO.getcAttachments() != null && !spFirmDTO.getcAttachments().isEmpty())
-            specializedFirmRService.updateIncorporation(spFirmDTO.getcAttachments(), loggedInUser, specializedFirm.getCrpSpecializedTradeId());
+            specializedFirmRService.updateIncorporation(spFirmDTO.getcAttachments(), loggedInUser, specializedFirmFinal.getId());
 
         //region incorporation (Name are also allowed to change)
         if(renewalServiceType.getIncorporation() != null){

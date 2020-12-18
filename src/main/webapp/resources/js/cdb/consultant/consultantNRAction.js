@@ -75,7 +75,7 @@ var consultant_action = (function () {
 
                         var employeeDetailsDTO = dto.employeeDetailsDTOs;
                         var empDtls ="",empDtls1="",empDtls2="";
-                        alert(employeeDetailsDTO != null);
+                       // alert(employeeDetailsDTO != null);
                         if(employeeDetailsDTO !=null){
                             $('#engagedId').show();
                             for(var i in employeeDetailsDTO){
@@ -144,7 +144,7 @@ var consultant_action = (function () {
 
                         var employeeDetailsDTO = dto.employeeDetailsDTOs;
                         var empDtls ="",empDtls1="",empDtls2="";
-                        alert(employeeDetailsDTO != null);
+                     //   alert(employeeDetailsDTO != null);
                         if(employeeDetailsDTO !=null){
                             $('#engagedId').show();
                             for(var i in employeeDetailsDTO){
@@ -217,7 +217,7 @@ var consultant_action = (function () {
     }
 
     function getEmployeeDetailsFromCDB(cidNo){
-        alert(cidNo);
+     //   alert(cidNo);
        // if(cidNo){
             $.ajax({
                 url: _baseURL()+ '/getEmployeeDetailsFromCDB',

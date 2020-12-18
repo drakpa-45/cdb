@@ -882,7 +882,7 @@ var consultantOS = (function () {
                 $.ajax({
                     url: cdbGlobal.baseURL() + '/consultantNR/getPersonalInfo',
                     type: 'GET',
-                    data: {cidNo: $this.val()},
+                    data: {cidNo: $this.val(),type:"fetch"},
                     success: function (res) {
                         if (res.status == '1') {
                             var dto = res.dto;
@@ -910,7 +910,7 @@ var consultantOS = (function () {
                 $.ajax({
                     url:cdbGlobal.baseURL() + '/consultantNR/getPersonalInfo',
                     type: 'GET',
-                    data: {cidNo: $this.val()},
+                    data: {cidNo: $this.val(),type:"fetch"},
                     success: function (res) {
                         if (res.status == '1') {
                             var dto = res.dto;
@@ -937,6 +937,7 @@ var consultantOS = (function () {
         delTableRow();
         editInModal();
         changeFile();
+        changeFileEq();
         addMoreCert();
         addMoreCertOwner();
         addMoreCertCategory();

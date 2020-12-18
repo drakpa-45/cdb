@@ -4,8 +4,14 @@
 </head>
 <body>
 <div class="card">
-    <div class="card-header">
-        <h3 class="card-title font-weight-bold">Construction Development Board Services </h3>
+    <div class="card-header col-sm-12 col-md-12 col-lg-12">
+        <div class="col-sm-12 col-md-7 col-lg-7"><h3 class="card-title font-weight-bold">Construction Development Board Services </h3></div>
+            <div class="col-sm-12 col-md-4 col-lg-4 pull-right">
+                <input type="text" class="form-control number" placeholder="Track application status with your application number" onchange="checkAppStatus(this.value)">
+            </div>
+        <div class="col-sm-12 col-md-1 col-lg-1 pull-right">
+            <button class="form-control number bg btn-success fa fa-search">Search</button>
+        </div>
     </div>
     <div class="card-body">
         <div class="row">
@@ -147,6 +153,11 @@
         </div>
     </div>
 </div>
-<script>$('[data-toggle="tooltip"]').tooltip();</script>
+
+<script>$('[data-toggle="tooltip"]').tooltip();
+    function checkAppStatus(applicationNo){
+        window.open('/cdb/trackApp?applicationNo=' + applicationNo);
+    }
+</script>
 </body>
 </html>

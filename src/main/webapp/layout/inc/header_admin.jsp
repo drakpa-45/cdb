@@ -51,15 +51,13 @@
 
 <div class="collapse d-lg-flex header p-0 shadow-sm" id="headerMenuCollapse">
     <div class="container">
-        <div class="row pull-right">
-            <div class="col-lg order-lg-first">
+        <div class="row col-lg-12 col-md-12 col-sm-12" >
+            <div class="col-sm-12 col-md-3 col-lg-3"></div>
+                <div class="col-sm-12 col-md-3 col-lg-3">
                 <strong>
                     <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                         <li class="nav-item">
                             <a href="<c:url value="/admin/"/>" class="nav-link active" style="color:black"><i class="fa fa-home"></i> Home</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="../trackApplication.html" class="nav-link" style="color:black"> <i class="fa fa-search"></i>Track Your Application</a>
                         </li>
                         <li class="nav-item" style="color:black">
                             <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fa fa-print"></i> Print Certificate <i class="fa fa-chevron-down"></i></a>
@@ -76,6 +74,18 @@
                     </ul>
                 </strong>
             </div>
+            <div class="col-sm-12 col-md-4 col-lg-4 mt-3 pull-right">
+                <input type="text" class="form-control number" placeholder="Track application status with your application number" onchange="checkAppStatus(this.value)">
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2 mt-3 pull-right">
+                <button class="form-control number bg btn-success fa fa-search">Search</button>
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+function checkAppStatus(applicationNo){
+    window.open('/cdb/trackApp?applicationNo=' + applicationNo);
+}
+</script>

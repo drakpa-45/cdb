@@ -139,7 +139,7 @@ public class ContractorRCActionController extends BaseController {
         String ver = null;
         if(request.isUserInRole("ROLE_APPROVER")) {
             appStatus= ApplicationStatus.UNDER_PROCESS.getCode();
-        }else if(request.isUserInRole("ROLE_PAYMENT")){
+        } else if(request.isUserInRole("ROLE_PAYMENT")) {
             appStatus= ApplicationStatus.VERIFIED.getCode();
         }
         return cNRActionService.sendBack(appNo, remarks,appStatus,loggedInUser);

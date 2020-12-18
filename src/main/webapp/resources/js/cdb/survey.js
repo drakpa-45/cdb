@@ -254,7 +254,7 @@ function verifyApplication(){
 }
 
 function approveApplication(type){
-    url= '/cdb/admin_survey/emptylayout/approveSurveyRegistration?servicefor='+type;
+    var url= '/cdb/admin_survey/emptylayout/approveSurveyRegistration?servicefor='+type;
     var options = {target:'#content_main_div',url:url,type:'GET', data: $('#surveyverificationForm').serialize()};
     $("#surveyverificationForm").ajaxSubmit(options);
 }
