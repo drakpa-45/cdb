@@ -56,7 +56,7 @@ public class PrintController {
         CertificateDTO certificateDTO = new CertificateDTO();
         String url =null;
         try {
-            if (cdbNo.startsWith("BA-")) {
+            if (cdbNo.startsWith("BA-") || cdbNo.startsWith("NBA-")) {
                 cdbNo = request.getParameter("cdbNo");
                 certificateDTO = architectServices.getArchitetPrintDetails(request, cdbNo);
                 initialRegistrationDate = certificateDTO.getInitialRegistrationDate();
@@ -66,7 +66,7 @@ public class PrintController {
                 regExpiryDate = certificateDTO.getRegExpiryDate();
                 dzongkhagName = certificateDTO.getDzongkhagName();
             }
-            if (cdbNo.startsWith("BS-")) {
+            if (cdbNo.startsWith("BS-") || cdbNo.startsWith("NBS-")) {
                 cdbNo = request.getParameter("cdbNo");
                 certificateDTO = services.getSurveyPrintDetails(request, cdbNo);
                 initialRegistrationDate = certificateDTO.getInitialRegistrationDate();
@@ -75,7 +75,7 @@ public class PrintController {
                 regExpiryDate = certificateDTO.getRegExpiryDate();
                 dzongkhagName = certificateDTO.getDzongkhagName();
             }
-            if (cdbNo.startsWith("BE-")) {
+            if (cdbNo.startsWith("BE-") || cdbNo.startsWith("NBE-")) {
                 cdbNo = request.getParameter("cdbNo");
                 certificateDTO = engineerServices.getEngineerPrintDetails(request, cdbNo);
                 initialRegistrationDate = certificateDTO.getInitialRegistrationDate();
@@ -110,13 +110,16 @@ public class PrintController {
               ServletOutputStream out = response.getOutputStream();
             response.setContentType("application/pdf;charset=UTF-8");
 
-          if (cdbNo.startsWith("BA-")) {
+          if (cdbNo.startsWith("BA-") || cdbNo.startsWith("NBA-")) {
                 response.setHeader("Content-Disposition", "attachment; filename=architect.pdf");
             }
-            if (cdbNo.startsWith("BS-")) {
+            if (cdbNo.startsWith("BS-") || cdbNo.startsWith("NBS-")) {
                 response.setHeader("Content-Disposition", "attachment; filename=Surveyor.pdf");
             }
-            if (cdbNo.startsWith("BE-")) {
+            if (cdbNo.startsWith("BE-") || cdbNo.startsWith("NBE-")) {
+                response.setHeader("Content-Disposition", "attachment; filename=Engineer.pdf");
+            }
+            if (cdbNo.startsWith("SP-") || cdbNo.startsWith("NSP-")) {
                 response.setHeader("Content-Disposition", "attachment; filename=Engineer.pdf");
             }
           JasperExportManager.exportReportToPdfStream(jasperprint, out);

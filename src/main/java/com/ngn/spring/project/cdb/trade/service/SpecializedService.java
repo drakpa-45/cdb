@@ -402,6 +402,9 @@ public class SpecializedService extends BaseService{
             dao.saveAservies(appliedServiceEntity);
 
             BigDecimal payAmount = dto.getPaymentAmt();
+            if(payAmount == null){
+                payAmount = BigDecimal.valueOf(00.00);
+            }
             BigDecimal totalAmount;
 
             if(payAmount.doubleValue() > 3000.00){
@@ -409,7 +412,7 @@ public class SpecializedService extends BaseService{
                 totalAmount = BigDecimal.valueOf(dto.getPaymentAmt().floatValue() + 1000);
                 dto.setTotalAmt(totalAmount);
             }else{
-                dto.setPaymentAmt(dto.getPaymentAmt());
+                dto.setPaymentAmt(payAmount);
                 totalAmount = BigDecimal.valueOf(dto.getPaymentAmt().floatValue() + 1000);
                 dto.setTotalAmt(totalAmount);
             }

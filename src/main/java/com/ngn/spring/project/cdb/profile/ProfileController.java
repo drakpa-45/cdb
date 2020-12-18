@@ -1,6 +1,7 @@
 package com.ngn.spring.project.cdb.profile;
 
 import com.ngn.spring.project.cdb.common.CommonService;
+import com.ngn.spring.project.cdb.trade.dto.TradeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
