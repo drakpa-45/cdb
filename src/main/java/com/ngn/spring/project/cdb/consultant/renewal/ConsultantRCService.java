@@ -83,15 +83,15 @@ public class ConsultantRCService extends BaseService {
         Consultant consultant = new Consultant();
         consultant.setpGewogId(consultantFinal.getpGewogId());
         consultant.setpVillageId(consultantFinal.getpVillageId());
-        consultant.setConsultantId(consultantFinal.getId());
+
         BeanUtils.copyProperties(consultantFinal,consultant);
 
         String consultantId = commonService.getRandomGeneratedId();
         String appliedService;
-
+        consultant.setConsultantId(consultantId);
         //insert undertaking letter
         if(consultantDTO.getcAttachments() != null && !consultantDTO.getcAttachments().isEmpty())
-            updateIncorporation(consultantDTO.getcAttachments(), loggedInUser, consultant.getConsultantId());
+            updateIncorporation(consultantDTO.getcAttachments(), loggedInUser, consultantFinal.getId());
 
 
         //region incorporation (Name are also allowed to change)

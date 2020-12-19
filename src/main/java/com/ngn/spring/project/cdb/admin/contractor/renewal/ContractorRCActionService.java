@@ -89,7 +89,6 @@ public class ContractorRCActionService extends BaseService {
         return responseMessage;
     }
 
-
     @Transactional(readOnly =  true)
     public Object getHrsExistingAndNew(String applicationNo){
         NewDeleteExistDTO ndeDTOhr = new NewDeleteExistDTO();

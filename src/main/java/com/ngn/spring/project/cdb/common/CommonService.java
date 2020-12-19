@@ -281,12 +281,14 @@ public class CommonService extends BaseService {
         String dcrcCitizenaccessToken =resourceBundle1.getString("getCitizenDetails.accessToken");
         PersonalInfoDTO personalInfoDTO = new PersonalInfoDTO();
 
-        String cdbNo=commonDao.getCDBNo(cid);
-        if(!cdbNo.isEmpty()) {
-            personalInfoDTO.setCdbNo(cdbNo);
-            personalInfoDTO.setRemarks("This CID is already registered in one of the services.");
-        }else{
-            personalInfoDTO.setCdbNo("Not Registered");
+        if(type.equalsIgnoreCase("fetch")) {
+            String cdbNo = commonDao.getCDBNo(cid);
+            if (!cdbNo.isEmpty()) {
+                personalInfoDTO.setCdbNo(cdbNo);
+                personalInfoDTO.setRemarks("This CID is already registered in one of the services.");
+            } else {
+                personalInfoDTO.setCdbNo("Not Registered");
+            }
         }
 
         try {

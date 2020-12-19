@@ -287,6 +287,7 @@
                                                                 Name <span class="text-danger">*</span></label>
                                                             <input type="text" class="col-lg-7 form-control" id="firmName"
                                                                    name="contractor.firmName" required="true" placeholder="Text..">
+                                                            <br/><br/><i class="afterNameMsg text-blue"></i>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -1133,6 +1134,7 @@
                                                 <tr>
                                                     <th>Document Name</th>
                                                     <th>Document Attached</th>
+                                                    <th>File Size</th>
                                                     <th>Delete</th>
                                                 </tr>
                                                 </thead>
@@ -1144,6 +1146,7 @@
                                                     <td><input type='file' required="" class='file' name='contractorHRs[0].contractorHRAs[0].attachment'
                                                                accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                     </td>
+                                                    <td class='file-size'></td>
                                                     <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                 </tr>
                                                 <tr>
@@ -1153,6 +1156,7 @@
                                                     <td><input type='file' required="" class='file' name='contractorHRs[0].contractorHRAs[0].attachment'
                                                                accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                     </td>
+                                                    <td class='file-size'></td>
                                                     <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                 </tr>
                                                 <tr>
@@ -1162,6 +1166,7 @@
                                                     <td><input type='file' required="" class='file'
                                                                name='contractorHRs[0].contractorHRAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                     </td>
+                                                    <td class='file-size'></td>
                                                     <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                 </tr>
                                                 </tbody>
@@ -1200,7 +1205,7 @@
 
                                     <div class="col-lg-4">
                                         <select name="equipments[0].equipmentId"
-                                                class="form-control custom-select text-left equipmentId" required=""
+                                                class="form-control custom-select text-left equipmentId" required="" onchange="enableRegistrationNo()"
                                                 id="eq1">
                                             <option value="">Select Equipment</option>
                                             <c:forEach var="item" items="${equipmentList}">
@@ -1213,7 +1218,7 @@
 
                                     <div class="col-lg-3">
                                         <input type="text" name="equipments[0].registrationNo"
-                                               class="form-control registrationNo" <%--required="true"--%> disabled
+                                               class="form-control registrationNo" onchange="validateNo(this.value)"<%--required="true"--%> disabled
                                                id="eq2" placeholder="BP-1-A1234">
                                     </div>
                                 </div>
@@ -1314,5 +1319,47 @@
 <script type="text/javascript" src="<c:url value="/resources/JqueryAjaxFormSubmit.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/jquery.form.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/cdb/contractor/contractorOS.js"/>"></script>
+
+<script>
+    function validateNo(vNo) {
+        if (validateVehNo(vNo)) {
+            return true;
+        } else {
+            $('#eq2').val('');
+            errorMsg('oops!! please check your vehicle Number format');
+            return false;
+        }
+    }
+    function validateVehNo() {
+        var vNo = $('#eq2').val();
+        const re = /\w[BPG]-\d-\w\d{4}$/;
+        return re.test(vNo);
+    }
+    function checkDuplicateEQ(){
+        var $this = $(this);
+        var isEqExist = false;
+        $('#eqdatatable').find('tbody tr td:nth-child(3)').each(function(){
+            if($this.val() == $(this).text()){
+                warningMsg("This Registration Number is already exists in your list!!!");
+                $this.val('');
+                isEqExist = true;
+                return isEqExist;
+            }
+        });
+    }
+
+    function enableRegistrationNo(){
+        $('.equipmentId').on('change',function(e){
+            var isRegistration = $(this).find("option:selected").hasClass("1");
+            if(isRegistration == true){
+                $('#eq2').prop('disabled',false).prop('required',true);
+                $('#eq3').val(1).prop('disabled',true);
+            } else{
+                $('#eq2').val('').prop('disabled',true);
+                $('#eq3').val('').prop('disabled',false);
+            }
+        })
+    }
+</script>
 </body>
 </html>

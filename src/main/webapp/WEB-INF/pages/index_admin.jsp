@@ -22,7 +22,6 @@
                 Construction Development Board
             </h1>
         </div>
-
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title font-weight-bold">Task List</h3>
@@ -37,7 +36,102 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <%--<sec:authorize access="hasRole('ROLE_000<%=UserRole.CONTRACTOR_VERIFIER.getRefNo()%>')">--%>
+
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" href="#Contractor"  style="color: #000099">CONTRACTOR<i class="fa fa-chevron-down"></i></a>
+                                            </h4>
+                                        </div>
+                                        <div id="Contractor"  class="panel-collapse collapse">
+                                            <ul class="list-group">
+                                                <li class="list-group-item"><a href="<c:url value="/admin/contractor?service=NR"/>"  class="dropdown-item "><i>New Contractor Application</i></a></li>
+                                                <li class="list-group-item"><a href="<c:url value="/admin/contractor?service=RC"/>"  class="dropdown-item "><i>Renewal of Contractor</i> </a></li>
+                                                <li class="list-group-item"><a href="<c:url value="/admin/contractor?service=OS"/>"  class="dropdown-item "><i>Other Services</i></a></li>
+                                                <li class="list-group-item"><a href="<c:url value="/admin/contractor?service=CC"/>"  class="dropdown-item "><i>Cancellation of contractor certificate</i></a></li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" href="#Consultant" style="color: #000099">CONSULTANT<i class="fa fa-chevron-down"></i></a>
+                                            </h4>
+                                        </div>
+                                        <div id="Consultant" class="panel-collapse collapse">
+                                            <ul class="list-group">
+                                                <li class="list-group-item"> <a href="<c:url value="/admin/consultant?service=NR"/>" class="dropdown-item "><i>New Consultant Application</i></a></li>
+                                                <li class="list-group-item"><a href="<c:url value="/admin/consultant?service=RC"/>"class="dropdown-item "><i>Renewal of Consultant </i></a></li>
+                                                <li class="list-group-item"> <a href="<c:url value="/admin/consultant?service=OS"/>"class="dropdown-item "><i>Other Services</i></a></li>
+                                                <li class="list-group-item"><a href="<c:url value="/admin/consultant?service=CC"/>"class="dropdown-item "><i>Cancellation of Consultant certificate</i></a></li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" href="#SpecializedFirm"  style="color: #000099">SPECIALIZED FIRM<i class="fa fa-chevron-down"></i></a>
+                                            </h4>
+                                        </div>
+                                        <div id="SpecializedFirm" class="panel-collapse collapse">
+                                            <ul class="list-group">
+                                                <li class="list-group-item"><a href="<c:url value="/admin/specializedFirm?service=NR"/>" class="dropdown-item "><i>New Specialized Firm Application</i></a></li>
+                                                <li class="list-group-item"> <a href="<c:url value="/admin/specializedFirm?service=RC"/>"class="dropdown-item "><i>Renewal of Specialized Firm</i> </a></li>
+                                                <li class="list-group-item">  <a href="<c:url value="/admin/specializedFirm?service=OS"/>"class="dropdown-item "><i>Other Services</i></a></li>
+                                                <li class="list-group-item"><a href="<c:url value="/admin/specializedFirm?service=CC"/>"class="dropdown-item "><i>Cancellation of Specialized Firm certificate</i></a></li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" href="#Architect"  style="color: #000099">ARCHITECT<i class="fa fa-chevron-down"></i></a>
+                                            </h4>
+                                        </div>
+                                        <div id="Architect" class="panel-collapse collapse">
+                                            <ul class="list-group">
+                                                <li class="list-group-item"><a href="<c:url value="/admin_architect/architect_tasklist?param=new"/>" class="dropdown-item "><i>New Architect Application</i></a></li>
+                                                <li class="list-group-item"><a href="<c:url value="/admin_architect/architect_tasklist?param=renew"/>" class="dropdown-item "><i>Renewal of Architect</i></a></li>
+                                                <li class="list-group-item"><a href="<c:url value="/admin_architect/architect_tasklist?param=cancellation"/>" class="dropdown-item "><i>Cancellation of Architect certificate</i></a></li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" href="#Engineer"  style="color: #000099">ENGINEER<i class="fa fa-chevron-down"></i></a>
+                                            </h4>
+                                        </div>
+                                        <div id="Engineer" class="panel-collapse collapse">
+                                            <ul class="list-group">
+                                                <li class="list-group-item"><a href="<c:url value="/admin_engineer/engineer_tasklist?param=new"/>" class="dropdown-item "><i>New Engineer Application</i></a></li>
+                                                <li class="list-group-item"><a href="<c:url value="/admin_engineer/engineer_tasklist?param=renew"/>" class="dropdown-item "><i>Renewal of Engineer</i> </a></li>
+                                                <li class="list-group-item"><a href="<c:url value="/admin_engineer/engineer_tasklist?param=cancellation"/>" class="dropdown-item "><i>Cancellation of Engineer certificate</i></a></li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" href="#Surveyor"  style="color: #000099">SURVEYOR<i class="fa fa-chevron-down"></i></a>
+                                            </h4>
+                                        </div>
+                                        <div id="Surveyor" class="panel-collapse collapse">
+                                            <ul class="list-group">
+                                                <li class="list-group-item"><a href="<c:url value="/admin_survey/survey_tasklist?param=new"/>" class="dropdown-item "><i>New Surveyor Application</i></a></li>
+                                                <li class="list-group-item"><a href="<c:url value="/admin_survey/survey_tasklist?param=renew"/>" class="dropdown-item "><i>Renewal of Surveyor</i></a></li>
+                                                <li class="list-group-item"><a href="<c:url value="/admin_survey/survey_tasklist?param=cancellation"/>" class="dropdown-item "><i>Cancellation of Surveyor certificate</i></a></li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" href="#SpecializedTrade" style="color: #000099">SPECIALIZED TRADE<i class="fa fa-chevron-down"></i></a>
+                                            </h4>
+                                        </div>
+                                        <div id="SpecializedTrade" class="panel-collapse collapse">
+                                            <ul class="list-group">
+                                                <li class="list-group-item"><a href="<c:url value="/admin_specializedTrade/specializedTrade_tasklist?param=new"/>" class="dropdown-item "><i>New Specialized Trade Application</i></a></li>
+                                                <li class="list-group-item"><a href="<c:url value="/admin_specializedTrade/specializedTrade_tasklist?param=renew"/>" class="dropdown-item "><i>Renewal of Specialiaed Trade</i> </a></li>
+                                                <li class="list-group-item"><a href="<c:url value="/admin_specializedTrade/specializedTrade_tasklist?param=cancellation"/>" class="dropdown-item "><i>Cancellation of Specialiaed Trade certificate</i></a></li>
+                                            </ul>
+                                        </div>
+                                        <%--
+                                        &lt;%&ndash;<sec:authorize access="hasRole('ROLE_000<%=UserRole.CONTRACTOR_VERIFIER.getRefNo()%>')">&ndash;%&gt;
                                         <li class="nav-item" style="color:black">
                                             <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-edit"></i> Contractor  <i class="fa fa-chevron-down"></i></a>
                                             <div class="dropdown-menu dropdown-menu-arrow" x-placement="bottom-start" style="position: absolute; transform: translate3d(12px, 54px, 0px); top: 0px; left: 0px; will-change: transform;">
@@ -47,7 +141,8 @@
                                                 <a href="<c:url value="/admin/contractor?service=CC"/>"  class="dropdown-item ">Cancellation of contractor certificate</a>
                                             </div>
                                         </li>
-                                      <%--  </sec:authorize>--%>
+
+                                      &lt;%&ndash;  </sec:authorize>&ndash;%&gt;
                                         <br />
                                         <li class="nav-item" style="color:black">
                                             <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-edit"></i> Consultant  <i class="fa fa-chevron-down"></i></a>
@@ -103,7 +198,7 @@
                                                 <a href="<c:url value="/admin_specializedTrade/specializedTrade_tasklist?param=renew"/>" class="dropdown-item ">Renewal of Specialiaed Trade </a>
                                                 <a href="<c:url value="/admin_specializedTrade/specializedTrade_tasklist?param=cancellation"/>" class="dropdown-item ">Cancellation of Specialiaed Trade certificate</a>
                                             </div>
-                                        </li>
+                                        </li> --%>
                                     </div>
                                 </div>
                             </div>

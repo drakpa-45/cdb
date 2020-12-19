@@ -80,15 +80,15 @@ public class ContractorOSService extends BaseService {
         Contractor contractor = new Contractor();
         contractor.setpGewog(contractorFinal.getpGewogId());
         contractor.setpVillage(contractorFinal.getpVillageId());
-        contractor.setContractorId(contractorFinal.getId());
+
         BeanUtils.copyProperties(contractorFinal,contractor);
 
         String contractorId = commonService.getRandomGeneratedId();
         String appliedService;
-
+        contractor.setContractorId(contractorId);
         //insert undertaking letter
         if(contractorDTO.getcAttachments() != null && !contractorDTO.getcAttachments().isEmpty())
-            contractorRCService.updateIncorporation(contractorDTO.getcAttachments(), loggedInUser, contractor.getContractorId());
+            contractorRCService.updateIncorporation(contractorDTO.getcAttachments(), loggedInUser, contractorFinal.getId());
 
         //region incorporation (Name are also allowed to change)
         if(renewalServiceType.getIncorporation() != null){

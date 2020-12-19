@@ -9,8 +9,6 @@ ContractorDao.isFirmNameUnique = SELECT a.NameOfFirm FROM `crpcontractor` a WHER
 ContractorDao.getTrainingDtl = SELECT a.`CmnTrainingTypeId` tTypeId,a.`CmnTrainingModuleId` tModuleId,tt.`Name` tType,tm.`Name` tModule,a.`TrainingFromDate` fromDate,a.`TrainingToDate` toDate,b.`CIDNo` cidNo,b.`Participant` participant FROM `crpcontractortraining` a INNER JOIN `crpcontractortrainingdetail` b ON a.`Id` = b.`CrpContractorTrainingId` INNER JOIN `cmnlistitem` tt ON tt.Id = a.`CmnTrainingTypeId` INNER JOIN `cmnlistitem` tm ON tm.Id = a.`CmnTrainingModuleId` WHERE b.`CIDNo` =:cidNo
 ContractorDao.getContractorOngoingApp = SELECT aa.`CrpContractorId` contractorId,aa.`ReferenceNo` AS referenceNo, aa.ApplicationDate AS applicationDate, aa.CDBNo AS cdbNo,aa.Id AS appStatusId,bb.Name AS appStatusName FROM `crpcontractor` aa INNER JOIN cmnlistitem bb ON aa.`CmnApplicationRegistrationStatusId`=bb.Id WHERE  bb.Id IN ('262a3f11-adbd-11e4-99d7-080027dcfac6','36f9627a-adbd-11e4-99d7-080027dcfac6','6195664d-c3c5-11e4-af9f-080027dcfac6') AND aa.CDBNo =:cdbNo
 
-
-
 /** ContractorActionDao */
 ContractorActionDao.gTaskList = CALL ProCrpContractorTaskList (:userId,:status,:service);
 
@@ -71,7 +69,7 @@ ContractorRCDao.getIncAttachmentFinal = SELECT DocumentName AS documentName, Doc
 
 /*Contractor Renewal Action Dao*/
 
-ContractorRCActionDao.getAppliedServices = SELECT a.`ReferenceNo` applicationNo,c.CmnServiceTypeId serviceId,d.referenceNo serviceRefNo, d.Name serviceName, e.PaymentAmount ,a.`NameOfFirm` firmName,b.`Name` AS appStatus,a.`ApplicationDate` applicationDate FROM `crpcontractor` a  INNER JOIN `cmnlistitem` b ON b.`Id`  = a.`CmnApplicationRegistrationStatusId` INNER JOIN `crpcontractorappliedservice` c ON c.`CrpContractorId` = a.`CrpContractorId` INNER JOIN `crpservice` d ON d.`Id` = c.`CmnServiceTypeId` INNER JOIN `crpcontractorservicepayment`  e ON e.`CrpContractorId` = c.CrpContractorId AND e.`CmnServiceTypeId` = c.CmnServiceTypeId WHERE a.`ReferenceNo` =:applicationNo
+ContractorRCActionDao.getAppliedServices = SELECT a.ReferenceNo applicationNo,c.CmnServiceTypeId serviceId,d.referenceNo serviceRefNo, d.Name serviceName, e.PaymentAmount ,a.NameOfFirm firmName,b.Name AS appStatus,a.ApplicationDate applicationDate FROM crpcontractor a  INNER JOIN cmnlistitem b ON b.Id  = a.CmnApplicationRegistrationStatusId INNER JOIN crpcontractorappliedservice c ON c.CrpContractorId = a.CrpContractorId INNER JOIN crpservice d ON d.Id = c.CmnServiceTypeId INNER JOIN crpcontractorservicepayment  e ON e.CrpContractorId = c.CrpContractorId AND e.CmnServiceTypeId = c.CmnServiceTypeId WHERE a.ReferenceNo=:applicationNo
 
 /*ContractorRCActionDao.getAppliedServices = SELECT CAST(a.`ReferenceNo` as char ) applicationNo,c.CmnServiceTypeId serviceId,CAST(d.referenceNo as char) serviceRefNo, d.Name serviceName, e.PaymentAmount ,a.`NameOfFirm` firmName,b.`Name` AS appStatus,a.`ApplicationDate` applicationDate FROM `crpcontractor` a  INNER JOIN `cmnlistitem` b ON b.`Id`  = a.`CmnApplicationRegistrationStatusId` INNER JOIN `crpcontractorappliedservice` c ON c.`CrpContractorId` = a.`CrpContractorId` INNER JOIN `crpservice` d ON d.`Id` = c.`CmnServiceTypeId` INNER JOIN `crpcontractorservicepayment`  e ON e.`CrpContractorId` = c.CrpContractorId AND e.`CmnServiceTypeId` = c.CmnServiceTypeId WHERE a.`ReferenceNo` = :applicationNo */
 ContractorRCActionDao.getDeleteHrRequest = SELECT hr.`Id` AS id,hr.`CrpContractorFinalId` contractorID,hr.`CIDNo`cidNo,hr.`Name` AS name, hr.`Sex` sex,hr.`ShowInCertificate` AS siCertificate, hr.DeleteRequest AS deleteRequest \

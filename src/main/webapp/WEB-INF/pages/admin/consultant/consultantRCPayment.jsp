@@ -115,6 +115,18 @@
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <div class="col-lg-6 col-md-6 form-group">
+                                                        <label class="col-lg-5 form-label">Previous Establishment
+                                                            Address</label>
+                                                        <label class="col-lg-7 form-label" id="oldestAddress"></label>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 form-group">
+                                                        <label class="col-lg-5 form-label">Previous Dzongkhag</label>
+                                                        <label class="col-lg-7 form-label"
+                                                               id="oldestDzongkhag"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="col-lg-6 col-md-6 form-group">
                                                         <label class="col-lg-5 form-label">Email</label>
                                                         <label class="col-lg-7 form-label" id="regEmail"></label>
                                                     </div>

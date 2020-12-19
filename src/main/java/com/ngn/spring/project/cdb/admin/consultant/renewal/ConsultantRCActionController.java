@@ -6,6 +6,7 @@ import com.ngn.spring.project.cdb.admin.contractor.registration.ContractorNRActi
 import com.ngn.spring.project.cdb.admin.contractor.renewal.ContractorRCActionService;
 import com.ngn.spring.project.cdb.admin.dto.PaymentUpdateDTO;
 import com.ngn.spring.project.cdb.common.CommonService;
+import com.ngn.spring.project.cdb.consultant.renewal.ConsultantRCService;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
 import com.ngn.spring.project.lib.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,8 @@ public class ConsultantRCActionController extends BaseController {
     private ConsultantNRActionService cNRActionService;
     @Autowired
     private CommonService commonService;
+    @Autowired
+    ConsultantRCService consultantRCService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(ModelMap model, HttpServletRequest request, HttpServletResponse response, @ModelAttribute("appNo")String appNo) {
@@ -158,5 +161,12 @@ public class ConsultantRCActionController extends BaseController {
     public List getServicesFee(HttpServletRequest request, BigInteger appNo, String remarks) throws Exception{
         //loggedInUser = gLoggedInUser(request);
         return cRCActionService.getServicesFee(appNo.intValue());
+    }
+
+    @ResponseBody
+    @RequestMapping(value ="/getConsultantFinal", method = RequestMethod.GET)
+    public Object getConsultantFinal(HttpServletRequest request, String appNo){
+        String cdbNo = cNRActionService.getCDBNoFromAppNo(appNo);
+        return consultantRCService.getConsultantFinal(cdbNo);
     }
 }

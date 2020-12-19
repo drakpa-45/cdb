@@ -88,15 +88,16 @@ public class SpecializedFirmRService extends BaseService {
         SpecializedFirm specializedFirm = new SpecializedFirm();
         specializedFirm.setpGewogId(specializedFirmFinal.getpGewogId());
         specializedFirm.setpVillageId(specializedFirmFinal.getpVillageId());
-        specializedFirm.setCrpSpecializedTradeId(specializedFirmFinal.getId());
+       // specializedFirm.setCrpSpecializedTradeId(specializedFirmFinal.getId());
         BeanUtils.copyProperties(specializedFirmFinal,specializedFirm);
 
         String specializedFirmId = commonService.getRandomGeneratedId();
         String appliedService;
 
+        specializedFirm.setCrpSpecializedTradeId(specializedFirmId);
         //insert undertaking letter
         if(spFirmDTO.getcAttachments() != null && !spFirmDTO.getcAttachments().isEmpty())
-            specializedFirmRService.updateIncorporation(spFirmDTO.getcAttachments(), loggedInUser, specializedFirm.getCrpSpecializedTradeId());
+            specializedFirmRService.updateIncorporation(spFirmDTO.getcAttachments(), loggedInUser, specializedFirmFinal.getId());
 
         //region incorporation (Name are also allowed to change)
         if(renewalServiceType.getIncorporation() != null){
@@ -238,7 +239,7 @@ public class SpecializedFirmRService extends BaseService {
 
         //region late fee service id
         BigDecimal lateFee = new BigDecimal(responseMessage.getVal2());
-        if(lateFee.compareTo(BigDecimal.ZERO) == 0){
+        if(lateFee.compareTo(BigDecimal.ZERO) != 0){
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "11");
             appliedServicesList.add(appliedService);
         }

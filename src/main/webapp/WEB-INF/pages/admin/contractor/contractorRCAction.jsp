@@ -268,7 +268,7 @@
                                                     <th>Gender</th>
                                                     <th>Designation</th>
                                                     <th>Show in certificate</th>
-                                                    <th>CHECK FOR THE CID</th>
+                                                    <th>Action</th>
                                                     <security:authorize access="hasRole('ROLE_VERIFIER')">
                                                         <th style="width: 10%">Verify</th>
                                                     </security:authorize>
@@ -299,13 +299,14 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-5 form-label">Dzongkhag</label>
-                                                <form:select id="estDzongkhagExist"
+                                               <%-- <form:select id="estDzongkhagExist"
                                                              class="form-control input-sm col-lg-7" required="true"
                                                              path="dzongkhagList">
                                                     <form:option value="" label="Select Dzongkhag"/>
                                                     <form:options items="${dzongkhagList}" itemValue="value"
                                                                   itemLabel="text"/>
-                                                </form:select>
+                                                </form:select>--%>
+                                                <label class="col-lg-7 form-label" id="estDzongkhagExist"></label>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
@@ -438,6 +439,25 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="card tab2">
+                                <div class="bg-blue card-status card-status-left"></div>
+                                <div class="card-header">Service Applied and Fee</div>
+                                <div class="card-body">
+                                    <table class="table table-bordered table-condensed table-striped" id="serviceTbl">
+                                        <thead>
+                                        <tr>
+                                            <th style="width: 5%"></th>
+                                            <th style="width: 60%">Service Name</th>
+                                            <th style="width: 25%">Fees (Nu.)</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                        <tfoot>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
                             <div class="col-lg-12 form-group nextBackBtn">
                                 <button type="button"
                                         onclick="backTab('category_details')"
@@ -472,8 +492,16 @@
                                                     <th style="width: 10%">Qualification</th>
                                                     <th style="width: 10%">Trade / Fields</th>
                                                     <th style="width: 10%">Service Type</th>
+                                                    <th style="width: 10%">Joining Date</th>
                                                     <th style="width: 20%">Attachments (CV/UT/AT)</th>
-                                                    <%--<th style="width: 5%">Action</th>--%>
+                                                    <th style="width: 5%">Action</th>
+                                                    <security:authorize access="hasRole('ROLE_VERIFIER')">
+                                                        <th style="width: 10%">Verify</th>
+                                                    </security:authorize>
+                                                    <security:authorize access="hasRole('ROLE_APPROVER')">
+                                                        <th style="width: 10%">Verify</th>
+                                                        <th style="width: 10%">Approve</th>
+                                                    </security:authorize>
                                                 </tr>
                                                 </thead>
                                                 <tbody class="existing-hr">
@@ -521,7 +549,14 @@
                                             <th>Registration Number</th>
                                             <th>Quantity</th>
                                             <th>Attachment</th>
-                                            <%--<th>Action</th>--%>
+                                            <th>Action</th>
+                                            <security:authorize access="hasRole('ROLE_VERIFIER')">
+                                                <th style="width: 10%">Verify</th>
+                                            </security:authorize>
+                                            <security:authorize access="hasRole('ROLE_APPROVER')">
+                                                <th style="width: 10%">Verify</th>
+                                                <th style="width: 10%">Approve</th>
+                                            </security:authorize>
                                         </tr>
                                         </thead>
                                         <tbody class="existing-eq">
@@ -732,6 +767,84 @@
                             </button>
                             <button type="button" class="btn btn-success" id="closeModal"
                                     onclick="checkBtn('checkver1')" data-dismiss="modal">OK
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%--Equipment Modal--%>
+    <div id="CheckModalEquipment" class="modal fade in" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="false">
+        <div class="modal-dialog" style=" max-width: 900px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 id="myModalLabel1" class="modal-title"><i class="fa fa-info-circle fa-lg"></i> Equipment
+                        check<span id="cid2"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div id="modal-print-equipment">
+                                <div class="form-group">
+                                    <p align="center"><strong><u><font size="3px;">Caution</font></u></strong>
+                                    </p>
+
+                                    <p align="center"><strong>An equipment is allowed to execute only one work
+                                        at a time for the perticular firm.</strong></p>
+
+                                    <p align="center"><font size="5px;">Details of Registration No: <span
+                                            id="regchecked"></span></font></p>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <p align="center"><strong>From RSTA database</strong></p>
+
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-12 form-group mb-0 pt-4">
+                                                <label class="col-lg-3 form-label">Registered No.</label>
+                                                <label class="col-lg-8 form-label" id="regNo">BP-1-D1234</label>
+                                            </div>
+                                            <div class="col-lg-12 form-group mb-0">
+                                                <label class="col-lg-3 form-label">Owner Name</label>
+                                                <label class="col-lg-8 form-label" id="ownerName">Tshewan Tenzin</label>
+                                            </div>
+                                            <div class="col-lg-12 form-group mb-0">
+                                                <label class="col-lg-3 form-label">Registered Region</label>
+                                                <label class="col-lg-8 form-label">Samtse</label>
+                                            </div>
+                                            <div class="col-lg-12 form-group mb-0">
+                                                <label class="col-lg-3 form-label">Vehicle Type</label>
+                                                <label class="col-lg-8 form-label">Tractor</label>
+                                            </div>
+                                        </div>
+                                        <p align="center">
+                                            <span id="regcheckerrorspa" class="has-error"></span>
+
+                                        <p align="center"></p>
+
+                                        <p align="center"><strong><span id="engagementStatus"></span></strong>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <p align="center"><strong>Print this page as an evidence to prove that
+                                        particular HR is engaged or not in a work or project</strong></p>
+
+                                    <p align="center">
+                                        Printed on: 28-05-2019 <span id="dateSpan1"
+                                                                     style="display: none;"></span>
+                                        By:Tshewang Tenzin
+                                    </p>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary"
+                                    onclick="javascript:printDiv('modal-print-equipment')">Print
+                            </button>
+                            <button type="button" class="btn btn-success" onclick="checkBtn('equipment')"
+                                    id="closeModalEquipment" data-dismiss="modal">OK
                             </button>
                         </div>
                     </div>

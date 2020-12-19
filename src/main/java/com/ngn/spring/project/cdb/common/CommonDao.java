@@ -455,9 +455,9 @@ try {
         cdbNo = existingCDBNo;
     }
 
-}catch (Exception e){
+    }catch (Exception e){
     e.printStackTrace();
-}
+    }
         return cdbNo;
     }
 
@@ -514,7 +514,7 @@ try {
        /* sqlQuery = properties.getProperty("CommonDao.validateWorkEngagementCidNo");
         return (List<EmployeeDetailsDTO>) hibernateQuery(sqlQuery, EmployeeDetailsDTO.class).setParameter("cidNo", cidNo);
 */
-        List<EmployeeDetailsDTO> employeeDetailsDTOs = new ArrayList<>();
+      List<EmployeeDetailsDTO> employeeDetailsDTOs = new ArrayList<>();
         try {
             sqlQuery = " SELECT DISTINCT(t5.Id) id, GROUP_CONCAT(t4.CDBNo SEPARATOR ', ' ) cdbNo,\n" +
                     "CASE WHEN T5.migratedworkid IS NULL THEN CONCAT(T6.Code,'/',YEAR(T5.UploadedDate),'/',T5.WorkId) ELSE T5.migratedworkid END AS workId,\n" +
