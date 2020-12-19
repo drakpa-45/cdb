@@ -39,33 +39,33 @@
             <div class="table-responsive">
                 <table class="table table-condensed" id="spdf">
                     <tbody>
-                    <tr>
-                        <td colspan="2" class="font-blue-madison bold warning"><b>Personal Information</b></td>
-                    </tr>
-                    <tr>
-                        <td>
-                    <tr>
-                        <td><strong>Full Name: </strong></td>
-                        <td>${App_Details.fullname}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>CID: </strong></td>
-                        <td>${App_Details.cidNo}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Contact Number: </strong></td>
-                        <td>${App_Details.mobileNo}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Email Address: </strong></td>
-                        <td>${App_Details.email}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Telephone Number: </strong></td>
-                        <td>${App_Details.telephoneNo}</td>
-                    </tr>
+                        <tr>
+                            <td colspan="2" class="font-blue-madison bold warning"><b>Personal Information</b></td>
+                        </tr>
+                        <tr>
+                            <td>
+                        <tr>
+                            <td><strong>Full Name: </strong></td>
+                            <td>${App_Details.fullname}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CID: </strong></td>
+                            <td>${App_Details.cidNo}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Contact Number: </strong></td>
+                            <td>${App_Details.mobileNo}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email Address: </strong></td>
+                            <td>${App_Details.email}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Telephone Number: </strong></td>
+                            <td>${App_Details.telephoneNo}</td>
+                        </tr>
 
-                    <tr>
+                        <tr>
                         <td><strong>TPN Number: </strong></td>
                         <td>${App_Details.tpn}</td>
                     </tr>
@@ -74,26 +74,26 @@
                     </tbody>
 
                     <tbody>
-                    <tr>
-                        <td colspan="2" class="font-blue-madison bold warning"><b>Permanent Address</b></td>
-                    </tr>
-                    <tr>
-                        <td>
-                    <tr>
-                        <td><strong>Dzongkhag: </strong></td>
-                        <td>${App_Details.dzongkhagId}</td>
-                        <input type="hidden" name="dzongkhagId" id="dzongkhagId">
-                    </tr>
-                    <tr>
-                        <td><strong>Gewog: </strong></td>
-                        <td>${App_Details.gewog}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Village: </strong></td>
-                        <td>${App_Details.village}</td>
-                    </tr>
-                    </td>
-                    </tr>
+                        <tr>
+                            <td colspan="2" class="font-blue-madison bold warning"><b>Permanent Address</b></td>
+                        </tr>
+                        <tr>
+                            <td>
+                        <tr>
+                            <td><strong>Dzongkhag: </strong></td>
+                            <td>${App_Details.dzongkhagId}</td>
+                            <input type="hidden" name="dzongkhagId" id="dzongkhagId">
+                        </tr>
+                        <tr>
+                            <td><strong>Gewog: </strong></td>
+                            <td>${App_Details.gewog}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Village: </strong></td>
+                            <td>${App_Details.village}</td>
+                        </tr>
+                        </td>
+                        </tr>
                     </tbody>
                     <div>
                         <tbody>

@@ -368,6 +368,23 @@ function PrintInfo() {
     $("#printingForm").submit();
 }
 
+function PrintInfoCID() {
+    var divToPrint = document.getElementById('printInfoCID');
+    var popupWin = window.open('', '_blank', 'width=1000,height=1000');
+    popupWin.document.open();
+    popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
+    popupWin.document.close();
+    //  var url = '${pageContext.request.contextPath}/ruralTimber/afterPrintingApp';
+    var options = {
+        target: '#registrtaionFormCard',
+        url: url,
+        type: 'POST',
+        enctype: 'form-data',
+        data: $('#printingForm').serialize()
+    };
+    $("#printingForm").submit();
+}
+
 function submitForm(){
     $('#concirmationRenewalModel').modal('show');
     $('#messages').html('You are about to submit application. Do you want to proceed?');

@@ -204,7 +204,7 @@
                                                                 <div class="col-lg-12">
                                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                         <label>Telephone Number </label>
-                                                                        <input type="text" maxlength="100" id="telephoneNo" name="telephoneNo" class="form-control" value="${registrationDetails.telephoneNo}">
+                                                                        <input type="number" maxlength="100" id="telephoneNo" name="telephoneNo" class="form-control number" value="${registrationDetails.telephoneNo}">
                                                                     </div>
                                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                         <label>TPN Number </label>

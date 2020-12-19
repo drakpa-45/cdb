@@ -345,6 +345,26 @@ function enablesubmit(){
     }
 }
 
+<<<<<<< HEAD
+function PrintInfo() {
+    var divToPrint = document.getElementById('printInfo');
+    var popupWin = window.open('', '_blank', 'width=1000,height=1000');
+    popupWin.document.open();
+    popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
+    popupWin.document.close();
+    //  var url = '${pageContext.request.contextPath}/ruralTimber/afterPrintingApp';
+    var options = {
+        target: '#registrtaionFormCard',
+        url: url,
+        type: 'POST',
+        enctype: 'form-data',
+        data: $('#printingForm').serialize()
+    };
+    $("#printingForm").submit();
+}
+
+=======
+>>>>>>> c2112dffe0263333e0290b268f344e3d33a9906c
 function submitForm(){
     var returntpe=true;
     if($('#file1').val()==""){
