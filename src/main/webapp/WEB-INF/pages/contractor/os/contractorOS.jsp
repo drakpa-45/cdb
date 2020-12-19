@@ -3,7 +3,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <body class="">
-
 <c:if test="${not empty res.status}">
     <div class="card" id="acknowledgment">
         <div class="card-header">
@@ -16,7 +15,6 @@
             <c:if test="${res.status eq 0}">
                 <span class="error"> ${res.text}</span>
             </c:if>
-
         </div>
     </div>
 </c:if>
@@ -31,23 +29,17 @@
                 <div class="card-body">
                     <div class="form-group row" >
                         <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-
                             <span class="error" id="err-expired-audit-memo" style="color:#ff0000; font-size: 10px"></span>
-
                         </div>
-
                     </div>
                     <c:if test="${renewalCheck.status eq 0}">
                     <div class="form-group row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert alert-danger text-center"
                              style="font-size: 10px">
-
                                 <span class="error">${renewalCheck.text}</span>
-
                         </div>
                     </div>
                     </c:if>
-
                     <c:if test="${renewalCheck.status eq 1}">
                     <div class="col-md-12 col-lg-12">
                         <input type="hidden" id="isExpired" value="<%=request.getSession().getAttribute("isExpired")%>"/>
@@ -56,8 +48,7 @@
                             <div class="nav-tabs-custom">
                                 <ul class="m-0 nav nav-tabs">
                                     <li class="feesStructure tab-pane active " id="feesStructure">
-                                        <a href="#fees_structure" class="border text-white" data-toggle="tab"
-                                           data-placement="top">
+                                        <a href="#fees_structure" class="border text-white" data-toggle="tab" data-placement="top">
                                             <i class="fa fa-bookmark mr-1"></i>Fee Structure</a>
                                     </li>
                                     <li class="tab-pane services" id="services">
@@ -161,8 +152,7 @@
                                                 <tbody>
                                                 <tr>
                                                     <td>
-                                                        <input type="checkbox" style="zoom:1.6" name="incorporation"
-                                                               value="1" id="Incorporation" class="service_check">
+                                                        <input type="checkbox" style="zoom:1.6" name="incorporation" value="1" id="Incorporation" class="service_check">
                                                     </td>
                                                     <td>
                                                         <span>Incorporation</span>
@@ -170,9 +160,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <input type="checkbox" style="zoom:1.6"
-                                                               name="changeOfFirmName" value="1"
-                                                               id="changeOfFirmName" class="service_check">
+                                                        <input type="checkbox" style="zoom:1.6" name="changeOfFirmName" value="1" id="changeOfFirmName" class="service_check">
                                                     </td>
                                                     <td>
                                                         <span>Change of Firm Name</span>
@@ -180,9 +168,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <input type="checkbox" style="zoom:1.6"
-                                                               name="changeOfLocation" value="1" class="service_check"
-                                                               id="changeOfLocation" >
+                                                        <input type="checkbox" style="zoom:1.6" name="changeOfLocation" value="1" class="service_check" id="changeOfLocation" >
                                                     </td>
                                                     <td>
                                                         <span>Change of Location</span>
@@ -190,8 +176,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <input type="checkbox" style="zoom:1.6" name="changeOfOwner"
-                                                               value="1" id="changeOfOwnerId" class="service_check">
+                                                        <input type="checkbox" style="zoom:1.6" name="changeOfOwner" value="1" id="changeOfOwnerId" class="service_check">
                                                     </td>
                                                     <td>
                                                         <span>Change of Owner</span>
@@ -199,9 +184,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <input type="checkbox" style="zoom:1.6"
-                                                               name="upgradeDowngrade" value="1"
-                                                               id="upgradeDowngrade" class="service_check">
+                                                        <input type="checkbox" style="zoom:1.6" name="upgradeDowngrade" value="1" id="upgradeDowngrade" class="service_check">
                                                     </td>
                                                     <td>
                                                         <span>Upgrade/Downgrade/Add Category/Classification</span>
@@ -209,8 +192,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <input type="checkbox" style="zoom:1.6" name="updateHR"
-                                                               value="1" id="updateHR" class="service_check">
+                                                        <input type="checkbox" style="zoom:1.6" name="updateHR" value="1" id="updateHR" class="service_check">
                                                     </td>
                                                     <td>
                                                         <span>Update Human Resource</span>
@@ -218,9 +200,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <input type="checkbox" style="zoom:1.6"
-                                                               name="updateEq" value="1"
-                                                               id="updateEq" class="service_check">
+                                                        <input type="checkbox" style="zoom:1.6" name="updateEq" value="1" id="updateEq" class="service_check">
                                                     </td>
                                                     <td>
                                                         <span>Update Equipment</span>
@@ -230,20 +210,14 @@
                                             </table>
                                         </div>
                                         <div class="col-lg-12 form-group">
-                                            <button type="button"
-                                                    onclick="backTab('services')"
-                                                    class="btn btn-azure col-lg-offset-9">
-                                                <i class="fa fa-arrow-left"></i>
-                                                Back
+                                            <button type="button" onclick="backTab('services')" class="btn btn-azure col-lg-offset-9">
+                                                <i class="fa fa-arrow-left"></i>Back
                                             </button>
-                                            <button type="button" onclick="nextTab('services')"
-                                                    class="btn btn-primary">
-                                                <i class="fa fa-arrow-right"></i>
-                                                Next
+                                            <button type="button" onclick="nextTab('services')" class="btn btn-primary">
+                                                <i class="fa fa-arrow-right"></i>Next
                                             </button>
                                         </div>
                                     </div>
-
                                     <div class="tab-pane generalInformation">
                                         <div class="div-actual">
                                             <div class="card" id="gInfo">
@@ -254,7 +228,6 @@
                                                         <div class="col-lg-6 col-md-6 ">
                                                             <label class="col-lg-4 form-label">Ownership Type
                                                                 <span class="text-danger">*</span></label>
-
                                                             <form:select id="ownershipList" class="form-control col-lg-7"
                                                                          required="true" path="ownershipList" name="contractor.ownershipTypeId">
                                                                 <form:option value="" label="Select Ownership Type"/>
@@ -263,39 +236,29 @@
                                                         </div>
 
                                                         <div class="col-lg-6 col-md-6">
-                                                            <label class="col-lg-4 form-label">Country <span
-                                                                    class="text-danger">*</span></label>
-                                                            <select class="form-control col-lg-7" required="true"
-                                                                    name="contractor.pCountryId" id="pCountryId">
+                                                            <label class="col-lg-4 form-label">Country <span class="text-danger">*</span></label>
+                                                            <select class="form-control col-lg-7" required="true" name="contractor.pCountryId" id="pCountryId">
                                                                 <c:forEach var="item" items="${countryList}">
                                                                     <option value="${item.value}"><c:out value="${item.text}"/></option>
                                                                 </c:forEach>
                                                             </select>
                                                         </div>
                                                     </div>
-
                                                     <div class="form-group row">
                                                         <div class="col-lg-6 col-lg-6">
-                                                            <label class="col-lg-4 form-label">Trade License
-                                                                No</label>
-                                                            <input type="text" class="col-lg-7 form-control"
-                                                                   name="contractor.tradeLicenseNo" required="true"
-                                                                   placeholder="Text.." id="tradeLicenseNo">
+                                                            <label class="col-lg-4 form-label">Trade License No</label>
+                                                            <input type="text" class="col-lg-7 form-control" name="contractor.tradeLicenseNo" required="true" placeholder="Text.." id="tradeLicenseNo">
                                                         </div>
                                                         <div class="col-lg-6 col-lg-6">
-                                                            <label class="col-lg-4 form-label">Proposed Firm
-                                                                Name <span class="text-danger">*</span></label>
-                                                            <input type="text" class="col-lg-7 form-control" id="firmName"
-                                                                   name="contractor.firmName" required="true" placeholder="Text..">
+                                                            <label class="col-lg-4 form-label">Proposed Firm Name <span class="text-danger">*</span></label>
+                                                            <input type="text" class="col-lg-7 form-control" id="firmName" name="contractor.firmName" required="true" placeholder="Text..">
                                                             <br/><br/><i class="afterNameMsg text-blue"></i>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="col-lg-6 col-md-6">
                                                             <label class="col-lg-4 form-label">TPN Number</label>
-                                                            <input type="text" class="col-lg-7 form-control"
-                                                                   name="contractor.tpn" id="tpn"
-                                                                   placeholder="Text..">
+                                                            <input type="text" class="col-lg-7 form-control" name="contractor.tpn" id="tpn" placeholder="Text..">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -308,8 +271,7 @@
                                                 <div class="card-body">
                                                     <div class="col-lg-12">
                                                         <div class=""><input id="addMoreCert" type="button" value="Add More Certificate" class="btn btn-primary"> </div>
-                                                        <table class="table table-bordered table-center table-responsive-lg auto-index"
-                                                               id="certificateTbl">
+                                                        <table class="table table-bordered table-center table-responsive-lg auto-index" id="certificateTbl">
                                                             <thead>
                                                             <tr>
                                                                 <th>Sl no</th>
@@ -334,8 +296,7 @@
                                                 </div>
                                                 <div class="card-body" >
                                                     <div class="col-lg-12">
-                                                        <table class="table table-bordered table-center table-responsive-lg"
-                                                               id="partnerDtls">
+                                                        <table class="table table-bordered table-center table-responsive-lg" id="partnerDtls">
                                                             <thead>
                                                             <tr>
                                                                 <th>Nationality</th>
@@ -350,31 +311,24 @@
                                                             <tbody>
                                                             <tr>
                                                                 <td class="country">
-                                                                    <form:select id="countryList" class="form-control"
-                                                                                 name="contractor.contractorHRs[0].countryId"
+                                                                    <form:select id="countryList" class="form-control" name="contractor.contractorHRs[0].countryId"
                                                                                  data-msg-required="" data-rule-required="true" path="countryList">
                                                                         <form:option value="" label="Select Country"/>
-                                                                        <form:options items="${countryList}" itemValue="value"
-                                                                                      itemLabel="text"/>
+                                                                        <form:options items="${countryList}" itemValue="value" itemLabel="text"/>
                                                                     </form:select>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" name="contractor.contractorHRs[0].cidNo" class="form-control hr-cid"
-                                                                           placeholder="Text..">
+                                                                    <input type="text" name="contractor.contractorHRs[0].cidNo" class="form-control hr-cid" placeholder="Text..">
                                                                 </td>
                                                                 <td>
                                                                     <form:select id="salutation" name="contractor.contractorHRs[0].salutationId"
-                                                                                 class="form-control input-sm"
-                                                                                 data-msg-required="true" data-rule-required="true"
-                                                                                 path="salutationList">
+                                                                                 class="form-control input-sm" data-msg-required="true" data-rule-required="true" path="salutationList">
                                                                         <form:option value="" label="Select Salutation"/>
-                                                                        <form:options items="${salutationList}" itemValue="value"
-                                                                                      itemLabel="text"/>
+                                                                        <form:options items="${salutationList}" itemValue="value" itemLabel="text"/>
                                                                     </form:select>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" class="form-control name" name="contractor.contractorHRs[0].name"
-                                                                           placeholder="Text..">
+                                                                    <input type="text" class="form-control name" name="contractor.contractorHRs[0].name" placeholder="Text..">
                                                                 </td>
                                                                 <td>
                                                                     <select id="gender" name="contractor.contractorHRs[0].sex" class="form-control sex">
@@ -382,13 +336,9 @@
                                                                         <option value="M">Male</option>
                                                                         <option value="F">Female</option>
                                                                     </select>
-
                                                                 </td>
                                                                 <td>
-                                                                    <form:select id="designation" name="contractor.contractorHRs[0].designationId"
-                                                                                 class="form-control input-sm"
-                                                                                 data-msg-required="" data-rule-required="true"
-                                                                                 path="designationList">
+                                                                    <form:select id="designation" name="contractor.contractorHRs[0].designationId" class="form-control input-sm" data-msg-required="" data-rule-required="true" path="designationList">
                                                                         <form:option value="" label="Select Designation"/>
                                                                         <form:options items="${designationList}" itemValue="value" itemLabel="text"/>
                                                                     </form:select>
@@ -396,8 +346,7 @@
                                                                 </td>
                                                                 <td>
                                                                     <label class="custom-control custom-checkbox ml-6">
-                                                                        <input type="checkbox" class="custom-control-input showCert"
-                                                                               name="contractor.contractorHRs[0].siCertificate" value="1">
+                                                                        <input type="checkbox" class="custom-control-input showCert" name="contractor.contractorHRs[0].siCertificate" value="1">
                                                                         <i class="custom-control-label"></i>
                                                                     </label>
                                                                 </td>
@@ -405,14 +354,10 @@
                                                             </tbody>
                                                         </table>
                                                         <div class="col-lg-12 text-right">
-                                                            <button type="button"
-                                                                    class="btn btn-outline-primary btn-sm"
-                                                                    onclick="addRow('partnerDtls')">
+                                                            <button type="button" class="btn btn-outline-primary btn-sm" onclick="addRow('partnerDtls')">
                                                                 <i class="fe fe-plus mr-2"></i>Add More
                                                             </button>
-                                                            <button type="button"
-                                                                    class="btn btn-outline-danger btn-sm"
-                                                                    onclick="removeRow('partnerDtls')">
+                                                            <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeRow('partnerDtls')">
                                                                 <i class="fe fe-trash mr-2"></i>Remove Last Row
                                                             </button>
                                                         </div>
@@ -421,9 +366,7 @@
                                                         <div class="col-lg-12 col-md-12 ">
                                                             <label class="col-lg-3 col-md-3 form-label" for="ownershipChangeRemarks">Reason for Change of Owner:
                                                                 <span class="text-danger">*</span></label>
-                                                            <input type="text" class="col-lg-6 form-control"
-                                                                   name="contractor.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true"
-                                                                   placeholder="Text..">
+                                                            <input type="text" class="col-lg-6 form-control" name="contractor.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true" placeholder="Text..">
                                                         </div>
                                                     </div>
                                                     <h5 class="text-orange">Attach Certificates of Ownership change</h5>
@@ -465,32 +408,26 @@
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-4 form-label">Dzongkhag</label>
-                                                            <select id="pDzongkhagId"
-                                                                    class="form-control input-sm col-lg-8"
-                                                                    name="contractor.pDzongkhagId">
+                                                            <select id="pDzongkhagId" class="form-control input-sm col-lg-8" name="contractor.pDzongkhagId">
                                                                 <option value="">Select Dzongkhag</option>
                                                                 <c:forEach var="item" items="${dzongkhagList}">
-                                                                    <option value="${item.value}"><c:out
-                                                                            value="${item.text}"/></option>
+                                                                    <option value="${item.value}"><c:out value="${item.text}"/></option>
                                                                 </c:forEach>
                                                             </select>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-4 form-label">Gewog </label>
-                                                            <input type="text" class="form-control col-lg-8 form-control"
-                                                                   name="contractor.pGewogId" id="pGewogId" required="true" placeholder="Text..">
+                                                            <input type="text" class="form-control col-lg-8 form-control" name="contractor.pGewogId" id="pGewogId" required="true" placeholder="Text..">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-4 form-label">Village </label>
-                                                            <input type="text" class="form-control col-lg-8 form-control"
-                                                                   name="contractor.pVillageId" id="pVillageId" required="true" placeholder="Text..">
+                                                            <input type="text" class="form-control col-lg-8 form-control" name="contractor.pVillageId" id="pVillageId" required="true" placeholder="Text..">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="card tab2">
                                                 <div class="bg-blue card-status card-status-left"></div>
                                                 <div class="card-header">
@@ -500,21 +437,15 @@
                                                     <div class="form-group row">
                                                         <div class="col-lg-6 col-md-6 ">
                                                             <label class="col-lg-4 form-label" for="estAddress">Establishment
-                                                                Address <span
-                                                                        class="text-danger">*</span></label>
-                                                            <input type="text" class="col-lg-7 form-control"
-                                                                   name="contractor.estAddress" id="estAddress" required="true"
-                                                                   placeholder="Text..">
+                                                                Address <span class="text-danger">*</span></label>
+                                                            <input type="text" class="col-lg-7 form-control" name="contractor.estAddress" id="estAddress" required="true" placeholder="Text..">
                                                         </div>
                                                         <div class="col-lg-6 col-md-6">
                                                             <label class="col-lg-4 form-label">Dzongkhag <span
                                                                     class="text-danger">*</span></label>
-                                                            <form:select id="regDzongkhagId"
-                                                                         class="form-control input-sm col-lg-7" required="true"
-                                                                         path="dzongkhagList" name="contractor.regDzongkhagId">
+                                                            <form:select id="regDzongkhagId" class="form-control input-sm col-lg-7" required="true" path="dzongkhagList" name="contractor.regDzongkhagId">
                                                                 <form:option value="" label="Select Dzongkhag"/>
-                                                                <form:options items="${dzongkhagList}" itemValue="value"
-                                                                              itemLabel="text"/>
+                                                                <form:options items="${dzongkhagList}" itemValue="value" itemLabel="text"/>
                                                             </form:select>
                                                         </div>
                                                     </div>
@@ -540,19 +471,13 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
                                         <div class="col-lg-12 form-group">
-                                            <button type="button" onclick="backTab('generalInformation')"
-                                                    class="btn btn-azure col-lg-offset-9">
-                                                <i class="fa fa-arrow-left"></i>
-                                                Back
+                                            <button type="button" onclick="backTab('generalInformation')" class="btn btn-azure col-lg-offset-9">
+                                                <i class="fa fa-arrow-left"></i>Back
                                             </button>
-                                            <button type="button"
-                                                    onclick="nextTab('generalInformation')"
-                                                    class="btn btn-primary nextTab">
-                                                <i class="fa fa-arrow-right"></i>
-                                                Next &nbsp;
+                                            <button type="button" onclick="nextTab('generalInformation')" class="btn btn-primary nextTab">
+                                                <i class="fa fa-arrow-right"></i>Next &nbsp;
                                             </button>
                                         </div>
                                     </div>
@@ -573,10 +498,8 @@
                                                 <tbody>
                                                     <%-- TODO:: kept as static since loading dynamic hampers the performance --%>
                                                 <tr id="W1">
-                                                    <td><input class="form-control categoryCheck" type="checkbox"
-                                                               name="categories[0].projectCateID"
-                                                               value="6cd737d4-a2b7-11e4-b4d2-080027dcfac6"
-                                                               style="width: 17px; height: 17px;"></td>
+                                                    <td><input class="form-control categoryCheck" type="checkbox" name="categories[0].projectCateID"
+                                                               value="6cd737d4-a2b7-11e4-b4d2-080027dcfac6" style="width: 17px; height: 17px;"></td>
                                                     <td>W1-Roads and Bridges</td>
                                                     <td><input type="hidden"name="categories[0].existingClassID" class="existingClassID">
                                                         <select class="form-control existingClassID" disabled="">
@@ -588,8 +511,7 @@
                                                         <option value="ef832830-c3ea-11e4-af9f-080027dcfac6">S:Small
                                                         </option>
                                                     </select></td>
-                                                    <td><select name="categories[0].appliedClassID"
-                                                                class="form-control appliedClassID" disabled="">
+                                                    <td><select name="categories[0].appliedClassID" class="form-control appliedClassID" disabled="">
                                                         <option value="">-Select-</option>
                                                         <option value="e19afe94-c3ea-11e4-af9f-080027dcfac6">L:Large
                                                         </option>
@@ -600,9 +522,7 @@
                                                     </select></td>
                                                 </tr>
                                                 <tr id="W2">
-                                                    <td><input class="form-control categoryCheck" type="checkbox"
-                                                               name="categories[1].projectCateID"
-                                                               value="8176bd2d-a2b7-11e4-b4d2-080027dcfac6"
+                                                    <td><input class="form-control categoryCheck" type="checkbox" name="categories[1].projectCateID" value="8176bd2d-a2b7-11e4-b4d2-080027dcfac6"
                                                                style="width: 17px; height: 17px;"></td>
                                                     <td>W2-Traditional Bhutanese Painting/Finishing Works</td>
                                                     <td><input type="hidden"name="categories[1].existingClassID" class="existingClassID">
@@ -621,10 +541,8 @@
                                                     </select></td>
                                                 </tr>
                                                 <tr id="W3">
-                                                    <td><input class="form-control categoryCheck" type="checkbox"
-                                                               name="categories[2].projectCateID"
-                                                               value="8afc0568-a2b7-11e4-b4d2-080027dcfac6"
-                                                               style="width: 17px; height: 17px;"></td>
+                                                    <td><input class="form-control categoryCheck" type="checkbox" name="categories[2].projectCateID"
+                                                               value="8afc0568-a2b7-11e4-b4d2-080027dcfac6" style="width: 17px; height: 17px;"></td>
                                                     <td>W3-Buildings,Irrigation,Drainage,Flood Control,Water Supply and
                                                         Sewerage
                                                     </td>
@@ -638,8 +556,7 @@
                                                         <option value="ef832830-c3ea-11e4-af9f-080027dcfac6">S:Small
                                                         </option>
                                                     </select></td>
-                                                    <td><select name="categories[2].appliedClassID"
-                                                                class="form-control appliedClassID" disabled="">
+                                                    <td><select name="categories[2].appliedClassID" class="form-control appliedClassID" disabled="">
                                                         <option value="">-Select-</option>
                                                         <option value="e19afe94-c3ea-11e4-af9f-080027dcfac6">L:Large
                                                         </option>
@@ -651,9 +568,7 @@
                                                 </tr>
                                                 <tr id="W4">
                                                     <td><input class="form-control categoryCheck" type="checkbox"
-                                                               name="categories[3].projectCateID"
-                                                               value="9090a82a-a2b7-11e4-b4d2-080027dcfac6"
-                                                               style="width: 17px; height: 17px;"></td>
+                                                               name="categories[3].projectCateID" value="9090a82a-a2b7-11e4-b4d2-080027dcfac6" style="width: 17px; height: 17px;"></td>
                                                     <td>W4-Power and Telecommunication Works</td>
                                                     <td><input type="hidden"name="categories[3].existingClassID" class="existingClassID">
                                                         <select class="form-control existingClassID" disabled="">
@@ -665,8 +580,7 @@
                                                         <option value="ef832830-c3ea-11e4-af9f-080027dcfac6">S:Small
                                                         </option>
                                                     </select></td>
-                                                    <td><select name="categories[3].appliedClassID"
-                                                                class="form-control appliedClassID" disabled="">
+                                                    <td><select name="categories[3].appliedClassID" class="form-control appliedClassID" disabled="">
                                                         <option value="">-Select-</option>
                                                         <option value="e19afe94-c3ea-11e4-af9f-080027dcfac6">L:Large
                                                         </option>
@@ -706,13 +620,10 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-12 form-group nextBackBtn">
-                                            <button type="button"
-                                                    onclick="backTab('category_details')"
-                                                    class="btn btn-azure col-lg-offset-9">
+                                            <button type="button" onclick="backTab('category_details')" class="btn btn-azure col-lg-offset-9">
                                                 <i class="fa fa-arrow-circle-left"></i> &nbsp; Back
                                             </button>
-                                            <button type="button" id="btnValCCNext" class="btn btn-primary"
-                                                    onclick="nextTab('category_details')">Next &nbsp;
+                                            <button type="button" id="btnValCCNext" class="btn btn-primary" onclick="nextTab('category_details')">Next &nbsp;
                                                 <i class="fa fa-arrow-circle-right"></i>
                                             </button>
                                         </div>
@@ -748,8 +659,7 @@
                                                             </tbody>
                                                         </table>
                                                         <div class="col-lg-12 text-right">
-                                                            <button type="button" class="btn btn-info btn-sm"
-                                                                    data-toggle="modal" data-target="#addHRModal"><i class="fa fa-plus"></i> Add More HR
+                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addHRModal"><i class="fa fa-plus"></i> Add More HR
                                                             </button>
                                                         </div>
                                                     </div>
@@ -765,7 +675,6 @@
                                             </button>
                                         </div>
                                     </div>
-
                                     <div class="tab-pane equipment_details hide">
                                         <div class="div-actual">
                                             <i><strong>Contractor Equipment Details</strong></i>
@@ -783,13 +692,10 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-
                                                     </tbody>
                                                 </table>
                                                 <div class="col-lg-12 text-right">
-                                                    <button type="button" class="btn btn-info btn-sm"
-                                                            data-toggle="modal" data-target="#eqModal"><i
-                                                            class="fa fa-plus"></i> Add More Equipment
+                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#eqModal"><i class="fa fa-plus"></i> Add More Equipment
                                                     </button>
                                                 </div>
                                             </div>
@@ -798,14 +704,11 @@
                                             <button type="button" onclick="backTab('equipment_details')" class="btn btn-azure col-lg-offset-9">
                                                 <i class="fa fa-arrow-circle-left"></i>&nbsp; Back
                                             </button>
-                                            <button type="button" class="btn btn-primary" id="btnValEqNext"
-                                                    onclick="nextTab('equipment_details')">
-                                                Next &nbsp;
+                                            <button type="button" class="btn btn-primary" id="btnValEqNext" onclick="nextTab('equipment_details')">Next &nbsp;
                                                 <i class="fa fa-life-saver"></i>
                                             </button>
                                         </div>
                                     </div>
-
                                     <div class="tab-pane saveAndPreview">
                                         <div>
                                             <div id="submitSection" style="">
@@ -814,7 +717,6 @@
                                                         <div class="form-froup">
                                                             <div class="col-lg-12">
                                                                 <strong>Terms and Condition</strong>
-
                                                                 <div class="form-group">
                                                                     <div class="col-lg-12" id="">
                                                                         1. As provided in clause 2.1.1.2 and 2.3.1
@@ -965,9 +867,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="col-lg-12">
-                                                        <span><input type="checkbox" id="agreeCheck"
-                                                                     name="tnc" class="required" onclick="enableSubmit()"
-                                                                     style="width:15px;height:15px;"></span>
+                                                        <span><input type="checkbox" id="agreeCheck" name="tnc" class="required" onclick="enableSubmit()" style="width:15px;height:15px;"></span>
                                                                 <span class="bold"> I agree to the above Terms Conditions</span>
                                                             </label>
                                                             <!-- <br /><span class="text-danger" id="termAndConErrorClass"></span> -->
@@ -978,8 +878,7 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-offset-5 text-center">
-                                            <button class="btn btn-primary col-lg-2 mr-2" type="button" id="btnSubmit"
-                                                    onclick="showConfirmation()" disabled>Submit
+                                            <button class="btn btn-primary col-lg-2 mr-2" type="button" id="btnSubmit" onclick="showConfirmation()" disabled>Submit
                                             </button>
                                             <button class="btn btn-danger col-lg-2" type="button">Cancel</button>
                                         </div>
@@ -991,7 +890,6 @@
                     </c:if>
                 </div>
             </div>
-
             <form id="modalForm">
             <%--HR add model--%>
             <div aria-hidden="true" aria-labelledby="hrModalLabel" role="dialog" class="modal fade in" id="addHRModal">
@@ -1032,7 +930,6 @@
                                 <div class="form-group">
                                     <label class="col-lg-2">Salutation
                                         <span class="text-danger">*</span>:</label>
-
                                     <div class="col-lg-4">
                                         <select name="contractorHRs[0].salutationId" id="hr1" required=""
                                                 class="form-control custom-select text-left select-beast">
@@ -1044,7 +941,6 @@
                                     </div>
                                     <label class="col-lg-2">Name
                                         <span class="text-danger">*</span>:</label>
-
                                     <div class="col-lg-4">
                                         <div class="input-icon">
                                             <span class="input-icon-addon"><i class="fe fe-user"></i></span>

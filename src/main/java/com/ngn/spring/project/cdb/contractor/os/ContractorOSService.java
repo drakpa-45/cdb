@@ -149,6 +149,8 @@ public class ContractorOSService extends BaseService {
         }
         //endregion
 
+
+
         //region change of owner or partner
         if(renewalServiceType.getChangeOfOwner() != null){
             List<ContractorHR> ownerList = contractorDTO.getContractor().getContractorHRs();
@@ -276,7 +278,7 @@ public class ContractorOSService extends BaseService {
 
     public void saveCCUpgrade(Contractor contractor,List<ConCategory> categories, LoggedInUser loggedInUser){
 
-        BigDecimal totalCCUpDownFee = BigDecimal.ZERO;
+       /* BigDecimal totalCCUpDownFee = BigDecimal.ZERO;
         final List<CategoryClassDTO> ccUpDown = new ArrayList<>();  //upgrade downgrade
         String contractorFinalId = (String)commonService.getValue("crpcontractorfinal","Id","CDBNo",contractor.getCdbNo());
 
@@ -299,11 +301,45 @@ public class ContractorOSService extends BaseService {
             BigDecimal fee = ((FeeStructureDTO) contractorNRService.gFeeStructure(classDTO.getaClassId()).get(0)).getRegistrationFee();
             classDTO.setvAmount(fee);
             totalCCUpDownFee = totalCCUpDownFee.add(fee);
+        }*/
+
+        categories = categories.stream().filter(c-> c.getProjectCateID() != null).collect(Collectors.toList());
+
+        BigDecimal totalRenewalFee = BigDecimal.ZERO;
+        BigDecimal totalCCUpDownFee = BigDecimal.ZERO;
+        List<CategoryClassDTO> ccRenewal; //renewal
+        final List<CategoryClassDTO> ccUpDown = new ArrayList<>();  //upgrade downgrade
+        String contractorFinalId = (String)commonService.getValue("crpcontractorfinal","Id","CDBNo",contractor.getCdbNo());
+
+        if(categories != null && !categories.isEmpty()){
+            final List<CategoryClassDTO> renewal = new ArrayList<>(); //renewal
+            //upgrade or downgrade or change of category
+            List<ConCategory> conCategoryR = categories.stream().filter(c-> c.getAppliedClassID() != null).filter(c -> getRegisteredClass(contractorFinalId, c.getProjectCateID()).equals(c.getAppliedClassID())).collect(Collectors.toList());
+            conCategoryR.addAll(categories.stream().filter(c -> c.getProjectCateID() != null && c.getAppliedClassID() == null).collect(Collectors.toList()));
+            List<ConCategory> conCategoryUD = categories.stream().filter(c -> !conCategoryR.contains(c)).collect(Collectors.toList());
+
+            conCategoryR.stream().forEach(r->{
+                String classId = getRegisteredClass(contractorFinalId, r.getProjectCateID());
+                renewal.add(new CategoryClassDTO(r.getProjectCateID(),classId,classId));
+            });
+            conCategoryUD.stream().forEach(r->ccUpDown.add(new CategoryClassDTO(r.getProjectCateID(),r.getAppliedClassID(),getRegisteredClass(contractorFinalId, r.getProjectCateID()))));
+            ccRenewal = renewal;
+        }else{ // no upgrade or downgrade or change of category
+            ccRenewal = getCategoryClassFinal(contractorFinalId);
+        }
+        for(CategoryClassDTO classDTO : ccRenewal){
+            BigDecimal renewalFee = ((FeeStructureDTO) contractorNRService.gFeeStructure(classDTO.getaClassId()).get(0)).getRenewalFee();
+            classDTO.setvAmount(BigDecimal.valueOf(00.00));
+            totalRenewalFee = totalRenewalFee.add(renewalFee);
+        }
+        for(CategoryClassDTO classDTO : ccUpDown){
+            BigDecimal fee = ((FeeStructureDTO) contractorNRService.gFeeStructure(classDTO.getaClassId()).get(0)).getRegistrationFee();
+            classDTO.setvAmount(fee);
+            totalCCUpDownFee = totalCCUpDownFee.add(fee);
         }
 
-
         //save upgrade downgrade change of category
-        if(!Objects.equals(totalCCUpDownFee, BigDecimal.ZERO)){
+        if(!Objects.equals(totalCCUpDownFee, BigDecimal.ZERO) || Objects.equals(totalCCUpDownFee,BigDecimal.ZERO)){
             String appliedServiceId = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "7"); //upgrade downgrade service id
             ContractorAppliedS contractorAppliedS = new ContractorAppliedS();
             contractorAppliedS.setContractorId(contractor.getId());
@@ -321,6 +357,8 @@ public class ContractorOSService extends BaseService {
             contractorRCDao.saveUpdate(servicePaymentUD);
 
             contractorRCService.saveServicePaymentDetail(servicePaymentUD.getId(), ccUpDown,loggedInUser);
+
+            contractorRCService.saveServicePaymentDetailOS(servicePaymentUD.getId(), ccRenewal, loggedInUser);
         }
     }
 

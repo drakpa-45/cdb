@@ -516,7 +516,7 @@ try {
 */
       List<EmployeeDetailsDTO> employeeDetailsDTOs = new ArrayList<>();
         try {
-            sqlQuery = " SELECT DISTINCT(t5.Id) id, GROUP_CONCAT(t4.CDBNo SEPARATOR ', ' ) cdbNo,\n" +
+            sqlQuery = "SELECT DISTINCT(t5.Id) id, GROUP_CONCAT(t4.CDBNo SEPARATOR ', ' ) cdbNo,\n" +
                     "CASE WHEN T5.migratedworkid IS NULL THEN CONCAT(T6.Code,'/',YEAR(T5.UploadedDate),'/',T5.WorkId) ELSE T5.migratedworkid END AS workId,\n" +
                     "T6.Name AS procuringAgency\n" +
                     "FROM etlcontractorhumanresource t1\n" +

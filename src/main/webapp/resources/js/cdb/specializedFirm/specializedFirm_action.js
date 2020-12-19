@@ -63,6 +63,7 @@ var specializedFirm_action = (function () {
                         $('#gewogM').text(dto.gowegName);
                         $('#villageM').text(dto.villageName);
                         $('#dobM').text(dto.dob);
+                        $('#cidchecked').text(cidNo);
                         var imagelink='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo='+cidNo;
                         $('#photoM').html("<img src='"+imagelink+"'  width='200px'  height='200px' class='pull-right'/>");
                         $("#hrModal").modal('show');
@@ -70,15 +71,20 @@ var specializedFirm_action = (function () {
 
                         var employeeDetailsDTO = dto.employeeDetailsDTOs;
                         var empDtls ="",empDtls1="",empDtls2="";
-                       /* var name = employeeDetailsDTO.workId;
-                        if(!name==''|| !name=='null'){
+                        var name = dto.employeeDetailsDTOs.workId;
+                        alert(name);
+
+                        if(name !=''|| name !='null'){
                             for(var i in employeeDetailsDTO){
-                                $('#dcbinfo').append("<br/> This person is engaged with cdb number <b>"+employeeDetailsDTO.cdbNo+"</b> in <b>"+employeeDetailsDTO.procuringAgency+"</b> with work Id:<b>"+employeeDetailsDTO.workId+"</b>");
+                                $('#engagedId').show();
+                                $('#dcbinfo').append("<br/> This person is engaged with cdb number <b>"+dto.employeeDetailsDTOs.cdbNo+"</b> in <b>"+employeeDetailsDTO.procuringAgency+"</b> with work Id:<b>"+dto.employeeDetailsDTOs.workId+"</b>");
                             }
                         }
                         else{
-                            $('#dcbinfo').append("<br/> This person is not engaged in any work or project");
-                        }*/
+                            $('#dcbinfo').hide();
+                            $('#engagedId').show();
+                            $('#dcbinfo1').append("<br/> This person is not engaged in any work or project");
+                        }
 
                       /*  if(employeeDetailsDTO !=null){
                             $('#engagedId').show();

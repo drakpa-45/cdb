@@ -353,7 +353,6 @@ public class CommonService extends BaseService {
             responseMessage.setStatus(SUCCESSFUL_STATUS);
             responseMessage.setDto(personalInfoDTO);
             return responseMessage;
-
         }
     }
 

@@ -69,7 +69,6 @@ public class ContractorNRActionService extends BaseService {
             if(contractor.getpDzongkhagId() != null) {
                 contractorDTO.setpDzongkhagTxt(commonService.getValue("cmndzongkhag", "NameEn", "Id", contractor.getpDzongkhagId()).toString());
             }
-
             List<ContractorHrDTO> contractorHRs = getContractorHRs(contractor.getContractorId(),'B'); //B for both owner and hr
             List<EquipmentDTO> contractorEQs = getContractorEQs(contractor.getContractorId());
             List<ContractorAttachment> cIncAttachment = getIncAttachment(contractor.getId());

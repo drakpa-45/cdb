@@ -569,4 +569,23 @@ public class ContractorRCService extends BaseService {
     public List<ContractorAttachment> getIncAttachmentFinal(String contractorFinalId) {
         return  contractorRCDao.getIncAttachmentFinal(contractorFinalId);
     }
+
+
+    @Transactional
+    public void saveServicePaymentDetailOS(String servicePaymentId,List<CategoryClassDTO> classDTOs,LoggedInUser loggedInUser){
+        for(CategoryClassDTO classDTO : classDTOs){
+            ContractorServicePaymentDetail spDetail = new ContractorServicePaymentDetail();
+            spDetail.setId(commonService.getRandomGeneratedId());
+            spDetail.setServicePaymentId(servicePaymentId);
+            spDetail.setAmount(classDTO.getvAmount());
+            spDetail.setCategoryId(classDTO.getCategoryId());
+            if(classDTO.getExClassId() != null && !classDTO.getExClassId().isEmpty()){
+                spDetail.setExistingClassId(classDTO.getExClassId());
+            }
+            spDetail.setAppliedClassId(classDTO.getaClassId());
+            spDetail.setCreatedBy(loggedInUser.getUserID());
+            spDetail.setCreatedOn(loggedInUser.getServerDate());
+            contractorRCDao.saveUpdate(spDetail);
+        }
+    }
 }
