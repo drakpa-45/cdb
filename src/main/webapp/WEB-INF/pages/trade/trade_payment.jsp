@@ -289,8 +289,8 @@
                                 </div>
                         <div class="form-group row pull-right">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                                <button class="btn btn-warning" type="button" id="showrejectsection" onclick="updateReject()"><span class="fa fa-times"></span> Reject
-                                </button>
+                                <%--<button class="btn btn-warning" type="button" id="showrejectsection" onclick="updateReject()"><span class="fa fa-times"></span> Reject--%>
+                                <%--</button>--%>
                                 <c:if test="${appDetails.updateStatus=='262a3f11-adbd-11e4-99d7-080027dcfac6'}">
                                     <button type="button" onclick="verifyApplication()" class="btn btn-primary">
                                         <i class="fa fa-save"></i> Verify

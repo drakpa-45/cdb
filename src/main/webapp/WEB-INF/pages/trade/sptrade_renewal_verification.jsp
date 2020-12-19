@@ -101,6 +101,7 @@
                                                                             <input type="hidden" name="villageId" id="villageId">
                                                                         </div>
                                                                     </div>
+                                                                    <input type='button'  value='Check for this CID' class='checkCid btn btn-success'>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <img src='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo=${appDetails.cidNo}'  width='200px'  height='200px' class='pull-right'/>
@@ -216,7 +217,7 @@
                                                             <div class="form-group row">
                                                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                                     <div class="table-responsive">
-                                                                        <table id="category" class="table table-bordered table-hover">
+                                                                        <table id="" class="table table-bordered table-hover">
                                                                             <thead style="background-color: #F2F2F2">
                                                                             <tr>
                                                                                 <th></th>
@@ -426,14 +427,103 @@
                         </div>
                         <jsp:include page="/WEB-INF/pages/architect/confirmationModal.jsp"/>
                     </form>
-                    <script type="text/javascript" src="<c:url value="/resources/JqueryAjaxFormSubmit.js"/>"></script>
-                    <script type="text/javascript" src="<c:url value="/resources/jquery.form.js"/>"></script>
-                    <script src="<c:url value="/resources/js/cdb/specialized.js"/>"></script>
+                    <div id="hrModal" class="modal fade in " tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" style=" max-width: 900px;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 id="myModalLabel" class="modal-title"><i class="fa fa-info-circle fa-lg"></i> Personal
+                                        Check<span id="cid"></span></h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div id="printInfo">
+                                                <div class="form-group">
+                                                    <p align="center"><strong><u>Caution</u></strong></p>
+
+                                                    <p align="center"><strong>A Specialized trade is allowed to execute only two work at
+                                                        a time for that particular firm.</strong></p>
+
+                                                    <p align="center"><strong>For any other Human Resource they are allowed to
+                                                        involve only in a single project of work</strong></p>
+
+                                                    <p align="center"><font size="5px;">Details of CID No: <span
+                                                            id="cidchecked"></span></font></p>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-lg-9 mt-8">
+                                                        <span class=""><b>From DCRC database</b></span>
+
+                                                        <div class="col-lg-12 form-group mb-0 pt-4">
+                                                            <label class="col-lg-3 form-label">Sex</label>
+                                                            <label class="col-lg-8 form-label" id="sexM"></label>
+                                                        </div>
+                                                        <div class="col-lg-12 form-group mb-0">
+                                                            <label class="col-lg-3 form-label">Name</label>
+                                                            <label class="col-lg-8 form-label" id="nameM"></label>
+                                                        </div>
+                                                        <div class="col-lg-12 form-group mb-0">
+                                                            <label class="col-lg-3 form-label">Dzongkhag</label>
+                                                            <label class="col-lg-8 form-label" id="dzongkhagM"></label>
+                                                        </div>
+                                                        <div class="col-lg-12 form-group mb-0">
+                                                            <label class="col-lg-3 form-label">Gewog</label>
+                                                            <label class="col-lg-8 form-label" id="gewogM"></label>
+                                                        </div>
+                                                        <div class="col-lg-12 form-group mb-0">
+                                                            <label class="col-lg-3 form-label">Village</label>
+                                                            <label class="col-lg-8 form-label" id="villageM"></label>
+                                                        </div>
+                                                        <div class="col-lg-12 form-group mb-0">
+                                                            <label class="col-lg-3 form-label">DOB</label>
+                                                            <label class="col-lg-8 form-label" id="dobM"></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3" align="center">
+                                                        <br><br><span id="photoM"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-lg-12" align="center">
+                                                        <p><span id="dcbinfo"><b>Human Resource is not registered in any of the
+                                                            CDB firm</b><br><br> This person is not engaged in any work or project<br>This person is not a civil servant</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <p align="center">With regard to Corporate Employee please verify with the
+                                                        concern agencies. There may be certain inconsistency.</p>
+                                                    <hr>
+                                                    <p align="center"><strong>Print this page as an evidence to prove that
+                                                        particular HR is engaged or not in a work or project</strong></p>
+
+                                                    <p align="center">
+                                                        Printed on:  <%=new Date()%>
+
+                                                        By: ${auth.fullName}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-primary"
+                                                    onclick="PrintInfo()">Print
+                                            </button>
+                                            <button type="button" class="btn btn-success" id="closeModal"
+                                                    onclick="checkBtn('checkver1')" data-dismiss="modal">OK
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript" src="<c:url value="/resources/JqueryAjaxFormSubmit.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/jquery.form.js"/>"></script>
+<script src="<c:url value="/resources/js/cdb/specialized.js"/>"></script>
 <script>
     var currentTime = new Date();
     var month = currentTime.getMonth() + 1;

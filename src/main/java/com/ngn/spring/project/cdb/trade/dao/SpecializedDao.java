@@ -464,7 +464,7 @@ public class SpecializedDao extends BaseDao {
                     "f.CrpSpecializedTradeId crpSpecializedTradeId,\n" +
                     "f.ReferenceNo referenceNo,\n" +
                     "f.CIDNo cidNo,\n" +
-                    "f.Name fullname,\n" +
+                    "f.Name fullname,cat.Name name,\n" +
                     "f.Village village,\n" +
                     "f.Gewog gewog,\n" +
                     "d.NameEn dzongkhagId,\n" +
@@ -491,7 +491,7 @@ public class SpecializedDao extends BaseDao {
                     "LEFT JOIN cmncountry c \n" +
                     "ON c.Id = f.CmnCountryId \n" +
                     "LEFT JOIN sysuser su \n" +
-                    "ON su.Email = f.Email \n" +
+                    "ON su.Email = f.Email LEFT JOIN crpspecializedtradeworkclassification w ON w.CrpSpecializedTradeId = f.CrpSpecializedTradeId LEFT JOIN cmnspecializedtradecategory cat ON w.CmnAppliedCategoryId = cat.Id \n" +
                     "WHERE f.SPNo = ?";
             dto=(TradeDto) hibernateQuery(sqlQuery, TradeDto.class).setParameter(1, cdbNo).list().get(0);
         } catch (Exception e) {

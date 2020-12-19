@@ -331,9 +331,18 @@ function printCertificate(cdbNo){
 window.open('/cdb/print/printCertificate?cdbNo=' + cdbNo);
 }
 
-function PrintInfo(cdbNo){
+function printInfo(cdbNo){
     var url= '/cdb/admin_architect/emptylayout/printarchitectInfo?cdbNo='+cdbNo;
     $('#content_main_div_public_user').load(url);
+}
+$('#submitbtn').prop('disabled',true);
+function enablesubmit(){
+    if($('#submitcheckbox').prop('checked')){
+        $('#submitbtn').prop('disabled',false);
+    }
+    else{
+        $('#submitbtn').prop('disabled',true);
+    }
 }
 
 function PrintInfo() {
@@ -351,16 +360,6 @@ function PrintInfo() {
         data: $('#printingForm').serialize()
     };
     $("#printingForm").submit();
-}
-
-$('#submitbtn').prop('disabled',true);
-function enablesubmit(){
-    if($('#submitcheckbox').prop('checked')){
-        $('#submitbtn').prop('disabled',false);
-    }
-    else{
-        $('#submitbtn').prop('disabled',true);
-    }
 }
 
 function submitForm(){

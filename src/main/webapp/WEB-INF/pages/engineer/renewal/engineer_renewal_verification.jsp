@@ -361,17 +361,17 @@
                                                                                             </td>
                                                                                             <td>${appDetails.applicationDate}</td>
                                                                                         </tr>
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <strong>Remarks: </strong>
-                                                                                            </td>
-                                                                                            <td>${appDetails.remarks}</td>
-                                                                                        </tr>
+                                                                                        <%--<tr>--%>
+                                                                                            <%--<td>--%>
+                                                                                                <%--<strong>Remarks: </strong>--%>
+                                                                                            <%--</td>--%>
+                                                                                            <%--<td>${appDetails.remarks}</td>--%>
+                                                                                        <%--</tr>--%>
                                                                                         <tr>
                                                                                             <td>
                                                                                                 <strong>Submitted By: </strong>
                                                                                             </td>
-                                                                                            <td>${appDetails.createdBy} <b style="color: blueviolet">(Applicant's CID number)</b></td>
+                                                                                            <td>${appDetails.createdBy} <b style="color: blueviolet">(${appDetails.fullname})</b></td>
                                                                                         </tr>
                                                                                     </table>
                                                                                 </td>
@@ -465,7 +465,7 @@
                                 <div class="modal-body">
                                     <div class="panel panel-default">
                                         <div class="panel-body">
-                                            <div id="modal-print">
+                                            <div id="printInfo">
                                                 <div class="form-group">
                                                     <p align="center"><strong><u>Caution</u></strong></p>
 
@@ -533,7 +533,7 @@
                                                 </div>
                                             </div>
                                             <button type="button" class="btn btn-primary"
-                                                    onclick="javascript:printDiv('modal-print')">Print
+                                                    onclick="PrintInfo()">Print
                                             </button>
                                             <button type="button" class="btn btn-success" id="closeModal"
                                                     onclick="checkBtn('checkver1')" data-dismiss="modal">OK

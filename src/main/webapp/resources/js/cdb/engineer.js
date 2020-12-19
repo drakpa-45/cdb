@@ -190,6 +190,7 @@ function addmoreattachemnts(){
     var fnshow='validateAttachment(this.value,"file'+inicount+'","file_added'+inicount+'")';
     $('#fileadd').append('<div class="form-group row" id="addedfile'+inicount+'"><div class="col-sm-6"><input type="file" class="alert badge-danger" accept="application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document" onchange=\''+fnshow+'\' name="files" id="file'+inicount+'"><i id="file_added'+inicount+'"></i></div><div class="col-sm-6"><button class="btn btn-danger fa fa-pull-right mt-4" type="button" onclick="deleteate('+inicount+')"><i class="fa fa-times pr-4"></i>Delete this</button></div></div>');
 }
+
 function deleteate(id){
     $('#addedfile'+id).remove();
 }
@@ -241,7 +242,7 @@ function SubmitApproveVerifyApplicationDetials(firmId,targetId){
     $("#architectForm").ajaxSubmit(options);
     $('#registrtaionFormCard').hide();
     $('#acknowledgementCard').show();
-    $('#concirmationModel').modal('hide');
+    $('#concirmationModel').modal('show');
 
 }
 
@@ -271,6 +272,7 @@ function enablesubmit(){
         $('#submitbtn').prop('disabled',true);
     }
 }
+
 function closemodel(modelId){
     $('#'+modelId).modal('hide');
 }
@@ -280,6 +282,7 @@ function verifyApplication(){
     var options = {target:'#content_main_div',url:url,type:'GET', data: $('#engineerverificationForm').serialize()};
     $("#engineerverificationForm").ajaxSubmit(options);
 }
+
 function approveApplication(type){
     url= '/cdb/admin_engineer/emptylayout/approveEngineerRegistration?servicefor='+type;
     var options = {target:'#content_main_div',url:url,type:'GET', data: $('#engineerverificationForm').serialize()};
@@ -338,17 +341,35 @@ function validateFeesDetails(){
 $('#architect_table').DataTable({
     responsive: true
 });
+
 function printCertificate(cdbNo){
     window.open("/cdb/print/printCertificate?cdbNo=" + cdbNo);
 }
 
 function printInfo(cdbNo){
-    var url= '/cdb/admin_survey/emptylayout/printarchitectInfo?cdbNo='+cdbNo;
+    var url= '/cdb/admin_engineer/emptylayout/printarchitectInfo?cdbNo='+cdbNo;
     $('#content_main_div_public_user').load(url);
 }
 
 function PrintInfo() {
     var divToPrint = document.getElementById('printInfo');
+    var popupWin = window.open('', '_blank', 'width=1000,height=1000');
+    popupWin.document.open();
+    popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
+    popupWin.document.close();
+    //  var url = '${pageContext.request.contextPath}/ruralTimber/afterPrintingApp';
+    var options = {
+        target: '#registrtaionFormCard',
+        url: url,
+        type: 'POST',
+        enctype: 'form-data',
+        data: $('#printingForm').serialize()
+    };
+    $("#printingForm").submit();
+}
+
+function PrintInfoCID() {
+    var divToPrint = document.getElementById('printInfoCID');
     var popupWin = window.open('', '_blank', 'width=1000,height=1000');
     popupWin.document.open();
     popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');

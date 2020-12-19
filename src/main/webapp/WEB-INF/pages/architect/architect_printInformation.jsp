@@ -115,7 +115,6 @@
                                         </table>
                                     </td>
                                 </tr>
-
                                 <tr>
                                     <td colspan="2">
                                         <table class="table table-condensed">
@@ -160,7 +159,6 @@
         </div>
     </div>
         </div>
-
     <script>
         function doExportItem(){
             var HTML_Width = $("#printdiv").width();

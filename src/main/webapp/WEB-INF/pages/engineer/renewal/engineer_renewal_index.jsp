@@ -12,6 +12,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <body>
+<div id="content_main_div_public_user">
 <c:if test="${not empty res.status}">
     <div class="card" id="acknowledgment">
         <div class="card-header">
@@ -416,13 +417,12 @@
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-success" onclick="SubmitApplicationDetials()">Yes</button>
+                                                                <button type="button" class="btn btn-success" onclick="SubmitRenewalApplicationDetials()">Yes</button>
                                                                 <button type="button" class="btn btn-warning" onclick="closemodel('concirmationModel')"><span class="fa fa-times"></span> No</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -476,4 +476,5 @@
         }
 
     </script>
+</div>
 </body>
