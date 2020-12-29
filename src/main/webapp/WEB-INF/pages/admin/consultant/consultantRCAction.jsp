@@ -13,7 +13,6 @@
 
 <body>
 <input type="hidden" id="appNoVA" value="${appNo}" name="applicationNo"/>
-
 <div class="mt-5 container mb-9">
     <div class="card" id="registrtaionFormCard">
         <div class="card-header">
@@ -23,7 +22,6 @@
             </h3>
             <span style="font-size: small;color: #444444"> >> CDB No: ${cdbNo} >> Application Number : ${appNo}</span>
         </div>
-
         <div class="card-body">
             <form action="" method="post" class="" id="consultantRenewalForm" enctype="multipart/form-data">
                 <div class="nav-tabs-custom">
@@ -67,92 +65,46 @@
                                 <table>
                                     <tbody>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" style="zoom:1.6" name="incorporation"
-                                                   value="1" id="Incorporation" class="service_check">
-                                        </td>
-                                        <td>
-                                            <span>Incorporation</span>
-                                        </td>
+                                        <td><input type="checkbox" style="zoom:1.6" name="incorporation" value="1" id="Incorporation" class="service_check"></td>
+                                        <td><span>Incorporation</span></td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" style="zoom:1.6"
-                                                   name="changeOfFirmName" value="1"
-                                                   id="changeOfFirmName" class="service_check">
-                                        </td>
-                                        <td>
-                                            <span>Change of Firm Name</span>
-                                        </td>
+                                        <td><input type="checkbox" style="zoom:1.6" name="changeOfFirmName" value="1" id="changeOfFirmName" class="service_check"></td>
+                                        <td><span>Change of Firm Name</span></td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" style="zoom:1.6"
-                                                   name="changeOfLocation" value="1" class="service_check"
-                                                   id="changeOfLocation">
-                                        </td>
-                                        <td>
-                                            <span>Change of Location</span>
-                                        </td>
+                                        <td><input type="checkbox" style="zoom:1.6" name="changeOfLocation" value="1" class="service_check" id="changeOfLocation"></td>
+                                        <td><span>Change of Location</span></td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" style="zoom:1.6" name="changeOfOwner"
-                                                   value="1" id="changeOfOwnerId" class="service_check">
-                                        </td>
-                                        <td>
-                                            <span>Change of Owner</span>
-                                        </td>
+                                        <td><input type="checkbox" style="zoom:1.6" name="changeOfOwner" value="1" id="changeOfOwnerId" class="service_check"></td>
+                                        <td><span>Change of Owner</span></td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" style="zoom:1.6"
-                                                   name="upgradeDowngrade" value="1"
-                                                   id="upgradeDowngrade" class="service_check">
-                                        </td>
-                                        <td>
-                                            <span>Upgrade/Downgrade/Add Category/Classification</span>
-                                        </td>
+                                        <td><input type="checkbox" style="zoom:1.6" name="upgradeDowngrade" value="1" id="upgradeDowngrade" class="service_check"></td>
+                                        <td><span>Upgrade/Downgrade/Add Category/Classification</span></td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" style="zoom:1.6" name="updateHR"
-                                                   value="1" id="updateHR" class="service_check">
-                                        </td>
-                                        <td>
-                                            <span>Update Human Resource</span>
-                                        </td>
+                                        <td><input type="checkbox" style="zoom:1.6" name="updateHR" value="1" id="updateHR" class="service_check"></td>
+                                        <td><span>Update Human Resource</span></td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" style="zoom:1.6"
-                                                   name="updateEq" value="1"
-                                                   id="updateEq" class="service_check">
-                                        </td>
-                                        <td>
-                                            <span>Update Equipment</span>
-                                        </td>
+                                        <td><input type="checkbox" style="zoom:1.6" name="updateEq" value="1" id="updateEq" class="service_check"></td>
+                                        <td><span>Update Equipment</span></td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="col-lg-12 form-group">
-                                <button type="button"
-                                        onclick="backTab('services')"
-                                        class="btn btn-azure col-lg-offset-9">
-                                    <i class="fa fa-arrow-left"></i>
-                                    Back
+                                <button type="button" onclick="backTab('services')" class="btn btn-azure col-lg-offset-9">
+                                    <i class="fa fa-arrow-left"></i>Back
                                 </button>
-                                <button type="button" onclick="nextTab('services')"
-                                        class="btn btn-primary">
-                                    <i class="fa fa-arrow-right"></i>
-                                    Next
+                                <button type="button" onclick="nextTab('services')" class="btn btn-primary">
+                                    <i class="fa fa-arrow-right"></i>Next
                                 </button>
                             </div>
                         </div>
-
                         <div class="tab-pane generalInformation" >
-
                             <%--<jsp:include page="../consultant/gInfo.jsp"/>--%>
                             <div class="div-actual">
                                 <div class="card ">
@@ -161,35 +113,31 @@
                                         <div class="col-lg-12">
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-4 form-label">Ownership Type</label>
-                                                <label class="col-lg-8 form-label"
-                                                       id="ownershipType"></label>
+                                                <label class="col-lg-8 form-label form-control" id="ownershipType"></label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-4 form-label">Country</label>
-                                                <label class="col-lg-8 form-label" id="country"></label>
+                                                <label class="col-lg-8 form-label form-control" id="country"></label>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-4 form-label">Trade License No</label>
-                                                <label class="col-lg-8 form-label"
-                                                       id="tradeLicenseNo"></label>
+                                                <label class="col-lg-4 form-label">Trade License Number</label>
+                                                <label class="col-lg-8 form-label form-control" id="tradeLicenseNo"></label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-4 form-label">Proposed Firm
-                                                    Name</label>
-                                                <label class="col-lg-8 form-label" id="firmName"></label>
+                                                <label class="col-lg-4 form-label">Proposed Firm Name</label>
+                                                <label class="col-lg-8 form-label form-control" id="firmName"></label>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-4 form-label">TPN Number</label>
-                                                <label class="col-lg-8 form-label" id="tpn"></label>
+                                                <label class="col-lg-8 form-label form-control" id="tpn"></label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-4 form-label">Previous Firm
-                                                    Name</label>
-                                                <label class="col-lg-8 form-label" id="oldfirmName"></label>
+                                                <label class="col-lg-4 form-label">Previous Firm Name</label>
+                                                <label class="col-lg-8 form-label form-control" id="oldfirmName"></label>
                                             </div>
                                         </div>
                                     </div>
@@ -204,8 +152,7 @@
                                             <%--<div class=""><input id="addMoreCert" type="button"
                                                                  value="Add More Certificate"
                                                                  class="btn btn-primary"></div>--%>
-                                            <table class="table table-bordered table-center table-responsive-lg auto-index"
-                                                   id="IncCertificateTbl">
+                                            <table class="table table-bordered table-center table-responsive-lg auto-index" id="IncCertificateTbl">
                                                 <thead>
                                                 <tr>
                                                     <th>Sl no</th>
@@ -220,7 +167,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="card tab2">
                                     <div class="bg-blue card-status card-status-left"></div>
                                     <div class="card-header">
@@ -230,17 +176,17 @@
                                         <div class="col-lg-12">
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-4 form-label">Dzongkhag</label>
-                                                <label class="col-lg-8 form-label" id="pDzongkhag"></label>
+                                                <label class="col-lg-8 form-label form-control" id="pDzongkhag"></label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-4 form-label">Gewog </label>
-                                                <label class="col-lg-8 form-label" id="pGewog"></label>
+                                                <label class="col-lg-8 form-label form-control" id="pGewog"></label>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-4 form-label">Village </label>
-                                                <label class="col-lg-8 form-label" id="pVillage"></label>
+                                                <label class="col-lg-8 form-label form-control" id="pVillage"></label>
                                             </div>
                                         </div>
                                     </div>
@@ -248,13 +194,11 @@
                                 <div class="card tab2">
                                     <div class="bg-blue card-status card-status-left"></div>
                                     <div class="card-header">
-                                        <h3 class="card-title">Name of Owner, Partners and/or others with
-                                            Controlling Interest</h3>
+                                        <h3 class="card-title">Name of Owner, Partners and/or others withControlling Interest</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12">
-                                            <table class="table table-bordered table-center table-responsive-lg"
-                                                   id="partnerDtls">
+                                            <table class="table table-bordered table-center table-responsive-lg" id="partnerDtls">
                                                 <thead>
                                                 <tr>
                                                     <th>Sl No</th>
@@ -290,9 +234,8 @@
                                     <div class="card-body">
                                         <div class="col-lg-12">
                                             <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Establishment
-                                                    Address</label>
-                                                <label class="col-lg-7 form-label" id="estAddressExist"></label>
+                                                <label class="col-lg-5 form-label">Establishment Address</label>
+                                                <label class="col-lg-7 form-label form-control" id="estAddressExist"></label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-5 form-label">Dzongkhag</label>
@@ -303,68 +246,60 @@
                                                      <form:options items="${dzongkhagList}" itemValue="value"
                                                                    itemLabel="text"/>
                                                  </form:select>--%>
-                                                <label class="col-lg-7 form-label" id="estDzongkhagExist"></label>
+                                                <label class="col-lg-7 form-label form-control" id="estDzongkhagExist"></label>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-5 form-label">Email</label>
-                                                <label class="col-lg-7 form-label" id="regEmailExist"></label>
+                                                <label class="col-lg-7 form-label form-control" id="regEmailExist"></label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Mobile No</label>
-                                                <label class="col-lg-7 form-label" id="regMobileNoExist"></label>
+                                                <label class="col-lg-5 form-label">Mobile Number</label>
+                                                <label class="col-lg-7 form-label form-control" id="regMobileNoExist"></label>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Telephone No </label>
-                                                <label class="col-lg-7 form-label" id="regPhoneNoExist"></label>
+                                                <label class="col-lg-5 form-label">Telephone Number </label>
+                                                <label class="col-lg-7 form-label form-control" id="regPhoneNoExist"></label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Fax No </label>
-                                                <label class="col-lg-7 form-label" id="regFaxNoExist"></label>
+                                                <label class="col-lg-5 form-label">Fax Number </label>
+                                                <label class="col-lg-7 form-label form-control" id="regFaxNoExist"></label>
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="card-header">
                                         <h3 class="card-title">Proposed Establishment Addresses</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12">
                                             <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Establishment
-                                                    Address</label>
-                                                <label class="col-lg-7 form-label" id="estAddress"></label>
+                                                <label class="col-lg-5 form-label">Establishment Address</label>
+                                                <label class="col-lg-7 form-label form-control" id="estAddress"></label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-5 form-label">Dzongkhag</label>
-                                                <label class="col-lg-7 form-label"
-                                                       id="estDzongkhag"></label>
+                                                <label class="col-lg-7 form-label form-control" id="estDzongkhag"></label>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Telephone No </label>
-                                                <label class="col-lg-7 form-label" id="regPhoneNo"></label>
+                                                <label class="col-lg-5 form-label">Telephone Number</label>
+                                                <label class="col-lg-7 form-label form-control" id="regPhoneNo"></label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Fax No </label>
-                                                <label class="col-lg-7 form-label" id="regFaxNo"></label>
+                                                <label class="col-lg-5 form-label">Fax Number</label>
+                                                <label class="col-lg-7 form-label form-control" id="regFaxNo"></label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-12 form-group">
-                                <button type="button" onclick="backTab('generalInformation')" class="btn btn-azure col-lg-offset-9">
-                                    <i class="fa fa-arrow-left"></i> Back
-                                </button>
-                                <button type="button" onclick="nextTab('generalInformation')" class="btn btn-primary">
-                                    <i class="fa fa-arrow-right"></i>
-                                    Next
-                                </button>
+                                <button type="button" onclick="backTab('generalInformation')" class="btn btn-azure col-lg-offset-9"><i class="fa fa-arrow-left"></i> Back</button>
+                                <button type="button" onclick="nextTab('generalInformation')" class="btn btn-primary"><i class="fa fa-arrow-right"></i>Next</button>
                             </div>
                         </div>
                         <div class="tab-pane category_details hide">
@@ -383,7 +318,6 @@
                                     <tbody>
                                     </tbody>
                                 </table>--%>
-
                                    <form action="" method="post" class="">
                                        <table id="consultantCCTbl" class="table table-bordered table-hover">
                                            <thead style="background-color: #F2F2F2">
@@ -396,7 +330,6 @@
                                            <tbody>
                                            </tbody>
                                            <tfoot>
-
                                            </tfoot>
                                        </table>
                                    </form>
@@ -433,15 +366,10 @@
                                 </div>
                             </div>
                             <div class="col-lg-12 form-group nextBackBtn">
-                                <button type="button" onclick="backTab('category_details')" class="btn btn-azure col-lg-offset-9">
-                                    <i class="fa fa-arrow-circle-left"></i> &nbsp; Back
-                                </button>
-                                <button type="button" id="btnValCCNext" class="btn btn-primary" onclick="nextTab('category_details')">Next &nbsp;
-                                    <i class="fa fa-arrow-circle-right"></i>
-                                </button>
+                                <button type="button" onclick="backTab('category_details')" class="btn btn-azure col-lg-offset-9"><i class="fa fa-arrow-circle-left"></i> &nbsp; Back</button>
+                                <button type="button" id="btnValCCNext" class="btn btn-primary" onclick="nextTab('category_details')">Next &nbsp;<i class="fa fa-arrow-circle-right"></i></button>
                             </div>
                         </div>
-
                         <div class="tab-pane human_resource_criteria hide">
                             <div class="div-actual">
                                 <div class="card tab4">
@@ -476,7 +404,6 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody class="existing-hr">
-
                                                 <tr><th colspan="11"> Existing Human Resource List</th></tr>
                                                 </tbody>
                                                 <tbody class="newly-added-hr">
@@ -494,26 +421,19 @@
                                 </div>
                             </div>
                             <div class="col-lg-12 form-group nextBackBtn">
-                                <button type="button"
-                                        onclick="backTab('human_resource_criteria')"
-                                        class="btn btn-azure col-lg-offset-9 backTab">
+                                <button type="button" onclick="backTab('human_resource_criteria')" class="btn btn-azure col-lg-offset-9 backTab">
                                     <i class="fa fa-arrow-circle-left"></i> &nbsp;Back
                                 </button>
-                                <button type="button" id="btnValHRNext"
-                                        onclick="nextTab('human_resource_criteria')"
-                                        class="btn btn-primary nextTab">Next &nbsp;
+                                <button type="button" id="btnValHRNext" onclick="nextTab('human_resource_criteria')" class="btn btn-primary nextTab">Next &nbsp;
                                     <i class="fa fa-arrow-circle-right"></i>
                                 </button>
                             </div>
                         </div>
-
                         <div class="tab-pane equipment_details hide">
                             <div class="div-actual">
                                 <i><strong> Equipment Details</strong></i>
-
                                 <div class="table-responsive">
-                                    <table class="table table-bordered table-striped"
-                                           id="equipmentTbl">
+                                    <table class="table table-bordered table-striped" id="equipmentTbl">
                                         <thead>
                                         <tr>
                                             <th>Equipment Name</th>
@@ -549,37 +469,23 @@
                                 <button type="button" onclick="backTab('equipment_details')" class="btn btn-azure col-lg-offset-9">
                                     <i class="fa fa-arrow-circle-left"></i>&nbsp; Back
                                 </button>
-                                <button type="button" class="btn btn-primary" id="btnValEqNext"
-                                        onclick="nextTab('equipment_details')">
-                                    Next &nbsp;
+                                <button type="button" class="btn btn-primary" id="btnValEqNext" onclick="nextTab('equipment_details')">Next &nbsp;
                                     <i class="fa fa-life-saver"></i>
                                 </button>
                             </div>
                         </div>
-
                         <div class="tab-pane saveAndPreview">
                             <div class="panel-body">
                                 <div class="form-group">
                                     <div class="table-responsive">
                                         <fieldset><h3>Application Status</h3>
-                                            <table id="appStatusTbl" width="1000px" cellpadding="1"
-                                                   cellspacing="1" border="1"
-                                                   style="border-collapse: collapse"
-                                                   class="table table-bordered">
+                                            <table id="appStatusTbl" width="1000px" cellpadding="1" cellspacing="1" border="1" style="border-collapse: collapse" class="table table-bordered">
                                                 <thead>
                                                 <tr class="Caption">
-                                                    <td width="20%" align="center" valign="top">
-                                                        <strong>Status</strong>
-                                                    </td>
-                                                    <td width="20%" align="center" valign="top">
-                                                        <strong>Action By</strong>
-                                                    </td>
-                                                    <td width="20%" align="center" valign="top">
-                                                        <strong>Action Date</strong>
-                                                    </td>
-                                                    <td width="20%" align="center" valign="top">
-                                                        <strong>Remarks</strong>
-                                                    </td>
+                                                    <td width="20%" align="center" valign="top"><strong>Status</strong></td>
+                                                    <td width="20%" align="center" valign="top"><strong>Action By</strong></td>
+                                                    <td width="20%" align="center" valign="top"><strong>Action Date</strong></td>
+                                                    <td width="20%" align="center" valign="top"><strong>Remarks</strong></td>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -592,35 +498,25 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-2" for="vRemarks">Remarks:</label>
-
                                     <div class="col-md-10" id="remarkclass">
-                                                    <textarea name="vRemarks" id="vRemarks"
-                                                              class="form-control"></textarea>
+                                        <textarea name="vRemarks" id="vRemarks" class="form-control"></textarea>
                                         <span class="help-block" id="remarkErrorId"></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <security:authorize access="hasRole('ROLE_VERIFIER')">
-                                    <button type="button" class="btn btn-primary" id="btnVerify"><i
-                                            class="fa fa-check"></i>&nbsp;&nbsp;Verify
-                                    </button>
+                                    <button type="button" class="btn btn-primary" id="btnVerify"><i class="fa fa-check"></i>&nbsp;&nbsp;Verify</button>
                                 </security:authorize>
                                 <security:authorize access="hasRole('ROLE_APPROVER')">
-                                    <button type="button" class="btn btn-primary" id="btnApprove"><i
-                                            class="fa fa-check"></i>&nbsp;&nbsp;Approve
-                                    </button>
+                                    <button type="button" class="btn btn-primary" id="btnApprove"><i class="fa fa-check"></i>&nbsp;&nbsp;Approve</button>
                                    <%-- <button type="button" class="btn btn-primary" id="btnSendBack"><i
                                             class="fa fa-backward"></i>&nbsp;&nbsp;Send back
                                     </button>--%>
                                 </security:authorize>
-                                <button type="button" class="btn btn-danger " id="btnReject"><i
-                                        class="fa fa-times mr-1"></i>Reject
-                                </button>
+                                <button type="button" class="btn btn-danger " id="btnReject"><i class="fa fa-times mr-1"></i>Reject</button>
                                 <a href="<c:url value="/admin/consultant"/>">
-                                    <button type="button" class="btn btn-warning"><i class="fa fa-ban"></i>
-                                        Cancel
-                                    </button>
+                                    <button type="button" class="btn btn-warning"><i class="fa fa-ban"></i>Cancel</button>
                                 </a>
                             </div>
                         </div>
@@ -653,14 +549,12 @@
             </div>
         </div>
     </div>
-
     <%--HR Modal--%>
     <div id="hrModal" class="modal fade in " tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" style=" max-width: 900px;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 id="myModalLabel" class="modal-title"><i class="fa fa-info-circle fa-lg"></i> Personal
-                        Check<span id="cid"></span></h4>
+                    <h4 id="myModalLabel" class="modal-title"><i class="fa fa-info-circle fa-lg"></i> Personal Check<span id="cid"></span></h4>
                 </div>
                 <div class="modal-body">
                     <div class="panel panel-default">
@@ -668,20 +562,15 @@
                             <div id="modal-print">
                                 <div class="form-group">
                                     <p align="center"><strong><u>Caution</u></strong></p>
-
                                     <p align="center"><strong>An engineer is allowed to execute only two work at
                                         a time for that particular firm.</strong></p>
-
                                     <p align="center"><strong>For any other Human Resource they are allowed to
                                         involve only in a single project of work</strong></p>
-
-                                    <p align="center"><font size="5px;">Details of CID No: <span
-                                            id="cidchecked"></span></font></p>
+                                    <p align="center"><font size="5px;">Details of CID No: <span id="cidchecked"></span></font></p>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-9 mt-8">
                                         <span class=""><b>From DCRC database</b></span>
-
                                         <div class="col-lg-12 form-group mb-0 pt-4">
                                             <label class="col-lg-3 form-label">Sex</label>
                                             <label class="col-lg-8 form-label" id="sexM"></label>
@@ -724,54 +613,40 @@
                                     <hr>
                                     <p align="center"><strong>Print this page as an evidence to prove that
                                         particular HR is engaged or not in a work or project</strong></p>
-
                                     <p align="center">
                                         Printed on:  <%=new Date()%>
-
                                         By: ${auth.fullName}
                                     </p>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-primary"
-                                    onclick="javascript:printDiv('modal-print')">Print
-                            </button>
-                            <button type="button" class="btn btn-success" id="closeModal"
-                                    onclick="checkBtn('checkver1')" data-dismiss="modal">OK
-                            </button>
+                            <button type="button" class="btn btn-primary" onclick="javascript:printDiv('modal-print')">Print</button>
+                            <button type="button" class="btn btn-success" id="closeModal" onclick="checkBtn('checkver1')" data-dismiss="modal">OK</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <%--Equipment Modal--%>
     <div id="CheckModalEquipment" class="modal fade in" tabindex="-1" role="dialog"
          aria-labelledby="myModalLabel" aria-hidden="false">
         <div class="modal-dialog" style=" max-width: 900px;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 id="myModalLabel1" class="modal-title"><i class="fa fa-info-circle fa-lg"></i> Equipment
-                        check<span id="cid2"></span></h4>
+                    <h4 id="myModalLabel1" class="modal-title"><i class="fa fa-info-circle fa-lg"></i> Equipment check<span id="cid2"></span></h4>
                 </div>
                 <div class="modal-body">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div id="modal-print-equipment">
                                 <div class="form-group">
-                                    <p align="center"><strong><u><font size="3px;">Caution</font></u></strong>
-                                    </p>
-
-                                    <p align="center"><strong>An equipment is allowed to execute only one work
-                                        at a time for the perticular firm.</strong></p>
-
-                                    <p align="center"><font size="5px;">Details of Registration No: <span
-                                            id="regchecked"></span></font></p>
+                                    <p align="center"><strong><u><font size="3px;">Caution</font></u></strong></p>
+                                    <p align="center"><strong>An equipment is allowed to execute only one workat a time for the perticular firm.</strong></p>
+                                    <p align="center"><font size="5px;">Details of Registration No: <span id="regchecked"></span></font></p>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-12">
                                         <p align="center"><strong>From RSTA database</strong></p>
-
                                         <div class="col-lg-12">
                                             <div class="col-lg-12 form-group mb-0 pt-4">
                                                 <label class="col-lg-3 form-label">Registered No.</label>
@@ -792,30 +667,21 @@
                                         </div>
                                         <p align="center">
                                             <span id="regcheckerrorspa" class="has-error"></span>
-
                                         <p align="center"></p>
-
-                                        <p align="center"><strong><span id="engagementStatus"></span></strong>
-                                        </p>
+                                        <p align="center"><strong><span id="engagementStatus"></span></strong></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <p align="center"><strong>Print this page as an evidence to prove that
                                         particular HR is engaged or not in a work or project</strong></p>
-
                                     <p align="center">
-                                        Printed on: 28-05-2019 <span id="dateSpan1"
-                                                                     style="display: none;"></span>
+                                        Printed on: 28-05-2019 <span id="dateSpan1" style="display: none;"></span>
                                         By:Tshewang Tenzin
                                     </p>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-primary"
-                                    onclick="javascript:printDiv('modal-print-equipment')">Print
-                            </button>
-                            <button type="button" class="btn btn-success" onclick="checkBtn('equipment')"
-                                    id="closeModalEquipment" data-dismiss="modal">OK
-                            </button>
+                            <button type="button" class="btn btn-primary" onclick="javascript:printDiv('modal-print-equipment')">Print</button>
+                            <button type="button" class="btn btn-success" onclick="checkBtn('equipment')" id="closeModalEquipment" data-dismiss="modal">OK</button>
                         </div>
                     </div>
                 </div>
@@ -824,7 +690,5 @@
     </div>
     <script src="<c:url value="/resources/js/cdb/consultant/consultantRCAction.js"/>"></script>
 </div>
-
-
 </body>
 

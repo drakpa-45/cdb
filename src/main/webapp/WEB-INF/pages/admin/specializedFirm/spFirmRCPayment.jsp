@@ -11,9 +11,7 @@
                         Construction Development Board
                     </h1>
                 </div>
-
                 <input type="hidden" id="appNoVA" value="${appNo}" name="applicationNo"/>
-
                 <div class="card" id="registrtaionFormCard">
                     <div class="card-header">
                         <h3 class="card-title font-weight-bold" style="color: #002752">SpecializedFirm >> Renewal Application >>
@@ -28,32 +26,27 @@
                             <div class="tab-content border p-3 col-lg-12">
                                 <form action="" method="post" id="specializedFirmPaymentForm">
                                     <input type="hidden" id="appNoPayment"  value="${appNo}" name="appNo"/>
-
                                     <div class="">
                                         <div class="card tab2">
                                             <div class="bg-blue card-status card-status-left"></div>
                                             <div class="card-body">
                                                 <div class="col-lg-12">
                                                     <div class="col-lg-6 col-md-6 form-group">
-                                                        <label class="col-lg-4 form-label">Ownership Type <span
-                                                                class="text-danger">*</span></label>
-
+                                                        <label class="col-lg-4 form-label">Ownership Type</label>
                                                         <label class="col-lg-8 form-label form-control" id="ownershipType"></label>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 form-group">
-                                                        <label class="col-lg-4 form-label">Country <span
-                                                                class="text-danger">*</span></label>
+                                                        <label class="col-lg-4 form-label">Country</label>
                                                         <label class="col-lg-8 form-label form-control" id="country"></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <div class="col-lg-6 col-md-6 form-group">
-                                                        <label class="col-lg-4 form-label">Trade License No</label>
+                                                        <label class="col-lg-4 form-label">Trade License Number</label>
                                                         <label class="col-lg-8 form-label form-control" id="tradeLicenseNo"></label>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 form-group">
-                                                        <label class="col-lg-4 form-label">Proposed Firm Name <span
-                                                                class="text-danger">*</span></label>
+                                                        <label class="col-lg-4 form-label">Proposed Firm Name</label>
                                                         <label class="col-lg-8 form-label form-control" id="firmName"></label>
                                                     </div>
                                                 </div>
@@ -74,23 +67,22 @@
                                             <div class="card-body">
                                                 <div class="col-lg-12">
                                                     <div class="col-lg-6 col-md-6 form-group">
-                                                        <label class="col-lg-5 form-label">Establishment
-                                                            Address</label>
-                                                        <label class="col-lg-7 form-label" id="estAddressExist"></label>
+                                                        <label class="col-lg-5 form-label">Establishment Address</label>
+                                                        <label class="col-lg-7 form-label form-control" id="estAddressExist"></label>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 form-group">
                                                         <label class="col-lg-5 form-label">Dzongkhag</label>
-                                                        <label class="col-lg-7 form-label" id="estDzongkhagExist"></label>
+                                                        <label class="col-lg-7 form-label form-control" id="estDzongkhagExist"></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <div class="col-lg-6 col-md-6 form-group">
                                                         <label class="col-lg-5 form-label">Email</label>
-                                                        <label class="col-lg-7 form-label" id="regEmailExist"></label>
+                                                        <label class="col-lg-7 form-label form-control" id="regEmailExist"></label>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 form-group">
-                                                        <label class="col-lg-5 form-label">Mobile No</label>
-                                                        <label class="col-lg-7 form-label" id="regMobileNoExist"></label>
+                                                        <label class="col-lg-5 form-label">Mobile Number</label>
+                                                        <label class="col-lg-7 form-label form-control" id="regMobileNoExist"></label>
                                                     </div>
                                                 </div>
                                                 <%--<div class="col-lg-12">
@@ -112,21 +104,21 @@
                                                     <div class="col-lg-6 col-md-6 form-group">
                                                         <label class="col-lg-5 form-label">Establishment
                                                             Address</label>
-                                                        <label class="col-lg-7 form-label" id="estAddress"></label>
+                                                        <label class="col-lg-7 form-label form-control" id="estAddress"></label>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 form-group">
                                                         <label class="col-lg-5 form-label">Dzongkhag</label>
-                                                        <label class="col-lg-7 form-label" id="estDzongkhag"></label>
+                                                        <label class="col-lg-7 form-label form-control" id="estDzongkhag"></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <div class="col-lg-6 col-md-6 form-group">
                                                         <label class="col-lg-5 form-label">Telephone No </label>
-                                                        <label class="col-lg-7 form-label" id="regPhoneNo"></label>
+                                                        <label class="col-lg-7 form-label form-control" id="regPhoneNo"></label>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 form-group">
                                                         <label class="col-lg-5 form-label">Fax No </label>
-                                                        <label class="col-lg-7 form-label" id="regFaxNo"></label>
+                                                        <label class="col-lg-7 form-label form-control" id="regFaxNo"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -167,17 +159,17 @@
                                                 <div class="col-lg-12">
                                                     <div class="col-lg-6 col-md-6 form-group">
                                                         <label class="col-lg-4 form-label">Dzongkhag</label>
-                                                        <label class="col-lg-8 form-label" id="pDzongkhag"></label>
+                                                        <label class="col-lg-8 form-label form-control" id="pDzongkhag"></label>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 form-group">
                                                         <label class="col-lg-4 form-label">Gewog </label>
-                                                        <label class="col-lg-8 form-label" id="pGewog"></label>
+                                                        <label class="col-lg-8 form-label form-control" id="pGewog"></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <div class="col-lg-6 col-md-6 form-group">
                                                         <label class="col-lg-4 form-label">Village </label>
-                                                        <label class="col-lg-8 form-label" id="pVillage"></label>
+                                                        <label class="col-lg-8 form-label form-control" id="pVillage"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -219,13 +211,8 @@
                                                     </thead>
                                                     <tbody>
                                                     <tr>
-                                                        <td>
-                                                            <input type="checkbox" style="zoom:1.6" name="incorporation"
-                                                                   value="1" id="Incorporation" class="service_check">
-                                                        </td>
-                                                        <td>
-                                                            <span>Incorporation</span>
-                                                        </td>
+                                                        <td><input type="checkbox" style="zoom:1.6" name="incorporation" value="1" id="Incorporation" class="service_check"></td>
+                                                        <td><span>Incorporation</span></td>
                                                         <td>500.00</td>
                                                     </tr>
                                                     </tbody>
@@ -233,7 +220,6 @@
                                                 </table>
                                             </div>
                                         </div>
-
                                         <div class="card tab2">
                                             <div class="bg-blue card-status card-status-left"></div>
                                             <div class="card-header">
@@ -243,61 +229,34 @@
                                                 <div class="col-lg-12">
                                                     <div class="panel-body">
                                                         <div class="form-group">
-                                                            <label class="col-lg-2 control-label">
-                                                                CDB Number :<font color="red">*</font>
-                                                            </label>
-
+                                                            <label class="col-lg-2 control-label">CDB Number :<font color="red">*</font></label>
                                                             <div class="col-lg-4" id="CDBNumberclass">
-                                                                <input type="text" name="cdbNo"
-                                                                        id="cdbNo" class="form-control"
-                                                                        readonly="readonly" value="${cdbNo}">
+                                                                <input type="text" name="cdbNo" id="cdbNo" class="form-control" readonly="readonly" value="${cdbNo}">
                                                             </div>
-                                                            <label class="col-lg-2 control-label">
-                                                                Payment Date :<font color="red">*</font>
-                                                            </label>
-
+                                                            <label class="col-lg-2 control-label">Payment Date :<font color="red">*</font></label>
                                                             <div class="col-lg-4" id="dateclass">
-
                                                                 <div class="input-group margin-bottom-sm">
-                                                                                <span class="input-group-addon pr-5"><i
-                                                                                        class="fa fa-calendar"></i></span>
-                                                                    <input type="date" name="paymentDate"
-                                                                           value="" id="paymentDate"
-                                                                           class="form-control datepicker">
+                                                                    <span class="input-group-addon pr-5"><i class="fa fa-calendar"></i></span>
+                                                                    <input type="date" name="paymentDate" value="" id="paymentDate" class="form-control datepicker">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label class="col-lg-2 control-label">
-                                                                Receipt No :<font color="red">*</font>
-                                                            </label>
-
+                                                            <label class="col-lg-2 control-label">Receipt No :<font color="red">*</font></label>
                                                             <div class="col-lg-4 ">
-                                                                <input type="text" name="paymentReceiptNo"
-                                                                        id="paymentReceiptNo"
-                                                                       class="form-control">
+                                                                <input type="text" name="paymentReceiptNo" id="paymentReceiptNo" class="form-control">
                                                             </div>
-                                                            <label class="col-lg-2 control-label">
-                                                                Remarks :
-                                                            </label>
+                                                            <label class="col-lg-2 control-label">Remarks :</label>
                                                             <div class="col-lg-4">
-                                                                <input type="text" name="paymentRemarks"
-                                                                       value="" id="paymentRemarks"
-                                                                       class="form-control">
+                                                                <input type="text" name="paymentRemarks" value="" id="paymentRemarks" class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label class="col-lg-2 control-label">
-                                                                Amount Paid:
-                                                            </label>
+                                                            <label class="col-lg-2 control-label">Amount Paid:</label>
                                                             <div class="col-lg-4" >
-                                                                <input type="text" name="paymentAmount"
-                                                                       value="" readonly="readonly"
-                                                                       id="paymentAmount" class="form-control">
+                                                                <input type="text" name="paymentAmount" value="" readonly="readonly" id="paymentAmount" class="form-control">
                                                             </div>
-                                                            <label class="col-lg-2 control-label">
-                                                                Mode of Payment:
-                                                            </label>
+                                                            <label class="col-lg-2 control-label">Mode of Payment:</label>
                                                             <div class="col-lg-4">
                                                                 <select name="modeOfPayment" class="chosen-select form-control" onchange="checkForApplicable(this.value)" id="paymentmode" required>
                                                                     <option value="">--Select--</option>
@@ -312,32 +271,19 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="form-group">
                                             <div class="table-responsive">
                                                 <fieldset><h3>Application Status</h3>
-                                                    <table id="appStatusTbl" width="1000px" cellpadding="1"
-                                                           cellspacing="1" border="1"
-                                                           style="border-collapse: collapse"
-                                                           class="table table-bordered">
+                                                    <table id="appStatusTbl" width="1000px" cellpadding="1" cellspacing="1" border="1" style="border-collapse: collapse" class="table table-bordered">
                                                         <thead>
                                                         <tr class="Caption">
-                                                            <td width="20%" align="center" valign="top">
-                                                                <strong>Status</strong>
-                                                            </td>
-                                                            <td width="20%" align="center" valign="top">
-                                                                <strong>Action By</strong>
-                                                            </td>
-                                                            <td width="20%" align="center" valign="top">
-                                                                <strong>Action Date</strong>
-                                                            </td>
-                                                            <td width="20%" align="center" valign="top">
-                                                                <strong>Remarks</strong>
-                                                            </td>
+                                                            <td width="20%" align="center" valign="top"><strong>Status</strong></td>
+                                                            <td width="20%" align="center" valign="top"><strong>Action By</strong></td>
+                                                            <td width="20%" align="center" valign="top"><strong>Action Date</strong></td>
+                                                            <td width="20%" align="center" valign="top"><strong>Remarks</strong></td>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
-
                                                         </tbody>
                                                     </table>
                                                     <br>
@@ -346,10 +292,8 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-2" for="vRemarks">Remarks:</label>
-
                                             <div class="col-md-10" id="remarkclass">
-                                                    <textarea name="vRemarks" id="vRemarks"
-                                                              class="form-control"></textarea>
+                                                <textarea name="vRemarks" id="vRemarks" class="form-control"></textarea>
                                                 <span class="help-block" id="remarkErrorId"></span>
                                             </div>
                                         </div>
