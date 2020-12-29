@@ -6,7 +6,6 @@
   Time: 8:40 PM
   To change this template use File | Settings | File Templates.
 --%>
-
 <div class="form-group div-actual">
     <table id="feeTbl" class="table table-striped table-bordered table-hover">
         <thead>
@@ -25,7 +24,6 @@
         </tbody>
     </table>
 </div>
-
 <div class="form-group">
     <div class="col-md-offset-11 col-lg-offset-10 col-xs-offset-10">
         <button type="button" id="btn1"

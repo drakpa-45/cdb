@@ -28,7 +28,6 @@
                               The registration of Contractors, re-registration, up-gradation, and any matters related to Contractors registration shall be carried out strictly in accordance with the specified principles and procedures.
                         </span>
                     </p>
-
                     <p>
                         CDB Registration requirement henceforth shall apply to JVs (amongst National
                         Contractors/Consultants or with Foreign Contractors/Consultants) and also to independent Foreign

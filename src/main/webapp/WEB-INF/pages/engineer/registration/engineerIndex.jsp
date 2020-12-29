@@ -90,6 +90,7 @@
                                             </div>
                                             <div class="tab-pane personalInformation" id="personalInformation">
                                                 <div class="">
+                                                    <span class="text-danger" ><i>Note: Fields marked with (*) are mandatory. Please provide your valid information while availing this service.</i></span>
                                                     <div class="card tab2">
                                                         <div class="bg-blue card-status card-status-left"></div>
                                                         <div class="card-header">
@@ -197,13 +198,10 @@
                                                 <hr />
                                                 <div class="form-group row pull-right">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-
                                                         <button type="button" onclick="previousTab('feesStructure','personalInformation')"  class="btn btn-success">
                                                             <i class="fa fa-arrow-circle-left"></i>  Previous
                                                         </button>
-                                                        <button type="button" onclick="nextTab('personalInformation','categoryDtls')"  class="btn btn-primary">
-                                                            Next  <i class="fa fa-arrow-circle-right"></i>
-                                                        </button>
+                                                        <button type="button" onclick="nextTab('personalInformation','categoryDtls')"  class="btn btn-primary">Next  <i class="fa fa-arrow-circle-right"></i></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -283,9 +281,7 @@
                                                             <button type="button" onclick="previousTab('personalInformation','categoryDtls')"  class="btn btn-success">
                                                                 <i class="fa fa-arrow-circle-left"></i>  Previous
                                                             </button>
-                                                            <button type="button" onclick="nextTab('categoryDtls','saveAndPreview')"  class="btn btn-primary">
-                                                                Next  <i class="fa fa-arrow-circle-right"></i>
-                                                            </button>
+                                                            <button type="button" onclick="nextTab('categoryDtls','saveAndPreview')"  class="btn btn-primary">Next  <i class="fa fa-arrow-circle-right"></i></button>
                                                         </div>
                                                     </div>
                                                 </div>

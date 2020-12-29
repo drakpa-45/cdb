@@ -25,15 +25,12 @@
                             <b>Application / </b>Acknowledgement
                         </div>
                         <div class="card-body" style="color:red">
-                            ${error}
+                               ${error}
                         </div>
                     </div>
                 </c:if>
                 <div class="card" id="registrtaionFormCard">
-
-                    <form id="consultantForm" name="consultantForm" action="<c:url value="consultantNR/save"/>"
-                          method="POST" class="globalForm"
-                          enctype="multipart/form-data">
+                    <form id="consultantForm" name="consultantForm" action="<c:url value="consultantNR/save"/>" method="POST" class="globalForm" enctype="multipart/form-data">
                         <div class="card-header">
                             <h3 class="card-title font-weight-bold">Registration of Consultant</h3>
                         </div>
@@ -43,8 +40,7 @@
                                     <div class="nav-tabs-custom">
                                         <ul class="m-0 nav nav-tabs">
                                             <li class="fees_structure tab-pane active">
-                                                <a href="#" class="border text-white" data-toggle="tab"
-                                                   data-placement="top">
+                                                <a href="#" class="border text-white" data-toggle="tab" data-placement="top">
                                                     <i class="fa fa-bookmark mr-1"></i>Fee Structure</a>
                                             </li>
                                             <li class="tab-pane general_Information">
@@ -69,32 +65,23 @@
                                             </li>
                                         </ul>
                                         <div class="tab-content border p-3 col-lg-12">
-                                            <div role="tabpanel" class="tab-pane active fees_structure"
-                                                 id="fees_structure">
+                                            <div role="tabpanel" class="tab-pane active fees_structure" id="fees_structure">
                                                 <h3 class="pt-3 text-center hide">Fee Structure</h3>
                                                 <jsp:include page="fee.jsp"/>
                                             </div>
-
-                                            <div role="tabpanel" class="tab-pane general_Information"
-                                                 id="general_Information">
+                                            <div role="tabpanel" class="tab-pane general_Information" id="general_Information">
                                                 <h3 class="pt-3 text-center hide">General Information</h3>
                                                 <jsp:include page="gInfo.jsp"/>
                                             </div>
-
-                                            <div role="tabpanel" class="tab-pane category_details"
-                                                 id="category_details">
+                                            <div role="tabpanel" class="tab-pane category_details" id="category_details">
                                                 <h3 class="pt-3 text-center hide">Category Details</h3>
                                                 <jsp:include page="categoryConsultant.jsp"/>
                                             </div>
-
-                                            <div role="tabpanel" class="tab-pane human_resource_criteria"
-                                                 id="human_resource_criteria">
+                                            <div role="tabpanel" class="tab-pane human_resource_criteria" id="human_resource_criteria">
                                                 <h3 class="pt-3 text-center hide">Human Resource Criteria</h3>
                                                 <jsp:include page="hr.jsp"/>
                                             </div>
-
-                                            <div role="tabpanel" class="tab-pane equipment_details"
-                                                 id="equipment_details">
+                                            <div role="tabpanel" class="tab-pane equipment_details" id="equipment_details">
                                                 <h3 class="pt-3 text-center hide">Consultant Equipment Details</h3>
                                                 <jsp:include page="equipment.jsp"/>
                                             </div>
@@ -138,10 +125,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="col-lg-12">
-                                                                    <span><input type="checkbox" id="submitcheckbox"
-                                                                                 onclick="enableSubmit()" name="tnc"
-                                                                                 required="true"
-                                                                                 style="width:15px;height:15px;"></span>
+                                                                    <span><input type="checkbox" id="submitcheckbox" onclick="enableSubmit()" name="tnc" required="true" style="width:15px;height:15px;"></span>
                                                                     <span class="bold"> I/We agree to the above Terms & Conditions</span>
                                                                 </label>
                                                                 <!-- <br /><span class="text-danger" id="termAndConErrorClass"></span> -->
@@ -182,13 +166,8 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-success" onclick="submitApplication()">
-                                            Yes
-                                        </button>
-                                        <button type="button" class="btn btn-warning"
-                                                onclick="closemodel('confirmationModel')"><span
-                                                class="fa fa-times"></span> No
-                                        </button>
+                                        <button type="button" class="btn btn-success" onclick="submitApplication()">Yes</button>
+                                        <button type="button" class="btn btn-warning" onclick="closemodel('confirmationModel')"><span class="fa fa-times"></span> No</button>
                                     </div>
                                 </div>
                             </div>

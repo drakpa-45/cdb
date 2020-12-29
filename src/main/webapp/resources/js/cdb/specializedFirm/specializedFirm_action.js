@@ -71,19 +71,23 @@ var specializedFirm_action = (function () {
 
                         var employeeDetailsDTO = dto.employeeDetailsDTOs;
                         var empDtls ="",empDtls1="",empDtls2="";
-                        var name = dto.employeeDetailsDTOs.workId;
-                        alert(name);
-
-                        if(name !=''|| name !='null'){
+                        if(employeeDetailsDTO != ""){
                             for(var i in employeeDetailsDTO){
-                                $('#engagedId').show();
-                                $('#dcbinfo').append("<br/> This person is engaged with cdb number <b>"+dto.employeeDetailsDTOs.cdbNo+"</b> in <b>"+employeeDetailsDTO.procuringAgency+"</b> with work Id:<b>"+dto.employeeDetailsDTOs.workId+"</b>");
+                                var workId = employeeDetailsDTO[i].workId;
+                                if(workId !=''|| workId !='null'){
+                                    $('#engagedId').show();
+                                    $('#dcbinfo').append("<br/> This person is engaged with cdb number <b>"+employeeDetailsDTO[i].cdbNo+"</b> in <b>"+employeeDetailsDTO[i].procuringAgency+"</b> with work Id:<b>"+employeeDetailsDTO[i].workId+"</b>");
+                                    $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
+                                } else{
+                                    $('#dcbinfo').hide();
+                                    $('#engagedId').show();
+                                    $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project");
+                                }
                             }
-                        }
-                        else{
+                        }else{
                             $('#dcbinfo').hide();
                             $('#engagedId').show();
-                            $('#dcbinfo1').append("<br/> This person is not engaged in any work or project");
+                            $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project");
                         }
 
                       /*  if(employeeDetailsDTO !=null){

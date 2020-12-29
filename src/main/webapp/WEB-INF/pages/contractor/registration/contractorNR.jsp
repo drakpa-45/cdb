@@ -36,28 +36,22 @@
                                     <div class="nav-tabs-custom">
                                         <ul class="m-0 nav nav-tabs">
                                             <li class="fees_structure tab-pane active">
-                                                <a href="#" class="border text-white" data-toggle="tab" data-placement="top">
-                                                    <i class="fa fa-bookmark mr-1"></i>Fee Structure</a>
+                                                <a href="#" class="border text-white" data-toggle="tab" data-placement="top"><i class="fa fa-bookmark mr-1"></i>Fee Structure</a>
                                             </li>
                                             <li class="tab-pane general_Information">
-                                                <a href="#" class=" border" data-toggle="tab" data-placement="top">
-                                                    <i class="fa fa-exclamation-circle mr-1"></i>General Information</a>
+                                                <a href="#" class=" border" data-toggle="tab" data-placement="top"><i class="fa fa-exclamation-circle mr-1"></i>General Information</a>
                                             </li>
                                             <li class="tab-pane category_details">
-                                                <a href="#" class="border" data-toggle="tab" data-placement="top">
-                                                    <i class="fa fa-sitemap mr-1"></i>Category Details</a>
+                                                <a href="#" class="border" data-toggle="tab" data-placement="top"><i class="fa fa-sitemap mr-1"></i>Category Details</a>
                                             </li>
                                             <li class="tab-pane human_resource_criteria">
-                                                <a href="#" class="border" data-toggle="tab" data-placement="top">
-                                                    <i class="fa fa-users mr-1"></i>Human Resource Criteria</a>
+                                                <a href="#" class="border" data-toggle="tab" data-placement="top"><i class="fa fa-users mr-1"></i>Human Resource Criteria</a>
                                             </li>
                                             <li class="tab-pane equipment_details">
-                                                <a href="#" class="border" data-toggle="tab" data-placement="top">
-                                                    <i class="fa fa-truck mr-1"></i>Equipment Details</a>
+                                                <a href="#" class="border" data-toggle="tab" data-placement="top"><i class="fa fa-truck mr-1"></i>Equipment Details</a>
                                             </li>
                                             <li class="tab-pane saveAndPreview">
-                                                <a href="#" class="border" data-toggle="tab" data-placement="top">
-                                                    <i class="fa fa-file mr-1"></i>Preview</a>
+                                                <a href="#" class="border" data-toggle="tab" data-placement="top"><i class="fa fa-file mr-1"></i>Preview</a>
                                             </li>
                                         </ul>
                                         <div class="tab-content border p-3 col-lg-12">
@@ -65,27 +59,22 @@
                                                 <h3 class="pt-3 text-center hide">Fee Structure</h3>
                                                 <jsp:include page="fee.jsp"/>
                                             </div>
-
                                             <div role="tabpanel" class="tab-pane general_Information" id="general_Information">
                                                 <h3 class="pt-3 text-center hide">General Information</h3>
                                                 <jsp:include page="gInfo.jsp"/>
                                             </div>
-
                                             <div role="tabpanel" class="tab-pane category_details" id="category_details">
                                                 <h3 class="pt-3 text-center hide">Category Details</h3>
                                                 <jsp:include page="category.jsp"/>
                                             </div>
-
                                             <div role="tabpanel" class="tab-pane human_resource_criteria" id="human_resource_criteria">
                                                 <h3 class="pt-3 text-center hide">Human Resource Criteria</h3>
                                                 <jsp:include page="hr.jsp"/>
                                             </div>
-
                                             <div role="tabpanel" class="tab-pane equipment_details" id="equipment_details">
                                                 <h3 class="pt-3 text-center hide"> Equipment Details</h3>
                                                 <jsp:include page="equipment.jsp"/>
                                             </div>
-
                                             <div class="tab-pane saveAndPreview" id="saveAndPreview">
                                                 <div id="submitSection" style="">
                                                     <div class="panel panel-default">
@@ -94,19 +83,34 @@
                                                                 <label class="col-lg-12">I/We declare and confirm that:- </label>
                                                                 <div id="termsAndCon">
                                                                     <ul>
-                                                                        <li> All information and attachments with this application are true and correct;
+                                                                        <li> All information and attachments with this
+                                                                            application are true and correct;
                                                                         </li>
-                                                                        <li>I am/We are aware that any false information provided herein shall result in rejection of my application and suspension of any registration granted;
+                                                                        <li>I am/We are aware that any false information
+                                                                            provided herein shall result in rejection of
+                                                                            my application and suspension of any
+                                                                            registration granted;
                                                                         </li>
-                                                                        <li>I/We shall not make refund claims of expenditure incurred in processing this application;
+                                                                        <li>I/We shall not make refund claims of
+                                                                            expenditure incurred in processing this
+                                                                            application;
                                                                         </li>
-                                                                        <li>I/We have read and understood the legal instruments issued by CDB (Manuals, Guidelines, Codes etc.) and shall perform in line with these instruments and
+                                                                        <li>I/We have read and understood the legal
+                                                                            instruments issued by CDB (Manuals,
+                                                                            Guidelines, Codes etc.) and shall perform in
+                                                                            line with these instruments and
                                                                             any other laws in force.
                                                                         </li>
-                                                                        <li>I/We understand that the failure to comply with aforementioned legal instruments will be subject to the penalties provided for in these instruments and
+                                                                        <li>I/We understand that the failure to comply
+                                                                            with aforementioned legal instruments will
+                                                                            be subject to the penalties provided for in
+                                                                            these instruments and
                                                                             applicable laws in force; and
                                                                         </li>
-                                                                        <li>I/We hereby declare that issuance of CDB certificate does not in any way constitute an obligation on the part of CDB or any other government agencies to
+                                                                        <li>I/We hereby declare that issuance of CDB
+                                                                            certificate does not in any way constitute
+                                                                            an obligation on the part of CDB or any
+                                                                            other government agencies to
                                                                             provide contract works.
                                                                         </li>
                                                                     </ul>
@@ -138,7 +142,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal in" id="confirmationModel">
+                        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+                             class="modal in" id="confirmationModel">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">

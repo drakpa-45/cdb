@@ -10,13 +10,10 @@
                         Construction Development Board
                     </h1>
                 </div>
-
             </div>
             <div class="card" id="rejectTab" style="/* display: none */">
                 <div class="card-header">
-                    <h3 class="card-title font-weight-bold">News/Notices
-
-                    </h3>
+                    <h3 class="card-title font-weight-bold">News/Notices</h3>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
@@ -71,7 +68,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="form-group">
                         <div class="col-lg-12"><h4>
                            Rejected Application

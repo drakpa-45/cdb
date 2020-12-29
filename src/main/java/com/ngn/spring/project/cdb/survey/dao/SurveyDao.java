@@ -349,6 +349,7 @@ public class SurveyDao extends BaseDao {
 
             Query querydoc = sqlQuery("INSERT INTO `crpsurveyattachmentfinal` (`Id`,`CrpSurveyFinalId`,`DocumentName`,`DocumentPath`,`FileType`,`CreatedBy`,`CreatedOn`) SELECT a.`Id`,a.`CrpSurveyId`,a.`DocumentName`,a.`DocumentPath`,a.`FileType`,?,CURRENT_TIMESTAMP FROM `crpsurveyattachment` a  LEFT JOIN `crpsurvey` ar ON a.`CrpSurveyId`=ar.`Id` WHERE ar.`ReferenceNo`=? ");
             querydoc.setParameter(1, userID).setParameter(2, dto.getReferenceNo());
+
             save = querydoc.executeUpdate();
             return_value = "Success";
         } catch (Exception e) {

@@ -13,9 +13,7 @@
 <body>
 <c:if test="${not empty res.status}">
     <div class="card" id="acknowledgment">
-        <div class="card-header">
-
-        </div>
+        <div class="card-header"></div>
         <div class="card-body">
             <c:if test="${res.status eq 1}">
                 ${res.text}
@@ -23,7 +21,6 @@
             <c:if test="${res.status eq 0}">
                 <span class="error"> ${res.text}</span>
             </c:if>
-
         </div>
     </div>
 </c:if>
@@ -48,10 +45,10 @@
                             </c:if>
                         </div>
                     </div>
-                     <c:if test="${renewalCheck.status eq 1}">
-                        <p class="text-justify">
-                             <span id="message">While renewing your certificate, you can also upgrade/downgrade work classification or change other information. Relevant fees will be applicable.</span>
-                         </p>
+                    <c:if test="${renewalCheck.status eq 1}">
+                    <p class="text-justify">
+                        <span id="message">While renewing your certificate, you can also upgrade/downgrade work classification or change other information. Relevant fees will be applicable.</span>
+                    </p>
                     <div class="card" id="registrtaionFormCard">
                         <form action="#" id="architectrenewalForm" method="post" enctype="multipart/form-data">
                             <div class="card-header">
@@ -65,19 +62,19 @@
                                             <ul class="m-0 nav nav-tabs">
                                                 <li class="feesStructurerenewal tab-pane active">
                                                     <a href="#" class="border text-white" data-toggle="tab" data-placement="top">
-                                                    <i class="fa fa-bookmark mr-1"></i>Fee Structure</a>
+                                                        <i class="fa fa-bookmark mr-1"></i>Fee Structure</a>
                                                 </li>
                                                 <li class="tab-pane personalInformation">
                                                     <a href="#" class=" border" data-toggle="tab" data-placement="top">
-                                                    <i class="fa fa-users mr-1"></i>Personal Information</a>
+                                                        <i class="fa fa-users mr-1"></i>Personal Information</a>
                                                 </li>
                                                 <li class="tab-pane categoryDtls">
                                                     <a href="#" class="border" data-toggle="tab" data-placement="top">
-                                                    <i class="fa fa-mobile mr-1"></i>Contact Details</a>
+                                                        <i class="fa fa-mobile mr-1"></i>Contact Details</a>
                                                 </li>
                                                 <li class="tab-pane saveAndPreview">
                                                     <a href="#" class="border" data-toggle="tab" data-placement="top">
-                                                    <i class="fa fa-file mr-1"></i>Attachments</a>
+                                                        <i class="fa fa-file mr-1"></i>Attachments</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content border p-3 col-lg-12">
@@ -103,7 +100,7 @@
                                                             </tbody>
                                                         </table>
                                                     </div>
-                                                    <hr />
+                                                    <hr/>
                                                     <input type="hidden" id="expdate" value="${registrationDetails.regExpDate}">
                                                     <input type="hidden" name="noOfDaysLate" id="totalNoDaysLate1" value="${renewalCheck.dto1.noOfDaysLate}">
                                                     <input type="hidden" name="paymentAmt" id="totalpenaltyamount1" value="${renewalCheck.dto1.paymentAmount}">
@@ -111,15 +108,14 @@
 
                                                     <div class="form-group row pull-right" id="">
                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                                                            <button type="button"  onclick="nextTab('feesStructurerenewal','personalInformation')" class="btn btn-primary">
-                                                                Next  <i class="fa fa-arrow-circle-right"></i>
-                                                            </button>
+                                                            <button type="button" onclick="nextTab('feesStructurerenewal','personalInformation')" class="btn btn-primary">Next <i class="fa fa-arrow-circle-right"></i></button>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="tab-pane personalInformation" id="personalInformation">
                                                     <div class="">
+                                                        <span class="text-danger" ><i>Note: Fields marked with (*) are mandatory. Please provide your valid information while availing this service.</i></span>
                                                         <div class="card tab2">
                                                             <div class="bg-blue card-status card-status-left"></div>
                                                             <div class="card-header">
@@ -131,11 +127,11 @@
                                                                         <div class="form-group row">
                                                                             <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Salutation<span class="text-danger">*</span>:</label>
                                                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                                <form:select path="salutationList"  name="salutation" onclick="remove_err('salutation_err')" id="salutation" class="form-control">
+                                                                                <form:select path="salutationList" name="salutation" onclick="remove_err('salutation_err')" id="salutation" class="form-control">
                                                                                     <form:option value="${registrationDetails.salutationId}">${registrationDetails.salutation}</form:option>
                                                                                     <form:options items="${salutationList}" itemValue="value" itemLabel="text"></form:options>
                                                                                 </form:select>
-                                                                                <%-- <input type="text" id="salutation" name="salutation" class="form-control" value="${registrationDetails.salutation}" readonly>--%>
+                                                                                    <%-- <input type="text" id="salutation" name="salutation" class="form-control" value="${registrationDetails.salutation}" readonly>--%>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
@@ -153,8 +149,8 @@
                                                                         <div class="form-group row">
                                                                             <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Dzongkhag:</label>
                                                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                                <input type="hidden" maxlength="100" id="dzongkhagId" name="dzongkhagId" class="form-control"  value="${registrationDetails.cmnDzongkhagId}" readonly>
-                                                                                <input type="text" maxlength="100" id="cmndzongkhag" class="form-control"  value="${registrationDetails.dzongkhagId}" readonly>
+                                                                                <input type="hidden" maxlength="100" id="dzongkhagId" name="dzongkhagId" class="form-control" value="${registrationDetails.cmnDzongkhagId}" readonly>
+                                                                                <input type="text" maxlength="100" id="cmndzongkhag" class="form-control" value="${registrationDetails.dzongkhagId}" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
@@ -171,7 +167,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                        <img src='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo=${appDetails.cidNo}'  width='200px'  height='200px' class='pull-right'/>
+                                                                        <img src='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo=${appDetails.cidNo}' width='200px' height='200px' class='pull-right'/>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -182,29 +178,32 @@
                                                             <div class="card-body">
                                                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                        <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Country <span class="text-danger">*</span></label>
+                                                                        <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Country
+                                                                            <span class="text-danger">*</span></label>
                                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                            <%-- <input type="text" maxlength="100" id="countryList" name="countryList" class="form-control" value="${registrationDetails.countryId}">--%>
-                                                                            <form:select path="countryList" name="countryId" id="countryId"  class="form-control">
-                                                                                <form:options items="${countryList}"  itemValue="value" itemLabel="text"/>
+                                                                                <%-- <input type="text" maxlength="100" id="countryList" name="countryList" class="form-control" value="${registrationDetails.countryId}">--%>
+                                                                            <form:select path="countryList" name="countryId" id="countryId" class="form-control">
+                                                                                <form:options items="${countryList}" itemValue="value" itemLabel="text"/>
                                                                             </form:select>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                        <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Type <span class="text-danger">*</span></label>
+                                                                        <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Type
+                                                                            <span class="text-danger">*</span></label>
                                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                             <input type="text" maxlength="100" id="serviceSector" readonly name="serviceSector" class="form-control" value="${registrationDetails.serviceSectorType}">
-                                                                            <input type="hidden" maxlength="100" id="serviceSectorType" readonly name="serviceSectorType" class="form-control" value="${registrationDetails.serviceSectorTypeId}">
-                                                                            <%--<form:select path="typeList" name="serviceSectorType" onclick="remove_err('serviceSectorType_err')" id="serviceSectorType" class="form-control">
-                                                                                <form:option value="${registrationDetails.serviceSectorTypeId}">${registrationDetails.serviceSectorType}</form:option>
-                                                                                <form:options items="${typeList}" itemValue="value" itemLabel="text"></form:options>
-                                                                            </form:select>--%>
+                                                                            <input type="text" maxlength="100" id="serviceSectorType" readonly name="serviceSectorType" class="form-control" value="${registrationDetails.serviceSectorType}">
+                                                                            <input type="hidden" maxlength="100" id="serviceSectorTypeId" readonly name="serviceSectorTypeId" class="form-control" value="${registrationDetails.serviceSectorTypeId}">
+                                                                                <%--<form:select path="typeList" name="serviceSectorType" onclick="remove_err('serviceSectorType_err')" id="serviceSectorType" class="form-control">
+                                                                                    <form:option value="${registrationDetails.serviceSectorTypeId}">${registrationDetails.serviceSectorType}</form:option>
+                                                                                    <form:options items="${typeList}" itemValue="value" itemLabel="text"></form:options>
+                                                                                </form:select>--%>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                        <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Trade <span class="text-danger">*</span></label>
+                                                                        <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Trade
+                                                                            <span class="text-danger">*</span></label>
                                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                                             <input type="text" maxlength="100" id="trade" name="cmnTradeId" readonly class="form-control" value="${registrationDetails.trade}">
                                                                             <input type="hidden" maxlength="100" id="cmnTradeId" name="trade" class="form-control" value="${registrationDetails.cmnTradeId}">
@@ -212,16 +211,15 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-12">
-
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <hr />
+                                                    <hr/>
                                                     <div class="form-group row pull-right">
                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                                                            <button type="button" onclick="nextTab('personalInformation','categoryDtls')"  class="btn btn-primary">
-                                                                Next  <i class="fa fa-arrow-circle-right"></i>
+                                                            <button type="button" onclick="nextTab('personalInformation','categoryDtls')" class="btn btn-primary">
+                                                                Next <i class="fa fa-arrow-circle-right"></i>
                                                             </button>
                                                         </div>
                                                     </div>
@@ -237,21 +235,21 @@
                                                                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                         <label>Email: <span class="text-danger">*</span></label>
-                                                                        <input id="email" type="email" class="form-control" value="${registrationDetails.email}" name="email"  readonly>
+                                                                        <input id="email" type="email" class="form-control" value="${registrationDetails.email}" name="email" readonly>
                                                                     </div>
                                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                        <label>Mobile No: <span class="text-danger">*</span></label>
+                                                                        <label>Mobile Number: <span class="text-danger">*</span></label>
                                                                         <input type="number" class="form-control number" value="${registrationDetails.mobileNo}" id="mobileNo" name="mobileNo" onKeyPress="if(this.value.length==8) return false;" min="0">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-12">
                                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                         <label>Office/Employer Name:</label>
-                                                                        <input type="text" class="form-control" name="employeeName"  value="${registrationDetails.employeeName}">
+                                                                        <input type="text" class="form-control" name="employeeName" value="${registrationDetails.employeeName}">
                                                                     </div>
                                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                         <label>Office/Employer Address:</label>
-                                                                        <input type="text" class="form-control" name="employeeAddress"  value="${registrationDetails.employeeAddress}">
+                                                                        <input type="text" class="form-control" name="employeeAddress" value="${registrationDetails.employeeAddress}">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -274,7 +272,7 @@
                                                                                 <form:option value="${registrationDetails.qualificationId}">${registrationDetails.qualification}</form:option>
                                                                                 <form:options items="${qualificationList}" itemValue="value" itemLabel="text"></form:options>
                                                                             </form:select>
-                                                                            <%-- <input type="text" class=" form-control number"  value="${registrationDetails.qualificationId}" name="qualificationId" readonly>--%>
+                                                                                <%-- <input type="text" class=" form-control number"  value="${registrationDetails.qualificationId}" name="qualificationId" readonly>--%>
                                                                         </div>
                                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                             <label>Year of Graduation: <span class="text-danger">*</span></label>
@@ -289,24 +287,24 @@
                                                                         </div>
                                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                             <label>Country of University: <span class="text-danger">*</span></label>
-                                                                            <form:select path="countryList"  name="universityCountry" onclick="remove_err('universityCountry_err')" id="universityCountry" class="form-control">
+                                                                            <form:select path="countryList" name="universityCountry" onclick="remove_err('universityCountry_err')" id="universityCountry" class="form-control">
                                                                                 <form:option value="${registrationDetails.cmnUniversityCountryId}">${registrationDetails.universityCountry}</form:option>
                                                                                 <form:options items="${countryList}" itemValue="value" itemLabel="text"></form:options>
                                                                             </form:select>
-                                                                            <%-- <input type="text" class="form-control " name="universityCountry" value="${registrationDetails.universityCountry}" id="universityCountry" readonly>--%>
+                                                                                <%-- <input type="text" class="form-control " name="universityCountry" value="${registrationDetails.universityCountry}" id="universityCountry" readonly>--%>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <hr />
+                                                        <hr/>
                                                         <div class="form-group row pull-right">
                                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                                                                <button type="button" onclick="previousTab('personalInformation','categoryDtls')"  class="btn btn-success">
-                                                                    <i class="fa fa-arrow-left"></i>  Previous
+                                                                <button type="button" onclick="previousTab('personalInformation','categoryDtls')" class="btn btn-success">
+                                                                    <i class="fa fa-arrow-left"></i> Previous
                                                                 </button>
-                                                                <button type="button" onclick="nextTab('categoryDtls','saveAndPreview')"  class="btn btn-primary">
-                                                                    Next  <i class="fa fa-arrow-circle-right"></i>
+                                                                <button type="button" onclick="nextTab('categoryDtls','saveAndPreview')" class="btn btn-primary">
+                                                                    Next <i class="fa fa-arrow-circle-right"></i>
                                                                 </button>
                                                             </div>
                                                         </div>
@@ -318,7 +316,9 @@
                                                             <div class="panel-body">
                                                                 <div class="form-group row">
                                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                                        <label><b>Attach your supporting documents:</b>( Please click on add more document button to add more attachments)</label><br />
+                                                                        <label><b>Attach your supporting documents:</b>(
+                                                                            Please click on add more document button to
+                                                                            add more attachments)</label><br/>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
@@ -326,7 +326,8 @@
                                                                         <input type="file" name="files" id="file1" class="alert badge-danger" onchange="validateAttachment(this.value,'file1','filecheck1')">
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                                                        <button class="btn btn-success fa-pull-right" type="button" onclick="addmoreattachemnts()"><i class="fa fa-plus"> Add More Documents</i></button>
+                                                                        <button class="btn btn-success fa-pull-right" type="button" onclick="addmoreattachemnts()"><i class="fa fa-plus"> Add More
+                                                                            Documents</i></button>
                                                                     </div>
                                                                 </div>
                                                                 <span id="fileadd"></span>
@@ -350,16 +351,32 @@
                                                                     <div id="termsAndCon">
                                                                         <ul>
                                                                             <li>
-                                                                                All information and attachments with this application are true and correct;
+                                                                                All information and attachments with
+                                                                                this application are true and correct;
                                                                             </li>
                                                                             <li>
-                                                                                I am/we are aware that any false information provided herein will result in rejection of my application and suspension of any registered granted;
+                                                                                I am/we are aware that any false
+                                                                                information provided herein will result
+                                                                                in rejection of my application and
+                                                                                suspension of any registered granted;
                                                                             </li>
-                                                                            <li>I/We shall not make refund claims of expenditure incurred in processing this application;
+                                                                            <li>I/We shall not make refund claims of
+                                                                                expenditure incurred in processing this
+                                                                                application;
                                                                             </li>
-                                                                            <li>I/We have read and understood the 'Code of Ethics' and shall perform in line with Code of Ethics and any other legislation in force. Failure to comply, will be subject to the penalties provided for in the applicable legislation of the country.
+                                                                            <li>I/We have read and understood the 'Code
+                                                                                of Ethics' and shall perform in line
+                                                                                with Code of Ethics and any other
+                                                                                legislation in force. Failure to comply,
+                                                                                will be subject to the penalties
+                                                                                provided for in the applicable
+                                                                                legislation of the country.
                                                                             </li>
-                                                                            <li>I/We hereby declare that issue of CDB certificate does not in anyway constitute an obligation on the part of CDB or any other Government agency to provide contract works.
+                                                                            <li>I/We hereby declare that issue of CDB
+                                                                                certificate does not in anyway
+                                                                                constitute an obligation on the part of
+                                                                                CDB or any other Government agency to
+                                                                                provide contract works.
                                                                             </li>
                                                                         </ul>
                                                                     </div>
@@ -374,21 +391,22 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <hr />
+                                                    <hr/>
                                                     <div class="form-group row pull-right">
                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                                                             <input type="hidden" name="cdbNo" value="${registrationDetails.cdbNo}">
-                                                            <button type="button" onclick="previousTab('categoryDtls','saveAndPreview')"  class="btn btn-success">
-                                                                <i class="fa fa-arrow-circle-left"></i>  Previous
+                                                            <button type="button" onclick="previousTab('categoryDtls','saveAndPreview')" class="btn btn-success">
+                                                                <i class="fa fa-arrow-circle-left"></i> Previous
                                                             </button>
-                                                            <button type="button" onclick="submitForm()"  class="btn btn-primary" id="submitbtn">
+                                                            <button type="button" onclick="submitForm()" class="btn btn-primary" id="submitbtn">
                                                                 <i class="fa fa-save"></i> Submit
                                                             </button>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 </c:if>
-                                            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"  class="modal in" id="concirmationRenewalModel">
+                                                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
+                                                     tabindex="-1" class="modal in" id="concirmationRenewalModel">
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -404,8 +422,11 @@
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-success" onclick="SubmitRenewalApplicationDetials()">Yes</button>
-                                                                <button type="button" class="btn btn-warning" onclick="closemodel('concirmationRenewalModel')"><span class="fa fa-times"></span> No</button>
+                                                                <button type="button" class="btn btn-success" onclick="SubmitRenewalApplicationDetials()">Yes
+                                                                </button>
+                                                                <button type="button" class="btn btn-warning" onclick="closemodel('concirmationRenewalModel')">
+                                                                    <span class="fa fa-times"></span> No
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -422,45 +443,45 @@
             </div>
         </div>
     </div>
-    </c:if>
-    <script type="text/javascript" src="<c:url value="/resources/JqueryAjaxFormSubmit.js"/>"></script>
-    <script type="text/javascript" src="<c:url value="/resources/jquery.form.js"/>"></script>
-    <script src="<c:url value="/resources/js/cdb/architect.js"/>"></script>
-    <script>
-        //checkvalidity('','${registrationDetails.serviceSectorType}');
-        var currentTime = new Date();
-        var month = currentTime.getMonth() + 1;
-        if(month<10){
-            month="0"+month;
-        }
-        var day = currentTime.getDate();
-        if(day<10){
-            day="0"+day;
-        }
-        var year = currentTime.getFullYear();
-        var applicationDate = (year + "/" + month + "/" + day);
-        var date1 = new Date(year + "-" + month + "-" + day);
-        var date2 = new Date('${registrationDetails.regExpDate}');
+</c:if>
+<script type="text/javascript" src="<c:url value="/resources/JqueryAjaxFormSubmit.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/jquery.form.js"/>"></script>
+<script src="<c:url value="/resources/js/cdb/architect.js"/>"></script>
+<script>
+    //checkvalidity('','${registrationDetails.serviceSectorType}');
+    var currentTime = new Date();
+    var month = currentTime.getMonth() + 1;
+    if (month < 10) {
+        month = "0" + month;
+    }
+    var day = currentTime.getDate();
+    if (day < 10) {
+        day = "0" + day;
+    }
+    var year = currentTime.getFullYear();
+    var applicationDate = (year + "/" + month + "/" + day);
+    var date1 = new Date(year + "-" + month + "-" + day);
+    var date2 = new Date('${registrationDetails.regExpDate}');
 
-        var Difference_In_Time = date2.getTime() - date1.getTime();
-        var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-        if(Difference_In_Days < 0 && '${registrationDetails.serviceSectorType}'=="Private"){
-            $('#totalDaysLate').html(Math.ceil(Difference_In_Days*-1));
-            if(Math.ceil(Difference_In_Days+30)<0){
-                var totaldays=Math.ceil((Difference_In_Days+30)*-1);
-                var totalpenalty=totaldays*100;
-                if(totalpenalty>3000){
-                    totalpenalty=3000;
-                }
-                $('#feenextbtn').hide();
-                $('#totalNoDaysLate').val(totaldays);
-                $('#totalpenaltyamount').val(totalpenalty);
-                $('#noteforgraceperiod').html('Total number of days after grace period is <b>'+totaldays+"</b>. Total of Nu. "+totalpenalty+" will be imposed as penalty for late renewal of your cdb Certificate till today. However your penalty will be calculated till date of approval.");
+    var Difference_In_Time = date2.getTime() - date1.getTime();
+    var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+    if (Difference_In_Days < 0 && '${registrationDetails.serviceSectorType}' == "Private") {
+        $('#totalDaysLate').html(Math.ceil(Difference_In_Days * -1));
+        if (Math.ceil(Difference_In_Days + 30) < 0) {
+            var totaldays = Math.ceil((Difference_In_Days + 30) * -1);
+            var totalpenalty = totaldays * 100;
+            if (totalpenalty > 3000) {
+                totalpenalty = 3000;
             }
-            else{
-                $('#noteforgraceperiod').html('You are in Grace Period and no penalty is applied to you.');
-            }
-            $('#expdetails').show();
+            $('#feenextbtn').hide();
+            $('#totalNoDaysLate').val(totaldays);
+            $('#totalpenaltyamount').val(totalpenalty);
+            $('#noteforgraceperiod').html('Total number of days after grace period is <b>' + totaldays + "</b>. Total of Nu. " + totalpenalty + " will be imposed as penalty for late renewal of your cdb Certificate till today. However your penalty will be calculated till date of approval.");
         }
-    </script>
+        else {
+            $('#noteforgraceperiod').html('You are in Grace Period and no penalty is applied to you.');
+        }
+        $('#expdetails').show();
+    }
+</script>
 </body>

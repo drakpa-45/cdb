@@ -240,9 +240,9 @@ public class SpecializedController extends BaseController {
         String uploadDocId = request.getParameter("uuid"),requesttype=request.getParameter("type");
         TradeDocument doc =null;
         try{
-             if(request.getParameter("docType").equalsIgnoreCase("doc")){
+            // if(request.getParameter("docType").equalsIgnoreCase("doc")){
                  doc = services.getDocumentDetailsByDocId(uploadDocId);
-            }
+           // }
             byte[] fileContent = downloadFile(doc.getDocumentPath());
             if(requesttype.equalsIgnoreCase("view")){
                 if(doc.getDocumentName().substring(doc.getDocumentName().length()-3).equalsIgnoreCase("JPG")||doc.getDocumentName().substring(doc.getDocumentName().length()-4).equalsIgnoreCase("jpeg") || doc.getDocumentName().substring(doc.getDocumentName().length()-3).equalsIgnoreCase("png")){

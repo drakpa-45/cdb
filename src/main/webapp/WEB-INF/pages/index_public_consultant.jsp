@@ -10,21 +10,16 @@
                         Construction Development Board
                     </h1>
                 </div>
-
             </div>
             <div class="card" id="rejectTab" style="/* display: none */">
                 <div class="card-header">
-                    <h3 class="card-title font-weight-bold">News/Notices
-
-                    </h3>
+                    <h3 class="card-title font-weight-bold">News/Notices</h3>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
                         <div class="col-lg-12">
                             <c:forEach items="${newsAndNotifications}" var="news" varStatus="i">
-                                <ul>
-                                    <li>${news.messages}</li>
-                                </ul>
+                                <ul><li>${news.messages}</li></ul>
                             </c:forEach>
                         </div>
                     </div>

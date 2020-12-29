@@ -513,9 +513,32 @@ function checkForEngagement(cidNo){
                     $('#gewogM').text(dto.gowegName);
                     $('#villageM').text(dto.villageName);
                     $('#dobM').text(dto.dob);
+                    $('#cidchecked').text(cidNo);
                     var imagelink='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo='+cidNo;
                     $('#photoM').html("<img src='"+imagelink+"'  width='200px'  height='200px' class='pull-right'/>");
                     $("#hrModal").modal('show');
+
+                    var employeeDetailsDTO = dto.employeeDetailsDTOs;
+                    var empDtls ="",empDtls1="",empDtls2="";
+                    if(employeeDetailsDTO != ""){
+                        for(var i in employeeDetailsDTO){
+                            var workId = employeeDetailsDTO[i].workId;
+                            alert(workId);
+                            if(workId !=''|| workId !='null'){
+                                $('#engagedId').show();
+                                $('#dcbinfo').append("<br/> This person is engaged with cdb number <b>"+employeeDetailsDTO[i].cdbNo+"</b> in <b>"+employeeDetailsDTO[i].procuringAgency+"</b> with work Id:<b>"+employeeDetailsDTO[i].workId+"</b>");
+                                $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
+                            } else{
+                                $('#dcbinfo').hide();
+                                $('#engagedId').show();
+                                $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project");
+                            }
+                        }
+                    }else{
+                        $('#dcbinfo').hide();
+                        $('#engagedId').show();
+                        $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project");
+                    }
                 }
             }
         });

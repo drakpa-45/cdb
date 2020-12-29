@@ -23,7 +23,6 @@
                         <form:options items="${ownershipList}" itemValue="value" itemLabel="text"/>
                     </form:select>
                 </div>
-
                 <div class="col-lg-6 col-md-6">
                     <label class="col-lg-4 form-label">Country <span class="text-danger">*</span></label>
                     <select class="form-control col-lg-7" required="true" name="contractor.pCountryId" id="pCountryId">
@@ -52,7 +51,6 @@
             </div>
         </div>
     </div>
-
     <div class="card hide" id="cIncorporation">
         <div class="bg-blue card-status card-status-left"></div>
         <div class="card-header">
@@ -60,7 +58,7 @@
         </div>
         <div class="card-body">
             <div class="col-lg-12">
-                <div class=""><input id="addMoreCert" type="button" value="Add More Certificate" class="btn btn-primary"> </div>
+                <div class=""><input id="addMoreCert" type="button" value="Add More Certificate" class="btn btn-primary"></div>
                 <table class="table table-bordered table-center table-responsive-lg auto-index" id="certificateTbl">
                     <thead>
                     <tr>
@@ -78,7 +76,6 @@
             </div>
         </div>
     </div>
-
     <div class="card">
         <div class="bg-blue card-status card-status-left"></div>
         <div class="card-header">
@@ -115,7 +112,7 @@
                             </form:select>
                         </td>
                         <td>
-                            <input type="text" class="form-control name"id="name" name="contractor.contractorHRs[0].name" placeholder="Text.." required="true">
+                            <input type="text" class="form-control name" id="name" name="contractor.contractorHRs[0].name" placeholder="Text.." required="true">
                         </td>
                         <td>
                             <select id="gender" name="contractor.contractorHRs[0].sex" class="form-control sex" required="true">
@@ -140,7 +137,7 @@
                     </tbody>
                 </table>
                 <div class="col-lg-12 text-right">
-                   <%-- <b class="text-orange"><marque>Note:Please Tick(✔) in "Show in Certificate" field to display your name in Certificate.</marque></b> &nbsp; &nbsp;--%>
+                    <%-- <b class="text-orange"><marque>Note:Please Tick(✔) in "Show in Certificate" field to display your name in Certificate.</marque></b> &nbsp; &nbsp;--%>
                     <button type="button" class="btn btn-outline-primary btn-sm" onclick="addRow('partnerDtls')">
                         <i class="fe fe-plus mr-2"></i>Add More
                     </button>
@@ -151,7 +148,6 @@
             </div>
         </div>
     </div>
-
     <div class="card ">
         <div class="bg-blue card-status card-status-left"></div>
         <div class="card-header">
@@ -260,15 +256,11 @@
         </div>
     </div>
 </div>
-
-
 <div class="col-lg-12 form-group">
     <button type="button" onclick="backTab('generalInformation','fees_structure')" class="btn btn-azure col-lg-offset-9">
         <i class="fa fa-arrow-circle-left"></i> &nbsp;Back
     </button>
-    <button type="button" id="btnValGINext" class="btn btn-primary">
-        Next &nbsp;<i class="fa fa-arrow-circle-right"></i>
-    </button>
+    <button type="button" id="btnValGINext" class="btn btn-primary">Next &nbsp;<i class="fa fa-arrow-circle-right"></i></button>
 </div>
 <%--</form>--%>
 

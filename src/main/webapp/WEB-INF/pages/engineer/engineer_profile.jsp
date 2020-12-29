@@ -56,7 +56,7 @@
                                                 <td>${App_Details.fullname}</td>
                                             </tr>
                                             <tr>
-                                                <td><strong>CID: </strong></td>
+                                                <td><strong>CID Number: </strong></td>
                                                 <td>${App_Details.cidNo}</td>
                                             </tr>
                                             <tr>

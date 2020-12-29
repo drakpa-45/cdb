@@ -7,6 +7,7 @@ import com.ngn.spring.project.cdb.admin.dto.EquipmentDTO;
 import com.ngn.spring.project.cdb.architect.dao.ArchitectDao;
 import com.ngn.spring.project.cdb.architect.dto.ArchitectDto;
 import com.ngn.spring.project.cdb.architect.dto.ArchitectFeesDto;
+import com.ngn.spring.project.cdb.common.dto.EmployeeDetailsDTO;
 import com.ngn.spring.project.cdb.common.dto.FileDetailDTO;
 import com.ngn.spring.project.cdb.common.dto.PersonalInfoDTO;
 import com.ngn.spring.project.cdb.common.dto.VehicleDetails;
@@ -322,7 +323,9 @@ public class CommonService extends BaseService {
             personalInfoDTO.setVillageName(citizendetailsObj.getVillageName());
             personalInfoDTO.setDob(citizendetailsObj.getDob());
             personalInfoDTO.setCidNo(citizendetailsObj.getCid());
-
+            if(type.equalsIgnoreCase("check")){
+                personalInfoDTO.setEmployeeDetailsDTOs(commonDao.validateWorkEngagementCidNo(cid));
+            }
             responseMessage = new ResponseMessage();
             responseMessage.setStatus(SUCCESSFUL_STATUS);
             responseMessage.setDto(personalInfoDTO);
@@ -677,5 +680,14 @@ public class CommonService extends BaseService {
         List<TasklistDto> dto=new ArrayList<TasklistDto>();
         dto= spDao.populaterejectedApplicationSptrade(cdbNo);
         return dto;
+    }
+
+    @Transactional
+    public ResponseMessage validateCorporateCidNo(HttpServletRequest request, String cidNo) {
+        responseMessage = new ResponseMessage();
+        EmployeeDetailsDTO employeeDetailsDTO =  commonDao.validateCorporateCidNo(cidNo);
+        responseMessage.setStatus(SUCCESSFUL_STATUS);
+        responseMessage.setDto(employeeDetailsDTO);
+        return responseMessage;
     }
 }

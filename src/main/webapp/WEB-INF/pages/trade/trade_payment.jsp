@@ -8,7 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
 <body>
 <div class="mt-5">
     <div class="container mb-9">
@@ -135,8 +134,7 @@
                                     </div>
                                     </div>
                                 </div>
-                                    <input type="hidden" class=" form-control number" value="${appDetails.cdbNo}"
-                                           readonly name="cdbNo">
+                                    <input type="hidden" class=" form-control number" value="${appDetails.cdbNo}" readonly name="cdbNo">
                                     <c:if test="${appDetails.updateStatus=='6195664d-c3c5-11e4-af9f-080027dcfac6'}">
                                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 form-group">
                                         <div class="card tab2">
@@ -153,12 +151,8 @@
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                             <label>Payment Receipt Date:</label>
-                                                            <div class="input-group margin-bottom-sm">
-                                                                                <span class="input-group-addon pr-5"><i
-                                                                                        class="fa fa-calendar"></i></span>
-                                                                <input type="date" name="paymentReceiptDate"
-                                                                       value="" id="paymentReceiptDate"
-                                                                       class="form-control">
+                                                            <div class="input-group margin-bottom-sm"><span class="input-group-addon pr-5"><i class="fa fa-calendar"></i></span>
+                                                                <input type="date" name="paymentReceiptDate" value="" id="paymentReceiptDate" class="form-control">
                                                             </div><span id="paymentReceiptDate_err" class="text-danger"></span>
                                                         </div>
                                                     </div>
@@ -280,13 +274,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                        <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
-                                            <label class="form-label">Your Remarks:</label>
-                                            <textarea class="form-control" onclick="remove_err('remarks_err')" name="remarks" id="remarks"></textarea>
-                                            <span id="remarks_err" class="text-danger"></span>
-                                        </div>
+                                <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                    <label class="form-label">Your Remarks:</label>
+                                    <textarea class="form-control" onclick="remove_err('remarks_err')" name="remarks" id="remarks"></textarea>
+                                    <span id="remarks_err" class="text-danger"></span>
                                 </div>
-                                </div>
+                            </div>
+                        </div>
                         <div class="form-group row pull-right">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                                 <%--<button class="btn btn-warning" type="button" id="showrejectsection" onclick="updateReject()"><span class="fa fa-times"></span> Reject--%>

@@ -143,6 +143,14 @@ public class SurveyController extends BaseController {
             if(personal.getStatus()==1){
                 services.saveDoc(files,resdto.getCrpSurveyId(),"RenewalOfSurvey",loginDTO.getUserId());
                 personal.setResponseText("Your application for <label class='control-label'>Renewal of Surveyor</label> has been submitted and your application number is <b>"+resdto.getReferenceNo()+"</b> <br><p>You will receive an email as well as SMS notification once take further action.</p><label class='control-label'>You can track your application using above Application Number. <br /> Thank you.</label>");
+
+                String mailContent = "<b>Application No: "+resdto.getReferenceNo()+" is submitted successfully on "+new Date()+" with Construction Development Board (CDB)." +
+                        "This is to acknowledge for the Renewal of the Surveyor with Construction Development Board (CDB)." +
+                        " Your application will processed in due course. You can check the status of the application using CID no or Application number provided." +
+                        " You will also be notified via email when your application is approved." +
+                        "Thank You," +
+                        "(CDB)";
+                MailSender.sendMail(dto.getEmail(), "cdb@gov.bt", null, mailContent, "Application Registered Success");
             }
             model.addAttribute("acknowledgement_message", "Your application for <label class='control-label'>Renewal of Surveyor</label> has been submitted and your application number is <b>"+resdto.getReferenceNo()+"</b> <br><p>You will receive an email as well as SMS notification once take further action.</p><label class='control-label'>You can track your application using above Application Number. <br /> Thank you.</label>");
             return "/architect/acknowledgement";

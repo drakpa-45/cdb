@@ -9,7 +9,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
-
 <body>
 <div class="card" id="printdiv">
     <div class="card-body">
@@ -44,7 +43,7 @@
                                         <td>${App_Details.fullname}</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>CID: </strong></td>
+                                        <td><strong>CID Number: </strong></td>
                                         <td>${App_Details.cidNo}</td>
                                     </tr>
                                     <tr>

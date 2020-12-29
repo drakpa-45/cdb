@@ -7,7 +7,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <%--<form name="contractorCCForm" contractor="" method="post" class="globalForm" id="contractorCCForm">--%>
 <div class="div-actual">
     <table id="contractorCCTbl" class="table table-bordered table-hover">
@@ -21,12 +20,9 @@
         <tbody>
         <c:forEach items="${categoryList}" var="category" varStatus="i">
             <tr>
-                <td><input class="form-control categoryCheck" type="checkbox"
-                           name="categories[${i.index}].projectCateID" value="${category.id}"
-                           <%--onclick="EnableDisableTextBox(this)"--%>
-                           style="width: 17px; height: 17px;"></td>
+                <td><input class="form-control categoryCheck" type="checkbox" name="categories[${i.index}].projectCateID" value="${category.id}"
+                    <%--onclick="EnableDisableTextBox(this)"--%> style="width: 17px; height: 17px;"></td>
                 <td>${category.code}-${category.name} </td>
-
                 <td><select name="categories[${i.index}].appliedClassID" class="form-control appliedClassID" disabled>
                     <option value="">-Select-</option>
                     <c:forEach items="${classification}" var="c">
@@ -46,7 +42,8 @@
     </table>
 </div>
 <div class="col-lg-12 form-group">
-    <button type="button" onclick="backTab('category_details', 'general_Information')" class="btn btn-azure col-lg-offset-9">
+    <button type="button" onclick="backTab('category_details', 'general_Information')"
+            class="btn btn-azure col-lg-offset-9">
         <i class="fa fa-arrow-circle-left"></i> &nbsp; Back
     </button>
     <button type="button" id="btnValCCNext" class="btn btn-primary">Next &nbsp;

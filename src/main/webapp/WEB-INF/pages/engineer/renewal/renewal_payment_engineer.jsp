@@ -86,7 +86,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Mobile No:</label>
+                                                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Mobile Number:</label>
                                                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                             <input type="hidden" class=" form-control number" value="${appDetails.mobileNo}" readonly id="mobileNo" name="mobileNo" maxlength="8">${appDetails.mobileNo}
                                                         </div>
@@ -142,9 +142,7 @@
                                             <input type="hidden" value="${appDetails.serviceSectorType}" readonly maxlength="100" id="service" name="serviceSectorType" class="form-control">${appDetails.serviceSectorType}
                                             <input type="hidden" value="${appDetails.serviceSectorTypeId}" readonly maxlength="100" id="service" name="serviceSectorTypeId" class="form-control">
                                         </div>
-
                                     </div>
-
                                     <div class="col-lg-12">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                             <label>Office/Employer Address:</label>
@@ -175,11 +173,8 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                     <label>Payment Receipt Date:</label>
                                                     <div class="input-group margin-bottom-sm">
-                                                                                <span class="input-group-addon pr-5"><i
-                                                                                        class="fa fa-calendar"></i></span>
-                                                        <input type="date" name="paymentReceiptDate"
-                                                               value="" id="paymentReceiptDate"
-                                                               class="form-control">
+                                                        <span class="input-group-addon pr-5"><i class="fa fa-calendar"></i></span>
+                                                        <input type="date" name="paymentReceiptDate" value="" id="paymentReceiptDate" class="form-control">
                                                     </div>
                                                     <span id="paymentReceiptDate_err" class="text-danger"></span>
                                                 </div>
@@ -304,8 +299,7 @@
                                         <table class="table">
                                             <c:if test="${appDetails.updateStatus=='6195664d-c3c5-11e4-af9f-080027dcfac6'}">
                                             <tbody>
-                                            <td colspan="1" class="font-blue-madison bold warning">Approver Information
-                                            </td>
+                                            <td colspan="1" class="font-blue-madison bold warning">Approver Information</td>
                                             <tr>
                                                 <td colspan="1">
                                                     <table class="table table-condensed">

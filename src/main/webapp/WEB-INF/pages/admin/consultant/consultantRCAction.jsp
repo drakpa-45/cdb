@@ -369,7 +369,7 @@
                         </div>
                         <div class="tab-pane category_details hide">
                             <div class="div-actual">
-                                <table id="consultantCCTbl" class="table table-bordered table-hover">
+                               <%-- <table id="consultantCCTbl" class="table table-bordered table-hover">
                                     <thead style="background-color: #F2F2F2">
                                     <tr>
                                         <th></th>
@@ -382,7 +382,24 @@
                                     </thead>
                                     <tbody>
                                     </tbody>
-                                </table>
+                                </table>--%>
+
+                                   <form action="" method="post" class="">
+                                       <table id="consultantCCTbl" class="table table-bordered table-hover">
+                                           <thead style="background-color: #F2F2F2">
+                                           <tr>
+                                               <td></td>
+                                               <td>Category</td>
+                                               <td>Fees</td>
+                                           </tr>
+                                           </thead>
+                                           <tbody>
+                                           </tbody>
+                                           <tfoot>
+
+                                           </tfoot>
+                                       </table>
+                                   </form>
                                 <table class="table table-bordered table-hover" id="certificateTblCategory">
                                     <thead>
                                     <tr>

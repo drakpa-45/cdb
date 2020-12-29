@@ -7,30 +7,29 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <%--<form contractor="" method="post" class="">--%>
 <div class="div-actual">
     <i><strong>Consultant Equipment Details</strong></i>
-    <div class="panel panel-default" >
-        <div class="panel-body" >
+    <div class="panel panel-default">
+        <div class="panel-body">
             <span><b>Requirements for different Category and Classification</b></span>
             <div class="form-group mt-5">
                 <div class="col-lg-6">
                     <div id="Surveyor">
-                        <div ><i>Note for Surveyor Services</i></div>
+                        <div><i>Note for Surveyor Services</i></div>
                         <div class="table-responsive">
                             <table id="" class="table table-bordered table-hover" style=" font-size: 12px;">
                                 <thead style="background-color:#F2F2F2">
                                 <tr>
-                                    <th align="center" >Category</th>
-                                    <th align="center" >Human Resource <br>Requirement</th>
-                                    <th  align="center">Equipment Requirement</th>
+                                    <th align="center">Category</th>
+                                    <th align="center">Human Resource <br>Requirement</th>
+                                    <th align="center">Equipment Requirement</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td  align="center">S1</td>
-                                    <td  align="center">Minimum Diploma field of specialization with Certified Cadastral Surveyor: 2</td>
+                                    <td align="center">S1</td>
+                                    <td align="center">Minimum Diploma field of specialization with Certified Cadastral Surveyor: 2</td>
                                     <td align="center">Total Station (3 sec or better): 1 set Or GNSS RTK: 1 set</td>
                                 </tr>
                                 <tr>
@@ -57,7 +56,7 @@
                                 </tr>
                                 <tr>
                                     <td align="center">S7</td>
-                                    <td align="center">	Minimum diploma in field of specialization: 1</td>
+                                    <td align="center"> Minimum diploma in field of specialization: 1</td>
                                     <td align="center">Established collimator: 1</td>
                                 </tr>
                                 </tbody>
@@ -71,35 +70,35 @@
                         <div class="table-responsive">
                             <table id="" class="table table-bordered table-hover" style=" font-size: 12px;">
                                 <thead style="background-color:#F2F2F2">
-                                <tr >
-                                    <th align="center" >Employees</th>
-                                    <th align="center" >E1&E2</th>
-                                    <th align="center" >E3&E4</th>
-                                    <th align="center" >E5&E6</th>
-                                    <th align="center" >E7</th>
+                                <tr>
+                                    <th align="center">Employees</th>
+                                    <th align="center">E1&E2</th>
+                                    <th align="center">E3&E4</th>
+                                    <th align="center">E5&E6</th>
+                                    <th align="center">E7</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td  align="center">Manager</td>
-                                    <td  align="center">1</td>
-                                    <td  align="center">1</td>
-                                    <td  align="center">1</td>
-                                    <td  align="center">1</td>
+                                    <td align="center">Manager</td>
+                                    <td align="center">1</td>
+                                    <td align="center">1</td>
+                                    <td align="center">1</td>
+                                    <td align="center">1</td>
                                 </tr>
                                 <tr>
-                                    <td  align="center">Engineer (Degree)</td>
-                                    <td  align="center">1(civil),1(Elect),1(Mech),1(Hydrologiest)</td>
-                                    <td  align="center">1(civil),1(Elect)</td>
-                                    <td  align="center">1(Elect)</td>
-                                    <td  align="center">-</td>
+                                    <td align="center">Engineer (Degree)</td>
+                                    <td align="center">1(civil),1(Elect),1(Mech),1(Hydrologiest)</td>
+                                    <td align="center">1(civil),1(Elect)</td>
+                                    <td align="center">1(Elect)</td>
+                                    <td align="center">-</td>
                                 </tr>
                                 <tr>
-                                    <td  align="center">Engineer (Diploma)</td>
-                                    <td  align="center">-</td>
-                                    <td  align="center">1(civil)</td>
-                                    <td  align="center">1(civil)</td>
-                                    <td  align="center">1(Elect)</td>
+                                    <td align="center">Engineer (Diploma)</td>
+                                    <td align="center">-</td>
+                                    <td align="center">1(civil)</td>
+                                    <td align="center">1(civil)</td>
+                                    <td align="center">1(Elect)</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -111,18 +110,18 @@
                             <table id="" class="table table-bordered table-hover" style=" font-size: 12px;">
                                 <thead style="background-color:#F2F2F2">
                                 <tr>
-                                    <th align="center" >Employees</th>
-                                    <th align="center" >A1</th>
-                                    <th align="center" >A2</th>
-                                    <th align="center" >A3</th>
+                                    <th align="center">Employees</th>
+                                    <th align="center">A1</th>
+                                    <th align="center">A2</th>
+                                    <th align="center">A3</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td  align="center">Architect(Bhutanese)Master/Degree</td>
-                                    <td  align="center">1</td>
-                                    <td  align="center">1</td>
-                                    <td  align="center">1</td>
+                                    <td align="center">Architect(Bhutanese)Master/Degree</td>
+                                    <td align="center">1</td>
+                                    <td align="center">1</td>
+                                    <td align="center">1</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -134,33 +133,34 @@
                             <table id="" class="table table-bordered table-hover" style=" font-size: 12px;">
                                 <thead style="background-color:#F2F2F2">
                                 <tr>
-                                    <th align="center" >Employees</th>
-                                    <th align="center" >C1&C4</th>
-                                    <th align="center" >C2</th>
-                                    <th align="center" >C3</th>
-                                    <th align="center" >C5&C6</th>
-                                    <th align="center" >C7</th>
+                                    <th align="center">Employees</th>
+                                    <th align="center">C1&C4</th>
+                                    <th align="center">C2</th>
+                                    <th align="center">C3</th>
+                                    <th align="center">C5&C6</th>
+                                    <th align="center">C7</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td  align="center">Engineer (Degree)</td>
-                                    <td  align="center">1</td>
-                                    <td  align="center">1*</td>
-                                    <td  align="center">1**</td>
-                                    <td  align="center">-</td>
-                                    <td  align="center">1</td>
+                                    <td align="center">Engineer (Degree)</td>
+                                    <td align="center">1</td>
+                                    <td align="center">1*</td>
+                                    <td align="center">1**</td>
+                                    <td align="center">-</td>
+                                    <td align="center">1</td>
                                 </tr>
                                 <tr>
-                                    <td  align="center">Engineer (Diploma)</td>
-                                    <td  align="center">-</td>
-                                    <td  align="center">-</td>
-                                    <td  align="center">-</td>
-                                    <td  align="center">1</td>
-                                    <td  align="center">-</td>
+                                    <td align="center">Engineer (Diploma)</td>
+                                    <td align="center">-</td>
+                                    <td align="center">-</td>
+                                    <td align="center">-</td>
+                                    <td align="center">1</td>
+                                    <td align="center">-</td>
                                 </tr>
                                 <tr>
-                                    <td  align="center" colspan="6">*Geo-Tech Engineer, **Social Science/Environmental</td>
+                                    <td align="center" colspan="6">*Geo-Tech Engineer, **Social Science/Environmental
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -185,34 +185,36 @@
                     </tr>
                     </thead>
                     <tbody>
-                   <%-- <tr>
-                        <td><select name="equipments[0].equipmentId"
-                                    class="form-control custom-select text-left equipmentId"
+                    <%-- <tr>
+                         <td><select name="equipments[0].equipmentId"
+                                     class="form-control custom-select text-left equipmentId"
+                                     required="">
+                             <option value="">Select Equipment</option>
+                             <c:forEach var="item" items="${equipmentList}">
+                                 <option value="${item.value}" class="${item.obj1}"><c:out
+                                         value="${item.text}"/></option>
+                             </c:forEach>
+                         </select></td>
+                         <td>
+                             <input type="text" name="equipments[0].registrationNo"
+                                    class="form-control registrationNo" required="true" disabled>
+                         </td>
+                         <td>
+                             <input type="text" name="equipments[0].quantity"
+                                    class="form-control"
                                     required="">
-                            <option value="">Select Equipment</option>
-                            <c:forEach var="item" items="${equipmentList}">
-                                <option value="${item.value}" class="${item.obj1}"><c:out
-                                        value="${item.text}"/></option>
-                            </c:forEach>
-                        </select></td>
-                        <td>
-                            <input type="text" name="equipments[0].registrationNo"
-                                   class="form-control registrationNo" required="true" disabled>
-                        </td>
-                        <td>
-                            <input type="text" name="equipments[0].quantity"
-                                   class="form-control"
-                                   required="">
-                        </td>
-                        <td>
-                            <input type="file" name="equipments[0].consultantEQA.attachment" id="equipmentFile">
-                        </td>
-                        <td><a class='p-2'><i class='fa fa-pencil text-green'></i></a><a class='p-2'><i class='fa fa-trash text-danger'></i></a></td>
-                    </tr>--%>
+                         </td>
+                         <td>
+                             <input type="file" name="equipments[0].consultantEQA.attachment" id="equipmentFile">
+                         </td>
+                         <td><a class='p-2'><i class='fa fa-pencil text-green'></i></a><a class='p-2'><i class='fa fa-trash text-danger'></i></a></td>
+                     </tr>--%>
                     </tbody>
                 </table>
                 <div class="col-lg-12 text-right">
-                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#eqModal"><i class="fa fa-plus"></i> Add More Equipment</button>
+                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#eqModal"><i
+                            class="fa fa-plus"></i> Add More Equipment
+                    </button>
                 </div>
                 <%--<div class="col-lg-12 text-right">
                     <button type="button"
@@ -231,20 +233,18 @@
         </div>
     </div>
 </div>
-
-<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
-     class="modal fade in" id="eqModal">
-    <div class="modal-dialog modal-lg" >
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" class="modal fade in" id="eqModal">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 id="myModalLabel" class="modal-title">Add Equipment</h4>
                 <button aria-hidden="true" data-dismiss="modal" class="close" type="button"><span></span></button>
             </div>
             <div class="modal-body form-horizontal">
-                <div class = "">
-                    <div class ="form-group">
-                        <label class = "col-lg-2">Equipment<span class="text-danger">*</span>:</label>
-                        <div class = "col-lg-4">
+                <div class="">
+                    <div class="form-group">
+                        <label class="col-lg-2">Equipment<span class="text-danger">*</span>:</label>
+                        <div class="col-lg-4">
                             <select name="equipments[0].equipmentId" class="form-control custom-select text-left equipmentId" required="" id="eq1" onchange="enableRegistrationNo()">
                                 <option value="">Select Equipment</option>
                                 <c:forEach var="item" items="${equipmentList}">
@@ -252,14 +252,14 @@
                                 </c:forEach>
                             </select>
                         </div>
-                        <label class = "col-lg-3">Registration No <span class="text-danger">*</span>:</label>
-                        <div class = "col-lg-3">
+                        <label class="col-lg-3">Registration No <span class="text-danger">*</span>:</label>
+                        <div class="col-lg-3">
                             <input type="text" name="equipments[0].registrationNo" class="form-control registrationNo" onchange="validateNo(this.value)" <%--required="true"--%> id="eq2">
                         </div>
                     </div>
-                    <div class ="form-group">
-                        <label class = "col-lg-2">Quantity <span class="text-danger">*</span>:</label>
-                        <div class = "col-lg-4">
+                    <div class="form-group">
+                        <label class="col-lg-2">Quantity <span class="text-danger">*</span>:</label>
+                        <div class="col-lg-4">
                             <div class="input-icon">
                                 <input type="text" name="equipments[0].quantity" class="form-control number" required="" id="eq3">
                             </div>
@@ -279,21 +279,27 @@
                                     </tr>
                                     </thead>
                                     <tbody class="files">
-                                    <tr><td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/> </td>
-                                        <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                    <tr>
+                                        <td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/></td>
+                                        <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment'
+                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/>
+                                        </td>
                                         <td class='file-size'></td>
-                                        <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                        <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                     </tr>
-                                    <tr><td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/> </td>
-                                        <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                    <tr>
+                                        <td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/></td>
+                                        <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment'
+                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/>
+                                        </td>
                                         <td class='file-size'></td>
-                                        <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                        <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                     </tr>
-                                  <%--  <tr><td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/> </td>
-                                        <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
-                                        <td class='file-size'></td>
-                                        <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
-                                    </tr>--%>
+                                    <%--  <tr><td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/> </td>
+                                          <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
+                                          <td class='file-size'></td>
+                                          <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                      </tr>--%>
                                     </tbody>
                                 </table>
                             </div>
@@ -308,38 +314,34 @@
         </div>
     </div>
 </div>
-
 <div class="col-lg-12 form-group">
     <button type="button" id="btn5" onclick="backTab('equipment_details','human_resource_criteria')" class="btn btn-azure col-lg-offset-9">
         <i class="fa fa-arrow-circle-left"></i>&nbsp; Back
     </button>
-    <button type="button" class="btn btn-primary" id="btnValEqNext">
-        Save & Preview &nbsp;
+    <button type="button" class="btn btn-primary" id="btnValEqNext">Save & Preview &nbsp;
         <i class="fa fa-life-saver"></i>
     </button>
 </div>
-
 <script>
     function validateNo(vNo) {
-            if (validateVehNo(vNo)) {
-                return true;
-            } else {
-                $('#eq2').val('');
-                errorMsg('oops!! please check your vehicle Number format');
-                return false;
-            }
+        if (validateVehNo(vNo)) {
+            return true;
+        } else {
+            $('#eq2').val('');
+            errorMsg('oops!! please check your vehicle Number format');
+            return false;
+        }
     }
     function validateVehNo() {
         var vNo = $('#eq2').val();
         const re = /\w[BPG]-\d-\w\d{4}$/;
         return re.test(vNo);
     }
-
-    function checkDuplicateEQ(){
+    function checkDuplicateEQ() {
         var $this = $(this);
         var isEqExist = false;
-        $('#eqdatatable').find('tbody tr td:nth-child(3)').each(function(){
-            if($this.val() == $(this).text()){
+        $('#eqdatatable').find('tbody tr td:nth-child(3)').each(function () {
+            if ($this.val() == $(this).text()) {
                 warningMsg("This Registration Number is already exists in your list!!!");
                 $this.val('');
                 isEqExist = true;
@@ -347,16 +349,15 @@
             }
         });
     }
-
-    function enableRegistrationNo(){
-        $('.equipmentId').on('change',function(e){
+    function enableRegistrationNo() {
+        $('.equipmentId').on('change', function (e) {
             var isRegistration = $(this).find("option:selected").hasClass("1");
-            if(isRegistration == true){
-                $('#eq2').prop('disabled',false).prop('required',true);
-                $('#eq3').val(1).prop('disabled',true);
-            } else{
-                $('#eq2').val('').prop('disabled',true).prop('required',false);
-                $('#eq3').val('').prop('disabled',false).prop('required',true);
+            if (isRegistration == true) {
+                $('#eq2').prop('disabled', false).prop('required', true);
+                $('#eq3').val(1).prop('disabled', true);
+            } else {
+                $('#eq2').val('').prop('disabled', true).prop('required', false);
+                $('#eq3').val('').prop('disabled', false).prop('required', true);
             }
         })
     }

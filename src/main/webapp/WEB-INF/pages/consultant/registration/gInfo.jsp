@@ -32,12 +32,11 @@
             </div>
             <div class="form-group row">
                 <div class="col-lg-6 col-lg-6">
-                    <label class="col-lg-4 form-label">Trade License No</label>
+                    <label class="col-lg-4 form-label">Trade License Number</label>
                     <input type="text" class="col-lg-7 form-control number" name="consultant.tradeLicenseNo" placeholder="Trade License No.." id="tradeLicenseNo">
                 </div>
                 <div class="col-lg-6 col-lg-6">
-                    <label class="col-lg-4 form-label">Proposed Firm
-                        Name <span class="text-danger">*</span></label>
+                    <label class="col-lg-4 form-label">Proposed Firm Name <span class="text-danger">*</span></label>
                     <input type="text" class="col-lg-7 form-control" id="firmName" name="consultant.firmName" required="true" placeholder="Firm Name..">
                 </div>
             </div>
@@ -56,7 +55,7 @@
         </div>
         <div class="card-body">
             <div class="col-lg-12">
-                <div class=""><input id="addMoreCert" type="button" value="Add More Certificate" class="btn btn-primary"> </div>
+                <div class=""><input id="addMoreCert" type="button" value="Add More Certificate" class="btn btn-primary"></div>
                 <table class="table table-bordered table-center table-responsive-lg auto-index" id="certificateTbl">
                     <thead>
                     <tr>
@@ -74,17 +73,14 @@
             </div>
         </div>
     </div>
-
     <div class="card">
         <div class="bg-blue card-status card-status-left"></div>
         <div class="card-header">
-            <h3 class="card-title">Name of Owner, Partners and/or others
-                with Controlling Interest</h3>
+            <h3 class="card-title">Name of Owner, Partners and/or others with Controlling Interest</h3>
         </div>
         <div class="card-body">
             <div class="col-lg-12">
-                <table class="table table-bordered table-center table-responsive-lg"
-                       id="partnerDtls">
+                <table class="table table-bordered table-center table-responsive-lg" id="partnerDtls">
                     <thead>
                     <tr>
                         <th>Nationality</th>
@@ -100,7 +96,7 @@
                     <tr>
                         <td class="country">
                             <form:select id="countryList" class="form-control" name="consultant.consultantHRs[0].countryId" data-msg-required="" data-rule-required="true" path="countryList">
-                               <%-- <form:option value="" label="Select Country"/>--%>
+                                <%-- <form:option value="" label="Select Country"/>--%>
                                 <form:options items="${countryList}" itemValue="value" itemLabel="text"/>
                             </form:select>
                         </td>
@@ -117,7 +113,7 @@
                             <input type="text" class="form-control name" name="consultant.consultantHRs[0].name" placeholder="Text.." required="true">
                         </td>
                         <td>
-                            <select id="gender" name="consultant.consultantHRs[0].sex" class="form-control sex" required="true" >
+                            <select id="gender" name="consultant.consultantHRs[0].sex" class="form-control sex" required="true">
                                 <option value="">Select Gender</option>
                                 <option value="M">Male</option>
                                 <option value="F">Female</option>
@@ -150,7 +146,6 @@
             </div>
         </div>
     </div>
-
     <div class="card hide" id="proprietorCum">
         <div class="bg-blue card-status card-status-left"></div>
         <div class="card-header">
@@ -158,7 +153,7 @@
         </div>
         <div class="card-body">
             <div class="col-lg-12">
-                <div class=""><input id="addMoreProprietorCum" type="button" value="Add More Certificate" class="btn btn-primary"> </div>
+                <div class=""><input id="addMoreProprietorCum" type="button" value="Add More Certificate" class="btn btn-primary"></div>
                 <table class="table table-bordered table-center table-responsive-lg auto-index" id="proprietorCumTbl">
                     <thead>
                     <tr>
@@ -215,8 +210,7 @@
         <div class="card-body">
             <div class="form-group row">
                 <div class="col-lg-6 col-md-6 ">
-                    <label class="col-lg-4 form-label" for="estAddress">Establishment
-                        Address <span class="text-danger">*</span></label>
+                    <label class="col-lg-4 form-label" for="estAddress">Establishment Address <span class="text-danger">*</span></label>
                     <input type="text" class="col-lg-7 form-control" name="consultant.estAddress" id="estAddress" required="true" placeholder="Text..">
                 </div>
                 <div class="col-lg-6 col-md-6">
@@ -240,7 +234,7 @@
             <div class="form-group row">
                 <div class="col-lg-6 col-md-6 ">
                     <label class="col-lg-4 form-label">Mobile No <span class="text-danger">*</span></label>
-                   <input type="number" class="form-control col-lg-7 number" name="consultant.regMobileNo" id="regMobileNo" required="true" placeholder="Mobile Number" onKeyPress="if(this.value.length==8) return false;" min="0">
+                    <input type="number" class="form-control col-lg-7 number" name="consultant.regMobileNo" id="regMobileNo" required="true" placeholder="Mobile Number" onKeyPress="if(this.value.length==8) return false;" min="0">
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <label class="col-lg-4 form-label">Telephone No </label>
@@ -256,14 +250,11 @@
         </div>
     </div>
 </div>
-
 <div class="col-lg-12 form-group">
     <button type="button" id="btn2" onclick="backTab('generalInformation','fees_structure')" class="btn btn-azure col-lg-offset-9">
         <i class="fa fa-arrow-circle-left"></i> &nbsp;Back
     </button>
-    <button type="button" id="btnValGINext" class="btn btn-primary">
-        Next &nbsp;<i class="fa fa-arrow-circle-right"></i>
-    </button>
+    <button type="button" id="btnValGINext" class="btn btn-primary">Next &nbsp;<i class="fa fa-arrow-circle-right"></i></button>
 </div>
 <%--</form>--%>
 

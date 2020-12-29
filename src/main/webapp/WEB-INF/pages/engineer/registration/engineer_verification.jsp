@@ -29,21 +29,17 @@
                         <div class="form-group">
                             <div class="col-lg-12">
                                 This application is verified and forwarded for approval,.<br>
-
                                 <p>Click on taskList button to go back to taskList.</p>
                             </div>
                         </div>
-
                         <div class="col-lg-12">
                             Thanks You.
                             <div class="col-lg-12 mt-3">
-                                <input type="button" class="btn btn-primary" id="btnLogin1" onclick="window.print();"
-                                       value="Print">
+                                <input type="button" class="btn btn-primary" id="btnLogin1" onclick="window.print();" value="Print">
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="card" id="registrtaionFormCard">
                     <form action="#" id="engineerverificationForm" >
                         <input type="hidden" id="referenceNo" value="${appDetails.referenceNo}" name="referenceNo"/>
@@ -170,12 +166,9 @@
                                                     </div>
                                                 </div>
                                                 <hr />
-
                                                 <div class="form-group row pull-right">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                                                        <button type="button" onclick="nextTab('personalInformation','categoryDtls')"  class="btn btn-primary">
-                                                            Next  <i class="fa fa-arrow-circle-right"></i>
-                                                        </button>
+                                                        <button type="button" onclick="nextTab('personalInformation','categoryDtls')"  class="btn btn-primary">Next  <i class="fa fa-arrow-circle-right"></i></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -193,7 +186,7 @@
                                                                     <input id="email" type="hidden" value="${appDetails.email}" readonly class="form-control" name="email" placeholder="Type valid email">${appDetails.email}
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                    <label>Mobile No:</label>
+                                                                    <label>Mobile Number:</label>
                                                                     <input type="hidden" class=" form-control number" value="${appDetails.mobileNo}" readonly id="mobileNo" name="mobileNo"  maxlength="8">${appDetails.mobileNo}
                                                                 </div>
                                                             </div>
@@ -240,12 +233,8 @@
                                                     <hr />
                                                     <div class="form-group row pull-right">
                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                                                            <button type="button" onclick="previousTab('personalInformation','categoryDtls')"  class="btn btn-success">
-                                                                <i class="fa fa-arrow-circle-left"></i>  Previous
-                                                            </button>
-                                                            <button type="button" onclick="nextTab('categoryDtls','saveAndPreview')"  class="btn btn-primary">
-                                                                Next  <i class="fa fa-arrow-circle-right"></i>
-                                                            </button>
+                                                            <button type="button" onclick="previousTab('personalInformation','categoryDtls')"  class="btn btn-success"><i class="fa fa-arrow-circle-left"></i>  Previous</button>
+                                                            <button type="button" onclick="nextTab('categoryDtls','saveAndPreview')"  class="btn btn-primary">Next  <i class="fa fa-arrow-circle-right"></i></button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -330,7 +319,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </c:if>
                                                             <%--${appDetails.updateStatus}--%>
@@ -392,7 +381,6 @@
                                                                     <textarea class="form-control" onclick="remove_err('remarks_err')" name="remarks" id="remarks"></textarea>
                                                                     <span id="remarks_err" class="text-danger"></span>
                                                                 </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -430,11 +418,9 @@
                     <%--HR Modal--%>
                     <div id="hrModal" class="modal fade in " tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" style=" max-width: 900px;">
-
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 id="myModalLabel" class="modal-title"><i class="fa fa-info-circle fa-lg"></i> Personal
-                                        Check<span id="cid"></span></h4>
+                                    <h4 id="myModalLabel" class="modal-title"><i class="fa fa-info-circle fa-lg"></i> Personal Check<span id="cid"></span></h4>
                                 </div>
                                 <div class="modal-body">
                                     <div class="panel panel-default">
@@ -442,20 +428,14 @@
                                             <div id="printInfoCID">
                                                 <div class="form-group">
                                                     <p align="center"><strong><u>Caution</u></strong></p>
-
                                                     <p align="center"><strong>An engineer is allowed to execute only two work at
                                                         a time for that particular firm.</strong></p>
-
-                                                    <p align="center"><strong>For any other Human Resource they are allowed to
-                                                        involve only in a single project of work</strong></p>
-
-                                                    <p align="center"><font size="5px;">Details of CID No: <span
-                                                            id="cidchecked"></span></font></p>
+                                                    <p align="center"><strong>For any other Human Resource they are allowed to involve only in a single project of work</strong></p>
+                                                    <p align="center"><font size="5px;">Details of CID No: <span id="cidchecked"></span></font></p>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-lg-9 mt-8">
                                                         <span class=""><b>From DCRC database</b></span>
-
                                                         <div class="col-lg-12 form-group mb-0 pt-4">
                                                             <label class="col-lg-3 form-label">Sex</label>
                                                             <label class="col-lg-8 form-label" id="sexM"></label>
@@ -487,9 +467,14 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-lg-12" align="center">
-                                                        <p><span id="dcbinfo"><b>Human Resource is not registered in any of the
-                                                            CDB firm</b><br><br> This person is not engaged in any work or project<br>This person is not a civil servant</span>
-                                                        </p>
+                                                        <div class="tab-pane employeeDetails" style="display: none" id="engagedId">
+                                                            <div class="form-group">
+                                                                <div class="col-lg-12" align="center">
+                                                                    <p ><span id="dcbinfo"><b>The Individual holding CID/permit no.<label id="cidNumber"></label>(<label id="hrName"></label>) is engaged in following project(s):</b></span></p>
+                                                                    <p><span id="dcbinfonotEngaged"></span></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -498,20 +483,14 @@
                                                     <hr>
                                                     <p align="center"><strong>Print this page as an evidence to prove that
                                                         particular HR is engaged or not in a work or project</strong></p>
-
                                                     <p align="center">
                                                         Printed on:  <%=new Date()%>
-
                                                         By: ${auth.fullName}
                                                     </p>
                                                 </div>
                                             </div>
-                                            <button type="button" class="btn btn-primary"
-                                                    onclick="PrintInfoCID()">Print
-                                            </button>
-                                            <button type="button" class="btn btn-success" id="closeModal"
-                                                    onclick="checkBtn('checkver1')" data-dismiss="modal">OK
-                                            </button>
+                                            <button type="button" class="btn btn-primary" onclick="PrintInfoCID()">Print</button>
+                                            <button type="button" class="btn btn-success" id="closeModal" onclick="checkBtn('checkver1')" data-dismiss="modal">OK</button>
                                         </div>
                                     </div>
                                 </div>
@@ -522,12 +501,10 @@
                     <script type="text/javascript" src="<c:url value="/resources/jquery.form.js"/>"></script>
                     <script src="<c:url value="/resources/js/cdb/engineer.js"/>"></script>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
 <script>
-
 </script>
 </body>

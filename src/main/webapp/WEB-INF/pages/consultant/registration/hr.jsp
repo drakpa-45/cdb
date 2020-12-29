@@ -7,32 +7,30 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <%--<form contractor="" method="post" class="">--%>
 <div class="div-actual">
     <div class="row">
         <div class="col-md-12 col-lg-12">
-
-            <div class="panel panel-default" >
-                <div class="panel-body" >
+            <div class="panel panel-default">
+                <div class="panel-body">
                     <span><b>Requirements for different Category and Classification</b></span>
                     <div class="form-group mt-5">
                         <div class="col-lg-6">
                             <div id="Surveyor">
-                                <div ><i>Note for Surveyor Services</i></div>
+                                <div><i>Note for Surveyor Services</i></div>
                                 <div class="table-responsive">
                                     <table id="" class="table table-bordered table-hover" style=" font-size: 12px;">
                                         <thead style="background-color:#F2F2F2">
                                         <tr>
-                                            <th align="center" >Category</th>
-                                            <th align="center" >Human Resource <br>Requirement</th>
-                                            <th  align="center">Equipment Requirement</th>
+                                            <th align="center">Category</th>
+                                            <th align="center">Human Resource <br>Requirement</th>
+                                            <th align="center">Equipment Requirement</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td  align="center">S1</td>
-                                            <td  align="center">Minimum Diploma field of specialization with Certified Cadastral Surveyor: 2</td>
+                                            <td align="center">S1</td>
+                                            <td align="center">Minimum Diploma field of specialization with Certified Cadastral Surveyor: 2</td>
                                             <td align="center">Total Station (3 sec or better): 1 set Or GNSS RTK: 1 set</td>
                                         </tr>
                                         <tr>
@@ -59,7 +57,7 @@
                                         </tr>
                                         <tr>
                                             <td align="center">S7</td>
-                                            <td align="center">	Minimum diploma in field of specialization: 1</td>
+                                            <td align="center"> Minimum diploma in field of specialization: 1</td>
                                             <td align="center">Established collimator: 1</td>
                                         </tr>
                                         </tbody>
@@ -73,35 +71,35 @@
                                 <div class="table-responsive">
                                     <table id="" class="table table-bordered table-hover" style=" font-size: 12px;">
                                         <thead style="background-color:#F2F2F2">
-                                        <tr >
-                                            <th align="center" >Employees</th>
-                                            <th align="center" >E1&E2</th>
-                                            <th align="center" >E3&E4</th>
-                                            <th align="center" >E5&E6</th>
-                                            <th align="center" >E7</th>
+                                        <tr>
+                                            <th align="center">Employees</th>
+                                            <th align="center">E1&E2</th>
+                                            <th align="center">E3&E4</th>
+                                            <th align="center">E5&E6</th>
+                                            <th align="center">E7</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td  align="center">Manager</td>
-                                            <td  align="center">1</td>
-                                            <td  align="center">1</td>
-                                            <td  align="center">1</td>
-                                            <td  align="center">1</td>
+                                            <td align="center">Manager</td>
+                                            <td align="center">1</td>
+                                            <td align="center">1</td>
+                                            <td align="center">1</td>
+                                            <td align="center">1</td>
                                         </tr>
                                         <tr>
-                                            <td  align="center">Engineer (Degree)</td>
-                                            <td  align="center">1(civil),1(Elect),1(Mech),1(Hydrologiest)</td>
-                                            <td  align="center">1(Elect)</td>
-                                            <td  align="center">1(Elect)</td>
-                                            <td  align="center">-</td>
+                                            <td align="center">Engineer (Degree)</td>
+                                            <td align="center">1(civil),1(Elect),1(Mech),1(Hydrologiest)</td>
+                                            <td align="center">1(Elect)</td>
+                                            <td align="center">1(Elect)</td>
+                                            <td align="center">-</td>
                                         </tr>
                                         <tr>
-                                            <td  align="center">Engineer (Diploma)</td>
-                                            <td  align="center">-</td>
-                                            <td  align="center">1(civil)</td>
-                                            <td  align="center">1(civil)</td>
-                                            <td  align="center">1(Elect)</td>
+                                            <td align="center">Engineer (Diploma)</td>
+                                            <td align="center">-</td>
+                                            <td align="center">1(civil)</td>
+                                            <td align="center">1(civil)</td>
+                                            <td align="center">1(Elect)</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -113,18 +111,18 @@
                                     <table id="" class="table table-bordered table-hover" style=" font-size: 12px;">
                                         <thead style="background-color:#F2F2F2">
                                         <tr>
-                                            <th align="center" >Employees</th>
-                                            <th align="center" >A1</th>
-                                            <th align="center" >A2</th>
-                                            <th align="center" >A3</th>
+                                            <th align="center">Employees</th>
+                                            <th align="center">A1</th>
+                                            <th align="center">A2</th>
+                                            <th align="center">A3</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td  align="center">Architect(Bhutanese)Master/Degree</td>
-                                            <td  align="center">1*</td>
-                                            <td  align="center">1*</td>
-                                            <td  align="center">1*</td>
+                                            <td align="center">Architect(Bhutanese)Master/Degree</td>
+                                            <td align="center">1*</td>
+                                            <td align="center">1*</td>
+                                            <td align="center">1*</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -136,33 +134,33 @@
                                     <table id="" class="table table-bordered table-hover" style=" font-size: 12px;">
                                         <thead style="background-color:#F2F2F2">
                                         <tr>
-                                            <th align="center" >Employees</th>
-                                            <th align="center" >C1&C4</th>
-                                            <th align="center" >C2</th>
-                                            <th align="center" >C3</th>
-                                            <th align="center" >C5&C6</th>
-                                            <th align="center" >C7</th>
+                                            <th align="center">Employees</th>
+                                            <th align="center">C1&C4</th>
+                                            <th align="center">C2</th>
+                                            <th align="center">C3</th>
+                                            <th align="center">C5&C6</th>
+                                            <th align="center">C7</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td  align="center">Engineer (Degree)</td>
-                                            <td  align="center">1</td>
-                                            <td  align="center">1*</td>
-                                            <td  align="center">1**</td>
-                                            <td  align="center">-</td>
-                                            <td  align="center">1</td>
+                                            <td align="center">Engineer (Degree)</td>
+                                            <td align="center">1</td>
+                                            <td align="center">1*</td>
+                                            <td align="center">1**</td>
+                                            <td align="center">-</td>
+                                            <td align="center">1</td>
                                         </tr>
                                         <tr>
-                                            <td  align="center">Engineer (Diploma)</td>
-                                            <td  align="center">-</td>
-                                            <td  align="center">-</td>
-                                            <td  align="center">-</td>
-                                            <td  align="center">1</td>
-                                            <td  align="center">-</td>
+                                            <td align="center">Engineer (Diploma)</td>
+                                            <td align="center">-</td>
+                                            <td align="center">-</td>
+                                            <td align="center">-</td>
+                                            <td align="center">1</td>
+                                            <td align="center">-</td>
                                         </tr>
                                         <tr>
-                                            <td  align="center" colspan="6">*Geo-Tech Engineer, **Social Science/Environmental</td>
+                                            <td align="center" colspan="6">*Geo-Tech Engineer, **Social Science/Environmental</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -229,7 +227,7 @@
                             <span class="text-danger">*</span>:</label>
                         <div class="col-lg-4">
                             <select name="consultantHRs[0].countryId" id="hr5" required="true" class="form-control custom-select text-left select-beast country">
-                             <%--   <option value="">Select Country</option>--%>
+                                <%--   <option value="">Select Country</option>--%>
                                 <c:forEach var="item" items="${countryList}">
                                     <option value="${item.value}"><c:out value="${item.text}"/></option>
                                 </c:forEach>
@@ -288,7 +286,6 @@
                     <div class="form-group">
                         <label class="col-lg-2">Qualification
                             <span class="text-danger">*</span>:</label>
-
                         <div class="col-lg-4">
                             <select name="consultantHRs[0].qualificationId" id="hr7" required="true" class="form-control custom-select text-left select-beast">
                                 <option value="">Select Qualification</option>
@@ -299,7 +296,6 @@
                         </div>
                         <label class="col-lg-2">Trade
                             <span class="text-danger">*</span>:</label>
-
                         <div class="col-lg-4">
                             <select name="consultantHRs[0].tradeId" id="hr8" required="true" class="form-control custom-select text-left select-beast">
                                 <option value="">Select Trade</option>
@@ -350,20 +346,29 @@
                                     </tr>
                                     </thead>
                                     <tbody id="fileListhrsection" class="files">
-                                    <tr><td><input type='text' required="true" value="CID" class='form-control docName' name='consultantHRs[0].consultantHRAs[0].documentName'/> </td>
-                                        <td><input type='file' required="true" class='file' name='consultantHRs[0].consultantHRAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
+                                    <tr>
+                                        <td><input type='text' required="true" value="CID" class='form-control docName' name='consultantHRs[0].consultantHRAs[0].documentName'/></td>
+                                        <td><input type='file' required="true" class='file' name='consultantHRs[0].consultantHRAs[0].attachment'
+                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
+                                        </td>
                                         <td class='file-size'></td>
-                                        <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                        <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                     </tr>
-                                    <tr><td><input type='text' required="true" value="Certificate" class='form-control docName' name='consultantHRs[0].consultantHRAs[0].documentName'/> </td>
-                                        <td><input type='file' required="true" class='file'  name='consultantHRs[0].consultantHRAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
+                                    <tr>
+                                        <td><input type='text' required="true" value="Certificate" class='form-control docName' name='consultantHRs[0].consultantHRAs[0].documentName'/></td>
+                                        <td><input type='file' required="true" class='file' name='consultantHRs[0].consultantHRAs[0].attachment'
+                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
+                                        </td>
                                         <td class='file-size'></td>
-                                        <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                        <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                     </tr>
-                                    <tr><td><input type='text' required="true" value="Others" class='form-control docName' name='consultantHRs[0].consultantHRAs[0].documentName'/> </td>
-                                        <td><input type='file' required="true" class='file' name='consultantHRs[0].consultantHRAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
+                                    <tr>
+                                        <td><input type='text' required="true" value="Others" class='form-control docName' name='consultantHRs[0].consultantHRAs[0].documentName'/></td>
+                                        <td><input type='file' required="true" class='file' name='consultantHRs[0].consultantHRAs[0].attachment'
+                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
+                                        </td>
                                         <td class='file-size'></td>
-                                        <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                        <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -382,10 +387,10 @@
 <!-- HR modal close -->
 <div class="col-lg-12 form-group">
     <button type="button" id="btn4" onclick="backTab('humanResourceCriteria','category_details')" class="btn btn-azure col-lg-offset-9">
-        <i class="fa fa-arrow-circle-left"></i> &nbsp;Back</button>
+        <i class="fa fa-arrow-circle-left"></i> &nbsp;Back
+    </button>
     <button type="button" id="btnValHRNext"
-    <%--onclick="nextTab('humanResourceCriteria','consultantEquipmentDtls')"--%>
-            class="btn btn-primary">Next &nbsp;
+    <%--onclick="nextTab('humanResourceCriteria','consultantEquipmentDtls')"--%> class="btn btn-primary">Next &nbsp;
         <i class="fa fa-arrow-circle-right"></i>
     </button>
 </div>

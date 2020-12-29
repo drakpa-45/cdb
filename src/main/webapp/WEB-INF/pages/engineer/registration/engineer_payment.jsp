@@ -9,8 +9,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<body>
 
+<body>
 <div class="mt-5">
     <div class="container mb-9">
         <div class="row">
@@ -41,15 +41,13 @@
                     </div>
                 </div>
                 <div class="card" id="registrtaionFormCard">
-
                     <form action="#" id="engineerverificationForm">
                         <input type="hidden" id="referenceNo" value="${appDetails.referenceNo}" name="referenceNo"/>
                         <%--<form id="architectForm" action="#" method="post" enctype="multipart/form-data">--%>
                         <div class="card-header">
                             <h3 class="card-title font-weight-bold" style="color: #002752">Engineer >> New Registration >>
-                                <%--            <security:authorize access="hasRole('ROLE_VERIFIER')">Verification</security:authorize>
-                                            <security:authorize access="hasRole('ROLE_APPROVER')">Approval</security:authorize>
-            --%>
+                                <%--<security:authorize access="hasRole('ROLE_VERIFIER')">Verification</security:authorize>
+                                            <security:authorize access="hasRole('ROLE_APPROVER')">Approval</security:authorize>--%>
                                 <c:if test="${appDetails.updateStatus=='6195664d-c3c5-11e4-af9f-080027dcfac6'}">
                                    Payment Approver
                                 </c:if>
@@ -112,7 +110,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Mobile No:</label>
+                                                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Mobile Number:</label>
                                                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                             <input type="hidden" class=" form-control number" value="${appDetails.mobileNo}" readonly id="mobileNo" name="mobileNo" maxlength="8">${appDetails.mobileNo}
                                                         </div>
@@ -200,11 +198,8 @@
                                                            <%-- <input type="text" onclick="remove_err('paymentReceiptDate_err')" class=" form-control datepicker"
                                                                    readonly name="paymentReceiptDate" id="paymentReceiptDate">--%>
                                                             <div class="input-group margin-bottom-sm">
-                                                                                <span class="input-group-addon pr-5"><i
-                                                                                        class="fa fa-calendar"></i></span>
-                                                                <input type="date" name="paymentReceiptDate"
-                                                                       value="" id="paymentReceiptDate"
-                                                                       class="form-control">
+                                                                <span class="input-group-addon pr-5"><i class="fa fa-calendar"></i></span>
+                                                                <input type="date" name="paymentReceiptDate" value="" id="paymentReceiptDate" class="form-control">
                                                             </div>
                                                             <span id="paymentReceiptDate_err" class="text-danger"></span>
                                                         </div>
@@ -322,11 +317,11 @@
                                     </div>
                                 </div>
                             </div>
-                                        <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
-                                            <label class="form-label">Your Remarks:</label>
-                                            <textarea class="form-control" onclick="remove_err('remarks_err')" name="remarks" id="remarks"></textarea>
-                                            <span id="remarks_err" class="text-danger"></span>
-                                        </div>
+                          <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                              <label class="form-label">Your Remarks:</label>
+                              <textarea class="form-control" onclick="remove_err('remarks_err')" name="remarks" id="remarks"></textarea>
+                              <span id="remarks_err" class="text-danger"></span>
+                          </div>
                                 <br>
                             <div class="form-group row pull-right">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">

@@ -7,16 +7,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <%--<form contractor="" method="post" class="">--%>
 <div class="div-actual">
     <div class="row">
         <div class="col-md-12 col-lg-12">
-
             <div class="panel panel-default">
                 <div class="panel-body">
                     <span><b>Registration Criteria for Specialized Firm</b></span>
-
                     <div class="form-group">
                         <div class="col-lg-12">
                             <p>CID/ Work Permit copy for all Personnel including
@@ -35,11 +32,11 @@
                                         <tr>
                                             <th align="center" rowspan="2">Specialized Category</th>
                                             <th align="center" colspan="2">Human Resource Required
-                                           <tr>
+                                        <tr>
                                             <th>Qualification Level</th>
                                             <th>Nos. of certified person(s)</th>
                                         </tr>
-                                            </th>
+                                        </th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -105,7 +102,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Box Close -->
             <!-- Box Open -->
             <div class="card tab4">
@@ -146,9 +142,8 @@
         </div>
     </div>
 </div>
-
 <!-- HR modal open -->
-<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"  class="modal fade in" id="addHRModal">
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" class="modal fade in" id="addHRModal">
     <div class="modal-dialog modal-lg" id="hrModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -162,7 +157,7 @@
                             <span class="text-danger">*</span>:</label>
                         <div class="col-lg-4">
                             <select name="spFirmHRs[0].countryId" id="hr5" required="" class="form-control custom-select text-left select-beast country">
-                               <%-- <option value="">Select Country</option>--%>
+                                <%-- <option value="">Select Country</option>--%>
                                 <c:forEach var="item" items="${countryList}">
                                     <option value="${item.value}"><c:out value="${item.text}"/></option>
                                 </c:forEach>
@@ -243,7 +238,8 @@
                     <div class="form-group">
                         <label class="col-lg-2">Service Type<span class="text-danger">*</span>:</label>
                         <div class="col-lg-4">
-                            <select name="spFirmHRs[0].serviceTypeId" id="hr9" required="true" class="form-control custom-select text-left select-beast">
+                            <select name="spFirmHRs[0].serviceTypeId" id="hr9" required="true"
+                                    class="form-control custom-select text-left select-beast">
                                 <option value="">Select Type</option>
                                 <c:forEach var="item" items="${serviceTypeList}">
                                     <option value="${item.value}"><c:out value="${item.text}"/></option>
@@ -253,11 +249,8 @@
                         <label class="col-lg-2"> Joining Date<span class="text-danger">*</span>:</label>
                         <div class="col-lg-4">
                             <div class="input-group margin-bottom-sm">
-                                <span class="input-group-addon pr-5"><i
-                                        class="fa fa-calendar"></i></span>
-                                <input type="date" name="spFirmHRs[0].joiningDate"
-                                       value="" id="hr10"
-                                       class="form-control datepicker" required="true">
+                                <span class="input-group-addon pr-5"><i class="fa fa-calendar"></i></span>
+                                <input type="date" name="spFirmHRs[0].joiningDate" value="" id="hr10" class="form-control datepicker" required="true">
                             </div>
                         </div>
                     </div>
@@ -266,7 +259,7 @@
                         <div class="col-lg-4">
                             <div class="input-icon">
                                 <span class="input-icon-addon"><i class="fe fe-user"></i></span>
-                                <input type="text" name="spFirmHRs[0].cdbNo" id="hr11" class="form-control name"  placeholder="cdbNo..">
+                                <input type="text" name="spFirmHRs[0].cdbNo" id="hr11" class="form-control name" placeholder="cdbNo..">
                             </div>
                         </div>
                     </div>
@@ -284,20 +277,29 @@
                                     </tr>
                                     </thead>
                                     <tbody id="fileListhrsection" class="files">
-                                    <tr><td><input type='text' required="true"  value="CID"class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/> </td>
-                                        <td><input type='file' required="true" class='file' name='spFirmHRs[0].spFirmHRAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
+                                    <tr>
+                                        <td><input type='text' required="true" value="CID" class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/></td>
+                                        <td><input type='file' required="true" class='file' name='spFirmHRs[0].spFirmHRAs[0].attachment'
+                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
+                                        </td>
                                         <td class='file-size'></td>
-                                        <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                        <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                     </tr>
-                                    <tr><td><input type='text' required="true" value="Certificate" class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/> </td>
-                                        <td><input type='file' required="true" class='file'  name='spFirmHRs[0].spFirmHRAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
+                                    <tr>
+                                        <td><input type='text' required="true" value="Certificate" class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/></td>
+                                        <td><input type='file' required="true" class='file' name='spFirmHRs[0].spFirmHRAs[0].attachment'
+                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
+                                        </td>
                                         <td class='file-size'></td>
-                                        <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                        <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                     </tr>
-                                    <tr><td><input type='text' required="true" value="Others" class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/> </td>
-                                        <td><input type='file' required="true" class='file' name='spFirmHRs[0].spFirmHRAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
+                                    <tr>
+                                        <td><input type='text' required="true" value="Others" class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/></td>
+                                        <td><input type='file' required="true" class='file' name='spFirmHRs[0].spFirmHRAs[0].attachment'
+                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
+                                        </td>
                                         <td class='file-size'></td>
-                                        <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                        <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -315,11 +317,11 @@
 </div>
 <!-- HR modal close -->
 <div class="col-lg-12 form-group">
-    <button type="button"id="btn4" onclick="backTab('humanResourceCriteria','category_details')" class="btn btn-azure col-lg-offset-9">
-        <i class="fa fa-arrow-circle-left"></i> &nbsp;Back</button>
+    <button type="button" id="btn4" onclick="backTab('humanResourceCriteria','category_details')" class="btn btn-azure col-lg-offset-9">
+        <i class="fa fa-arrow-circle-left"></i> &nbsp;Back
+    </button>
     <button type="button" id="btnValHRNext"
-    <%--onclick="nextTab('humanResourceCriteria','consultantEquipmentDtls')"--%>
-            class="btn btn-primary">Next &nbsp;
+    <%--onclick="nextTab('humanResourceCriteria','consultantEquipmentDtls')"--%> class="btn btn-primary">Next &nbsp;
         <i class="fa fa-arrow-circle-right"></i>
     </button>
 </div>

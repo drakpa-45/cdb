@@ -115,19 +115,16 @@ public class EngineerController extends BaseController {
                             " You will also be notified via email when your application is approved." +
                             "Thank You," +
                             "(CDB)";
-                    try {
                         MailSender.sendMail(dto.getEmail(), "cdb@gov.bt", null, mailContent, "Application Registered Success");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
                 }
-                model.addAttribute("acknowledgement_message", "Your application for <label class='control-label'>Registration of Engineer</label> has been submitted successfully and your application number is <b>" + resdto.getReferenceNo() + "."+"</b> <br><p>You will receive an email as well as SMS notification once taken further action.</p><label class='control-label'>You can track your application using above Application Number.</label>");
-                return "/architect/acknowledgement";
+            model.addAttribute("acknowledgement_message", "Your application for <label class='control-label'>Registration of Engineer</label> has been submitted successfully and your application number is <b>" + resdto.getReferenceNo() + "."+"</b> <br><p>You will receive an email as well as SMS notification once taken further action.</p><label class='control-label'>You can track your application using above Application Number.</label>");
+            return "/architect/acknowledgement";
         }catch (Exception e){
             System.out.print(e);
             model.addAttribute("status","failed");
+            model.addAttribute("acknowledgement_message", "Not able to submit details. "+e+". Please try again");
+            return "/architect/acknowledgement";
         }
-        return  null;
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -164,12 +161,12 @@ public class EngineerController extends BaseController {
             ResponseMessage personal=services.saveEngineercancellation(dto, loginDTO.getUserId());
             ArchitectDto resdto=(ArchitectDto)personal.getDto();
             model.addAttribute("acknowledgement_message", "Your application for <label class='control-label'>Cancellation of Engineer </label> has been submitted successfully and your application number is <b>"+resdto.getReferenceNo()+"</b> <br><p>You will receive an email as well as sms notification once take further action.</p><label class='control-label'>You can track your application using above Application Number. <br /> Thank you.</label>");
-            return "/architect/acknowledgement";
+            return "architect/acknowledgement";
         }catch (Exception e){
             System.out.print(e);
             model.addAttribute("status","failed");
             model.addAttribute("acknowledgement_message", "Not able to submit details. "+e+". Please try again");
-            return "/architect/acknowledgement";
+            return "architect/acknowledgement";
         }
     }
 

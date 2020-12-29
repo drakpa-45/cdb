@@ -85,7 +85,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Mobile No:</label>
+                                                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Mobile Number:</label>
                                                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                             <input type="hidden" class=" form-control number" value="${appDetails.mobileNo}" readonly id="mobileNo" name="mobileNo" maxlength="8">${appDetails.mobileNo}
                                                         </div>
@@ -93,7 +93,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Trade:</label>
                                                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                            <input type="hidden" value="${appDetails.trade}" readonly maxlength="100" id="service" name="serviceSectorType" class="form-control">${appDetails.trade}
+                                                            <input type="hidden" value="${appDetails.cmnTradeId}" readonly maxlength="100" id="service" name="trade" class="form-control">${appDetails.trade}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -172,11 +172,8 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                     <label>Payment Receipt Date:</label>
                                                     <div class="input-group margin-bottom-sm">
-                                                                                <span class="input-group-addon pr-5"><i
-                                                                                        class="fa fa-calendar"></i></span>
-                                                    <input type="date" name="paymentReceiptDate"
-                                                           value="" id="paymentReceiptDate"
-                                                           class="form-control">
+                                                        <span class="input-group-addon pr-5"><i class="fa fa-calendar"></i></span>
+                                                    <input type="date" name="paymentReceiptDate" value="" id="paymentReceiptDate" class="form-control">
                                                 </div>
                                                     <span id="paymentReceiptDate_err" class="text-danger"></span>
                                                 </div>
@@ -244,8 +241,7 @@
                                         <table class="table">
                                             <tbody>
                                             <tr>
-                                                <td colspan="2" class="font-blue-madison bold warning">Applicant Details
-                                                </td>
+                                                <td colspan="2" class="font-blue-madison bold warning">Applicant Details</td>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -337,20 +333,14 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                                     <c:if test="${appDetails.updateStatus=='262a3f11-adbd-11e4-99d7-080027dcfac6'}">
                                         <%--<button class="btn btn-warning" type="button" id="showrejectsection" onclick="updateReject()"><span class="fa fa-times"></span> Reject</button>--%>
-                                        <button type="button" onclick="verifyApplication()" class="btn btn-primary">
-                                            <i class="fa fa-save"></i> Verify
-                                        </button>
+                                        <button type="button" onclick="verifyApplication()" class="btn btn-primary"><i class="fa fa-save"></i> Verify</button>
                                     </c:if>
                                     <c:if test="${appDetails.updateStatus=='36f9627a-adbd-11e4-99d7-080027dcfac6'}">
                                         <button class="btn btn-warning" type="button" id="showrejectsection" onclick="updateReject()"><span class="fa fa-times"></span> Reject</button>
-                                        <button type="button" onclick="approveApplication('renewal')" class="btn btn-primary">
-                                            <i class="fa fa-save"></i> Approve
-                                        </button>
+                                        <button type="button" onclick="approveApplication('renewal')" class="btn btn-primary"><i class="fa fa-save"></i> Approve</button>
                                     </c:if>
                                     <c:if test="${appDetails.updateStatus=='6195664d-c3c5-11e4-af9f-080027dcfac6'}">
-                                        <button type="button" onclick="approveAndGenerateCertificate('renewal')" class="btn btn-primary">
-                                            <i class="fa fa-save"></i> Approve & Update Certificate
-                                        </button>
+                                        <button type="button" onclick="approveAndGenerateCertificate('renewal')" class="btn btn-primary"><i class="fa fa-save"></i> Approve & Update Certificate</button>
                                     </c:if>
                                 </div>
                             </div>

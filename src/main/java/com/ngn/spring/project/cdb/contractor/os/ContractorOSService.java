@@ -278,31 +278,6 @@ public class ContractorOSService extends BaseService {
 
     public void saveCCUpgrade(Contractor contractor,List<ConCategory> categories, LoggedInUser loggedInUser){
 
-       /* BigDecimal totalCCUpDownFee = BigDecimal.ZERO;
-        final List<CategoryClassDTO> ccUpDown = new ArrayList<>();  //upgrade downgrade
-        String contractorFinalId = (String)commonService.getValue("crpcontractorfinal","Id","CDBNo",contractor.getCdbNo());
-
-        //since project category cannot be null
-        categories = categories.stream().filter(c-> c.getProjectCateID() != null).collect(Collectors.toList());
-        if(categories != null && !categories.isEmpty()){
-            for(ConCategory category : categories){
-                if(category.getAppliedClassID() == null || category.getAppliedClassID().equals(category.getExistingClassID())){
-                    // fee not application since class is same or no change
-                }else{
-                    ccUpDown.add(new CategoryClassDTO(category.getProjectCateID(),category.getAppliedClassID()
-                            ,category.getExistingClassID()));
-                    BigDecimal fee = ((FeeStructureDTO) contractorNRService.gFeeStructure(category.getAppliedClassID()).get(0)).getRegistrationFee();
-                    totalCCUpDownFee = totalCCUpDownFee.add(fee);
-                }
-            }
-        }
-
-        for(CategoryClassDTO classDTO : ccUpDown){
-            BigDecimal fee = ((FeeStructureDTO) contractorNRService.gFeeStructure(classDTO.getaClassId()).get(0)).getRegistrationFee();
-            classDTO.setvAmount(fee);
-            totalCCUpDownFee = totalCCUpDownFee.add(fee);
-        }*/
-
         categories = categories.stream().filter(c-> c.getProjectCateID() != null).collect(Collectors.toList());
 
         BigDecimal totalRenewalFee = BigDecimal.ZERO;

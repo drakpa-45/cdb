@@ -37,6 +37,10 @@ public class ConsultantOSDao extends BaseDao {
         return hQuery.list();
     }
 
-
-
+    @Transactional(readOnly = true)
+    public List<ServiceFeeDTO> getRegisteredService(String consultantFinalId) {
+        sqlQuery = properties.getProperty("ConsultantRCDao.getRegisteredService");
+        hQuery = hibernateQuery(sqlQuery, ServiceFeeDTO.class).setParameter("consultantFinalId",consultantFinalId);
+        return hQuery.list();
+    }
 }

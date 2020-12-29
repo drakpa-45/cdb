@@ -57,8 +57,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-lg-4 form-label" for="cancellationRemarks">Cancellation Reason
                                                         <span class="text-danger">*</span></label>
-                                                            <textarea name="cancellationRemarks" class="form-control col-lg-6" id="cancellationRemarks" rows="6"  required="required">
-                                                             </textarea>
+                                                            <textarea name="cancellationRemarks" class="form-control col-lg-6" id="cancellationRemarks" rows="6"  required="required"></textarea>
                                                 </div>
                                                 <input type="hidden" name="cdbNo" value="${registrationDetails.cdbNo}">
                                                 <input type="hidden" id="referenceNo" value="${registrationDetails.referenceNo}" name="referenceNo"/>

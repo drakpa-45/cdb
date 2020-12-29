@@ -670,7 +670,7 @@ var contractor = (function () {
                return;
             }
             if($(this).val() != $('#regEmail').val()){
-               $(this).focus().val('');
+                $('#regEmail').focus().val('');
                 warningMsg("Confirmation email does not match.");
                 $(this).focus().val('');
             }

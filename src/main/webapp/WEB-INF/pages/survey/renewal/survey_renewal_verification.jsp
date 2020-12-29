@@ -11,7 +11,6 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <body>
-
 <div class="mt-5">
     <div class="container mb-9">
         <div class="row">
@@ -165,7 +164,7 @@
                                                                     <input id="email" type="hidden" value="${appDetails.email}" readonly class="form-control" name="email" placeholder="Type valid email">${appDetails.email}
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                    <label>Mobile No:</label>
+                                                                    <label>Mobile Number:</label>
                                                                     <input type="hidden" class=" form-control number" value="${appDetails.mobileNo}" readonly id="mobileNo" name="mobileNo" maxlength="8">${appDetails.mobileNo}
                                                                 </div>
                                                             </div>
@@ -281,11 +280,8 @@
                                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                                     <label>Payment Receipt Date:</label>
                                                                                     <div class="input-group margin-bottom-sm">
-                                                                                <span class="input-group-addon pr-5"><i
-                                                                                        class="fa fa-calendar"></i></span>
-                                                                                        <input type="date" name="paymentReceiptDate"
-                                                                                               value="" id="paymentReceiptDate"
-                                                                                               class="form-control datepicker">
+                                                                                <span class="input-group-addon pr-5"><i class="fa fa-calendar"></i></span>
+                                                                                        <input type="date" name="paymentReceiptDate" value="" id="paymentReceiptDate" class="form-control datepicker">
                                                                                     </div>
                                                                                     <span id="paymentReceiptDate_err" class="text-danger"></span>
                                                                                 </div>
@@ -325,8 +321,7 @@
                                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                                     <label>Mode of Payment:</label>
                                                                                     <select name="paymentmode" class="chosen-select form-control" onchange="checkForApplicable(this.value)" id="paymentmode" required>
-                                                                                        <option value="">--Select--
-                                                                                        </option>
+                                                                                        <option value="">--Select--</option>
                                                                                         <c:forEach var="plist" items="${modeOfPayment}" varStatus="counter">
                                                                                             <option value="${plist.name}">${plist.name}</option>
                                                                                         </c:forEach>
@@ -345,16 +340,13 @@
                                                                         <table class="table">
                                                                             <tbody>
                                                                             <tr>
-                                                                                <td colspan="2"
-                                                                                    class="font-blue-madison bold warning">Applicant Details
-                                                                                </td>
+                                                                                <td colspan="2" class="font-blue-madison bold warning">Applicant Details</td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>
                                                                                     <table class="table table-condensed">
                                                                                         <tr>
-                                                                                            <td><strong>Date of application:</strong>
-                                                                                            </td>
+                                                                                            <td><strong>Date of application:</strong></td>
                                                                                             <td>${appDetails.applicationDate}</td>
                                                                                         </tr>
                                                                                        <%-- <tr>
@@ -364,9 +356,7 @@
                                                                                             <td>${appDetails.remarks}</td>
                                                                                         </tr>--%>
                                                                                         <tr>
-                                                                                            <td>
-                                                                                                <strong>Submitted By: </strong>
-                                                                                            </td>
+                                                                                            <td><strong>Submitted By: </strong></td>
                                                                                             <td>${appDetails.createdBy} <b style="color: blueviolet">(${appDetails.fullname})</b></td>
                                                                                         </tr>
                                                                                     </table>
@@ -385,19 +375,15 @@
                                                                                 <td>
                                                                                     <table class="table table-condensed">
                                                                                         <tr>
-                                                                                            <td><strong>Date of
-                                                                                                Verification:</strong>
-                                                                                            </td>
+                                                                                            <td><strong>Date of Verification:</strong></td>
                                                                                             <td>${appDetails.applicationDate}</td>
                                                                                         </tr>
                                                                                         <tr>
-                                                                                            <td><strong>Verifier
-                                                                                                Remarks: </strong></td>
+                                                                                            <td><strong>Verifier Remarks: </strong></td>
                                                                                             <td>${appDetails.verifierremarks}</td>
                                                                                         </tr>
                                                                                         <tr>
-                                                                                            <td><strong>Verified
-                                                                                                By: </strong></td>
+                                                                                            <td><strong>Verified By: </strong></td>
                                                                                             <td>${appDetails.verifierUser}</td>
                                                                                         </tr>
                                                                                     </table>
@@ -454,8 +440,7 @@
                         <div class="modal-dialog" style=" max-width: 900px;">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 id="myModalLabel" class="modal-title"><i class="fa fa-info-circle fa-lg"></i> Personal
-                                        Check<span id="cid"></span></h4>
+                                    <h4 id="myModalLabel" class="modal-title"><i class="fa fa-info-circle fa-lg"></i> Personal Check<span id="cid"></span></h4>
                                 </div>
                                 <div class="modal-body">
                                     <div class="panel panel-default">
@@ -463,20 +448,15 @@
                                             <div id="modal-print">
                                                 <div class="form-group">
                                                     <p align="center"><strong><u>Caution</u></strong></p>
-
                                                     <p align="center"><strong>An surveyor is allowed to execute only two work at
                                                         a time for that particular firm.</strong></p>
-
                                                     <p align="center"><strong>For any other Human Resource they are allowed to
                                                         involve only in a single project of work</strong></p>
-
-                                                    <p align="center"><font size="5px;">Details of CID No: <span
-                                                            id="cidchecked"></span></font></p>
+                                                    <p align="center"><font size="5px;">Details of CID No: <span id="cidchecked"></span></font></p>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-lg-9 mt-8">
                                                         <span class=""><b>From DCRC database</b></span>
-
                                                         <div class="col-lg-12 form-group mb-0 pt-4">
                                                             <label class="col-lg-3 form-label">Sex</label>
                                                             <label class="col-lg-8 form-label" id="sexM"></label>
@@ -508,9 +488,14 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-lg-12" align="center">
-                                                        <p><span id="dcbinfo"><b>Human Resource is not registered in any of the
-                                                            CDB firm</b><br><br> This person is not engaged in any work or project<br>This person is not a civil servant</span>
-                                                        </p>
+                                                        <div class="tab-pane employeeDetails" style="display: none" id="engagedId">
+                                                            <div class="form-group">
+                                                                <div class="col-lg-12" align="center">
+                                                                    <p ><span id="dcbinfo"><b>The Individual holding CID/permit no.<label id="cidNumber"></label>(<label id="hrName"></label>) is engaged in following project(s):</b></span></p>
+                                                                    <p><span id="dcbinfonotEngaged"></span></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -519,20 +504,14 @@
                                                     <hr>
                                                     <p align="center"><strong>Print this page as an evidence to prove that
                                                         particular HR is engaged or not in a work or project</strong></p>
-
                                                     <p align="center">
                                                         Printed on:  <%=new Date()%>
-
                                                         By: ${auth.fullName}
                                                     </p>
                                                 </div>
                                             </div>
-                                            <button type="button" class="btn btn-primary"
-                                                    onclick="javascript:printDiv('modal-print')">Print
-                                            </button>
-                                            <button type="button" class="btn btn-success" id="closeModal"
-                                                    onclick="checkBtn('checkver1')" data-dismiss="modal">OK
-                                            </button>
+                                            <button type="button" class="btn btn-primary" onclick="javascript:printDiv('modal-print')">Print</button>
+                                            <button type="button" class="btn btn-success" id="closeModal" onclick="checkBtn('checkver1')" data-dismiss="modal">OK</button>
                                         </div>
                                     </div>
                                 </div>

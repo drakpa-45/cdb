@@ -113,4 +113,15 @@ public class ConsultantNRActionController extends BaseController {
         return consultantActionService.sendBack(appNo, remarks,appStatus,loggedInUser);
     }
 
+    @RequestMapping(value = "/validateCorporateCidNo", method = RequestMethod.GET)
+    public ResponseMessage validateCorporateCidNo(HttpServletRequest request,String cidNo) {
+      //  String cidNo = request.getParameter("cidNo");
+        try{
+            ResponseMessage validateCorporateCidNo=commonService.validateCorporateCidNo(request,cidNo);
+            return validateCorporateCidNo;
+        }catch (Exception e){
+            System.out.print(e);
+            return  null;
+        }
+    }
 }

@@ -63,10 +63,9 @@ public class ConsultantOSActionController extends BaseController {
         model.addAttribute("modeOfPayment", commonService.getModePayment());
         if (appStatus.equals(ApplicationStatus.APPROVED_FOR_PAYMENT.getCode())) {
             return "admin/consultant/consultantRCPayment";
-        } else {
+        }else{
             return "admin/consultant/consultantRCAction";
         }
-
     }
 
     @ResponseBody

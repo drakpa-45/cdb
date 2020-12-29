@@ -99,9 +99,7 @@
                                                         <tbody>
                                                         <c:forEach items="${appDetails.terms}" var="category" varStatus="i">
                                                             <tr>
-                                                                    <%--${category.arrayId}--%>
-                                                                    <%--${i.index}--%>
-                                                                        <input class="form-control categoryCheck" type="hidden" name="serviceTypeId" value="${category.appliedCategoryId}" style="width: 17px; height: 17px;" disabled checked>
+                                                                <input class="form-control categoryCheck" type="hidden" name="serviceTypeId" value="${category.appliedCategoryId}" style="width: 17px; height: 17px;" disabled checked>
                                                                 <td><input class="form-control categoryCheck" type="checkbox" name="itemId" value="${category.appliedCategoryId}" style="width: 17px; height: 17px;" disabled checked></td>
                                                                 <td>${category.code}${category.name}</td>
                                                             </tr>
@@ -154,11 +152,8 @@
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                         <label>Payment Receipt Date:</label>
                                                         <div class="input-group margin-bottom-sm">
-                                                                                <span class="input-group-addon pr-5"><i
-                                                                                        class="fa fa-calendar"></i></span>
-                                                            <input type="date" name="paymentReceiptDate"
-                                                                   value="" id="paymentReceiptDate"
-                                                                   class="form-control">
+                                                            <span class="input-group-addon pr-5"><i class="fa fa-calendar"></i></span>
+                                                            <input type="date" name="paymentReceiptDate" value="" id="paymentReceiptDate" class="form-control">
                                                         </div>
                                                         <span id="paymentReceiptDate_err" class="text-danger"></span>
                                                     </div>
@@ -220,9 +215,7 @@
                                             <table class="table">
                                                 <tbody>
                                                 <tr>
-                                                    <td colspan="2" class="font-blue-madison bold warning">Application
-                                                        Submitter Details
-                                                    </td>
+                                                    <td colspan="2" class="font-blue-madison bold warning">Application Submitter Details</td>
                                                 </tr>
                                                 <tr>
                                                     <td>

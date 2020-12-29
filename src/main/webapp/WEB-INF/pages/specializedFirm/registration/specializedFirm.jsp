@@ -25,14 +25,12 @@
                             <b>Application / </b>Acknowledgement
                         </div>
                         <div class="card-body" style="color:red">
-                            ${error}
+                                ${error}
                         </div>
                     </div>
                 </c:if>
                 <div class="card" id="registrtaionFormCard">
-                    <form id="specializedFirmForm" name="specializedFirmForm" action="<c:url value="SpFirm/save"/>"
-                          method="POST" class="globalForm"
-                          enctype="multipart/form-data">
+                    <form id="specializedFirmForm" name="specializedFirmForm" action="<c:url value="SpFirm/save"/>" method="POST" class="globalForm" enctype="multipart/form-data">
                         <div class="card-header">
                             <h3 class="card-title font-weight-bold">Registration of Specialized Firm</h3>
                         </div>
@@ -71,25 +69,19 @@
                                                 <h3 class="pt-3 text-center hide">Fee Structure</h3>
                                                 <jsp:include page="fee.jsp"/>
                                             </div>
-
                                             <div role="tabpanel" class="tab-pane general_Information" id="general_Information">
                                                 <h3 class="pt-3 text-center hide">General Information</h3>
                                                 <jsp:include page="gInfo.jsp"/>
                                             </div>
-
                                             <div role="tabpanel" class="tab-pane category_details" id="category_details">
                                                 <h3 class="pt-3 text-center hide">Category Details</h3>
                                                 <jsp:include page="categorySpFirm.jsp"/>
                                             </div>
-
-                                            <div role="tabpanel" class="tab-pane human_resource_criteria"
-                                                 id="human_resource_criteria">
+                                            <div role="tabpanel" class="tab-pane human_resource_criteria" id="human_resource_criteria">
                                                 <h3 class="pt-3 text-center hide">Human Resource Criteria</h3>
                                                 <jsp:include page="hr.jsp"/>
                                             </div>
-
-                                            <div role="tabpanel" class="tab-pane equipment_details"
-                                                 id="equipment_details">
+                                            <div role="tabpanel" class="tab-pane equipment_details" id="equipment_details">
                                                 <h3 class="pt-3 text-center hide">Consultant Equipment Details</h3>
                                                 <jsp:include page="equipment.jsp"/>
                                             </div>
@@ -98,8 +90,7 @@
                                                     <div class="panel panel-default">
                                                         <div class="panel-body">
                                                             <div class="form-group">
-                                                                <label class="col-lg-12">I/We declare and confirm
-                                                                    that:- </label>
+                                                                <label class="col-lg-12">I/We declare and confirm that:- </label>
                                                                 <div id="termsAndCon">
                                                                     <ul>
                                                                         <li> All information and attachments with this
@@ -137,10 +128,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="col-lg-12">
-                                                                    <span><input type="checkbox" id="submitcheckbox"
-                                                                                 onclick="enableSubmit()" name="tnc"
-                                                                                 required="true"
-                                                                                 style="width:15px;height:15px;"></span>
+                                                                    <span><input type="checkbox" id="submitcheckbox" onclick="enableSubmit()" name="tnc" required="true" style="width:15px;height:15px;"></span>
                                                                     <span class="bold"> I/We agree to the above Terms Conditions</span>
                                                                 </label>
                                                                 <!-- <br /><span class="text-danger" id="termAndConErrorClass"></span> -->
@@ -150,7 +138,7 @@
                                                 </div>
                                                 <div class="form-group row pull-right">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                                                        <button type="button"  id="btn6" onclick="previousTab('equipment_details','saveAndPreview')" class="btn btn-success">
+                                                        <button type="button" id="btn6" onclick="previousTab('equipment_details','saveAndPreview')" class="btn btn-success">
                                                             <i class="fa fa-arrow-circle-left"></i> Previous
                                                         </button>
                                                         <button type="button" onclick="showConfirmation()" class="btn btn-primary" id="btnSubmit" disabled>
@@ -164,8 +152,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
-                             class="modal in" id="confirmationModel">
+                        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal in" id="confirmationModel">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -181,13 +168,8 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-success" onclick="submitApplication()">
-                                            Yes
-                                        </button>
-                                        <button type="button" class="btn btn-warning"
-                                                onclick="closemodel('confirmationModel')"><span
-                                                class="fa fa-times"></span> No
-                                        </button>
+                                        <button type="button" class="btn btn-success" onclick="submitApplication()">Yes</button>
+                                        <button type="button" class="btn btn-warning" onclick="closemodel('confirmationModel')"><span class="fa fa-times"></span> No</button>
                                     </div>
                                 </div>
                             </div>
