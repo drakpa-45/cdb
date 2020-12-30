@@ -14,7 +14,6 @@
 <c:if test="${not empty res.status}">
     <div class="card" id="acknowledgment">
         <div class="card-header">
-
         </div>
         <div class="card-body">
             <c:if test="${res.status eq 1}">
@@ -31,7 +30,6 @@
     <div class="mt-5">
         <div class="container mb-9">
             <div class="row">
-
                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                     <div class="page-header mb-0 mt-0 page-header">
                         <h1 class="page-title">
@@ -39,8 +37,7 @@
                         </h1>
                     </div>
                     <div class="form-group row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert alert-danger text-center"
-                             style="font-size: 10px">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert alert-danger text-center" style="font-size: 10px">
                             <c:if test="${renewalCheck.status eq 1}">
                                 <span class="error">${renewalCheck.text}</span>
                             </c:if>
@@ -84,8 +81,7 @@
                                             <div class="tab-content border p-3 col-lg-12">
                                                 <div class="tab-pane active feesStructurerenewal" id="feesStructure">
                                                     <div class="form-group ">
-                                                        <table id="csa"
-                                                               class="table table-striped table-bordered table-hover">
+                                                        <table id="csa" class="table table-striped table-bordered table-hover">
                                                             <thead>
                                                             <tr>
                                                                 <th>Type</th>
@@ -144,6 +140,7 @@
                                                 </div>
                                                 <div class="tab-pane personalInformation" id="personalInformation">
                                                     <div class="">
+                                                        <span class="text-danger" ><i>Note: Fields marked with (*) are mandatory. Please provide your valid information while availing this service.</i></span>
                                                         <div class="card tab2">
                                                             <div class="bg-blue card-status card-status-left"></div>
                                                             <div class="card-header">
@@ -217,8 +214,8 @@
                                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                         <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Type <span class="text-danger">*</span></label>
                                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                             <input type="text" maxlength="100" id="serviceSectorType" readonly name="serviceSector" class="form-control" value="${registrationDetails.serviceSectorType}">
-                                                                            <input type="hidden" maxlength="100" id="serviceSectorType" name="serviceSectorType" class="form-control" value="${registrationDetails.serviceSectorTypeId}">
+                                                                             <input type="text" maxlength="100" id="serviceSectorType" readonly name="serviceSectorType" class="form-control" value="${registrationDetails.serviceSectorType}">
+                                                                            <input type="hidden" maxlength="100" id="serviceSectorTypeId" name="serviceSectorTypeId" class="form-control" value="${registrationDetails.serviceSectorTypeId}">
                                                                             <%--<form:select path="typeList" name="serviceSectorType" onclick="remove_err('serviceSectorType_err')" id="serviceSectorType" class="form-control">
                                                                                 <form:option value="${registrationDetails.serviceSectorTypeId}">${registrationDetails.serviceSectorType}</form:option>
                                                                                 <form:options items="${typeList}" itemValue="value" itemLabel="text"></form:options>
@@ -230,14 +227,12 @@
                                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                         <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Trade <span class="text-danger">*</span></label>
                                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                            <input type="text" maxlength="100" id="trade" name="cmnTradeId" readonly class="form-control" value="${registrationDetails.trade}">
-                                                                            <input type="hidden" maxlength="100" id="cmnTradeId" name="trade" class="form-control" value="${registrationDetails.cmnTradeId}">
+                                                                            <input type="text" maxlength="100" id="cmnTradeId" name="cmnTradeId" readonly class="form-control" value="${registrationDetails.trade}">
+                                                                            <input type="hidden" maxlength="100" id="trade" name="trade" class="form-control" value="${registrationDetails.cmnTradeId}">
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-lg-12">
-
-                                                                </div>
+                                                                <div class="col-lg-12"></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -370,18 +365,11 @@
                                                                     <label class="col-lg-12"> I/We declare and confirm that: </label>
                                                                     <div id="termsAndCon">
                                                                         <ul>
-                                                                            <li>
-                                                                                All information and attachments with this application are true and correct;
-                                                                            </li>
-                                                                            <li>
-                                                                                I am/we are aware that any false information provided herein will result in rejection of my application and suspension of any registered granted;
-                                                                            </li>
-                                                                            <li>I/We shall not make refund claims of expenditure incurred in processing this application;
-                                                                            </li>
-                                                                            <li>I/We have read and understood the 'Code of Ethics' and shall perform in line with Code of Ethics and any other legislation in force. Failure to comply, will be subject to the penalities provided for in the applicable legislation of the country.
-                                                                            </li>
-                                                                            <li>I/We hereby declare that issue of CDB certificate does not in anyway constitute an obligation on the part of CDB or any other Government agency to provide contract works.
-                                                                            </li>
+                                                                            <li>All information and attachments with this application are true and correct;</li>
+                                                                            <li>I am/we are aware that any false information provided herein will result in rejection of my application and suspension of any registered granted;</li>
+                                                                            <li>I/We shall not make refund claims of expenditure incurred in processing this application;</li>
+                                                                            <li>I/We have read and understood the 'Code of Ethics' and shall perform in line with Code of Ethics and any other legislation in force. Failure to comply, will be subject to the penalities provided for in the applicable legislation of the country.</li>
+                                                                            <li>I/We hereby declare that issue of CDB certificate does not in anyway constitute an obligation on the part of CDB or any other Government agency to provide contract works.</li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>

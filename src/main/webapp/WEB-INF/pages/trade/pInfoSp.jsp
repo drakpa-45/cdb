@@ -11,6 +11,7 @@
 <%--<form name="contractorGIForm" contractor="contractor/saveGI" method="POST" class="globalForm"
       id="contractorGIForm" enctype="multipart/form-data" role="form">--%>
 <div class="div-actual" id="soledetails">
+    <span class="text-danger" ><i>Note: Fields marked with (*) are mandatory. Please provide your valid information while availing this service.</i></span>
     <div class="card tab2">
         <div class="bg-blue card-status card-status-left"></div>
         <div class="card-header">

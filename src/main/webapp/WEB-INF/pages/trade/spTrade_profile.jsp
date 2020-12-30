@@ -55,7 +55,7 @@
                                         <td>${App_Details.fullname}</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>CID: </strong></td>
+                                        <td><strong>CID Number: </strong></td>
                                         <td>${App_Details.cidNo}</td>
                                     </tr>
                                     <tr>
@@ -70,7 +70,6 @@
                                         <td><strong>Telephone Number: </strong></td>
                                         <td>${App_Details.telephoneNo}</td>
                                     </tr>
-
                                     <tr>
                                         <td><strong>TPN Number: </strong></td>
                                         <td>${App_Details.tpn}</td>
@@ -78,27 +77,26 @@
                             </td>
                          </tr>
                         </tbody>
-
                         <tbody>
                           <tr>
                             <td colspan="2" class="font-blue-madison bold warning"><b>Permanent Address</b></td>
                           </tr>
                           <tr>
                             <td>
-                                    <tr>
-                                        <td><strong>Dzongkhag:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
-                                        <td>${App_Details.dzongkhagId}</td>
-                                        <input type="hidden" name="dzongkhagId" id="dzongkhagId">
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Gewog: </strong></td>
-                                        <td>${App_Details.gewog}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Village: </strong></td>
-                                        <td>${App_Details.village}</td>
-                                    </tr>
-                            </td>
+                          <tr>
+                              <td><strong>Dzongkhag:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+                              <td>${App_Details.dzongkhagId}</td>
+                              <input type="hidden" name="dzongkhagId" id="dzongkhagId">
+                          </tr>
+                          <tr>
+                              <td><strong>Gewog: </strong></td>
+                              <td>${App_Details.gewog}</td>
+                          </tr>
+                          <tr>
+                              <td><strong>Village: </strong></td>
+                              <td>${App_Details.village}</td>
+                          </tr>
+                          </td>
                           </tr>
                         </tbody>
                         <div>
@@ -108,28 +106,28 @@
                             </tr>
                             <tr>
                                 <td>
-                                        <tr>
-                                             <td><strong>Applied Category:</strong></td>
-                                             <td>${App_Details.name}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>CDB Number:</strong></td>
-                                            <td>${App_Details.cdbNo}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Registration Approval Date:</strong></td>
-                                            <td>${App_Details.registrationApproveDate}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Registration Expiry Date:</strong></td>
-                                            <% Boolean isExpired = (Boolean)request.getSession().getAttribute("isExpired");
-                                                if(isExpired){%>
-                                            <td style="color: #ff0000">${App_Details.regExpDate} <i>(Expired)</i></td>
-                                            <%}else{%>
-                                            <td>${App_Details.regExpDate}</td>
-                                            <%}%>
-                                        </tr>
-                                </td>
+                            <tr>
+                                <td><strong>Applied Category:</strong></td>
+                                <td>${App_Details.name}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CDB Number:</strong></td>
+                                <td>${App_Details.cdbNo}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Registration Approval Date:</strong></td>
+                                <td>${App_Details.registrationApproveDate}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Registration Expiry Date:</strong></td>
+                                <% Boolean isExpired = (Boolean)request.getSession().getAttribute("isExpired");
+                                    if(isExpired){%>
+                                <td style="color: #ff0000">${App_Details.regExpDate} <i>(Expired)</i></td>
+                                <%}else{%>
+                                <td>${App_Details.regExpDate}</td>
+                                <%}%>
+                            </tr>
+                            </td>
                             </tr>
                             </tbody>
                     </div>

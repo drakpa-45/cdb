@@ -335,15 +335,6 @@ function printInfo(cdbNo){
     var url= '/cdb/admin_architect/emptylayout/printarchitectInfo?cdbNo='+cdbNo;
     $('#content_main_div_public_user').load(url);
 }
-$('#submitbtn').prop('disabled',true);
-function enablesubmit(){
-    if($('#submitcheckbox').prop('checked')){
-        $('#submitbtn').prop('disabled',false);
-    }
-    else{
-        $('#submitbtn').prop('disabled',true);
-    }
-}
 
 function PrintInfo() {
     var divToPrint = document.getElementById('printInfo');
@@ -361,6 +352,34 @@ function PrintInfo() {
     };
     $("#printingForm").submit();
 }
+
+$('#submitbtn').prop('disabled',true);
+function enablesubmit(){
+    if($('#submitcheckbox').prop('checked')){
+        $('#submitbtn').prop('disabled',false);
+    }
+    else{
+        $('#submitbtn').prop('disabled',true);
+    }
+}
+
+/*function PrintInfo() {
+    b3ece95606d75f5e942ddf1a94f0ce5281187821
+    var divToPrint = document.getElementById('printInfo');
+    var popupWin = window.open('', '_blank', 'width=1000,height=1000');
+    popupWin.document.open();
+    popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
+    popupWin.document.close();
+    //  var url = '${pageContext.request.contextPath}/ruralTimber/afterPrintingApp';
+    var options = {
+        target: '#registrtaionFormCard',
+        url: url,
+        type: 'POST',
+        enctype: 'form-data',
+        data: $('#printingForm').serialize()
+    };
+    $("#printingForm").submit();
+}*/
 
 function submitForm(){
     var returntpe=true;
@@ -469,7 +488,7 @@ function checkForEngagement(cidNo){
         $.ajax({
             url: cdbGlobal.baseURL() + "/architects/getPersonalInfo",
             type: 'GET',
-            data: {cid: cidNo},
+            data: {cid: cidNo,type:"check"},
             success: function (res) {
                // alert('asdf');
                 if (res.status == '1') {
@@ -480,13 +499,36 @@ function checkForEngagement(cidNo){
                     $('#gewogM').text(dto.gowegName);
                     $('#villageM').text(dto.villageName);
                     $('#dobM').text(dto.dob);
+                    $('#cidchecked').text(cidNo);
                     var imagelink='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo='+cidNo;
                     $('#photoM').html("<img src='"+imagelink+"'  width='200px'  height='200px' class='pull-right'/>");
                     $("#hrModal").modal('show');
+
+
+                    var employeeDetailsDTO = dto.employeeDetailsDTOs;
+                    var empDtls ="",empDtls1="",empDtls2="";
+                    if(employeeDetailsDTO != ""){
+                        for(var i in employeeDetailsDTO){
+                            var workId = employeeDetailsDTO[i].workId;
+                            alert(workId);
+                            if(workId !=''|| workId !='null'){
+                                $('#engagedId').show();
+                                $('#dcbinfo').append("<br/> This person is engaged with cdb number <b>"+employeeDetailsDTO[i].cdbNo+"</b> in <b>"+employeeDetailsDTO[i].procuringAgency+"</b> with work Id:<b>"+employeeDetailsDTO[i].workId+"</b>");
+                                $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
+                            } else{
+                                $('#dcbinfo').hide();
+                                $('#engagedId').show();
+                                $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project");
+                            }
+                        }
+                    }else{
+                        $('#dcbinfo').hide();
+                        $('#engagedId').show();
+                        $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project");
+                    }
                 }
             }
         });
     });
 }
-
 checkForEngagement();

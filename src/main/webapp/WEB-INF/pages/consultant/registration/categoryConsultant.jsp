@@ -7,7 +7,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <div class="div-actual">
     <table id="consultantCCTbl" class="table table-bordered table-hover">
         <thead style="background-color: #F2F2F2">
@@ -20,7 +19,7 @@
         <c:forEach items="${categoryList}" var="category" varStatus="i">
             <tr>
                 <td>
-                    <input type="checkbox" style="zoom:1.6" class=" categoryCheck" id="asone" value="${category.id}"  name="categories[${i.index}].serviceCateID">  &nbsp;
+                    <input type="checkbox" style="zoom:1.6" class=" categoryCheck" id="asone" value="${category.id}" name="categories[${i.index}].serviceCateID"> &nbsp;
                     ${category.code}-${category.name}
                 </td>
                 <td>
@@ -29,19 +28,19 @@
                             <c:when test="${(category.code eq 'A') && (c.value eq 'e6372584-bc15-11e4-81ac-080027dcfac6')}">
                                 <a href="javascript:void(0)" style="color: #006699" title='${c.obj1}' data-toggle="tooltip" data-placement="top" class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
                                 <%--<input type="hidden" id="asone1" value="${c.text}" name="categories[${i.index}].appliedServices">--%>
-                               <input type="checkbox" id="asone" value="${c.id}" class="ticked appliedClassID" disabled name="categories[${i.index}].appliedServiceID">${c.text} &nbsp; &nbsp; &nbsp;
+                                <input type="checkbox" id="asone" value="${c.id}" class="ticked appliedClassID" disabled name="categories[${i.index}].appliedServiceID">${c.text} &nbsp; &nbsp; &nbsp;
                             </c:when>
                             <c:when test="${(category.code eq 'C') && (c.value eq 'f39b9245-bc15-11e4-81ac-080027dcfac6')}">
                                 <a href="javascript:void(0)" style="color: #006699" title='${c.obj1}' data-toggle="tooltip" data-placement="top" class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                <input type="checkbox" id="asone"  value="${c.id}"  class="ticked appliedClassID" disabled  name="categories[${i.index}].appliedServiceID">${c.text} &nbsp; &nbsp; &nbsp;
+                                <input type="checkbox" id="asone" value="${c.id}" class="ticked appliedClassID" disabled name="categories[${i.index}].appliedServiceID">${c.text} &nbsp; &nbsp; &nbsp;
                             </c:when>
                             <c:when test="${(category.code eq 'E') && (c.value eq  'fb2aa1a7-bc15-11e4-81ac-080027dcfac6')}">
-                                <a href="javascript:void(0)" style="color: #006699" title='${c.obj1}' data-toggle="tooltip" data-placement="top"  class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                               <input type="checkbox" id="asone"  value="${c.id}"  class="ticked appliedClassID" disabled name="categories[${i.index}].appliedServiceID">${c.text} &nbsp; &nbsp; &nbsp;
+                                <a href="javascript:void(0)" style="color: #006699" title='${c.obj1}' data-toggle="tooltip" data-placement="top" class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                <input type="checkbox" id="asone" value="${c.id}" class="ticked appliedClassID" disabled name="categories[${i.index}].appliedServiceID">${c.text} &nbsp; &nbsp; &nbsp;
                             </c:when>
                             <c:when test="${(category.code eq 'S') && (c.value eq  '2adfae00-be66-11e9-9ac2-0026b988eaa8')}">
-                               <a href="javascript:void(0)" style="color: #006699" title='${c.obj1}' data-toggle="tooltip" data-placement="top"  class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                <input type="checkbox" id="asone" value="${c.id}"  class="ticked appliedClassID" disabled name="categories[${i.index}].appliedServiceID">${c.text} &nbsp; &nbsp; &nbsp;
+                                <a href="javascript:void(0)" style="color: #006699" title='${c.obj1}' data-toggle="tooltip" data-placement="top" class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
+                                <input type="checkbox" id="asone" value="${c.id}" class="ticked appliedClassID" disabled name="categories[${i.index}].appliedServiceID">${c.text} &nbsp; &nbsp; &nbsp;
                             </c:when>
                         </c:choose>
                     </c:forEach>

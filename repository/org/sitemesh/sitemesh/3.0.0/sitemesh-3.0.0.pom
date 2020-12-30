@@ -18,7 +18,6 @@
 
   <build>
     <plugins>
-
       <!-- JFlex is used to generate the tag lexer Java class -->
       <plugin>
         <groupId>de.jflex</groupId>

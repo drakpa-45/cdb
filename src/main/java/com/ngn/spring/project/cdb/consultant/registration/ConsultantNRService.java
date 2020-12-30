@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 import java.util.stream.Collectors;
 
 /**
@@ -53,6 +54,10 @@ public class ConsultantNRService extends BaseService {
         return consultantDao.gFeeStructure(category);
     }
 
+    @Transactional(readOnly = true)
+    public List gFeeStructureRO(String category){
+        return consultantDao.gFeeStructureRO(category);
+    }
     /**
      * To get the fee structure of the consultant based on category.
      * @return List
@@ -343,8 +348,6 @@ public class ConsultantNRService extends BaseService {
             consultantPayment.setCreatedBy(loggedInUser.getUserID());
             consultantPayment.setCreatedOn(loggedInUser.getServerDate());
             savePayment(consultantPayment, loggedInUser);
-
-
       }
 
     @Transactional(readOnly = false)
@@ -441,4 +444,5 @@ public class ConsultantNRService extends BaseService {
     public Boolean isFirmNameUnique(String firmName) {
         return consultantDao.isFirmNameUnique(firmName);
     }
+
 }

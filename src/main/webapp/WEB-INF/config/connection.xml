@@ -12,6 +12,15 @@
         <property name="validationQuery" value="SELECT 1"/>
     </bean>
 
+  <!--  <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="url" value="jdbc:mysql://119.2.120.14:3306/cdb_local"/>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="username" value="cdb_user"/>
+        <property name="password" value="cdb@2019"/>
+        <property name="validationQuery" value="SELECT 1"/>
+    </bean>
+-->
+
     <!--<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="url" value="jdbc:mysql://119.2.120.14:3306/cdb_local_try"/>
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>

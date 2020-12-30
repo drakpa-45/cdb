@@ -14,7 +14,6 @@
     <title></title>
 </head>
 <body>
-
 <div class="row">
     <div class="col-12">
         <div class="mb-0 page-header">
@@ -39,7 +38,7 @@
 
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
-                                                <a data-toggle="collapse" href="#Contractor"  style="color: #000099">CONTRACTOR<i class="fa fa-chevron-down"></i></a>
+                                                <a data-toggle="collapse" href="#Contractor"  style="color: #000099">Contractor<i class="fa fa-chevron-down"></i></a>
                                             </h4>
                                         </div>
                                         <div id="Contractor"  class="panel-collapse collapse">
@@ -53,7 +52,7 @@
 
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
-                                                <a data-toggle="collapse" href="#Consultant" style="color: #000099">CONSULTANT<i class="fa fa-chevron-down"></i></a>
+                                                <a data-toggle="collapse" href="#Consultant" style="color: #000099">Consultant<i class="fa fa-chevron-down"></i></a>
                                             </h4>
                                         </div>
                                         <div id="Consultant" class="panel-collapse collapse">
@@ -67,7 +66,7 @@
 
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
-                                                <a data-toggle="collapse" href="#SpecializedFirm"  style="color: #000099">SPECIALIZED FIRM<i class="fa fa-chevron-down"></i></a>
+                                                <a data-toggle="collapse" href="#SpecializedFirm"  style="color: #000099">Specialized Firm<i class="fa fa-chevron-down"></i></a>
                                             </h4>
                                         </div>
                                         <div id="SpecializedFirm" class="panel-collapse collapse">
@@ -81,7 +80,7 @@
 
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
-                                                <a data-toggle="collapse" href="#Architect"  style="color: #000099">ARCHITECT<i class="fa fa-chevron-down"></i></a>
+                                                <a data-toggle="collapse" href="#Architect"  style="color: #000099">Architect<i class="fa fa-chevron-down"></i></a>
                                             </h4>
                                         </div>
                                         <div id="Architect" class="panel-collapse collapse">
@@ -94,7 +93,7 @@
 
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
-                                                <a data-toggle="collapse" href="#Engineer"  style="color: #000099">ENGINEER<i class="fa fa-chevron-down"></i></a>
+                                                <a data-toggle="collapse" href="#Engineer"  style="color: #000099">Engineer<i class="fa fa-chevron-down"></i></a>
                                             </h4>
                                         </div>
                                         <div id="Engineer" class="panel-collapse collapse">
@@ -107,7 +106,7 @@
 
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
-                                                <a data-toggle="collapse" href="#Surveyor"  style="color: #000099">SURVEYOR<i class="fa fa-chevron-down"></i></a>
+                                                <a data-toggle="collapse" href="#Surveyor"  style="color: #000099">Surveyor<i class="fa fa-chevron-down"></i></a>
                                             </h4>
                                         </div>
                                         <div id="Surveyor" class="panel-collapse collapse">
@@ -117,10 +116,9 @@
                                                 <li class="list-group-item"><a href="<c:url value="/admin_survey/survey_tasklist?param=cancellation"/>" class="dropdown-item "><i>Cancellation of Surveyor certificate</i></a></li>
                                             </ul>
                                         </div>
-
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
-                                                <a data-toggle="collapse" href="#SpecializedTrade" style="color: #000099">SPECIALIZED TRADE<i class="fa fa-chevron-down"></i></a>
+                                                <a data-toggle="collapse" href="#SpecializedTrade" style="color: #000099">Specialized Trade<i class="fa fa-chevron-down"></i></a>
                                             </h4>
                                         </div>
                                         <div id="SpecializedTrade" class="panel-collapse collapse">

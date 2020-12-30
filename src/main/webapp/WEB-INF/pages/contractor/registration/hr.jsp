@@ -7,16 +7,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <%--<form contractor="" method="post" class="">--%>
 <div class="div-actual">
     <div class="row">
         <div class="col-md-12 col-lg-12">
-
             <div class="panel panel-default">
                 <div class="panel-body">
                     <span><b>Requirements for different Category and Classification</b></span>
-
                     <div class="form-group">
                         <div class="col-lg-12">
                             <p>CID/ Work Permit copy for all Personnel including
@@ -119,7 +116,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Box Close -->
             <!-- Box Open -->
             <div class="card tab4">
@@ -160,9 +156,8 @@
         </div>
     </div>
 </div>
-
 <!-- HR modal open -->
-<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"  class="modal fade in" id="addHRModal">
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" class="modal fade in" id="addHRModal">
     <div class="modal-dialog modal-lg" id="hrModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -171,12 +166,12 @@
             </div>
             <div class="modal-body form-horizontal">
                 <div class="modal-div">
-                        <div class="form-group">
+                    <div class="form-group">
                         <label class="col-lg-2">Nationality
                             <span class="text-danger">*</span>:</label>
                         <div class="col-lg-4">
                             <select name="contractorHRs[0].countryId" id="hr5" required="" class="form-control custom-select text-left select-beast country">
-                               <%-- <option value="">Select Country</option>--%>
+                                <%-- <option value="">Select Country</option>--%>
                                 <c:forEach var="item" items="${countryList}">
                                     <option value="${item.value}"><c:out value="${item.text}"/></option>
                                 </c:forEach>
@@ -267,11 +262,8 @@
                         <label class="col-lg-2"> Joining Date<span class="text-danger">*</span>:</label>
                         <div class="col-lg-4">
                             <div class="input-group margin-bottom-sm">
-                                <span class="input-group-addon pr-5"><i
-                                        class="fa fa-calendar"></i></span>
-                                <input type="date" name="contractorHRs[0].joiningDate"
-                                       value="" id="hr10"
-                                       class="form-control datepicker">
+                                <span class="input-group-addon pr-5"><i class="fa fa-calendar"></i></span>
+                                <input type="date" name="contractorHRs[0].joiningDate" value="" id="hr10" class="form-control datepicker">
                             </div>
                         </div>
                     </div>
@@ -280,7 +272,7 @@
                         <div class="col-lg-4">
                             <div class="input-icon">
                                 <span class="input-icon-addon"><i class="fe fe-user"></i></span>
-                                <input type="text" name="contractorHRs[0].cdbNo" id="hr11" class="form-control name"  placeholder="cdbNo">
+                                <input type="text" name="contractorHRs[0].cdbNo" id="hr11" class="form-control name" placeholder="cdbNo">
                             </div>
                         </div>
                     </div>
@@ -298,20 +290,29 @@
                                     </tr>
                                     </thead>
                                     <tbody id="fileListhrsection" class="files">
-                                    <tr><td><input type='text' required=""  value="CID"class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/> </td>
-                                        <td><input type='file' required="" class='file' name='contractorHRs[0].contractorHRAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
+                                    <tr>
+                                        <td><input type='text' required="" value="CID" class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/></td>
+                                        <td><input type='file' required="" class='file' name='contractorHRs[0].contractorHRAs[0].attachment'
+                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
+                                        </td>
                                         <td class='file-size'></td>
-                                        <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                        <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                     </tr>
-                                    <tr><td><input type='text' required="" value="Certificate" class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/> </td>
-                                        <td><input type='file' required="" class='file'  name='contractorHRs[0].contractorHRAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
+                                    <tr>
+                                        <td><input type='text' required="" value="Certificate" class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/></td>
+                                        <td><input type='file' required="" class='file' name='contractorHRs[0].contractorHRAs[0].attachment'
+                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
+                                        </td>
                                         <td class='file-size'></td>
-                                        <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                        <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                     </tr>
-                                    <tr><td><input type='text' required="" value="Others" class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/> </td>
-                                        <td><input type='file' required="" class='file' name='contractorHRs[0].contractorHRAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
+                                    <tr>
+                                        <td><input type='text' required="" value="Others" class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/></td>
+                                        <td><input type='file' required="" class='file' name='contractorHRs[0].contractorHRAs[0].attachment'
+                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
+                                        </td>
                                         <td class='file-size'></td>
-                                        <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                        <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -330,7 +331,8 @@
 <!-- HR modal close -->
 <div class="col-lg-12 form-group">
     <button type="button" onclick="backTab('humanResourceCriteria','category_details')" class="btn btn-azure col-lg-offset-9">
-        <i class="fa fa-arrow-circle-left"></i> &nbsp;Back</button>
+        <i class="fa fa-arrow-circle-left"></i> &nbsp;Back
+    </button>
     <button type="button" id="btnValHRNext"
     <%--onclick="nextTab('humanResourceCriteria','consultantEquipmentDtls')"--%>
             class="btn btn-primary">Next &nbsp;

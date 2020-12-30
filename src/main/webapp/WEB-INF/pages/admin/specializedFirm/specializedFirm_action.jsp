@@ -16,7 +16,6 @@
 </head>
 <body>
 <input type="hidden" id="appNoVA" value="${appNo}" name="applcationNo"/>
-
 <div class="container mb-9">
     <div class="row">
         <div class="col-12">
@@ -94,30 +93,27 @@
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-4 form-label">Ownership Type:</label>
-                                                            <label class="col-lg-8 form-label"
-                                                                   id="ownershipType"></label>
+                                                            <label class="col-lg-8 form-label form-control" id="ownershipType"></label>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-4 form-label">Country:</label>
-                                                            <label class="col-lg-8 form-label" id="country"></label>
+                                                            <label class="col-lg-8 form-label form-control" id="country"></label>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-6 col-md-6 form-group">
-                                                            <label class="col-lg-4 form-label">Trade License No:</label>
-                                                            <label class="col-lg-8 form-label"
-                                                                   id="tradeLicenseNo"></label>
+                                                            <label class="col-lg-4 form-label">Trade License Number:</label>
+                                                            <label class="col-lg-8 form-label form-control" id="tradeLicenseNo"></label>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 form-group">
-                                                            <label class="col-lg-4 form-label">Proposed Firm
-                                                                Name:</label>
-                                                            <label class="col-lg-8 form-label" id="firmName"></label>
+                                                            <label class="col-lg-4 form-label">Proposed Firm Name:</label>
+                                                            <label class="col-lg-8 form-label form-control" id="firmName"></label>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-4 form-label">TPN Number:</label>
-                                                            <label class="col-lg-8 form-label" id="tpn"></label>
+                                                            <label class="col-lg-8 form-label form-control" id="tpn"></label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -127,13 +123,11 @@
                                             <div class="card tab2">
                                                 <div class="bg-blue card-status card-status-left"></div>
                                                 <div class="card-header">
-                                                    <h3 class="card-title">Name of Owner, Partners and/or others with
-                                                        Controlling Interest</h3>
+                                                    <h3 class="card-title">Name of Owner, Partners and/or others with Controlling Interest</h3>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="col-lg-12">
-                                                        <table class="table table-bordered table-center table-responsive-lg"
-                                                               id="partnerDtls">
+                                                        <table class="table table-bordered table-center table-responsive-lg" id="partnerDtls">
                                                             <thead>
                                                             <tr>
                                                                 <th>Sl No</th>
@@ -173,8 +167,7 @@
                                                         <%--<div class=""><input id="addMoreCert" type="button"
                                                                              value="Add More Certificate"
                                                                              class="btn btn-primary"></div>--%>
-                                                        <table class="table table-bordered table-center table-responsive-lg auto-index"
-                                                               id="IncCertificateTbl">
+                                                        <table class="table table-bordered table-center table-responsive-lg auto-index" id="IncCertificateTbl">
                                                             <thead>
                                                             <tr>
                                                                 <th>Sl no</th>
@@ -200,26 +193,22 @@
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-4 form-label">Dzongkhag:</label>
-                                                            <label class="col-lg-8 form-label" id="pDzongkhag"></label>
+                                                            <label class="col-lg-8 form-label form-control" id="pDzongkhag"></label>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-4 form-label">Gewog: </label>
-                                                            <label class="col-lg-8 form-label" id="pGewog"></label>
+                                                            <label class="col-lg-8 form-label form-control" id="pGewog"></label>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-4 form-label">Village: </label>
-                                                            <label class="col-lg-8 form-label" id="pVillage"></label>
+                                                            <label class="col-lg-8 form-label form-control" id="pVillage"></label>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- Box Close -->
-
-                                            <!-- Box Open -->
-                                            <!-- Box Close -->
-
                                             <!-- Box Open -->
                                             <div class="card tab2">
                                                 <div class="bg-blue card-status card-status-left"></div>
@@ -229,34 +218,32 @@
                                                 <div class="card-body">
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-6 col-md-6 form-group">
-                                                            <label class="col-lg-5 form-label">Establishment
-                                                                Address:</label>
-                                                            <label class="col-lg-7 form-label" id="estAddress"></label>
+                                                            <label class="col-lg-5 form-label">Establishment Address:</label>
+                                                            <label class="col-lg-7 form-label form-control" id="estAddress"></label>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-5 form-label">Dzongkhag:</label>
-                                                            <label class="col-lg-7 form-label"
-                                                                   id="estDzongkhag"></label>
+                                                            <label class="col-lg-7 form-label form-control" id="estDzongkhag"></label>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-5 form-label">Email:</label>
-                                                            <label class="col-lg-7 form-label" id="regEmail"></label>
+                                                            <label class="col-lg-7 form-label form-control" id="regEmail"></label>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 form-group">
-                                                            <label class="col-lg-5 form-label">Mobile No:</label>
-                                                            <label class="col-lg-7 form-label" id="regMobileNo"></label>
+                                                            <label class="col-lg-5 form-label">Mobile Number:</label>
+                                                            <label class="col-lg-7 form-label form-control" id="regMobileNo"></label>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-6 col-md-6 form-group">
-                                                            <label class="col-lg-5 form-label">Telephone No: </label>
-                                                            <label class="col-lg-7 form-label" id="regPhoneNo"></label>
+                                                            <label class="col-lg-5 form-label">Telephone Number: </label>
+                                                            <label class="col-lg-7 form-label form-control" id="regPhoneNo"></label>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-5 form-label">Fax No: </label>
-                                                            <label class="col-lg-7 form-label" id="regFaxNo"></label>
+                                                            <label class="col-lg-7 form-label form-control" id="regFaxNo"></label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -265,10 +252,8 @@
                                         </div>
                                     </form>
                                     <div class="col-lg-12 form-group">
-
                                         <label class="col-lg-offset-10"></label>
-                                        <button type="button" disabled onclick="nextTab('generalInformation','categoryDtls')"
-                                                class="btn btn-primary" id="nextGIBtn">
+                                        <button type="button" disabled onclick="nextTab('generalInformation','categoryDtls')" class="btn btn-primary" id="nextGIBtn">
                                             <i class="fa fa-arrow-circle-right"></i>Next
                                         </button>
                                     </div>
@@ -291,12 +276,10 @@
                                         </table>
                                     </form>
                                     <div class="col-lg-12 form-group">
-                                        <button type="button" onclick="backTab('categoryDtls','generalInformation')"
-                                                class="btn btn-azure col-lg-offset-9" id="back1">
+                                        <button type="button" onclick="backTab('categoryDtls','generalInformation')" class="btn btn-azure col-lg-offset-9" id="back1">
                                             <i class="fa fa-arrow-circle-left"></i>Back
                                         </button>
-                                        <button type="button" onclick="nextTab('categoryDtls','humanResourceCriteria')"
-                                                class="btn btn-primary" id="next1">
+                                        <button type="button" onclick="nextTab('categoryDtls','humanResourceCriteria')" class="btn btn-primary" id="next1">
                                             <i class="fa fa-arrow-circle-right"></i>Next
                                         </button>
                                     </div>
@@ -330,12 +313,10 @@
                                                                         <th>Service Type</th>
                                                                         <th>Attachment</th>
                                                                         <th>Check for the CID</th>
-                                                                        <security:authorize
-                                                                                access="hasRole('ROLE_VERIFIER')">
+                                                                        <security:authorize access="hasRole('ROLE_VERIFIER')">
                                                                             <th style="width: 10%">Verify</th>
                                                                         </security:authorize>
-                                                                        <security:authorize
-                                                                                access="hasRole('ROLE_APPROVER')">
+                                                                        <security:authorize access="hasRole('ROLE_APPROVER')">
                                                                             <th style="width: 10%">Verify</th>
                                                                             <th style="width: 10%">Approve</th>
                                                                         </security:authorize>
@@ -354,13 +335,10 @@
                                         </div>
                                     </form>
                                     <div class="col-lg-12 form-group">
-                                        <button type="button" onclick="backTab('humanResourceCriteria','categoryDtls')"
-                                                class="btn btn-azure col-lg-offset-9" id="back2">
+                                        <button type="button" onclick="backTab('humanResourceCriteria','categoryDtls')" class="btn btn-azure col-lg-offset-9" id="back2">
                                             <i class="fa fa-arrow-circle-left"></i>Back
                                         </button>
-                                        <button type="button" id="nextHRBtn" disabled
-                                                onclick="nextTab('humanResourceCriteria','consultantEquipmentDtls')"
-                                                class="btn btn-primary">
+                                        <button type="button" id="nextHRBtn" disabled onclick="nextTab('humanResourceCriteria','consultantEquipmentDtls')" class="btn btn-primary">
                                             <i class="fa fa-arrow-circle-right" ></i>Next
                                         </button>
                                     </div>
@@ -370,12 +348,10 @@
                                     <form action="" method="post" class="">
                                         <div id="contractorEquipment" style="">
                                             <i><strong> Equipment Details</strong></i>
-
                                             <div class="panel panel-default">
                                                 <div class="panel-body">
                                                     <div class="table-responsive">
-                                                        <table class="table table-bordered table-hover"
-                                                               id="equipmentTbl">
+                                                        <table class="table table-bordered table-hover" id="equipmentTbl">
                                                             <thead>
                                                             <tr style="background-color: #e6f9ff">
                                                                 <th>SLNo</th>
@@ -409,8 +385,7 @@
                                         <button type="button" onclick="backTab('consultantEquipmentDtls','humanResourceCriteria')" id="back3" class="btn btn-azure col-lg-offset-9">
                                             <i class="fa fa-arrow-circle-left"></i>&nbsp; Back
                                         </button>
-                                        <button type="button" disabled class="btn btn-primary" id="btnValEqNext" onclick="saveAndPreview('consultantEquipmentDtls', 'saveAndPreview')">
-                                            Save & Preview &nbsp;
+                                        <button type="button" disabled class="btn btn-primary" id="btnValEqNext" onclick="saveAndPreview('consultantEquipmentDtls', 'saveAndPreview')">Save & Preview &nbsp;
                                             <i class="fa fa-life-saver"></i>
                                         </button>
                                     </div>
@@ -421,10 +396,7 @@
                                             <div class="form-group">
                                                 <div class="table-responsive">
                                                     <fieldset><h3>Application Status</h3>
-                                                        <table id="appStatusTbl" width="1000px" cellpadding="1"
-                                                               cellspacing="1" border="1"
-                                                               style="border-collapse: collapse"
-                                                               class="table table-bordered">
+                                                        <table id="appStatusTbl" width="1000px" cellpadding="1" cellspacing="1" border="1" style="border-collapse: collapse" class="table table-bordered">
                                                             <thead>
                                                             <tr class="Caption">
                                                                 <td width="20%" align="center" valign="top">
@@ -451,10 +423,8 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-2" for="vRemarks">Remarks:</label>
-
                                                 <div class="col-md-10" id="remarkclass">
-                                                    <textarea name="vRemarks" id="vRemarks"
-                                                              class="form-control"></textarea>
+                                                    <textarea name="vRemarks" id="vRemarks" class="form-control"></textarea>
                                                     <span class="help-block" id="remarkErrorId"></span>
                                                 </div>
                                             </div>
@@ -503,20 +473,15 @@
                                     <div id="modal-print">
                                         <div class="form-group">
                                             <p align="center"><strong><u>Caution</u></strong></p>
-
                                             <p align="center"><strong>An engineer is allowed to execute only two work at
                                                 a time for that particular firm.</strong></p>
-
                                             <p align="center"><strong>For any other Human Resource they are allowed to
                                                 involve only in a single project of work</strong></p>
-
-                                            <p align="center"><font size="5px;">Details of CID No: <span
-                                                    id="cidchecked"></span></font></p>
+                                            <p align="center"><font size="5px;">Details of CID No: <span id="cidchecked"></span></font></p>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-9 mt-8">
                                                 <span class=""><b>From DCRC database</b></span>
-
                                                 <div class="col-lg-12 form-group mb-0 pt-4">
                                                     <label class="col-lg-3 form-label">Sex</label>
                                                     <label class="col-lg-8 form-label" id="sexM"></label>
@@ -552,19 +517,15 @@
                                                     CDB firm</b><br><br> This person is not engaged in any work or project<br>This person is not a civil servant</span>
                                                 </p>--%>
                                                 <div class="tab-pane employeeDetails" style="display: none" id="engagedId">
-                                                    <p ><span><b>The Individual holding CID/permit no.<label id="cidNumber"></label>(<label id="hrName"></label>) is engaged in following project(s):</b></span>
-                                                    </p>
-                                                    <form action="" method="post" class="">
+                                                    <div class="form-group">
+                                                        <div class="col-lg-12" align="center">
+                                                            <p ><span id="dcbinfo"><b>The Individual holding CID/permit no.<label id="cidNumber"></label>(<label id="hrName"></label>) is engaged in following project(s):</b></span></p>
+                                                            <p><span id="dcbinfo1"></span></p>
+                                                        </div>
+                                                    </div>
+                                                    <%--<form action="" method="post" class="">
                                                         <div id="employeeDetails" style="">
                                                             <i><strong>Employee Engagement Details</strong></i>
-
-                                                            <div class="form-group">
-                                                                <div class="col-lg-12" align="center">
-                                                                    <hr />
-                                                                    <p><span id="dcbinfo"></span></p>
-                                                                </div>
-                                                            </div>
-
                                                             <div class="panel panel-default">
                                                                 <div class="panel-body">
                                                                     <span>Contractor</span>
@@ -632,7 +593,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </form>
+                                                    </form>--%>
                                                 </div>
                                             </div>
                                         </div>
@@ -640,29 +601,20 @@
                                             <p align="center">With regard to Corporate Employee please verify with the
                                                 concern agencies. There may be certain inconsistency.</p>
                                             <hr>
-                                            <p align="center"><strong>Print this page as an evidence to prove that
-                                                particular HR is engaged or not in a work or project</strong></p>
-
+                                            <p align="center"><strong>Print this page as an evidence to prove that particular HR is engaged or not in a work or project</strong></p>
                                             <p align="center">
                                                 Printed on:  <%=new Date()%>
-
                                                 By: ${auth.fullName}
                                             </p>
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-lg-12 col-sm-12">
                                         <div class="col-md-1 col-lg-1 col-sm-2">
-                                            <button type="button" class="btn btn-primary"
-                                                    onclick="javascript:printDiv('modal-print')">Print
-                                            </button>
+                                            <button type="button" class="btn btn-primary" onclick="javascript:printDiv('modal-print')">Print</button>
                                         </div>
                                         <div class="col-md-4 col-lg-4 col-sm-4">
-                                            <button type="button" class="btn btn-success" id="closeModal" style="display: none"
-                                                    onclick="checkBtn('owner')" data-dismiss="modal">OK
-                                            </button>
-                                            <button type="button" class="btn btn-success " id="closeModal1"  style="display: none"
-                                                    onclick="checkBtn('Hr')" data-dismiss="modal">OK
-                                            </button>
+                                            <button type="button" class="btn btn-success" id="closeModal" style="display: none" onclick="checkBtn('owner')" data-dismiss="modal">OK</button>
+                                            <button type="button" class="btn btn-success " id="closeModal1"  style="display: none" onclick="checkBtn('Hr')" data-dismiss="modal">OK</button>
                                         </div>
                                     </div>
                                 </div>
@@ -677,27 +629,20 @@
                 <div class="modal-dialog" style=" max-width: 900px;">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 id="myModalLabel1" class="modal-title"><i class="fa fa-info-circle fa-lg"></i> Equipment
-                                check<span id="cid2"></span></h4>
+                            <h4 id="myModalLabel1" class="modal-title"><i class="fa fa-info-circle fa-lg"></i> Equipment check<span id="cid2"></span></h4>
                         </div>
                         <div class="modal-body">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <div id="modal-print-equipment">
                                         <div class="form-group">
-                                            <p align="center"><strong><u><font size="3px;">Caution</font></u></strong>
-                                            </p>
-
-                                            <p align="center"><strong>An equipment is allowed to execute only one work
-                                                at a time for the perticular firm.</strong></p>
-
-                                            <p align="center"><font size="5px;">Details of Registration No: <span
-                                                    id="regchecked"></span></font></p>
+                                            <p align="center"><strong><u><font size="3px;">Caution</font></u></strong></p>
+                                            <p align="center"><strong>An equipment is allowed to execute only one work at a time for the perticular firm.</strong></p>
+                                            <p align="center"><font size="5px;">Details of Registration No: <span id="regchecked"></span></font></p>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-12">
                                                 <p align="center"><strong>From RSTA database</strong></p>
-
                                                 <div class="col-lg-12">
                                                     <div class="col-lg-12 form-group mb-0 pt-4">
                                                         <label class="col-lg-3 form-label">Registered No.</label>
@@ -721,8 +666,7 @@
                                                     <div class="panel-body">
                                                         <span>From RSTA database</span>
                                                         <div class="table-responsive">
-                                                            <table class="table table-bordered table-hover"
-                                                                   id="equipmentDTLS">
+                                                            <table class="table table-bordered table-hover" id="equipmentDTLS">
                                                                 <thead>
                                                                 <tr style="background-color: #e6f9ff">
                                                                     <th>SLNo</th>
@@ -733,7 +677,6 @@
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
-
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -741,9 +684,7 @@
                                                 </div>
                                                 <p align="center">
                                                     <span id="regcheckerrorspa" class="has-error"></span>
-
                                                 <p align="center"></p>
-
                                                 <p align="center"><strong><span id="engagementStatus"></span></strong>
                                                 </p>
                                             </div>
@@ -751,35 +692,26 @@
                                         <div class="form-group">
                                             <p align="center"><strong>Print this page as an evidence to prove that
                                                 particular HR is engaged or not in a work or project</strong></p>
-
                                             <p align="center">
-                                                Printed on: 28-05-2019 <span id="dateSpan1"
-                                                                             style="display: none;"></span>
+                                                Printed on: 28-05-2019 <span id="dateSpan1" style="display: none;"></span>
                                                 By:Tshewang Tenzin
                                             </p>
                                         </div>
                                     </div>
-                                    <button type="button" class="btn btn-primary"
-                                            onclick="javascript:printDiv('modal-print-equipment')">Print
-                                    </button>
-                                    <button type="button" class="btn btn-success" onclick="checkBtn('equipment')"
-                                            id="closeModalEquipment" data-dismiss="modal">OK
-                                    </button>
+                                    <button type="button" class="btn btn-primary" onclick="javascript:printDiv('modal-print-equipment')">Print</button>
+                                    <button type="button" class="btn btn-success" onclick="checkBtn('equipment')" id="closeModalEquipment" data-dismiss="modal">OK</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
         <script type="text/javascript">
             function showAcknowledgement() {
                 $("#registrtaionFormCard").hide();
                 $("#acknowledgementCard").show();
             }
-
             function getModalData(tableId, prefix, totalCol) {
                 var td = "";
                 for (var i = 1; i <= totalCol; i++) {
@@ -791,7 +723,6 @@
                 $('#' + tableId).append(tr);
             }
         </script>
-
         <script type="text/javascript">
             function addRow(tableId) {
                 var $tableBody = $('#' + tableId).find("tbody"),

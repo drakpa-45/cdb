@@ -24,8 +24,8 @@ import java.util.List;
 
 /**
  * ====================================================================
- * Created by Nima Yoezer on 8/2/2020.
- * Description: contractor renewal of certificate controller
+ * Created by Pema Drakpa on 8/2/2020.
+ * Description: specializedFirmOSAction  of certificate controller
  * ====================================================================
  * Modified by:
  * Modified on:

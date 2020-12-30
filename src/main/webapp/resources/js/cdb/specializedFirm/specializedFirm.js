@@ -628,7 +628,7 @@ var specializedFirm = (function () {
                 return;
             }
             if($(this).val() != $('#regEmail').val()){
-                $(this).val('').focus();
+                $('#regEmail').focus().val('');
                 warningMsg("Confirmation email does not match.");
                 $(this).val('').focus();
                 return;

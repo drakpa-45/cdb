@@ -34,25 +34,22 @@
                                             <div class="card-body">
                                                 <div class="col-lg-12">
                                                     <div class="col-lg-6 col-md-6 form-group">
-                                                        <label class="col-lg-4 form-label">Ownership Type <span
-                                                                class="text-danger">*</span></label>
+                                                        <label class="col-lg-4 form-label">Ownership Type</label>
 
                                                         <label class="col-lg-8 form-label form-control" id="ownershipType"></label>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 form-group">
-                                                        <label class="col-lg-4 form-label">Country <span
-                                                                class="text-danger">*</span></label>
+                                                        <label class="col-lg-4 form-label">Country</label>
                                                         <label class="col-lg-8 form-label form-control" id="country"></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <div class="col-lg-6 col-md-6 form-group">
-                                                        <label class="col-lg-4 form-label">Trade License No</label>
+                                                        <label class="col-lg-4 form-label">Trade License Number</label>
                                                         <label class="col-lg-8 form-label form-control" id="tradeLicenseNo"></label>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 form-group">
-                                                        <label class="col-lg-4 form-label">Proposed Firm Name <span
-                                                                class="text-danger">*</span></label>
+                                                        <label class="col-lg-4 form-label">Proposed Firm Name </label>
                                                         <label class="col-lg-8 form-label form-control" id="firmName"></label>
                                                     </div>
                                                 </div>
@@ -73,34 +70,32 @@
                                             <div class="card-body">
                                                 <div class="col-lg-12">
                                                     <div class="col-lg-6 col-md-6 form-group">
-                                                        <label class="col-lg-5 form-label">Establishment
-                                                            Address:</label>
-                                                        <label class="col-lg-7 form-label" id="estAddress"></label>
+                                                        <label class="col-lg-5 form-label">Establishment Address:</label>
+                                                        <label class="col-lg-7 form-label form-control" id="estAddress"></label>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 form-group">
                                                         <label class="col-lg-5 form-label">Dzongkhag:</label>
-                                                        <label class="col-lg-7 form-label"
-                                                               id="estDzongkhag"></label>
+                                                        <label class="col-lg-7 form-label form-control" id="estDzongkhag"></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <div class="col-lg-6 col-md-6 form-group">
                                                         <label class="col-lg-5 form-label">Email:</label>
-                                                        <label class="col-lg-7 form-label" id="regEmail"></label>
+                                                        <label class="col-lg-7 form-label form-control" id="regEmail"></label>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 form-group">
-                                                        <label class="col-lg-5 form-label">Mobile No:</label>
-                                                        <label class="col-lg-7 form-label" id="regMobileNo"></label>
+                                                        <label class="col-lg-5 form-label">Mobile Number:</label>
+                                                        <label class="col-lg-7 form-label form-control" id="regMobileNo"></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <div class="col-lg-6 col-md-6 form-group">
-                                                        <label class="col-lg-5 form-label">Telephone No: </label>
-                                                        <label class="col-lg-7 form-label" id="regPhoneNo"></label>
+                                                        <label class="col-lg-5 form-label">Telephone Number: </label>
+                                                        <label class="col-lg-7 form-label form-control" id="regPhoneNo"></label>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 form-group">
-                                                        <label class="col-lg-5 form-label">Fax No: </label>
-                                                        <label class="col-lg-7 form-label" id="regFaxNo"></label>
+                                                        <label class="col-lg-5 form-label">Fax Number: </label>
+                                                        <label class="col-lg-7 form-label form-control" id="regFaxNo"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -146,30 +141,27 @@
                                                 <div class="col-lg-12">
                                                     <div class="col-lg-6 col-md-6 form-group">
                                                         <label class="col-lg-4 form-label">Dzongkhag</label>
-                                                        <label class="col-lg-8 form-label" id="pDzongkhag"></label>
+                                                        <label class="col-lg-8 form-label form-control" id="pDzongkhag"></label>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 form-group">
                                                         <label class="col-lg-4 form-label">Gewog </label>
-                                                        <label class="col-lg-8 form-label" id="pGewog"></label>
+                                                        <label class="col-lg-8 form-label form-control" id="pGewog"></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <div class="col-lg-6 col-md-6 form-group">
                                                         <label class="col-lg-4 form-label">Village </label>
-                                                        <label class="col-lg-8 form-label" id="pVillage"></label>
+                                                        <label class="col-lg-8 form-label form-control" id="pVillage"></label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="card tab2">
                                             <div class="bg-blue card-status card-status-left"></div>
                                             <div class="card-header">
                                                 <h3 class="card-title">Category Details</h3>
                                             </div>
                                             <div class="card-body">
-
-
                                                 <div class="col-lg-12">
                                                     <table id="contractorCCTbl"
                                                            class="table table-bordered table-hover">
@@ -208,14 +200,9 @@
                                                 <div class="col-lg-12">
                                                     <div class="panel-body">
                                                         <div class="form-group">
-                                                            <label class="col-lg-2 control-label">
-                                                                CDB Number :<font color="red">*</font>
-                                                            </label>
-
+                                                            <label class="col-lg-2 control-label">CDB Number :<font color="red">*</font></label>
                                                             <div class="col-lg-4" id="CDBNumberclass">
-                                                                <input type="text" name="cdbNo"
-                                                                        id="cdbNo" class="form-control"
-                                                                        readonly="readonly">
+                                                                <input type="text" name="cdbNo" id="cdbNo" class="form-control" readonly="readonly">
                                                             </div>
                                                             <label class="col-lg-2 control-label">
                                                                 Payment Date :<font color="red">*</font>

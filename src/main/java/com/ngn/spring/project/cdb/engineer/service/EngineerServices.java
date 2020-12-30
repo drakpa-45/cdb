@@ -378,7 +378,7 @@ public class EngineerServices extends BaseService{
             dao.saveSservies(engineerAppliedServiceEntity);
 
             BigDecimal payAmount = dto.getPaymentAmt();
-            if(payAmount == null || dto.getServiceSectorType().equalsIgnoreCase("6e1cd096-bea8-11e4-9757-080027dcfac6")){
+            if(payAmount == null || dto.getServiceSectorType().equalsIgnoreCase("Government")){
                 payAmount = BigDecimal.valueOf(00.00);
             }
             BigDecimal totalAmount;
@@ -389,7 +389,7 @@ public class EngineerServices extends BaseService{
                 dto.setTotalAmt(totalAmount);
             }else{
 
-                if(dto.getServiceSectorType().equalsIgnoreCase("6e1cd096-bea8-11e4-9757-080027dcfac6")){
+                if(dto.getServiceSectorType().equalsIgnoreCase("Government")){
                     totalAmount = BigDecimal.valueOf(payAmount.floatValue());
                     dto.setPaymentAmt(BigDecimal.valueOf(00.00));
                 }else{
@@ -426,7 +426,7 @@ public class EngineerServices extends BaseService{
         entity.setGewog(dto.getGewog());
         entity.setVillage(dto.getVillage());
         entity.setEngineerId(dto.getCrpEngineerId());
-        entity.setCmnServiceSectorTypeId(dto.getServiceSectorType());
+        entity.setCmnServiceSectorTypeId(dto.getServiceSectorTypeId());
         entity.setCountryId(dto.getCountryId());
         entity.setEmail(dto.getEmail());
         entity.setTradeId(dto.getTrade());

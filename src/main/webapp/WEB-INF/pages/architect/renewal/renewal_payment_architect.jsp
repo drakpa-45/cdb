@@ -49,7 +49,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Cid No:</label>
+                                                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Cid Number:</label>
                                                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                             <input type="hidden" readonly id="cidNo" value="${appDetails.cidNo}" name="cidNo" class="form-control number">${appDetails.cidNo}
                                                         </div>
@@ -76,7 +76,7 @@
                                                         <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Village:</label>
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                             <input type="hidden" value="${appDetails.village}" readonly maxlength="100" id="village" name="village" class="form-control">${appDetails.village}
-                                                            <input type="hidden"  name="villageId" id="villageId">
+                                                            <input type="hidden" name="villageId" id="villageId">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -86,7 +86,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Mobile No:</label>
+                                                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Mobile Number:</label>
                                                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                             <input type="hidden" class=" form-control number" value="${appDetails.mobileNo}" readonly id="mobileNo" name="mobileNo" maxlength="8">${appDetails.mobileNo}
                                                         </div>
@@ -119,13 +119,13 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                             <label>Year of graduation:</label>
-                                            <input type="hidden" class=" form-control number" value="${fn:substring(appDetails.graduationyr, 0, 4)}" readonly name="graduationYear" >${fn:substring(appDetails.graduationyr, 0, 4)}
+                                            <input type="hidden" class=" form-control number" value="${fn:substring(appDetails.graduationyr, 0, 4)}" readonly name="graduationYear">${fn:substring(appDetails.graduationyr, 0, 4)}
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                             <label>University:</label>
-                                            <input type="hidden" class="form-control " name="universityName"value="${appDetails.universityName}" readonly>${appDetails.universityName}
+                                            <input type="hidden" class="form-control " name="universityName" value="${appDetails.universityName}" readonly>${appDetails.universityName}
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                             <label>Country of unversity:</label>
@@ -173,11 +173,8 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                     <label>Payment Receipt Date:</label>
                                                     <div class="input-group margin-bottom-sm">
-                                                                                <span class="input-group-addon pr-5"><i
-                                                                                        class="fa fa-calendar"></i></span>
-                                                        <input type="date" name="paymentReceiptDate"
-                                                               value="" id="paymentReceiptDate"
-                                                               class="form-control">
+                                                        <span class="input-group-addon pr-5"><i class="fa fa-calendar"></i></span>
+                                                        <input type="date" name="paymentReceiptDate" value="" id="paymentReceiptDate" class="form-control">
                                                     </div>
                                                     <span id="paymentReceiptDate_err" class="text-danger"></span>
                                                 </div>
@@ -188,7 +185,7 @@
                                                     <input type="number" class="form-control " name="noOfDaysLate" id="noOfDaysLate" value="${appDetails.noOfDaysLate}" readonly>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                    <label>No of Days after Grace Period:</label>
+                                                    <label>No. of Days after Grace Period:</label>
                                                     <input type="number" class="form-control " name="noOfDaysAfterGracePeriod" id="noOfDaysAfterGracePeriod" value="${appDetails.noOfDaysAfterGracePeriod}" readonly>
                                                 </div>
                                             </div>
@@ -245,8 +242,7 @@
                                         <table class="table">
                                             <tbody>
                                             <tr>
-                                                <td colspan="2" class="font-blue-madison bold warning">Application Submitter Details
-                                                </td>
+                                                <td colspan="2" class="font-blue-madison bold warning">Application Submitter Details</td>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -255,13 +251,13 @@
                                                             <td><strong>Date of application:</strong></td>
                                                             <td>${appDetails.applicationDate}</td>
                                                         </tr>
-                                                       <%-- <tr>
-                                                            <td><strong>Remarks: </strong></td>
-                                                            <td>${appDetails.remarks}</td>
-                                                        </tr>--%>
+                                                            <%-- <tr>
+                                                                 <td><strong>Remarks: </strong></td>
+                                                                 <td>${appDetails.remarks}</td>
+                                                             </tr>--%>
                                                         <tr>
                                                             <td><strong>Submitted By: </strong></td>
-                                                            <td>${appDetails.createdBy} <b style="color: blueviolet"> (${appDetails.fullname})</td>
+                                                            <td>${appDetails.createdBy} <b style="color: blueviolet">(${appDetails.fullname})</td>
                                                         </tr>
                                                     </table>
                                                 </td>
@@ -273,8 +269,7 @@
                                         <c:if test="${appDetails.updateStatus=='36f9627a-adbd-11e4-99d7-080027dcfac6' || appDetails.updateStatus=='6195664d-c3c5-11e4-af9f-080027dcfac6'}">
                                             <table class="table">
                                                 <tbody>
-                                                <td colspan="1" class="font-blue-madison bold warning">Verifier
-                                                    Information
+                                                <td colspan="1" class="font-blue-madison bold warning">Verifier Information
                                                 </td>
                                                 <tr>
                                                     <td>
@@ -357,11 +352,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
-             </div>
+            </div>
         </div>
     </div>
+</div>
 <jsp:include page="/WEB-INF/pages/architect/confirmationModal.jsp"/>
 </form>
 <script type="text/javascript" src="<c:url value="/resources/JqueryAjaxFormSubmit.js"/>"></script>
@@ -369,7 +364,7 @@
 <script src="<c:url value="/resources/js/cdb/architect.js"/>"></script>
 <script>
 
-    function calculateTotalAmount(){
+    function calculateTotalAmount() {
         // alert();
         var payamt = $('#paymentAmt').val();
         var renewamt = $('#renewalAmt').val();

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OtherPassportPrint1" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="00c38a41-e2bc-4c8b-85ae-7db99fd3ffa9">
 	<property name="ireport.zoom" value="1.3636363636363638"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="642"/>
+	<property name="ireport.y" value="498"/>
 	<subDataset name="dataset1" uuid="3bc2008e-f52f-433d-bcc9-307c42176f33"/>
 	<parameter name="paramFirstName" class="java.lang.String"/>
 	<parameter name="paramSurname" class="java.lang.String"/>
@@ -155,11 +155,11 @@
 				<text><![CDATA[Registration Expiry Date   : ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="306" y="386" width="208" height="23" uuid="af1c8d7e-0545-4139-947d-c8d4a91f957e"/>
+				<reportElement x="283" y="386" width="231" height="23" uuid="af1c8d7e-0545-4139-947d-c8d4a91f957e"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{ownerCID}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{ownerCID} ($P{ownerName})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="71" y="466" width="212" height="27" uuid="fc8603f2-9bf9-4983-b3e3-8bee3b15a5ea"/>
@@ -182,13 +182,6 @@
 				</textElement>
 				<text><![CDATA[bearing CID No.]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="306" y="356" width="208" height="30" uuid="d53b7a73-bbeb-46a2-ac6a-5d654f7b7d69"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{ownerName}]]></textFieldExpression>
-			</textField>
 			<textField>
 				<reportElement x="71" y="493" width="115" height="25" uuid="3b173614-def7-49f5-98b7-480cc6a88086"/>
 				<textElement verticalAlignment="Middle">

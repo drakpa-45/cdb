@@ -8,6 +8,7 @@ import com.ngn.spring.project.cdb.trade.dto.TradeFeesDto;
 import com.ngn.spring.project.commonDto.TasklistDto;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
 import com.ngn.spring.project.lib.DropdownDTO;
+import com.ngn.spring.project.lib.ResponseMessage;
 import org.hibernate.query.Query;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Repository;
@@ -511,12 +512,15 @@ try {
     @Transactional
     public List<EmployeeDetailsDTO> validateWorkEngagementCidNo(String cidNo) {
        // sqlQuery = properties.getProperty("ConsultantRCActionDao.getEmployeeDetailsFromCDB");
-       /* sqlQuery = properties.getProperty("CommonDao.validateWorkEngagementCidNo");
-        return (List<EmployeeDetailsDTO>) hibernateQuery(sqlQuery, EmployeeDetailsDTO.class).setParameter("cidNo", cidNo);
-*/
-      List<EmployeeDetailsDTO> employeeDetailsDTOs = new ArrayList<>();
+        List<EmployeeDetailsDTO> employeeDetailsDTOs = new ArrayList<>();
+        sqlQuery = properties.getProperty("CommonDao.validateWorkEngagementCidNo");
+         employeeDetailsDTOs =(List<EmployeeDetailsDTO>) hibernateQuery(sqlQuery, EmployeeDetailsDTO.class).setParameter("cidNo", cidNo).list();
+
+        return employeeDetailsDTOs;
+
+     /* List<EmployeeDetailsDTO> employeeDetailsDTOs = new ArrayList<>();
         try {
-            sqlQuery = " SELECT DISTINCT(t5.Id) id, GROUP_CONCAT(t4.CDBNo SEPARATOR ', ' ) cdbNo,\n" +
+            sqlQuery = "SELECT DISTINCT(t5.Id) id, GROUP_CONCAT(t4.CDBNo SEPARATOR ', ' ) cdbNo,\n" +
                     "CASE WHEN T5.migratedworkid IS NULL THEN CONCAT(T6.Code,'/',YEAR(T5.UploadedDate),'/',T5.WorkId) ELSE T5.migratedworkid END AS workId,\n" +
                     "T6.Name AS procuringAgency\n" +
                     "FROM etlcontractorhumanresource t1\n" +
@@ -531,8 +535,8 @@ try {
         } catch (Exception e) {
             System.out.print("Exception in CommonDao # validateWorkEngagementCidNo:" + e);
             e.printStackTrace();
-        }
-        return employeeDetailsDTOs;
+        }*/
+      //  return employeeDetailsDTOs;
     }
 
     @Transactional
@@ -671,6 +675,18 @@ try {
             //get cdbno for others
         }
         return cdbNo;
+    }
+
+    public EmployeeDetailsDTO validateCorporateCidNo(String cidNo) {
+        EmployeeDetailsDTO dto=new EmployeeDetailsDTO();
+        try {
+            sqlQuery = "SELECT c.PositionTitle positionTitle,c.Agency agency,c.CIDNo cidNo FROM crpgovermentengineer c WHERE c.CIDNo = ? AND Releaved=0";
+            dto = (EmployeeDetailsDTO) hibernateQuery(sqlQuery, EmployeeDetailsDTO.class).setParameter(1, cidNo);
+        } catch (Exception e) {
+            System.out.print("Exception in CommonDao # validateCorporateCidNo: " + e);
+            e.printStackTrace();
+        }
+        return dto;
     }
 }
 

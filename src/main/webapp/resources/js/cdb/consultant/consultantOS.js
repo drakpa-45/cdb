@@ -224,7 +224,7 @@ function submitApplication(){
         serviceCateID = ($(this).val());
     });
 
-    var url=_baseURL() + '/save?appliedClassID='+appliedClassID + '&serviceCateID=' + serviceCateID;
+    var url=_baseURL() + '/save';
     var options = {
         target:'#registrtaionFormCard',
         url:url,
@@ -246,7 +246,7 @@ var consultantOS = (function () {
         "<td><input type='text' class='form-control' name='cAttachments[0].documentName'/> </td>"+
         "<td><input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
         "<td class='file-size'></td>" +
-        "<td><a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a></td>" +
+        "<td><input type='button' class='p-2 del_row btn btn-azure' value='Delete'><!--<a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a>--></td>" +
         "</tr>";
 
     function sCertIncorporation() {
@@ -557,6 +557,20 @@ var consultantOS = (function () {
 
                         var categories = res;
                         for (var i in categories) {
+                            if (categories[i].categoryId == "e6372584-bc15-11e4-81ac-080027dcfac6") {
+                                $('#cateId0').prop('checked', true).prop('disabled',false);
+                            }
+                            if (categories[i].categoryId == "f39b9245-bc15-11e4-81ac-080027dcfac6") {
+                                $('#cateId01').prop('checked', true).prop('disabled',false);
+                            }
+                            if (categories[i].categoryId == "fb2aa1a7-bc15-11e4-81ac-080027dcfac6") {
+                                $('#cateId2').prop('checked', true).prop('disabled',false);
+                            }
+                            if (categories[i].categoryId == "2adfae00-be66-11e9-9ac2-0026b988eaa8") {
+                                $('#cateId3').prop('checked', true).prop('disabled',false);
+                            }
+
+
                             if (categories[i].apClassId == "2dc059a3-bc17-11e4-81ac-080027dcfac6") {
                                 $('#asone').prop('checked', true).prop('disabled',false);
                             }

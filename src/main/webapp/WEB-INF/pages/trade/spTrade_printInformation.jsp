@@ -49,7 +49,7 @@
                             <td>${App_Details.fullname}</td>
                         </tr>
                         <tr>
-                            <td><strong>CID: </strong></td>
+                            <td><strong>CID Number: </strong></td>
                             <td>${App_Details.cidNo}</td>
                         </tr>
                         <tr>
@@ -64,7 +64,6 @@
                             <td><strong>Telephone Number: </strong></td>
                             <td>${App_Details.telephoneNo}</td>
                         </tr>
-
                         <tr>
                         <td><strong>TPN Number: </strong></td>
                         <td>${App_Details.tpn}</td>

@@ -10,7 +10,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <html>
 <div class="mt-5">
     <div class="container mb-9">
@@ -91,6 +90,7 @@
                                             </div>
                                             <div class="tab-pane personalInformation" id="personalInformation">
                                                 <div class="">
+                                                    <span class="text-danger" ><i>Note: Fields marked with (*) are mandatory. Please provide your valid information while availing this service.</i></span>
                                                     <div class="card tab2">
                                                         <div class="bg-blue card-status card-status-left"></div>
                                                         <div class="card-header">
@@ -201,9 +201,7 @@
                                                         <button type="button" onclick="previousTab('feesStructure','personalInformation')"  class="btn btn-success">
                                                             <i class="fa fa-arrow-circle-left"></i>  Previous
                                                         </button>
-                                                        <button type="button" onclick="nextTab('personalInformation','categoryDtls')"  class="btn btn-primary">
-                                                            Next  <i class="fa fa-arrow-circle-right"></i>
-                                                        </button>
+                                                        <button type="button" onclick="nextTab('personalInformation','categoryDtls')"  class="btn btn-primary">Next  <i class="fa fa-arrow-circle-right"></i></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -325,18 +323,11 @@
                                                                 <label class="col-lg-12"> I/We declare and confirm that: </label>
                                                                 <div id="termsAndCon">
                                                                     <ul>
-                                                                        <li>
-                                                                            All information and attachments with this application are true and correct;
-                                                                        </li>
-                                                                        <li>
-                                                                            I am/We are aware that any false information provided herein shall result in rejection of my application and suspension of any registration granted;
-                                                                        </li>
-                                                                        <li>I/We shall not make refund claims of expenditure incurred in processing this application;
-                                                                        </li>
-                                                                        <li>I/We have read and understood the legal instruments issued by CDB (Manuals, Guidelines, Codes etc.)  and shall perform in line with these instruments and any other laws in force.
-                                                                        </li>
-                                                                        <li>I/We understand that the failure to comply with aforementioned legal instruments  will be subject to the penalties provided for in these instruments and applicable laws in force; and
-                                                                        </li>
+                                                                        <li>All information and attachments with this application are true and correct;</li>
+                                                                        <li>I am/We are aware that any false information provided herein shall result in rejection of my application and suspension of any registration granted;</li>
+                                                                        <li>I/We shall not make refund claims of expenditure incurred in processing this application;</li>
+                                                                        <li>I/We have read and understood the legal instruments issued by CDB (Manuals, Guidelines, Codes etc.)  and shall perform in line with these instruments and any other laws in force.</li>
+                                                                        <li>I/We understand that the failure to comply with aforementioned legal instruments  will be subject to the penalties provided for in these instruments and applicable laws in force; and</li>
                                                                         <li>I/We hereby declare that issuance of CDB certificate does not in any way constitute an obligation on the part of CDB or any other government agencies to provide contract works.</li>
                                                                     </ul>
                                                                 </div>

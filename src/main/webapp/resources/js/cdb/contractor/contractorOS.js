@@ -304,6 +304,7 @@ var contractorOS = (function () {
                     $('#changeOfFirmName').prop('disabled', true);
                     $('#ownerPartner').removeClass('hide');
                     $('#changeOfOwnerId').prop('disabled', true);
+                    $('#ownerPartnerNoChange').addClass('hide');
                     getOwnerFinal();
                 }else{
                     $('#ownershipList').prop('disabled',true);
@@ -311,6 +312,7 @@ var contractorOS = (function () {
                     $('#changeOfFirmName').prop('disabled', false);
                     $('#changeOfOwnerId').prop('disabled', false);
                     $('#ownerPartner').addClass('hide');
+
                 }
             }else if(id == 'changeOfFirmName' ){
                 if($this.is(':checked')) {
@@ -390,7 +392,7 @@ var contractorOS = (function () {
                         "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
                         "</tr>";
                     }
-                    $('#IncCertificateTbl').find('tbody').html(tr);
+                    $('#certificateTbl').find('tbody').html(tr);
                 }else{
                     $('#cIncorporation').addClass('hide');
                 }
@@ -401,7 +403,7 @@ var contractorOS = (function () {
 
 
     function editIncAttachment(){
-        $('#IncCertificateTbl').on('click','.edit_row',function(){
+        $('#certificateTbl').on('click','.edit_row',function(){
             $(this).closest('tr').find('.docName').prop('disabled',false);
             var attachment = $(this).closest('tr').find('.attachment');
             attachment.html("<input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'>");
@@ -545,22 +547,22 @@ var contractorOS = (function () {
                         var categories = res;
                         for (var i in categories) {
                             if (categories[i].categoryId == "6cd737d4-a2b7-11e4-b4d2-080027dcfac6") {
-                                $('#W1').find('.categoryCheck').prop('checked', false);
+                                $('#W1').find('.categoryCheck').prop('checked', true);
                                 $('#W1').find('.appliedClassID').val(categories[i].aClassId);
                                 $('#W1').find('.existingClassID').val(categories[i].aClassId);
                             }
                             if (categories[i].categoryId == "8176bd2d-a2b7-11e4-b4d2-080027dcfac6") {
-                                $('#W2').find('.categoryCheck').prop('checked', false);
+                                $('#W2').find('.categoryCheck').prop('checked', true);
                                 $('#W2').find('.appliedClassID').val(categories[i].aClassId);
                                 $('#W2').find('.existingClassID').val(categories[i].aClassId);
                             }
                             if (categories[i].categoryId == "8afc0568-a2b7-11e4-b4d2-080027dcfac6") {
-                                $('#W3').find('.categoryCheck').prop('checked', false);
+                                $('#W3').find('.categoryCheck').prop('checked', true);
                                 $('#W3').find('.appliedClassID').val(categories[i].aClassId);
                                 $('#W3').find('.existingClassID').val(categories[i].aClassId);
                             }
                             if (categories[i].categoryId == "9090a82a-a2b7-11e4-b4d2-080027dcfac6") {
-                                $('#W4').find('.categoryCheck').prop('checked', false);
+                                $('#W4').find('.categoryCheck').prop('checked', true);
                                 $('#W4').find('.appliedClassID').val(categories[i].aClassId);
                                 $('#W4').find('.existingClassID').val(categories[i].aClassId);
                             }
@@ -844,6 +846,7 @@ var contractorOS = (function () {
         editIncAttachment();
         getPersonalInfo();
         getPersonalInfoHR();
+        getOwnerFinal();
     }
 
     return {

@@ -70,5 +70,4 @@
         </div>
     </div>
     <script src="<c:url value="/resources/js/cdb/architect.js"/>"></script>
-
 </body>

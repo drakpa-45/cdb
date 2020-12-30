@@ -3,6 +3,7 @@
 ConsultantDao.gFeeStructure = SELECT cc.Id AS id,cc.NewRegistrationFee AS registrationFee,cc.FirstRenewalFee AS renewalFee FROM crpservicefeestructure cc WHERE cc.Name=:category  ORDER BY referenceNo ASC
 ConsultantDao.gConsultantCategory = SELECT wc.Id AS id, wc.`Name` AS name,wc.`Code` AS code FROM `cmnconsultantservicecategory` wc ORDER BY Code ASC
 ConsultantDao.gConsultantClassification = SELECT a.CmnConsultantServiceCategoryId AS value, a.Code AS text,a.Name AS obj1, a.Id id FROM `cmnconsultantservice` a ORDER BY Code ASC;
+ConsultantDao.gConsultantCategoryRO = SELECT cc.`Id` AS id,cc.`Name` AS name,cc.`Code` AS code,cc.`RegistrationFee` AS registrationFee,cc.`RenewalFee` AS renewalFee FROM `cmnconsultantclassification` cc where (:category is null or cc.Id =:category) ORDER BY referenceNo ASC
 /*SELECT a.CmnConsultantServiceCategoryId AS value, CONCAT(a.Code,':',a.Name) text FROM `cmnconsultantservice` a;*/
 
 ConsultantDao.gEquipment = SELECT a.`Id` AS value,a.`Name` AS text,a.IsRegistered as obj1  FROM `cmnequipment` a
@@ -134,5 +135,7 @@ ConsultantRCDao.getCategoryClassFinal=SELECT Id AS id,CrpConsultantFinalId AS co
 ConsultantRCActionDao.paymentUpdate = CALL ProCrpConsultantRenewalPaymentApproval(:consultantId,:userId,:appStatusId,:createdBy)
 
 ConsultantRCActionDao.getEmployeeDetailsFromCDB = SELECT con.NameOfFirm consultantFirmname,con.CDBNo consultantCDBNo,co.NameOfFirm contractorFirmname,co.CDBNo contractorCDBNo,s.NameOfFirm spFirmname, s.SPNo spCDBNo FROM crpcontractorhumanresourcefinal c LEFT JOIN crpconsultanthumanresourcefinal crp ON c.CIDNo = crp.CIDNo LEFT JOIN crpspecializedtradehumanresourcefinal sf ON sf.CIDNo = c.CIDNo LEFT JOIN crpspecializedtradefinal s ON s.Id = sf.CrpSpecializedTradeFinalId LEFT JOIN crpconsultantfinal con ON con.Id = crp.CrpConsultantFinalId LEFT JOIN crpcontractorfinal co ON co.Id = c.CrpContractorFinalId WHERE c.CIDNo =:cidNo
+
+ConsultantRCDao.getRegisteredService=SELECT c.AppliedService serviceName FROM crpconsultantregistrationpayment c WHERE c.CrpConsultantFinalId=:consultantFinalId GROUP BY AppliedService;
 
 ConsultantRCActionDao.getProposedCategories=

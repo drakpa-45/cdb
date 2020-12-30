@@ -163,35 +163,31 @@
                                         <div class="col-lg-12">
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-4 form-label">Ownership Type</label>
-                                                <label class="col-lg-8 form-label"
-                                                       id="ownershipType"></label>
+                                                <label class="col-lg-8 form-label form-control" id="ownershipType"></label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-4 form-label">Country</label>
-                                                <label class="col-lg-8 form-label" id="country"></label>
+                                                <label class="col-lg-8 form-label form-control" id="country"></label>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-4 form-label">Trade License No</label>
-                                                <label class="col-lg-8 form-label"
-                                                       id="tradeLicenseNo"></label>
+                                                <label class="col-lg-4 form-label">Trade License Number</label>
+                                                <label class="col-lg-8 form-label form-control" id="tradeLicenseNo"></label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-4 form-label">Proposed Firm
-                                                    Name</label>
-                                                <label class="col-lg-8 form-label" id="firmName"></label>
+                                                <label class="col-lg-4 form-label">Proposed Firm Name</label>
+                                                <label class="col-lg-8 form-label form-control" id="firmName"></label>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-4 form-label">TPN Number</label>
-                                                <label class="col-lg-8 form-label" id="tpn"></label>
+                                                <label class="col-lg-8 form-label form-control" id="tpn"></label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-4 form-label">Old Proposed Firm
-                                                    Name</label>
-                                                <label class="col-lg-8 form-label" id="oldfirmName"></label>
+                                                <label class="col-lg-4 form-label">Old Proposed Firm Name</label>
+                                                <label class="col-lg-8 form-label form-control" id="oldfirmName"></label>
                                             </div>
                                         </div>
                                     </div>
@@ -232,17 +228,17 @@
                                         <div class="col-lg-12">
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-4 form-label">Dzongkhag</label>
-                                                <label class="col-lg-8 form-label" id="pDzongkhag"></label>
+                                                <label class="col-lg-8 form-label form-control" id="pDzongkhag"></label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-4 form-label">Gewog </label>
-                                                <label class="col-lg-8 form-label" id="pGewog"></label>
+                                                <label class="col-lg-8 form-label form-control" id="pGewog"></label>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-4 form-label">Village </label>
-                                                <label class="col-lg-8 form-label" id="pVillage"></label>
+                                                <label class="col-lg-8 form-label form-control" id="pVillage"></label>
                                             </div>
                                         </div>
                                     </div>
@@ -293,9 +289,8 @@
                                     <div class="card-body">
                                         <div class="col-lg-12">
                                             <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Establishment
-                                                    Address</label>
-                                                <label class="col-lg-7 form-label" id="estAddressExist"></label>
+                                                <label class="col-lg-5 form-label">Establishment Address</label>
+                                                <label class="col-lg-7 form-label form-control" id="estAddressExist"></label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-5 form-label">Dzongkhag</label>
@@ -306,27 +301,27 @@
                                                     <form:options items="${dzongkhagList}" itemValue="value"
                                                                   itemLabel="text"/>
                                                 </form:select>--%>
-                                                <label class="col-lg-7 form-label" id="estDzongkhagExist"></label>
+                                                <label class="col-lg-7 form-label form-control" id="estDzongkhagExist"></label>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-5 form-label">Email</label>
-                                                <label class="col-lg-7 form-label" id="regEmailExist"></label>
+                                                <label class="col-lg-7 form-label form-control" id="regEmailExist"></label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Mobile No</label>
-                                                <label class="col-lg-7 form-label" id="regMobileNoExist"></label>
+                                                <label class="col-lg-5 form-label">Mobile Number</label>
+                                                <label class="col-lg-7 form-label form-control" id="regMobileNoExist"></label>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Telephone No </label>
-                                                <label class="col-lg-7 form-label" id="regPhoneNoExist"></label>
+                                                <label class="col-lg-5 form-label">Telephone Number </label>
+                                                <label class="col-lg-7 form-label form-control" id="regPhoneNoExist"></label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Fax No </label>
-                                                <label class="col-lg-7 form-label" id="regFaxNoExist"></label>
+                                                <label class="col-lg-5 form-label">Fax Number </label>
+                                                <label class="col-lg-7 form-label form-control" id="regFaxNoExist"></label>
                                             </div>
                                         </div>
                                     </div>
@@ -337,24 +332,22 @@
                                     <div class="card-body">
                                         <div class="col-lg-12">
                                             <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Establishment
-                                                    Address</label>
-                                                <label class="col-lg-7 form-label" id="estAddress"></label>
+                                                <label class="col-lg-5 form-label">Establishment Address</label>
+                                                <label class="col-lg-7 form-label form-control" id="estAddress"></label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-5 form-label">Dzongkhag</label>
-                                                <label class="col-lg-7 form-label"
-                                                       id="estDzongkhag"></label>
+                                                <label class="col-lg-7 form-label form-control" id="estDzongkhag"></label>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Telephone No </label>
-                                                <label class="col-lg-7 form-label" id="regPhoneNo"></label>
+                                                <label class="col-lg-5 form-label">Telephone Number </label>
+                                                <label class="col-lg-7 form-label form-control" id="regPhoneNo"></label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Fax No </label>
-                                                <label class="col-lg-7 form-label" id="regFaxNo"></label>
+                                                <label class="col-lg-5 form-label">Fax Number </label>
+                                                <label class="col-lg-7 form-label form-control" id="regFaxNo"></label>
                                             </div>
                                         </div>
                                     </div>
@@ -592,10 +585,7 @@
                                 <div class="form-group">
                                     <div class="table-responsive">
                                         <fieldset><h3>Application Status</h3>
-                                            <table id="appStatusTbl" width="1000px" cellpadding="1"
-                                                   cellspacing="1" border="1"
-                                                   style="border-collapse: collapse"
-                                                   class="table table-bordered">
+                                            <table id="appStatusTbl" width="1000px" cellpadding="1" cellspacing="1" border="1" style="border-collapse: collapse" class="table table-bordered">
                                                 <thead>
                                                 <tr class="Caption">
                                                     <td width="20%" align="center" valign="top">
@@ -622,35 +612,25 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-2" for="vRemarks">Remarks:</label>
-
                                     <div class="col-md-10" id="remarkclass">
-                                                    <textarea name="vRemarks" id="vRemarks"
-                                                              class="form-control"></textarea>
+                                        <textarea name="vRemarks" id="vRemarks" class="form-control"></textarea>
                                         <span class="help-block" id="remarkErrorId"></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <security:authorize access="hasRole('ROLE_VERIFIER')">
-                                    <button type="button" class="btn btn-primary" id="btnVerify"><i
-                                            class="fa fa-check"></i>&nbsp;&nbsp;Verify
-                                    </button>
+                                    <button type="button" class="btn btn-primary" id="btnVerify"><i class="fa fa-check"></i>&nbsp;&nbsp;Verify</button>
                                 </security:authorize>
                                 <security:authorize access="hasRole('ROLE_APPROVER')">
-                                    <button type="button" class="btn btn-primary" id="btnApprove"><i
-                                            class="fa fa-check"></i>&nbsp;&nbsp;Approve
-                                    </button>
+                                    <button type="button" class="btn btn-primary" id="btnApprove"><i class="fa fa-check"></i>&nbsp;&nbsp;Approve</button>
                                    <%-- <button type="button" class="btn btn-primary" id="btnSendBack"><i
                                             class="fa fa-backward"></i>&nbsp;&nbsp;Send back
                                     </button>--%>
                                 </security:authorize>
-                                <button type="button" class="btn btn-danger " id="btnReject"><i
-                                        class="fa fa-times mr-1"></i>Reject
-                                </button>
+                                <button type="button" class="btn btn-danger " id="btnReject"><i class="fa fa-times mr-1"></i>Reject</button>
                                 <a href="<c:url value="/admin/contractor"/>">
-                                    <button type="button" class="btn btn-warning"><i class="fa fa-ban"></i>
-                                        Cancel
-                                    </button>
+                                    <button type="button" class="btn btn-warning"><i class="fa fa-ban"></i>Cancel</button>
                                 </a>
                             </div>
                         </div>
@@ -762,19 +742,14 @@
                                     </p>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-primary"
-                                    onclick="javascript:printDiv('modal-print')">Print
-                            </button>
-                            <button type="button" class="btn btn-success" id="closeModal"
-                                    onclick="checkBtn('checkver1')" data-dismiss="modal">OK
-                            </button>
+                            <button type="button" class="btn btn-primary" onclick="javascript:printDiv('modal-print')">Print</button>
+                            <button type="button" class="btn btn-success" id="closeModal" onclick="checkBtn('checkver1')" data-dismiss="modal">OK</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <%--Equipment Modal--%>
     <div id="CheckModalEquipment" class="modal fade in" tabindex="-1" role="dialog"
          aria-labelledby="myModalLabel" aria-hidden="false">
@@ -789,19 +764,13 @@
                         <div class="panel-body">
                             <div id="modal-print-equipment">
                                 <div class="form-group">
-                                    <p align="center"><strong><u><font size="3px;">Caution</font></u></strong>
-                                    </p>
-
-                                    <p align="center"><strong>An equipment is allowed to execute only one work
-                                        at a time for the perticular firm.</strong></p>
-
-                                    <p align="center"><font size="5px;">Details of Registration No: <span
-                                            id="regchecked"></span></font></p>
+                                    <p align="center"><strong><u><font size="3px;">Caution</font></u></strong></p>
+                                    <p align="center"><strong>An equipment is allowed to execute only one work at a time for the perticular firm.</strong></p>
+                                    <p align="center"><font size="5px;">Details of Registration No: <span id="regchecked"></span></font></p>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-12">
                                         <p align="center"><strong>From RSTA database</strong></p>
-
                                         <div class="col-lg-12">
                                             <div class="col-lg-12 form-group mb-0 pt-4">
                                                 <label class="col-lg-3 form-label">Registered No.</label>

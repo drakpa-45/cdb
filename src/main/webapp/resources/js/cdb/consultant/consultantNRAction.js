@@ -75,48 +75,47 @@ var consultant_action = (function () {
 
                         var employeeDetailsDTO = dto.employeeDetailsDTOs;
                         var empDtls ="",empDtls1="",empDtls2="";
-                       // alert(employeeDetailsDTO != null);
-                        if(employeeDetailsDTO !=null){
+                        if(employeeDetailsDTO != ""){
+                            for(var i in employeeDetailsDTO){
+                                var workId = employeeDetailsDTO[i].workId;
+                                alert(workId);
+                                if(workId !=''|| workId !='null'){
+                                    $('#engagedId').show();
+                                    $('#dcbinfo').append("<br/> This person is engaged with cdb number <b>"+employeeDetailsDTO[i].cdbNo+"</b> in <b>"+employeeDetailsDTO[i].procuringAgency+"</b> with work Id:<b>"+employeeDetailsDTO[i].workId+"</b>");
+                                    $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
+                                } else{
+                                    $('#dcbinfo').hide();
+                                    $('#engagedId').show();
+                                    $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project");
+                                }
+                            }
+                        }else{
+                            $('#dcbinfo').hide();
                             $('#engagedId').show();
-                            for(var i in employeeDetailsDTO){
-                                empDtls = empDtls +
-                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
-                                "<td>" +  + "</td>" +
-                                "<td>" + + "</td>" +
-                                "<td>" + employeeDetailsDTO[i].contractorCDBNo+ "</td>" +
-                                "<td>" + employeeDetailsDTO[i].contractorFirmname + "</td>" +"</tr>";
-                            }
-                            $('#employeeDTLS').find('tbody').html(empDtls);
-
-                            for(var i in employeeDetailsDTO){
-                                empDtls1 = empDtls1 +
-                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
-                                "<td>" +  + "</td>" +
-                                "<td>" + + "</td>" +
-                                "<td>" + employeeDetailsDTO[i].consultantCDBNo+ "</td>" +
-                                "<td>" + employeeDetailsDTO[i].consultantFirmname + "</td>" +"</tr>";
-                            }
-                            $('#employeeDTLS1').find('tbody').html(empDtls1);
-
-                            for(var i in employeeDetailsDTO){
-                                empDtls2 = empDtls2 +
-                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
-                                "<td>" +  + "</td>" +
-                                "<td>" + + "</td>" +
-                                "<td>" + employeeDetailsDTO[i].spCDBNo+ "</td>" +
-                                "<td>" + employeeDetailsDTO[i].spFirmname + "</td>" +"</tr>";
-                            }
-                            $('#employeeDTLS2').find('tbody').html(empDtls2);
-
-                            $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
-                        } else{
-                            $('#notEngagedId').show();
+                            $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project");
                         }
                     }
                 }
             });
-            //getEmployeeDetailsFromCDB(cidNo);
-        });
+
+                $.ajax({
+                    url:_baseURL() + "/validateCorporateCidNo",
+                    type: 'GET',
+                    data: {cidNo: cidNo},
+                    success: function (res) {
+                        if (res.status == '1') {
+                            var dto = res.dto;
+                            var agency = "";
+                            if(agency !='' || agency !='null'){
+                                $('#dcbinfo').append("<br/>This person had already Registered in "+agency);
+                            }
+                            else{
+                                $('#dcbinfo').append("<br/This person is not registered in any of Corporate sectors");
+                            }
+                        }
+                    }
+                });
+            });
 
         $('body').on('click','.checkCidHr',function(){
             var cidNo = $(this).closest('tr').find('.cidNo').text();
@@ -144,42 +143,24 @@ var consultant_action = (function () {
 
                         var employeeDetailsDTO = dto.employeeDetailsDTOs;
                         var empDtls ="",empDtls1="",empDtls2="";
-                     //   alert(employeeDetailsDTO != null);
-                        if(employeeDetailsDTO !=null){
+                        if(employeeDetailsDTO != ""){
+                            for(var i in employeeDetailsDTO){
+                                var workId = employeeDetailsDTO[i].workId;
+                                alert(workId);
+                                if(workId !=''|| workId !='null'){
+                                    $('#engagedId').show();
+                                    $('#dcbinfo').append("<br/> This person is engaged with cdb number <b>"+employeeDetailsDTO[i].cdbNo+"</b> in <b>"+employeeDetailsDTO[i].procuringAgency+"</b> with work Id:<b>"+employeeDetailsDTO[i].workId+"</b>");
+                                    $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
+                                } else{
+                                    $('#dcbinfo').hide();
+                                    $('#engagedId').show();
+                                    $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project");
+                                }
+                            }
+                        }else{
+                            $('#dcbinfo').hide();
                             $('#engagedId').show();
-                            for(var i in employeeDetailsDTO){
-                                empDtls = empDtls +
-                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
-                                "<td>" +  + "</td>" +
-                                "<td>" + + "</td>" +
-                                "<td>" + employeeDetailsDTO[i].contractorCDBNo+ "</td>" +
-                                "<td>" + employeeDetailsDTO[i].contractorFirmname + "</td>" +"</tr>";
-                            }
-                            $('#employeeDTLS').find('tbody').html(empDtls);
-
-                            for(var i in employeeDetailsDTO){
-                                empDtls1 = empDtls1 +
-                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
-                                "<td>" +  + "</td>" +
-                                "<td>" + + "</td>" +
-                                "<td>" + employeeDetailsDTO[i].consultantCDBNo+ "</td>" +
-                                "<td>" + employeeDetailsDTO[i].consultantFirmname + "</td>" +"</tr>";
-                            }
-                            $('#employeeDTLS1').find('tbody').html(empDtls1);
-
-                            for(var i in employeeDetailsDTO){
-                                empDtls2 = empDtls2 +
-                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
-                                "<td>" +  + "</td>" +
-                                "<td>" + + "</td>" +
-                                "<td>" + employeeDetailsDTO[i].spCDBNo+ "</td>" +
-                                "<td>" + employeeDetailsDTO[i].spFirmname + "</td>" +"</tr>";
-                            }
-                            $('#employeeDTLS2').find('tbody').html(empDtls2);
-
-                            $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
-                        } else{
-                            $('#notEngagedId').show();
+                            $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project");
                         }
                     }
                 }

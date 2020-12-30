@@ -12,20 +12,15 @@
     <title></title>
 </head>
 <body>
-
 <div class="row">
     <div class="col-12">
         <div class="mb-0 page-header">
-            <h1 class="page-title">
-                Construction Development Board
-            </h1>
+            <h1 class="page-title">Construction Development Board</h1>
         </div>
-
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title font-weight-bold">Task List</h3>
             </div>
-
             <div id="tasklistId">
                 <div class="card-body">
                     <div class="card">
@@ -51,8 +46,7 @@
                                         <td>${i.index+1}</td>
                                         <td>
                                             <a href="#" onclick="openAndClaimApplication('${task.applicationNo}','open')" data-toggle="tooltip"  data-placement="top" >
-                                                    ${task.applicationNo}
-                                            </a>
+                                                 ${task.applicationNo}</a>
                                             <a></a>
                                         </td>
                                         <td>${task.serviceName}</td>

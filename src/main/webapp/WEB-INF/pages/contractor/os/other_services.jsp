@@ -5,33 +5,33 @@
 <body class="">
 <c:if test="${not empty res}">
 
-<div class="card hide" id="acknowledgment">
-    <div class="card-header">
-        <b>Contractor >> Renewal Application >> </b>Acknowledgement
-    </div>
-    <div class="card-body">
-        <c:if test="${res.status eq 1}">
-            ${res.text}
-        </c:if>
-        <c:if test="${res.status eq 0}">
-            <label class="form-control error"><spring:message code="${res.text}"/></label>
-        </c:if>
+    <div class="card hide" id="acknowledgment">
+        <div class="card-header">
+            <b>Contractor >> Renewal Application >> </b>Acknowledgement
+        </div>
+        <div class="card-body">
+            <c:if test="${res.status eq 1}">
+                ${res.text}
+            </c:if>
+            <c:if test="${res.status eq 0}">
+                <label class="form-control error"><spring:message code="${res.text}"/></label>
+            </c:if>
 
+        </div>
     </div>
-</div>
 </c:if>
 <div class="mt-5">
     <div class="container mb-9">
         <div class="row">
 
-                <div class="card" id="registrtaionFormCard">
-                    <div class="card-header">
-                        <h3 class="card-title font-weight-bold">Other Services</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-12 col-lg-12">
-                                <form action="" method="post" class="" id="contractorRenewalForm">
+            <div class="card" id="registrtaionFormCard">
+                <div class="card-header">
+                    <h3 class="card-title font-weight-bold">Other Services</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12">
+                            <form action="" method="post" class="" id="contractorRenewalForm">
                                 <div class="nav-tabs-custom">
                                     <ul class="m-0 nav nav-tabs">
                                         <li class="feesStructure tab-pane active ">
@@ -122,11 +122,11 @@
                                         </div>
 
                                         <div class="tab-pane services">
-                                            <div class="panel-body table-responsive div-actual" >
+                                            <div class="panel-body table-responsive div-actual">
                                   <span>
                                     Would you like to avail listed below along with this application? Please tick on the check box if you wish to.
                                   </span>
-                                                <table >
+                                                <table>
                                                     <tbody>
                                                     <tr>
                                                         <td>
@@ -150,7 +150,8 @@
                                                     <tr>
                                                         <td>
                                                             <input type="checkbox" style="zoom:1.6"
-                                                                   name="changeOfLocation" value="1" class="service_check"
+                                                                   name="changeOfLocation" value="1"
+                                                                   class="service_check"
                                                                    id="changeOfLocation" checked="checked">
                                                         </td>
                                                         <td>
@@ -215,628 +216,666 @@
 
                                         <div class="tab-pane generalInformation">
 
-                                                    <div class="div-actual">
-                                                        <div class="card" id="gInfo">
-                                                            <div class="bg-blue card-status card-status-left"></div>
-                                                            <div class="card-body">
+                                            <div class="div-actual">
+                                                <div class="card" id="gInfo">
+                                                    <div class="bg-blue card-status card-status-left"></div>
+                                                    <div class="card-body">
 
-                                                                <div class="form-group row">
-                                                                    <div class="col-lg-6 col-md-6 ">
-                                                                        <label class="col-lg-4 form-label">Ownership Type
-                                                                            <span class="text-danger">*</span></label>
+                                                        <div class="form-group row">
+                                                            <div class="col-lg-6 col-md-6 ">
+                                                                <label class="col-lg-4 form-label">Ownership Type
+                                                                    <span class="text-danger">*</span></label>
 
-                                                                        <form:select id="ownershipList" class="form-control col-lg-7"
-                                                                                     required="true" path="ownershipList" name="contractor.ownershipTypeId">
-                                                                            <form:option value="" label="Select Ownership Type"/>
-                                                                            <form:options items="${ownershipList}" itemValue="value"
+                                                                <form:select id="ownershipList"
+                                                                             class="form-control col-lg-7"
+                                                                             required="true" path="ownershipList"
+                                                                             name="contractor.ownershipTypeId">
+                                                                    <form:option value=""
+                                                                                 label="Select Ownership Type"/>
+                                                                    <form:options items="${ownershipList}"
+                                                                                  itemValue="value"
+                                                                                  itemLabel="text"/>
+                                                                </form:select>
+                                                            </div>
+
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <label class="col-lg-4 form-label">Country <span
+                                                                        class="text-danger">*</span></label>
+
+                                                                <select class="form-control col-lg-7" required="true"
+                                                                        name="contractor.pCountryId" id="pCountryId">
+                                                                    <c:forEach var="item" items="${countryList}">
+                                                                        <option value="${item.value}"><c:out
+                                                                                value="${item.text}"/></option>
+                                                                    </c:forEach>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <div class="col-lg-6 col-lg-6">
+                                                                <label class="col-lg-4 form-label">Trade License
+                                                                    No</label>
+                                                                <input type="text" class="col-lg-7 form-control"
+                                                                       name="contractor.tradeLicenseNo" required="true"
+                                                                       placeholder="Text.." id="tradeLicenseNo">
+                                                            </div>
+                                                            <div class="col-lg-6 col-lg-6">
+                                                                <label class="col-lg-4 form-label">Proposed Firm
+                                                                    Name <span class="text-danger">*</span></label>
+                                                                <input type="text" class="col-lg-7 form-control"
+                                                                       id="firmName"
+                                                                       name="contractor.firmName" required="true"
+                                                                       placeholder="Text..">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <label class="col-lg-4 form-label">TPN Number</label>
+                                                                <input type="text" class="col-lg-7 form-control"
+                                                                       name="contractor.tpn" id="tpn"
+                                                                       placeholder="Text..">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="card hide" id="cIncorporation">
+                                                    <div class="bg-blue card-status card-status-left"></div>
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">Attach Certificates of Incorporation</h3>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="col-lg-12">
+                                                            <div class=""><input id="addMoreCert" type="button"
+                                                                                 value="Add More Certificate"
+                                                                                 class="btn btn-primary"></div>
+                                                            <table class="table table-bordered table-center table-responsive-lg auto-index"
+                                                                   id="certificateTbl">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>Sl no</th>
+                                                                    <th>Document Name</th>
+                                                                    <th>Document Attached</th>
+                                                                    <th>File Size</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="card hide" id="ownerPartner">
+                                                    <div class="bg-blue card-status card-status-left"></div>
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">Name of Owner, Partners and/or others
+                                                            with Controlling Interest</h3>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="col-lg-12">
+                                                            <table class="table table-bordered table-center table-responsive-lg"
+                                                                   id="partnerDtls">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>Nationality</th>
+                                                                    <th>CID/Work Permit No.</th>
+                                                                    <th>Salutation</th>
+                                                                    <th>Name</th>
+                                                                    <th>Gender</th>
+                                                                    <th>Designation</th>
+                                                                    <th>Show<br>in<br>certificate</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td class="country">
+                                                                        <form:select id="countryList"
+                                                                                     class="form-control"
+                                                                                     name="contractor.contractorHRs[0].countryId"
+                                                                                     data-msg-required=""
+                                                                                     data-rule-required="true"
+                                                                                     path="countryList">
+                                                                            <form:option value=""
+                                                                                         label="Select Country"/>
+                                                                            <form:options items="${countryList}"
+                                                                                          itemValue="value"
                                                                                           itemLabel="text"/>
                                                                         </form:select>
-                                                                    </div>
-
-                                                                    <div class="col-lg-6 col-md-6">
-                                                                        <label class="col-lg-4 form-label">Country <span
-                                                                                class="text-danger">*</span></label>
-
-                                                                        <select class="form-control col-lg-7" required="true"
-                                                                                name="contractor.pCountryId" id="pCountryId">
-                                                                            <c:forEach var="item" items="${countryList}">
-                                                                                <option value="${item.value}"><c:out value="${item.text}"/></option>
-                                                                            </c:forEach>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="form-group row">
-                                                                    <div class="col-lg-6 col-lg-6">
-                                                                        <label class="col-lg-4 form-label">Trade License
-                                                                            No</label>
-                                                                        <input type="text" class="col-lg-7 form-control"
-                                                                               name="contractor.tradeLicenseNo" required="true"
-                                                                               placeholder="Text.." id="tradeLicenseNo">
-                                                                    </div>
-                                                                    <div class="col-lg-6 col-lg-6">
-                                                                        <label class="col-lg-4 form-label">Proposed Firm
-                                                                            Name <span class="text-danger">*</span></label>
-                                                                        <input type="text" class="col-lg-7 form-control" id="firmName"
-                                                                               name="contractor.firmName" required="true" placeholder="Text..">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group row">
-                                                                    <div class="col-lg-6 col-md-6">
-                                                                        <label class="col-lg-4 form-label">TPN Number</label>
-                                                                        <input type="text" class="col-lg-7 form-control"
-                                                                               name="contractor.tpn" id="tpn"
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text"
+                                                                               name="contractor.contractorHRs[0].cidNo"
+                                                                               class="form-control hr-cid"
                                                                                placeholder="Text..">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="card hide" id="cIncorporation">
-                                                            <div class="bg-blue card-status card-status-left"></div>
-                                                            <div class="card-header">
-                                                                <h3 class="card-title">Attach Certificates of Incorporation</h3>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <div class="col-lg-12">
-                                                                    <div class=""><input id="addMoreCert" type="button" value="Add More Certificate" class="btn btn-primary"> </div>
-                                                                    <table class="table table-bordered table-center table-responsive-lg auto-index"
-                                                                           id="certificateTbl">
-                                                                        <thead>
-                                                                        <tr>
-                                                                            <th>Sl no</th>
-                                                                            <th>Document Name</th>
-                                                                            <th>Document Attached</th>
-                                                                            <th>File Size</th>
-                                                                            <th>Action</th>
-                                                                        </tr>
-                                                                        </thead>
-                                                                        <tbody>
-
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="card hide" id="ownerPartner">
-                                                            <div class="bg-blue card-status card-status-left"></div>
-                                                            <div class="card-header">
-                                                                <h3 class="card-title">Name of Owner, Partners and/or others
-                                                                    with Controlling Interest</h3>
-                                                            </div>
-                                                            <div class="card-body" >
-                                                                <div class="col-lg-12">
-                                                                    <table class="table table-bordered table-center table-responsive-lg"
-                                                                           id="partnerDtls">
-                                                                        <thead>
-                                                                        <tr>
-                                                                            <th>Nationality</th>
-                                                                            <th>CID/Work Permit No.</th>
-                                                                            <th>Salutation</th>
-                                                                            <th>Name</th>
-                                                                            <th>Gender</th>
-                                                                            <th>Designation</th>
-                                                                            <th>Show<br>in<br>certificate</th>
-                                                                        </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                        <tr>
-                                                                            <td class="country">
-                                                                                <form:select id="countryList" class="form-control"
-                                                                                             name="contractor.contractorHRs[0].countryId"
-                                                                                             data-msg-required="" data-rule-required="true" path="countryList">
-                                                                                    <form:option value="" label="Select Country"/>
-                                                                                    <form:options items="${countryList}" itemValue="value"
-                                                                                                  itemLabel="text"/>
-                                                                                </form:select>
-                                                                            </td>
-                                                                            <td>
-                                                                                <input type="text" name="contractor.contractorHRs[0].cidNo" class="form-control hr-cid"
-                                                                                       placeholder="Text..">
-                                                                            </td>
-                                                                            <td>
-                                                                                <form:select id="salutation" name="contractor.contractorHRs[0].salutationId"
-                                                                                             class="form-control input-sm"
-                                                                                             data-msg-required="true" data-rule-required="true"
-                                                                                             path="salutationList">
-                                                                                    <form:option value="" label="Select Salutation"/>
-                                                                                    <form:options items="${salutationList}" itemValue="value"
-                                                                                                  itemLabel="text"/>
-                                                                                </form:select>
-                                                                            </td>
-                                                                            <td>
-                                                                                <input type="text" class="form-control name" name="contractor.contractorHRs[0].name"
-                                                                                       placeholder="Text..">
-                                                                            </td>
-                                                                            <td>
-                                                                                <select id="gender" name="contractor.contractorHRs[0].sex" class="form-control sex">
-                                                                                    <option value="">Select Gender</option>
-                                                                                    <option value="M">Male</option>
-                                                                                    <option value="F">Female</option>
-                                                                                </select>
-
-                                                                            </td>
-                                                                            <td>
-                                                                                <form:select id="designation" name="contractor.contractorHRs[0].designationId"
-                                                                                             class="form-control input-sm"
-                                                                                             data-msg-required="" data-rule-required="true"
-                                                                                             path="designationList">
-                                                                                    <form:option value="" label="Select Designation"/>
-                                                                                    <form:options items="${designationList}" itemValue="value" itemLabel="text"/>
-                                                                                </form:select>
-
-                                                                            </td>
-                                                                            <td>
-                                                                                <label class="custom-control custom-checkbox ml-6">
-                                                                                    <input type="checkbox" class="custom-control-input showCert"
-                                                                                           name="contractor.contractorHRs[0].siCertificate" value="1">
-                                                                                    <i class="custom-control-label"></i>
-                                                                                </label>
-                                                                            </td>
-                                                                        </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                    <div class="col-lg-12 text-right">
-                                                                        <button type="button"
-                                                                                class="btn btn-outline-primary btn-sm"
-                                                                                onclick="addRow('partnerDtls')">
-                                                                            <i class="fe fe-plus mr-2"></i>Add More
-                                                                        </button>
-                                                                        <button type="button"
-                                                                                class="btn btn-outline-danger btn-sm"
-                                                                                onclick="removeRow('partnerDtls')">
-                                                                            <i class="fe fe-trash mr-2"></i>Remove Last Row
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="card ">
-                                                            <div class="bg-blue card-status card-status-left"></div>
-                                                            <div class="card-header">
-                                                                <h3 class="card-title">Permanent Address</h3>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <div class="col-lg-12">
-                                                                    <div class="col-lg-6 col-md-6 form-group">
-                                                                        <label class="col-lg-4 form-label">Dzongkhag</label>
-                                                                        <select id="pDzongkhagId"
-                                                                                class="form-control input-sm col-lg-8"
-                                                                                name="contractor.pDzongkhagId">
-                                                                            <option value="">Select Dzongkhag</option>
-                                                                            <c:forEach var="item" items="${dzongkhagList}">
-                                                                                <option value="${item.value}"><c:out
-                                                                                        value="${item.text}"/></option>
-                                                                            </c:forEach>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-lg-6 col-md-6 form-group">
-                                                                        <label class="col-lg-4 form-label">Gewog </label>
-                                                                        <select name="contractor.pGewogId" id="pGewogId" class="form-control col-lg-8">
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-12">
-                                                                    <div class="col-lg-6 col-md-6 form-group">
-                                                                        <label class="col-lg-4 form-label">Village </label>
-                                                                        <select name="contractor.pVillageId" id="pVillageId" class="form-control col-lg-8">
-
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="card tab2">
-                                                            <div class="bg-blue card-status card-status-left"></div>
-                                                            <div class="card-header">
-                                                                <h3 class="card-title">Establishment Addresses</h3>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <div class="form-group row">
-                                                                    <div class="col-lg-6 col-md-6 ">
-                                                                        <label class="col-lg-4 form-label" for="estAddress">Establishment
-                                                                            Address <span
-                                                                                    class="text-danger">*</span></label>
-                                                                        <input type="text" class="col-lg-7 form-control"
-                                                                               name="contractor.estAddress" id="estAddress" required="true"
-                                                                               placeholder="Text..">
-                                                                    </div>
-                                                                    <div class="col-lg-6 col-md-6">
-                                                                        <label class="col-lg-4 form-label">Dzongkhag <span
-                                                                                class="text-danger">*</span></label>
-                                                                        <form:select id="regDzongkhagId"
-                                                                                     class="form-control input-sm col-lg-7" required="true"
-                                                                                     path="dzongkhagList" name="contractor.regDzongkhagId">
-                                                                            <form:option value="" label="Select Dzongkhag"/>
-                                                                            <form:options items="${dzongkhagList}" itemValue="value"
+                                                                    </td>
+                                                                    <td>
+                                                                        <form:select id="salutation"
+                                                                                     name="contractor.contractorHRs[0].salutationId"
+                                                                                     class="form-control input-sm"
+                                                                                     data-msg-required="true"
+                                                                                     data-rule-required="true"
+                                                                                     path="salutationList">
+                                                                            <form:option value=""
+                                                                                         label="Select Salutation"/>
+                                                                            <form:options items="${salutationList}"
+                                                                                          itemValue="value"
                                                                                           itemLabel="text"/>
                                                                         </form:select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group row">
-                                                                    <div class="col-lg-6 col-md-6">
-                                                                        <label class="col-lg-4 form-label">Email <span
-                                                                                class="text-danger">*</span></label>
-                                                                        <input type="email" class=" form-control col-lg-7"
-                                                                               name="contractor.regEmail" id="regEmail" required="true"
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" class="form-control name"
+                                                                               name="contractor.contractorHRs[0].name"
                                                                                placeholder="Text..">
-                                                                    </div>
-                                                                    <div class="col-lg-6 col-md-6 ">
-                                                                        <label class="col-lg-4 form-label">Mobile No <span
-                                                                                class="text-danger">*</span></label>
-                                                                        <input type="text" class=" form-control col-lg-7"
-                                                                               name="contractor.regMobileNo" id="regMobileNo" required="true"
-                                                                               placeholder="Text..">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group row">
-                                                                    <div class="col-lg-6 col-md-6">
-                                                                        <label class="col-lg-4 form-label">Telephone No </label>
-                                                                        <input type="text" class="form-control col-lg-7"
-                                                                               name="contractor.regPhoneNo" id="regPhoneNo"
-                                                                               placeholder="Text..">
-                                                                    </div>
-                                                                    <div class="col-lg-6 col-md-6">
-                                                                        <label class="col-lg-4 form-label">Fax No <span
-                                                                                class="text-danger">*</span></label>
-                                                                        <input type="text" class=" form-control col-lg-7"
-                                                                               name="contractor.regFaxNo" required="true"
-                                                                               placeholder="Text..">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <select id="gender"
+                                                                                name="contractor.contractorHRs[0].sex"
+                                                                                class="form-control sex">
+                                                                            <option value="">Select Gender</option>
+                                                                            <option value="M">Male</option>
+                                                                            <option value="F">Female</option>
+                                                                        </select>
 
-                                                    </div>
-                                               <%-- <div class="">
-                                                    <!-- Box Open -->
-                                                    <div class="card tab2">
-                                                        <div class="bg-blue card-status card-status-left"></div>
-                                                        <div class="card-body">
-                                                            <div class="col-lg-12">
-                                                                &lt;%&ndash;<div class="col-lg-6 col-md-6 form-group">
-                                                                    <label class="col-lg-4 form-label">Ownership Type
-                                                                        <span class="text-danger">*</span></label>
-                                                                    <label class="col-lg-8 form-label">Sole
-                                                                        Proprietorship</label>
-                                                                </div>&ndash;%&gt;
-                                                                <div class="col-lg-6 col-md-6 form-group">
-                                                                    <label class="col-lg-4 form-label">Ownership Type
-                                                                        <span class="text-danger">*</span></label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <form:select id="designation"
+                                                                                     name="contractor.contractorHRs[0].designationId"
+                                                                                     class="form-control input-sm"
+                                                                                     data-msg-required=""
+                                                                                     data-rule-required="true"
+                                                                                     path="designationList">
+                                                                            <form:option value=""
+                                                                                         label="Select Designation"/>
+                                                                            <form:options items="${designationList}"
+                                                                                          itemValue="value"
+                                                                                          itemLabel="text"/>
+                                                                        </form:select>
 
-                                                                    <form:select id="ownershipList" class="form-control col-lg-7"
-                                                                                 required="true" path="ownershipList" name="contractor.ownershipTypeId">
-                                                                        <form:option value="" label="Select Ownership Type"/>
-                                                                        <form:options items="${ownershipList}" itemValue="value"
-                                                                                      itemLabel="text"/>
-                                                                    </form:select>
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-6 form-group">
-                                                                    <label class="col-lg-4 form-label">Country <span
-                                                                            class="text-danger">*</span></label>
-                                                                    <label class="col-lg-8 form-label">Belgium</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-12">
-                                                                <div class="col-lg-6 col-md-6 form-group">
-                                                                    <label class="col-lg-4 form-label">Trade License
-                                                                        No</label>
-                                                                    <label class="col-lg-8 form-label">1060001</label>
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-6 form-group">
-                                                                    <label class="col-lg-4 form-label">Proposed Firm
-                                                                        Name <span class="text-danger">*</span></label>
-                                                                    <label class="col-lg-8 form-label">ABC Firm
-                                                                        Name</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-12">
-                                                                <div class="col-lg-6 col-md-6 form-group">
-                                                                    <label class="col-lg-4 form-label">TPN
-                                                                        Number</label>
-                                                                    <label class="col-lg-8 form-label">BIT123123</label>
-                                                                </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <label class="custom-control custom-checkbox ml-6">
+                                                                            <input type="checkbox"
+                                                                                   class="custom-control-input showCert"
+                                                                                   name="contractor.contractorHRs[0].siCertificate"
+                                                                                   value="1">
+                                                                            <i class="custom-control-label"></i>
+                                                                        </label>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <div class="col-lg-12 text-right">
+                                                                <button type="button"
+                                                                        class="btn btn-outline-primary btn-sm"
+                                                                        onclick="addRow('partnerDtls')">
+                                                                    <i class="fe fe-plus mr-2"></i>Add More
+                                                                </button>
+                                                                <button type="button"
+                                                                        class="btn btn-outline-danger btn-sm"
+                                                                        onclick="removeRow('partnerDtls')">
+                                                                    <i class="fe fe-trash mr-2"></i>Remove Last Row
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <!-- Box Close -->
-                                                    <div class="card hide" id="cIncorporation">
-                                                        <div class="bg-blue card-status card-status-left"></div>
-                                                        <div class="card-header">
-                                                            <h3 class="card-title">Attach Certificates of Incorporation</h3>
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <div class="col-lg-12">
-                                                                <div class=""><input id="addMoreCert" type="button" value="Add More Certificate" class="btn btn-primary"> </div>
-                                                                <table class="table table-bordered table-center table-responsive-lg auto-index"
-                                                                       id="certificateTbl">
-                                                                    <thead>
-                                                                    <tr>
-                                                                        <th>Sl no</th>
-                                                                        <th>Document Name</th>
-                                                                        <th>Document Attached</th>
-                                                                        <th>File Size</th>
-                                                                        <th>Action</th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody>
+                                                </div>
 
-                                                                    </tbody>
-                                                                </table>
+                                                <div class="card ">
+                                                    <div class="bg-blue card-status card-status-left"></div>
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">Permanent Address</h3>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="col-lg-12">
+                                                            <div class="col-lg-6 col-md-6 form-group">
+                                                                <label class="col-lg-4 form-label">Dzongkhag</label>
+                                                                <select id="pDzongkhagId"
+                                                                        class="form-control input-sm col-lg-8"
+                                                                        name="contractor.pDzongkhagId">
+                                                                    <option value="">Select Dzongkhag</option>
+                                                                    <c:forEach var="item" items="${dzongkhagList}">
+                                                                        <option value="${item.value}"><c:out
+                                                                                value="${item.text}"/></option>
+                                                                    </c:forEach>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 form-group">
+                                                                <label class="col-lg-4 form-label">Gewog </label>
+                                                                <select name="contractor.pGewogId" id="pGewogId"
+                                                                        class="form-control col-lg-8">
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="col-lg-6 col-md-6 form-group">
+                                                                <label class="col-lg-4 form-label">Village </label>
+                                                                <select name="contractor.pVillageId" id="pVillageId"
+                                                                        class="form-control col-lg-8">
+
+                                                                </select>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
 
-                                                    <div id="CheckModal" class="modal fade in " tabindex="-1"
-                                                         role="dialog" aria-labelledby="myModalLabel"
-                                                         style="display: none; padding-right: 6px;">
-                                                        <div class="modal-dialog" style=" max-width: 900px;">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h4 id="myModalLabel" class="modal-title"><i
-                                                                            class="fa fa-info-circle fa-lg"></i>
-                                                                        Personal Check<span id="cid"></span></h4>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="panel panel-default">
-                                                                        <div class="panel-body">
-                                                                            <div id="modal-print">
-                                                                                <div class="form-group">
-                                                                                    <p align="center">
-                                                                                        <strong><u>Caution</u></strong>
-                                                                                    </p>
-
-                                                                                    <p align="center"><strong>An
-                                                                                        engineer is allowed to execute
-                                                                                        only two work at a time for that
-                                                                                        particular firm.</strong></p>
-
-                                                                                    <p align="center"><strong>For any
-                                                                                        other Human Resource they are
-                                                                                        allowed to involve only in a
-                                                                                        single project of work</strong>
-                                                                                    </p>
-
-                                                                                    <p align="center"><font size="5px;">Details
-                                                                                        of CID No: <span
-                                                                                                id="cidchecked">123213</span></font>
-                                                                                    </p>
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <div class="col-lg-9 mt-8">
-                                                                                        <span class=""><b>From DCRC
-                                                                                            database</b></span>
-
-                                                                                        <div class="col-lg-12 form-group mb-0 pt-4">
-                                                                                            <label class="col-lg-3 form-label">Sex</label>
-                                                                                            <label class="col-lg-8 form-label">Male</label>
-                                                                                        </div>
-                                                                                        <div class="col-lg-12 form-group mb-0">
-                                                                                            <label class="col-lg-3 form-label">Name</label>
-                                                                                            <label class="col-lg-8 form-label">Tshewan
-                                                                                                Tenzin</label>
-                                                                                        </div>
-                                                                                        <div class="col-lg-12 form-group mb-0">
-                                                                                            <label class="col-lg-3 form-label">Dzongkhag</label>
-                                                                                            <label class="col-lg-8 form-label">Samtse</label>
-                                                                                        </div>
-                                                                                        <div class="col-lg-12 form-group mb-0">
-                                                                                            <label class="col-lg-3 form-label">Gewog</label>
-                                                                                            <label class="col-lg-8 form-label">Samtse</label>
-                                                                                        </div>
-                                                                                        <div class="col-lg-12 form-group mb-0">
-                                                                                            <label class="col-lg-3 form-label">Village</label>
-                                                                                            <label class="col-lg-8 form-label">Samtse</label>
-                                                                                        </div>
-                                                                                        <div class="col-lg-12 form-group mb-0">
-                                                                                            <label class="col-lg-3 form-label">DOB</label>
-                                                                                            <label class="col-lg-8 form-label">1991-01-01</label>
-                                                                                        </div>
-
-                                                                                    </div>
-                                                                                    <div class="col-lg-3"
-                                                                                         align="center">
-                                                                                        <br><br><span id="photoSpan"
-                                                                                                      style=""><img
-                                                                                            src="../assets/images/ip.jpeg"></span>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <div class="col-lg-12"
-                                                                                         align="center">
-                                                                                        <p><span id="dcbinfo"><b>Human
-                                                                                            Resource is not registered
-                                                                                            in any of the CDB
-                                                                                            firm</b><br><br> This person is not engaged in any work or project<br>This personis not a civil servant</span>
-                                                                                        </p>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <p align="center">With regard to
-                                                                                        Corporate Employee please verify
-                                                                                        with the concern agencies. There
-                                                                                        may be certain
-                                                                                        inconsistency.</p>
-                                                                                    <hr>
-                                                                                    <p align="center"><strong>Print this
-                                                                                        page as an evidence to prove
-                                                                                        that particular HR is engaged or
-                                                                                        not in a work or
-                                                                                        project</strong></p>
-
-                                                                                    <p align="center">
-                                                                                        Printed on: <span id="dateSpan"
-                                                                                                          style="display: none;"></span>
-
-                                                                                        By:Ugyen Doelma
-                                                                                    </p>
-                                                                                </div>
-                                                                            </div>
-                                                                            <button type="button"
-                                                                                    class="btn btn-primary"
-                                                                                    onclick="javascript:printDiv('modal-print')">
-                                                                                Print
-                                                                            </button>
-                                                                            <button type="button"
-                                                                                    class="btn btn-success"
-                                                                                    id="closeModal"
-                                                                                    onclick="checkBtn('checkver1')"
-                                                                                    data-dismiss="modal">OK
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                <div class="card tab2">
+                                                    <div class="bg-blue card-status card-status-left"></div>
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">Establishment Addresses</h3>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="form-group row">
+                                                            <div class="col-lg-6 col-md-6 ">
+                                                                <label class="col-lg-4 form-label" for="estAddress">Establishment
+                                                                    Address <span
+                                                                            class="text-danger">*</span></label>
+                                                                <input type="text" class="col-lg-7 form-control"
+                                                                       name="contractor.estAddress" id="estAddress"
+                                                                       required="true"
+                                                                       placeholder="Text..">
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <label class="col-lg-4 form-label">Dzongkhag <span
+                                                                        class="text-danger">*</span></label>
+                                                                <form:select id="regDzongkhagId"
+                                                                             class="form-control input-sm col-lg-7"
+                                                                             required="true"
+                                                                             path="dzongkhagList"
+                                                                             name="contractor.regDzongkhagId">
+                                                                    <form:option value="" label="Select Dzongkhag"/>
+                                                                    <form:options items="${dzongkhagList}"
+                                                                                  itemValue="value"
+                                                                                  itemLabel="text"/>
+                                                                </form:select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <label class="col-lg-4 form-label">Email <span
+                                                                        class="text-danger">*</span></label>
+                                                                <input type="email" class=" form-control col-lg-7"
+                                                                       name="contractor.regEmail" id="regEmail"
+                                                                       required="true"
+                                                                       placeholder="Text..">
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 ">
+                                                                <label class="col-lg-4 form-label">Mobile No <span
+                                                                        class="text-danger">*</span></label>
+                                                                <input type="text" class=" form-control col-lg-7"
+                                                                       name="contractor.regMobileNo" id="regMobileNo"
+                                                                       required="true"
+                                                                       placeholder="Text..">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <label class="col-lg-4 form-label">Telephone No </label>
+                                                                <input type="text" class="form-control col-lg-7"
+                                                                       name="contractor.regPhoneNo" id="regPhoneNo"
+                                                                       placeholder="Text..">
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <label class="col-lg-4 form-label">Fax No <span
+                                                                        class="text-danger">*</span></label>
+                                                                <input type="text" class=" form-control col-lg-7"
+                                                                       name="contractor.regFaxNo" required="true"
+                                                                       placeholder="Text..">
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
+
+                                            </div>
+                                            <%-- <div class="">
+                                                 <!-- Box Open -->
+                                                 <div class="card tab2">
+                                                     <div class="bg-blue card-status card-status-left"></div>
+                                                     <div class="card-body">
+                                                         <div class="col-lg-12">
+                                                             &lt;%&ndash;<div class="col-lg-6 col-md-6 form-group">
+                                                                 <label class="col-lg-4 form-label">Ownership Type
+                                                                     <span class="text-danger">*</span></label>
+                                                                 <label class="col-lg-8 form-label">Sole
+                                                                     Proprietorship</label>
+                                                             </div>&ndash;%&gt;
+                                                             <div class="col-lg-6 col-md-6 form-group">
+                                                                 <label class="col-lg-4 form-label">Ownership Type
+                                                                     <span class="text-danger">*</span></label>
+
+                                                                 <form:select id="ownershipList" class="form-control col-lg-7"
+                                                                              required="true" path="ownershipList" name="contractor.ownershipTypeId">
+                                                                     <form:option value="" label="Select Ownership Type"/>
+                                                                     <form:options items="${ownershipList}" itemValue="value"
+                                                                                   itemLabel="text"/>
+                                                                 </form:select>
+                                                             </div>
+                                                             <div class="col-lg-6 col-md-6 form-group">
+                                                                 <label class="col-lg-4 form-label">Country <span
+                                                                         class="text-danger">*</span></label>
+                                                                 <label class="col-lg-8 form-label">Belgium</label>
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-lg-12">
+                                                             <div class="col-lg-6 col-md-6 form-group">
+                                                                 <label class="col-lg-4 form-label">Trade License
+                                                                     No</label>
+                                                                 <label class="col-lg-8 form-label">1060001</label>
+                                                             </div>
+                                                             <div class="col-lg-6 col-md-6 form-group">
+                                                                 <label class="col-lg-4 form-label">Proposed Firm
+                                                                     Name <span class="text-danger">*</span></label>
+                                                                 <label class="col-lg-8 form-label">ABC Firm
+                                                                     Name</label>
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-lg-12">
+                                                             <div class="col-lg-6 col-md-6 form-group">
+                                                                 <label class="col-lg-4 form-label">TPN
+                                                                     Number</label>
+                                                                 <label class="col-lg-8 form-label">BIT123123</label>
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                                 <!-- Box Close -->
+                                                 <div class="card hide" id="cIncorporation">
+                                                     <div class="bg-blue card-status card-status-left"></div>
+                                                     <div class="card-header">
+                                                         <h3 class="card-title">Attach Certificates of Incorporation</h3>
+                                                     </div>
+                                                     <div class="card-body">
+                                                         <div class="col-lg-12">
+                                                             <div class=""><input id="addMoreCert" type="button" value="Add More Certificate" class="btn btn-primary"> </div>
+                                                             <table class="table table-bordered table-center table-responsive-lg auto-index"
+                                                                    id="certificateTbl">
+                                                                 <thead>
+                                                                 <tr>
+                                                                     <th>Sl no</th>
+                                                                     <th>Document Name</th>
+                                                                     <th>Document Attached</th>
+                                                                     <th>File Size</th>
+                                                                     <th>Action</th>
+                                                                 </tr>
+                                                                 </thead>
+                                                                 <tbody>
+
+                                                                 </tbody>
+                                                             </table>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+
+                                                 <div id="CheckModal" class="modal fade in " tabindex="-1"
+                                                      role="dialog" aria-labelledby="myModalLabel"
+                                                      style="display: none; padding-right: 6px;">
+                                                     <div class="modal-dialog" style=" max-width: 900px;">
+                                                         <div class="modal-content">
+                                                             <div class="modal-header">
+                                                                 <h4 id="myModalLabel" class="modal-title"><i
+                                                                         class="fa fa-info-circle fa-lg"></i>
+                                                                     Personal Check<span id="cid"></span></h4>
+                                                             </div>
+                                                             <div class="modal-body">
+                                                                 <div class="panel panel-default">
+                                                                     <div class="panel-body">
+                                                                         <div id="modal-print">
+                                                                             <div class="form-group">
+                                                                                 <p align="center">
+                                                                                     <strong><u>Caution</u></strong>
+                                                                                 </p>
+
+                                                                                 <p align="center"><strong>An
+                                                                                     engineer is allowed to execute
+                                                                                     only two work at a time for that
+                                                                                     particular firm.</strong></p>
+
+                                                                                 <p align="center"><strong>For any
+                                                                                     other Human Resource they are
+                                                                                     allowed to involve only in a
+                                                                                     single project of work</strong>
+                                                                                 </p>
+
+                                                                                 <p align="center"><font size="5px;">Details
+                                                                                     of CID No: <span
+                                                                                             id="cidchecked">123213</span></font>
+                                                                                 </p>
+                                                                             </div>
+                                                                             <div class="form-group">
+                                                                                 <div class="col-lg-9 mt-8">
+                                                                                     <span class=""><b>From DCRC
+                                                                                         database</b></span>
+
+                                                                                     <div class="col-lg-12 form-group mb-0 pt-4">
+                                                                                         <label class="col-lg-3 form-label">Sex</label>
+                                                                                         <label class="col-lg-8 form-label">Male</label>
+                                                                                     </div>
+                                                                                     <div class="col-lg-12 form-group mb-0">
+                                                                                         <label class="col-lg-3 form-label">Name</label>
+                                                                                         <label class="col-lg-8 form-label">Tshewan
+                                                                                             Tenzin</label>
+                                                                                     </div>
+                                                                                     <div class="col-lg-12 form-group mb-0">
+                                                                                         <label class="col-lg-3 form-label">Dzongkhag</label>
+                                                                                         <label class="col-lg-8 form-label">Samtse</label>
+                                                                                     </div>
+                                                                                     <div class="col-lg-12 form-group mb-0">
+                                                                                         <label class="col-lg-3 form-label">Gewog</label>
+                                                                                         <label class="col-lg-8 form-label">Samtse</label>
+                                                                                     </div>
+                                                                                     <div class="col-lg-12 form-group mb-0">
+                                                                                         <label class="col-lg-3 form-label">Village</label>
+                                                                                         <label class="col-lg-8 form-label">Samtse</label>
+                                                                                     </div>
+                                                                                     <div class="col-lg-12 form-group mb-0">
+                                                                                         <label class="col-lg-3 form-label">DOB</label>
+                                                                                         <label class="col-lg-8 form-label">1991-01-01</label>
+                                                                                     </div>
+
+                                                                                 </div>
+                                                                                 <div class="col-lg-3"
+                                                                                      align="center">
+                                                                                     <br><br><span id="photoSpan"
+                                                                                                   style=""><img
+                                                                                         src="../assets/images/ip.jpeg"></span>
+                                                                                 </div>
+                                                                             </div>
+                                                                             <div class="form-group">
+                                                                                 <div class="col-lg-12"
+                                                                                      align="center">
+                                                                                     <p><span id="dcbinfo"><b>Human
+                                                                                         Resource is not registered
+                                                                                         in any of the CDB
+                                                                                         firm</b><br><br> This person is not engaged in any work or project<br>This personis not a civil servant</span>
+                                                                                     </p>
+                                                                                 </div>
+                                                                             </div>
+                                                                             <div class="form-group">
+                                                                                 <p align="center">With regard to
+                                                                                     Corporate Employee please verify
+                                                                                     with the concern agencies. There
+                                                                                     may be certain
+                                                                                     inconsistency.</p>
+                                                                                 <hr>
+                                                                                 <p align="center"><strong>Print this
+                                                                                     page as an evidence to prove
+                                                                                     that particular HR is engaged or
+                                                                                     not in a work or
+                                                                                     project</strong></p>
+
+                                                                                 <p align="center">
+                                                                                     Printed on: <span id="dateSpan"
+                                                                                                       style="display: none;"></span>
+
+                                                                                     By:Ugyen Doelma
+                                                                                 </p>
+                                                                             </div>
+                                                                         </div>
+                                                                         <button type="button"
+                                                                                 class="btn btn-primary"
+                                                                                 onclick="javascript:printDiv('modal-print')">
+                                                                             Print
+                                                                         </button>
+                                                                         <button type="button"
+                                                                                 class="btn btn-success"
+                                                                                 id="closeModal"
+                                                                                 onclick="checkBtn('checkver1')"
+                                                                                 data-dismiss="modal">OK
+                                                                         </button>
+                                                                     </div>
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                 </div>
 
 
-                                                    <!-- Box Close -->
-                                                    <!-- Box Open -->
-                                                    <div class="card tab2">
-                                                        <div class="bg-blue card-status card-status-left"></div>
-                                                        <div class="card-header">
-                                                            <h3 class="card-title">Permanent Address</h3>
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <div class="col-lg-12">
-                                                                <div class="col-lg-6 col-md-6 form-group">
-                                                                    <label class="col-lg-4 form-label">Dzongkhag</label>
-                                                                    <label class="col-lg-8 form-label">Bumthang</label>
+                                                 <!-- Box Close -->
+                                                 <!-- Box Open -->
+                                                 <div class="card tab2">
+                                                     <div class="bg-blue card-status card-status-left"></div>
+                                                     <div class="card-header">
+                                                         <h3 class="card-title">Permanent Address</h3>
+                                                     </div>
+                                                     <div class="card-body">
+                                                         <div class="col-lg-12">
+                                                             <div class="col-lg-6 col-md-6 form-group">
+                                                                 <label class="col-lg-4 form-label">Dzongkhag</label>
+                                                                 <label class="col-lg-8 form-label">Bumthang</label>
 
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-6 form-group">
-                                                                    <label class="col-lg-4 form-label">Gewog </label>
-                                                                    <label class="col-lg-8 form-label">Chokhor</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-12">
-                                                                <div class="col-lg-6 col-md-6 form-group">
-                                                                    <label class="col-lg-4 form-label">Village </label>
-                                                                    <label class="col-lg-8 form-label">Chamkhar</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Box Close -->
-                                                    <!-- Box Open -->
+                                                             </div>
+                                                             <div class="col-lg-6 col-md-6 form-group">
+                                                                 <label class="col-lg-4 form-label">Gewog </label>
+                                                                 <label class="col-lg-8 form-label">Chokhor</label>
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-lg-12">
+                                                             <div class="col-lg-6 col-md-6 form-group">
+                                                                 <label class="col-lg-4 form-label">Village </label>
+                                                                 <label class="col-lg-8 form-label">Chamkhar</label>
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                                 <!-- Box Close -->
+                                                 <!-- Box Open -->
 
-                                                    <!-- Box Close -->
-                                                    <!-- Box Open -->
-                                                    <div class="card tab2">
-                                                        <div class="bg-blue card-status card-status-left"></div>
-                                                        <div class="card-header">
-                                                            <h3 class="card-title">Establishment Addresses</h3>
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <div class="col-lg-12">
-                                                                <div class="col-lg-6 col-md-6 form-group">
-                                                                    <label class="col-lg-5 form-label">Establishment
-                                                                        Address <span
-                                                                                class="text-danger">*</span></label>
-                                                                    <label class="col-lg-7 form-label">Olakha,
-                                                                        Thimphu</label>
+                                                 <!-- Box Close -->
+                                                 <!-- Box Open -->
+                                                 <div class="card tab2">
+                                                     <div class="bg-blue card-status card-status-left"></div>
+                                                     <div class="card-header">
+                                                         <h3 class="card-title">Establishment Addresses</h3>
+                                                     </div>
+                                                     <div class="card-body">
+                                                         <div class="col-lg-12">
+                                                             <div class="col-lg-6 col-md-6 form-group">
+                                                                 <label class="col-lg-5 form-label">Establishment
+                                                                     Address <span
+                                                                             class="text-danger">*</span></label>
+                                                                 <label class="col-lg-7 form-label">Olakha,
+                                                                     Thimphu</label>
 
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-6 form-group">
-                                                                    <label class="col-lg-5 form-label">Dzongkhag <span
-                                                                            class="text-danger">*</span></label>
-                                                                    <label class="col-lg-7 form-label">Samtse</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-12">
-                                                                <div class="col-lg-6 col-md-6 form-group">
-                                                                    <label class="col-lg-5 form-label">Email <span
-                                                                            class="text-danger">*</span></label>
-                                                                    <label class="col-lg-7 form-label">abc@gmail.com</label>
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-6 form-group">
-                                                                    <label class="col-lg-5 form-label">Mobile No <span
-                                                                            class="text-danger">*</span></label>
-                                                                    <label class="col-lg-7 form-label">17897654</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-12">
-                                                                <div class="col-lg-6 col-md-6 form-group">
-                                                                    <label class="col-lg-5 form-label">Telephone
-                                                                        No </label>
-                                                                    <label class="col-lg-7 form-label">365543</label>
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-6 form-group">
-                                                                    <label class="col-lg-5 form-label">Fax No <span
-                                                                            class="text-danger">*</span></label>
-                                                                    <label class="col-lg-7 form-label">365789</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Box Close -->
-                                                    <!-- Box Open -->
-                                                    <div class="card tab2">
-                                                        <div class="bg-blue card-status card-status-left"></div>
-                                                        <div class="card-header">
-                                                            <h3 class="card-title">Proposed Establishment Addresses</h3>
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <div class="col-lg-12">
-                                                                <div class="col-lg-6 col-md-6 form-group">
-                                                                    <label class="col-lg-5 form-label">Establishment
-                                                                        Address <span
-                                                                                class="text-danger">*</span></label>
-                                                                    <input type="text" class="col-lg-7 form-control"
-                                                                           name="example-text-input"
-                                                                           placeholder="Text..">
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-6 form-group">
-                                                                    <label class="col-lg-5 form-label">Dzongkhag <span
-                                                                            class="text-danger">*</span></label>
-                                                                    <select name="beast" id="select-beast"
-                                                                            class="form-control custom-select col-lg-7">
-                                                                        <option value="1">Samtse</option>
-                                                                        <option value="4">Thimphu</option>
-                                                                        <option value="3">Paro</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-12">
-                                                                <div class="col-lg-6 col-md-6 form-group">
-                                                                    <label class="col-lg-5 form-label">Email <span
-                                                                            class="text-danger">*</span></label>
-                                                                    <input type="text" class=" form-control col-lg-7"
-                                                                           name="example-text-input"
-                                                                           placeholder="Text..">
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-6 form-group">
-                                                                    <label class="col-lg-5 form-label">Mobile No <span
-                                                                            class="text-danger">*</span></label>
-                                                                    <input type="text" class=" form-control col-lg-7"
-                                                                           name="example-text-input"
-                                                                           placeholder="Text..">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-12">
-                                                                <div class="col-lg-6 col-md-6 form-group">
-                                                                    <label class="col-lg-5 form-label">Telephone
-                                                                        No </label>
-                                                                    <input type="text" class="form-control col-lg-7"
-                                                                           name="example-text-input"
-                                                                           placeholder="Text..">
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-6 form-group">
-                                                                    <label class="col-lg-5 form-label">Fax No <span
-                                                                            class="text-danger">*</span></label>
-                                                                    <input type="text" class=" form-control col-lg-7"
-                                                                           name="example-text-input"
-                                                                           placeholder="Text..">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Box Close -->
-                                                </div>--%>
+                                                             </div>
+                                                             <div class="col-lg-6 col-md-6 form-group">
+                                                                 <label class="col-lg-5 form-label">Dzongkhag <span
+                                                                         class="text-danger">*</span></label>
+                                                                 <label class="col-lg-7 form-label">Samtse</label>
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-lg-12">
+                                                             <div class="col-lg-6 col-md-6 form-group">
+                                                                 <label class="col-lg-5 form-label">Email <span
+                                                                         class="text-danger">*</span></label>
+                                                                 <label class="col-lg-7 form-label">abc@gmail.com</label>
+                                                             </div>
+                                                             <div class="col-lg-6 col-md-6 form-group">
+                                                                 <label class="col-lg-5 form-label">Mobile No <span
+                                                                         class="text-danger">*</span></label>
+                                                                 <label class="col-lg-7 form-label">17897654</label>
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-lg-12">
+                                                             <div class="col-lg-6 col-md-6 form-group">
+                                                                 <label class="col-lg-5 form-label">Telephone
+                                                                     No </label>
+                                                                 <label class="col-lg-7 form-label">365543</label>
+                                                             </div>
+                                                             <div class="col-lg-6 col-md-6 form-group">
+                                                                 <label class="col-lg-5 form-label">Fax No <span
+                                                                         class="text-danger">*</span></label>
+                                                                 <label class="col-lg-7 form-label">365789</label>
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                                 <!-- Box Close -->
+                                                 <!-- Box Open -->
+                                                 <div class="card tab2">
+                                                     <div class="bg-blue card-status card-status-left"></div>
+                                                     <div class="card-header">
+                                                         <h3 class="card-title">Proposed Establishment Addresses</h3>
+                                                     </div>
+                                                     <div class="card-body">
+                                                         <div class="col-lg-12">
+                                                             <div class="col-lg-6 col-md-6 form-group">
+                                                                 <label class="col-lg-5 form-label">Establishment
+                                                                     Address <span
+                                                                             class="text-danger">*</span></label>
+                                                                 <input type="text" class="col-lg-7 form-control"
+                                                                        name="example-text-input"
+                                                                        placeholder="Text..">
+                                                             </div>
+                                                             <div class="col-lg-6 col-md-6 form-group">
+                                                                 <label class="col-lg-5 form-label">Dzongkhag <span
+                                                                         class="text-danger">*</span></label>
+                                                                 <select name="beast" id="select-beast"
+                                                                         class="form-control custom-select col-lg-7">
+                                                                     <option value="1">Samtse</option>
+                                                                     <option value="4">Thimphu</option>
+                                                                     <option value="3">Paro</option>
+                                                                 </select>
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-lg-12">
+                                                             <div class="col-lg-6 col-md-6 form-group">
+                                                                 <label class="col-lg-5 form-label">Email <span
+                                                                         class="text-danger">*</span></label>
+                                                                 <input type="text" class=" form-control col-lg-7"
+                                                                        name="example-text-input"
+                                                                        placeholder="Text..">
+                                                             </div>
+                                                             <div class="col-lg-6 col-md-6 form-group">
+                                                                 <label class="col-lg-5 form-label">Mobile No <span
+                                                                         class="text-danger">*</span></label>
+                                                                 <input type="text" class=" form-control col-lg-7"
+                                                                        name="example-text-input"
+                                                                        placeholder="Text..">
+                                                             </div>
+                                                         </div>
+                                                         <div class="col-lg-12">
+                                                             <div class="col-lg-6 col-md-6 form-group">
+                                                                 <label class="col-lg-5 form-label">Telephone
+                                                                     No </label>
+                                                                 <input type="text" class="form-control col-lg-7"
+                                                                        name="example-text-input"
+                                                                        placeholder="Text..">
+                                                             </div>
+                                                             <div class="col-lg-6 col-md-6 form-group">
+                                                                 <label class="col-lg-5 form-label">Fax No <span
+                                                                         class="text-danger">*</span></label>
+                                                                 <input type="text" class=" form-control col-lg-7"
+                                                                        name="example-text-input"
+                                                                        placeholder="Text..">
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                                 <!-- Box Close -->
+                                             </div>--%>
                                             <div class="col-lg-12 form-group">
                                                 <button type="button" onclick="nextTab('feesStructure','services')"
                                                         class="btn btn-azure col-lg-offset-9">
@@ -1035,40 +1074,42 @@
                                         </div>
                                     </div>
                                 </div>
-                                </form>
+                            </form>
 
-                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
-                     class="modal in" id="confirmationModel">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <span><b>Confirmation!</b></span>
-                            </div>
-                            <div class="modal-body form-horizontal">
-                                <div class="alert alert-info">
-                                    <div class="row">
-                                        <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
-                                            <span id="messages"></span>
-                                        </div>
+            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+                 class="modal in" id="confirmationModel">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <span><b>Confirmation!</b></span>
+                        </div>
+                        <div class="modal-body form-horizontal">
+                            <div class="alert alert-info">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                        <span id="messages"></span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-success" onclick="submitApplication()">Yes</button>
-                                <button type="button" class="btn btn-warning" onclick="closemodel('confirmationModel')"><span class="fa fa-times"></span> No</button>
-                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" onclick="submitApplication()">Yes</button>
+                            <button type="button" class="btn btn-warning" onclick="closemodel('confirmationModel')">
+                                <span class="fa fa-times"></span> No
+                            </button>
                         </div>
                     </div>
                 </div>
-
             </div>
+
         </div>
     </div>
+</div>
 
 <script type="text/javascript" src="<c:url value="/resources/JqueryAjaxFormSubmit.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/jquery.form.js"/>"></script>

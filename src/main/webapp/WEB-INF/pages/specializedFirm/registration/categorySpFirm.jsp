@@ -7,7 +7,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <div class="div-actual">
     <div class="card tab2" id="firmCate_">
         <div class="bg-blue card-status card-status-left"></div>

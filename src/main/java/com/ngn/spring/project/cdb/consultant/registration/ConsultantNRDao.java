@@ -6,6 +6,7 @@ import com.ngn.spring.project.cdb.consultant.registration.dto.ConsultantDTOFetch
 import com.ngn.spring.project.cdb.consultant.registration.dto.ConsultantTrainingDTO;
 import com.ngn.spring.project.cdb.consultant.model.Consultant;
 import com.ngn.spring.project.cdb.consultant.model.ConsultantFinal;
+import com.ngn.spring.project.cdb.contractor.registration.dto.CategoryDTO;
 import com.ngn.spring.project.cdb.contractor.registration.dto.FeeStructureDTO;
 import com.ngn.spring.project.lib.DropdownDTO;
 import org.springframework.stereotype.Repository;
@@ -101,4 +102,8 @@ public class ConsultantNRDao extends BaseDao {
         return hibernateQuery(sqlQuery).setParameter("firmName",firmName).list().isEmpty();
     }
 
+    public List gFeeStructureRO(String category) {
+        sqlQuery = properties.getProperty("ConsultantDao.gConsultantCategoryRO");
+        return hibernateQuery(sqlQuery, FeeStructureDTO.class).setParameter("category",category).list();
+    }
 }

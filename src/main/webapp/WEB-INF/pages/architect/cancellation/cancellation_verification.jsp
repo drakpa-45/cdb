@@ -8,10 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <body>
-
-
 <div class="mt-5">
     <div class="container mb-9">
         <div class="row">
@@ -23,7 +21,7 @@
                 </div>
                 <!-- tab open -->
                 <div class="card" id="registrtaionFormCard">
-                    <form action="#" id="architectverificationForm" >
+                    <form action="#" id="architectverificationForm">
                         <div class="card-header">
                             <h3 class="card-title font-weight-bold">Cancellation of Architect</h3>
                         </div>
@@ -34,7 +32,6 @@
                                         <div class="tab-content border p-3 col-lg-12">
                                             <div class="tab-pane active personalInformation" id="personalInformation">
                                                 <div class="">
-
                                                     <div class="card tab2">
                                                         <div class="bg-blue card-status card-status-left"></div>
                                                         <div class="card-header">
@@ -51,7 +48,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
-                                                                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Cid No:</label>
+                                                                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Cid Number:</label>
                                                                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                             <input type="text" readonly id="cidNo" value="${appDetails.cidNo}" name="cidNo" class="form-control number">
                                                                         </div>
@@ -59,7 +56,7 @@
                                                                     <div class="form-group row">
                                                                         <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Name:</label>
                                                                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                                            <input type="text" readonly  name="fullname" value="${appDetails.fullname}" maxlength="100" id="name" class="form-control">
+                                                                            <input type="text" readonly name="fullname" value="${appDetails.fullname}" maxlength="100" id="name" class="form-control">
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
@@ -78,12 +75,12 @@
                                                                         <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Village:</label>
                                                                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                             <input type="text" value="${appDetails.village}" readonly maxlength="100" id="village" name="village" class="form-control">
-                                                                            <input type="hidden"  name="villageId" id="villageId">
+                                                                            <input type="hidden" name="villageId" id="villageId">
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                    <img src='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo=${appDetails.cidNo}'  width='200px'  height='200px' class='pull-right'/>
+                                                                    <img src='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo=${appDetails.cidNo}' width='200px' height='200px' class='pull-right'/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -104,11 +101,10 @@
                                                                     <input type="text" value="${appDetails.referenceNo}" readonly id="referenceNo" name="referenceNo" class="form-control">
                                                                 </div>
                                                             </div>
-
                                                             <div class="col-lg-12">
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <label>Expiry Date: </label>
-                                                                    <input type="text" value="${appDetails.regExpDate}" readonly id="regExpDate"class="form-control">
+                                                                    <input type="text" value="${appDetails.regExpDate}" readonly id="regExpDate" class="form-control">
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <label>Applied Date: </label>
@@ -125,7 +121,7 @@
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Service for:</label>
                                                                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                                        <select class="form-control"  name="serviceTypeId">
+                                                                        <select class="form-control" name="serviceTypeId">
                                                                             <option value="030ace8e-24af-11e6-967f-9c2a70cc8e06">Architecture</option>
                                                                         </select>
                                                                     </div>
@@ -160,7 +156,7 @@
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <label>Mobile No:</label>
-                                                                    <input type="text" class=" form-control number" value="${appDetails.mobileNo}" readonly id="mobileNo" name="mobileNo"  maxlength="8">
+                                                                    <input type="text" class=" form-control number" value="${appDetails.mobileNo}" readonly id="mobileNo" name="mobileNo" maxlength="8">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-12">
@@ -190,13 +186,13 @@
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <label>Year of graduation:</label>
-                                                                    <input type="text" class=" form-control number" value="${fn:substring(appDetails.graduationyr, 0, 4)}" readonly name="graduationYear" >
+                                                                    <input type="text" class=" form-control number" value="${fn:substring(appDetails.graduationyr, 0, 4)}" readonly name="graduationYear">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <label>University:</label>
-                                                                    <input type="text" class="form-control " name="universityName"value="${appDetails.universityName}" readonly>
+                                                                    <input type="text" class="form-control " name="universityName" value="${appDetails.universityName}" readonly>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <label>Country of unversity:</label>
@@ -217,28 +213,21 @@
                                                                     <table class="table">
                                                                         <tbody>
                                                                         <tr>
-                                                                            <td colspan="2"
-                                                                                class="font-blue-madison bold warning">Application Submitter Details
-                                                                            </td>
+                                                                            <td colspan="2" class="font-blue-madison bold warning">Application Submitter Details</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>
                                                                                 <table class="table table-condensed">
                                                                                     <tr>
-                                                                                        <td><strong>Date of application:</strong>
-                                                                                        </td>
+                                                                                        <td><strong>Date ofapplication:</strong></td>
                                                                                         <td>${appDetails.applicationDate}</td>
                                                                                     </tr>
                                                                                     <tr>
-                                                                                        <td>
-                                                                                            <strong>Remarks: </strong>
-                                                                                        </td>
+                                                                                        <td><strong>Remarks: </strong></td>
                                                                                         <td>${appDetails.remarks}</td>
                                                                                     </tr>
                                                                                     <tr>
-                                                                                        <td>
-                                                                                            <strong>CreatedBy: </strong>
-                                                                                        </td>
+                                                                                        <td><strong>CreatedBy: </strong></td>
                                                                                         <td>${appDetails.createdBy}</td>
                                                                                     </tr>
                                                                                 </table>
@@ -250,7 +239,6 @@
                                                             </div>
                                                         </div>
                                                         <input type="hidden" class=" form-control number" value="${appDetails.cdbNo}" readonly name="cdbNo">
-
                                                         <div class="row pt-4">
                                                             <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
                                                                 <label class="form-label">Your Remarks:</label>
@@ -261,25 +249,26 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                                <hr />
-                                                <div class="form-group row pull-right">
-                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                                                        <button type="button" onclick="previousTab('categoryDtls','saveAndPreview')"  class="btn btn-success">
-                                                            <i class="fa fa-arrow-circle-left"></i>  Previous
+                                            <hr/>
+                                            <div class="form-group row pull-right">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                                                    <button type="button" onclick="previousTab('categoryDtls','saveAndPreview')" class="btn btn-success">
+                                                        <i class="fa fa-arrow-circle-left"></i> Previous
+                                                    </button>
+                                                    <button class="btn btn-warning" type="button" id="showrejectsection" onclick="updateReject()"><span class="fa fa-times"></span>Reject
+                                                    </button>
+                                                    <c:if test="${appDetails.updateStatus=='262a3f11-adbd-11e4-99d7-080027dcfac6'}">
+                                                        <button type="button" onclick="verifyApplication()" class="btn btn-primary">
+                                                            <i class="fa fa-save"></i> Verify
                                                         </button>
-                                                        <button class="btn btn-warning" type="button" id="showrejectsection" onclick="updateReject()"><span class="fa fa-times"></span> Reject </button>
-                                                        <c:if test="${appDetails.updateStatus=='262a3f11-adbd-11e4-99d7-080027dcfac6'}">
-                                                            <button type="button" onclick="verifyApplication()"  class="btn btn-primary">
-                                                                <i class="fa fa-save"></i> Verify
-                                                            </button>
-                                                        </c:if>
-                                                        <c:if test="${appDetails.updateStatus=='36f9627a-adbd-11e4-99d7-080027dcfac6'}">
-                                                            <button type="button" onclick="approveApplication('cancel')"  class="btn btn-primary">
-                                                                <i class="fa fa-save"></i> Approve
-                                                            </button>
-                                                        </c:if>
-                                                    </div>
+                                                    </c:if>
+                                                    <c:if test="${appDetails.updateStatus=='36f9627a-adbd-11e4-99d7-080027dcfac6'}">
+                                                        <button type="button" onclick="approveApplication('cancel')" class="btn btn-primary">
+                                                            <i class="fa fa-save"></i> Approve
+                                                        </button>
+                                                    </c:if>
                                                 </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

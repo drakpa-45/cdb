@@ -7,11 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <body>
-
-
 <div class="mt-5">
     <div class="container mb-9">
         <div class="row">
@@ -22,7 +19,6 @@
                     </h1>
                 </div>
                 <!-- tab open -->
-
                 <div class="card" id="registrtaionFormCard">
                     <form action="#" id="surveyForm" enctype="multipart/form-data" >
                         <input type="hidden" id="referenceNo" value="${appDetails.referenceNo}" name="referenceNo"/>
@@ -144,7 +140,6 @@
                                                     </div>
                                                 </div>
                                                 <hr />
-
                                                 <div class="form-group row pull-right">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                                                         <button type="button" onclick="nextTab('personalInformation','categoryDtls')"  class="btn btn-primary">
@@ -167,7 +162,7 @@
                                                                     <input id="email" type="email" value="${appDetails.email}" class="form-control" name="email" placeholder="Type valid email">
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                    <label>Mobile No:</label>
+                                                                    <label>Mobile Number:</label>
                                                                     <input type="text" class=" form-control number" value="${appDetails.mobileNo}" id="mobileNo" name="mobileNo"  maxlength="8">
                                                                 </div>
                                                             </div>
@@ -269,18 +264,11 @@
                                                                 <label class="col-lg-12"> I/We declare and confirm that: </label>
                                                                 <div id="termsAndCon">
                                                                     <ul>
-                                                                        <li>
-                                                                            All information and attachments with this application are true and correct;
-                                                                        </li>
-                                                                        <li>
-                                                                            I am/we are aware that any false information provided herein will result in rejection of my application and suspension of any registered granted;
-                                                                        </li>
-                                                                        <li>I/We shall not make refund claims of expenditure incurred in processing this application;
-                                                                        </li>
-                                                                        <li>I/We have read and understood the 'Code of Ethics' and shall perform in line with Code of Ethics and any other legislation in force. Failure to comply, will be subject to the penalities provided for in the applicable legislation of the country.
-                                                                        </li>
-                                                                        <li>I/We hereby declare that issue of CDB certificate does not in anyway constitute an obligation on the part of CDB or any other Goverment agency to provide contract works.
-                                                                        </li>
+                                                                        <li>All information and attachments with this application are true and correct;</li>
+                                                                        <li>I am/we are aware that any false information provided herein will result in rejection of my application and suspension of any registered granted;</li>
+                                                                        <li>I/We shall not make refund claims of expenditure incurred in processing this application;</li>
+                                                                        <li>I/We have read and understood the 'Code of Ethics' and shall perform in line with Code of Ethics and any other legislation in force. Failure to comply, will be subject to the penalities provided for in the applicable legislation of the country.</li>
+                                                                        <li>I/We hereby declare that issue of CDB certificate does not in anyway constitute an obligation on the part of CDB or any other Goverment agency to provide contract works.</li>
                                                                     </ul>
                                                                 </div>
                                                             </div>

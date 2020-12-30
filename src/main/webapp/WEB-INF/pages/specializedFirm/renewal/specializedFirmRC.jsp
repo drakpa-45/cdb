@@ -3,7 +3,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <body class="">
-
 <c:if test="${not empty res.status}">
     <div class="card" id="acknowledgment">
         <div class="card-header">
@@ -26,11 +25,9 @@
                 <div class="card-header">
                     <h3 class="card-title font-weight-bold">Specialized Firm >> Renewal Application</h3>
                 </div>
-
                 <div class="card-body">
                     <div class="form-group row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert alert-danger text-center"
-                             style="font-size: 10px">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert alert-danger text-center" style="font-size: 10px">
                             <c:if test="${renewalCheck.status eq 1}">
                                 <span class="error">${renewalCheck.text}</span>
                             </c:if>
@@ -39,19 +36,15 @@
                             </c:if>
                         </div>
                     </div>
-
                     <c:if test="${renewalCheck.status eq 1}">
-
                         <p class="text-justify">
                             <span id="message">While renewing your certificate you can also upgrade/downgrade work classification or change other information. Relevant fees will be applicable.</span>
                         </p>
-
                         <form action="" method="post" class="" id="specializedFirmRenewalForm" enctype="multipart/form-data">
                             <div class="nav-tabs-custom">
                                 <ul class="m-0 nav nav-tabs">
                                     <li class="feesStructure tab-pane active " id="feesStructure">
-                                        <a href="#fees_structure" class="border text-white" data-toggle="tab"
-                                           data-placement="top">
+                                        <a href="#fees_structure" class="border text-white" data-toggle="tab" data-placement="top">
                                             <i class="fa fa-bookmark mr-1"></i>Fee Structure</a>
                                     </li>
                                     <li class="tab-pane services" id="services">
@@ -77,8 +70,7 @@
                                     </li>
 
                                     <li class="tab-pane saveAndPreview" id="saveAndPreview">
-                                        <a href="#saveAndPreview" class="border" data-toggle="tab"
-                                           data-placement="top">
+                                        <a href="#saveAndPreview" class="border" data-toggle="tab" data-placement="top">
                                             <i class="fa fa-file mr-1"></i>Preview</a>
                                     </li>
                                 </ul>
@@ -107,22 +99,19 @@
                                                 </tbody>
                                             </table>
                                         </div>
-
                                         <div class="col-lg-12 form-group nextBackBtn">
                                             <div class="col-md-offset-11 col-lg-offset-10 col-xs-offset-10">
-                                                <button type="button" onclick="nextTab('feesStructure')"
-                                                        class="btn btn-primary">
+                                                <button type="button" onclick="nextTab('feesStructure')" class="btn btn-primary">
                                                     <i class="fa fa-arrow-right mr-2"></i>Next
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="tab-pane services">
                                         <div class="panel-body table-responsive div-actual">
-                                  <span>
-                                    Would you like to avail listed below along with this application? Please tick on the check box if you wish to.
-                                  </span>
+                                          <span>
+                                                 Would you like to avail listed below along with this application? Please tick on the check box if you wish to.
+                                          </span>
                                             <table class="table table-bordered table-condensed table-striped">
                                                 <thead>
                                                 <tr>
@@ -143,159 +132,94 @@
                                                     </tbody>--%>
                                                 <tbody>
                                                 <tr>
-                                                    <td>
-                                                        <input type="checkbox" style="zoom:1.6" name="incorporation"
-                                                               value="1" id="Incorporation" class="service_check">
-                                                    </td>
-                                                    <td>
-                                                        <span>Incorporation</span>
-                                                    </td>
+                                                    <td><input type="checkbox" style="zoom:1.6" name="incorporation" value="1" id="Incorporation" class="service_check"></td>
+                                                    <td><span>Incorporation</span></td>
                                                     <td>500.00</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>
-                                                        <input type="checkbox" style="zoom:1.6" name="changeOfFirmName" value="1"
-                                                               id="changeOfFirmName" class="service_check">
-                                                    </td>
-                                                    <td>
-                                                        <span>Change of Firm Name</span>
-                                                    </td>
+                                                    <td><input type="checkbox" style="zoom:1.6" name="changeOfFirmName" value="1" id="changeOfFirmName" class="service_check"></td>
+                                                    <td><span>Change of Firm Name</span></td>
                                                     <td>500.00</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>
-                                                        <input type="checkbox" style="zoom:1.6"
-                                                               name="changeOfLocation" value="1" class="service_check"
-                                                               id="changeOfLocation">
-                                                    </td>
-                                                    <td>
-                                                        <span>Change of Location</span>
-                                                    </td>
+                                                    <td><input type="checkbox" style="zoom:1.6" name="changeOfLocation" value="1" class="service_check" id="changeOfLocation"></td>
+                                                    <td><span>Change of Location</span></td>
                                                     <td>500.00</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>
-                                                        <input type="checkbox" style="zoom:1.6" name="changeOfOwner"
-                                                               value="1" id="changeOfOwnerId" class="service_check">
-                                                    </td>
-                                                    <td>
-                                                        <span>Change of Owner</span>
-                                                    </td>
+                                                    <td><input type="checkbox" style="zoom:1.6" name="changeOfOwner" value="1" id="changeOfOwnerId" class="service_check"></td>
+                                                    <td><span>Change of Owner</span></td>
                                                     <td>1000.00</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>
-                                                        <input type="checkbox" style="zoom:1.6"
-                                                               name="upgradeDowngrade" value="1"
-                                                               id="upgradeDowngrade" class="service_check">
-                                                    </td>
-                                                    <td>
-                                                        <span>Upgrade/Downgrade/Add Category/Classification</span>
-                                                    </td>
+                                                    <td><input type="checkbox" style="zoom:1.6" name="upgradeDowngrade" value="1" id="upgradeDowngrade" class="service_check"></td>
+                                                    <td><span>Upgrade/Downgrade/Add Category/Classification</span></td>
                                                     <td>As per Fee Structure</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>
-                                                        <input type="checkbox" style="zoom:1.6" name="updateHR"
-                                                               value="1" id="updateHR" class="service_check">
-                                                    </td>
-                                                    <td>
-                                                        <span>Update Human Resource</span>
-                                                    </td>
+                                                    <td><input type="checkbox" style="zoom:1.6" name="updateHR" value="1" id="updateHR" class="service_check"></td>
+                                                    <td><span>Update Human Resource</span></td>
                                                     <td> Not Applicable</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>
-                                                        <input type="checkbox" style="zoom:1.6"
-                                                               name="updateEq" value="1"
-                                                               id="updateEq" class="service_check">
-                                                    </td>
-                                                    <td>
-                                                        <span>Update Equipment</span>
-                                                    </td>
+                                                    <td><input type="checkbox" style="zoom:1.6" name="updateEq" value="1" id="updateEq" class="service_check"></td>
+                                                    <td><span>Update Equipment</span></td>
                                                     <td> Not Applicable</td>
                                                 </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                         <div class="col-lg-12 form-group nextBackBtn">
-                                            <button type="button"
-                                                    onclick="backTab('services')"
-                                                    class="btn btn-azure col-lg-offset-9">
-                                                <i class="fa fa-arrow-left"></i>
-                                                Back
+                                            <button type="button" onclick="backTab('services')" class="btn btn-azure col-lg-offset-9">
+                                                <i class="fa fa-arrow-left"></i>Back
                                             </button>
-                                            <button type="button" onclick="nextTab('services')"
-                                                    class="btn btn-primary">
-                                                <i class="fa fa-arrow-right"></i>
-                                                Next
+                                            <button type="button" onclick="nextTab('services')" class="btn btn-primary">
+                                                <i class="fa fa-arrow-right"></i>Next
                                             </button>
                                         </div>
                                     </div>
-
                                     <div class="tab-pane generalInformation">
                                         <div class="div-actual">
                                             <div class="card" id="gInfo">
                                                 <div class="bg-blue card-status card-status-left"></div>
                                                 <div class="card-body">
-
                                                     <input type="hidden" id="spFirmHRidIdFinal">
                                                     <div class="form-group row">
                                                         <div class="col-lg-6 col-md-6 ">
                                                             <label class="col-lg-4 form-label">Ownership Type
                                                                 <span class="text-danger">*</span></label>
-                                                            <form:select id="ownershipList"
-                                                                         class="form-control col-lg-7"
-                                                                         required="true" path="ownershipList"
-                                                                         name="specializedFirm.ownershipTypeId">
+                                                            <form:select id="ownershipList" class="form-control col-lg-7" required="true" path="ownershipList" name="specializedFirm.ownershipTypeId">
                                                                 <form:option value="" label="Select Ownership Type"/>
-                                                                <form:options items="${ownershipList}" itemValue="value"
-                                                                              itemLabel="text"/>
+                                                                <form:options items="${ownershipList}" itemValue="value" itemLabel="text"/>
                                                             </form:select>
                                                         </div>
-
                                                         <div class="col-lg-6 col-md-6">
-                                                            <label class="col-lg-4 form-label">Country:<span
-                                                                    class="text-danger">*</span></label>
-
-                                                            <select class="form-control col-lg-7" required="true"
-                                                                    name="specializedFirm.pCountryId" id="pCountryId">
+                                                            <label class="col-lg-4 form-label">Country:<span class="text-danger">*</span></label>
+                                                            <select class="form-control col-lg-7" required="true" name="specializedFirm.pCountryId" id="pCountryId">
                                                                 <c:forEach var="item" items="${countryList}">
-                                                                    <option value="${item.value}"><c:out
-                                                                            value="${item.text}"/></option>
+                                                                    <option value="${item.value}"><c:out value="${item.text}"/></option>
                                                                 </c:forEach>
                                                             </select>
                                                         </div>
                                                     </div>
-
                                                     <div class="form-group row">
                                                         <div class="col-lg-6 col-lg-6">
-                                                            <label class="col-lg-4 form-label">Trade License
-                                                                No</label>
-                                                            <input type="text" class="col-lg-7 form-control"
-                                                                   name="specializedFirm.tradeLicenseNo" required="true"
-                                                                   placeholder="Text.." id="tradeLicenseNo">
+                                                            <label class="col-lg-4 form-label">Trade License Number</label>
+                                                            <input type="text" class="col-lg-7 form-control" name="specializedFirm.tradeLicenseNo" required="true" placeholder="Text.." id="tradeLicenseNo">
                                                         </div>
                                                         <div class="col-lg-6 col-lg-6">
-                                                            <label class="col-lg-4 form-label">Proposed Firm
-                                                                Name <span class="text-danger">*</span></label>
-                                                            <input type="text" class="col-lg-7 form-control"
-                                                                   id="firmName"
-                                                                   name="specializedFirm.firmName" required="true"
-                                                                   placeholder="Text..">
+                                                            <label class="col-lg-4 form-label">Proposed Firm Name <span class="text-danger">*</span></label>
+                                                            <input type="text" class="col-lg-7 form-control" id="firmName" name="specializedFirm.firmName" required="true" placeholder="Text..">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="col-lg-6 col-md-6">
                                                             <label class="col-lg-4 form-label">TPN Number</label>
-                                                            <input type="text" class="col-lg-7 form-control"
-                                                                   name="specializedFirm.tpn" id="tpn"
-                                                                   placeholder="Text..">
+                                                            <input type="text" class="col-lg-7 form-control" name="specializedFirm.tpn" id="tpn" placeholder="Text..">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="card hide" id="cIncorporation">
                                                 <div class="bg-blue card-status card-status-left"></div>
                                                 <div class="card-header">
@@ -303,9 +227,8 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="col-lg-12">
-                                                        <div class=""><input id="addMoreCert" type="button" value="Add More Certificate" class="btn btn-primary"> </div>
-                                                        <table class="table table-bordered table-center table-responsive-lg auto-index"
-                                                               id="certificateTbl">
+                                                        <div class=""><input id="addMoreCert" type="button" value="Add More Certificate" class="btn btn-primary"></div>
+                                                        <table class="table table-bordered table-center table-responsive-lg auto-index" id="certificateTbl">
                                                             <thead>
                                                             <tr>
                                                                 <th>Sl no</th>
@@ -322,17 +245,14 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="card hide" id="ownerPartner">
                                                 <div class="bg-blue card-status card-status-left"></div>
                                                 <div class="card-header">
-                                                    <h3 class="card-title">Name of Owner, Partners and/or others
-                                                        with Controlling Interest</h3>
+                                                    <h3 class="card-title">Name of Owner, Partners and/or others with Controlling Interest</h3>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="col-lg-12">
-                                                        <table class="table table-bordered table-center table-responsive-lg"
-                                                               id="partnerDtls">
+                                                        <table class="table table-bordered table-center table-responsive-lg" id="partnerDtls">
                                                             <thead>
                                                             <tr>
                                                                 <th>Nationality</th>
@@ -347,73 +267,39 @@
                                                             <tbody>
                                                             <tr>
                                                                 <td class="country">
-                                                                    <form:select id="countryList" class="form-control"
-                                                                                 name="specializedFirm.spFirmHRs[0].countryId"
-                                                                                 data-msg-required=""
-                                                                                 data-rule-required="true"
-                                                                                 path="countryList">
+                                                                    <form:select id="countryList" class="form-control" name="specializedFirm.spFirmHRs[0].countryId" data-msg-required="" data-rule-required="true" path="countryList">
                                                                         <form:option value="" label="Select Country"/>
-                                                                        <form:options items="${countryList}"
-                                                                                      itemValue="value"
-                                                                                      itemLabel="text"/>
+                                                                        <form:options items="${countryList}" itemValue="value" itemLabel="text"/>
                                                                     </form:select>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text"
-                                                                           name="specializedFirm.spFirmHRs[0].cidNo"
-                                                                           class="form-control hr-cid"
-                                                                           placeholder="Text..">
+                                                                    <input type="text" name="specializedFirm.spFirmHRs[0].cidNo" class="form-control hr-cid" placeholder="Text..">
                                                                 </td>
                                                                 <td>
-                                                                    <form:select id="salutation"
-                                                                                 name="specializedFirm.spFirmHRs[0].salutationId"
-                                                                                 class="form-control input-sm"
-                                                                                 data-msg-required="true"
-                                                                                 data-rule-required="true"
-                                                                                 path="salutationList">
-                                                                        <form:option value=""
-                                                                                     label="Select Salutation"/>
-                                                                        <form:options items="${salutationList}"
-                                                                                      itemValue="value"
-                                                                                      itemLabel="text"/>
+                                                                    <form:select id="salutation" name="specializedFirm.spFirmHRs[0].salutationId" class="form-control input-sm" data-msg-required="true" data-rule-required="true" path="salutationList">
+                                                                        <form:option value="" label="Select Salutation"/>
+                                                                        <form:options items="${salutationList}" itemValue="value" itemLabel="text"/>
                                                                     </form:select>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="text" class="form-control name"
-                                                                           name="specializedFirm.spFirmHRs[0].name"
-                                                                           placeholder="Text..">
+                                                                    <input type="text" class="form-control name" name="specializedFirm.spFirmHRs[0].name" placeholder="Text..">
                                                                 </td>
                                                                 <td>
-                                                                    <select id="gender"
-                                                                            name="specializedFirm.spFirmHRs[0].sex"
-                                                                            class="form-control sex">
+                                                                    <select id="gender" name="specializedFirm.spFirmHRs[0].sex" class="form-control sex">
                                                                         <option value="">Select Gender</option>
                                                                         <option value="M">Male</option>
                                                                         <option value="F">Female</option>
                                                                     </select>
-
                                                                 </td>
                                                                 <td>
-                                                                    <form:select id="designation"
-                                                                                 name="specializedFirm.spFirmHRs[0].designationId"
-                                                                                 class="form-control input-sm"
-                                                                                 data-msg-required=""
-                                                                                 data-rule-required="true"
-                                                                                 path="designationList">
-                                                                        <form:option value=""
-                                                                                     label="Select Designation"/>
-                                                                        <form:options items="${designationList}"
-                                                                                      itemValue="value"
-                                                                                      itemLabel="text"/>
+                                                                    <form:select id="designation" name="specializedFirm.spFirmHRs[0].designationId" class="form-control input-sm" data-msg-required="" data-rule-required="true" path="designationList">
+                                                                        <form:option value="" label="Select Designation"/>
+                                                                        <form:options items="${designationList}" itemValue="value" itemLabel="text"/>
                                                                     </form:select>
-
                                                                 </td>
                                                                 <td>
                                                                     <label class="custom-control custom-checkbox ml-6">
-                                                                        <input type="checkbox"
-                                                                               class="custom-control-input showCert"
-                                                                               name="specializedFirm.spFirmHRs[0].siCertificate"
-                                                                               value="1">
+                                                                        <input type="checkbox" class="custom-control-input showCert" name="specializedFirm.spFirmHRs[0].siCertificate" value="1">
                                                                         <i class="custom-control-label"></i>
                                                                     </label>
                                                                 </td>
@@ -421,14 +307,10 @@
                                                             </tbody>
                                                         </table>
                                                         <div class="col-lg-12 text-right">
-                                                            <button type="button"
-                                                                    class="btn btn-outline-primary btn-sm"
-                                                                    onclick="addRow('partnerDtls')">
+                                                            <button type="button" class="btn btn-outline-primary btn-sm" onclick="addRow('partnerDtls')">
                                                                 <i class="fe fe-plus mr-2"></i>Add More
                                                             </button>
-                                                            <button type="button"
-                                                                    class="btn btn-outline-danger btn-sm"
-                                                                    onclick="removeRow('partnerDtls')">
+                                                            <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeRow('partnerDtls')">
                                                                 <i class="fe fe-trash mr-2"></i>Remove Last Row
                                                             </button>
                                                         </div>
@@ -437,9 +319,7 @@
                                                         <div class="col-lg-12 col-md-12 ">
                                                             <label class="col-lg-3 col-md-3 form-label" for="ownershipChangeRemarks">Reason for Change of Owner:
                                                                 <span class="text-danger">*</span></label>
-                                                            <input type="text" class="col-lg-6 form-control"
-                                                                   name="specializedFirm.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true"
-                                                                   placeholder="Text..">
+                                                            <input type="text" class="col-lg-6 form-control" name="specializedFirm.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true" placeholder="Text..">
                                                         </div>
                                                     </div>
                                                     <h5 class="text-orange">Attach Certificates of Ownership change</h5>
@@ -456,15 +336,21 @@
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody class="files">
-                                                                <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
-                                                                    <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                                <tr>
+                                                                    <td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/></td>
+                                                                    <td><input type='file' required="" class='file' name='cAttachments[0].attachment'
+                                                                               accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/>
+                                                                    </td>
                                                                     <td class='file-size'></td>
-                                                                    <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                                    <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                                 </tr>
-                                                                <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
-                                                                    <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                                <tr>
+                                                                    <td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/></td>
+                                                                    <td><input type='file' required="" class='file' name='cAttachments[0].attachment'
+                                                                               accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/>
+                                                                    </td>
                                                                     <td class='file-size'></td>
-                                                                    <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                                    <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                                 </tr>
                                                                 </tbody>
                                                             </table>
@@ -472,7 +358,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="card ">
                                                 <div class="bg-blue card-status card-status-left"></div>
                                                 <div class="card-header">
@@ -482,34 +367,30 @@
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-4 form-label">Dzongkhag</label>
-                                                           <%-- <select id="pDzongkhagId"
-                                                                    class="form-control input-sm col-lg-8"
-                                                                    name="specializedFirm.pDzongkhagId">
-                                                                <option value="">Select Dzongkhag</option>
-                                                                <c:forEach var="item" items="${dzongkhagList}">
-                                                                    <option value="${item.value}"><c:out
-                                                                            value="${item.text}"/></option>
-                                                                </c:forEach>
-                                                            </select>--%>
-                                                            <input type="text" class="col-lg-7 form-control" id="pDzongkhagId"
-                                                                   name="specializedFirm.pDzongkhagId" required="true" class="form-control col-lg-8">
+                                                                <%-- <select id="pDzongkhagId"
+                                                                         class="form-control input-sm col-lg-8"
+                                                                         name="specializedFirm.pDzongkhagId">
+                                                                     <option value="">Select Dzongkhag</option>
+                                                                     <c:forEach var="item" items="${dzongkhagList}">
+                                                                         <option value="${item.value}"><c:out
+                                                                                 value="${item.text}"/></option>
+                                                                     </c:forEach>
+                                                                 </select>--%>
+                                                            <input type="text" class="col-lg-7 form-control" id="pDzongkhagId" name="specializedFirm.pDzongkhagId" required="true" class="form-control col-lg-8">
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-4 form-label">Gewog:</label>
-                                                            <input type="text" class="col-lg-7 form-control" id="pGewogId"
-                                                                   name="specializedFirm.pGewogId" required="true" class="form-control col-lg-8">
+                                                            <input type="text" class="col-lg-7 form-control" id="pGewogId" name="specializedFirm.pGewogId" required="true" class="form-control col-lg-8">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-4 form-label">Village: </label>
-                                                            <input type="text" class="col-lg-7 form-control" id="pVillageId"
-                                                                   name="specializedFirm.pVillageId" required="true" class="form-control col-lg-8">
+                                                            <input type="text" class="col-lg-7 form-control" id="pVillageId" name="specializedFirm.pVillageId" required="true" class="form-control col-lg-8">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="card tab2">
                                                 <div class="bg-blue card-status card-status-left"></div>
                                                 <div class="card-header">
@@ -518,72 +399,46 @@
                                                 <div class="card-body">
                                                     <div class="form-group row">
                                                         <div class="col-lg-6 col-md-6 ">
-                                                            <label class="col-lg-4 form-label" for="estAddress">Establishment
-                                                                Address <span
-                                                                        class="text-danger">*</span></label>
-                                                            <input type="text" class="col-lg-7 form-control"
-                                                                   name="specializedFirm.estAddress" id="estAddress"
-                                                                   required="true"
-                                                                   placeholder="Text..">
+                                                            <label class="col-lg-4 form-label" for="estAddress">Establishment Address <span class="text-danger">*</span></label>
+                                                            <input type="text" class="col-lg-7 form-control" name="specializedFirm.estAddress" id="estAddress" required="true" placeholder="Text..">
                                                         </div>
                                                         <div class="col-lg-6 col-md-6">
-                                                            <label class="col-lg-4 form-label">Dzongkhag <span
-                                                                    class="text-danger">*</span></label>
-                                                            <form:select id="regDzongkhagId"
-                                                                         class="form-control input-sm col-lg-7" required="true"
-                                                                         path="dzongkhagList" name="specializedFirm.regDzongkhagId">
+                                                            <label class="col-lg-4 form-label">Dzongkhag <span class="text-danger">*</span></label>
+                                                            <form:select id="regDzongkhagId" class="form-control input-sm col-lg-7" required="true" path="dzongkhagList" name="specializedFirm.regDzongkhagId">
                                                                 <form:option value="" label="Select Dzongkhag"/>
-                                                                <form:options items="${dzongkhagList}" itemValue="value"
-                                                                              itemLabel="text"/>
+                                                                <form:options items="${dzongkhagList}" itemValue="value" itemLabel="text"/>
                                                             </form:select>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="col-lg-6 col-md-6">
-                                                            <label class="col-lg-4 form-label">Email <span
-                                                                    class="text-danger">*</span></label>
-                                                            <input type="email" class=" form-control col-lg-7"
-                                                                   name="specializedFirm.regEmail" id="regEmail"
-                                                                   required="true"
-                                                                   placeholder="Text..">
+                                                            <label class="col-lg-4 form-label">Email <span class="text-danger">*</span></label>
+                                                            <input type="email" class=" form-control col-lg-7" name="specializedFirm.regEmail" id="regEmail" required="true" placeholder="Text..">
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 ">
-                                                            <label class="col-lg-4 form-label">Mobile No <span
-                                                                    class="text-danger">*</span></label>
-                                                            <input type="text" class=" form-control col-lg-7"
-                                                                   name="specializedFirm.regMobileNo" id="regMobileNo"
-                                                                   required="true"
-                                                                   placeholder="Text..">
+                                                            <label class="col-lg-4 form-label">Mobile No <span class="text-danger">*</span></label>
+                                                            <input type="text" class=" form-control col-lg-7" name="specializedFirm.regMobileNo" id="regMobileNo" required="true" placeholder="Text..">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="col-lg-6 col-md-6">
                                                             <label class="col-lg-4 form-label">Telephone No </label>
-                                                            <input type="text" class="form-control col-lg-7"
-                                                                   name="specializedFirm.regPhoneNo" id="regPhoneNo"
-                                                                   placeholder="Text..">
+                                                            <input type="text" class="form-control col-lg-7" name="specializedFirm.regPhoneNo" id="regPhoneNo" placeholder="Text..">
                                                         </div>
                                                         <div class="col-lg-6 col-md-6">
                                                             <label class="col-lg-4 form-label">Fax No </label>
-                                                            <input type="text" class="form-control col-lg-7"
-                                                                   name="specializedFirm.regFaxNo" id="regFaxNo"
-                                                                   placeholder="Text..">
+                                                            <input type="text" class="form-control col-lg-7" name="specializedFirm.regFaxNo" id="regFaxNo" placeholder="Text..">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 form-group nextBackBtn">
-                                            <button type="button" onclick="backTab('generalInformation')"
-                                                    class="btn btn-azure col-lg-offset-9 backTab">
-                                                <i class="fa fa-arrow-left"></i>
-                                                Back
+                                            <button type="button" onclick="backTab('generalInformation')" class="btn btn-azure col-lg-offset-9 backTab">
+                                                <i class="fa fa-arrow-left"></i>Back
                                             </button>
-                                            <button type="button"
-                                                    onclick="nextTab('generalInformation')"
-                                                    class="btn btn-primary nextTab">
-                                                <i class="fa fa-arrow-right"></i>
-                                                Next &nbsp;
+                                            <button type="button" onclick="nextTab('generalInformation')" class="btn btn-primary nextTab">
+                                                <i class="fa fa-arrow-right"></i>Next &nbsp;
                                             </button>
                                         </div>
                                     </div>
@@ -591,7 +446,7 @@
                                     <div class="tab-pane category_details hide">
                                         <div class="div-actual">
                                             <b class="text-orange">Note: If you are upgrading/down grade class,it is necessary to attach Letter of Undertaking</b> &nbsp; &nbsp;
-                                            <br />
+                                            <br/>
                                             <table id="specializedFirmCCTbl" class="table table-bordered table-hover">
                                                 <thead style="background-color: #F2F2F2">
                                                 <tr>
@@ -617,22 +472,22 @@
                                                     <td><input class="form-control categoryCheck" type="checkbox" name="categories[3].appliedCategoryId" value="3h4f937c-c74f-11e4-bf37-080027dcfac6" style="width: 17px; height: 17px;"></td>
                                                     <td>SF4-Electrical</td>
                                                 </tr>
-                                                    <tr id="W5">
-                                                        <td><input class="form-control categoryCheck" type="checkbox" name="categories[4].appliedCategoryId" value="3h5f937c-c74f-11e4-bf37-080027dcfac6" style="width: 17px; height: 17px;"></td>
-                                                        <td>SF5-Weilding & Fabrication</td>
-                                                    </tr>
-                                                    <tr id="W6">
-                                                        <td><input class="form-control categoryCheck" type="checkbox" name="categories[5].appliedCategoryId" value="3h6f937c-c74f-11e4-bf37-080027dcfac6" style="width: 17px; height: 17px;"></td>
-                                                        <td>SF6-Painting</td>
-                                                    </tr>
+                                                <tr id="W5">
+                                                    <td><input class="form-control categoryCheck" type="checkbox" name="categories[4].appliedCategoryId" value="3h5f937c-c74f-11e4-bf37-080027dcfac6" style="width: 17px; height: 17px;"></td>
+                                                    <td>SF5-Weilding & Fabrication</td>
+                                                </tr>
+                                                <tr id="W6">
+                                                    <td><input class="form-control categoryCheck" type="checkbox" name="categories[5].appliedCategoryId" value="3h6f937c-c74f-11e4-bf37-080027dcfac6" style="width: 17px; height: 17px;"></td>
+                                                    <td>SF6-Painting</td>
+                                                </tr>
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <br />
+                                        <br/>
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <b class="text-orange">Attach your UnderTaking Below</b> &nbsp; &nbsp;
-                                                <br />
+                                               <br/>
                                                 <input type="button" id="addMoreCertCategory" value="Add More File" class="btn btn-primary eqFile">
                                                 <div class="table-responsive">
                                                     <table class="table table-bordered table-hover" id="certificateTblCategory">
@@ -645,15 +500,21 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody class="files">
-                                                        <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
-                                                            <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                        <tr>
+                                                            <td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/></td>
+                                                            <td><input type='file' required="" class='file' name='cAttachments[0].attachment'
+                                                                       accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/>
+                                                            </td>
                                                             <td class='file-size'></td>
-                                                            <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                            <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                         </tr>
-                                                        <tr><td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
-                                                            <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
+                                                        <tr>
+                                                            <td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/></td>
+                                                            <td><input type='file' required="" class='file' name='cAttachments[0].attachment'
+                                                                       accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/>
+                                                            </td>
                                                             <td class='file-size'></td>
-                                                            <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                            <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                         </tr>
                                                             <%--  <tr><td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/> </td>
                                                                   <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
@@ -666,18 +527,14 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-12 form-group nextBackBtn">
-                                            <button type="button"
-                                                    onclick="backTab('category_details')"
-                                                    class="btn btn-azure col-lg-offset-9">
+                                            <button type="button" onclick="backTab('category_details')" class="btn btn-azure col-lg-offset-9">
                                                 <i class="fa fa-arrow-circle-left"></i> &nbsp; Back
                                             </button>
-                                            <button type="button" id="btnValCCNext" class="btn btn-primary"
-                                                    onclick="nextTab('category_details')">Next &nbsp;
+                                            <button type="button" id="btnValCCNext" class="btn btn-primary" onclick="nextTab('category_details')">Next &nbsp;
                                                 <i class="fa fa-arrow-circle-right"></i>
                                             </button>
                                         </div>
                                     </div>
-
                                     <div class="tab-pane human_resource_criteria hide">
                                         <div class="div-actual">
                                             <div class="card tab4">
@@ -710,24 +567,17 @@
                                                             </tbody>
                                                         </table>
                                                         <div class="col-lg-12 text-right">
-                                                            <button type="button" class="btn btn-info btn-sm"
-                                                                    data-toggle="modal" data-target="#addHRModal"><i
-                                                                    class="fa fa-plus"></i> Add More HR
-                                                            </button>
+                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addHRModal"><i class="fa fa-plus"></i> Add More HR</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 form-group nextBackBtn">
-                                            <button type="button"
-                                                    onclick="backTab('human_resource_criteria')"
-                                                    class="btn btn-azure col-lg-offset-9 backTab">
+                                            <button type="button" onclick="backTab('human_resource_criteria')" class="btn btn-azure col-lg-offset-9 backTab">
                                                 <i class="fa fa-arrow-circle-left"></i> &nbsp;Back
                                             </button>
-                                            <button type="button" id="btnValHRNext"
-                                                onclick="nextTab('human_resource_criteria')"
-                                                    class="btn btn-primary nextTab">Next &nbsp;
+                                            <button type="button" id="btnValHRNext" onclick="nextTab('human_resource_criteria')" class="btn btn-primary nextTab">Next &nbsp;
                                                 <i class="fa fa-arrow-circle-right"></i>
                                             </button>
                                         </div>
@@ -735,10 +585,8 @@
                                     <div class="tab-pane equipment_details hide">
                                         <div class="div-actual">
                                             <i><strong> Equipment Details</strong></i>
-
                                             <div class="table-responsive">
-                                                <table class="table table-bordered table-striped"
-                                                       id="equipmentTbl">
+                                                <table class="table table-bordered table-striped" id="equipmentTbl">
                                                     <thead>
                                                     <tr>
                                                         <th>Equipment Name</th>
@@ -752,13 +600,8 @@
                                                     <tbody>
                                                     </tbody>
                                                 </table>
-
                                                 <div class="col-lg-12 text-right">
-                                                    <button type="button" class="btn btn-info btn-sm"
-                                                            data-toggle="modal" data-backdrop="static"
-                                                            data-keyboard="false" data-target="#eqModal"><i
-                                                            class="fa fa-plus"></i> Add More Equipment
-                                                    </button>
+                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#eqModal"><i class="fa fa-plus"></i> Add More Equipment</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -766,11 +609,7 @@
                                             <button type="button" onclick="backTab('equipment_details')" class="btn btn-azure col-lg-offset-9">
                                                 <i class="fa fa-arrow-circle-left"></i>&nbsp; Back
                                             </button>
-                                            <button type="button" class="btn btn-primary" id="btnValEqNext"
-                                                    onclick="nextTab('equipment_details')">
-                                                Next &nbsp;
-                                                <i class="fa fa-life-saver"></i>
-                                            </button>
+                                            <button type="button" class="btn btn-primary" id="btnValEqNext" onclick="nextTab('equipment_details')">Next &nbsp;<i class="fa fa-life-saver"></i></button>
                                         </div>
                                     </div>
                                     <div class="tab-pane saveAndPreview">
@@ -781,7 +620,6 @@
                                                         <div class="form-froup">
                                                             <div class="col-lg-12">
                                                                 <strong>Terms and Condition</strong>
-
                                                                 <div class="form-group">
                                                                     <div class="col-lg-12" id="">
                                                                         1. As provided in clause 2.1.1.2 and 2.3.1
@@ -893,14 +731,10 @@
                                                                         <br> Director
                                                                     </div>
                                                                 </div>
-
-
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label class="col-lg-12">I/We declare and confirm
-                                                                that:- </label>
-
+                                                            <label class="col-lg-12">I/We declare and confirm that:- </label>
                                                             <div id="termsAndCon">
                                                                 <ul>
                                                                     <li>All information and attachments with this
@@ -932,7 +766,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="col-lg-12">
-                                                            <span><input type="checkbox" id="agreeCheck" name="tnc" class="required" onclick="enableSubmit()" style="width:15px;height:15px;"></span>
+                                                                <span><input type="checkbox" id="agreeCheck" name="tnc" class="required" onclick="enableSubmit()" style="width:15px;height:15px;"></span>
                                                                 <span class="bold"> I agree to the above Terms Conditions</span>
                                                             </label>
                                                             <!-- <br /><span class="text-danger" id="termAndConErrorClass"></span> -->
@@ -943,9 +777,7 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-offset-5 text-center">
-                                            <button class="btn btn-primary col-lg-2 mr-2" type="button" id="btnSubmit"
-                                                    onclick="showConfirmation()" disabled>Submit
-                                            </button>
+                                            <button class="btn btn-primary col-lg-2 mr-2" type="button" id="btnSubmit" onclick="showConfirmation()" disabled>Submit</button>
                                             <button class="btn btn-danger col-lg-2" type="button">Cancel</button>
                                         </div>
                                     </div>
@@ -956,370 +788,299 @@
                 </div>
             </div>
             <form id="modalForm">
-                <%--HR add model--%>
-            <div aria-hidden="true" aria-labelledby="hrModalLabel" role="dialog" class="modal fade in" id="addHRModal">
-                <div class="modal-dialog modal-lg" id="hrModal">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 id="hrModalLabel" class="modal-title"> Add Human Resource </h4>
-                            <button aria-hidden="true" data-dismiss="modal" class="close" type="button"></button>
-                        </div>
-                        <div class="modal-body form-horizontal">
-                            <div class="modal-div">
-                                <div class="form-group">
-                                    <input type="hidden" id="hrId" name="spFirmHRs[0].id">
-                                    <label class="col-lg-2">Nationality
-                                        <span class="text-danger">*</span>:</label>
-
-                                    <div class="col-lg-4">
-                                        <select name="spFirmHRs[0].countryId" id="hr5" required=""
-                                                class="form-control custom-select text-left select-beast country">
-                                            <option value="">Select Country</option>
-                                            <c:forEach var="item" items="${countryList}">
-                                                <option value="${item.value}"><c:out value="${item.text}"/></option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <label class="col-md-2 col-lg-2">CID/Work Permit No <span
-                                            class="text-danger">*</span>:</label>
-
-                                    <div class="col-lg-4">
-                                        <div class="input-icon">
-                                <span class="input-icon-addon">
-                                    <i class="fa fa-address-card-o"></i>
-                                </span>
-                                            <input type="text" name="spFirmHRs[0].cidNo" class="form-control hr-cid"
-                                                   id="hr3" required="" placeholder="">
+                    <%--HR add model--%>
+                <div aria-hidden="true" aria-labelledby="hrModalLabel" role="dialog" class="modal fade in"
+                     id="addHRModal">
+                    <div class="modal-dialog modal-lg" id="hrModal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 id="hrModalLabel" class="modal-title"> Add Human Resource </h4>
+                                <button aria-hidden="true" data-dismiss="modal" class="close" type="button"></button>
+                            </div>
+                            <div class="modal-body form-horizontal">
+                                <div class="modal-div">
+                                    <div class="form-group">
+                                        <input type="hidden" id="hrId" name="spFirmHRs[0].id">
+                                        <label class="col-lg-2">Nationality
+                                            <span class="text-danger">*</span>:</label>
+                                        <div class="col-lg-4">
+                                            <select name="spFirmHRs[0].countryId" id="hr5" required="" class="form-control custom-select text-left select-beast country">
+                                                <option value="">Select Country</option>
+                                                <c:forEach var="item" items="${countryList}">
+                                                    <option value="${item.value}"><c:out value="${item.text}"/></option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                        <label class="col-md-2 col-lg-2">CID/Work Permit No <span class="text-danger">*</span>:</label>
+                                        <div class="col-lg-4">
+                                            <div class="input-icon">
+                                                <span class="input-icon-addon">
+                                                     <i class="fa fa-address-card-o"></i>
+                                                 </span>
+                                                <input type="text" name="spFirmHRs[0].cidNo" class="form-control hr-cid" id="hr3" required="" placeholder="">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-2">Salutation
-                                        <span class="text-danger">*</span>:</label>
-
-                                    <div class="col-lg-4">
-                                        <select name="spFirmHRs[0].salutationId" id="hr1" required=""
-                                                class="form-control custom-select text-left select-beast">
-                                            <option value="">Select Salutation</option>
-                                            <c:forEach var="item" items="${salutationList}">
-                                                <option value="${item.value}"><c:out value="${item.text}"/></option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <label class="col-lg-2">Name
-                                        <span class="text-danger">*</span>:</label>
-
-                                    <div class="col-lg-4">
-                                        <div class="input-icon">
-                                            <span class="input-icon-addon"><i class="fe fe-user"></i></span>
-                                            <input type="text" name="spFirmHRs[0].name" id="hr2"
-                                                   class="form-control name" required="" placeholder="">
+                                    <div class="form-group">
+                                        <label class="col-lg-2">Salutation
+                                            <span class="text-danger">*</span>:</label>
+                                        <div class="col-lg-4">
+                                            <select name="spFirmHRs[0].salutationId" id="hr1" required="" class="form-control custom-select text-left select-beast">
+                                                <option value="">Select Salutation</option>
+                                                <c:forEach var="item" items="${salutationList}">
+                                                    <option value="${item.value}"><c:out value="${item.text}"/></option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                        <label class="col-lg-2">Name
+                                            <span class="text-danger">*</span>:</label>
+                                        <div class="col-lg-4">
+                                            <div class="input-icon">
+                                                <span class="input-icon-addon"><i class="fe fe-user"></i></span>
+                                                <input type="text" name="spFirmHRs[0].name" id="hr2" class="form-control name" required="" placeholder="">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-2">Gender<span class="text-danger">*</span>:</label>
-
-                                    <div class="col-lg-4">
-                                        <select name="spFirmHRs[0].sex" id="hr4" required=""
-                                                class="form-control custom-select text-left select-beast sex">
-                                            <option value="">Select Gender</option>
-                                            <option value="M">Male</option>
-                                            <option value="F">Female</option>
-                                        </select>
-                                    </div>
-                                    <label class="col-lg-2">Designation
-                                        <span class="text-danger">*</span>:</label>
-
-                                    <div class="col-lg-4">
-                                        <select name="spFirmHRs[0].designationId" id="hr6" required=""
-                                                class="form-control custom-select text-left select-beast">
-                                            <option value="">Select Designation</option>
-                                            <c:forEach var="item" items="${designationList}">
-                                                <option value="${item.value}"><c:out value="${item.text}"/></option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-2">Qualification
-                                        <span class="text-danger">*</span>:</label>
-
-                                    <div class="col-lg-4">
-                                        <select name="spFirmHRs[0].qualificationId" id="hr7" required=""
-                                                class="form-control custom-select text-left select-beast">
-                                            <option value="">Select Qualification</option>
-                                            <c:forEach var="item" items="${qualificationList}">
-                                                <option value="${item.value}"><c:out value="${item.text}"/></option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <label class="col-lg-2">Trade
-                                        <span class="text-danger">*</span>:</label>
-
-                                    <div class="col-lg-4">
-                                        <select name="spFirmHRs[0].tradeId" id="hr8" required=""
-                                                class="form-control custom-select text-left select-beast">
-                                            <option value="">Select Trade</option>
-                                            <c:forEach var="item" items="${tradeList}">
-                                                <option value="${item.value}"><c:out value="${item.text}"/></option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-2">Service Type<span class="text-danger">*</span>:</label>
-
-                                    <div class="col-lg-4">
-                                        <select name="spFirmHRs[0].serviceTypeId" id="hr9" required="true"
-                                                class="form-control custom-select text-left select-beast">
-                                            <option value="">Select Type</option>
-                                            <c:forEach var="item" items="${serviceTypeList}">
-                                                <option value="${item.value}"><c:out value="${item.text}"/></option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <label class="col-lg-2"> Joining Date<span class="text-danger">*</span>:</label>
-
-                                    <div class="col-lg-4">
-                                        <div class="input-group margin-bottom-sm">
-                                <span class="input-group-addon pr-5"><i
-                                        class="fa fa-calendar"></i></span>
-                                            <input type="date" name="spFirmHRs[0].joiningDate"
-                                                   value="" id="hr10"
-                                                   class="form-control datepicker">
+                                    <div class="form-group">
+                                        <label class="col-lg-2">Gender<span class="text-danger">*</span>:</label>
+                                        <div class="col-lg-4">
+                                            <select name="spFirmHRs[0].sex" id="hr4" required="" class="form-control custom-select text-left select-beast sex">
+                                                <option value="">Select Gender</option>
+                                                <option value="M">Male</option>
+                                                <option value="F">Female</option>
+                                            </select>
+                                        </div>
+                                        <label class="col-lg-2">Designation
+                                            <span class="text-danger">*</span>:</label>
+                                        <div class="col-lg-4">
+                                            <select name="spFirmHRs[0].designationId" id="hr6" required="" class="form-control custom-select text-left select-beast">
+                                                <option value="">Select Designation</option>
+                                                <c:forEach var="item" items="${designationList}">
+                                                    <option value="${item.value}"><c:out value="${item.text}"/></option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-2">CDB Reg No :</label>
-
-                                    <div class="col-lg-4">
-                                        <div class="input-icon">
-                                            <span class="input-icon-addon"><i class="fe fe-user"></i></span>
-                                            <input type="text" name="spFirmHRs[0].cdbNo" id="hr11"
-                                                   class="form-control name" placeholder="cdbNo">
+                                    <div class="form-group">
+                                        <label class="col-lg-2">Qualification
+                                            <span class="text-danger">*</span>:</label>
+                                        <div class="col-lg-4">
+                                            <select name="spFirmHRs[0].qualificationId" id="hr7" required="" class="form-control custom-select text-left select-beast">
+                                                <option value="">Select Qualification</option>
+                                                <c:forEach var="item" items="${qualificationList}">
+                                                    <option value="${item.value}"><c:out value="${item.text}"/></option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                        <label class="col-lg-2">Trade
+                                            <span class="text-danger">*</span>:</label>
+                                        <div class="col-lg-4">
+                                            <select name="spFirmHRs[0].tradeId" id="hr8" required="" class="form-control custom-select text-left select-beast">
+                                                <option value="">Select Trade</option>
+                                                <c:forEach var="item" items="${tradeList}">
+                                                    <option value="${item.value}"><c:out value="${item.text}"/></option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 col-lg-12">
-                                        <input type="button" id="addMoreHr" value="Add More File"
-                                               class="btn btn-primary hrFile">
-
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-hover" id="hrUploadTbl">
-                                                <thead>
-                                                <tr>
-                                                    <th>Document Name</th>
-                                                    <th>Document Attached</th>
-                                                    <th>File Size</th>
-                                                    <th>Delete</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody id="fileListhrsection" class="files">
-                                                <tr>
-                                                    <td><input type='text' required="" value="CID"
-                                                               class='form-control docName'
-                                                               name='spFirmHRs[0].spFirmHRAs[0].documentName'/>
-                                                    </td>
-                                                    <td><input type='file' required="" class='file'
-                                                               name='spFirmHRs[0].spFirmHRAs[0].attachment'
-                                                               accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
-                                                    </td>
-                                                    <td class='file-size'></td>
-                                                    <td class='del_row'><a class='p-2'><i
-                                                            class='fa fa-trash text-danger '></i></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type='text' required="" value="Certificate"
-                                                               class='form-control docName'
-                                                               name='spFirmHRs[0].spFirmHRAs[0].documentName'/>
-                                                    </td>
-                                                    <td><input type='file' required="" class='file'
-                                                               name='spFirmHRs[0].spFirmHRAs[0].attachment'
-                                                               accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
-                                                    </td>
-                                                    <td class='file-size'></td>
-                                                    <td class='del_row'><a class='p-2'><i
-                                                            class='fa fa-trash text-danger '></i></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type='text' required="" value="Others"
-                                                               class='form-control docName'
-                                                               name='spFirmHRs[0].spFirmHRAs[0].documentName'/>
-                                                    </td>
-                                                    <td><input type='file' required="" class='file'
-                                                               name='spFirmHRs[0].spFirmHRAs[0].attachment'
-                                                               accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
-                                                    </td>
-                                                    <td class='file-size'></td>
-                                                    <td class='del_row'><a class='p-2'><i
-                                                            class='fa fa-trash text-danger '></i></a></td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
+                                    <div class="form-group">
+                                        <label class="col-lg-2">Service Type<span class="text-danger">*</span>:</label>
+                                        <div class="col-lg-4">
+                                            <select name="spFirmHRs[0].serviceTypeId" id="hr9" required="true" class="form-control custom-select text-left select-beast">
+                                                <option value="">Select Type</option>
+                                                <c:forEach var="item" items="${serviceTypeList}">
+                                                    <option value="${item.value}"><c:out value="${item.text}"/></option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                        <label class="col-lg-2"> Joining Date<span class="text-danger">*</span>:</label>
+                                        <div class="col-lg-4">
+                                            <div class="input-group margin-bottom-sm">
+                                                  <span class="input-group-addon pr-5"><i class="fa fa-calendar"></i></span>
+                                                <input type="date" name="spFirmHRs[0].joiningDate" value="" id="hr10" class="form-control datepicker">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-2">CDB Reg No :</label>
+                                        <div class="col-lg-4">
+                                            <div class="input-icon">
+                                                <span class="input-icon-addon"><i class="fe fe-user"></i></span>
+                                                <input type="text" name="spFirmHRs[0].cdbNo" id="hr11" class="form-control name" placeholder="cdbNo">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-12">
+                                            <input type="button" id="addMoreHr" value="Add More File" class="btn btn-primary hrFile">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-hover" id="hrUploadTbl">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Document Name</th>
+                                                        <th>Document Attached</th>
+                                                        <th>File Size</th>
+                                                        <th>Delete</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id="fileListhrsection" class="files">
+                                                    <tr>
+                                                        <td><input type='text' required="" value="CID" class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/></td>
+                                                        <td><input type='file' required="" class='file' name='spFirmHRs[0].spFirmHRAs[0].attachment'
+                                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
+                                                        </td>
+                                                        <td class='file-size'></td>
+                                                        <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input type='text' required="" value="Certificate" class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/></td>
+                                                        <td><input type='file' required="" class='file' name='spFirmHRs[0].spFirmHRAs[0].attachment'
+                                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
+                                                        </td>
+                                                        <td class='file-size'></td>
+                                                        <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input type='text' required="" value="Others" class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/></td>
+                                                        <td><input type='file' required="" class='file' name='spFirmHRs[0].spFirmHRAs[0].attachment'
+                                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
+                                                        </td>
+                                                        <td class='file-size'></td>
+                                                        <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-primary" onclick="getModalData('hrDtlsTable','hr',10)" type="button">
-                                OK
-                            </button>
-                            <button data-dismiss="modal" class="btn btn-warning" type="button">Close</button>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" onclick="getModalData('hrDtlsTable','hr',10)" type="button">OK</button>
+                                <button data-dismiss="modal" class="btn btn-warning" type="button">Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-                <%--Equipment addmore model--%>
-            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
-                 class="modal fade in" id="eqModal">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 id="myModalLabel" class="modal-title">Add Equipment</h4>
-
-                            <button aria-hidden="true" data-dismiss="modal" class="close" type="button"><span></span>
-                            </button>
-                        </div>
-                        <div class="modal-body form-horizontal">
-                            <div class="">
-                                <div class="form-group">
-                                    <label class="col-lg-2">Equipment <span class="text-danger">*</span>:</label>
-                                    <input type="hidden" class="id4Edit" name="equipments[0].id" /> <!-- for edit-->
-                                    <div class="col-lg-4">
-                                        <select name="equipments[0].equipmentId"
-                                                class="form-control custom-select text-left equipmentId" required=""
-                                                id="eq1">
-                                            <option value="">Select Equipment</option>
-                                            <c:forEach var="item" items="${equipmentList}">
-                                                <option value="${item.value}" class="${item.obj1}"><c:out
-                                                        value="${item.text}"/></option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                    <label class="col-lg-3">Registration No:</label>
-
-                                    <div class="col-lg-3">
-                                        <input type="text" name="equipments[0].registrationNo"
-                                               class="form-control registrationNo" <%--required="true"--%> disabled
-                                               id="eq2">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-lg-2">Quantity :</label>
-
-                                    <div class="col-lg-4">
-                                        <div class="input-icon">
-                                            <input type="text" name="equipments[0].quantity" class="form-control"
-                                                   required="" id="eq3">
+                    <%--Equipment addmore model--%>
+                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
+                     class="modal fade in" id="eqModal">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 id="myModalLabel" class="modal-title">Add Equipment</h4>
+                                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">
+                                    <span></span>
+                                </button>
+                            </div>
+                            <div class="modal-body form-horizontal">
+                                <div class="">
+                                    <div class="form-group">
+                                        <label class="col-lg-2">Equipment <span class="text-danger">*</span>:</label>
+                                        <input type="hidden" class="id4Edit" name="equipments[0].id"/> <!-- for edit-->
+                                        <div class="col-lg-4">
+                                            <select name="equipments[0].equipmentId" class="form-control custom-select text-left equipmentId" required="" id="eq1">
+                                                <option value="">Select Equipment</option>
+                                                <c:forEach var="item" items="${equipmentList}">
+                                                    <option value="${item.value}" class="${item.obj1}"><c:out
+                                                            value="${item.text}"/></option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                        <label class="col-lg-3">Registration No:</label>
+                                        <div class="col-lg-3">
+                                            <input type="text" name="equipments[0].registrationNo" class="form-control registrationNo" <%--required="true"--%> disabled id="eq2">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <input type="button" id="addMoreEq" value="Add More File"
-                                               class="btn btn-primary eqFile">
-
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-hover" id="eqUploadTbl">
-                                                <thead>
-                                                <tr>
-                                                    <th>Document Name</th>
-                                                    <th>Document Attached</th>
-                                                    <th>File Size</th>
-                                                    <th>Delete</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody class="files">
-                                                <tr>
-                                                    <td><input type='text' required="" class='form-control docName'
-                                                               name='equipments[0].spFirmEQAs[0].documentName'/>
-                                                    </td>
-                                                    <td><input type='file' required="" class='file'
-                                                               name='equipments[0].spFirmEQAs[0].attachment'
-                                                               accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
-                                                    </td>
-                                                    <td class='file-size'></td>
-                                                    <td class='del_row'><a class='p-2'><i
-                                                            class='fa fa-trash text-danger '></i></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type='text' required="" class='form-control docName'
-                                                               name='equipments[0].spFirmEQAs[0].documentName'/>
-                                                    </td>
-                                                    <td><input type='file' required="" class='file'
-                                                               name='equipments[0].spFirmEQAs[0].attachment'
-                                                               accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
-                                                    </td>
-                                                    <td class='file-size'></td>
-                                                    <td class='del_row'><a class='p-2'><i
-                                                            class='fa fa-trash text-danger '></i></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type='text' required="" class='form-control docName'
-                                                               name='equipments[0].spFirmEQAs[0].documentName'/>
-                                                    </td>
-                                                    <td><input type='file' required="" class='file'
-                                                               name='equipments[0].spFirmEQAs[0].attachment'
-                                                               accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
-                                                    </td>
-                                                    <td class='file-size'></td>
-                                                    <td class='del_row'><a class='p-2'><i
-                                                            class='fa fa-trash text-danger '></i></a></td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
+                                    <div class="form-group">
+                                        <label class="col-lg-2">Quantity :</label>
+                                        <div class="col-lg-4">
+                                            <div class="input-icon">
+                                                <input type="text" name="equipments[0].quantity" class="form-control" required="" id="eq3">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <input type="button" id="addMoreEq" value="Add More File" class="btn btn-primary eqFile">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-hover" id="eqUploadTbl">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Document Name</th>
+                                                        <th>Document Attached</th>
+                                                        <th>File Size</th>
+                                                        <th>Delete</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody class="files">
+                                                    <tr>
+                                                        <td><input type='text' required="" class='form-control docName' name='equipments[0].spFirmEQAs[0].documentName'/></td>
+                                                        <td><input type='file' required="" class='file' name='equipments[0].spFirmEQAs[0].attachment'
+                                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
+                                                        </td>
+                                                        <td class='file-size'></td>
+                                                        <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input type='text' required="" class='form-control docName' name='equipments[0].spFirmEQAs[0].documentName'/></td>
+                                                        <td><input type='file' required="" class='file' name='equipments[0].spFirmEQAs[0].attachment'
+                                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
+                                                        </td>
+                                                        <td class='file-size'></td>
+                                                        <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input type='text' required="" class='form-control docName' name='equipments[0].spFirmEQAs[0].documentName'/></td>
+                                                        <td><input type='file' required="" class='file' name='equipments[0].spFirmEQAs[0].attachment'
+                                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
+                                                        </td>
+                                                        <td class='file-size'></td>
+                                                        <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button data-dismiss="modal" class="btn btn-primary"
-                                    onclick="getModalData('equipmentTbl','eq',3)" type="button">OK
-                            </button>
-                            <button data-dismiss="modal" class="btn btn-warning" type="button">Close</button>
+                            <div class="modal-footer">
+                                <button data-dismiss="modal" class="btn btn-primary" onclick="getModalData('equipmentTbl','eq',3)" type="button">OK</button>
+                                <button data-dismiss="modal" class="btn btn-warning" type="button">Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-                <%--confirmation model--%>
-            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
-                 class="modal in" id="confirmationModel">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <span><b>Confirmation!</b></span>
-                        </div>
-                        <div class="modal-body form-horizontal">
-                            <div class="alert alert-info">
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
-                                        <span id="messages"></span>
+                    <%--confirmation model--%>
+                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal in" id="confirmationModel">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <span><b>Confirmation!</b></span>
+                            </div>
+                            <div class="modal-body form-horizontal">
+                                <div class="alert alert-info">
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                            <span id="messages"></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-success" onclick="submitApplication()">Yes</button>
-                            <button type="button" class="btn btn-warning" onclick="closemodel('confirmationModel')">
-                                <span class="fa fa-times"></span> No
-                            </button>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" onclick="submitApplication()">Yes</button>
+                                <button type="button" class="btn btn-warning" onclick="closemodel('confirmationModel')">
+                                    <span class="fa fa-times"></span> No
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </form>
         </div>
     </div>
 </c:if>
-
 <script type="text/javascript" src="<c:url value="/resources/JqueryAjaxFormSubmit.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/jquery.form.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/cdb/specializedFirm/specializedFirmRC.js"/>"></script>

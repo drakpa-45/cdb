@@ -132,7 +132,7 @@ public class ArchitectController extends BaseController {
                         e.printStackTrace();
                     }
                 }
-                model.addAttribute("acknowledgement_message", "Your application for <label class='control-label'>Registration of Architecture</label> has been submitted successfully and your application number is <b>" + resdto.getReferenceNo() + "</b> <br><p>You will receive an email as well as SMS notification once take further action.</p><label class='control-label'>You can track your application using above Application Number.</label>");
+                model.addAttribute("acknowledgement_message", "Your application for <label class='control-label'>Registration of Architect</label> has been submitted successfully and your application number is <b>" + resdto.getReferenceNo() + "</b> <br><p>You will receive an email as well as SMS notification once take further action.</p><label class='control-label'>You can track your application using above Application Number.</label>");
                 return "/architect/acknowledgement";
         } catch (Exception e){
             System.out.print(e);

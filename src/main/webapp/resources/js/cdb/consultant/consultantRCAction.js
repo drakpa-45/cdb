@@ -227,19 +227,42 @@ var consultantRCAction = (function () {
 
                         incorporation(consultantDTO.incAttachments);
 
+                        var categoryClassDTOs = consultantDTO.categories;
+
+                        var ccTr = "";
+                        var tFeeAmount = 0;
+                        for (var i in categoryClassDTOs) {
+                            var valueee = categoryClassDTOs.value;
+                            tFeeAmount = tFeeAmount + parseFloat(categoryClassDTOs[i].aAmount);
+                            //  var total = valueee.();
+                            /* for(var j in valueee){
+                             count ++;
+                             return count;
+                             }*/
+                            ccTr = ccTr + "<tr> <td>" + categoryClassDTOs[i].name + "</td>" +
+                            "<td>"+
+                            " <a href='javascript:void(0)' style='color: #006699' title='${categoryClassDTOs[i].obj1}' data-toggle='tooltip' data-placement='top' class='tooltipCSSSelector'><i class='fa fa-question-circle'></i></a>"+
+                            " <input type='checkbox'  checked='checked' disabled id='asone' value='${c.id},${c.text}' class='ticked' name='categories[${i.index}].appliedServiceID'>" + categoryClassDTOs[i].value + "&nbsp; &nbsp; &nbsp;"+
+                            "</td> " +
+                            "<td>"+categoryClassDTOs[i].aAmount+"</td>"+
+                            "</tr>";
+                        }
+                        var tfoot = "<tr><td colspan='2' align='right'>Total</td><td>"+tFeeAmount+"</td> ";
+                        $('#consultantCCTbl').find('tbody').html(ccTr);
+                        $('#consultantCCTbl').find('tfoot').html(tfoot);
+
                         var appHistoryDTOs = consultantDTO.appHistoryDTOs;
 
                         var appHistoryTr = "";
 
                         for (var i in appHistoryDTOs) {
                             var actionTakenBy = appHistoryDTOs[i].userName;
-                            actionTakenBy = (actionTakenBy==null)?'By Citizen':actionTakenBy
+                            actionTakenBy = (actionTakenBy==null)?'By Citizen':actionTakenBy;
                             appHistoryTr = appHistoryTr +
                             "<tr><td>" + appHistoryDTOs[i].appStatus + "</td>" +
                             "<td>" + actionTakenBy + "</td>" +
                             "<td>" + formatAsDate(appHistoryDTOs[i].actionDate) + "</td>" +
                             "<td>"+ appHistoryDTOs[i].remarks +"</td></tr>";
-
                         }
                         $('#appStatusTbl').find('tbody').html(appHistoryTr);
 

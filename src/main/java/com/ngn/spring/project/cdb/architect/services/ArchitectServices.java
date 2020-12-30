@@ -370,7 +370,7 @@ public class ArchitectServices extends BaseService{
             dao.saveAservies(engineerAppliedServiceEntity);
 
             BigDecimal payAmount = dto.getPaymentAmt();
-            if(payAmount == null || dto.getServiceSectorType().equalsIgnoreCase("6e1cd096-bea8-11e4-9757-080027dcfac6")){
+            if(payAmount == null || dto.getServiceSectorType().equalsIgnoreCase("Government")){
                 payAmount = BigDecimal.valueOf(00.00);
             }
             BigDecimal totalAmount;
@@ -380,7 +380,7 @@ public class ArchitectServices extends BaseService{
                 totalAmount = BigDecimal.valueOf(dto.getPaymentAmt().floatValue() + 1000);
                 dto.setTotalAmt(totalAmount);
             }else{
-                if(dto.getServiceSectorType().equalsIgnoreCase("6e1cd096-bea8-11e4-9757-080027dcfac6")){
+                if(dto.getServiceSectorType().equalsIgnoreCase("Government")){
                     totalAmount = BigDecimal.valueOf(payAmount.floatValue());
                     dto.setPaymentAmt(BigDecimal.valueOf(00.00));
                 }else{
@@ -425,7 +425,7 @@ public class ArchitectServices extends BaseService{
         entity.setCmnDzongkhagId(dto.getDzongkhagId());
         entity.setGewog(dto.getGewog());
         entity.setVillage(dto.getVillage());
-        entity.setCmnServiceSectorTypeId(dto.getServiceSectorType());
+        entity.setCmnServiceSectorTypeId(dto.getServiceSectorTypeId());
         entity.setCmnCountryId(dto.getCountryId());
         entity.setCmnTradeId(dto.getTrade());//trade field is not there in db
         entity.setEmail(dto.getEmail());

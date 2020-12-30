@@ -15,9 +15,7 @@
 <div id="content_main_div_public_user">
 <c:if test="${not empty res.status}">
     <div class="card" id="acknowledgment">
-        <div class="card-header">
-
-        </div>
+        <div class="card-header"></div>
         <div class="card-body">
             <c:if test="${res.status eq 1}">
                 ${res.text}
@@ -25,7 +23,6 @@
             <c:if test="${res.status eq 0}">
                 <span class="error"> ${res.text}</span>
             </c:if>
-
         </div>
     </div>
 </c:if>
@@ -125,7 +122,6 @@
                                                     <input type="hidden" name="noOfDaysLate" id="totalNoDaysLate1" value="${renewalCheck.dto1.noOfDaysLate}">
                                                     <input type="hidden" name="paymentAmt" id="totalpenaltyamount1" value="${renewalCheck.dto1.paymentAmount}">
                                                     <input type="hidden" name="noOfDaysAfterGracePeriod" id="noOfDaysAfterGracePeriod1" value="${renewalCheck.dto1.noOfDaysAfterGracePeriod}">
-
                                                     <div class="form-group row pull-right">
                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                                                             <button type="button"  onclick="nextTab('feesStructurerenewal','personalInformation')" class="btn btn-primary">
@@ -137,6 +133,7 @@
 
                                                 <div class="tab-pane personalInformation" id="personalInformation">
                                                     <div class="">
+                                                        <span class="text-danger" ><i>Note: Fields marked with (*) are mandatory. Please provide your valid information while availing this service.</i></span>
                                                         <div class="card tab2">
                                                             <div class="bg-blue card-status card-status-left"></div>
                                                             <div class="card-header">
@@ -210,8 +207,8 @@
                                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                         <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Type <span class="text-danger">*</span></label>
                                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                            <input type="text" maxlength="100" id="serviceSectorType" name="serviceSector" readonly class="form-control" value="${registrationDetails.serviceSectorType}">
-                                                                            <input type="hidden" maxlength="100" id="serviceSectorType" name="serviceSectorType" class="form-control" value="${registrationDetails.serviceSectorTypeId}">
+                                                                            <input type="text" maxlength="100" id="serviceSectorType" name="serviceSectorType" readonly class="form-control" value="${registrationDetails.serviceSectorType}">
+                                                                            <input type="hidden" maxlength="100" id="serviceSectorTypeId" name="serviceSectorTypeId" class="form-control" value="${registrationDetails.serviceSectorTypeId}">
                                                                               <%-- <form:select path="typeList" name="serviceSectorType" onclick="remove_err('serviceSectorType_err')" id="serviceSectorType" class="form-control">
                                                                                    <form:option value="${registrationDetails.serviceSectorTypeId}">${registrationDetails.serviceSectorType}</form:option>
                                                                                    <form:options items="${typeList}" itemValue="value" itemLabel="text"></form:options>
@@ -257,7 +254,7 @@
                                                                         <input id="email" type="email" class="form-control" value="${registrationDetails.email}" name="email" readonly>
                                                                     </div>
                                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                        <label>Mobile No: <span class="text-danger">*</span></label>
+                                                                        <label>Mobile Number: <span class="text-danger">*</span></label>
                                                                         <input type="number" class="form-control number sp-character" value="${registrationDetails.mobileNo}" id="mobileNo" name="mobileNo" onKeyPress="if(this.value.length==8) return false;" min="0">
                                                                     </div>
                                                                 </div>

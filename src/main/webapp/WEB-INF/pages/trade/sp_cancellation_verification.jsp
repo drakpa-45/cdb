@@ -29,7 +29,7 @@
                             <h3 class="card-title font-weight-bold" style="color: #002752">Specialized Trade >> Cancellation >>
                                 <security:authorize access="hasRole('ROLE_PAYMENT')">Payment Approver</security:authorize>
                             </h3>
-                            <span style="font-size: small;color: #444444"> >> Application Number : ${appDetails.referenceNo} || CDB Number : ${appDetails.cdbNo}     Application Date: ${appDetails.applicationDate} </span>
+                            <span style="font-size: small;color: #444444"><b> Application Number : ${appDetails.referenceNo} || CDB Number : ${appDetails.cdbNo}     Application Date: ${appDetails.applicationDate} </b></span>
                         </div>
                         <input type="hidden" value="${appDetails.referenceNo}" readonly id="referenceNo" name="referenceNo" class="form-control">
                         <div class="card-body">
@@ -110,7 +110,7 @@
                                                                     <input id="email" type="email" value="${appDetails.email}" readonly class="form-control" name="email" placeholder="Type valid email">
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                    <label>Mobile No:</label>
+                                                                    <label>Mobile Number:</label>
                                                                     <input type="text" class=" form-control number" value="${appDetails.mobileNo}" readonly id="mobileNo" name="mobileNo"  maxlength="8">
                                                                 </div>
                                                             </div>
@@ -151,29 +151,22 @@
                                                                         <table class="table">
                                                                             <tbody>
                                                                             <tr>
-                                                                                <td colspan="2"
-                                                                                    class="font-blue-madison bold warning">Applicant Details
-                                                                                </td>
+                                                                                <td colspan="2" class="font-blue-madison bold warning">Applicant Details</td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>
                                                                                     <table class="table table-condensed">
                                                                                         <tr>
-                                                                                            <td><strong>Date of application:</strong>
-                                                                                            </td>
+                                                                                            <td><strong>Date of application:</strong></td>
                                                                                             <td>${appDetails.applicationDate}</td>
                                                                                         </tr>
                                                                                         <tr>
-                                                                                            <td>
-                                                                                                <strong>Remarks: </strong>
-                                                                                            </td>
+                                                                                            <td><strong>Remarks: </strong></td>
                                                                                             <td>${appDetails.cancellationRemarks}</td>
                                                                                         </tr>
                                                                                         <tr>
-                                                                                            <td>
-                                                                                                <strong>CreatedBy: </strong>
-                                                                                            </td>
-                                                                                            <td>${appDetails.createdBy}<b style="color: blueviolet">(Applicant's CID Number)</b></td>
+                                                                                            <td><strong>CreatedBy: </strong></td>
+                                                                                            <td>${appDetails.createdBy}<b style="color: blueviolet">(${appDetails.fullname})</b></td>
                                                                                         </tr>
                                                                                     </table>
                                                                                 </td>

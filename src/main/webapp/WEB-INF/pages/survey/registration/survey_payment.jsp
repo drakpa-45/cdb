@@ -10,7 +10,6 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <body>
-
 <div class="mt-5">
     <div class="container mb-9">
         <div class="row">
@@ -108,7 +107,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Mobile No:</label>
+                                                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Mobile Number:</label>
                                                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                             <input type="hidden" class=" form-control number" value="${appDetails.mobileNo}" readonly id="mobileNo" name="mobileNo" maxlength="8">${appDetails.mobileNo}
                                                         </div>
@@ -158,7 +157,6 @@
                                                 <input type="hidden" value="${appDetails.serviceSectorType}" readonly maxlength="100" id="service" name="serviceSectorType" class="form-control">${appDetails.serviceSectorType}
                                         </div>
                                     </div>
-
                                     <div class="col-lg-12">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                             <label>Office/Employer Address:</label>
@@ -196,11 +194,8 @@
                                                            <%-- <input type="text" onclick="remove_err('paymentReceiptDate_err')" class=" form-control datepicker"
                                                                    readonly name="paymentReceiptDate" id="paymentReceiptDate">--%>
                                                             <div class="input-group margin-bottom-sm">
-                                                                                <span class="input-group-addon pr-5"><i
-                                                                                        class="fa fa-calendar"></i></span>
-                                                                <input type="date" name="paymentReceiptDate"
-                                                                       value="" id="paymentReceiptDate"
-                                                                       class="form-control">
+                                                                <span class="input-group-addon pr-5"><i class="fa fa-calendar"></i></span>
+                                                                <input type="date" name="paymentReceiptDate" value="" id="paymentReceiptDate" class="form-control">
                                                             </div>
                                                             <span id="paymentReceiptDate_err" class="text-danger"></span>
                                                         </div>
@@ -318,12 +313,12 @@
                                     </div>
                                 </div>
                             </div>
-                                        <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
-                                            <label class="form-label">Your Remarks:</label>
-                                            <textarea class="form-control" onclick="remove_err('remarks_err')" name="remarks" id="remarks"></textarea>
-                                            <span id="remarks_err" class="text-danger"></span>
-                                        </div>
-                                <br>
+                          <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                              <label class="form-label">Your Remarks:</label>
+                                 <textarea class="form-control" onclick="remove_err('remarks_err')" name="remarks" id="remarks"></textarea>
+                              <span id="remarks_err" class="text-danger"></span>
+                          </div>
+                            <br>
                             <div class="form-group row pull-right">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                                    <%-- <button class="btn btn-warning" type="button" id="showrejectsection" onclick="updateReject()"><span class="fa fa-times"></span> Reject

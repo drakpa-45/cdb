@@ -68,7 +68,6 @@ public class ConsultantRCService extends BaseService {
      */
     @Transactional(readOnly = false)
     public ResponseMessage save(ConsultantDTO consultantDTO, RenewalServiceType renewalServiceType, LoggedInUser loggedInUser, HttpServletRequest request) throws Exception {
-
         if(renewalServiceType == null){
             return responseMessage;
         }
@@ -584,5 +583,18 @@ public class ConsultantRCService extends BaseService {
     @Transactional(readOnly = true)
     public String auditMemo(String consultantFinalId){
         return consultantRCDao.auditMemo(consultantFinalId);
+    }
+
+    @Transactional
+    public void saveServicePaymentDetailOS(String servicePaymentId,List<CategoryClassDTO> classDTOs,LoggedInUser loggedInUser){
+        for(CategoryClassDTO classDTO : classDTOs){
+            ConsultantServicePaymentDetail spDetail = new ConsultantServicePaymentDetail();
+            spDetail.setId(commonService.getRandomGeneratedId());
+            spDetail.setServicePaymentId(servicePaymentId);
+            spDetail.setAmount(classDTO.getvAmount());
+            spDetail.setCategoryId(classDTO.getCategoryId());
+            // spDetail.setExistingClassId(classDTO.getApClassId());
+            spDetail.setAppliedClassId(classDTO.getApClassId());
+        }
     }
 }

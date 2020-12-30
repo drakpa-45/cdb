@@ -188,5 +188,12 @@ public class AtchitectAdminController extends BaseController {
         return "architect/architect_printInformation";
       //  return "jasperreport";
     }
+
+    @RequestMapping(value ={"/emptylayout/openRejectedApplication"}, method = RequestMethod.GET)
+    public String fetchRejectedAppDetails(HttpServletRequest request,String appNo,Model model) {
+        ArchitectDto dto = services.fetchRejectedAppDetails(appNo);
+        model.addAttribute("appDetails", dto);
+        return "architect/rejectedApplications/rejectedIndex";
+    }
 }
 

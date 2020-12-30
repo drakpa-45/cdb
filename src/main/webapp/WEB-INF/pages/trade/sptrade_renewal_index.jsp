@@ -13,7 +13,6 @@
 <c:if test="${not empty res.status}">
     <div class="card" id="acknowledgment">
         <div class="card-header">
-
         </div>
         <div class="card-body">
             <c:if test="${res.status eq 1}">
@@ -22,7 +21,6 @@
             <c:if test="${res.status eq 0}">
                 <span class="error"> ${res.text}</span>
             </c:if>
-
         </div>
     </div>
 </c:if>
@@ -82,8 +80,7 @@
                                             <div class="tab-content border p-3 col-lg-12">
                                                 <div class="tab-pane active feesStructurerenewal" id="feesStructure">
                                                     <div class="form-group ">
-                                                        <table id="csa"
-                                                               class="table table-striped table-bordered table-hover">
+                                                        <table id="csa" class="table table-striped table-bordered table-hover">
                                                             <thead>
                                                             <tr>
                                                                 <th>Type</th>
@@ -118,6 +115,7 @@
                                                 </div>
                                                 <div class="tab-pane personalInformation" id="personalInformation">
                                                     <div class="">
+                                                        <span class="text-danger" ><i>Note: Fields marked with (*) are mandatory. Please provide your valid information while availing this service.</i></span>
                                                         <div class="card tab2">
                                                             <div class="bg-blue card-status card-status-left"></div>
                                                             <div class="card-header">

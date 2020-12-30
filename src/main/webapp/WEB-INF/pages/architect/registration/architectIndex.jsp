@@ -22,10 +22,9 @@
                         Construction Development Board
                     </h1>
                 </div>
-
                 <div class="card" id="registrtaionFormCard">
                     <form action="#" id="architectForm" method="post" enctype="multipart/form-data">
-                    <%--<form id="architectForm" action="#" method="post" enctype="multipart/form-data">--%>
+                        <%--<form id="architectForm" action="#" method="post" enctype="multipart/form-data">--%>
                         <div class="card-header">
                             <h3 class="card-title font-weight-bold">Registration of Architect</h3>
                         </div>
@@ -36,26 +35,25 @@
                                         <ul class="m-0 nav nav-tabs">
                                             <li class="feesStructure tab-pane active">
                                                 <a href="#" class="border text-white" data-toggle="tab" data-placement="top">
-                                                <i class="fa fa-bookmark mr-1"></i>Fee Structure</a>
+                                                    <i class="fa fa-bookmark mr-1"></i>Fee Structure</a>
                                             </li>
                                             <li class="tab-pane personalInformation">
                                                 <a href="#" class=" border" data-toggle="tab" data-placement="top">
-                                                <i class="fa fa-users mr-1"></i>Personal Information</a>
+                                                    <i class="fa fa-users mr-1"></i>Personal Information</a>
                                             </li>
                                             <li class="tab-pane categoryDtls">
                                                 <a href="#" class="border" data-toggle="tab" data-placement="top">
-                                                <i class="fa fa-mobile mr-1"></i>Contact Details</a>
+                                                    <i class="fa fa-mobile mr-1"></i>Contact Details</a>
                                             </li>
                                             <li class="tab-pane saveAndPreview">
                                                 <a href="#" class="border" data-toggle="tab" data-placement="top">
-                                                <i class="fa fa-file mr-1"></i>Attachments</a>
+                                                    <i class="fa fa-file mr-1"></i>Attachments</a>
                                             </li>
                                         </ul>
                                         <div class="tab-content border p-3 col-lg-12">
                                             <div class="tab-pane active feesStructure" id="feesStructure">
                                                 <div class="form-group ">
-                                                    <table id="csa"
-                                                           class="table table-striped table-bordered table-hover">
+                                                    <table id="csa" class="table table-striped table-bordered table-hover">
                                                         <thead>
                                                         <tr>
                                                             <th>Type</th>
@@ -64,35 +62,36 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <c:forEach var="fee" items="${fee_details}" varStatus="count">
-                                                                <tr>
-                                                                    <td>${fee.name}</td>
-                                                                    <td>${fee.validaty}</td>
-                                                                    <td>${fee.registrationFee}</td>
-                                                                </tr>
-                                                            </c:forEach>
+                                                        <c:forEach var="fee" items="${fee_details}" varStatus="count">
+                                                            <tr>
+                                                                <td>${fee.name}</td>
+                                                                <td>${fee.validaty}</td>
+                                                                <td>${fee.registrationFee}</td>
+                                                            </tr>
+                                                        </c:forEach>
                                                         </tbody>
                                                     </table>
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                                         <label>Enter your valid CID Number/work permit number:<span class="text-danger">*</span></label>
-                                                       <span><input type="number" id="app_çid" onchange="checkStatus(this.value)" name="app_çid" class="form-control number" onkeypress="return preventDot(event);"></span>
+                                                        <span><input type="number" id="app_çid" onchange="checkStatus(this.value)" name="app_çid" class="form-control number" onkeypress="return preventDot(event);"></span>
                                                         <span id="app_çid_err" class="text-danger"></span><br/>
-                                                       <%-- <span><input class="form-control categoryCheck" type="checkbox" name="itemId" value="${category.id}" style="width: 17px; height: 17px;"> If you are non-Bhutanese applicant, please check here.</span>--%>
+                                                        <%-- <span><input class="form-control categoryCheck" type="checkbox" name="itemId" value="${category.id}" style="width: 17px; height: 17px;"> If you are non-Bhutanese applicant, please check here.</span>--%>
                                                     </div>
                                                 </div>
-                                                <hr />
+                                                <hr/>
                                                 <div class="form-group row pull-right">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                                                        <button type="button"  onclick="nextTab('feesStructure','personalInformation')" class="btn btn-primary">
-                                                            Next  <i class="fa fa-arrow-circle-right"></i>
+                                                        <button type="button" onclick="nextTab('feesStructure','personalInformation')" class="btn btn-primary">
+                                                            Next <i class="fa fa-arrow-circle-right"></i>
                                                         </button>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="tab-pane personalInformation" id="personalInformation">
                                                 <div class="">
+                                                    <span class="text-danger" ><i>Note: Fields marked with (*) are mandatory. Please provide your valid information while availing this service.</i></span>
                                                     <div class="card tab2">
                                                         <div class="bg-blue card-status card-status-left"></div>
                                                         <div class="card-header">
@@ -104,7 +103,7 @@
                                                                     <div class="form-group row">
                                                                         <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Salutation<span class="text-danger">*</span>:</label>
                                                                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                                            <form:select path="salutationList"  name="salutation" onclick="remove_err('salutation_err')" id="salutation" class="form-control">
+                                                                            <form:select path="salutationList" name="salutation" onclick="remove_err('salutation_err')" id="salutation" class="form-control">
                                                                                 <form:option value="">Select</form:option>
                                                                                 <form:options items="${salutationList}" itemValue="value" itemLabel="text"></form:options>
                                                                             </form:select>
@@ -120,14 +119,14 @@
                                                                     <div class="form-group row">
                                                                         <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Name:</label>
                                                                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                                            <input type="text" readonly  name="fullname" maxlength="100" id="name" class="form-control">
+                                                                            <input type="text" readonly name="fullname" maxlength="100" id="name" class="form-control">
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
                                                                         <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Dzongkhag:</label>
                                                                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                             <input type="text" readonly maxlength="100" id="dzongkhag" class="form-control">
-                                                                            <input type="hidden"  name="dzongkhagId" id="dzongkhagId">
+                                                                            <input type="hidden" name="dzongkhagId" id="dzongkhagId">
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
@@ -140,7 +139,7 @@
                                                                         <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Village:</label>
                                                                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                             <input type="text" readonly maxlength="100" id="village" name="village" class="form-control">
-                                                                            <input type="hidden"  name="villageId" id="villageId">
+                                                                            <input type="hidden" name="villageId" id="villageId">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -156,25 +155,28 @@
                                                         <div class="card-body">
                                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                    <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Service for <span class="text-danger">*</span></label>
+                                                                    <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Service
+                                                                        for <span class="text-danger">*</span></label>
                                                                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                                        <select class="form-control"  name="serviceTypeId">
+                                                                        <select class="form-control" name="serviceTypeId">
                                                                             <option value="030ace8e-24af-11e6-967f-9c2a70cc8e06">Architect</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                    <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Country <span class="text-danger">*</span></label>
+                                                                    <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Country
+                                                                        <span class="text-danger">*</span></label>
                                                                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                                        <form:select path="countryList" name="countryId" id="countryId"  class="form-control">
-                                                                            <form:options items="${countryList}"  itemValue="value" itemLabel="text"/>
+                                                                        <form:select path="countryList" name="countryId" id="countryId" class="form-control">
+                                                                            <form:options items="${countryList}" itemValue="value" itemLabel="text"/>
                                                                         </form:select>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-12">
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                    <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Type <span class="text-danger">*</span></label>
+                                                                    <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Type
+                                                                        <span class="text-danger">*</span></label>
                                                                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                         <form:select path="typeList" name="serviceSectorType" onclick="remove_err('serviceSectorType_err')" id="serviceSectorType" class="form-control">
                                                                             <form:option value="">Select</form:option>
@@ -184,7 +186,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                    <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Trade <span class="text-danger">*</span></label>
+                                                                    <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Trade
+                                                                        <span class="text-danger">*</span></label>
                                                                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                                         <form:select path="tradeList" name="trade" id="trade" onclick="remove_err('trade_err')" class="form-control">
                                                                             <form:option value="">Select</form:option>
@@ -197,11 +200,11 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <hr />
+                                                <hr/>
                                                 <div class="form-group row pull-right">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                                                        <button type="button" onclick="nextTab('personalInformation','categoryDtls')"  class="btn btn-primary">
-                                                            Next  <i class="fa fa-arrow-circle-right"></i>
+                                                        <button type="button" onclick="nextTab('personalInformation','categoryDtls')" class="btn btn-primary">
+                                                            Next <i class="fa fa-arrow-circle-right"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -217,7 +220,7 @@
                                                             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <label>Email: <span class="text-danger">*</span></label>
-                                                                    <input id="regEmail" type="email" class="form-control"onchange="isMailUnique(this.value)" name="email" placeholder="Type valid email">
+                                                                    <input id="regEmail" type="email" class="form-control" onchange="isMailUnique(this.value)" name="email" placeholder="Type valid email">
                                                                     <span id="email_err" class="text-danger"></span>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
@@ -267,7 +270,7 @@
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <label>Country of University: <span class="text-danger">*</span></label>
-                                                                    <form:select path="countryList"  name="universityCountry" onclick="remove_err('universityCountry_err')" id="universityCountry" class="form-control">
+                                                                    <form:select path="countryList" name="universityCountry" onclick="remove_err('universityCountry_err')" id="universityCountry" class="form-control">
                                                                         <form:option value="">Select</form:option>
                                                                         <form:options items="${countryList}" itemValue="value" itemLabel="text"></form:options>
                                                                     </form:select>
@@ -276,14 +279,14 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <hr />
+                                                    <hr/>
                                                     <div class="form-group row pull-right">
                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                                                            <button type="button" onclick="previousTab('personalInformation','categoryDtls')"  class="btn btn-success">
-                                                                <i class="fa fa-arrow-circle-left"></i>  Previous
+                                                            <button type="button" onclick="previousTab('personalInformation','categoryDtls')" class="btn btn-success">
+                                                                <i class="fa fa-arrow-circle-left"></i> Previous
                                                             </button>
-                                                            <button type="button" onclick="nextTab('categoryDtls','saveAndPreview')"  class="btn btn-primary">
-                                                                Next  <i class="fa fa-arrow-circle-right"></i>
+                                                            <button type="button" onclick="nextTab('categoryDtls','saveAndPreview')" class="btn btn-primary">
+                                                                Next <i class="fa fa-arrow-circle-right"></i>
                                                             </button>
                                                         </div>
                                                     </div>
@@ -295,12 +298,13 @@
                                                         <div class="panel-body">
                                                             <div class="form-group row">
                                                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                                    <label><b>Attach your supporting documents:<span class="text-danger">*</span></b>( Please click on add more document button to add more attachments)</label><br />
+                                                                    <label><b>Attach your supporting documents:<span class="text-danger">*</span></b>( Pleaseclick on add more document button to add more attachments)</label><br/>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                                                    <input type="file" required="true" name="files" id="file1" class="alert badge-danger" accept="application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document" onchange="validateAttachment(this.value,'file1','filecheck1')">
+                                                                    <input type="file" required="true" name="files" id="file1" class="alert badge-danger" accept="application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                                                                           onchange="validateAttachment(this.value,'file1','filecheck1')">
                                                                 </div>
                                                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                                                     <button class="btn btn-success fa-pull-right" type="button" onclick="addmoreattachemnts()"><i class="fa fa-plus"> Add More Documents</i></button>
@@ -325,23 +329,38 @@
                                                                 <div id="termsAndCon">
                                                                     <ul>
                                                                         <li>
-                                                                            All information and attachments with this application are true and correct;
+                                                                            All information and attachments with this
+                                                                            application are true and correct;
                                                                         </li>
                                                                         <li>
-                                                                            I am/we are aware that any false information provided herein will result in rejection of my application and suspension of any registered granted;
+                                                                            I am/we are aware that any false information
+                                                                            provided herein will result in rejection of
+                                                                            my application and suspension of any
+                                                                            registered granted;
                                                                         </li>
-                                                                        <li>I/We shall not make refund claims of expenditure incurred in processing this application;
+                                                                        <li>I/We shall not make refund claims of
+                                                                            expenditure incurred in processing this
+                                                                            application;
                                                                         </li>
-                                                                        <li>I/We have read and understood <b>the Guidelines & other legal instruments</b> and shall perform in line with Guidelines and any other legislation in force. Failure to comply, will be subject to the penalties provided for in the applicable legislation of the country.
+                                                                        <li>I/We have read and understood <b>the
+                                                                            Guidelines & other legal instruments</b> and
+                                                                            shall perform in line with Guidelines and
+                                                                            any other legislation in force. Failure to
+                                                                            comply, will be subject to the penalties
+                                                                            provided for in the applicable legislation
+                                                                            of the country.
                                                                         </li>
-                                                                        <li>I/We hereby declare that issue of CDB certificate does not in anyway constitute an obligation on the part of CDB or any other Government agency to provide contract works.
+                                                                        <li>I/We hereby declare that issue of CDB
+                                                                            certificate does not in anyway constitute an
+                                                                            obligation on the part of CDB or any other
+                                                                            Government agency to provide contract works.
                                                                         </li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="col-lg-12">
-                                                                <span><input type="checkbox" id="submitcheckbox" onclick="enablesubmit()" name="tnc" class="required"  style="width:15px;height:15px;"></span>
+                                                                    <span><input type="checkbox" id="submitcheckbox" onclick="enablesubmit()" name="tnc" class="required" style="width:15px;height:15px;"></span>
                                                                     <span class="bold"> I agree to the above Terms and Conditions</span>
                                                                 </label>
                                                             </div>
@@ -349,13 +368,13 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <hr />
+                                                <hr/>
                                                 <div class="form-group row pull-right">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                                                        <button type="button" onclick="previousTab('categoryDtls','saveAndPreview')"  class="btn btn-success">
-                                                            <i class="fa fa-arrow-circle-left"></i>  Previous
+                                                        <button type="button" onclick="previousTab('categoryDtls','saveAndPreview')" class="btn btn-success">
+                                                            <i class="fa fa-arrow-circle-left"></i> Previous
                                                         </button>
-                                                        <button disabled type="button" onclick="submitRegistrationForm()"  class="btn btn-primary" id="submitbtn">
+                                                        <button disabled type="button" onclick="submitRegistrationForm()" class="btn btn-primary" id="submitbtn">
                                                             <i class="fa fa-save"></i> Submit
                                                         </button>
                                                     </div>
@@ -366,7 +385,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"  class="modal in" id="concirmationModel">
+                        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+                             class="modal in" id="concirmationModel">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">

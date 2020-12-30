@@ -10,7 +10,6 @@
 
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <body>
-
 <div class="mt-5">
     <div class="container mb-9">
         <div class="row">
@@ -141,7 +140,7 @@
                                                                             <input id="email" type="email" value="${appDetails.email}" readonly class="form-control" name="email" placeholder="Type valid email">
                                                                         </div>
                                                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                            <label>Mobile No:</label>
+                                                                            <label>Mobile Number:</label>
                                                                             <input type="text" class=" form-control number" value="${appDetails.mobileNo}" readonly id="mobileNo" name="mobileNo"  maxlength="8">
                                                                         </div>
                                                                     </div>
@@ -190,12 +189,8 @@
                                                             <hr />
                                                             <div class="form-group row pull-right">
                                                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                                                                    <button type="button" onclick="previousTab('personalInformation','categoryDtls')"  class="btn btn-success">
-                                                                        <i class="fa fa-arrow-circle-left"></i>  Previous
-                                                                    </button>
-                                                                    <button type="button" onclick="nextTab('categoryDtls','saveAndPreview')"  class="btn btn-primary">
-                                                                        Next  <i class="fa fa-arrow-circle-right"></i>
-                                                                    </button>
+                                                                    <button type="button" onclick="previousTab('personalInformation','categoryDtls')"  class="btn btn-success"><i class="fa fa-arrow-circle-left"></i>  Previous</button>
+                                                                    <button type="button" onclick="nextTab('categoryDtls','saveAndPreview')"  class="btn btn-primary">Next  <i class="fa fa-arrow-circle-right"></i></button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -205,7 +200,6 @@
                                                 <div id="submitSection" style="">
                                                     <div class="panel panel-default">
                                                         <div class="panel-body">
-
                                                             <input type="hidden" id="currentStatus" value="${appDetails.updateStatus}">
                                                             <input type="hidden" id="referenceNo" name="referenceNo" value="${appDetails.referenceNo}">
                                                             <%--${appDetails.updateStatus}--%>
@@ -215,28 +209,21 @@
                                                                         <table class="table">
                                                                             <tbody>
                                                                             <tr>
-                                                                                <td colspan="2"
-                                                                                    class="font-blue-madison bold warning">Application Submitter Details
-                                                                                </td>
+                                                                                <td colspan="2" class="font-blue-madison bold warning">Application Submitter Details</td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>
                                                                                     <table class="table table-condensed">
                                                                                         <tr>
-                                                                                            <td><strong>Date of application:</strong>
-                                                                                            </td>
+                                                                                            <td><strong>Date of application:</strong></td>
                                                                                             <td>${appDetails.applicationDate}</td>
                                                                                         </tr>
                                                                                         <tr>
-                                                                                            <td>
-                                                                                                <strong>Remarks: </strong>
-                                                                                            </td>
+                                                                                            <td><strong>Remarks: </strong></td>
                                                                                             <td>${appDetails.remarks}</td>
                                                                                         </tr>
                                                                                         <tr>
-                                                                                            <td>
-                                                                                                <strong>CreatedBy: </strong>
-                                                                                            </td>
+                                                                                            <td><strong>CreatedBy: </strong></td>
                                                                                             <td>${appDetails.createdBy}</td>
                                                                                         </tr>
                                                                                     </table>
@@ -247,9 +234,7 @@
                                                                     </c:if>
                                                                 </div>
                                                             </div>
-
                                                             <input type="hidden" class=" form-control number" value="${appDetails.cdbNo}" readonly name="cdbNo">
-
                                                             <div class="row pt-4">
                                                                 <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
                                                                     <label class="form-label">Your Remarks:</label>
@@ -263,27 +248,21 @@
                                                 <hr />
                                                 <div class="form-group row pull-right">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                                                        <button type="button" onclick="previousTab('categoryDtls','saveAndPreview')"  class="btn btn-success">
-                                                            <i class="fa fa-arrow-circle-left"></i>  Previous
-                                                        </button>
+                                                        <button type="button" onclick="previousTab('categoryDtls','saveAndPreview')"  class="btn btn-success"><i class="fa fa-arrow-circle-left"></i>  Previous</button>
                                                         <button class="btn btn-warning" type="button" id="showrejectsection" onclick="updateReject()"><span class="fa fa-times"></span> Reject </button>
                                                         <c:if test="${appDetails.updateStatus=='262a3f11-adbd-11e4-99d7-080027dcfac6'}">
-                                                            <button type="button" onclick="verifyApplication()"  class="btn btn-primary">
-                                                                <i class="fa fa-save"></i> Verify
-                                                            </button>
+                                                            <button type="button" onclick="verifyApplication()"  class="btn btn-primary"><i class="fa fa-save"></i> Verify</button>
                                                         </c:if>
                                                         <c:if test="${appDetails.updateStatus=='36f9627a-adbd-11e4-99d7-080027dcfac6'}">
-                                                            <button type="button" onclick="approveApplication('cancel')"  class="btn btn-primary">
-                                                                <i class="fa fa-save"></i> Approve
-                                                            </button>
+                                                            <button type="button" onclick="approveApplication('cancel')"  class="btn btn-primary"><i class="fa fa-save"></i> Approve</button>
                                                         </c:if>
                                                     </div>
                                                 </div>
+                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         <jsp:include page="/WEB-INF/pages/architect/confirmationModal.jsp"/>
                     </form>
                     <script type="text/javascript" src="<c:url value="/resources/JqueryAjaxFormSubmit.js"/>"></script>

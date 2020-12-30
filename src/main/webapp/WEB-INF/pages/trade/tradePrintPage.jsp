@@ -10,7 +10,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <html>
 <div>
 <div class="mt-5">
@@ -29,7 +28,7 @@
                                         <label>Applicant Name: <i>${cidDetails.fullname}</i></label>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                        <label>Mobile No: <i>${cidDetails.mobileNo}</i></label>
+                                        <label>Mobile Number: <i>${cidDetails.mobileNo}</i></label>
                                     </div>
                                 </div>
                                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">

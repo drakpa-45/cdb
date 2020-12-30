@@ -14,6 +14,10 @@ public class EmployeeDetailsDTO {
     private String cdbNo;
     private String workId;
     private String procuringAgency;
+    private String positionTitle;
+    private String agency;
+    private String cidNo;
+
 
     public String getConsultantFirmname() {
         return consultantFirmname;
@@ -93,5 +97,29 @@ public class EmployeeDetailsDTO {
 
     public void setProcuringAgency(String procuringAgency) {
         this.procuringAgency = procuringAgency;
+    }
+
+    public String getPositionTitle() {
+        return positionTitle;
+    }
+
+    public void setPositionTitle(String positionTitle) {
+        this.positionTitle = positionTitle;
+    }
+
+    public String getAgency() {
+        return agency;
+    }
+
+    public void setAgency(String agency) {
+        this.agency = agency;
+    }
+
+    public String getCidNo() {
+        return cidNo;
+    }
+
+    public void setCidNo(String cidNo) {
+        this.cidNo = cidNo;
     }
 }

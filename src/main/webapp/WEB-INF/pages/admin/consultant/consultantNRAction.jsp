@@ -16,7 +16,6 @@
 </head>
 <body>
 <input type="hidden" id="appNoVA" value="${appNo}" name="applcationNo"/>
-
 <div class="container mb-9">
     <div class="row">
         <div class="col-12">
@@ -90,35 +89,31 @@
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-4 form-label">Ownership Type</label>
-                                                            <label class="col-lg-8 form-label"
-                                                                   id="ownershipType"></label>
+                                                            <label class="col-lg-8 form-label form-control" id="ownershipType"></label>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-4 form-label">Country</label>
-                                                            <label class="col-lg-8 form-label" id="country"></label>
+                                                            <label class="col-lg-8 form-label form-control" id="country"></label>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-6 col-md-6 form-group">
-                                                            <label class="col-lg-4 form-label">Trade License No</label>
-                                                            <label class="col-lg-8 form-label"
-                                                                   id="tradeLicenseNo"></label>
+                                                            <label class="col-lg-4 form-label">Trade License Number</label>
+                                                            <label class="col-lg-8 form-label form-control" id="tradeLicenseNo"></label>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 form-group">
-                                                            <label class="col-lg-4 form-label">Proposed Firm
-                                                                Name</label>
-                                                            <label class="col-lg-8 form-label" id="firmName"></label>
+                                                            <label class="col-lg-4 form-label">Proposed Firm Name</label>
+                                                            <label class="col-lg-8 form-label form-control" id="firmName"></label>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-4 form-label">TPN Number</label>
-                                                            <label class="col-lg-8 form-label" id="tpn"></label>
+                                                            <label class="col-lg-8 form-label form-control" id="tpn"></label>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="card hidden" id="cIncorporation">
                                                 <div class="bg-blue card-status card-status-left"></div>
                                                 <div class="card-header">
@@ -151,8 +146,7 @@
                                             <div class="card tab2">
                                                 <div class="bg-blue card-status card-status-left"></div>
                                                 <div class="card-header">
-                                                    <h3 class="card-title">Name of Owner, Partners and/or others with
-                                                        Controlling Interest</h3>
+                                                    <h3 class="card-title">Name of Owner, Partners and/or others with Controlling Interest</h3>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="col-lg-12">
@@ -196,23 +190,22 @@
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-4 form-label">Dzongkhag</label>
-                                                            <label class="col-lg-8 form-label" id="pDzongkhag"></label>
+                                                            <label class="col-lg-8 form-label form-control" id="pDzongkhag"></label>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-4 form-label">Gewog </label>
-                                                            <label class="col-lg-8 form-label" id="pGewog"></label>
+                                                            <label class="col-lg-8 form-label form-control" id="pGewog"></label>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-4 form-label">Village </label>
-                                                            <label class="col-lg-8 form-label" id="pVillage"></label>
+                                                            <label class="col-lg-8 form-label form-control" id="pVillage"></label>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- Box Close -->
-
                                             <!-- Box Open -->
                                             <div class="card tab2">
                                                 <div class="bg-blue card-status card-status-left"></div>
@@ -222,34 +215,32 @@
                                                 <div class="card-body">
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-6 col-md-6 form-group">
-                                                            <label class="col-lg-5 form-label">Establishment
-                                                                Address</label>
-                                                            <label class="col-lg-7 form-label" id="estAddress"></label>
+                                                            <label class="col-lg-5 form-label">Establishment Address</label>
+                                                            <label class="col-lg-7 form-label form-control" id="estAddress"></label>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-5 form-label">Dzongkhag</label>
-                                                            <label class="col-lg-7 form-label"
-                                                                   id="estDzongkhag"></label>
+                                                            <label class="col-lg-7 form-label form-control" id="estDzongkhag"></label>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-6 col-md-6 form-group">
                                                             <label class="col-lg-5 form-label">Email</label>
-                                                            <label class="col-lg-7 form-label" id="regEmail"></label>
+                                                            <label class="col-lg-7 form-label form-control" id="regEmail"></label>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 form-group">
-                                                            <label class="col-lg-5 form-label">Mobile No</label>
-                                                            <label class="col-lg-7 form-label" id="regMobileNo"></label>
+                                                            <label class="col-lg-5 form-label">Mobile Number</label>
+                                                            <label class="col-lg-7 form-label form-control" id="regMobileNo"></label>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-6 col-md-6 form-group">
-                                                            <label class="col-lg-5 form-label">Telephone No </label>
-                                                            <label class="col-lg-7 form-label" id="regPhoneNo"></label>
+                                                            <label class="col-lg-5 form-label">Telephone Number </label>
+                                                            <label class="col-lg-7 form-label form-control" id="regPhoneNo"></label>
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 form-group">
-                                                            <label class="col-lg-5 form-label">Fax No </label>
-                                                            <label class="col-lg-7 form-label" id="regFaxNo"></label>
+                                                            <label class="col-lg-5 form-label">Fax Number</label>
+                                                            <label class="col-lg-7 form-label form-control" id="regFaxNo"></label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -258,12 +249,10 @@
                                         </div>
                                     </form>
                                     <div class="col-lg-12 form-group">
-                                        <button type="button" onclick="nextTab('feesStructure','generalInformation')"
-                                                class="btn btn-azure col-lg-offset-9" id="btn1">
+                                        <button type="button" onclick="nextTab('feesStructure','generalInformation')" class="btn btn-azure col-lg-offset-9" id="btn1">
                                             <i class="fa fa-arrow-circle-left"></i>Back
                                         </button>
-                                        <button type="button"  onclick="nextTab('generalInformation','categoryDtls')"
-                                                class="btn btn-primary" disabled id="nextGIBtn">
+                                        <button type="button"  onclick="nextTab('generalInformation','categoryDtls')" class="btn btn-primary" disabled id="nextGIBtn">
                                             <i class="fa fa-arrow-circle-right"></i>Next
                                         </button>
                                     </div>
@@ -286,12 +275,10 @@
                                         </table>
                                     </form>
                                     <div class="col-lg-12 form-group">
-                                        <button type="button" onclick="backTab('categoryDtls','generalInformation')"
-                                                class="btn btn-azure col-lg-offset-9" id="btn2">
+                                        <button type="button" onclick="backTab('categoryDtls','generalInformation')" class="btn btn-azure col-lg-offset-9" id="btn2">
                                             <i class="fa fa-arrow-circle-left"></i>Back
                                         </button>
-                                        <button type="button" onclick="nextTab('categoryDtls','humanResourceCriteria')"
-                                                class="btn btn-primary" id="btn3">
+                                        <button type="button" onclick="nextTab('categoryDtls','humanResourceCriteria')" class="btn btn-primary" id="btn3">
                                             <i class="fa fa-arrow-circle-right"></i>Next
                                         </button>
                                     </div>
@@ -336,12 +323,10 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
-
                                                                     </tbody>
                                                                 </table>
                                                             </div>
                                                         </div>
-
                                                     </div>
                                                     <!-- Box Close -->
                                                 </div>
@@ -403,8 +388,7 @@
                                                 <button type="button" onclick="backTab('consultantEquipmentDtls','humanResourceCriteria')" id="btn5" class="btn btn-azure col-lg-offset-9">
                                                     <i class="fa fa-arrow-circle-left"></i>&nbsp; Back
                                                 </button>
-                                                <button type="button"  class="btn btn-primary" disabled id="btnValEqNext" onclick="saveAndPreview('consultantEquipmentDtls', 'saveAndPreview')">
-                                                    Save & Preview &nbsp;
+                                                <button type="button"  class="btn btn-primary" disabled id="btnValEqNext" onclick="saveAndPreview('consultantEquipmentDtls', 'saveAndPreview')">Save & Preview &nbsp;
                                                     <i class="fa fa-life-saver"></i>
                                                 </button>
                                             </div>
@@ -415,24 +399,13 @@
                                             <div class="form-group">
                                                 <div class="table-responsive">
                                                     <fieldset><h3>Application Status</h3>
-                                                        <table id="appStatusTbl" width="1000px" cellpadding="1"
-                                                               cellspacing="1" border="1"
-                                                               style="border-collapse: collapse"
-                                                               class="table table-bordered">
+                                                        <table id="appStatusTbl" width="1000px" cellpadding="1" cellspacing="1" border="1" style="border-collapse: collapse" class="table table-bordered">
                                                             <thead>
                                                             <tr class="Caption">
-                                                                <td width="20%" align="center" valign="top">
-                                                                    <strong>Status</strong>
-                                                                </td>
-                                                                <td width="20%" align="center" valign="top">
-                                                                    <strong>Action By</strong>
-                                                                </td>
-                                                                <td width="20%" align="center" valign="top">
-                                                                    <strong>Action Date</strong>
-                                                                </td>
-                                                                <td width="20%" align="center" valign="top">
-                                                                    <strong>Remarks</strong>
-                                                                </td>
+                                                                <td width="20%" align="center" valign="top"><strong>Status</strong></td>
+                                                                <td width="20%" align="center" valign="top"><strong>Action By</strong></td>
+                                                                <td width="20%" align="center" valign="top"><strong>Action Date</strong></td>
+                                                                <td width="20%" align="center" valign="top"><strong>Remarks</strong></td>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
@@ -445,10 +418,8 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-2" for="vRemarks">Remarks:</label>
-
                                                 <div class="col-md-10" id="remarkclass">
-                                                    <textarea name="vRemarks" id="vRemarks"
-                                                              class="form-control"></textarea>
+                                                    <textarea name="vRemarks" id="vRemarks" class="form-control"></textarea>
                                                     <span class="help-block" id="remarkErrorId"></span>
                                                 </div>
                                             </div>
@@ -456,25 +427,17 @@
                                         </form>
                                         <div class="col-md-12">
                                             <security:authorize access="hasRole('ROLE_VERIFIER')">
-                                                <button type="button" class="btn btn-primary" id="btnVerify"><i
-                                                        class="fa fa-check"></i>&nbsp;&nbsp;Verify
-                                                </button>
+                                                <button type="button" class="btn btn-primary" id="btnVerify"><i class="fa fa-check"></i>&nbsp;&nbsp;Verify</button>
                                             </security:authorize>
                                             <security:authorize access="hasRole('ROLE_APPROVER')">
-                                                <button type="button" class="btn btn-primary" id="btnApprove"><i
-                                                        class="fa fa-check"></i>&nbsp;&nbsp;Approve
-                                                </button>
+                                                <button type="button" class="btn btn-primary" id="btnApprove"><i class="fa fa-check"></i>&nbsp;&nbsp;Approve</button>
                                                 <%--  <button type="button" class="btn btn-primary" id="btnSendBack"><i
                                                           class="fa fa-backward"></i>&nbsp;&nbsp;Send back
                                                   </button>--%>
                                             </security:authorize>
-                                            <button type="button" class="btn btn-danger " id="btnReject"><i
-                                                    class="fa fa-times mr-1"></i>Reject
-                                            </button>
+                                            <button type="button" class="btn btn-danger " id="btnReject"><i class="fa fa-times mr-1"></i>Reject</button>
                                             <a href="<c:url value="/admin/consultant"/>">
-                                                <button type="button" class="btn btn-warning"><i class="fa fa-ban"></i>
-                                                    Cancel
-                                                </button>
+                                                <button type="button" class="btn btn-warning"><i class="fa fa-ban"></i>Cancel</button>
                                             </a>
                                         </div>
                                     </div>
@@ -488,8 +451,7 @@
                 <div class="modal-dialog" style=" max-width: 900px;">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 id="myModalLabel" class="modal-title"><i class="fa fa-info-circle fa-lg"></i> Personal
-                                Check<span id="cid"></span></h4>
+                            <h4 id="myModalLabel" class="modal-title"><i class="fa fa-info-circle fa-lg"></i> Personal Check<span id="cid"></span></h4>
                         </div>
                         <div class="modal-body">
                             <div class="panel panel-default">
@@ -497,19 +459,13 @@
                                     <div id="modal-print">
                                         <div class="form-group">
                                             <p align="center"><strong><u>Caution</u></strong></p>
-
-                                            <p align="center"><strong>An engineer is allowed to execute only two work at
-                                                a time for that particular firm.</strong></p>
-
-                                            <p align="center"><strong>For any other Human Resource they are allowed to
-                                                involve only in a single project of work</strong></p>
-
+                                            <p align="center"><strong>An engineer is allowed to execute only two work at a time for that particular firm.</strong></p>
+                                            <p align="center"><strong>For any other Human Resource they are allowed to involve only in a single project of work</strong></p>
                                             <p align="center"><font size="5px;">Details of CID No:</font><label class="form-label" id="cidNo"></label></p>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-9 mt-8">
                                                 <span class=""><b>From DCRC database</b></span>
-
                                                 <div class="col-lg-12 form-group mb-0 pt-4">
                                                     <label class="col-lg-3 form-label">Sex</label>
                                                     <label class="col-lg-8 form-label" id="sexM"></label>
@@ -541,83 +497,13 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-12" align="center">
-                                                <p id="notEngagedId" style="display: none"><span id="dcbinfo"><b>Human Resource is not registered in any of the
-                                                    CDB firm</b><br><br> This person is not engaged in any work or project<br>This person is not a civil servant</span>
-                                                </p>
                                                 <div class="tab-pane employeeDetails" style="display: none" id="engagedId">
-                                                    <p ><span><b>The Individual holding CID/permit no.<label id="cidNumber"></label>(<label id="hrName"></label>) is engaged in following project(s):</b></span>
-                                                    </p>
-                                                    <form action="" method="post" class="">
-                                                        <div id="employeeDetails" style="">
-                                                            <i><strong>Employee Engagement Details</strong></i>
-                                                            <div class="panel panel-default">
-                                                                <div class="panel-body">
-                                                                    <span>Contractor</span>
-                                                                    <div class="table-responsive">
-                                                                        <table class="table table-bordered table-hover"
-                                                                               id="employeeDTLS">
-                                                                            <thead>
-                                                                            <tr style="background-color: #e6f9ff">
-                                                                                <th>SLNo</th>
-                                                                                <th>Work </th>
-                                                                                <th>Procuring Agency</th>
-                                                                                <th>CDB Number</th>
-                                                                                <th>Firm Name</th>
-                                                                            </tr>
-                                                                            </thead>
-                                                                            <tbody>
-
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="panel panel-default">
-                                                                <div class="panel-body">
-                                                                    <span>Consultant</span>
-                                                                    <div class="table-responsive">
-                                                                        <table class="table table-bordered table-hover"
-                                                                               id="employeeDTLS1">
-                                                                            <thead>
-                                                                            <tr style="background-color: #e6f9ff">
-                                                                                <th>SLNo</th>
-                                                                                <th>Work </th>
-                                                                                <th>Procuring Agency</th>
-                                                                                <th>CDB Number</th>
-                                                                                <th>Firm Name</th>
-                                                                            </tr>
-                                                                            </thead>
-                                                                            <tbody>
-
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="panel panel-default">
-                                                                <div class="panel-body">
-                                                                    <span>Specialized Firm</span>
-                                                                    <div class="table-responsive">
-                                                                        <table class="table table-bordered table-hover"
-                                                                               id="employeeDTLS2">
-                                                                            <thead>
-                                                                            <tr style="background-color: #e6f9ff">
-                                                                                <th>SLNo</th>
-                                                                                <th>Work </th>
-                                                                                <th>Procuring Agency</th>
-                                                                                <th>CDB Number</th>
-                                                                                <th>Firm Name</th>
-                                                                            </tr>
-                                                                            </thead>
-                                                                            <tbody>
-
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
+                                                <div class="form-group">
+                                                    <div class="col-lg-12" align="center">
+                                                        <p ><span id="dcbinfo"><b>The Individual holding CID/permit no.<label id="cidNumber"></label>(<label id="hrName"></label>) is engaged in following project(s):</b></span></p>
+                                                        <p><span id="dcbinfonotEngaged"></span></p>
+                                                    </div>
+                                                </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -627,28 +513,20 @@
                                             <hr>
                                             <p align="center"><strong>Print this page as an evidence to prove that
                                                 particular HR is engaged or not in a work or project</strong></p>
-
                                             <p align="center">
                                                 Printed on:  <%=new Date()%>
-
                                                 By: ${auth.fullName}
                                             </p>
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-lg-12 col-sm-12">
                                         <div class="col-md-1 col-lg-1 col-sm-2">
-                                    <button type="button" class="btn btn-primary"
-                                            onclick="javascript:printDiv('modal-print')">Print
-                                    </button>
-                                            </div>
+                                             <button type="button" class="btn btn-primary" onclick="javascript:printDiv('modal-print')">Print</button>
+                                        </div>
                                         <div class="col-md-4 col-lg-4 col-sm-4">
-                                    <button type="button" class="btn btn-success" id="closeModal" style="display: none"
-                                            onclick="checkBtn('owner')" data-dismiss="modal">OK
-                                    </button>
-                                    <button type="button" class="btn btn-success " id="closeModal1"  style="display: none"
-                                            onclick="checkBtn('Hr')" data-dismiss="modal">OK
-                                    </button>
-                                    </div>
+                                             <button type="button" class="btn btn-success" id="closeModal" style="display: none" onclick="checkBtn('owner')" data-dismiss="modal">OK</button>
+                                             <button type="button" class="btn btn-success " id="closeModal1"  style="display: none" onclick="checkBtn('Hr')" data-dismiss="modal">OK</button>
+                                        </div>
                                   </div>
                                 </div>
                             </div>
@@ -656,7 +534,6 @@
                     </div>
                 </div>
             </div>
-
             <%--Equipment Modal--%>
             <div id="CheckModalEquipment" class="modal fade in" tabindex="-1" role="dialog"
                  aria-labelledby="myModalLabel" aria-hidden="false">
@@ -676,8 +553,7 @@
 
                                             <p align="center"><strong>An equipment is allowed to execute only one work at a time for the perticular firm.</strong></p>
 
-                                            <p align="center"><font size="5px;">Details of Registration No:<span
-                                                    id="regchecked"></span></font></p>
+                                            <p align="center"><font size="5px;">Details of Registration No:<span id="regchecked"></span></font></p>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-12">
