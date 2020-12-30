@@ -72,7 +72,6 @@
                     </td>
                     </tr>
                     </tbody>
-
                     <tbody>
                         <tr>
                             <td colspan="2" class="font-blue-madison bold warning"><b>Permanent Address</b></td>
@@ -129,7 +128,6 @@
     </div>
     </div>
 </div>
-
 <script>
     function doExportItem(){
         var HTML_Width = $("#printdiv").width();

@@ -439,7 +439,7 @@
                                 <div class="modal-body">
                                     <div class="panel panel-default">
                                         <div class="panel-body">
-                                            <div id="printInfoCID">
+                                            <div id="printInfo">
                                                 <div class="form-group">
                                                     <p align="center"><strong><u>Caution</u></strong></p>
 
@@ -507,7 +507,7 @@
                                                 </div>
                                             </div>
                                             <button type="button" class="btn btn-primary"
-                                                    onclick="PrintInfoCID()">Print
+                                                    onclick="PrintInfo()">Print
                                             </button>
                                             <button type="button" class="btn btn-success" id="closeModal"
                                                     onclick="checkBtn('checkver1')" data-dismiss="modal">OK

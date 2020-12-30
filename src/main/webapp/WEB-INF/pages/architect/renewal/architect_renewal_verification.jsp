@@ -26,13 +26,13 @@
                 <div class="card" id="registrtaionFormCard">
                     <form action="#" id="architectverificationForm" >
                         <%--<form id="architectForm" action="#" method="post" enctype="multipart/form-data">--%>
-                            <div class="card-header">
-                                <h3 class="card-title font-weight-bold" style="color: #002752">Architect >> Renewal >>
-                                    <security:authorize access="hasRole('ROLE_VERIFIER')">Verification/</security:authorize>
-                                    <security:authorize access="hasRole('ROLE_APPROVER')">Approval</security:authorize>
-                                </h3> <input type="hidden" readonly id="referenceNo" value="${appDetails.referenceNo}" name="referenceNo" class="form-control number">
-                                <span class="font-weight-bold" style="font-size: small;color: #444444"> >> Application Number : ${appDetails.referenceNo} || CDB Number : ${appDetails.cdbNo}     Application Date: ${appDetails.applicationDate} </span>
-                            </div>
+                        <div class="card-header">
+                            <h3 class="card-title font-weight-bold" style="color: #002752">Architect >> Renewal >>
+                                <security:authorize access="hasRole('ROLE_VERIFIER')">Verification/</security:authorize>
+                                <security:authorize access="hasRole('ROLE_APPROVER')">Approval</security:authorize>
+                            </h3> <input type="hidden" readonly id="referenceNo" value="${appDetails.referenceNo}" name="referenceNo" class="form-control number">
+                            <span class="font-weight-bold" style="font-size: small;color: #444444"> >> Application Number : ${appDetails.referenceNo} || CDB Number : ${appDetails.cdbNo}     Application Date: ${appDetails.applicationDate} </span>
+                        </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
@@ -282,12 +282,12 @@
                                                                                             </td>
                                                                                             <td>${appDetails.applicationDate}</td>
                                                                                         </tr>
-                                                                                       <%-- <tr>
-                                                                                            <td>
-                                                                                                <strong>Remarks: </strong>
-                                                                                            </td>
-                                                                                            <td>${appDetails.remarks}</td>
-                                                                                        </tr>--%>
+                                                                                            <%-- <tr>
+                                                                                                 <td>
+                                                                                                     <strong>Remarks: </strong>
+                                                                                                 </td>
+                                                                                                 <td>${appDetails.remarks}</td>
+                                                                                             </tr>--%>
                                                                                         <tr>
                                                                                             <td>
                                                                                                 <strong>Submitted By: </strong>

@@ -345,7 +345,6 @@ function enablesubmit(){
     }
 }
 
-<<<<<<< HEAD
 function PrintInfo() {
     var divToPrint = document.getElementById('printInfo');
     var popupWin = window.open('', '_blank', 'width=1000,height=1000');
@@ -363,8 +362,6 @@ function PrintInfo() {
     $("#printingForm").submit();
 }
 
-=======
->>>>>>> c2112dffe0263333e0290b268f344e3d33a9906c
 function submitForm(){
     var returntpe=true;
     if($('#file1').val()==""){
