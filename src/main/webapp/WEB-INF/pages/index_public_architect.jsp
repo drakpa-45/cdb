@@ -167,13 +167,12 @@
             </div>
         </div>
     </div>
-
 <script>
     function openAndClaimRejectedApplication(appNo) {
         alert(appNo);
-        var urrl = '${pageContext.request.contextPath}/emptylayout/openRejectedApplication';
+        var urrl = '${pageContext.request.contextPath}/public_access/emptylayout/openRejectedApplication';
         alert(urrl);
-        var url = '${pageContext.request.contextPath}/emptylayout/openRejectedApplication?appNo=' + appNo;
+        var url = '${pageContext.request.contextPath}/admin_architect/emptylayout/openRejectedApplication?appNo=' + appNo;
         $('#content_main_div').load(url);
     }
 </script>
