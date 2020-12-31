@@ -964,7 +964,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-lg-2">CDB Reg No :</label>
+                                        <label class="col-lg-2">CDB Registered Number :</label>
                                         <div class="col-lg-4">
                                             <div class="input-icon">
                                                 <span class="input-icon-addon"><i class="fe fe-user"></i></span>

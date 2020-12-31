@@ -14,6 +14,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -188,6 +189,21 @@ public class SurveyController extends BaseController {
         ArchitectDto dto=services.getDetails(appNo);
         model.addAttribute("appDetails", dto);
         return "/survey/surveyResubmissionIndex";
+    }
+
+    @RequestMapping(value ={"/public_access/emptylayout/surveyopenRejectedApplication"}, method = RequestMethod.GET)
+    public String fetchRejectedAppDetails(HttpServletRequest request,String appNo,Model model) {
+        String cmnSalutation = "f237fdb8-a5ef-11e4-8ab5-080027dcfac6";
+        String qualification = "ff4e55ee-a254-11e4-b4d2-080027dcfac6";
+        String serviceSectorType = "8d6e1df8-bea7-11e4-9757-080027dcfac6";
+        model.addAttribute("typeList", commonService.gCmnListItem(serviceSectorType));
+        model.addAttribute("countryList", commonService.gCountryList());
+        model.addAttribute("salutationList", commonService.gCmnListItem(cmnSalutation));
+        model.addAttribute("qualificationList", commonService.gCmnListItem(qualification));
+
+        model.addAttribute("fee_details", services.getFeesDetals("Survey"));
+        model.addAttribute("registrationDetails", commonService.populateSurveyApplicantDetails(appNo));
+        return "survey/rejection/survey_rejected_index";
     }
 
     private Boolean isEmailUnique(String email) {

@@ -154,6 +154,7 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                             <label>Type: </label>
+                                            <input type="hidden" value="${appDetails.serviceSectorTypeId}" readonly maxlength="100" id="service" name="serviceSectorTypeId" class="form-control">
                                                 <input type="hidden" value="${appDetails.serviceSectorType}" readonly maxlength="100" id="service" name="serviceSectorType" class="form-control">${appDetails.serviceSectorType}
                                         </div>
                                     </div>
