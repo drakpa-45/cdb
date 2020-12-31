@@ -672,7 +672,6 @@ public class ArchitectServices extends BaseService{
 
     public ArchitectDto fetchRejectedAppDetails(String appNo) {
         ArchitectDto dto=dao.getArchitetDetails(appNo);
-
         List<ArchitectDocument> doc=dao.getdocumentList(dto.getCrpArchitectId());
         dto.setDoc(doc);
         return dto;

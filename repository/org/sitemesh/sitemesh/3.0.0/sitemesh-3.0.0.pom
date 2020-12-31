@@ -77,12 +77,10 @@
           </includes>
         </configuration>
       </plugin>
-
     </plugins>
   </build>
 
   <dependencies>
-
     <!-- Dependencies needed at compile time -->
     <dependency>
       <groupId>javax.servlet</groupId>

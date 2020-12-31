@@ -6,6 +6,7 @@ import com.ngn.spring.project.cdb.specializedFirm.dto.SpFirmDTO;
 import com.ngn.spring.project.lib.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -112,5 +113,33 @@ public class SpecializedFirmController extends BaseController {
         return services.getTrainingDtl(cidNo);
     }
 
+    @RequestMapping(value ={"/spfirmopenRejectedApplication"}, method = RequestMethod.GET)
+    public String fetchRejectedAppDetails(HttpServletRequest request,String appNo,Model model,String error) {
+        String serviceSectorType = "8d6e1df8-bea7-11e4-9757-080027dcfac6";
+        String cmnOwnership = "08dada52-c651-11e4-b574-080027dcfac6";
+        String trade = "bf4b32e8-a256-11e4-b4d2-080027dcfac6";
+        String cmnSalutation = "f237fdb8-a5ef-11e4-8ab5-080027dcfac6";
+        String qualification = "ff4e55ee-a254-11e4-b4d2-080027dcfac6";
+        String cmnDesignation = "599fbfdc-a250-11e4-b4d2-080027dcfac6";
+        String cmnServiceType = "08dada52-c651-11e4-b574-080027dcfee6";
+        String category="Specialized Trade Firm";
+
+        model.addAttribute("feeStructureList", services.gFeeStructure(category));
+        model.addAttribute("ownershipList", commonService.gCmnListItem(cmnOwnership));
+        model.addAttribute("countryList", commonService.gCountryList());
+        model.addAttribute("typeList", commonService.gCmnListItem(serviceSectorType));
+        model.addAttribute("tradeList", commonService.gCmnListItem(trade));
+        model.addAttribute("salutationList", commonService.gCmnListItem(cmnSalutation));
+        model.addAttribute("qualificationList", commonService.gCmnListItem(qualification));
+        model.addAttribute("dzongkhagList", commonService.gDzongkhagList());
+        //model.addAttribute("undertaking", commonService.getundertaking("Architect_Registration"));
+        model.addAttribute("categoryList", services.categoryFirm());
+        model.addAttribute("designationList", commonService.gCmnListItem(cmnDesignation));
+        model.addAttribute("equipmentList", services.gEquipment());
+        model.addAttribute("serviceTypeList", commonService.gCmnListItem(cmnServiceType));
+        model.addAttribute("error", error);
+
+        return "specializedFirm/registration/specializedFirm";
+    }
 
 }

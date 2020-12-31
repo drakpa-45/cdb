@@ -3,6 +3,7 @@ package com.ngn.spring.project.cdb.engineer.service;
 import bt.gov.ditt.sso.client.dto.UserSessionDetailDTO;
 import com.ngn.spring.project.base.BaseService;
 import com.ngn.spring.project.cdb.architect.dto.ArchitectDto;
+import com.ngn.spring.project.cdb.architect.entity.ArchitectDocument;
 import com.ngn.spring.project.cdb.certification.CertificateDTO;
 import com.ngn.spring.project.cdb.common.CommonDao;
 import com.ngn.spring.project.cdb.common.CommonService;
@@ -678,4 +679,5 @@ public class EngineerServices extends BaseService{
     public CertificateDTO getEngineerPrintDetails(HttpServletRequest request, String cdbNo) {
         return dao.getEngineerPrintDetails(request,cdbNo);
     }
+
 }
