@@ -8,6 +8,7 @@ import com.ngn.spring.project.cdb.common.dto.EmployeeDetailsDTO;
 import com.ngn.spring.project.cdb.common.dto.PersonalInfoDTO;
 import com.ngn.spring.project.cdb.common.dto.ServiceFeeDTO;
 import com.ngn.spring.project.cdb.consultant.model.Consultant;
+import com.ngn.spring.project.cdb.consultant.model.ConsultantAttachment;
 import com.ngn.spring.project.cdb.consultant.model.ConsultantFinal;
 import com.ngn.spring.project.cdb.consultant.registration.dto.ConsultantHrDTO;
 import com.ngn.spring.project.cdb.contractor.registration.dto.ContractorHrDTO;
@@ -136,4 +137,8 @@ public class ConsultantRCDao extends BaseDao {
                 .setParameter("appNo", appNo).list();
     }
 
+    public List<ConsultantAttachment> getIncAttachmentFinal(String consultantIdFinal) {
+        sqlQuery = properties.getProperty("ConsultantRCDao.getIncAttachmentFinal");
+        return hibernateQuery(sqlQuery, ConsultantAttachment.class).setParameter("consultantIdFinal", consultantIdFinal).list();
+    }
 }

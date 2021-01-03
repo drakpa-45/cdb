@@ -8,6 +8,7 @@ import com.ngn.spring.project.cdb.common.dto.ServiceFeeDTO;
 import com.ngn.spring.project.cdb.contractor.registration.dto.ContractorHrDTO;
 import com.ngn.spring.project.cdb.contractor.registration.model.ContractorFinal;
 import com.ngn.spring.project.cdb.specializedFirm.dto.SpFirmHrDTO;
+import com.ngn.spring.project.cdb.specializedFirm.model.SpFirmAttachment;
 import com.ngn.spring.project.cdb.specializedFirm.model.SpecializedFirmFinal;
 import com.ngn.spring.project.lib.DropdownDTO;
 import org.hibernate.query.Query;
@@ -130,5 +131,10 @@ public class SpecializedFirmRDao extends BaseDao {
         sqlQuery = properties.getProperty("SpecializedFirmRCDao.auditMemo");
         Query hQuery = hibernateQuery(sqlQuery).setParameter("specializedFirmFinalId", specializedFirmFinalId);
         return hQuery.list().isEmpty()?null:hQuery.list().get(0).toString();
+    }
+
+    public List<SpFirmAttachment> getIncAttachmentFinal(String specializedFirmId) {
+        sqlQuery = properties.getProperty("SpecializedFirmRCDao.getIncAttachmentFinal");
+        return hibernateQuery(sqlQuery, SpFirmAttachment.class).setParameter("specializedFirmId", specializedFirmId).list();
     }
 }

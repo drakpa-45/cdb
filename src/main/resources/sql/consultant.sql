@@ -125,6 +125,7 @@ ConsultantRCDao.saveDeleteEqRequest = Update crpconsultantequipmentfinal set Del
 
 ConsultantRCDao.getServicesFee= SELECT Id,ReferenceNo, Name AS serviceName, ConsultantAmount AS feeAmount  FROM `crpservice` WHERE ((:refNo is null and ReferenceNo IN (4,6,7,8,9,10,12)) or ReferenceNo = :refNo)
 
+ConsultantRCDao.getIncAttachmentFinal = SELECT DocumentName AS documentName, DocumentPath documentPath,FileType AS fileType FROM crpconsultantattachmentfinal WHERE CrpConsultantFinalId =:consultantIdFinal
 /*Consultant Renewal Action dao*/
 ConsultantRCActionDao.getAppliedServices=SELECT a.ReferenceNo applicationNo,c.CmnServiceTypeId serviceId,d.referenceNo serviceRefNo,d.Name serviceName,e.PaymentAmount,a.NameOfFirm firmName,b.Name AS appStatus,a.ApplicationDate applicationDate FROM crpconsultant a INNER JOIN cmnlistitem b ON b.Id = a.CmnApplicationRegistrationStatusId INNER JOIN crpconsultantappliedservice c ON c.CrpConsultantId = a.CrpConsultantId INNER JOIN crpservice d ON d.Id = c.CmnServiceTypeId INNER JOIN crpconsultantservicepayment e ON e.CrpConsultantId = c.CrpConsultantId AND e.CmnServiceTypeId = c.CmnServiceTypeId WHERE a.ReferenceNo =:applicationNo
 

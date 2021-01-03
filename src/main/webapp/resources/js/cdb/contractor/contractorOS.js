@@ -252,6 +252,9 @@ var contractorOS = (function () {
                 $('#cIncorporation').addClass('hide');
                 certificateTbl.empty();
             }
+            if($('#ownershipList').val() != '1e243ef0-c652-11e4-b574-080027dcfac6'){
+                getIncAttachmentFinal();
+            }
         });
     }
 
@@ -400,8 +403,6 @@ var contractorOS = (function () {
 
         });
     }
-
-
     function editIncAttachment(){
         $('#certificateTbl').on('click','.edit_row',function(){
             $(this).closest('tr').find('.docName').prop('disabled',false);

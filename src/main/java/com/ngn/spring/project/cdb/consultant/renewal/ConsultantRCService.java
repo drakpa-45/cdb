@@ -597,4 +597,9 @@ public class ConsultantRCService extends BaseService {
             spDetail.setAppliedClassId(classDTO.getApClassId());
         }
     }
+
+    @Transactional(readOnly = true)
+    public List<ConsultantAttachment> getIncAttachmentFinal(String consultantIdFinal) {
+        return  consultantRCDao.getIncAttachmentFinal(consultantIdFinal);
+    }
 }

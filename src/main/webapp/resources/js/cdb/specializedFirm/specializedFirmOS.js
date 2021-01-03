@@ -262,6 +262,9 @@ var specializedFirmOS = (function () {
                 $('#cIncorporation').addClass('hide');
                 certificateTbl.empty();
             }
+            if($('#ownershipList').val() != '1e243ef0-c652-11e4-b574-080027dcfac6'){
+                getIncAttachmentFinal();
+            }
         });
     }
 
@@ -390,8 +393,49 @@ var specializedFirmOS = (function () {
                 $('#regPhoneNo').val(specializedFirm.regPhoneNo).prop('disabled',true);
                 $('#regFaxNo').val(specializedFirm.regFaxNo).prop('disabled',true);
                 $('#specializedFirmIdFinal').val(specializedFirm.id);
+
+                if(specializedFirm.ownershipTypeId != '1e243ef0-c652-11e4-b574-080027dcfac6'){
+                    getIncAttachmentFinal();
+                }
             }
         });
+    }
+
+    function getIncAttachmentFinal(){
+        $.ajax({
+            url: _baseURL() + '/getIncAttachmentFinal',
+            type: 'GET',
+            data: {specializedFirmId:$('#specializedFirmIdFinal').val(),ownerOrHR:'O'},
+            success: function (data) {
+
+                if(data){
+                    $('#cIncorporation').removeClass('hide');
+                    var tr = '';
+                    for(var i in data){
+                        tr = tr + "<tr>"+
+                        "<td></td>" +
+                        "<td ><input type='text' class='form-control docName' name='cAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>"+
+                        "<td class='attachment'><a href='"+_baseURL() + "/viewDownload?documentPath="+data[i].documentPath+"' target='_blank'> View </a></td>" +
+                        "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
+                        "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                        "</tr>";
+                    }
+                    $('#certificateTbl').find('tbody').html(tr);
+                }else{
+                    $('#cIncorporation').addClass('hide');
+                }
+            }
+
+        });
+    }
+
+    function editIncAttachment(){
+        $('#certificateTbl').on('click','.edit_row',function(){
+            $(this).closest('tr').find('.docName').prop('disabled',false);
+            var attachment = $(this).closest('tr').find('.attachment');
+            attachment.html("<input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'>");
+
+        })
     }
 
     function viewDownloadAttachment(){
@@ -842,6 +886,7 @@ var specializedFirmOS = (function () {
         addMoreEqFile();
         getPersonalInfoHR();
         getPersonalInfo();
+        editIncAttachment();
     }
     return {
         init:init

@@ -128,6 +128,8 @@ SpecializedFirmRCDao.saveDeleteHrRequest = Update crpspecializedtradehumanresour
 
 SpecializedFirmRCDao.saveDeleteEqRequest=Update crpspecializedtradeequipmentfinal set DeleteRequest = 1 where Id =:eqId
 
+SpecializedFirmRCDao.getIncAttachmentFinal = SELECT DocumentName AS documentName, DocumentPath documentPath,FileType AS fileType FROM crpspecializedtradeattachmentfinal WHERE CrpSpecializedTradeFinalId =:specializedFirmId
+
 SpecializedFirmRCDao.auditMemo=SELECT CONCAT('You have following audit memo:<br>',AIN,' : ',`AuditObservation`) AS auditObservation FROM `crpcontractorauditclearance` WHERE `CrpContractorConsultantId` =:specializedFirmFinalId AND  `Dropped` = '0';
 
 SpecializedDao.getSpecializedtradeOngoingApp = SELECT f.SPNo cdbNo,i.Name updateStatus,f.ApplicationDate applicationDate,f.ReferenceNo ReferenceNo FROM crpspecializedtrade f LEFT JOIN cmnlistitem i ON i.Id=f.CmnApplicationRegistrationStatusId WHERE i.Id IN ('262a3f11-adbd-11e4-99d7-080027dcfac6','36f9627a-adbd-11e4-99d7-080027dcfac6','6195664d-c3c5-11e4-af9f-080027dcfac6') AND f.SPNo=:cdbNo

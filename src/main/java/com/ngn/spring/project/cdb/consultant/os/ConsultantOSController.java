@@ -119,6 +119,12 @@ public class ConsultantOSController extends BaseController {
     }
 
     @ResponseBody
+    @RequestMapping(value ="/getIncAttachmentFinal", method = RequestMethod.GET)
+    public List getIncAttachmentFinal(HttpServletRequest request, String consultantIdFinal){
+        return cRenewalService.getIncAttachmentFinal(consultantIdFinal);
+    }
+
+    @ResponseBody
     @RequestMapping(value ="/getCategory", method = RequestMethod.GET)
     public List getFeeCategoryClass(HttpServletRequest request, String consultantId){
         return cRenewalService.getCategoryClassFinal(consultantId);

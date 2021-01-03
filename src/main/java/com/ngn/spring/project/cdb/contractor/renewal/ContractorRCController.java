@@ -89,7 +89,7 @@ public class ContractorRCController extends BaseController {
         responseMessage =cRenewalService.save(contractorDTO,renewalService,loggedInUser);
         if(responseMessage.getStatus() == 1){
             redirectAttributes.addFlashAttribute("acknowledgement_message",responseMessage.getText());
-        } else{
+        }else{
             redirectAttributes.addFlashAttribute("res", responseMessage);
             return "redirect:/public_access/contractorRC";
         }
