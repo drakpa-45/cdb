@@ -243,7 +243,8 @@ var consultantOS = (function () {
     "use strict";
 
     var cert = "<tr><td></td>" +
-        "<td><input type='text' class='form-control' name='cAttachments[0].documentName'/> </td>"+
+        "<td><input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='C'/>" +
+        "<input type='text' class='form-control' name='cAttachments[0].documentName'/> </td>"+
         "<td><input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
         "<td class='file-size'></td>" +
         "<td><input type='button' class='p-2 del_row btn btn-azure' value='Delete'><!--<a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a>--></td>" +
@@ -259,6 +260,9 @@ var consultantOS = (function () {
             } else{
                 $('#cIncorporation').addClass('hide');
                 certificateTbl.empty();
+            }
+            if($('#ownershipList').val() != '1e243ef0-c652-11e4-b574-080027dcfac6'){
+                getIncAttachmentFinal();
             }
         });
     }
@@ -458,10 +462,48 @@ var consultantOS = (function () {
                 $('#regPhoneNo').val(consultant.regPhoneNo).prop('disabled',true);
                 $('#regFaxNo').val(consultant.regFaxNo).prop('disabled',true);
                 $('#consultantIdFinal').val(consultant.id);
+
+                if(consultant.ownershipTypeId != '1e243ef0-c652-11e4-b574-080027dcfac6'){
+                    getIncAttachmentFinal();
+                }
             }
         });
     }
+    function getIncAttachmentFinal(){
+        $.ajax({
+            url: _baseURL() + '/getIncAttachmentFinal',
+            type: 'GET',
+            data: {consultantIdFinal:$('#consultantIdFinal').val(),ownerOrHR:'O'},
+            success: function (data) {
 
+                if(data){
+                    $('#cIncorporation').removeClass('hide');
+                    var tr = '';
+                    for(var i in data){
+                        tr = tr + "<tr>"+
+                        "<td><input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='C'/></td>" +
+                        "<td>"+data[i].documentName+"</td>"+
+                        "<td><a href='"+_baseURL() + "/viewDownload?documentPath="+data[i].documentPath+"' target='_blank'> View </a></td>" +
+                        "<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
+                        "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                        "</tr>";
+                    }
+                    $('#IncCertificateTbl').find('tbody').html(tr);
+                }else{
+                    $('#cIncorporation').addClass('hide');
+                }
+            }
+
+        });
+    }
+    function editIncAttachment(){
+        $('#certificateTbl').on('click','.edit_row',function(){
+            $(this).closest('tr').find('.docName').prop('disabled',false);
+            var attachment = $(this).closest('tr').find('.attachment');
+            attachment.html("<input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'>");
+
+        })
+    }
     function viewDownloadAttachment(){
         $('body').on('click','.vAttachment',function(){
             var id = $(this).closest('tr').find('.consultantHRid').val();
@@ -493,6 +535,7 @@ var consultantOS = (function () {
                     } else {
                         tblRow.find('.showCert').prop('checked', false);
                     }
+
                 }
             }
         });
@@ -663,6 +706,43 @@ var consultantOS = (function () {
             }else{
                 $(this).closest('tr').find('.appliedClassID').prop('disabled',true).prop('required',false);
             }
+        });
+    }
+
+    function editInModalOwner(){
+        $('body').on('click','.edit-rowOW',function(e){
+            e.preventDefault();
+            var row = $(this).closest('tr');
+            var hrModal = $('#addOwModal');
+            hrModal.find('#hrId').val(row.find('.consultantHRid').val())//for Edit
+            hrModal.find('#country').val(hrModal.find('#country option:contains("'+row.find('#countryList').text()+'")').val());
+            hrModal.find('#cidNo1').val(row.find('#cidNo').text());
+            hrModal.find('#salutationId').val(hrModal.find('#salutationId option:contains("'+row.find('#salutation').text()+'")').val());
+            hrModal.find('#name').val(row.find('.name').text());
+            hrModal.find('#sex').val(row.find('.sex').text());
+            hrModal.find('#designationId').val(hrModal.find('#designationId option:contains("'+row.find('.designationName').text()+'")').val());
+            var hraTr = "";
+            //row.remove();
+            row.addClass('tbd'); //add class to be deleted
+            openModal('addOwModal');
+        });
+
+        $('body').on('click','.edit-hr',function(e){
+            e.preventDefault();
+            var row = $(this).closest('tr');
+            var hrModal = $('#addHRModal');
+            hrModal.find('#hr5').val(row.find('.hr5').val());
+            hrModal.find('#hr3').val(row.find('.hr3').val());
+            hrModal.find('#hr1').val(row.find('.hr1').val());
+            hrModal.find('#hr2').val(row.find('.hr2').val());
+            hrModal.find('#hr4').val(row.find('.hr4').val());
+            hrModal.find('#hr6').val(row.find('.hr6').val());
+            hrModal.find('#hr7').val(row.find('.hr7').val());
+            hrModal.find('#hr8').val(row.find('.hr8').val());
+            hrModal.find('#hr9').val(row.find('.hr9').val());
+            hrModal.find('#hr10').val(row.find('.hr10').val());
+            row.addClass('tbd'); //add class to be deleted
+            openModal('addHRModal');
         });
     }
 
@@ -965,6 +1045,8 @@ var consultantOS = (function () {
        // deleteRequest();
         showFileSize();
         enableRegistrationNo();
+        editIncAttachment();
+        editInModalOwner();
     }
     return {
         init:init

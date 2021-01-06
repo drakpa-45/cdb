@@ -599,4 +599,9 @@ public class SpecializedFirmRService extends BaseService {
     public String auditMemo(String specializedFirmFinalId){
         return specializedFirmRDao.auditMemo(specializedFirmFinalId);
     }
+
+    @Transactional(readOnly = true)
+    public List<SpFirmAttachment> getIncAttachmentFinal(String specializedFirmId) {
+        return  specializedFirmRDao.getIncAttachmentFinal(specializedFirmId);
+    }
 }

@@ -191,7 +191,6 @@ function cloneEqFiles(tableId,modal,i){
 }
 //endregion
 
-
 function enableSubmit(){
     if($('#agreeCheck').prop('checked')){
         $('#btnSubmit').prop('disabled',false);
@@ -199,7 +198,6 @@ function enableSubmit(){
     else{
         $('#btnSubmit').prop('disabled',true);
     }
-
 }
 
 function showConfirmation(){
@@ -209,6 +207,7 @@ function showConfirmation(){
     $('#targetId').val('acknowledgementmessage');
     $('#messages').html('You are about to submit application. Are you sure to proceed ?');
 }
+
 function submitApplication(){
     cdbGlobal.formIndexing($('#certificateTbl').find('tbody'));
     cdbGlobal.formIndexing($('#partnerDtls').find('tbody'));
@@ -255,6 +254,9 @@ var contractorRC = (function () {
             }else{
                 $('#cIncorporation').addClass('hide');
                 certificateTbl.empty();
+            }
+            if($('#ownershipList').val() != '1e243ef0-c652-11e4-b574-080027dcfac6'){
+                getIncAttachmentFinal();
             }
         });
     }
@@ -322,8 +324,8 @@ var contractorRC = (function () {
             var $this = $(this);
             if(id == 'Incorporation' ){
                 if($this.is(':checked')){
-                    $('#ownershipList').prop('disabled',false);
-                    $('#firmName').prop('disabled', false);
+                    $('#ownershipList').prop('disabled',false).prop('required', true);
+                    $('#firmName').prop('disabled', false).prop('required', true);
                     $('#changeOfFirmName').prop('disabled', true);
                     $('#ownerPartner').removeClass('hide');
                     $('#changeOfOwnerId').prop('disabled', true);
@@ -332,20 +334,20 @@ var contractorRC = (function () {
                 }else{
                     $('#ownershipList').prop('disabled',true);
                     $('#firmName').prop('disabled', true);
-                    $('#changeOfFirmName').prop('disabled', false);
-                    $('#changeOfOwnerId').prop('disabled', false);
+                    $('#changeOfFirmName').prop('disabled', false).prop('required', true);
+                    $('#changeOfOwnerId').prop('disabled', false).prop('required', true);
                     $('#ownerPartner').addClass('hide');
                 }
             }else if(id == 'changeOfFirmName' ){
                 if($this.is(':checked')) {
-                    $('#firmName').prop('disabled', false);
+                    $('#firmName').prop('disabled', false).prop('required', true);
                 }else{
                     $('#firmName').prop('disabled', true);
                 }
             }else if(id == 'changeOfLocation' ){
                 if($this.is(':checked')) {
-                    $('#estAddress').prop('disabled', false);
-                    $('#regDzongkhagId').prop('disabled', false);
+                    $('#estAddress').prop('disabled', false).prop('required', true);
+                    $('#regDzongkhagId').prop('disabled', false).prop('required', true);
                 }else{
                     $('#estAddress').prop('disabled', true);
                     $('#regDzongkhagId').prop('disabled', true);
@@ -393,7 +395,6 @@ var contractorRC = (function () {
                 }
             }
         });
-
     }
 
     function getIncAttachmentFinal(){
@@ -411,6 +412,7 @@ var contractorRC = (function () {
                         "<td></td>" +
                         "<td>"+data[i].documentName+"</td>"+
                         "<td><a href='"+_baseURL() + "/viewDownload?documentPath="+data[i].documentPath+"' target='_blank'> View </a></td>" +
+                        "<td class='file-size'></td>" +
                         "<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
                         "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
                         "</tr>";
@@ -423,7 +425,14 @@ var contractorRC = (function () {
 
         });
     }
+    function editIncAttachment(){
+        $('#certificateTbl').on('click','.edit_row',function(){
+            $(this).closest('tr').find('.docName').prop('disabled',false);
+            var attachment = $(this).closest('tr').find('.attachment');
+            attachment.html("<input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'>");
 
+        })
+    }
 
     function viewDownloadAttachment(){
         $('body').on('click','.vAttachment',function(){
@@ -869,6 +878,7 @@ var contractorRC = (function () {
         addMoreEqFile();
         getPersonalInfo();
         getPersonalInfoHR();
+        editIncAttachment();
     }
 
     return {

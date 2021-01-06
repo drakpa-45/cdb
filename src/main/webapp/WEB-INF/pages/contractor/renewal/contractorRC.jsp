@@ -256,7 +256,7 @@
                                                 <div class="card-body">
                                                     <div class="col-lg-12">
                                                         <div class=""><input id="addMoreCert" type="button" value="Add More Certificate" class="btn btn-primary"></div>
-                                                        <table class="table table-bordered table-center table-responsive-lg auto-index" id="certificateTbl">
+                                                        <table class="table table-bordered table-center table-responsive-lg auto-index" id="IncCertificateTbl">
                                                             <thead>
                                                             <tr>
                                                                 <th>Sl no</th>

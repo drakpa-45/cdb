@@ -126,6 +126,12 @@ public class ConsultantRCController extends BaseController {
         return cRenewalService.getCategoryClassFinal(consultantId);
     }
 
+    @ResponseBody
+    @RequestMapping(value ="/getIncAttachmentFinal", method = RequestMethod.GET)
+    public List getIncAttachmentFinal(HttpServletRequest request, String consultantIdFinal){
+        return cRenewalService.getIncAttachmentFinal(consultantIdFinal);
+    }
+
     @RequestMapping(value = "/viewDownload", method = RequestMethod.GET)
     public void viewDownload(HttpServletRequest request, HttpServletResponse response, String documentPath) throws Exception{
         commonService.viewDownloadFile(documentPath, response);

@@ -381,6 +381,5 @@
 <script src="<c:url value="/resources/js/cdb/architect.js"/>"></script>
 </div>
 <script>
-
 </script>
 </body>

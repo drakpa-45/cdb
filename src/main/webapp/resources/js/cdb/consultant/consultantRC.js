@@ -266,6 +266,9 @@ var consultantRC = (function () {
                 $('#cIncorporation').addClass('hide');
                 certificateTbl.empty();
             }
+            if($('#ownershipList').val() != '1e243ef0-c652-11e4-b574-080027dcfac6'){
+                getIncAttachmentFinal();
+            }
         });
     }
     function sCertOwner() {
@@ -324,8 +327,8 @@ var consultantRC = (function () {
             var $this = $(this);
             if(id == 'Incorporation' ){
                 if($this.is(':checked')){
-                    $('#ownershipList').prop('disabled',false);
-                    $('#firmName').prop('disabled', false);
+                    $('#ownershipList').prop('disabled',false).prop('required', true);
+                    $('#firmName').prop('disabled', false).prop('required', true);
                     $('#changeOfFirmName').prop('disabled', true);
                     $('#ownerPartner').removeClass('hide');
                     $('#changeOfOwnerId').prop('disabled', true);
@@ -333,8 +336,8 @@ var consultantRC = (function () {
                 }else{
                     $('#ownershipList').prop('disabled',true);
                     $('#firmName').prop('disabled', true);
-                    $('#changeOfFirmName').prop('disabled', false);
-                    $('#changeOfOwnerId').prop('disabled', false);
+                    $('#changeOfFirmName').prop('disabled', false).prop('required', true);
+                    $('#changeOfOwnerId').prop('disabled', false).prop('required', true);
                     $('#ownerPartner').addClass('hide');
                 }
             }else if(id == 'changeOfFirmName' ){
@@ -388,10 +391,48 @@ var consultantRC = (function () {
                 $('#regPhoneNo').val(consultant.regPhoneNo).prop('disabled',true);
                 $('#regFaxNo').val(consultant.regFaxNo).prop('disabled',true);
                 $('#consultantIdFinal').val(consultant.id);
+
+                if(consultant.ownershipTypeId != '1e243ef0-c652-11e4-b574-080027dcfac6'){
+                    getIncAttachmentFinal();
+                }
             }
         });
     }
+    function getIncAttachmentFinal(){
+        $.ajax({
+            url: _baseURL() + '/getIncAttachmentFinal',
+            type: 'GET',
+            data: {consultantIdFinal:$('#consultantIdFinal').val(),ownerOrHR:'O'},
+            success: function (data) {
 
+                if(data){
+                    $('#cIncorporation').removeClass('hide');
+                    var tr = '';
+                    for(var i in data){
+                        tr = tr + "<tr>"+
+                        "<td></td>" +
+                        "<td>"+data[i].documentName+"</td>"+
+                        "<td><a href='"+_baseURL() + "/viewDownload?documentPath="+data[i].documentPath+"' target='_blank'> View </a></td>" +
+                        "<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
+                        "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                        "</tr>";
+                    }
+                    $('#IncCertificateTbl').find('tbody').html(tr);
+                }else{
+                    $('#cIncorporation').addClass('hide');
+                }
+            }
+
+        });
+    }
+    function editIncAttachment(){
+        $('#certificateTbl').on('click','.edit_row',function(){
+            $(this).closest('tr').find('.docName').prop('disabled',false);
+            var attachment = $(this).closest('tr').find('.attachment');
+            attachment.html("<input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'>");
+
+        })
+    }
     function viewDownloadAttachment(){
         $('body').on('click','.vAttachment',function(){
             var id = $(this).closest('tr').find('.consultantHRid').val();
@@ -892,6 +933,7 @@ var consultantRC = (function () {
         addMoreFile();
         showFileSize();
         enableRegistrationNo();
+        editIncAttachment();
     }
     return {
         init:init
