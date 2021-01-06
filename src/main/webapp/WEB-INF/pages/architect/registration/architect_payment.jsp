@@ -67,6 +67,7 @@
                                                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                             <input type="hidden" readonly id="salutation" name="salutation" value="${appDetails.salutation}" class="form-control number">
                                                             <label class="col-lg-8 form-label form-control">${appDetails.salutation}</label>
+                                                            <span id="salutation_err" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -137,36 +138,36 @@
                                 <div class="card-body">
                                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                            <label  class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Qualification:</label>
+                                            <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Qualification:</label>
                                             <input type="hidden" class=" form-control number" value="${appDetails.qualificationId}" readonly name="ualification">
                                             <label class="col-lg-8 form-label form-control">${appDetails.qualificationId}</label>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                            <label  class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Graduated Year:</label>
+                                            <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Graduation Year:</label>
                                             <input type="hidden" class=" form-control number" value="${fn:substring(appDetails.graduationyr, 0, 4)}" readonly name="graduationYear">
                                             <label class="col-lg-8 form-label form-control">${fn:substring(appDetails.graduationyr, 0, 4)}</label>
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                            <label  class="col-lg-4 col-md-4 col-sm-4 col-xs-12">University:</label>
+                                            <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">University:</label>
                                             <input type="hidden" class="form-control " name="universityName" value="${appDetails.universityName}" readonly>
                                             <label class="col-lg-8 form-label form-control">${appDetails.universityName}</label>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                            <label  class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Country of University:</label>
+                                            <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Country of University:</label>
                                             <label class="col-lg-8 form-label form-control">${appDetails.universityCountry}</label>
                                             <input type="hidden" class=" form-control number" value="${appDetails.universityCountry}" readonly name="universityCountry">
                                         </div>
                                     </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                            <label  class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Service for:</label>
+                                            <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Service for:</label>
                                             <input type="hidden" value="030ace8e-24af-11e6-967f-9c2a70cc8e06" readonly maxlength="100" id="serviceTypeId" name="serviceTypeId" class="form-control">
                                             <label class="col-lg-8 form-label form-control">Architect</label>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                            <label  class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Type: </label>
+                                            <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Type: </label>
                                             <input type="hidden" value="${appDetails.serviceSectorType}" readonly maxlength="100" id="service" name="serviceSectorType" class="form-control">
                                             <input type="hidden" value="${appDetails.serviceSectorTypeId}" readonly maxlength="100" id="serviceSectorTypeId" name="serviceSectorTypeId" class="form-control">
                                             <label class="col-lg-8 form-label form-control">${appDetails.serviceSectorType}</label>
@@ -174,19 +175,19 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                            <label  class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Office/Employer Name:</label>
+                                            <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Office/Employer Name:</label>
                                             <input type="hidden" class="form-control" value="${appDetails.employeeName}" readonly name="employeeName" placeholder="Employer Name">
                                             <label class="col-lg-8 form-label form-control">${appDetails.employeeName}</label>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                            <label  class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Office/Employer Address:</label>
+                                            <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Office/Employer Address:</label>
                                             <input type="hidden" class="form-control" value="${appDetails.employeeAddress}" readonly name="employeeAddress" placeholder="Employer Address">
                                             <label class="col-lg-8 form-label form-control">${appDetails.employeeAddress}</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                            <label  class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Trade:</label>
+                                            <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Trade:</label>
                                             <input type="hidden" value="${appDetails.trade}" readonly maxlength="100" id="trade" name="trade" class="form-control">
                                             <label class="col-lg-8 form-label form-control">${appDetails.trade}</label>
                                         </div>

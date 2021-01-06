@@ -43,32 +43,37 @@
                                                     <div class="form-group row">
                                                         <label class="col-lg-4 col-md-4 col-sm-4col-xs-12">Salutation:</label>
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            <input type="hidden" readonly id="salutation" name="salutation" value="${appDetails.salutation}" class="form-control number">${appDetails.salutation}
+                                                            <input type="hidden" readonly id="salutation" name="salutation" value="${appDetails.salutation}" class="form-control number">
+                                                            <label class="col-lg-8 form-label form-control">${appDetails.salutation}</label>
                                                             <span id="salutation_err" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Cid No:</label>
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            <input type="hidden" readonly id="cidNo" value="${appDetails.cidNo}" name="cidNo" class="form-control number">${appDetails.cidNo}
+                                                            <input type="hidden" readonly id="cidNo" value="${appDetails.cidNo}" name="cidNo" class="form-control number">
+                                                            <label class="col-lg-8 form-label form-control">${appDetails.cidNo}</label>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Name:</label>
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            <input type="hidden" readonly name="fullname" value="${appDetails.fullname}" maxlength="100" id="name" class="form-control">${appDetails.fullname}
+                                                            <input type="hidden" readonly name="fullname" value="${appDetails.fullname}" maxlength="100" id="name" class="form-control">
+                                                            <label class="col-lg-8 form-label form-control">${appDetails.fullname}</label>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Email:</label>
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            <input type="hidden" readonly id="email" value="${appDetails.email}" name="email" class="form-control number">${appDetails.email}
+                                                            <input type="hidden" readonly id="email" value="${appDetails.email}" name="email" class="form-control number">
+                                                            <label class="col-lg-8 form-label form-control">${appDetails.email}</label>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Mobile No:</label>
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            <input type="hidden" class=" form-control number" value="${appDetails.mobileNo}" readonly id="mobileNo" name="mobileNo" maxlength="8">${appDetails.mobileNo}
+                                                            <input type="hidden" class=" form-control number" value="${appDetails.mobileNo}" readonly id="mobileNo" name="mobileNo" maxlength="8">
+                                                            <label class="col-lg-8 form-label form-control">${appDetails.mobileNo}</label>
                                                         </div>
                                                     </div>
                                                 </div>

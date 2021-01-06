@@ -84,38 +84,44 @@
                                                                     <div class="form-group row">
                                                                         <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Salutation:</label>
                                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                            <input type="hidden" readonly id="salutation" name="salutation" value="${appDetails.salutation}" class="form-control number">${appDetails.salutation}
+                                                                            <input type="hidden" readonly id="salutation" name="salutation" value="${appDetails.salutation}" class="form-control number">
+                                                                            <label class="col-lg-8 form-label form-control">${appDetails.salutation}</label>
                                                                             <span id="salutation_err" class="text-danger"></span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
                                                                         <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">CID Number:</label>
                                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                            <input type="hidden" readonly id="cidNo" value="${appDetails.cidNo}" name="cidNo" class="form-control number">${appDetails.cidNo}
+                                                                            <input type="hidden" readonly id="cidNo" value="${appDetails.cidNo}" name="cidNo" class="form-control number">
+                                                                            <label class="col-lg-8 form-label form-control">${appDetails.cidNo}</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
                                                                         <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Name:</label>
                                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                            <input type="hidden" readonly  name="fullname" value="${appDetails.fullname}" maxlength="100" id="name" class="form-control">${appDetails.fullname}
+                                                                            <input type="hidden" readonly  name="fullname" value="${appDetails.fullname}" maxlength="100" id="name" class="form-control">
+                                                                            <label class="col-lg-8 form-label form-control">${appDetails.fullname}</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
                                                                         <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Dzongkhag:</label>
                                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                            <input type="hidden" readonly value="${appDetails.dzongkhagId}" maxlength="100" id="dzongkhag" class="form-control">${appDetails.dzongkhagId}
+                                                                            <input type="hidden" readonly value="${appDetails.dzongkhagId}" maxlength="100" id="dzongkhag" class="form-control">
+                                                                            <label class="col-lg-8 form-label form-control">${appDetails.dzongkhagId}</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
                                                                         <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Gewog:</label>
                                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                            <input type="hidden" value="${appDetails.gewog}" readonly maxlength="100" id="gewog" name="gewog" class="form-control">${appDetails.gewog}
+                                                                            <input type="hidden" value="${appDetails.gewog}" readonly maxlength="100" id="gewog" name="gewog" class="form-control">
+                                                                            <label class="col-lg-8 form-label form-control">${appDetails.gewog}</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
                                                                         <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Village:</label>
                                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                            <input type="hidden" value="${appDetails.village}" readonly maxlength="100" id="village" name="village" class="form-control">${appDetails.village}
+                                                                            <input type="hidden" value="${appDetails.village}" readonly maxlength="100" id="village" name="village" class="form-control">
+                                                                            <label class="col-lg-8 form-label form-control">${appDetails.village}</label>
                                                                             <input type="hidden"  name="villageId" id="villageId">
                                                                         </div>
                                                                     </div>
@@ -135,16 +141,15 @@
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Service for:</label>
                                                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                        <input type="hidden" value="030ace8e-24af-11e6-967f-9c2a70cc8e06" readonly maxlength="100" id="serviceTypeId" name="serviceTypeId" class="form-control">Engineer
-                                                                      <%--  <select class="form-control"  name="serviceTypeId">
-                                                                            <option value="030ace8e-24af-11e6-967f-9c2a70cc8e06">Engineer</option>
-                                                                        </select>--%>
+                                                                        <input type="hidden" value="030ace8e-24af-11e6-967f-9c2a70cc8e06" readonly maxlength="100" id="serviceTypeId" name="serviceTypeId" class="form-control">
+                                                                        <label class="col-lg-8 form-label form-control">Engineer</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Country:</label>
                                                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                        <input type="hidden" value="${appDetails.countryId}" readonly maxlength="100" id="country" name="country" class="form-control">${appDetails.countryId}
+                                                                        <input type="hidden" value="${appDetails.countryId}" readonly maxlength="100" id="country" name="country" class="form-control">
+                                                                        <label class="col-lg-8 form-label form-control">${appDetails.countryId}</label>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -152,13 +157,15 @@
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Type: </label>
                                                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                        <input type="hidden" value="${appDetails.serviceSectorType}" readonly maxlength="100" id="service" name="serviceSectorType" class="form-control">${appDetails.serviceSectorType}
+                                                                        <input type="hidden" value="${appDetails.serviceSectorType}" readonly maxlength="100" id="service" name="serviceSectorType" class="form-control">
+                                                                        <label class="col-lg-8 form-label form-control">${appDetails.serviceSectorType}</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Trade: </label>
                                                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                        <input type="hidden" value="${appDetails.cmnTradeId}" readonly id="service" name="trade" class="form-control">${appDetails.trade}
+                                                                        <input type="hidden" value="${appDetails.cmnTradeId}" readonly id="service" name="trade" class="form-control">
+                                                                        <label class="col-lg-8 form-label form-control">${appDetails.trade}</label>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -182,22 +189,26 @@
                                                         <div class="card-body">
                                                             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                    <label>Email:</label>
-                                                                    <input id="email" type="hidden" value="${appDetails.email}" readonly class="form-control" name="email" placeholder="Type valid email">${appDetails.email}
+                                                                    <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Email:</label>
+                                                                    <input id="email" type="hidden" value="${appDetails.email}" readonly class="form-control" name="email" placeholder="Type valid email">
+                                                                    <label class="col-lg-8 form-label form-control">${appDetails.email}</label>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                    <label>Mobile Number:</label>
-                                                                    <input type="hidden" class=" form-control number" value="${appDetails.mobileNo}" readonly id="mobileNo" name="mobileNo"  maxlength="8">${appDetails.mobileNo}
+                                                                    <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Mobile Number:</label>
+                                                                    <input type="hidden" class=" form-control number" value="${appDetails.mobileNo}" readonly id="mobileNo" name="mobileNo" maxlength="8">
+                                                                    <label class="col-lg-8 form-label form-control">${appDetails.mobileNo}</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-12">
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                    <label>Office/Employer Name:</label>
-                                                                    <input type="hidden" class="form-control" value="${appDetails.employeeName}" readonly name="employeeName" placeholder="Employer Name">${appDetails.employeeName}
+                                                                    <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Office/Employer Name:</label>
+                                                                    <input type="hidden" class="form-control" value="${appDetails.employeeName}" readonly name="employeeName" placeholder="Employer Name">
+                                                                    <label class="col-lg-8 form-label form-control">${appDetails.employeeName}</label>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                    <label>Office/Employer Address:</label>
-                                                                    <input type="hidden" class="form-control" value="${appDetails.employeeAddress}" readonly name="employeeAddress" placeholder="Employer Address">${appDetails.employeeAddress}
+                                                                    <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Office/Employer Address:</label>
+                                                                    <input type="hidden" class="form-control" value="${appDetails.employeeAddress}" readonly name="employeeAddress" placeholder="Employer Address">
+                                                                    <label class="col-lg-8 form-label form-control">${appDetails.employeeAddress}</label>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -210,22 +221,26 @@
                                                         <div class="card-body">
                                                             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                    <label>Qualification:</label>
-                                                                    <input type="hidden" class=" form-control number" value="${appDetails.qualificationId}" readonly name="ualification">${appDetails.qualificationId}
+                                                                    <label  class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Qualification:</label>
+                                                                    <input type="hidden" class=" form-control number" value="${appDetails.qualificationId}" readonly name="qualification">
+                                                                    <label class="col-lg-8 form-label form-control">${appDetails.qualificationId}</label>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                    <label>Year of graduation:</label>
-                                                                    <input type="hidden" class=" form-control number" value="${fn:substring(appDetails.graduationyr, 0, 4)}" readonly name="graduationYear" >${fn:substring(appDetails.graduationyr, 0, 4)}
+                                                                    <label  class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Graduation Year:</label>
+                                                                    <input type="hidden" class=" form-control number" value="${fn:substring(appDetails.graduationyr, 0, 4)}" readonly name="graduationYear">
+                                                                    <label class="col-lg-8 form-label form-control">${fn:substring(appDetails.graduationyr, 0, 4)}</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                    <label>University:</label>
-                                                                    <input type="hidden" class="form-control " name="universityName"value="${appDetails.universityName}" readonly>${appDetails.universityName}
+                                                                    <label  class="col-lg-4 col-md-4 col-sm-4 col-xs-12">University:</label>
+                                                                    <input type="hidden" class="form-control " name="universityName" value="${appDetails.universityName}" readonly>
+                                                                    <label class="col-lg-8 form-label form-control">${appDetails.universityName}</label>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                    <label>Country of University:</label>
-                                                                    <input type="hidden" class=" form-control number" value="${appDetails.universityCountry}" readonly name="universityCountry">${appDetails.universityCountry}
+                                                                    <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Country of University:</label>
+                                                                    <label class="col-lg-8 form-label form-control">${appDetails.universityCountry}</label>
+                                                                    <input type="hidden" class=" form-control number" value="${appDetails.universityCountry}" readonly name="universityCountry">
                                                                 </div>
                                                             </div>
                                                         </div>

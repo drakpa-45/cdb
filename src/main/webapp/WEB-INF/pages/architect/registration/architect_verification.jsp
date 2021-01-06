@@ -84,6 +84,7 @@
                                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                                             <input type="hidden" readonly id="salutation" name="salutation" value="${appDetails.salutation}" class="form-control number">
                                                                             <label class="col-lg-8 form-label form-control">${appDetails.salutation}</label>
+                                                                            <span id="salutation_err" class="text-danger"></span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
@@ -220,19 +221,19 @@
                                                         <div class="card-body">
                                                             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                    <label  class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Qualification:</label>
-                                                                    <input type="hidden" class=" form-control number" value="${appDetails.qualificationId}" readonly name="ualification">
+                                                                    <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Qualification:</label>
+                                                                    <input type="hidden" class=" form-control number" value="${appDetails.qualificationId}" readonly name="qualification">
                                                                     <label class="col-lg-8 form-label form-control">${appDetails.qualificationId}</label>
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                    <label  class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Graduated Year:</label>
+                                                                    <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Graduation Year:</label>
                                                                     <input type="hidden" class=" form-control number" value="${fn:substring(appDetails.graduationyr, 0, 4)}" readonly name="graduationYear">
                                                                     <label class="col-lg-8 form-label form-control">${fn:substring(appDetails.graduationyr, 0, 4)}</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                                                                    <label  class="col-lg-4 col-md-4 col-sm-4 col-xs-12">University:</label>
+                                                                    <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">University:</label>
                                                                     <input type="hidden" class="form-control " name="universityName" value="${appDetails.universityName}" readonly>
                                                                     <label class="col-lg-8 form-label form-control">${appDetails.universityName}</label>
                                                                 </div>
