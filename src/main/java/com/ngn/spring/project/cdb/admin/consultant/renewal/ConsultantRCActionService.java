@@ -86,7 +86,6 @@ public class ConsultantRCActionService extends BaseService{
         return (String)commonService.getValue("crpconsultantfinal","Id","CDBNo",cdbNo);
     }
 
-
     /**
      * To get the CDB no from app no
      * @param appNo  -- cdbNo

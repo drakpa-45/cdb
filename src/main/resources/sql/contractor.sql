@@ -47,7 +47,7 @@ ContractorActionDao.send2MyOrGroupTask = UPDATE crpcontractor a SET a.`SysLocked
 ContractorActionDao.getNextCDBNo = SELECT DISTINCT a.`CDBNo`+1 AS cdbNo  FROM crpcontractorfinal a ORDER BY CONVERT(a.`CDBNo`, DECIMAL) DESC  LIMIT 1
 ContractorActionDao.getHRAttachments = SELECT a.`DocumentName` documentName,`DocumentPath` documentPath, `FileType` fileType FROM `crpcontractorhumanresourceattachment` a WHERE a.`CrpContractorHumanResourceId` = :hrId
 ContractorActionDao.getEQAttachments = SELECT a.`DocumentName` documentName,`DocumentPath` documentPath, `FileType` fileType FROM `crpcontractorequipmentattachment` a WHERE a.`CrpContractorEquipmentId`  = :eqId
-ContractorActionDao.getIncAttachment = SELECT DocumentName AS documentName, DocumentPath documentPath,FileType AS fileType, AttachmentFor as attachmentFor FROM crpcontractorattachment WHERE CrpContractorId =:contractorId
+ContractorActionDao.getIncAttachment = SELECT DocumentName AS documentName, DocumentPath documentPath,FileType AS fileType,AttachmentFor AS attachmentFor FROM crpcontractorattachment WHERE CrpContractorId =:contractorId
 ContractorActionDao.getCDBNoFromAppNo = SELECT b.cdbno FROM  crpcontractor a INNER JOIN crpcontractorfinal b ON a.email = b.email WHERE a.referenceNo =:appNo
 /* Contractor renewal dao*/
 ContractorRCDao.getContractorStatus =select bb.Id value,bb.Name text,bb.ReferenceNo obj1 from `crpcontractorfinal` aa inner join cmnlistitem bb on aa.`CmnApplicationRegistrationStatusId`=bb.Id where cdbNo = :cdbNo
@@ -68,8 +68,7 @@ ContractorRCDao.auditMemo = SELECT CONCAT('You have following audit memo:<br>',A
 ContractorRCDao.getIncAttachmentFinal = SELECT DocumentName AS documentName, DocumentPath documentPath,FileType AS fileType FROM crpcontractorattachmentfinal WHERE CrpContractorFinalId =:contractorFinalId
 
 /*Contractor Renewal Action Dao*/
-
-ContractorRCActionDao.getAppliedServices = SELECT a.ReferenceNo applicationNo,c.CmnServiceTypeId serviceId,d.referenceNo serviceRefNo, d.Name serviceName, e.PaymentAmount ,a.NameOfFirm firmName,b.Name AS appStatus,a.ApplicationDate applicationDate FROM crpcontractor a  INNER JOIN cmnlistitem b ON b.Id  = a.CmnApplicationRegistrationStatusId INNER JOIN crpcontractorappliedservice c ON c.CrpContractorId = a.CrpContractorId INNER JOIN crpservice d ON d.Id = c.CmnServiceTypeId INNER JOIN crpcontractorservicepayment  e ON e.CrpContractorId = c.CrpContractorId AND e.CmnServiceTypeId = c.CmnServiceTypeId WHERE a.ReferenceNo=:applicationNo
+ContractorRCActionDao.getAppliedServices = SELECT a.ReferenceNo applicationNo,c.CmnServiceTypeId serviceId,d.referenceNo serviceRefNo, d.Name serviceName, e.PaymentAmount ,a.NameOfFirm firmName,b.Name AS appStatus,a.ApplicationDate applicationDate FROM crpcontractor a INNER JOIN cmnlistitem b ON b.Id  = a.CmnApplicationRegistrationStatusId INNER JOIN crpcontractorappliedservice c ON c.CrpContractorId = a.CrpContractorId INNER JOIN crpservice d ON d.Id = c.CmnServiceTypeId INNER JOIN crpcontractorservicepayment  e ON e.CrpContractorId = c.CrpContractorId AND e.CmnServiceTypeId = c.CmnServiceTypeId WHERE a.ReferenceNo=:applicationNo
 
 /*ContractorRCActionDao.getAppliedServices = SELECT CAST(a.`ReferenceNo` as char ) applicationNo,c.CmnServiceTypeId serviceId,CAST(d.referenceNo as char) serviceRefNo, d.Name serviceName, e.PaymentAmount ,a.`NameOfFirm` firmName,b.`Name` AS appStatus,a.`ApplicationDate` applicationDate FROM `crpcontractor` a  INNER JOIN `cmnlistitem` b ON b.`Id`  = a.`CmnApplicationRegistrationStatusId` INNER JOIN `crpcontractorappliedservice` c ON c.`CrpContractorId` = a.`CrpContractorId` INNER JOIN `crpservice` d ON d.`Id` = c.`CmnServiceTypeId` INNER JOIN `crpcontractorservicepayment`  e ON e.`CrpContractorId` = c.CrpContractorId AND e.`CmnServiceTypeId` = c.CmnServiceTypeId WHERE a.`ReferenceNo` = :applicationNo */
 ContractorRCActionDao.getDeleteHrRequest = SELECT hr.`Id` AS id,hr.`CrpContractorFinalId` contractorID,hr.`CIDNo`cidNo,hr.`Name` AS name, hr.`Sex` sex,hr.`ShowInCertificate` AS siCertificate, hr.DeleteRequest AS deleteRequest \
@@ -81,4 +80,5 @@ ContractorRCActionDao.getProposedCategories = SELECT s.`CrpContractorId` contrac
 FROM `crpcontractorservicepayment` s INNER JOIN `crpcontractorservicepaymentdetail` d ON s.`Id` = `CrpContractorServicePaymentId` INNER JOIN `crpcontractor` c ON s.`CrpContractorId` = c.Id INNER JOIN `crpservice` ss ON ss.Id = s.`CmnServiceTypeId` \
 LEFT JOIN `cmncontractorclassification` ap ON ap.Id = d.`CmnAppliedClassificationId` LEFT JOIN `cmncontractorclassification` ex ON ex.Id = d.`CmnExistingClassificationId` \
 LEFT JOIN `cmncontractorworkcategory` ca ON ca.Id = d.`CmnCategoryId` WHERE c.`ReferenceNo` =:appNo ORDER BY ca.ReferenceNo ASC
+
 ContractorRCActionDao.paymentUpdate = CALL ProCrpContractorRenewalPaymentApproval(:contractorId,:userId,:appStatusId,:createdBy)

@@ -243,11 +243,11 @@ var consultantOS = (function () {
     "use strict";
 
     var cert = "<tr><td></td>" +
-        "<td><input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='C'/>" +
+        "<td><input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='InSole'/>" +
         "<input type='text' class='form-control' name='cAttachments[0].documentName'/> </td>"+
         "<td><input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
         "<td class='file-size'></td>" +
-        "<td><input type='button' class='p-2 del_row btn btn-azure' value='Delete'><!--<a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a>--></td>" +
+        "<td><a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a></td>" +
         "</tr>";
 
     function sCertIncorporation() {
@@ -369,9 +369,18 @@ var consultantOS = (function () {
         });
     }
 
-    var certCategory = "<tr>" +
-        "<td><input type='text' class='form-control' name='cAttachments[0].documentName'/> </td>"+
-        "<td><input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
+    var certCategory ="<tr><td></td>" +
+        "<td><input type='hidden' class='form-control aFor' name='cAttachments[2].attachmentFor' value='AL'/>" +
+        "<input type='text' class='form-control' name='cAttachments[2].documentName'/> </td>"+
+        "<td><input type='file' name='cAttachments[2].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
+        "<td class='file-size'></td>" +
+        "<td><a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a></td>" +
+        "</tr>";
+
+    var certOSC = "<tr><td></td>" +
+        "<td><input type='hidden' class='form-control aFor' name='cAttachments[1].attachmentFor' value='OC'/>" +
+        "<input type='text' class='form-control' name='cAttachments[1].documentName'/> </td>"+
+        "<td><input type='file' name='cAttachments[1].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
         "<td class='file-size'></td>" +
         "<td><a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a></td>" +
         "</tr>";
@@ -386,7 +395,7 @@ var consultantOS = (function () {
 
     function addMoreCertOwner(){
         $('#addMoreCertOwner').on('click',function(e){
-            var certificateTbl = $('#certificateTblOwner').find('tbody').append(certCategory);
+            var certificateTbl = $('#certificateTblOwner').find('tbody').append(certOSC);
             /*var row = certificateTbl.find('tr:eq(0)').html();
              certificateTbl.append('<tr>'+row.find(':input').val('')+'</tr>');*/
         });
@@ -481,7 +490,7 @@ var consultantOS = (function () {
                     var tr = '';
                     for(var i in data){
                         tr = tr + "<tr>"+
-                        "<td><input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='C'/></td>" +
+                        "<td><input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='InSole'/></td>" +
                         "<td>"+data[i].documentName+"</td>"+
                         "<td><a href='"+_baseURL() + "/viewDownload?documentPath="+data[i].documentPath+"' target='_blank'> View </a></td>" +
                         "<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
@@ -1018,7 +1027,25 @@ var consultantOS = (function () {
             }
         })
     }
-
+    function isFirmNameUnique(){
+        $('#firmName').on('change',function(){
+            var $this = $(this);
+            $.ajax({
+                url:cdbGlobal.baseURL() + '/consultantNR/isFirmNameUnique',
+                type: 'GET',
+                data: {firmName: $this.val()},
+                success: function (res) {
+                    if(res == true){
+                        //$this.val()
+                    }else{
+                        $this.val('').focus();
+                        warningMsg("This firm name has been already taken. Please choose another name.");
+                        $this.val('').focus();
+                    }
+                }
+            });
+        });
+    }
     function init(){
         viewDownloadAttachment();
         getConsultant();
@@ -1047,6 +1074,7 @@ var consultantOS = (function () {
         enableRegistrationNo();
         editIncAttachment();
         editInModalOwner();
+        isFirmNameUnique();
     }
     return {
         init:init

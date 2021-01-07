@@ -2,9 +2,15 @@
  * Created by user on 2/14/2020.
  */
 var $check = null;
-function checkBtn(checkBoxId)
-{
+function checkBtn(checkBoxId) {
     $check.prop('checked',true);
+    if (checkBoxId == "owner") {
+        $('#nextGIBtn').prop('disabled', false);
+    } else if(checkBoxId == 'equipment'){
+        $('#btnValEqNext').prop('disabled', false);
+    }else{
+        $('#nextHRBtn').prop('disabled', false);
+    }
 }
 
 function nextTab(presentClass) {
@@ -248,6 +254,7 @@ var specializedFirmRCAction = (function () {
                 success: function (res) {
                     if (res.status == '1') {
                         var spFirmDTO = res.dto;
+                        debugger;
                         var specializedFirm = spFirmDTO.specializedFirm;
                         $('#ownershipType').text(spFirmDTO.ownershipTypeTxt);
                         $('#country').text(spFirmDTO.countryTxt);
@@ -263,8 +270,7 @@ var specializedFirmRCAction = (function () {
                         $('#regMobileNo').text(specializedFirm.regMobileNo);
                         $('#regPhoneNo').text(specializedFirm.regPhoneNo);
                         $('#regFaxNo').text(specializedFirm.regFaxNo);
-                        $('#ownershipchangeRemarks').text(spFirmDTO.ownershipChangeRemarks);
-
+                        $('#ownershipChangeRemarks').text(spFirmDTO.ownershipChangeRemarks);
 
                         incorporation(spFirmDTO.incAttachments);
 
@@ -336,7 +342,7 @@ var specializedFirmRCAction = (function () {
                 var spFirm = res;
                 $('#oldfirmName').html(spFirm.firmName);
                 $('#estAddressExist').html(spFirm.regAddress);
-                $('#estDzongkhagExist').val(spFirm.oldDzongkhag).prop('disabled',true);
+                $('#estDzongkhagExist').html(spFirm.oldDzongkhag);
                 $('#regEmailExist').html(spFirm.regEmail);
                 $('#regMobileNoExist').html(spFirm.regMobileNo);
                 $('#regPhoneNoExist').html(spFirm.regPhoneNo);
@@ -379,15 +385,37 @@ var specializedFirmRCAction = (function () {
     function incorporation(data){
         if(data){
             $('#cIncorporation').removeClass('hide');
-            var tr = '';
+            $('#oIncorporation').removeClass('hide');
+            var cIncTr = '';
+            var categoryTr = '';
+            var ownerTr = '';
             for(var i in data){
-                tr = tr + "<tr>"+
-                "<td></td>" +
-                "<td>"+data[i].documentName+"</td>"+
-                "<td><a href='"+_baseURL() + "/viewDownload?documentPath="+data[i].documentPath+"' target='_blank'> View </a></td>" +
-                "</tr>";
+                if(data[i].attachmentFor == 'InSole') {
+                    cIncTr = cIncTr + "<tr>" +
+                    "<td></td>" +
+                    "<td>" + data[i].documentName + "</td>" +
+                    "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                    "</tr>";
+                }
+                if(data[i].attachmentFor == 'AL'){
+                    categoryTr = categoryTr + "<tr>" +
+                    "<td></td>" +
+                    "<td>" + data[i].documentName + "</td>" +
+                    "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                    "</tr>";
+                }
+                if(data[i].attachmentFor == 'OC'){
+                    ownerTr = ownerTr + "<tr>" +
+                    "<td></td>" +
+                    "<td>" + data[i].documentName + "</td>" +
+                    "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                    "</tr>";
+                }
             }
-            $('#IncCertificateTbl').find('tbody').html(tr);
+            $('#IncCertificateTbl').find('tbody').html(cIncTr);
+            $('#OcCertificateTbl').find('tbody').html(ownerTr);
+            $('#certificateTblCategory').find('tbody').html(categoryTr);
+
         }else{
             $('#cIncorporation').addClass('hide');
         }

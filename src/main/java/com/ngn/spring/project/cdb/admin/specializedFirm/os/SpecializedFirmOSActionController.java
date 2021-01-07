@@ -78,7 +78,7 @@ public class SpecializedFirmOSActionController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value ="/getSpFirm", method = RequestMethod.GET)
+    @RequestMapping(value ="/getSpFirmFinal", method = RequestMethod.GET)
     public Object getSpecializedFirmFinal(HttpServletRequest request){
       //  String cdbNo = request.getParameter("cdbNo");
         String cdbNo = request.getSession().getAttribute("CDBNo").toString();

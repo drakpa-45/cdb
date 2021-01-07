@@ -93,7 +93,6 @@ public class ConsultantOSService extends BaseService {
         Consultant consultant = new Consultant();
         consultant.setpGewogId(consultantFinal.getpGewogId());
         consultant.setpVillageId(consultantFinal.getpVillageId());
-
         BeanUtils.copyProperties(consultantFinal,consultant);
 
         String consultantId = commonService.getRandomGeneratedId();
@@ -101,7 +100,7 @@ public class ConsultantOSService extends BaseService {
         consultant.setConsultantId(consultantId);
         //insert undertaking letter
         if(consultantDTO.getcAttachments() != null && !consultantDTO.getcAttachments().isEmpty())
-            consultantRCService.updateIncorporation(consultantDTO.getcAttachments(), loggedInUser, consultantFinal.getId());
+            updateIncorporation(consultantDTO.getcAttachments(), loggedInUser, consultantId);
 
         //region incorporation (Name are also allowed to change)
         if(renewalServiceType.getIncorporation() != null){
@@ -258,6 +257,14 @@ public class ConsultantOSService extends BaseService {
         return responseMessage;
     }
 
+    public void updateIncorporation(List<ConsultantAttachment> cAttachments, LoggedInUser loggedInUser,String consultantId) throws Exception{
+        if(cAttachments.size() > 1) {
+            for(ConsultantAttachment cAttachment:cAttachments) {
+                cAttachment.setConsultantId(consultantId);
+                consultantNRService.saveAttachment(cAttachment, loggedInUser);
+            }
+        }
+    }
    /* private void saveCC(List<ConsultantCategory> consultantCategory, String[] serviceCateID, String[] appliedClassID, LoggedInUser loggedInUser, HttpServletRequest request) {
         ConsultantCategory conCategory = new ConsultantCategory();
         for (int i =0; i<serviceCateID.length;i++) {

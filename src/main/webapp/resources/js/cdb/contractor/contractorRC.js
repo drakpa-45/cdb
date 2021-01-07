@@ -854,7 +854,25 @@ var contractorRC = (function () {
             }
         })
     }
-
+    function isEmailUnique(){
+        $('#regEmail').on('change',function(){
+            var $this = $('#regEmail');
+            $.ajax({
+                url:cdbGlobal.baseURL() + '/contractorNR/isEmailUnique',
+                type: 'GET',
+                data: {email: $this.val()},
+                success: function (res) {
+                    if(res == true){
+                        //$this.val()
+                    }else{
+                        $this.val('').focus();
+                        warningMsg("This email has already been registered.");
+                        $this.val('').focus();
+                    }
+                }
+            });
+        });
+    }
     function init(){
         viewDownloadAttachment();
         getContractor();
@@ -879,6 +897,7 @@ var contractorRC = (function () {
         getPersonalInfo();
         getPersonalInfoHR();
         editIncAttachment();
+        isEmailUnique();
     }
 
     return {

@@ -414,7 +414,7 @@ public class ContractorRCService extends BaseService {
     public void updateIncorporation(List<ContractorAttachment> cAttachments,
                                     LoggedInUser loggedInUser,String contractorId) throws Exception{
         if(cAttachments != null && cAttachments.size() >= 1) {
-            for(ContractorAttachment cAttachment:cAttachments) {
+                for(ContractorAttachment cAttachment:cAttachments) {
                 cAttachment.setContractorId(contractorId);
                 contractorNRService.saveAttachment(cAttachment, loggedInUser);
             }

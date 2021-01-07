@@ -88,7 +88,7 @@ public class ContractorOSService extends BaseService {
         contractor.setContractorId(contractorId);
         //insert undertaking letter
         if(contractorDTO.getcAttachments() != null && !contractorDTO.getcAttachments().isEmpty())
-            contractorRCService.updateIncorporation(contractorDTO.getcAttachments(), loggedInUser, contractorFinal.getId());
+           updateIncorporation(contractorDTO.getcAttachments(), loggedInUser, contractorId);
 
         //region incorporation (Name are also allowed to change)
         if(renewalServiceType.getIncorporation() != null){
@@ -96,7 +96,6 @@ public class ContractorOSService extends BaseService {
            // contractorRCService.updateIncorporation(contractorDTO.getcAttachments(), loggedInUser, contractor.getContractorId());
             contractor.setOwnershipTypeId(ownershipTypeId);
             contractor.setFirmName(contractorDTO.getContractor().getFirmName());
-
 
             List<ContractorHR> ownerList = contractorDTO.getContractor().getContractorHRs();
             contractor.setOwnershipChangeRemarks(contractorDTO.getContractor().getOwnershipChangeRemarks());
@@ -107,7 +106,6 @@ public class ContractorOSService extends BaseService {
                 contractorHR.setIsPartnerOrOwner(TRUE_INT);
                 contractorNRService.saveHR(contractorHR, loggedInUser);
             }
-
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "12");
             appliedServicesList.add(appliedService);
         }
@@ -244,6 +242,15 @@ public class ContractorOSService extends BaseService {
         return responseMessage;
     }
 
+    @Transactional
+    public void updateIncorporation(List<ContractorAttachment> cAttachments, LoggedInUser loggedInUser,String contractorId) throws Exception{
+        if(cAttachments != null && cAttachments.size() >= 1) {
+            for(ContractorAttachment cAttachment:cAttachments) {
+                cAttachment.setContractorId(contractorId);
+                contractorNRService.saveAttachment(cAttachment, loggedInUser);
+            }
+        }
+    }
     public String saveOS(Contractor contractor,LoggedInUser loggedInUser){
         String referenceNo = commonService.getNextID("crpcontractor", "ReferenceNo").toString();
         contractor.setReferenceNo(referenceNo);

@@ -96,11 +96,11 @@
                                 </table>
                             </div>
                             <div class="col-lg-12 form-group">
-                                <button type="button" onclick="backTab('services')" class="btn btn-azure col-lg-offset-9">
+                              <%--  <button type="button" onclick="backTab('services')" class="btn btn-azure col-lg-offset-9">
                                     <i class="fa fa-arrow-left"></i>Back
-                                </button>
+                                </button>--%>
                                 <button type="button" onclick="nextTab('services')" class="btn btn-primary">
-                                    <i class="fa fa-arrow-right"></i>Next
+                                    <i class="fa fa-arrow-circle-right"></i>Next
                                 </button>
                             </div>
                         </div>
@@ -142,22 +142,19 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card hidden" id="cIncorporation">
+                                <div class="card hidd" id="cIncorporation">
                                     <div class="bg-blue card-status card-status-left"></div>
                                     <div class="card-header">
                                         <h3 class="card-title">Attach Certificates of Incorporation</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12">
-                                            <%--<div class=""><input id="addMoreCert" type="button"
-                                                                 value="Add More Certificate"
-                                                                 class="btn btn-primary"></div>--%>
                                             <table class="table table-bordered table-center table-responsive-lg auto-index" id="IncCertificateTbl">
                                                 <thead>
                                                 <tr>
                                                     <th>Sl no</th>
-                                                    <th>Document Name</th>
                                                     <th>Document Attached</th>
+                                                    <th>View/Download</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -217,6 +214,28 @@
                                                         <th style="width: 10%">Verify</th>
                                                         <th style="width: 10%">Approve</th>
                                                     </security:authorize>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card hidd" id="oIncorporation">
+                                    <div class="bg-blue card-status card-status-left"></div>
+                                    <div class="card-header">
+                                        <h3 class="card-title">Attach Certificates of Incorporation</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="col-lg-12">
+                                            <table class="table table-bordered table-center table-responsive-lg auto-index" id="OcCertificateTbl">
+                                                <thead>
+                                                <tr>
+                                                    <th>Sl no</th>
+                                                    <th>Document Attached</th>
+                                                    <th>View/Download</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -298,8 +317,8 @@
                                 </div>
                             </div>
                             <div class="col-lg-12 form-group">
-                                <button type="button" onclick="backTab('generalInformation')" class="btn btn-azure col-lg-offset-9"><i class="fa fa-arrow-left"></i> Back</button>
-                                <button type="button" onclick="nextTab('generalInformation')" class="btn btn-primary"><i class="fa fa-arrow-right"></i>Next</button>
+                                <button type="button" onclick="backTab('generalInformation')" class="btn btn-azure col-lg-offset-9"><i class="fa fa-arrow-circle-left"></i> Back</button>
+                                <button type="button" onclick="nextTab('generalInformation')" class="btn btn-primary" id="nextGIBtn" disabled><i class="fa fa-arrow-circle-right"></i>Next</button>
                             </div>
                         </div>
                         <div class="tab-pane category_details hide">
@@ -336,13 +355,12 @@
                                 <table class="table table-bordered table-hover" id="certificateTblCategory">
                                     <thead>
                                     <tr>
-                                        <th>Document Name</th>
+                                        <th>Sl No</th>
                                         <th>Document Attached</th>
-                                        <th>Delete</th>
+                                        <th>View/Download</th>
                                     </tr>
                                     </thead>
                                     <tbody class="files">
-
                                     </tbody>
                                 </table>
                             </div>
@@ -424,7 +442,7 @@
                                 <button type="button" onclick="backTab('human_resource_criteria')" class="btn btn-azure col-lg-offset-9 backTab">
                                     <i class="fa fa-arrow-circle-left"></i> &nbsp;Back
                                 </button>
-                                <button type="button" id="btnValHRNext" onclick="nextTab('human_resource_criteria')" class="btn btn-primary nextTab">Next &nbsp;
+                                <button type="button" id="nextHRBtn" disabled onclick="nextTab('human_resource_criteria')" class="btn btn-primary nextTab">Next &nbsp;
                                     <i class="fa fa-arrow-circle-right"></i>
                                 </button>
                             </div>
@@ -469,7 +487,7 @@
                                 <button type="button" onclick="backTab('equipment_details')" class="btn btn-azure col-lg-offset-9">
                                     <i class="fa fa-arrow-circle-left"></i>&nbsp; Back
                                 </button>
-                                <button type="button" class="btn btn-primary" id="btnValEqNext" onclick="nextTab('equipment_details')">Next &nbsp;
+                                <button type="button" class="btn btn-primary" id="btnValEqNext" disabled onclick="nextTab('equipment_details')">Next &nbsp;
                                     <i class="fa fa-life-saver"></i>
                                 </button>
                             </div>
@@ -619,8 +637,15 @@
                                     </p>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-primary" onclick="javascript:printDiv('modal-print')">Print</button>
-                            <button type="button" class="btn btn-success" id="closeModal" onclick="checkBtn('checkver1')" data-dismiss="modal">OK</button>
+                            <div class="col-md-12 col-lg-12 col-sm-12">
+                                <div class="col-md-1 col-lg-1 col-sm-2">
+                                    <button type="button" class="btn btn-primary" onclick="javascript:printDiv('modal-print')">Print</button>
+                                </div>
+                                <div class="col-md-4 col-lg-4 col-sm-4">
+                                    <button type="button" class="btn btn-success" id="closeModal" style="display: none" onclick="checkBtn('owner')" data-dismiss="modal">OK</button>
+                                    <button type="button" class="btn btn-success " id="closeModal1"  style="display: none" onclick="checkBtn('Hr')" data-dismiss="modal">OK</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

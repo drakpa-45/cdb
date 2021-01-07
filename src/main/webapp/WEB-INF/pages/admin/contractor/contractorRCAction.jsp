@@ -69,92 +69,46 @@
                                 <table>
                                     <tbody>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" style="zoom:1.6" name="incorporation"
-                                                   value="1" id="Incorporation" class="service_check">
-                                        </td>
-                                        <td>
-                                            <span>Incorporation</span>
-                                        </td>
+                                        <td><input type="checkbox" style="zoom:1.6" name="incorporation" value="1" id="Incorporation" class="service_check"></td>
+                                        <td><span>Incorporation</span></td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" style="zoom:1.6"
-                                                   name="changeOfFirmName" value="1"
-                                                   id="changeOfFirmName" class="service_check">
-                                        </td>
-                                        <td>
-                                            <span>Change of Firm Name</span>
-                                        </td>
+                                        <td><input type="checkbox" style="zoom:1.6" name="changeOfFirmName" value="1" id="changeOfFirmName" class="service_check"></td>
+                                        <td><span>Change of Firm Name</span></td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" style="zoom:1.6"
-                                                   name="changeOfLocation" value="1" class="service_check"
-                                                   id="changeOfLocation">
-                                        </td>
-                                        <td>
-                                            <span>Change of Location</span>
-                                        </td>
+                                        <td><input type="checkbox" style="zoom:1.6" name="changeOfLocation" value="1" class="service_check" id="changeOfLocation"></td>
+                                        <td><span>Change of Location</span></td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" style="zoom:1.6" name="changeOfOwner"
-                                                   value="1" id="changeOfOwnerId" class="service_check">
-                                        </td>
-                                        <td>
-                                            <span>Change of Owner</span>
-                                        </td>
+                                        <td><input type="checkbox" style="zoom:1.6" name="changeOfOwner" value="1" id="changeOfOwnerId" class="service_check"></td>
+                                        <td><span>Change of Owner</span></td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" style="zoom:1.6"
-                                                   name="upgradeDowngrade" value="1"
-                                                   id="upgradeDowngrade" class="service_check">
-                                        </td>
-                                        <td>
-                                            <span>Upgrade/Downgrade/Add Category/Classification</span>
-                                        </td>
+                                        <td><input type="checkbox" style="zoom:1.6" name="upgradeDowngrade" value="1" id="upgradeDowngrade" class="service_check"></td>
+                                        <td><span>Upgrade/Downgrade/Add Category/Classification</span></td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" style="zoom:1.6" name="updateHR"
-                                                   value="1" id="updateHR" class="service_check">
-                                        </td>
-                                        <td>
-                                            <span>Update Human Resource</span>
-                                        </td>
+                                        <td><input type="checkbox" style="zoom:1.6" name="updateHR" value="1" id="updateHR" class="service_check"></td>
+                                        <td><span>Update Human Resource</span></td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" style="zoom:1.6"
-                                                   name="updateEq" value="1"
-                                                   id="updateEq" class="service_check">
-                                        </td>
-                                        <td>
-                                            <span>Update Equipment</span>
-                                        </td>
+                                        <td><input type="checkbox" style="zoom:1.6" name="updateEq" value="1" id="updateEq" class="service_check"></td>
+                                        <td><span>Update Equipment</span></td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="col-lg-12 form-group">
-                                <button type="button"
-                                        onclick="backTab('services')"
-                                        class="btn btn-azure col-lg-offset-9">
-                                    <i class="fa fa-arrow-left"></i>
-                                    Back
-                                </button>
-                                <button type="button" onclick="nextTab('services')"
-                                        class="btn btn-primary">
-                                    <i class="fa fa-arrow-right"></i>
-                                    Next
+                            <div class="col-lg-12 form-group pull-right">
+                               <%-- <button type="button" onclick="backTab('services')" class="btn btn-azure col-lg-offset-9">
+                                    <i class="fa fa-arrow-left"></i>Back
+                                </button>--%>
+                                <button type="button" onclick="nextTab('services')" class="btn btn-primary">
+                                    <i class="fa fa-arrow-circle-right"></i>Next
                                 </button>
                             </div>
                         </div>
-
                         <div class="tab-pane generalInformation" >
-
                             <%--<jsp:include page="../contractor/gInfo.jsp"/>--%>
                             <div class="div-actual">
                                 <div class="card ">
@@ -199,26 +153,20 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12">
-                                            <%--<div class=""><input id="addMoreCert" type="button"
-                                                                 value="Add More Certificate"
-                                                                 class="btn btn-primary"></div>--%>
-                                            <table class="table table-bordered table-center table-responsive-lg auto-index"
-                                                   id="IncCertificateTbl">
+                                            <table class="table table-bordered table-center table-responsive-lg auto-index" id="IncCertificateTbl">
                                                 <thead>
                                                 <tr>
                                                     <th>Sl no</th>
-                                                    <th>Document Name</th>
                                                     <th>Document Attached</th>
+                                                    <th>View/Download</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="card tab2">
                                     <div class="bg-blue card-status card-status-left"></div>
                                     <div class="card-header">
@@ -247,8 +195,7 @@
                                 <div class="card tab2">
                                     <div class="bg-blue card-status card-status-left"></div>
                                     <div class="card-header">
-                                        <h3 class="card-title">Name of Owner, Partners and/or others with
-                                            Controlling Interest</h3>
+                                        <h3 class="card-title">Name of Owner, Partners and/or others with Controlling Interest</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12">
@@ -276,6 +223,27 @@
                                                 </thead>
                                                 <tbody>
 
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card hide" id="oIncorporation">
+                                    <div class="bg-blue card-status card-status-left"></div>
+                                    <div class="card-header">
+                                        <h3 class="card-title">Attach Certificates of ownership change</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="col-lg-12">
+                                            <table class="table table-bordered table-center table-responsive-lg auto-index" id="OcCertificateTbl">
+                                                <thead>
+                                                <tr>
+                                                    <th>Sl no</th>
+                                                    <th>Document Attached</th>
+                                                    <th>View/Download</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -360,8 +328,7 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12">
-                                            <table class="table table-bordered table-center table-responsive-lg auto-index"
-                                                   id="inductionCourseDtl">
+                                            <table class="table table-bordered table-center table-responsive-lg auto-index" id="inductionCourseDtl">
                                                 <thead>
                                                 <tr>
                                                     <th>Sl No</th>
@@ -381,19 +348,13 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="col-lg-12 form-group">
-                                <button type="button" onclick="backTab('generalInformation')"
-                                        class="btn btn-azure col-lg-offset-9">
-                                    <i class="fa fa-arrow-left"></i>
-                                    Back
+                                <button type="button" onclick="backTab('generalInformation')" class="btn btn-azure col-lg-offset-9">
+                                    <i class="fa fa-arrow-circle-left"></i> &nbsp;Back
                                 </button>
-                                <button type="button"
-                                        onclick="nextTab('generalInformation')"
-                                        class="btn btn-primary">
-                                    <i class="fa fa-arrow-right"></i>
-                                    Next
+                                <button type="button" onclick="nextTab('generalInformation')" disabled id="nextGIBtn" class="btn btn-primary">
+                                    <i class="fa fa-arrow-circle-right"></i>Next
                                 </button>
                             </div>
                         </div>
@@ -413,22 +374,22 @@
                                     <tbody>
                                     </tbody>
                                 </table>
-                                <table class="table table-bordered table-hover" id="certificateTblCategory">
+                                <table class="table table-bordered table-center table-responsive-lg auto-index" id="certificateTblCategory">
                                     <thead>
                                     <tr>
-                                        <th>Document Name</th>
+                                        <th>Sl No</th>
                                         <th>Document Attached</th>
-                                        <th>Delete</th>
+                                        <th>View/Download</th>
                                     </tr>
                                     </thead>
                                     <tbody class="files">
-                                    <tr><td>
+                                   <%-- <tr><td>
                                         <input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='C'/>
                                         <input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/> </td>
                                         <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/> </td>
                                         <td class='file-size'></td>
                                         <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
-                                    </tr>
+                                    </tr>--%>
                                     </tbody>
                                 </table>
                             </div>
@@ -452,13 +413,10 @@
                                 </div>
                             </div>
                             <div class="col-lg-12 form-group nextBackBtn">
-                                <button type="button"
-                                        onclick="backTab('category_details')"
-                                        class="btn btn-azure col-lg-offset-9">
+                                <button type="button" onclick="backTab('category_details')" class="btn btn-azure col-lg-offset-9">
                                     <i class="fa fa-arrow-circle-left"></i> &nbsp; Back
                                 </button>
-                                <button type="button" id="btnValCCNext" class="btn btn-primary"
-                                        onclick="nextTab('category_details')">Next &nbsp;
+                                <button type="button" id="btnValCCNext" class="btn btn-primary" onclick="nextTab('category_details')">Next &nbsp;
                                     <i class="fa fa-arrow-circle-right"></i>
                                 </button>
                             </div>
@@ -498,7 +456,6 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody class="existing-hr">
-
                                                 <tr><th colspan="11"> Existing Human Resource List</th></tr>
                                                 </tbody>
                                                 <tbody class="newly-added-hr">
@@ -516,14 +473,10 @@
                                 </div>
                             </div>
                             <div class="col-lg-12 form-group nextBackBtn">
-                                <button type="button"
-                                        onclick="backTab('human_resource_criteria')"
-                                        class="btn btn-azure col-lg-offset-9 backTab">
+                                <button type="button" onclick="backTab('human_resource_criteria')" class="btn btn-azure col-lg-offset-9 backTab">
                                     <i class="fa fa-arrow-circle-left"></i> &nbsp;Back
                                 </button>
-                                <button type="button" id="btnValHRNext"
-                                        onclick="nextTab('human_resource_criteria')"
-                                        class="btn btn-primary nextTab">Next &nbsp;
+                                <button type="button" id="nextHRBtn" disabled onclick="nextTab('human_resource_criteria')" class="btn btn-primary nextTab">Next &nbsp;
                                     <i class="fa fa-arrow-circle-right"></i>
                                 </button>
                             </div>
@@ -572,14 +525,11 @@
                                 <button type="button" onclick="backTab('equipment_details')" class="btn btn-azure col-lg-offset-9">
                                     <i class="fa fa-arrow-circle-left"></i>&nbsp; Back
                                 </button>
-                                <button type="button" class="btn btn-primary" id="btnValEqNext"
-                                        onclick="nextTab('equipment_details')">
-                                    Next &nbsp;
+                                <button type="button" class="btn btn-primary" id="btnValEqNext" disabled onclick="nextTab('equipment_details')">Next &nbsp;
                                     <i class="fa fa-life-saver"></i>
                                 </button>
                             </div>
                         </div>
-
                         <div class="tab-pane saveAndPreview">
                             <div class="panel-body">
                                 <div class="form-group">
@@ -588,18 +538,10 @@
                                             <table id="appStatusTbl" width="1000px" cellpadding="1" cellspacing="1" border="1" style="border-collapse: collapse" class="table table-bordered">
                                                 <thead>
                                                 <tr class="Caption">
-                                                    <td width="20%" align="center" valign="top">
-                                                        <strong>Status</strong>
-                                                    </td>
-                                                    <td width="20%" align="center" valign="top">
-                                                        <strong>Action By</strong>
-                                                    </td>
-                                                    <td width="20%" align="center" valign="top">
-                                                        <strong>Action Date</strong>
-                                                    </td>
-                                                    <td width="20%" align="center" valign="top">
-                                                        <strong>Remarks</strong>
-                                                    </td>
+                                                    <td width="20%" align="center" valign="top"><strong>Status</strong></td>
+                                                    <td width="20%" align="center" valign="top"><strong>Action By</strong></td>
+                                                    <td width="20%" align="center" valign="top"><strong>Action Date</strong></td>
+                                                    <td width="20%" align="center" valign="top"><strong>Remarks</strong></td>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -669,8 +611,7 @@
         <div class="modal-dialog" style=" max-width: 900px;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 id="myModalLabel" class="modal-title"><i class="fa fa-info-circle fa-lg"></i> Personal
-                        Check<span id="cid"></span></h4>
+                    <h4 id="myModalLabel" class="modal-title"><i class="fa fa-info-circle fa-lg"></i> Personal Check<span id="cid"></span></h4>
                 </div>
                 <div class="modal-body">
                     <div class="panel panel-default">
@@ -678,20 +619,13 @@
                             <div id="modal-print">
                                 <div class="form-group">
                                     <p align="center"><strong><u>Caution</u></strong></p>
-
-                                    <p align="center"><strong>An engineer is allowed to execute only two work at
-                                        a time for that particular firm.</strong></p>
-
-                                    <p align="center"><strong>For any other Human Resource they are allowed to
-                                        involve only in a single project of work</strong></p>
-
-                                    <p align="center"><font size="5px;">Details of CID No: <span
-                                            id="cidchecked"></span></font></p>
+                                    <p align="center"><strong>An engineer is allowed to execute only two work at a time for that particular firm.</strong></p>
+                                    <p align="center"><strong>For any other Human Resource they are allowed to involve only in a single project of work</strong></p>
+                                    <p align="center"><font size="5px;">Details of CID No: <span id="cidchecked"></span></font></p>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-9 mt-8">
                                         <span class=""><b>From DCRC database</b></span>
-
                                         <div class="col-lg-12 form-group mb-0 pt-4">
                                             <label class="col-lg-3 form-label">Sex</label>
                                             <label class="col-lg-8 form-label" id="sexM"></label>
@@ -734,16 +668,21 @@
                                     <hr>
                                     <p align="center"><strong>Print this page as an evidence to prove that
                                         particular HR is engaged or not in a work or project</strong></p>
-
                                     <p align="center">
                                         Printed on:  <%=new Date()%>
-
                                         By: ${auth.fullName}
                                     </p>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-primary" onclick="javascript:printDiv('modal-print')">Print</button>
-                            <button type="button" class="btn btn-success" id="closeModal" onclick="checkBtn('checkver1')" data-dismiss="modal">OK</button>
+                            <div class="col-md-12 col-lg-12 col-sm-12">
+                                <div class="col-md-1 col-lg-1 col-sm-2">
+                                    <button type="button" class="btn btn-primary" onclick="javascript:printDiv('modal-print')">Print</button>
+                                </div>
+                                <div class="col-md-4 col-lg-4 col-sm-4">
+                                    <button type="button" class="btn btn-success" id="closeModal" style="display: none" onclick="checkBtn('owner')" data-dismiss="modal">OK</button>
+                                    <button type="button" class="btn btn-success " id="closeModal1"  style="display: none" onclick="checkBtn('Hr')" data-dismiss="modal">OK</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

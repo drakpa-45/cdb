@@ -2,9 +2,15 @@
  * Created by user on 2/14/2020.
  */
 var $check = null;
-function checkBtn(checkBoxId)
-{
+function checkBtn(checkBoxId) {
     $check.prop('checked',true);
+    if (checkBoxId == "owner") {
+        $('#nextGIBtn').prop('disabled', false);
+    } else if(checkBoxId == 'equipment'){
+        $('#btnValEqNext').prop('disabled', false);
+    }else{
+        $('#nextHRBtn').prop('disabled', false);
+    }
 }
 
 function nextTab(presentClass) {
@@ -125,6 +131,7 @@ var contractorRCAction = (function () {
                         var imagelink='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo='+cidNo;
                         $('#photoM').html("<img src='"+imagelink+"'  width='200px'  height='200px' class='pull-right'/>");
                         $("#hrModal").modal('show');
+                        $("#closeModal").modal('show');
                     }
                 }
             });
@@ -258,9 +265,9 @@ var contractorRCAction = (function () {
                                 verifiedApproved = verifiedApproved + "<td>(✔)</td>";
                             }else if(contractorHrs[i].verified == '1'){
                                 verifiedApproved = verifiedApproved + "<td>(✔)</td>";
-                                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' value='1'  required=''></td>";
+                                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' disabled class='check' value='1'  required=''></td>";
                             }else{
-                                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' value='1'  required=''></td>";
+                                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' disabled class='check' value='1'  required=''></td>";
                             }
                             if (contractorHrs[i].isPartnerOrOwner == '1') {
                                 owner = contractorHrs[i].name;
@@ -632,18 +639,27 @@ var contractorRCAction = (function () {
     function incorporation(data){
         if(data){
             $('#cIncorporation').removeClass('hide');
+            $('#oIncorporation').removeClass('hide');
             var cIncTr = '';
             var categoryTr = '';
+            var ownerTr = '';
             for(var i in data){
-                if(data[i].attachmentFor == 'I') {
+                if(data[i].attachmentFor == 'InSole') {
                     cIncTr = cIncTr + "<tr>" +
                     "<td></td>" +
                     "<td>" + data[i].documentName + "</td>" +
                     "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
                     "</tr>";
                 }
-                if(data[i].attachmentFor == 'C'){
+                if(data[i].attachmentFor == 'AL'){
                     categoryTr = categoryTr + "<tr>" +
+                    "<td></td>" +
+                    "<td>" + data[i].documentName + "</td>" +
+                    "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                    "</tr>";
+                }
+                if(data[i].attachmentFor == 'OC'){
+                    ownerTr = ownerTr + "<tr>" +
                     "<td></td>" +
                     "<td>" + data[i].documentName + "</td>" +
                     "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
@@ -651,7 +667,9 @@ var contractorRCAction = (function () {
                 }
             }
             $('#IncCertificateTbl').find('tbody').html(cIncTr);
+            $('#OcCertificateTbl').find('tbody').html(ownerTr);
             $('#certificateTblCategory').find('tbody').html(categoryTr);
+
         }else{
             $('#cIncorporation').addClass('hide');
         }

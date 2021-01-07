@@ -90,7 +90,7 @@ public class SpecializedFirmOSService extends BaseService {
         specializedFirm.setCrpSpecializedTradeId(specializedFirmId);
         //insert undertaking letter
         if(spFirmDTO.getcAttachments() != null && !spFirmDTO.getcAttachments().isEmpty())
-            specializedFirmRService.updateIncorporation(spFirmDTO.getcAttachments(), loggedInUser, specializedFirmFinal.getId());
+            updateIncorporation(spFirmDTO.getcAttachments(), loggedInUser, specializedFirmId);
 
         //region incorporation (Name are also allowed to change)
         if(renewalServiceType.getIncorporation() != null){
@@ -243,6 +243,15 @@ public class SpecializedFirmOSService extends BaseService {
                 "You can track your application using above Application Number. <br>" +
                 "Thanks You.");
         return responseMessage;
+    }
+
+    public void updateIncorporation(List<SpFirmAttachment> cAttachments,LoggedInUser loggedInUser,String specializedFirmId) throws Exception{
+        if(cAttachments != null && cAttachments.size() >= 1) {
+            for(SpFirmAttachment cAttachment:cAttachments) {
+                cAttachment.setSpecializedTradeId(specializedFirmId);
+                specializedFirmService.saveAttachment(cAttachment, loggedInUser);
+            }
+        }
     }
 
     @Transactional(readOnly = false)

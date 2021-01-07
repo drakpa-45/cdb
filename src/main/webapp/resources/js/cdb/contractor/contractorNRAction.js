@@ -40,7 +40,6 @@ var contractorNRAction = (function () {
     "use strict";
     var isSubmitted = false;
 
-
     function _baseURL() {
         return cdbGlobal.baseURL() + "/admin/contractorNRAction";
     }
@@ -85,7 +84,6 @@ var contractorNRAction = (function () {
                                 "<td>" + employeeDetailsDTO[i].contractorFirmname + "</td>" +"</tr>";
                             }
                             $('#employeeDTLS').find('tbody').html(empDtls);
-
                             for(var i in employeeDetailsDTO){
                                 empDtls1 = empDtls1 +
                                 "<tr><td>" + (parseInt(i) + 1) + "</td>" +
@@ -95,7 +93,6 @@ var contractorNRAction = (function () {
                                 "<td>" + employeeDetailsDTO[i].consultantFirmname + "</td>" +"</tr>";
                             }
                             $('#employeeDTLS1').find('tbody').html(empDtls1);
-
                             for(var i in employeeDetailsDTO){
                                 empDtls2 = empDtls2 +
                                 "<tr><td>" + (parseInt(i) + 1) + "</td>" +
@@ -105,7 +102,6 @@ var contractorNRAction = (function () {
                                 "<td>" + employeeDetailsDTO[i].spFirmname + "</td>" +"</tr>";
                             }
                             $('#employeeDTLS2').find('tbody').html(empDtls2);
-
                             $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
                         } else{
                             $('#notEngagedId').show();
@@ -153,7 +149,6 @@ var contractorNRAction = (function () {
                                 "<td>" + employeeDetailsDTO[i].contractorFirmname + "</td>" +"</tr>";
                             }
                             $('#employeeDTLS').find('tbody').html(empDtls);
-
                             for(var i in employeeDetailsDTO){
                                 empDtls1 = empDtls1 +
                                 "<tr><td>" + (parseInt(i) + 1) + "</td>" +
@@ -163,7 +158,6 @@ var contractorNRAction = (function () {
                                 "<td>" + employeeDetailsDTO[i].consultantFirmname + "</td>" +"</tr>";
                             }
                             $('#employeeDTLS1').find('tbody').html(empDtls1);
-
                             for(var i in employeeDetailsDTO){
                                 empDtls2 = empDtls2 +
                                 "<tr><td>" + (parseInt(i) + 1) + "</td>" +
@@ -173,7 +167,6 @@ var contractorNRAction = (function () {
                                 "<td>" + employeeDetailsDTO[i].spFirmname + "</td>" +"</tr>";
                             }
                             $('#employeeDTLS2').find('tbody').html(empDtls2);
-
                             $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
                         } else{
                             $('#notEngagedId').show();
@@ -290,7 +283,6 @@ var contractorNRAction = (function () {
                             "<td>" + categoryClassDTOs[i].categoryName + "</td>" +
                             "<td><select disabled class='form-control'><option>" + categoryClassDTOs[i].aClassName + "</option></select></td>" +
                             "<td>"+categoryClassDTOs[i].aAmount+"</td></tr>";
-
                         }
                         var tfoot = "<tr><td colspan='3' align='right'>Total</td><td>"+tFeeAmount+"</td> ";
                         $('#contractorCCTbl').find('tbody').html(ccTr);
@@ -328,7 +320,6 @@ var contractorNRAction = (function () {
                         $('#equipmentTbl').find('tbody').html(eqTr);
 
                         var appHistoryDTOs = contractorDTO.appHistoryDTOs;
-
                         var appHistoryTr = "";
 
                         for (var i in appHistoryDTOs) {
@@ -345,7 +336,6 @@ var contractorNRAction = (function () {
                         if(contractor.ownershipTypeId != '1e243ef0-c652-11e4-b574-080027dcfac6'){
 
                         }
-
                     } else {
                         warningMsg(res.text);
                     }
@@ -470,8 +460,6 @@ var contractorNRAction = (function () {
                         $('#regPhoneNo').text(contractor.regPhoneNo);
                         $('#regFaxNo').text(contractor.regFaxNo);
 
-
-
                         var contractorHrs = contractorDTO.contractorHRs;
                         var partnerHrTr = "";
                         var m = 0;
@@ -517,7 +505,6 @@ var contractorNRAction = (function () {
                         $('#cdbNo').val(contractorDTO.cdbNo);
 
                         var appHistoryDTOs = contractorDTO.appHistoryDTOs;
-
                         var appHistoryTr = "";
 
                         for (var i in appHistoryDTOs) {
@@ -529,7 +516,6 @@ var contractorNRAction = (function () {
                             "<td>" + actionTakenBy + "</td>" +
                             "<td>" + formatAsDate(appHistoryDTOs[i].actionDate) + "</td>" +
                             "<td>"+ appHistoryDTOs[i].remarks +"</td></tr>";
-
                         }
                         $('#appStatusTbl').find('tbody').html(appHistoryTr);
                     } else {
@@ -579,7 +565,6 @@ var contractorNRAction = (function () {
         })
     }
 
-
     function paymentUpdate() {
         $('#btnSave').on('click', function (e) {
             $('#contractorPaymentForm').validate({
@@ -601,7 +586,6 @@ var contractorNRAction = (function () {
         })
     }
 
-
     function validateOwner(){
         $('#partnerDtls').on('change','.check',function(){
             var allChecked = false;
@@ -620,6 +604,7 @@ var contractorNRAction = (function () {
             }
         });
     }
+
     function validateHr(){
         $('#hrTbl').on('change','.check',function(){
             var allChecked = false;

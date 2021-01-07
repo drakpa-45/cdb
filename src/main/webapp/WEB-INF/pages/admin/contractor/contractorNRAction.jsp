@@ -265,12 +265,10 @@
                                         </div>
                                     </form>
                                     <div class="col-lg-12 form-group">
-                                        <button type="button" onclick="nextTab('feesStructure','generalInformation')"
-                                                class="btn btn-azure col-lg-offset-9" id="btn1">
+                                        <button type="button" onclick="nextTab('feesStructure','generalInformation')" class="btn btn-azure col-lg-offset-9" id="btn1">
                                             <i class="fa fa-arrow-circle-left"></i>Back
                                         </button>
-                                        <button type="button" disabled onclick="nextTab('generalInformation','categoryDtls')"
-                                                class="btn btn-primary" id="nextGIBtn">
+                                        <button type="button" disabled onclick="nextTab('generalInformation','categoryDtls')" class="btn btn-primary" id="nextGIBtn">
                                             <i class="fa fa-arrow-circle-right"></i>Next
                                         </button>
                                     </div>
@@ -358,13 +356,10 @@
                                         </div>
                                     </form>
                                     <div class="col-lg-12 form-group">
-                                        <button type="button" onclick="backTab('humanResourceCriteria','categoryDtls')"
-                                                class="btn btn-azure col-lg-offset-9" id="btn4">
+                                        <button type="button" onclick="backTab('humanResourceCriteria','categoryDtls')" class="btn btn-azure col-lg-offset-9" id="btn4">
                                             <i class="fa fa-arrow-circle-left"></i>Back
                                         </button>
-                                        <button type="button" id="nextHRBtn" disabled
-                                                onclick="nextTab('humanResourceCriteria','contractorEquipmentDtls')"
-                                                class="btn btn-primary">
+                                        <button type="button" id="nextHRBtn" disabled onclick="nextTab('humanResourceCriteria','contractorEquipmentDtls')" class="btn btn-primary">
                                             <i class="fa fa-arrow-circle-right"></i>Next
                                         </button>
                                     </div>

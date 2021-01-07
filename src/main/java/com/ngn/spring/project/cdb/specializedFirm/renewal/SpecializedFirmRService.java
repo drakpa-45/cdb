@@ -97,7 +97,7 @@ public class SpecializedFirmRService extends BaseService {
         specializedFirm.setCrpSpecializedTradeId(specializedFirmId);
         //insert undertaking letter
         if(spFirmDTO.getcAttachments() != null && !spFirmDTO.getcAttachments().isEmpty())
-            specializedFirmRService.updateIncorporation(spFirmDTO.getcAttachments(), loggedInUser, specializedFirmFinal.getId());
+            specializedFirmRService.updateIncorporation(spFirmDTO.getcAttachments(), loggedInUser, specializedFirmId);
 
         //region incorporation (Name are also allowed to change)
         if(renewalServiceType.getIncorporation() != null){
@@ -447,8 +447,7 @@ public class SpecializedFirmRService extends BaseService {
     }
 
     @Transactional
-    public void updateIncorporation(List<SpFirmAttachment> cAttachments,
-                                    LoggedInUser loggedInUser,String specializedFirmId) throws Exception{
+    public void updateIncorporation(List<SpFirmAttachment> cAttachments,LoggedInUser loggedInUser,String specializedFirmId) throws Exception{
         if(cAttachments != null && cAttachments.size() >= 1) {
             for(SpFirmAttachment cAttachment:cAttachments) {
                 cAttachment.setSpecializedTradeId(specializedFirmId);

@@ -100,7 +100,7 @@ public class ContractorRCActionService extends BaseService {
         List<ContractorHrDTO> newlyAddedHRs = newHRs.stream().filter(e->!editedHRs.contains(e)).collect(Collectors.toList());
         List<ContractorHrDTO> deletedHRs = existingHRs.stream().filter(e->e.getDeleteRequest() != null && e.getDeleteRequest() == 1).collect(Collectors.toList());
         ndeDTOhr.setExisting(existingHRs);
-        ndeDTOhr.setEdited(editedHRs);
+       ndeDTOhr.setEdited(editedHRs);
         ndeDTOhr.setNewlyAdded(newlyAddedHRs);
         ndeDTOhr.setDeleted(deletedHRs);
         return ndeDTOhr;
@@ -134,9 +134,9 @@ public class ContractorRCActionService extends BaseService {
     }
 
     /**
-     * To get the CDB no from app no
-     * @param appNo  -- cdbNo
-     * @return contractor final id
+     * To get the CrpContractorId no from app no
+     * @param appNo  -- appNo
+     * @return contractor CrpContractorId
      */
     @Transactional(readOnly = true)
     public String getIdFromAppNo(String appNo){
@@ -147,6 +147,4 @@ public class ContractorRCActionService extends BaseService {
     public List getProposedCategories(String appNo) {
         return contractorRCActionDao.getProposedCategories(appNo);
     }
-
-
 }

@@ -108,33 +108,6 @@ public class SpecializedFirmRCActionService extends BaseService {
         return ndeDTOhr;
     }
 
-    /**
-     * To get the CDB no from cdb no
-     * @param cdbNo  -- cdbNo
-     * @return specializedFirm final id
-     */
-
-    @Transactional(readOnly = true)
-    public String getFinalIdFromCDBNo(String cdbNo){
-        return (String)commonService.getValue("crpspecializedtradefinal","Id","SPNo",cdbNo);
-    }
-
-    /**
-     * To get the CDB no from app no
-     * @param appNo  -- cdbNo
-     * @return specializedFirm final id
-     */
-
-    @Transactional(readOnly = true)
-    public String getIdFromAppNo(String appNo){
-        return (String)commonService.getValue("crpspecializedtrade","CrpSpecializedTradeId","ReferenceNo",appNo);
-    }
-
-    @Transactional(readOnly = true)
-    public List getProposedCategories(String appNo) {
-        return specializedFirmRCActionDao.getProposedCategories(appNo);
-    }
-
     @Transactional
     public Object getEQs(String appNo) {
         NewDeleteExistDTO ndeDTOeq = new NewDeleteExistDTO();
@@ -150,5 +123,26 @@ public class SpecializedFirmRCActionService extends BaseService {
         ndeDTOeq.setNewlyAdded(newlyAddedEQs);
         ndeDTOeq.setDeleted(deletedEQs);
         return ndeDTOeq;
+    }
+
+    /**
+     * To get the CDB no from cdb no
+     * @param cdbNo  -- cdbNo
+     * @return specializedFirm final id
+     */
+
+    @Transactional(readOnly = true)
+    public String getFinalIdFromCDBNo(String cdbNo){
+        return (String)commonService.getValue("crpspecializedtradefinal","Id","SPNo",cdbNo);
+    }
+
+    @Transactional(readOnly = true)
+    public String getIdFromAppNo(String appNo){
+        return (String)commonService.getValue("crpspecializedtrade","CrpSpecializedTradeId","ReferenceNo",appNo);
+    }
+
+    @Transactional(readOnly = true)
+    public List getProposedCategories(String appNo) {
+        return specializedFirmRCActionDao.getProposedCategories(appNo);
     }
 }

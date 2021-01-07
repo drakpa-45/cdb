@@ -11,7 +11,6 @@ function checkBtn(checkBoxId) {
     }else{
         $('#nextHRBtn').prop('disabled', false);
     }
-
 }
 function saveAndPreview(presentClass, nextClass) {
     var content = '<h3 class="pt-3 text-center">Fee Structure</h3>' + $("#fees_structure >.div-actual").html() +

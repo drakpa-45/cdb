@@ -231,8 +231,10 @@ function _baseURL() {
 var contractorOS = (function () {
     "use strict";
     var cert = "<tr><td></td>" +
-        "<td><input type='text' class='form-control' name='cAttachments[0].documentName'/> </td>"+
+        "<td><input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='InSole'/>" +
+        "<input type='text' class='form-control' name='cAttachments[0].documentName'/> </td>"+
         "<td><input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
+        "<td class='file-size'></td>" +
         "<td><a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a></td>" +
         "</tr>";
 
@@ -265,9 +267,19 @@ var contractorOS = (function () {
         });
     }
 
-    var certCategory = "<tr>" +
-        "<td><input type='text' class='form-control' name='cAttachments[0].documentName'/> </td>"+
-        "<td><input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
+    var certCategory ="<tr><td></td>" +
+        "<td><input type='hidden' class='form-control aFor' name='cAttachments[2].attachmentFor' value='AL'/>" +
+        "<input type='text' class='form-control' name='cAttachments[2].documentName'/> </td>"+
+        "<td><input type='file' name='cAttachments[2].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
+        "<td class='file-size'></td>" +
+        "<td><a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a></td>" +
+        "</tr>";
+
+    var certOSC = "<tr><td></td>" +
+        "<td><input type='hidden' class='form-control aFor' name='cAttachments[1].attachmentFor' value='OC'/>" +
+        "<input type='text' class='form-control' name='cAttachments[1].documentName'/> </td>"+
+        "<td><input type='file' name='cAttachments[1].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
+        "<td class='file-size'></td>" +
         "<td><a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a></td>" +
         "</tr>";
 
@@ -290,7 +302,7 @@ var contractorOS = (function () {
 
     function addMoreCertOwner(){
         $('#addMoreCertOwner').on('click',function(e){
-            var certificateTbl = $('#certificateTblOwner').find('tbody').append(certCategory);
+            var certificateTbl = $('#certificateTblOwner').find('tbody').append(certOSC);
             /*var row = certificateTbl.find('tr:eq(0)').html();
              certificateTbl.append('<tr>'+row.find(':input').val('')+'</tr>');*/
         });
@@ -388,7 +400,7 @@ var contractorOS = (function () {
                     var tr = '';
                     for(var i in data){
                         tr = tr + "<tr>"+
-                        "<td></td>" +
+                        "<td><input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='InSole'/></td>" +
                         "<td ><input type='text' class='form-control docName' name='cAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>"+
                         "<td class='attachment'><a href='"+_baseURL() + "/viewDownload?documentPath="+data[i].documentPath+"' target='_blank'> View </a></td>" +
                         "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
@@ -757,6 +769,7 @@ var contractorOS = (function () {
             var uplTbl = $('#hrUploadTbl').find('tbody');
             var tr = "<tr><td><input type='text' required class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/> </td>" +
                 "<td><input type='file' required class='file' name='contractorHRs[0].contractorHRAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>" +
+                "<td></td>" +
                 "<td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td></tr>";
             uplTbl.append(tr);
         });
@@ -823,6 +836,91 @@ var contractorOS = (function () {
         })
     }
 
+    function showFileSize() {
+        $('tbody').on('change', '.file', function () {
+            //this.files[0].size gets the size of your file.
+            var exactSize = calFileSize(this);
+            $(this).closest('tr').find('.file-size').text(exactSize);
+            //alert(this.files[0].size);
+        });
+    }
+
+    function calFileSize($this){
+        var _size = $this.files[0].size;
+        var fSExt = ['Bytes', 'KB', 'MB', 'GB'],
+            i = 0;
+        while (_size > 900) {
+            _size /= 1024;
+            i++;
+        }
+        return (Math.round(_size * 100) / 100) + ' ' + fSExt[i];
+    }
+
+    function checkDuplicateHR(){
+        $('body').on('focusin', '.hr-cid', function(){
+            //console.log("Saving value " + $(this).val());
+            $(this).data('val', $(this).val());
+        }).on('change','.hr-cid',function(){
+
+            var $this = $(this);
+            var isHrExist = false;
+
+            var designation = $('#designation').val();
+
+            var country = '';
+            var hrOrPartner = $this.closest('table').attr('id');
+            if(hrOrPartner == 'partnerDtls'){
+                hrOrPartner = 'O';
+                country = $this.closest('tr').find('.country #countryList').val();
+            }else{
+                hrOrPartner = 'H';
+                country = $('#hr5').val();
+            }
+            $('#partnerDtls').find('.ownerCidNo').each(function(e){
+                //  alert(designation);
+                if(hrOrPartner == 'H' && $this.val() == $(this).val() && designation != '030aacf0-24af-11e6-967f-9c2a70cc8e06'){
+                    warningMsg("This CID is already exists in your Owner/Partner list!!!");
+                    $this.val('');
+                    isHrExist = true;
+                    return false;
+                }
+                /* */
+            });
+
+            $('#hrDtlsTable').find('tbody tr td:nth-child(3)').each(function(){
+                if($this.val() == $(this).text()){
+                    warningMsg("This CID is already exists in your HR list!!!");
+                    $this.val('');
+                    isHrExist = true;
+                    return false;
+                }
+            });
+            if(!isHrExist){
+                getPersonalInfo($this,country,hrOrPartner);
+                //getTrainingDtl($this);
+            }
+        })
+    }
+
+    function isEmailUnique(){
+        $('#regEmail').on('change',function(){
+            var $this = $('#regEmail');
+            $.ajax({
+                url:cdbGlobal.baseURL() + '/contractorNR/isEmailUnique',
+                type: 'GET',
+                data: {email: $this.val()},
+                success: function (res) {
+                    if(res == true){
+                        //$this.val()
+                    }else{
+                        $this.val('').focus();
+                        warningMsg("This email has already been registered.");
+                        $this.val('').focus();
+                    }
+                }
+            });
+        });
+    }
     function init(){
         viewDownloadAttachment();
         getContractor();
@@ -848,6 +946,9 @@ var contractorOS = (function () {
         getPersonalInfo();
         getPersonalInfoHR();
         getOwnerFinal();
+        showFileSize();
+        checkDuplicateHR();
+        isEmailUnique();
     }
 
     return {

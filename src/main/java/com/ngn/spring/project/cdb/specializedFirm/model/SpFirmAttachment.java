@@ -26,6 +26,8 @@ public class SpFirmAttachment extends BaseModel implements Serializable {
     private String documentPath;
     @Column(name = "FileType")
     private String fileType;
+    @Column(name = "AttachmentFor")
+    private String attachmentFor;
 
     @Transient
     private MultipartFile attachment;
@@ -76,5 +78,13 @@ public class SpFirmAttachment extends BaseModel implements Serializable {
 
     public void setAttachment(MultipartFile attachment) {
         this.attachment = attachment;
+    }
+
+    public String getAttachmentFor() {
+        return attachmentFor;
+    }
+
+    public void setAttachmentFor(String attachmentFor) {
+        this.attachmentFor = attachmentFor;
     }
 }

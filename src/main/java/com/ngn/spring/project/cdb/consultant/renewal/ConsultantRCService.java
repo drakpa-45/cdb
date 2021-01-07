@@ -90,7 +90,7 @@ public class ConsultantRCService extends BaseService {
         consultant.setConsultantId(consultantId);
         //insert undertaking letter
         if(consultantDTO.getcAttachments() != null && !consultantDTO.getcAttachments().isEmpty())
-            updateIncorporation(consultantDTO.getcAttachments(), loggedInUser, consultantFinal.getId());
+            updateIncorporation(consultantDTO.getcAttachments(), loggedInUser, consultantId);
 
 
         //region incorporation (Name are also allowed to change)
@@ -472,7 +472,7 @@ public class ConsultantRCService extends BaseService {
         if(statusList.contains(cFinal.getAppStatusId())){
             responseMessage.setStatus(UNSUCCESSFUL_STATUS);
             responseMessage.setText("You are not allow to avail this service as your certificate is " +
-                    "<b> "+ApplicationStatus.valueOf(cFinal.getAppStatusId()).getName()+"</b>");
+                    "<b>"+ApplicationStatus.valueOf(cFinal.getAppStatusId()).getName()+"</b>");
             return responseMessage;
         }
         //endregion

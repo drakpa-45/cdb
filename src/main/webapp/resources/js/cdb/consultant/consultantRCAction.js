@@ -2,9 +2,15 @@
  * Created by user on 2/14/2020.
  */
 var $check = null;
-function checkBtn(checkBoxId)
-{
-    $check.prop('checked',true);
+function checkBtn(checkBoxId) {
+    $check.prop('checked', true);
+    if (checkBoxId == "owner") {
+        $('#nextGIBtn').prop('disabled', false);
+    } else if(checkBoxId == 'equipment'){
+        $('#btnValEqNext').prop('disabled', false);
+    }else{
+        $('#nextHRBtn').prop('disabled', false);
+    }
 }
 
 function nextTab(presentClass) {
@@ -125,6 +131,7 @@ var consultantRCAction = (function () {
                         var imagelink='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo='+cidNo;
                         $('#photoM').html("<img src='"+imagelink+"'  width='200px'  height='200px' class='pull-right'/>");
                         $("#hrModal").modal('show');
+                        $("#closeModal").modal('show');
                     }
                 }
             });
@@ -318,12 +325,11 @@ var consultantRCAction = (function () {
                 var consultant = res;
                 $('#oldfirmName').html(consultant.firmName);
                 $('#estAddressExist').html(consultant.estAddress);
-                $('#estDzongkhagExist').val(consultant.regDzongkhagId).prop('disabled',true);
+                $('#estDzongkhagExist').html(consultant.oldDzongkhag);
                 $('#regEmailExist').html(consultant.regEmail);
                 $('#regMobileNoExist').html(consultant.regMobileNo);
                 $('#regPhoneNoExist').html(consultant.regPhoneNo);
                 $('#regFaxNoExist').html(consultant.regFaxNo);
-
             }
         });
     }
@@ -472,16 +478,37 @@ var consultantRCAction = (function () {
 
     function incorporation(data){
         if(data){
-            $('#cIncorporation').removeClass('hidden');
-            var tr = '';
+            $('#cIncorporation').removeClass('hide');
+            $('#oIncorporation').removeClass('hide');
+            var cIncTr = '';
+            var categoryTr = '';
+            var ownerTr = '';
             for(var i in data){
-                tr = tr + "<tr>"+
-                "<td></td>" +
-                "<td>"+data[i].documentName+"</td>"+
-                "<td><a href='"+_baseURL() + "/viewDownload?documentPath="+data[i].documentPath+"' target='_blank'> View </a></td>" +
-                "</tr>";
+                if(data[i].attachmentFor == 'InSole') {
+                    cIncTr = cIncTr + "<tr>" +
+                    "<td></td>" +
+                    "<td>" + data[i].documentName + "</td>" +
+                    "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                    "</tr>";
+                }
+                if(data[i].attachmentFor == 'AL'){
+                    categoryTr = categoryTr + "<tr>" +
+                    "<td></td>" +
+                    "<td>" + data[i].documentName + "</td>" +
+                    "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                    "</tr>";
+                }
+                if(data[i].attachmentFor == 'OC'){
+                    ownerTr = ownerTr + "<tr>" +
+                    "<td></td>" +
+                    "<td>" + data[i].documentName + "</td>" +
+                    "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                    "</tr>";
+                }
             }
-            $('#IncCertificateTbl').find('tbody').html(tr);
+            $('#IncCertificateTbl').find('tbody').html(cIncTr);
+            $('#OcCertificateTbl').find('tbody').html(ownerTr);
+            $('#certificateTblCategory').find('tbody').html(categoryTr);
         }else{
             $('#cIncorporation').addClass('hide');
         }

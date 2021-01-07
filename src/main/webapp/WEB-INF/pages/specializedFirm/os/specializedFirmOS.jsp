@@ -331,32 +331,31 @@
                                                         <div class="card-body">
                                                             <div class="col-lg-12">
                                                                 <div class=""><input id="addMoreCertOwner" type="button" value="Add More Certificate" class="btn btn-primary"></div>
-                                                                <table class="table table-bordered table-hover" id="certificateTblOwner">
+                                                                <table class="table table-bordered table-center table-responsive-lg auto-index" id="certificateTblOwner">
                                                                     <thead>
                                                                     <tr>
+                                                                        <th>Sl no</th>
                                                                         <th>Document Name</th>
                                                                         <th>Document Attached</th>
                                                                         <th>File Size</th>
                                                                         <th>Delete</th>
                                                                     </tr>
                                                                     </thead>
-                                                                    <tbody class="files">
-                                                                    <tr>
-                                                                        <td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/></td>
-                                                                        <td><input type='file' required="" class='file' name='cAttachments[0].attachment'
-                                                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/>
-                                                                        </td>
+                                                                    <tbody>
+                                                                    <%--<tr>
+                                                                        <td><input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='OC'/>
+                                                                            <input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/></td>
+                                                                        <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/></td>
                                                                         <td class='file-size'></td>
                                                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/></td>
-                                                                        <td><input type='file' required="" class='file' name='cAttachments[0].attachment'
-                                                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/>
-                                                                        </td>
+                                                                        <td><input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='OC'/>
+                                                                            <input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/></td>
+                                                                        <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/></td>
                                                                         <td class='file-size'></td>
                                                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
-                                                                    </tr>
+                                                                    </tr>--%>
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -422,7 +421,7 @@
                                                                 <input type="email" class=" form-control col-lg-7" name="specializedFirm.regEmail" id="regEmail" required="true" placeholder="Text..">
                                                             </div>
                                                             <div class="col-lg-6 col-md-6 ">
-                                                                <label class="col-lg-4 form-label">Mobile No <span class="text-danger">*</span></label>
+                                                                <label class="col-lg-4 form-label">Mobile Number <span class="text-danger">*</span></label>
                                                                 <input type="text" class=" form-control col-lg-7" name="specializedFirm.regMobileNo" id="regMobileNo" required="true" placeholder="Text..">
                                                             </div>
                                                         </div>
@@ -496,35 +495,31 @@
                                                     <br/>
                                                     <input type="button" id="addMoreCertCategory" value="Add More File" class="btn btn-primary eqFile">
                                                     <div class="table-responsive">
-                                                        <table class="table table-bordered table-hover" id="certificateTblCategory">
+                                                        <table class="table table-bordered table-center table-responsive-lg auto-index" id="certificateTblCategory">
                                                             <thead>
                                                             <tr>
+                                                                <th>Sl no</th>
                                                                 <th>Document Name</th>
                                                                 <th>Document Attached</th>
                                                                 <th>File Size</th>
                                                                 <th>Delete</th>
                                                             </tr>
                                                             </thead>
-                                                            <tbody class="files">
-                                                            <tr>
-                                                                <td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/></td>
+                                                            <tbody>
+                                                           <%-- <tr>
+                                                                <td><input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='AL'/>
+                                                                    <input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/></td>
                                                                 <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/></td>
                                                                 <td class='file-size'></td>
                                                                 <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/></td>
-                                                                <td><input type='file' required="" class='file' name='cAttachments[0].attachment'
-                                                                           accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/>
-                                                                </td>
+                                                                <td><input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='AL'/>
+                                                                    <input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/></td>
+                                                                <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/></td>
                                                                 <td class='file-size'></td>
                                                                 <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
-                                                            </tr>
-                                                                <%--  <tr><td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/> </td>
-                                                                      <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
-                                                                      <td class='file-size'></td>
-                                                                      <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
-                                                                  </tr>--%>
+                                                            </tr>--%>
                                                             </tbody>
                                                         </table>
                                                     </div>

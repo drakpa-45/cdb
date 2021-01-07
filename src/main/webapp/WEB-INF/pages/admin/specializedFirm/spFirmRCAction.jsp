@@ -65,67 +65,39 @@
                                 <table>
                                     <tbody>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" style="zoom:1.6" name="incorporation" value="1" id="Incorporation" class="service_check">
-                                        </td>
-                                        <td>
-                                            <span>Incorporation</span>
-                                        </td>
+                                        <td><input type="checkbox" style="zoom:1.6" name="incorporation" value="1" id="Incorporation" class="service_check"></td>
+                                        <td><span>Incorporation</span></td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" style="zoom:1.6" name="changeOfFirmName" value="1" id="changeOfFirmName" class="service_check">
-                                        </td>
-                                        <td>
-                                            <span>Change of Firm Name</span>
-                                        </td>
+                                        <td><input type="checkbox" style="zoom:1.6" name="changeOfFirmName" value="1" id="changeOfFirmName" class="service_check"></td>
+                                        <td><span>Change of Firm Name</span></td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" style="zoom:1.6" name="changeOfLocation" value="1" class="service_check" id="changeOfLocation">
-                                        </td>
-                                        <td>
-                                            <span>Change of Location</span>
-                                        </td>
+                                        <td><input type="checkbox" style="zoom:1.6" name="changeOfLocation" value="1" class="service_check" id="changeOfLocation"></td>
+                                        <td><span>Change of Location</span></td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" style="zoom:1.6" name="changeOfOwner" value="1" id="changeOfOwnerId" class="service_check">
-                                        </td>
-                                        <td>
-                                            <span>Change of Owner</span>
-                                        </td>
+                                        <td><input type="checkbox" style="zoom:1.6" name="changeOfOwner" value="1" id="changeOfOwnerId" class="service_check"></td>
+                                        <td><span>Change of Owner</span></td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" style="zoom:1.6" name="upgradeDowngrade" value="1" id="upgradeDowngrade" class="service_check">
-                                        </td>
-                                        <td>
-                                            <span>Upgrade/Downgrade/Add Category/Classification</span>
-                                        </td>
+                                        <td><input type="checkbox" style="zoom:1.6" name="upgradeDowngrade" value="1" id="upgradeDowngrade" class="service_check"></td>
+                                        <td><span>Upgrade/Downgrade/Add Category/Classification</span></td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" style="zoom:1.6" name="updateHR" value="1" id="updateHR" class="service_check">
-                                        </td>
-                                        <td>
-                                            <span>Update Human Resource</span>
-                                        </td>
+                                        <td><input type="checkbox" style="zoom:1.6" name="updateHR" value="1" id="updateHR" class="service_check"></td>
+                                        <td><span>Update Human Resource</span></td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" style="zoom:1.6" name="updateEq" value="1" id="updateEq" class="service_check">
-                                        </td>
-                                        <td>
-                                            <span>Update Equipment</span>
-                                        </td>
+                                        <td><input type="checkbox" style="zoom:1.6" name="updateEq" value="1" id="updateEq" class="service_check"></td>
+                                        <td><span>Update Equipment</span></td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="col-lg-12 form-group">
                                 <button type="button" onclick="nextTab('services')" class="btn btn-primary col-lg-offset-9">
-                                    <i class="fa fa-arrow-right"></i>Next
+                                    <i class="fa fa-arrow-circle-right"></i>Next
                                 </button>
                             </div>
                         </div>
@@ -170,7 +142,7 @@
                                 <div class="card hide" id="cIncorporation">
                                     <div class="bg-blue card-status card-status-left"></div>
                                     <div class="card-header">
-                                        <h3 class="card-title">Attached Documents</h3>
+                                        <h3 class="card-title">Attached Documents for Incorporation</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12">
@@ -181,8 +153,8 @@
                                                 <thead>
                                                 <tr>
                                                     <th>Sl no</th>
-                                                    <th>Document Name</th>
                                                     <th>Document Attached</th>
+                                                    <th>View/Download</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -258,6 +230,28 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="card hide" id="oIncorporation">
+                                    <div class="bg-blue card-status card-status-left"></div>
+                                    <div class="card-header">
+                                        <h3 class="card-title">Attached Documents for Ownership change</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="col-lg-12">
+                                            <table class="table table-bordered table-center table-responsive-lg auto-index" id="OcCertificateTbl">
+                                                <thead>
+                                                <tr>
+                                                    <th>Sl no</th>
+                                                    <th>Document Attached</th>
+                                                    <th>View/Download</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="card tab2">
                                     <div class="bg-blue card-status card-status-left"></div>
                                     <div class="card-header">
@@ -266,8 +260,7 @@
                                     <div class="card-body">
                                         <div class="col-lg-12">
                                             <div class="col-lg-6 col-md-6 form-group">
-                                                <label class="col-lg-5 form-label">Establishment
-                                                    Address</label>
+                                                <label class="col-lg-5 form-label">Establishment Address</label>
                                                 <label class="col-lg-7 form-label form-control" id="estAddressExist"></label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 form-group">
@@ -325,10 +318,10 @@
                             </div>
                             <div class="col-lg-12">
                                 <button type="button" onclick="backTab('generalInformation')" class="btn btn-azure col-lg-offset-9">
-                                    <i class="fa fa-arrow-left"></i>Back
+                                    <i class="fa fa-arrow-circle-left"></i>Back
                                 </button>
-                                <button type="button" onclick="nextTab('generalInformation')" class="btn btn-primary">
-                                    <i class="fa fa-arrow-right"></i>Next
+                                <button type="button" onclick="nextTab('generalInformation')" disabled id="nextGIBtn" class="btn btn-primary">
+                                    <i class="fa fa-arrow-circle-right"></i>Next
                                 </button>
                             </div>
                         </div>
@@ -348,12 +341,12 @@
                                     <tbody>
                                     </tbody>
                                 </table>
-                                <table class="table table-bordered table-hover" id="certificateTblCategory">
+                                <table class="table table-bordered table-center table-responsive-lg auto-index" id="certificateTblCategory">
                                     <thead>
                                     <tr>
-                                        <th>Document Name</th>
+                                        <th>Sl No</th>
                                         <th>Document Attached</th>
-                                        <th>Delete</th>
+                                        <th>View/Download</th>
                                     </tr>
                                     </thead>
                                     <tbody class="files">
@@ -443,7 +436,7 @@
                                 <button type="button" onclick="backTab('human_resource_criteria')" class="btn btn-azure col-lg-offset-9 backTab">
                                     <i class="fa fa-arrow-circle-left"></i> &nbsp;Back
                                 </button>
-                                <button type="button" id="btnValHRNext" onclick="nextTab('human_resource_criteria')" class="btn btn-primary nextTab">Next &nbsp;
+                                <button type="button" id="nextHRBtn" disabled onclick="nextTab('human_resource_criteria')" class="btn btn-primary nextTab">Next &nbsp;
                                     <i class="fa fa-arrow-circle-right"></i>
                                 </button>
                             </div>
@@ -489,7 +482,7 @@
                                 <button type="button" onclick="backTab('equipment_details')" class="btn btn-azure col-lg-offset-9">
                                     <i class="fa fa-arrow-circle-left"></i>&nbsp; Back
                                 </button>
-                                <button type="button" class="btn btn-primary" id="btnValEqNext" onclick="nextTab('equipment_details')">Next &nbsp;
+                                <button type="button" class="btn btn-primary" id="btnValEqNext" disabled onclick="nextTab('equipment_details')">Next &nbsp;
                                     <i class="fa fa-life-saver"></i>
                                 </button>
                             </div>
@@ -640,8 +633,15 @@
                                     </p>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-primary" onclick="javascript:printDiv('modal-print')">Print</button>
-                            <button type="button" class="btn btn-success" id="closeModal" onclick="checkBtn('checkver1')" data-dismiss="modal">OK</button>
+                            <div class="col-md-12 col-lg-12 col-sm-12">
+                                <div class="col-md-1 col-lg-1 col-sm-2">
+                                    <button type="button" class="btn btn-primary" onclick="javascript:printDiv('modal-print')">Print</button>
+                                </div>
+                                <div class="col-md-4 col-lg-4 col-sm-4">
+                                    <button type="button" class="btn btn-success" id="closeModal" style="display: none" onclick="checkBtn('owner')" data-dismiss="modal">OK</button>
+                                    <button type="button" class="btn btn-success " id="closeModal1"  style="display: none" onclick="checkBtn('Hr')" data-dismiss="modal">OK</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

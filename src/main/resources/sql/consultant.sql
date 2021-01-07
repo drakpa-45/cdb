@@ -68,7 +68,7 @@ ConsultantActionDao.paymentUpdate = CALL ProCrpConsultantNewRegistrationFinalDat
 
 ConsultantActionDao.getHRAttachments=SELECT a.DocumentName documentName,DocumentPath documentPath, FileType fileType FROM crpconsultanthumanresourceattachment a WHERE a.CrpConsultantHumanResourceId = :hrId
 ConsultantActionDao.getEQAttachments= SELECT a.DocumentName documentName,DocumentPath documentPath, FileType fileType FROM crpconsultantequipmentattachment a WHERE a.CrpConsultantEquipmentId = :eqId
-ConsultantActionDao.getIncAttachment = SELECT DocumentName AS documentName, DocumentPath documentPath,FileType AS fileType FROM crpconsultantattachment WHERE CrpConsultantId =:consultantId
+ConsultantActionDao.getIncAttachment = SELECT DocumentName AS documentName, DocumentPath documentPath,FileType AS fileType,AttachmentFor AS attachmentFor FROM crpconsultantattachment WHERE CrpConsultantId =:consultantId
 
 /*New Queries*/
 ConsultantActionDao.getNextCDBNo=SELECT DISTINCT a.`CDBNo`+1 AS cdbNo  FROM crpconsultantfinal a ORDER BY CONVERT(a.`CDBNo`, DECIMAL) DESC  LIMIT 1

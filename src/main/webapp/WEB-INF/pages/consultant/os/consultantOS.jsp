@@ -330,9 +330,10 @@
                                                         <div class="card-body">
                                                             <div class="col-lg-12">
                                                                 <div class=""><input id="addMoreCertOwner" type="button" value="Add More Certificate" class="btn btn-primary"></div>
-                                                                <table class="table table-bordered table-hover" id="certificateTblOwner">
+                                                                <table class="table table-bordered table-center table-responsive-lg auto-index" id="certificateTblOwner">
                                                                     <thead>
                                                                     <tr>
+                                                                        <th>Sl No</th>
                                                                         <th>Document Name</th>
                                                                         <th>Document Attached</th>
                                                                         <th>File Size</th>
@@ -340,7 +341,7 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody class="files">
-                                                                    <tr>
+                                                                    <%--<tr>
                                                                         <td><input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='C'/>
                                                                             <input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/></td>
                                                                         <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/></td>
@@ -354,7 +355,7 @@
                                                                         <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/></td>
                                                                         <td class='file-size'></td>
                                                                         <td><input type='button' class='p-2 del_row btn btn-azure' value='Delete'></td>
-                                                                    </tr>
+                                                                    </tr>--%>
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -632,9 +633,10 @@
                                                     <br/>
                                                     <input type="button" id="addMoreCertCategory" value="Add More File" class="btn btn-primary eqFile">
                                                     <div class="table-responsive">
-                                                        <table class="table table-bordered table-hover" id="certificateTblCategory">
+                                                        <table class="table table-bordered table-center table-responsive-lg auto-index" id="certificateTblCategory">
                                                             <thead>
                                                             <tr>
+                                                                <th>Sl No</th>
                                                                 <th>Document Name</th>
                                                                 <th>Document Attached</th>
                                                                 <th>File Size</th>
@@ -642,7 +644,7 @@
                                                             </tr>
                                                             </thead>
                                                             <tbody class="files">
-                                                            <tr>
+                                                            <%--<tr>
                                                                 <td><input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='C'/>
                                                                     <input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/></td>
                                                                 <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/></td>
@@ -654,12 +656,7 @@
                                                                 <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/></td>
                                                                 <td class='file-size'></td>
                                                                 <td><input type='button' class='p-2 del_row btn btn-azure' value='Delete'></td>
-                                                            </tr>
-                                                                <%--  <tr><td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/> </td>
-                                                                      <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
-                                                                      <td class='file-size'></td>
-                                                                      <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
-                                                                  </tr>--%>
+                                                            </tr>--%>
                                                             </tbody>
                                                         </table>
                                                     </div>
