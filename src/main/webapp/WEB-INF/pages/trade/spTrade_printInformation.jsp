@@ -127,7 +127,6 @@
     </div>
     </div>
 </div>
-
 <script>
     function doExportItem(){
         var HTML_Width = $("#printdiv").width();

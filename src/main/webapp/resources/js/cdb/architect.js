@@ -364,6 +364,7 @@ function enablesubmit(){
 }
 
 /*function PrintInfo() {
+    b3ece95606d75f5e942ddf1a94f0ce5281187821
     var divToPrint = document.getElementById('printInfo');
     var popupWin = window.open('', '_blank', 'width=1000,height=1000');
     popupWin.document.open();
