@@ -108,8 +108,7 @@
                                                             <td>500.00</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Change of Owner/Partner and other Controlling interest
-                                                            </td>
+                                                            <td>Change of Owner/Partner and other Controlling interest</td>
                                                             <td>1000.00</td>
                                                         </tr>
                                                         <tr>
@@ -130,8 +129,8 @@
                                             </div>
                                             <div class="col-lg-12 form-group">
                                                 <div class="col-md-offset-11 col-lg-offset-10 col-xs-offset-10">
-                                                    <button type="button" onclick="nextTab('feesStructure')" class="btn btn-primary">
-                                                        <i class="fa fa-arrow-right mr-2"></i>Next
+                                                    <button type="button" id="btn1" onclick="nextTab('feesStructure')" class="btn btn-primary">
+                                                        <i class="fa fa-arrow-circle-right mr-2"></i>Next
                                                     </button>
                                                 </div>
                                             </div>
@@ -144,70 +143,42 @@
                                                 <table>
                                                     <tbody>
                                                     <tr>
-                                                        <td>
-                                                            <input type="checkbox" style="zoom:1.6" name="incorporation" value="1" id="Incorporation" class="service_check">
-                                                        </td>
-                                                        <td>
-                                                            <span>Incorporation</span>
-                                                        </td>
+                                                        <td><input type="checkbox" style="zoom:1.6" name="incorporation" value="1" id="Incorporation" class="service_check"></td>
+                                                        <td><span>Incorporation</span></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>
-                                                            <input type="checkbox" style="zoom:1.6" name="changeOfFirmName" value="1" id="changeOfFirmName" class="service_check">
-                                                        </td>
-                                                        <td>
-                                                            <span>Change of Firm Name</span>
-                                                        </td>
+                                                        <td><input type="checkbox" style="zoom:1.6" name="changeOfFirmName" value="1" id="changeOfFirmName" class="service_check"></td>
+                                                        <td><span>Change of Firm Name</span></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>
-                                                            <input type="checkbox" style="zoom:1.6" name="changeOfLocation" value="1" class="service_check" id="changeOfLocation">
-                                                        </td>
-                                                        <td>
-                                                            <span>Change of Location</span>
-                                                        </td>
+                                                        <td><input type="checkbox" style="zoom:1.6" name="changeOfLocation" value="1" class="service_check" id="changeOfLocation"></td>
+                                                        <td><span>Change of Location</span></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>
-                                                            <input type="checkbox" style="zoom:1.6" name="changeOfOwner" value="1" id="changeOfOwnerId" class="service_check">
-                                                        </td>
-                                                        <td>
-                                                            <span>Change of Owner</span>
-                                                        </td>
+                                                        <td><input type="checkbox" style="zoom:1.6" name="changeOfOwner" value="1" id="changeOfOwnerId" class="service_check"></td>
+                                                        <td><span>Change of Owner</span></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>
-                                                            <input type="checkbox" style="zoom:1.6" name="upgradeDowngrade" value="1" id="upgradeDowngrade" class="service_check">
-                                                        </td>
-                                                        <td>
-                                                            <span>Upgrade/Downgrade/Add Category/Classification</span>
-                                                        </td>
+                                                        <td><input type="checkbox" style="zoom:1.6" name="upgradeDowngrade" value="1" id="upgradeDowngrade" class="service_check"></td>
+                                                        <td><span>Upgrade/Downgrade/Add Category/Classification</span></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>
-                                                            <input type="checkbox" style="zoom:1.6" name="updateHR" value="1" id="updateHR" class="service_check">
-                                                        </td>
-                                                        <td>
-                                                            <span>Update Human Resource</span>
-                                                        </td>
+                                                        <td><input type="checkbox" style="zoom:1.6" name="updateHR" value="1" id="updateHR" class="service_check"></td>
+                                                        <td><span>Update Human Resource</span></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>
-                                                            <input type="checkbox" style="zoom:1.6" name="updateEq" value="1" id="updateEq" class="service_check">
-                                                        </td>
-                                                        <td>
-                                                            <span>Update Equipment</span>
-                                                        </td>
+                                                        <td><input type="checkbox" style="zoom:1.6" name="updateEq" value="1" id="updateEq" class="service_check"></td>
+                                                        <td><span>Update Equipment</span></td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
                                             <div class="col-lg-12 form-group">
-                                                <button type="button" onclick="backTab('services')" class="btn btn-azure col-lg-offset-9">
-                                                    <i class="fa fa-arrow-left"></i>Back
+                                                <button type="button" onclick="backTab('services')" id="btn2" class="btn btn-azure col-lg-offset-9">
+                                                    <i class="fa fa-arrow-circle-left"></i>Back
                                                 </button>
-                                                <button type="button" onclick="nextTab('services')" class="btn btn-primary">
-                                                    <i class="fa fa-arrow-right"></i>Next
+                                                <button type="button" onclick="nextTab('services')" id="btn3" class="btn btn-primary">
+                                                    <i class="fa fa-arrow-circle-right"></i>Next
                                                 </button>
                                             </div>
                                         </div>
@@ -280,7 +251,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="card hide" id="ownerPartner">
+                                                <div class="card" id="ownerPartner1">
                                                     <div class="bg-blue card-status card-status-left"></div>
                                                     <div class="card-header">
                                                         <h3 class="card-title">Name of Owner, Partners and/or others with Controlling Interest</h3>
@@ -341,7 +312,7 @@
                                                                 </tr>
                                                                 </tbody>
                                                             </table>
-                                                            <div class="col-lg-12 text-right">
+                                                            <div class="col-lg-12 text-right hide" id="ownerPartner">
                                                                 <button type="button" class="btn btn-outline-primary btn-sm" onclick="addRow('partnerDtls')">
                                                                     <i class="fe fe-plus mr-2"></i>Add More
                                                                 </button>
@@ -350,16 +321,16 @@
                                                                 </button>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group row">
+                                                        <div class="form-group row hide" id="ownerShipchangeId">
                                                             <div class="col-lg-12 col-md-12 ">
                                                                 <label class="col-lg-3 col-md-3 form-label" for="ownershipChangeRemarks">Reason for Change of Owner:
                                                                     <span class="text-danger">*</span></label>
                                                                 <input type="text" class="col-lg-6 form-control" name="contractor.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true" placeholder="Text..">
                                                             </div>
-                                                        </div>
-                                                        <h5 class="text-orange">Attach Certificates of Ownership change</h5>
+
                                                         <div class="card-body">
                                                             <div class="col-lg-12">
+                                                                <span><h5 class="text-orange">Attach Certificates of Ownership change</h5></span>
                                                                 <div class=""><input id="addMoreCertOwner" type="button" value="Add More Certificate" class="btn btn-primary"></div>
                                                                 <table class="table table-bordered table-center table-responsive-lg auto-index" id="certificateTblOwner">
                                                                     <thead>
@@ -387,6 +358,7 @@
                                                                     </tbody>
                                                                 </table>
                                                             </div>
+                                                        </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -444,17 +416,17 @@
                                                                 <input type="email" class=" form-control col-lg-7" name="contractor.regEmail" id="regEmail" required="true" placeholder="Text..">
                                                             </div>
                                                             <div class="col-lg-6 col-md-6 ">
-                                                                <label class="col-lg-4 form-label">Mobile No <span class="text-danger">*</span></label>
+                                                                <label class="col-lg-4 form-label">Mobile Number <span class="text-danger">*</span></label>
                                                                 <input type="text" class=" form-control col-lg-7" name="contractor.regMobileNo" id="regMobileNo" required="true" placeholder="Text..">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <div class="col-lg-6 col-md-6">
-                                                                <label class="col-lg-4 form-label">Telephone No </label>
+                                                                <label class="col-lg-4 form-label">Telephone Number </label>
                                                                 <input type="text" class="form-control col-lg-7" name="contractor.regPhoneNo" id="regPhoneNo" placeholder="Text..">
                                                             </div>
                                                             <div class="col-lg-6 col-md-6">
-                                                                <label class="col-lg-4 form-label">Fax No </label>
+                                                                <label class="col-lg-4 form-label">Fax Number</label>
                                                                 <input type="text" class="form-control col-lg-7" name="contractor.regFaxNo" id="regFaxNo" placeholder="Text..">
                                                             </div>
                                                         </div>
@@ -462,11 +434,11 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 form-group">
-                                                <button type="button" onclick="backTab('generalInformation')" class="btn btn-azure col-lg-offset-9">
-                                                    <i class="fa fa-arrow-left"></i>Back
+                                                <button type="button" onclick="backTab('generalInformation')" id="btn4" class="btn btn-azure col-lg-offset-9">
+                                                    <i class="fa fa-arrow-circle-left"></i>Back
                                                 </button>
-                                                <button type="button" onclick="nextTab('generalInformation')" class="btn btn-primary nextTab">
-                                                    <i class="fa fa-arrow-right"></i>Next &nbsp;
+                                                <button type="button" onclick="nextTab('generalInformation')"id="btn5" class="btn btn-primary nextTab">
+                                                    <i class="fa fa-arrow-circle-right"></i>Next &nbsp;
                                                 </button>
                                             </div>
                                         </div>
@@ -585,7 +557,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 form-group nextBackBtn">
-                                                <button type="button" onclick="backTab('category_details')" class="btn btn-azure col-lg-offset-9">
+                                                <button type="button" onclick="backTab('category_details')" id="btn6" class="btn btn-azure col-lg-offset-9">
                                                     <i class="fa fa-arrow-circle-left"></i> &nbsp; Back
                                                 </button>
                                                 <button type="button" id="btnValCCNext" class="btn btn-primary" onclick="nextTab('category_details')">Next &nbsp;
@@ -630,7 +602,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 form-group nextBackBtn">
-                                                <button type="button" onclick="backTab('human_resource_criteria')" class="btn btn-azure col-lg-offset-9 backTab">
+                                                <button type="button" onclick="backTab('human_resource_criteria')" id="btn7" class="btn btn-azure col-lg-offset-9 backTab">
                                                     <i class="fa fa-arrow-circle-left"></i> &nbsp;Back
                                                 </button>
                                                 <button type="button" id="btnValHRNext" onclick="nextTab('human_resource_criteria')" class="btn btn-primary nextTab">Next &nbsp;
@@ -662,7 +634,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 form-group nextBackBtn">
-                                                <button type="button" onclick="backTab('equipment_details')" class="btn btn-azure col-lg-offset-9">
+                                                <button type="button" onclick="backTab('equipment_details')" id="btn8" class="btn btn-azure col-lg-offset-9">
                                                     <i class="fa fa-arrow-circle-left"></i>&nbsp; Back
                                                 </button>
                                                 <button type="button" class="btn btn-primary" id="btnValEqNext" onclick="nextTab('equipment_details')">Next &nbsp;
@@ -685,7 +657,6 @@
                                                                             the holder of this Certificate is qualified
                                                                             to participate in public procurement
                                                                             procedure.
-
                                                                             <br> 2. The issuance of CDB Registration
                                                                             Certificate will be based largely on the
                                                                             fulfillment of the minimum criteria set
@@ -693,61 +664,48 @@
                                                                             Contractor/Consultant and Categorization of
                                                                             Works and upon certification by competent
                                                                             authority for construction professionals.
-
                                                                             <br> 3. All the registered contractors
                                                                             should comply with 'Code of ethics for
                                                                             Contractors'.
-
                                                                             <br> 4. CDB will not be accountable for any
                                                                             false/fabricated submission that could have
                                                                             led to the fulfillment of the criteria and
                                                                             subsequent issue of CDB Registration
                                                                             Certificate.
-
                                                                             <br> 5. CDB Registration Certificate once
                                                                             issued would not relieve the certificate
                                                                             holder of any relaxation on the minimum
                                                                             requirements for registration.
-
                                                                             <br> 6. Notwithstanding the provisions of
                                                                             Companies Act of Bhutan, the certificate
                                                                             issued is non-transferable even if the
                                                                             promoters separate and establish similar
                                                                             companies.
-
                                                                             <br> 7. CDB Certificate cannot be leased or
                                                                             subleased to any individual or another firm.
-
                                                                             <br> 8. Certificate is valid during the
                                                                             period for which it was issued provided it
                                                                             has not been cancelled, suspended or revoked
                                                                             by CDB or any other competent authority.
-
                                                                             <br> 9. Failing to renew within the expiry
                                                                             date will lead to penalty of Nu.100 per day.
-
                                                                             <br> 10. Failing to pay the fees for
                                                                             approved online application within 30 days
                                                                             will lead to cancellation of the
                                                                             application.
-
                                                                             <br> 11. All registered construction firm
                                                                             must attend the mandatory refresher course
                                                                             in order to apply for renewal.
-
                                                                             <br> 12. No Contractors can submit bid,
                                                                             participate in bidding or be on the
                                                                             contention for award if the registration has
                                                                             expired.
-
                                                                             <br> 13. No Contractors can
                                                                             undertake/implement works which is not
                                                                             within the scope of the registration.
-
                                                                             <br> 14. CDB may verify the resources
                                                                             committed for the projects as and when
                                                                             desires.
-
                                                                             <br> 15. The registration is subject to
                                                                             verification whenever the CDB so desires.
                                                                             CDB will inspect the minimum mandatory
@@ -756,17 +714,14 @@
                                                                             the time of monitoring, every firm must
                                                                             extend necessary support and cooperation to
                                                                             CDB Officials.
-
                                                                             <br> 16. Large and Medium Contractors must
                                                                             have Office established with Signboard
                                                                             (requirements of office and signboard as
                                                                             determined by CDB)
-
                                                                             <br> 17. Registered firms are required to
                                                                             inform the CDB of any changes in their
                                                                             address, contact details or any pertinent
                                                                             particulars within one month.
-
                                                                             <br> 18. The CDB Registration Certificate
                                                                             can be revoked, downgraded, suspended or
                                                                             cancelled at any given time if the:
@@ -774,17 +729,14 @@
                                                                             participation in the procurement process;
                                                                             <br> b. Entity does not possess the minimum
                                                                             requirements during the physical
-                                                                            verification process (at the discretion of
-                                                                            CDB);
+                                                                            verification process (at the discretion of CDB);
                                                                             <br> c. Entity has obtained the same due to
                                                                             false submissions;
-                                                                            <br> d. Entity becomes bankrupt or winds up;
-                                                                            or
+                                                                            <br> d. Entity becomes bankrupt or winds up; or
                                                                             <br> e. Entity has been charged by the court
                                                                             for penal offence.
                                                                             <br> This Terms of Condition is hereby
                                                                             endorsed and enforced with immediate effect.
-
                                                                             <br> (Phub Rinzin)
                                                                             <br> Director
                                                                         </div>
@@ -795,29 +747,17 @@
                                                                 <label class="col-lg-12">I/We declare and confirm that:- </label>
                                                                 <div id="termsAndCon">
                                                                     <ul>
-                                                                        <li>All information and attachments with this
-                                                                            application are true and correct;
-                                                                        </li>
+                                                                        <li>All information and attachments with this application are true and correct;</li>
                                                                         <li>I am/we are aware that any false information
-                                                                            provided herein will result in rejection of
-                                                                            my application and suspension of any
-                                                                            registered granted;
+                                                                            provided herein will result in rejection of my application and suspension of any registered granted;
                                                                         </li>
-                                                                        <li>I/We shall not make refund claims of
-                                                                            expenditure incurred in processing this
-                                                                            application;
+                                                                        <li>I/We shall not make refund claims of expenditure incurred in processing this application;</li>
+                                                                        <li>I/We have read and understood the 'Code of Ethics' and shall perform in line with Code
+                                                                            of Ethics and any other legislation in force. Failure to comply, will be subject to
+                                                                            the penalties provided for in the applicable legislation of the country.
                                                                         </li>
-                                                                        <li>I/We have read and understood the 'Code of
-                                                                            Ethics' and shall perform in line with Code
-                                                                            of Ethics and any other legislation in
-                                                                            force. Failure to comply, will be subject to
-                                                                            the penalties provided for in the
-                                                                            applicable legislation of the country.
-                                                                        </li>
-                                                                        <li>I/We hereby declare that issue of CDB
-                                                                            certificate does not in anyway constitute an
-                                                                            obligation on the part of CDB or any other
-                                                                            Government agency to provide contract works.
+                                                                        <li>I/We hereby declare that issue of CDB certificate does not in anyway constitute an
+                                                                            obligation on the part of CDB or any other Government agency to provide contract works.
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -956,7 +896,7 @@
                                         <div class="col-lg-4">
                                             <div class="input-group margin-bottom-sm">
                                                 <span class="input-group-addon pr-5"><i class="fa fa-calendar"></i></span>
-                                                <input type="date" name="contractorHRs[0].joiningDate" value="" id="joiningDate" class="form-control datepicker">
+                                                <input type="date" name="contractorHRs[0].joiningDate" id="joiningDate" class="form-control datepicker">
                                             </div>
                                         </div>
                                     </div>
@@ -987,9 +927,7 @@
                                                         <td><input type="hidden" class="hraId">
                                                             <input type='text' required="" value="CID" class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/>
                                                         </td>
-                                                        <td><input type='file' required="" class='file' name='contractorHRs[0].contractorHRAs[0].attachment'
-                                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
-                                                        </td>
+                                                        <td><input type='file' required="" class='file' name='contractorHRs[0].contractorHRAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/></td>
                                                         <td class='file-size'></td>
                                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                     </tr>
@@ -997,9 +935,7 @@
                                                         <td><input type="hidden" class="hraId">
                                                             <input type='text' required="" value="Certificate" class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/>
                                                         </td>
-                                                        <td><input type='file' required="" class='file' name='contractorHRs[0].contractorHRAs[0].attachment'
-                                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
-                                                        </td>
+                                                        <td><input type='file' required="" class='file' name='contractorHRs[0].contractorHRAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/></td>
                                                         <td class='file-size'></td>
                                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                     </tr>
@@ -1007,9 +943,7 @@
                                                         <td><input type="hidden" class="hraId">
                                                             <input type='text' required="" value="Others" class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/>
                                                         </td>
-                                                        <td><input type='file' required="" class='file' name='contractorHRs[0].contractorHRAs[0].attachment'
-                                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
-                                                        </td>
+                                                        <td><input type='file' required="" class='file' name='contractorHRs[0].contractorHRAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/></td>
                                                         <td class='file-size'></td>
                                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                     </tr>
@@ -1079,17 +1013,13 @@
                                                     <tr>
                                                         <td><input type='text' required="" class='form-control docName' name='equipments[0].contractorEQAs[0].documentName'/>
                                                         </td>
-                                                        <td><input type='file' required="" class='file' name='equipments[0].contractorEQAs[0].attachment'
-                                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
-                                                        </td>
+                                                        <td><input type='file' required="" class='file' name='equipments[0].contractorEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/></td>
                                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                     </tr>
                                                     <tr>
                                                         <td><input type='text' required="" class='form-control docName' name='equipments[0].contractorEQAs[0].documentName'/>
                                                         </td>
-                                                        <td><input type='file' required="" class='file' name='equipments[0].contractorEQAs[0].attachment'
-                                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
-                                                        </td>
+                                                        <td><input type='file' required="" class='file' name='equipments[0].contractorEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/></td>
                                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                     </tr>
                                                     </tbody>
@@ -1100,9 +1030,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button data-dismiss="modal" class="btn btn-primary"
-                                        onclick="getModalData('equipmentTbl','eq',3)" type="button">OK
-                                </button>
+                                <button data-dismiss="modal" class="btn btn-primary" onclick="getModalData('equipmentTbl','eq',3)" type="button">OK</button>
                                 <button data-dismiss="modal" class="btn btn-warning" type="button">Close</button>
                             </div>
                         </div>

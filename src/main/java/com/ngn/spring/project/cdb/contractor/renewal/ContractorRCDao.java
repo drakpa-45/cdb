@@ -29,7 +29,6 @@ import java.util.List;
 @Repository
 public class ContractorRCDao extends BaseDao {
 
-
     public void saveUpdate(Object object) {
         saveOrUpdate(object);
     }

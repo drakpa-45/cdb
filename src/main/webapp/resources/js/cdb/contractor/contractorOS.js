@@ -41,6 +41,7 @@ function saveAndPreview(presentClass, nextClass) {
         $('.tab-content').removeClass("active").addClass("active");
         $("." + nextClass).addClass("active");
         $("." + presentClass + ">a").append("<i class='fa fa-check ml-1'></i>");
+
 }
 
 function nextTab(presentClass) {
@@ -59,6 +60,20 @@ function nextTab(presentClass) {
         $("." + nextClass).addClass("active");
         $("." + presentClass + ">a").append("<i class='fa fa-check ml-1'></i>");
         $('.nextBackBtn').addClass('hide');
+
+        $('#btn1').hide();
+        $('#btn2').hide();
+        $('#btn3').hide();
+        $('#btn4').hide();
+        $('#btnValCCNext').hide();
+        $('#btnValHRNext').hide();
+        $('#btn5').hide();
+        $('#btnValEqNext').hide();
+        $('#btn6').hide();
+        $('#btn7').hide();
+        $('#btn8').hide();
+
+        window.scroll(0, 0);
     }else{ //next
         $("." + presentClass + ">a").addClass('bg-blue text-white');
         $('.tab-pane').removeClass("active");
@@ -194,7 +209,6 @@ function enableSubmit(){
     else{
         $('#btnSubmit').prop('disabled',true);
     }
-
 }
 function showConfirmation(){
     $('#confirmationModel').modal('show');
@@ -320,6 +334,7 @@ var contractorOS = (function () {
                     $('#ownerPartner').removeClass('hide');
                     $('#changeOfOwnerId').prop('disabled', true);
                     $('#ownerPartnerNoChange').addClass('hide');
+                    $('#ownerShipchangeId').removeClass('hide');
                     getOwnerFinal();
                 }else{
                     $('#ownershipList').prop('disabled',true);
@@ -327,7 +342,7 @@ var contractorOS = (function () {
                     $('#changeOfFirmName').prop('disabled', false);
                     $('#changeOfOwnerId').prop('disabled', false);
                     $('#ownerPartner').addClass('hide');
-
+                    $('#changeOfOwnerId').prop('disabled', true);
                 }
             }else if(id == 'changeOfFirmName' ){
                 if($this.is(':checked')) {
@@ -346,10 +361,11 @@ var contractorOS = (function () {
             }else if(id == 'changeOfOwnerId' ){
                 if($this.is(':checked')) {
                     $('#ownerPartner').removeClass('hide');
+                    $('#ownerShipchangeId').removeClass('hide');
                     getOwnerFinal();
                 }else{
                     $('#ownerPartner').addClass('hide');
-                    $('#cOwnershipId').addClass('hide');
+                    $('#ownerShipchangeId').addClass('hide');
                 }
             }
         });
@@ -385,7 +401,6 @@ var contractorOS = (function () {
                 }
             }
         });
-
     }
 
     function getIncAttachmentFinal(){
@@ -394,20 +409,50 @@ var contractorOS = (function () {
             type: 'GET',
             data: {contractorId:$('#contractorIdFinal').val(),ownerOrHR:'O'},
             success: function (data) {
-
                 if(data){
                     $('#cIncorporation').removeClass('hide');
-                    var tr = '';
+                    $('#oIncorporation').removeClass('hide');
+                    var cIncTr = '';
+                    var categoryTr = '';
+                    var ownerTr = '';
                     for(var i in data){
-                        tr = tr + "<tr>"+
-                        "<td><input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='InSole'/></td>" +
-                        "<td ><input type='text' class='form-control docName' name='cAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>"+
-                        "<td class='attachment'><a href='"+_baseURL() + "/viewDownload?documentPath="+data[i].documentPath+"' target='_blank'> View </a></td>" +
-                        "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
-                        "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
-                        "</tr>";
+                        if(data[i].attachmentFor == 'InSole' || data[i].attachmentFor == null) {
+                            cIncTr = cIncTr + "<tr>" +
+                            "<td></td>" +
+                            "<td>" +
+                            "<input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='InSole'/>" +
+                            "<input type='text' class='form-control docName' name='cAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
+                            "<td class='attachment'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                            "<td></td>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
+                            "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                            "</tr>";
+                        }
+                        if(data[i].attachmentFor == 'AL'){
+                            categoryTr = categoryTr + "<tr>" +
+                            "<td></td>" +
+                            "<td>" + data[i].documentName + "</td>" +
+                            "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                            "<td></td>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
+                            "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                            "</tr>";
+                        }
+                        if(data[i].attachmentFor == 'OC'){
+                            ownerTr = ownerTr + "<tr>" +
+                            "<td></td>" +
+                            "<td>" + data[i].documentName + "</td>" +
+                            "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                            "<td></td>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
+                            "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                            "</tr>";
+                        }
                     }
-                    $('#certificateTbl').find('tbody').html(tr);
+                    $('#certificateTbl').find('tbody').html(cIncTr);
+                    $('#certificateTblOwner').find('tbody').html(ownerTr);
+                    $('#certificateTblCategory').find('tbody').html(categoryTr);
+
                 }else{
                     $('#cIncorporation').addClass('hide');
                 }
@@ -456,7 +501,7 @@ var contractorOS = (function () {
                             }
                             hrTr = hrTr + "<tr class=''>" +
                             "<td class='salutationName'><input type='hidden' class='contractorHRid' name='contractorHRs[0].id' value='"+contractorHrs[i].id +"'/>" +
-                            "<input type='hidden' class='joiningDate' value='"+contractorHrs[i].joiningDate +"'/>"+
+                            "<input type='hidden' class='joiningDate' name='contractorHRs[0].joiningDate' value='"+contractorHrs[i].joinDate +"'/>"+
                             contractorHrs[i].salutationName + "</td>" +
                             "<td class='name'>" + contractorHrs[i].name + "</td>" +
                             "<td class='cidNo'>" + contractorHrs[i].cidNo + "</td>" +
@@ -481,30 +526,31 @@ var contractorOS = (function () {
     }
 
     function getOwnerFinal(){
-        $.ajax({
-            url: _baseURL() + '/getContractorHRsFinal',
-            type: 'GET',
-            data: {contractorId:$('#contractorIdFinal').val(),ownerOrHR:'O'},
-            success: function (res) {
-                var contractorHrs = res;
+        $('#btn3').on('click',function() {
+            $.ajax({
+                url: _baseURL() + '/getContractorHRsFinal',
+                type: 'GET',
+                data: {contractorId: $('#contractorIdFinal').val(), ownerOrHR: 'O'},
+                success: function (res) {
+                    var contractorHrs = res;
 
-                for (var i in contractorHrs) {
-                    var tblRow = $('#partnerDtls').find('tbody tr:eq(' + (parseInt(i)) + ')');
-                    tblRow.find('#countryList').val(tblRow.find('#countryList option:contains("' + contractorHrs[i].countryName + '")').val());
-                    tblRow.find('.hr-cid').val(contractorHrs[i].cidNo);
-                    tblRow.find('#salutation').val(tblRow.find('#salutation option:contains("' + contractorHrs[i].salutationName + '")').val());
-                    tblRow.find('#designation').val(tblRow.find('#designation option:contains("' + contractorHrs[i].designationName + '")').val());
-                    tblRow.find('.name').val(contractorHrs[i].name);
-                    tblRow.find('#gender').val(contractorHrs[i].sex);
-                    if (contractorHrs[i].siCertificate == '1') {
-                        tblRow.find('.showCert').prop('checked', true);
-                    } else {
-                        tblRow.find('.showCert').prop('checked', false);
+                    for (var i in contractorHrs) {
+                        var tblRow = $('#partnerDtls').find('tbody tr:eq(' + (parseInt(i)) + ')');
+                        tblRow.find('#countryList').val(tblRow.find('#countryList option:contains("' + contractorHrs[i].countryName + '")').val());
+                        tblRow.find('.hr-cid').val(contractorHrs[i].cidNo);
+                        tblRow.find('#salutation').val(tblRow.find('#salutation option:contains("' + contractorHrs[i].salutationName + '")').val());
+                        tblRow.find('#designation').val(tblRow.find('#designation option:contains("' + contractorHrs[i].designationName + '")').val());
+                        tblRow.find('.name').val(contractorHrs[i].name);
+                        tblRow.find('#gender').val(contractorHrs[i].sex);
+                        if (contractorHrs[i].siCertificate == '1') {
+                            tblRow.find('.showCert').prop('checked', true);
+                        } else {
+                            tblRow.find('.showCert').prop('checked', false);
+                        }
                     }
                 }
-            }
-
-        });
+            });
+        })
     }
 
     function getEQsFinal(){
@@ -519,13 +565,11 @@ var contractorOS = (function () {
                         var equipments = res;
                         var eqTr = "";
                         for (var i in equipments) {
-
                             var attachment = '';
                             for (var j in equipments[i].eqAttachments){
                                 attachment = attachment + "<span class='eqa'><input type='hidden' class='eqId' value='"+equipments[i].eqAttachments[j].id+"'>" +
                                 "<a href='"+_baseURL() + "/viewDownload?documentPath="+equipments[i].eqAttachments[j].documentPath+"' target='_blank'>"+equipments[i].eqAttachments[j].documentName+"</a></span><br>";
                             }
-
                             eqTr = eqTr +
                             "<tr>" +
                             "<td class='eq1'><input type='hidden' class='contractorEQid' name='equipments[0].id' value='"+equipments[i].id +"'/>"
@@ -539,7 +583,6 @@ var contractorOS = (function () {
                         }
                         $('#equipmentTbl').find('tbody').html(eqTr);
                     }
-
                 });
             }else{
                 $('.equipment_details').addClass('hide');
@@ -949,6 +992,7 @@ var contractorOS = (function () {
         showFileSize();
         checkDuplicateHR();
         isEmailUnique();
+        getOwnerFinal();
     }
 
     return {

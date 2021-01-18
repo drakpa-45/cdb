@@ -132,7 +132,7 @@
                                             <div class="col-lg-12 form-group">
                                                 <div class="col-md-offset-11 col-lg-offset-10 col-xs-offset-10">
                                                     <button type="button" id="btn1" onclick="nextTab('feesStructure')" class="btn btn-primary">
-                                                        <i class="fa fa-arrow-right mr-2"></i>Next
+                                                        <i class="fa fa-arrow-circle-right mr-2"></i>Next
                                                     </button>
                                                 </div>
                                             </div>
@@ -176,11 +176,11 @@
                                                 </table>
                                             </div>
                                             <div class="col-lg-12 form-group">
-                                                <button type="button" onclick="backTab('services')" class="btn btn-azure col-lg-offset-9">
-                                                    <i class="fa fa-arrow-left"></i>Back
+                                                <button type="button" onclick="backTab('services')" id="btn8" class="btn btn-azure col-lg-offset-9">
+                                                    <i class="fa fa-arrow-cicle-left"></i>Back
                                                 </button>
-                                                <button type="button" onclick="nextTab('services')" class="btn btn-primary">
-                                                    <i class="fa fa-arrow-right"></i>Next
+                                                <button type="button" onclick="nextTab('services')" id="btn7" class="btn btn-primary">
+                                                    <i class="fa fa-arrow-circle-right"></i>Next
                                                 </button>
                                             </div>
                                         </div>
@@ -440,10 +440,10 @@
                                             </div>
                                             <div class="col-lg-12 form-group">
                                                 <button type="button" id="btn2" onclick="backTab('generalInformation')" class="btn btn-azure col-lg-offset-9">
-                                                    <i class="fa fa-arrow-left"></i>Back
+                                                    <i class="fa fa-arrow-circle-left"></i>Back
                                                 </button>
                                                 <button type="button" id="btn3" onclick="nextTab('generalInformation')" class="btn btn-primary nextTab">
-                                                    <i class="fa fa-arrow-right"></i>Next &nbsp;
+                                                    <i class="fa fa-arrow-circle-right"></i>Next &nbsp;
                                                 </button>
                                             </div>
                                         </div>

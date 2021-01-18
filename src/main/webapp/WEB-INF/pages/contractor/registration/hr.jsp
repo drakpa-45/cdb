@@ -330,7 +330,7 @@
 </div>
 <!-- HR modal close -->
 <div class="col-lg-12 form-group">
-    <button type="button" onclick="backTab('humanResourceCriteria','category_details')" class="btn btn-azure col-lg-offset-9">
+    <button type="button" onclick="backTab('humanResourceCriteria','category_details')" id="btn4" class="btn btn-azure col-lg-offset-9">
         <i class="fa fa-arrow-circle-left"></i> &nbsp;Back
     </button>
     <button type="button" id="btnValHRNext"

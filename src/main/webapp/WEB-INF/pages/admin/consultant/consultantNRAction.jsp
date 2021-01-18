@@ -353,8 +353,7 @@
                                                     <div class="panel panel-default">
                                                         <div class="panel-body">
                                                             <div class="table-responsive">
-                                                                <table class="table table-bordered table-hover"
-                                                                       id="equipmentTbl">
+                                                                <table class="table table-bordered table-hover" id="equipmentTbl">
                                                                     <thead>
                                                                     <tr style="background-color: #e6f9ff">
                                                                         <th>SLNo</th>

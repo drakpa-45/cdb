@@ -118,7 +118,7 @@ public class ContractorNRActionService extends BaseService {
                 "<br>You may pay the required fee online through following link:<br>" +
                 "<a target='_blank' href='https://www.citizenservices.gov.bt/G2CPaymentAggregatorStg'>https://www.citizenservices.gov.bt/G2CPaymentAggregatorStg</a>" +
                 "<br>Or You may visit our CDB counters to pay the fee. " +
-                "<br><br>Note: Only after payment confirmation, your application will be done final approval. And you will get the login credential to log into system. ";
+                "<br><br>Note: Only after payment confirmation, your application will be done final approval. And you will get the login credential to log into system.";
         MailSender.sendMail(emailId, "cdb@gov.bt", null, mailContent, "Application approved");
         responseMessage.setStatus(SUCCESSFUL_STATUS);
         responseMessage.setText("Contractor application number :" + appNo+" approved successfully.");

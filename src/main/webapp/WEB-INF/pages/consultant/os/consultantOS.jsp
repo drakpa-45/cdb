@@ -129,8 +129,8 @@
                                             </div>
                                             <div class="col-lg-12 form-group">
                                                 <div class="col-md-offset-11 col-lg-offset-10 col-xs-offset-10">
-                                                    <button type="button" onclick="nextTab('feesStructure')" class="btn btn-primary">
-                                                        <i class="fa fa-arrow-right mr-2"></i>Next
+                                                    <button type="button" id="btn1" onclick="nextTab('feesStructure')" class="btn btn-primary">
+                                                        <i class="fa fa-arrow-circle-right mr-2"></i>Next
                                                     </button>
                                                 </div>
                                             </div>
@@ -174,11 +174,11 @@
                                                 </table>
                                             </div>
                                             <div class="col-lg-12 form-group">
-                                                <button type="button" onclick="backTab('services')" class="btn btn-azure col-lg-offset-9">
-                                                    <i class="fa fa-arrow-left"></i>Back
+                                                <button type="button" id="btn2" onclick="backTab('services')" class="btn btn-azure col-lg-offset-9">
+                                                    <i class="fa fa-arrow-circle-left"></i>Back
                                                 </button>
-                                                <button type="button" onclick="nextTab('services')" class="btn btn-primary">
-                                                    <i class="fa fa-arrow-right"></i>Next
+                                                <button type="button" id="btn3" onclick="nextTab('services')" class="btn btn-primary">
+                                                    <i class="fa fa-arrow-circle-right"></i>Next
                                                 </button>
                                             </div>
                                         </div>
@@ -249,7 +249,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="card hide" id="ownerPartner">
+                                                <div class="card" id="ownerPartner1">
                                                     <div class="bg-blue card-status card-status-left"></div>
                                                     <div class="card-header">
                                                         <h3 class="card-title">Name of Owner, Partners and/or others with Controlling Interest</h3>
@@ -310,7 +310,7 @@
                                                                 </tr>
                                                                 </tbody>
                                                             </table>
-                                                            <div class="col-lg-12 text-right">
+                                                            <div class="col-lg-12 text-right hide" id="ownerPartner">
                                                                 <button type="button" class="btn btn-outline-primary btn-sm" onclick="addRow('partnerDtls')">
                                                                     <i class="fe fe-plus mr-2"></i>Add More
                                                                 </button>
@@ -319,16 +319,15 @@
                                                                 </button>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group row">
+                                                        <div class="form-group row hide" id="ownerShipchangeId">
                                                             <div class="col-lg-12 col-md-12 ">
                                                                 <label class="col-lg-3 col-md-3 form-label" for="ownershipChangeRemarks">Reason for Change of Owner:
                                                                     <span class="text-danger">*</span></label>
                                                                 <input type="text" class="col-lg-6 form-control" name="specializedFirm.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true" placeholder="Text..">
                                                             </div>
-                                                        </div>
-                                                        <h5 class="text-orange">Attach Certificates of Ownership change</h5>
                                                         <div class="card-body">
                                                             <div class="col-lg-12">
+                                                                <h5 class="text-orange">Attach Certificates of Ownership change</h5>
                                                                 <div class=""><input id="addMoreCertOwner" type="button" value="Add More Certificate" class="btn btn-primary"></div>
                                                                 <table class="table table-bordered table-center table-responsive-lg auto-index" id="certificateTblOwner">
                                                                     <thead>
@@ -359,6 +358,7 @@
                                                                     </tbody>
                                                                 </table>
                                                             </div>
+                                                        </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -438,11 +438,11 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 form-group">
-                                                <button type="button" onclick="backTab('generalInformation')" class="btn btn-azure col-lg-offset-9">
-                                                    <i class="fa fa-arrow-left"></i>Back
+                                                <button type="button" id="btn4" onclick="backTab('generalInformation')" class="btn btn-azure col-lg-offset-9">
+                                                    <i class="fa fa-arrow-circle-left"></i>Back
                                                 </button>
-                                                <button type="button" onclick="nextTab('generalInformation')" class="btn btn-primary nextTab">
-                                                    <i class="fa fa-arrow-right"></i>Next &nbsp;
+                                                <button type="button" id="btn5"  onclick="nextTab('generalInformation')" class="btn btn-primary nextTab">
+                                                    <i class="fa fa-arrow-circle-right"></i>Next &nbsp;
                                                 </button>
                                             </div>
                                         </div>
@@ -663,7 +663,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 form-group nextBackBtn">
-                                                <button type="button" onclick="backTab('category_details')" class="btn btn-azure col-lg-offset-9">
+                                                <button type="button" id="btn6" onclick="backTab('category_details')" class="btn btn-azure col-lg-offset-9">
                                                     <i class="fa fa-arrow-circle-left"></i> &nbsp; Back
                                                 </button>
                                                 <button type="button" id="btnValCCNext" class="btn btn-primary" onclick="nextTab('category_details')">Next &nbsp;
@@ -709,7 +709,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 form-group nextBackBtn">
-                                                <button type="button" onclick="backTab('human_resource_criteria')" class="btn btn-azure col-lg-offset-9 backTab">
+                                                <button type="button" id="btn7" onclick="backTab('human_resource_criteria')" class="btn btn-azure col-lg-offset-9 backTab">
                                                     <i class="fa fa-arrow-circle-left"></i> &nbsp;Back
                                                 </button>
                                                 <button type="button" id="btnValHRNext" onclick="nextTab('human_resource_criteria')" class="btn btn-primary nextTab">Next &nbsp;
@@ -741,7 +741,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 form-group nextBackBtn">
-                                                <button type="button" onclick="backTab('equipment_details')" class="btn btn-azure col-lg-offset-9">
+                                                <button type="button" id="btn8" onclick="backTab('equipment_details')" class="btn btn-azure col-lg-offset-9">
                                                     <i class="fa fa-arrow-circle-left"></i>&nbsp; Back
                                                 </button>
                                                 <button type="button" class="btn btn-primary" id="btnValEqNext" onclick="nextTab('equipment_details')">Next &nbsp;

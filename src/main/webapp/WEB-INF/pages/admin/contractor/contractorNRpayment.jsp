@@ -19,7 +19,7 @@
                             <security:authorize access="hasRole('ROLE_APPROVER')">Approval</security:authorize>
                             <security:authorize access="hasRole('ROLE_PAYMENT')">Payment Approval</security:authorize>
                         </h3>
-                        <span style="font-size: small;color: #444444"> >> Application Number : ${appNo}</span>
+                        <span style="font-size: large;color: #444444"> >> Application Number : <b>${appNo}</b></span>
                     </div>
                     <div class="card-body">
                         <div class="row">

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * ====================================================================
- * Created by Nima Yoezer on 7/18/2020.
+ * Created by Pema Drakpa on 7/18/2020.
  * Description:
  * ====================================================================
  * Modified by:
@@ -72,6 +72,13 @@ public class ProfileController {
         return null;
     }
 
+    /**
+     *
+     * @param model
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping(value ="/printInformation", method = RequestMethod.GET)
     public String printInformation(ModelMap model,HttpServletRequest request, HttpServletResponse response) {
         //String type=request.getParameter("param");

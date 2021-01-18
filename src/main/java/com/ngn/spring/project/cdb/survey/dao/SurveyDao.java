@@ -160,7 +160,7 @@ public class SurveyDao extends BaseDao {
             if (save > 0) {
                 dto.setUpdateStatus("Success");
         }
-        } catch (Exception e) {
+        }catch (Exception e) {
             System.out.print("Exception in SurveyDao # updateVerification: " + e);
             e.printStackTrace();
         }
@@ -482,7 +482,7 @@ public class SurveyDao extends BaseDao {
     public ArchitectDto populateSurveyApplicantDetails(String cdbNo) {
         ArchitectDto dto = new ArchitectDto();
         try {
-            sqlQuery = "SELECT f.ARNo cdbNo,f.ReferenceNo refNo,f.Id CrpSurveyId,f.CIDNo cidNo,f.Name fullname,f.Village village,f.Gewog gewog,d.NameEn dzongkhagId,c.Name countryId,s.Name salutation,\n" +
+            sqlQuery = "SELECT f.ARNo cdbNo,f.ReferenceNo refNo,f.Id CrpSurveyId,f.CIDNo cidNo,f.Name fullname,f.Village village,f.Gewog gewog,f.CmnDzongkhagId cmnDzongkhagId,d.NameEn dzongkhagId,c.Name countryId,s.Name salutation,\n" +
                     "i.Name updateStatus,f.CmnSalutationId salutationId,f.Email email,f.MobileNo mobileNo,f.EmployerName employeeName,f.EmployerAddress employeeAddress,f.CmnQualificationId qualificationId, q.Name qualification,f.CmnServiceSectorTypeId serviceSectorTypeId,\n" +
                     "f.GraduationYear graduationyr,td.Name trade, f.CmnTradeId cmnTradeId,t.Name serviceSectorType,f.NameOfUniversity universityName,f.CmnUniversityCountryId cmnUniversityCountryId,uc.Name universityCountry,f.RegistrationApprovedDate registrationApproveDate,f.RegistrationExpiryDate regExpDate\n" +
                     "FROM crpsurveyfinal f \n" +

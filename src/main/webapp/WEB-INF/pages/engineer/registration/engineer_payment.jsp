@@ -89,21 +89,21 @@
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Dzongkhag:</label>
-                                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                             <input type="hidden" readonly value="${appDetails.dzongkhagId}" maxlength="100" id="dzongkhag" class="form-control">
                                                             <label class="col-lg-8 form-label form-control">${appDetails.dzongkhagId}</label>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Gewog:</label>
-                                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                             <input type="hidden" value="${appDetails.gewog}" readonly maxlength="100" id="gewog" name="gewog" class="form-control">
                                                             <label class="col-lg-8 form-label form-control">${appDetails.gewog}</label>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Village:</label>
-                                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                             <input type="hidden" value="${appDetails.village}" readonly maxlength="100" id="village" name="village" class="form-control">
                                                             <label class="col-lg-8 form-label form-control">${appDetails.village}</label>
                                                             <input type="hidden"  name="villageId" id="villageId">
@@ -190,7 +190,7 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                             <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Trade:</label>
-                                            <input type="hidden" value="${appDetails.trade}" readonly maxlength="100" id="trade" name="trade" class="form-control">
+                                            <input type="hidden" value="${appDetails.cmnTradeId}" readonly maxlength="100" id="trade" name="trade" class="form-control">
                                             <label class="col-lg-8 form-label form-control">${appDetails.trade}</label>
                                         </div>
                                     </div>

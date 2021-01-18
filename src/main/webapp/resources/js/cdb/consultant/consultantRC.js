@@ -342,6 +342,7 @@ var consultantRC = (function () {
                     $('#changeOfFirmName').prop('disabled', true);
                     $('#ownerPartner').removeClass('hide');
                     $('#changeOfOwnerId').prop('disabled', true);
+                    $('#ownerShipchangeId').removeClass('hide');
                     getOwnerFinal();
                 }else{
                     $('#ownershipList').prop('disabled',true);
@@ -367,11 +368,13 @@ var consultantRC = (function () {
             }else if(id == 'changeOfOwnerId' ){
                 if($this.is(':checked')) {
                     $('#ownerPartner').removeClass('hide');
+                    $('#ownerShipchangeId').removeClass('hide');
                     getOwnerFinal();
                     // sCertOwner();
                 }else{
                     $('#ownerPartner').addClass('hide');
                     $('#cOwnershipId').addClass('hide');
+                    $('#ownerShipchangeId').addClass('hide');
                 }
             }
         });
@@ -502,29 +505,31 @@ var consultantRC = (function () {
     }
 
     function getOwnerFinal(){
-        $.ajax({
-            url: _baseURL() + '/getConsultantHRsFinal',
-            type: 'GET',
-            data: {consultantId:$('#consultantIdFinal').val(),ownerOrHR:'O'},
-            success: function (res) {
-                var consultantHrs = res;
+        $('#btn3').on('click',function() {
+            $.ajax({
+                url: _baseURL() + '/getConsultantHRsFinal',
+                type: 'GET',
+                data: {consultantId: $('#consultantIdFinal').val(), ownerOrHR: 'O'},
+                success: function (res) {
+                    var consultantHrs = res;
 
-                for (var i in consultantHrs) {
-                    var tblRow = $('#partnerDtls').find('tbody tr:eq(' + (parseInt(i)) + ')');
-                    tblRow.find('#countryList').val(tblRow.find('#countryList option:contains("' + consultantHrs[i].countryName + '")').val());
-                    tblRow.find('.hr-cid').val(consultantHrs[i].cidNo);
-                    tblRow.find('#salutation').val(tblRow.find('#salutation option:contains("' + consultantHrs[i].salutationName + '")').val());
-                    tblRow.find('#designation').val(tblRow.find('#designation option:contains("' + consultantHrs[i].designationName + '")').val());
-                    tblRow.find('.name').val(consultantHrs[i].name);
-                    tblRow.find('#gender').val(consultantHrs[i].sex);
-                    if (consultantHrs[i].siCertificate == '1') {
-                        tblRow.find('.showCert').prop('checked', true);
-                    } else {
-                        tblRow.find('.showCert').prop('checked', false);
+                    for (var i in consultantHrs) {
+                        var tblRow = $('#partnerDtls').find('tbody tr:eq(' + (parseInt(i)) + ')');
+                        tblRow.find('#countryList').val(tblRow.find('#countryList option:contains("' + consultantHrs[i].countryName + '")').val());
+                        tblRow.find('.hr-cid').val(consultantHrs[i].cidNo);
+                        tblRow.find('#salutation').val(tblRow.find('#salutation option:contains("' + consultantHrs[i].salutationName + '")').val());
+                        tblRow.find('#designation').val(tblRow.find('#designation option:contains("' + consultantHrs[i].designationName + '")').val());
+                        tblRow.find('.name').val(consultantHrs[i].name);
+                        tblRow.find('#gender').val(consultantHrs[i].sex);
+                        if (consultantHrs[i].siCertificate == '1') {
+                            tblRow.find('.showCert').prop('checked', true);
+                        } else {
+                            tblRow.find('.showCert').prop('checked', false);
+                        }
                     }
                 }
-            }
-        });
+            });
+        })
     }
 
     function getEQsFinal(){

@@ -71,11 +71,8 @@
                                                         <label class="col-lg-7 form-label form-control" id="estAddressExist"></label>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 form-group">
-                                                        <label class="col-lg-5 form-label form-control">Dzongkhag</label>
-                                                        <form:select id="estDzongkhagExist" class="form-control input-sm col-lg-7" required="true" path="dzongkhagList">
-                                                            <form:option value="" label="Select Dzongkhag"/>
-                                                            <form:options items="${dzongkhagList}" itemValue="value" itemLabel="text"/>
-                                                        </form:select>
+                                                        <label class="col-lg-5 form-label">Dzongkhag</label>
+                                                        <label class="col-lg-7 form-label form-control" id="pDzongkhag"></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12">

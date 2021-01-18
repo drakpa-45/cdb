@@ -58,6 +58,9 @@ public class ContractorHR extends BaseModel implements Serializable{
     private Integer deleteRequest;
 
     @Transient
+    private Integer sendNotification;
+
+    @Transient
     private List<ContractorHRAttachment> contractorHRAs;
 
     public String getId() {
@@ -198,6 +201,14 @@ public class ContractorHR extends BaseModel implements Serializable{
 
     public Integer getDeleteRequest() {
         return deleteRequest;
+    }
+
+    public Integer getSendNotification() {
+        return sendNotification;
+    }
+
+    public void setSendNotification(Integer sendNotification) {
+        this.sendNotification = sendNotification;
     }
 
     public void setDeleteRequest(Integer deleteRequest) {

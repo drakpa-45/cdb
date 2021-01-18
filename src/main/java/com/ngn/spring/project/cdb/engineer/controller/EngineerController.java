@@ -145,7 +145,6 @@ public class EngineerController extends BaseController {
                 model.addAttribute("acknowledgement_message", "Your application for <label class='control-label'>Renewal of Engineer</label> is not able to submit.Please try again.");
                 return "architect/acknowledgement";
             }
-
         }catch (Exception e){
             System.out.print(e);
             model.addAttribute("status","failed");
@@ -153,6 +152,7 @@ public class EngineerController extends BaseController {
             return "/architect/acknowledgement";
         }
     }
+
     @PreAuthorize("isAuthenticated()")
       @RequestMapping(value ={"/public_access/emptylayout/submitengineercancellation"}, method = RequestMethod.POST)
       public String submitcancellation(ArchitectDto dto,ModelMap model,HttpServletRequest request, HttpServletResponse response) {

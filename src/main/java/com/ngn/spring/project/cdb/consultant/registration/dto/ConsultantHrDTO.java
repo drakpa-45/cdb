@@ -241,4 +241,21 @@ public class ConsultantHrDTO {
     public void setHrAttachments(List<AttachmentDTO> hrAttachments) {
         this.hrAttachments = hrAttachments;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ConsultantHrDTO that = (ConsultantHrDTO) o;
+
+        if (!cidNo.equals(that.cidNo)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return cidNo.hashCode();
+    }
 }

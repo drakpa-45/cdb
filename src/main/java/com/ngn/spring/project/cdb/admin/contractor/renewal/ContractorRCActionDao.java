@@ -28,12 +28,8 @@ public class ContractorRCActionDao extends BaseDao {
         if (createdBy ==  null){
             createdBy = userId;
         }
-        hibernateQuery(sqlQuery)
-                .setParameter("contractorId", contractorId)
-                .setParameter("userId",userId)
-                .setParameter("appStatusId",appStatusId)
-                .setParameter("createdBy",createdBy)
-                .executeUpdate();
+        hibernateQuery(sqlQuery).setParameter("contractorId", contractorId).setParameter("userId",userId)
+                .setParameter("appStatusId",appStatusId).setParameter("createdBy",createdBy).executeUpdate();
     }
 
     public List<AppliedServiceFeeDTO> getAppliedServices(String applicationNo) {
@@ -43,8 +39,7 @@ public class ContractorRCActionDao extends BaseDao {
 
     public List<ContractorHrDTO> getDeleteHrRequest(String cdbNo) {
         sqlQuery = properties.getProperty("ContractorRCActionDao.getDeleteHrRequest");
-        return hibernateQuery(sqlQuery, ContractorHrDTO.class)
-                .setParameter("cdbNo", cdbNo).list();
+        return hibernateQuery(sqlQuery, ContractorHrDTO.class).setParameter("cdbNo", cdbNo).list();
     }
 
     public List getProposedCategories(String appNo) {

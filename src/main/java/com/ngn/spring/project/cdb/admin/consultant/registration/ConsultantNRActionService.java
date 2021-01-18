@@ -124,12 +124,34 @@ public class ConsultantNRActionService extends BaseService {
         String consultantId = (String)commonService.getValue("crpconsultant","CrpConsultantId","ReferenceNo",appNo.toString());
         consultantActionDao.approve(consultantId, loggedInUser.getUserID(), aRemarks);
 
+        List<CategoryClassDTO> categoryClassDTOs = consultantActionDao.getCategoryClass(consultantId);
+        Integer tFeeAmount = 0;
+     //   tFeeAmount + categoryClassDTOs[i].aAmount;
         String emailId = (String)commonService.getValue("crpconsultant","Email","ReferenceNo",appNo.toString());
         String mailContent = "Dear User,<br>Your application for application number : "+appNo.toString()+" is approved."+
                 "<br>You may pay the required fee online through following link:<br>" +
                 "<a target='_blank' href='https://www.citizenservices.gov.bt/G2CPaymentAggregatorStg'>https://www.citizenservices.gov.bt/G2CPaymentAggregatorStg</a>" +
                 "<br>Or You may visit our CDB counters to pay the fee. " +
-                "<br><br>Note: Only after payment confirmation, your application will be done final approval. And you will get the login credential to log into system. ";
+                "<br><br>Note: Only after payment confirmation, your application will be done final approval. And you will get the login credential to log into system. " +
+                "<html>"+
+                "<table id='consultantCCTbl' class='table table-bordered table-hover'>" +
+                "<thead style='background-color: #F2F2F2'>" +
+                "<tr>" +
+                "<td>Category</td>" +
+                "<td>Fees</td>" +
+                "</tr>" +
+                "</thead>" +
+                "<tbody>" +
+                "<td>dfgdg</td>" +
+                "<td>"+
+                " <a href='javascript:void(0)' style='color: #006699' title='${categoryClassDTOs[i].obj1}' data-toggle='tooltip' data-placement='top' class='tooltipCSSSelector'><i class='fa fa-question-circle'></i></a>"+
+                " <input type='checkbox'  checked='checked' disabled id='asone' value='${c.id},${c.text}' class='ticked' name='categories[${i.index}].appliedServiceID'>"+
+                "</td> " +
+                "<td>dgdfg</td>"+
+                "<td colspan='2' align='right'>Total</td><td>"+tFeeAmount+"</td>"+
+                "</tbody>" +
+                "</table>"+
+                "</html>";
         try {
             MailSender.sendMail(emailId,"cdb@gov.bt",null,mailContent,"Application approved for payment");
         } catch (Exception e) {

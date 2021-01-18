@@ -133,6 +133,7 @@ var specializedFirmRCAction = (function () {
                         var imagelink='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo='+cidNo;
                         $('#photoM').html("<img src='"+imagelink+"'  width='200px'  height='200px' class='pull-right'/>");
                         $("#hrModal").modal('show');
+                        $("#closeModal").modal('show');
                     }
                 }
             });
@@ -303,9 +304,9 @@ var specializedFirmRCAction = (function () {
                                 verifiedApproved = verifiedApproved + "<td>(✔)</td>";
                             }else if(specializedFirmHrs[i].verified == '1'){
                                 verifiedApproved = verifiedApproved + "<td>(✔)</td>";
-                                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check'  value='1'  required='true'></td>";
+                                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' disabled value='1'  required='true'></td>";
                             }else{
-                                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' value='1'  required='true'></td>";
+                                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' disabled value='1'  required='true'></td>";
                             }
                             if (specializedFirmHrs[i].isPartnerOrOwner == '1') {
                                 owner = specializedFirmHrs[i].name;

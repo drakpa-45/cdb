@@ -205,8 +205,8 @@
                                                                         <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Trade
                                                                             <span class="text-danger">*</span></label>
                                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                            <input type="text" maxlength="100" id="trade" name="cmnTradeId" readonly class="form-control" value="${registrationDetails.trade}">
-                                                                            <input type="hidden" maxlength="100" id="cmnTradeId" name="trade" class="form-control" value="${registrationDetails.cmnTradeId}">
+                                                                            <input type="text" maxlength="100" id="cmnTradeId" name="cmnTradeId" readonly class="form-control" value="${registrationDetails.trade}">
+                                                                            <input type="hidden" maxlength="100" id="trade" name="trade" class="form-control" value="${registrationDetails.cmnTradeId}">
                                                                         </div>
                                                                     </div>
                                                                 </div>

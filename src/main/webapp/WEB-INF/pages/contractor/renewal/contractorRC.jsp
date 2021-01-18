@@ -102,7 +102,7 @@
                                         <div class="col-lg-12 form-group nextBackBtn">
                                             <div class="col-md-offset-11 col-lg-offset-10 col-xs-offset-10">
                                                 <button type="button" onclick="nextTab('feesStructure')" class="btn btn-primary">
-                                                    <i class="fa fa-arrow-right mr-2"></i>Next
+                                                    <i class="fa fa-arrow-circle-right mr-2"></i>Next
                                                 </button>
                                             </div>
                                         </div>
@@ -135,63 +135,37 @@
                                                     <td>
                                                         <input type="checkbox" style="zoom:1.6" name="incorporation" value="1" id="Incorporation" class="service_check">
                                                     </td>
-                                                    <td>
-                                                        <span>Incorporation</span>
-                                                    </td>
+                                                    <td><span>Incorporation</span></td>
                                                     <td>500.00</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>
-                                                        <input type="checkbox" style="zoom:1.6" name="changeOfFirmName" value="1" id="changeOfFirmName" class="service_check">
-                                                    </td>
-                                                    <td>
-                                                        <span>Change of Firm Name</span>
-                                                    </td>
+                                                    <td><input type="checkbox" style="zoom:1.6" name="changeOfFirmName" value="1" id="changeOfFirmName" class="service_check"></td>
+                                                    <td><span>Change of Firm Name</span></td>
                                                     <td>500.00</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>
-                                                        <input type="checkbox" style="zoom:1.6" name="changeOfLocation" value="1" class="service_check" id="changeOfLocation">
-                                                    </td>
-                                                    <td>
-                                                        <span>Change of Location</span>
-                                                    </td>
+                                                    <td><input type="checkbox" style="zoom:1.6" name="changeOfLocation" value="1" class="service_check" id="changeOfLocation"></td>
+                                                    <td><span>Change of Location</span></td>
                                                     <td>500.00</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>
-                                                        <input type="checkbox" style="zoom:1.6" name="changeOfOwner" value="1" id="changeOfOwnerId" class="service_check">
-                                                    </td>
-                                                    <td>
-                                                        <span>Change of Owner</span>
-                                                    </td>
+                                                    <td><input type="checkbox" style="zoom:1.6" name="changeOfOwner" value="1" id="changeOfOwnerId" class="service_check"></td>
+                                                    <td><span>Change of Owner</span></td>
                                                     <td>1000.00</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>
-                                                        <input type="checkbox" style="zoom:1.6" name="upgradeDowngrade" value="1" id="upgradeDowngrade" class="service_check">
-                                                    </td>
-                                                    <td>
-                                                        <span>Upgrade/Downgrade/Add Category/Classification</span>
-                                                    </td>
+                                                    <td><input type="checkbox" style="zoom:1.6" name="upgradeDowngrade" value="1" id="upgradeDowngrade" class="service_check"></td>
+                                                    <td><span>Upgrade/Downgrade/Add Category/Classification</span></td>
                                                     <td>As per Fee Structure</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>
-                                                        <input type="checkbox" style="zoom:1.6" name="updateHR" value="1" id="updateHR" class="service_check">
-                                                    </td>
-                                                    <td>
-                                                        <span>Update Human Resource</span>
-                                                    </td>
+                                                    <td><input type="checkbox" style="zoom:1.6" name="updateHR" value="1" id="updateHR" class="service_check"></td>
+                                                    <td><span>Update Human Resource</span></td>
                                                     <td> Not Applicable</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>
-                                                        <input type="checkbox" style="zoom:1.6" name="updateEq" value="1" id="updateEq" class="service_check">
-                                                    </td>
-                                                    <td>
-                                                        <span>Update Equipment</span>
-                                                    </td>
+                                                    <td><input type="checkbox" style="zoom:1.6" name="updateEq" value="1" id="updateEq" class="service_check"></td>
+                                                    <td><span>Update Equipment</span></td>
                                                     <td> Not Applicable</td>
                                                 </tr>
                                                 </tbody>
@@ -199,10 +173,10 @@
                                         </div>
                                         <div class="col-lg-12 form-group nextBackBtn">
                                             <button type="button" onclick="backTab('services')" class="btn btn-azure col-lg-offset-9">
-                                                <i class="fa fa-arrow-left"></i>Back
+                                                <i class="fa fa-arrow-circle-left"></i>Back
                                             </button>
                                             <button type="button" onclick="nextTab('services')" class="btn btn-primary">
-                                                <i class="fa fa-arrow-right"></i>Next
+                                                <i class="fa fa-arrow-circle-right"></i>Next
                                             </button>
                                         </div>
                                     </div>
@@ -273,7 +247,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card hide" id="ownerPartner">
+                                            <div class="card" id="ownerPartner1">
                                                 <div class="bg-blue card-status card-status-left"></div>
                                                 <div class="card-header">
                                                     <h3 class="card-title">Name of Owner, Partners and/or others with Controlling Interest</h3>
@@ -300,18 +274,14 @@
                                                                         <form:options items="${countryList}" itemValue="value" itemLabel="text"/>
                                                                     </form:select>
                                                                 </td>
-                                                                <td>
-                                                                    <input type="text" name="contractor.contractorHRs[0].cidNo" class="form-control hr-cid" placeholder="Text..">
-                                                                </td>
+                                                                <td><input type="text" name="contractor.contractorHRs[0].cidNo" class="form-control hr-cid" placeholder="Text.."></td>
                                                                 <td>
                                                                     <form:select id="salutation" name="contractor.contractorHRs[0].salutationId" class="form-control input-sm" data-msg-required="true" data-rule-required="true" path="salutationList">
                                                                         <form:option value="" label="Select Salutation"/>
                                                                         <form:options items="${salutationList}" itemValue="value" itemLabel="text"/>
                                                                     </form:select>
                                                                 </td>
-                                                                <td>
-                                                                    <input type="text" class="form-control name" name="contractor.contractorHRs[0].name" placeholder="Text..">
-                                                                </td>
+                                                                <td><input type="text" class="form-control name" name="contractor.contractorHRs[0].name" placeholder="Text.."></td>
                                                                 <td>
                                                                     <select id="gender" name="contractor.contractorHRs[0].sex" class="form-control sex">
                                                                         <option value="">Select Gender</option>
@@ -334,7 +304,7 @@
                                                             </tr>
                                                             </tbody>
                                                         </table>
-                                                        <div class="col-lg-12 text-right">
+                                                        <div class="col-lg-12 text-right hide" id="ownerPartner">
                                                             <button type="button" class="btn btn-outline-primary btn-sm" onclick="addRow('partnerDtls')">
                                                                 <i class="fe fe-plus mr-2"></i>Add More
                                                             </button>
@@ -343,16 +313,15 @@
                                                             </button>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group row">
+                                                    <div class="form-group row hide" id="ownerShipchangeId">
                                                         <div class="col-lg-12 col-md-12 ">
                                                             <label class="col-lg-3 col-md-3 form-label" for="ownershipChangeRemarks">Reason for Change of Owner:
                                                                 <span class="text-danger">*</span></label>
                                                             <input type="text" class="col-lg-6 form-control" name="specializedFirm.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true" placeholder="Text..">
                                                         </div>
-                                                    </div>
-                                                    <h5 class="text-orange">Attach Certificates of Ownership change</h5>
                                                     <div class="card-body">
                                                         <div class="col-lg-12">
+                                                            <h5 class="text-orange">Attach Certificates of Ownership change</h5>
                                                             <div class=""><input id="addMoreCertOwner" type="button" value="Add More Certificate" class="btn btn-primary"></div>
                                                             <table class="table table-bordered table-hover" id="certificateTblOwner">
                                                                 <thead>
@@ -379,6 +348,7 @@
                                                                 </tbody>
                                                             </table>
                                                         </div>
+                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -419,8 +389,7 @@
                                                 <div class="card-body">
                                                     <div class="form-group row">
                                                         <div class="col-lg-6 col-md-6 ">
-                                                            <label class="col-lg-4 form-label" for="estAddress">Establishment
-                                                                Address <span class="text-danger">*</span></label>
+                                                            <label class="col-lg-4 form-label" for="estAddress">Establishment Address <span class="text-danger">*</span></label>
                                                             <input type="text" class="col-lg-7 form-control" name="contractor.estAddress" id="estAddress" required="true" placeholder="Text..">
                                                         </div>
                                                         <div class="col-lg-6 col-md-6">
@@ -478,8 +447,7 @@
                                                 <tbody>
                                                     <%-- TODO:: kept as static since loading dynamic hampers the performance --%>
                                                 <tr id="W1">
-                                                    <td><input class="form-control categoryCheck" type="checkbox" name="categories[0].projectCateID"
-                                                               value="6cd737d4-a2b7-11e4-b4d2-080027dcfac6" style="width: 17px; height: 17px;"></td>
+                                                    <td><input class="form-control categoryCheck" type="checkbox" name="categories[0].projectCateID" value="6cd737d4-a2b7-11e4-b4d2-080027dcfac6" style="width: 17px; height: 17px;"></td>
                                                     <td>W1-Roads and Bridges</td>
                                                     <td><select class="form-control existingClass" disabled="">
                                                         <option value="">-Select-</option>
@@ -495,8 +463,7 @@
                                                     </select></td>
                                                 </tr>
                                                 <tr id="W2">
-                                                    <td><input class="form-control categoryCheck" type="checkbox" name="categories[1].projectCateID"
-                                                               value="8176bd2d-a2b7-11e4-b4d2-080027dcfac6" style="width: 17px; height: 17px;"></td>
+                                                    <td><input class="form-control categoryCheck" type="checkbox" name="categories[1].projectCateID" value="8176bd2d-a2b7-11e4-b4d2-080027dcfac6" style="width: 17px; height: 17px;"></td>
                                                     <td>W2-Traditional Bhutanese Painting/Finishing Works</td>
                                                     <td><select class="form-control existingClass" disabled="">
                                                         <option value="">-Select-</option>
@@ -508,8 +475,7 @@
                                                     </select></td>
                                                 </tr>
                                                 <tr id="W3">
-                                                    <td><input class="form-control categoryCheck" type="checkbox" name="categories[2].projectCateID"
-                                                               value="8afc0568-a2b7-11e4-b4d2-080027dcfac6" style="width: 17px; height: 17px;"></td>
+                                                    <td><input class="form-control categoryCheck" type="checkbox" name="categories[2].projectCateID" value="8afc0568-a2b7-11e4-b4d2-080027dcfac6" style="width: 17px; height: 17px;"></td>
                                                     <td>W3-Buildings,Irrigation,Drainage,Flood Control,Water Supply and Sewerage
                                                     </td>
                                                     <td><select class="form-control existingClass" disabled="">
@@ -526,8 +492,7 @@
                                                     </select></td>
                                                 </tr>
                                                 <tr id="W4">
-                                                    <td><input class="form-control categoryCheck" type="checkbox" name="categories[3].projectCateID"
-                                                               value="9090a82a-a2b7-11e4-b4d2-080027dcfac6" style="width: 17px; height: 17px;"></td>
+                                                    <td><input class="form-control categoryCheck" type="checkbox" name="categories[3].projectCateID" value="9090a82a-a2b7-11e4-b4d2-080027dcfac6" style="width: 17px; height: 17px;"></td>
                                                     <td>W4-Power and Telecommunication Works</td>
                                                     <td><select class="form-control existingClass" disabled="">
                                                         <option value="">-Select-</option>
@@ -688,7 +653,6 @@
                                                                         the holder of this Certificate is qualified
                                                                         to participate in public procurement
                                                                         procedure.
-
                                                                         <br> 2. The issuance of CDB Registration
                                                                         Certificate will be based largely on the
                                                                         fulfillment of the minimum criteria set
@@ -696,61 +660,48 @@
                                                                         Contractor/Consultant and Categorization of
                                                                         Works and upon certification by competent
                                                                         authority for construction professionals.
-
                                                                         <br> 3. All the registered contractors
                                                                         should comply with 'Code of ethics for
                                                                         Contractors'.
-
                                                                         <br> 4. CDB will not be accountable for any
                                                                         false/fabricated submission that could have
                                                                         led to the fulfillment of the criteria and
                                                                         subsequent issue of CDB Registration
                                                                         Certificate.
-
                                                                         <br> 5. CDB Registration Certificate once
                                                                         issued would not relieve the certificate
                                                                         holder of any relaxation on the minimum
                                                                         requirements for registration.
-
                                                                         <br> 6. Notwithstanding the provisions of
                                                                         Companies Act of Bhutan, the certificate
                                                                         issued is non-transferable even if the
                                                                         promoters separate and establish similar
                                                                         companies.
-
                                                                         <br> 7. CDB Certificate cannot be leased or
                                                                         subleased to any individual or another firm.
-
                                                                         <br> 8. Certificate is valid during the
                                                                         period for which it was issued provided it
                                                                         has not been cancelled, suspended or revoked
                                                                         by CDB or any other competent authority.
-
                                                                         <br> 9. Failing to renew within the expiry
                                                                         date will lead to penalty of Nu.100 per day.
-
                                                                         <br> 10. Failing to pay the fees for
                                                                         approved online application within 30 days
                                                                         will lead to cancellation of the
                                                                         application.
-
                                                                         <br> 11. All registered construction firm
                                                                         must attend the mandatory refresher course
                                                                         in order to apply for renewal.
-
                                                                         <br> 12. No Contractors can submit bid,
                                                                         participate in bidding or be on the
                                                                         contention for award if the registration has
                                                                         expired.
-
                                                                         <br> 13. No Contractors can
                                                                         undertake/implement works which is not
                                                                         within the scope of the registration.
-
                                                                         <br> 14. CDB may verify the resources
                                                                         committed for the projects as and when
                                                                         desires.
-
                                                                         <br> 15. The registration is subject to
                                                                         verification whenever the CDB so desires.
                                                                         CDB will inspect the minimum mandatory
@@ -759,17 +710,14 @@
                                                                         the time of monitoring, every firm must
                                                                         extend necessary support and cooperation to
                                                                         CDB Officials.
-
                                                                         <br> 16. Large and Medium Contractors must
                                                                         have Office established with Signboard
                                                                         (requirements of office and signboard as
                                                                         determined by CDB)
-
                                                                         <br> 17. Registered firms are required to
                                                                         inform the CDB of any changes in their
                                                                         address, contact details or any pertinent
                                                                         particulars within one month.
-
                                                                         <br> 18. The CDB Registration Certificate
                                                                         can be revoked, downgraded, suspended or
                                                                         cancelled at any given time if the:
@@ -1102,8 +1050,7 @@
                     </div>
                 </div>
                     <%--confirmation model--%>
-                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
-                     class="modal in" id="confirmationModel">
+                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal in" id="confirmationModel">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">

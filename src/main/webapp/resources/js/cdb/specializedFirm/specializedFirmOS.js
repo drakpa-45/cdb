@@ -38,17 +38,6 @@ function saveAndPreview(presentClass, nextClass) {
         $("." + nextClass).addClass("active");
         $("." + presentClass + ">a").append("<i class='fa fa-check ml-1'></i>");
 
-    $('#btn1').hide();
-    $('#btn2').hide();
-    $('#btn3').hide();
-    $('#btn4').hide();
-    $('#btnValCCNext').hide();
-    $('#btnValHRNext').hide();
-    $('#btn5').hide();
-    $('#btnValEqNext').hide();
-    $('#btn6').hide();
-
-    window.scroll(0, 0);
 }
 
 function nextTab(presentClass) {
@@ -67,6 +56,20 @@ function nextTab(presentClass) {
         $("." + nextClass).addClass("active");
         $("." + presentClass + ">a").append("<i class='fa fa-check ml-1'></i>");
         $('.nextBackBtn').addClass('hide');
+
+        $('#btn1').hide();
+        $('#btn2').hide();
+        $('#btn3').hide();
+        $('#btn4').hide();
+        $('#btnValCCNext').hide();
+        $('#btnValHRNext').hide();
+        $('#btn5').hide();
+        $('#btnValEqNext').hide();
+        $('#btn6').hide();
+        $('#btn7').hide();
+        $('#btn8').hide();
+
+        window.scroll(0, 0);
     }else{ //next
         $("." + presentClass + ">a").addClass('bg-blue text-white');
         $('.tab-pane').removeClass("active");

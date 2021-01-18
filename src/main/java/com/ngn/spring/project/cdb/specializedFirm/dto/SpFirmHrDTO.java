@@ -241,4 +241,20 @@ public class SpFirmHrDTO {
     public void setDeleteRequest(Integer deleteRequest) {
         this.deleteRequest = deleteRequest;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SpFirmHrDTO that = (SpFirmHrDTO) o;
+
+        if (!cidNo.equals(that.cidNo)) return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return cidNo.hashCode();
+    }
 }

@@ -242,7 +242,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card hide" id="ownerPartner">
+                                            <div class="card" id="ownerPartner1">
                                                 <div class="bg-blue card-status card-status-left"></div>
                                                 <div class="card-header">
                                                     <h3 class="card-title">Name of Owner, Partners and/or otherswith Controlling Interest</h3>
@@ -304,7 +304,7 @@
                                                             </tr>
                                                             </tbody>
                                                         </table>
-                                                        <div class="col-lg-12 text-right">
+                                                        <div class="col-lg-12 text-right hide" id="ownerPartner">
                                                             <button type="button" class="btn btn-outline-primary btn-sm" onclick="addRow('partnerDtls')">
                                                                 <i class="fe fe-plus mr-2"></i>Add More
                                                             </button>
@@ -314,16 +314,15 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group row">
+                                                <div class="form-group row hide" id="ownerShipchangeId">
                                                     <div class="col-lg-12 col-md-12 ">
                                                         <label class="col-lg-3 col-md-3 form-label" for="ownershipChangeRemarks">Reason for Change of Owner:
                                                             <span class="text-danger">*</span></label>
                                                         <input type="text" class="col-lg-6 form-control" name="consultant.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true" placeholder="Text..">
                                                     </div>
-                                                </div>
-                                                <h5 class="text-orange">Attach Certificates of Ownership change</h5>
                                                 <div class="card-body">
                                                     <div class="col-lg-12">
+                                                        <h5 class="text-orange">Attach Certificates of Ownership change</h5>
                                                         <div class=""><input id="addMoreCertOwner" type="button" value="Add More Certificate" class="btn btn-primary"></div>
                                                         <table class="table table-bordered table-center table-responsive-lg auto-index" id="certificateTblOwner">
                                                             <thead>
@@ -351,6 +350,7 @@
                                                             </tbody>
                                                         </table>
                                                     </div>
+                                                </div>
                                                 </div>
                                             </div>
                                             <div class="card ">

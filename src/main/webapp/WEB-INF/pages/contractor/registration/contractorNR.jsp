@@ -128,7 +128,7 @@
                                                 </div>
                                                 <div class="form-group row pull-right">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                                                        <button type="button" onclick="previousTab('equipment_details','saveAndPreview')" class="btn btn-success">
+                                                        <button type="button" onclick="previousTab('equipment_details','saveAndPreview')" id="btn6" class="btn btn-success">
                                                             <i class="fa fa-arrow-circle-left"></i> Previous
                                                         </button>
                                                         <button type="button" onclick="showConfirmation()" class="btn btn-primary" id="btnSubmit" disabled>

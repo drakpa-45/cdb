@@ -229,6 +229,20 @@ public class ContractorRCService extends BaseService {
         }
         //endregion
 
+        //region to save owner details if both of incoporation & change of owner service is not availed
+        if(renewalServiceType.getIncorporation() == null || renewalServiceType.getChangeOfOwner() == null){
+            List<ContractorHR> ownerList = contractorDTO.getContractor().getContractorHRs();
+            contractor.setOwnershipChangeRemarks(contractorDTO.getContractor().getOwnershipChangeRemarks());
+            for(ContractorHR contractorHR:ownerList){
+                String hrId = commonService.getRandomGeneratedId();
+                contractorHR.setId(hrId);
+                contractorHR.setContractorID(contractorId);
+                contractorHR.setIsPartnerOrOwner(TRUE_INT);
+                contractorNRService.saveHR(contractorHR, loggedInUser);
+            }
+        }
+        //end region
+
         //region late fee service id
         BigDecimal lateFee = new BigDecimal(responseMessage.getVal2());
         if(lateFee.compareTo(BigDecimal.ZERO)  != 0){

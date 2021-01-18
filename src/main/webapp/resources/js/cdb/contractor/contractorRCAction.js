@@ -331,7 +331,6 @@ var contractorRCAction = (function () {
                     addEQ("newly-added-eq",newlyAddedHrs);
                     addEQ("deleted-eq",deletedHRs);
                 }
-
             }
         })
     }
@@ -398,15 +397,12 @@ var contractorRCAction = (function () {
                 $('#regMobileNoExist').html(contractor.regMobileNo);
                 $('#regPhoneNoExist').html(contractor.regPhoneNo);
                 $('#regFaxNoExist').html(contractor.regFaxNo);
-
             }
         });
     }
 
     function addEQ(tBodyClass, contractorEQs){
-
         var eqTr = "";
-
         for (var i in contractorEQs) {
             var verifiedApprovedEq = '';
             if(contractorEQs[i].approved == '1'){
@@ -696,6 +692,21 @@ var contractorRCAction = (function () {
         })
     }
 
+    function sendNotification(){
+        if($('#sendNotification').prop('checked')){
+            var emailId= $('#regEmailExist').val();
+            alert(emailId);
+            $.ajax({
+                url:_baseURL() + '/sendNotification',
+                type: 'GET',
+                data: {cidNo: cidNo},
+                success: function (res) {
+
+                }
+            })
+        }
+    }
+
     function init(){
         approve();
         reject();
@@ -706,7 +717,8 @@ var contractorRCAction = (function () {
         sendBack();
         getAppliedServices();
         getProposedCategories();
-        checkEquipment()();
+        checkEquipment();
+        sendNotification();
     }
     return {
         init:init

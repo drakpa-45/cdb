@@ -258,7 +258,7 @@
 </div>
 <div class="col-lg-12 form-group">
     <button type="button" onclick="backTab('generalInformation','fees_structure')" class="btn btn-azure col-lg-offset-9">
-        <i class="fa fa-arrow-circle-left"></i> &nbsp;Back
+        <i class="fa fa-arrow-circle-left" id="btn2"></i> &nbsp;Back
     </button>
     <button type="button" id="btnValGINext" class="btn btn-primary">Next &nbsp;<i class="fa fa-arrow-circle-right"></i></button>
 </div>

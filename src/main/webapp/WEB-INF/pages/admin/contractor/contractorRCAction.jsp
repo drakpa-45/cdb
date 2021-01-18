@@ -13,7 +13,6 @@
 
 <body>
 <input type="hidden" id="appNoVA" value="${appNo}" name="applicationNo"/>
-
 <div class="mt-5 container mb-9">
     <div class="card" id="registrtaionFormCard">
         <div class="card-header">
@@ -469,6 +468,9 @@
                                                 </tbody>
                                             </table>
                                         </div>
+                                        <security:authorize access="hasRole('ROLE_APPROVER')">
+                                            <span class="text-danger"> Would you like to send Hr replacement notification on approval? Please tick if you wish to:<input type='checkbox' name='contractorHRs[0].sendNotification' id= "sendNotification" onclick="sendNotification()" style='zoom:1.6' value='1'></span>
+                                        </security:authorize>
                                     </div>
                                 </div>
                             </div>
@@ -762,7 +764,6 @@
     </div>
     <script src="<c:url value="/resources/js/cdb/contractor/contractorRCAction.js"/>"></script>
 </div>
-
 
 </body>
 

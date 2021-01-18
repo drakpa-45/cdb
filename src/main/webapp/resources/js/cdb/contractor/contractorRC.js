@@ -329,6 +329,7 @@ var contractorRC = (function () {
                     $('#changeOfFirmName').prop('disabled', true);
                     $('#ownerPartner').removeClass('hide');
                     $('#changeOfOwnerId').prop('disabled', true);
+                    $('#ownerShipchangeId').removeClass('hide');
                     getOwnerFinal();
                     //  sCertOwner();
                 }else{
@@ -355,11 +356,13 @@ var contractorRC = (function () {
             }else if(id == 'changeOfOwnerId' ){
                 if($this.is(':checked')) {
                     $('#ownerPartner').removeClass('hide');
+                    $('#ownerShipchangeId').removeClass('hide');
                     getOwnerFinal();
                     //  sCertOwner();
                 }else{
                     $('#ownerPartner').addClass('hide');
                     $('#cOwnershipId').addClass('hide');
+                    $('#ownerShipchangeId').addClass('hide');
                 }
             }
         });
@@ -404,20 +407,68 @@ var contractorRC = (function () {
             data: {contractorId:$('#contractorIdFinal').val(),ownerOrHR:'O'},
             success: function (data) {
 
-                if(data){
+               /* if(data){
                     $('#cIncorporation').removeClass('hide');
                     var tr = '';
-                    for(var i in data){
-                        tr = tr + "<tr>"+
-                        "<td></td>" +
-                        "<td>"+data[i].documentName+"</td>"+
-                        "<td><a href='"+_baseURL() + "/viewDownload?documentPath="+data[i].documentPath+"' target='_blank'> View </a></td>" +
-                        "<td class='file-size'></td>" +
-                        "<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
-                        "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
-                        "</tr>";
+                    for(var i in data) {
+                        if (data[i].attachmentFor == 'InSole') {
+                            tr = tr + "<tr>" +
+                            "<td></td>" +
+                            "<td>" + data[i].documentName + "</td>" +
+                            "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                            "<td class='file-size'></td>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
+                            "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                            "</tr>";
+                        }
                     }
                     $('#IncCertificateTbl').find('tbody').html(tr);
+                }else{
+                    $('#cIncorporation').addClass('hide');
+                }*/
+
+                if(data){
+                    $('#cIncorporation').removeClass('hide');
+                    $('#oIncorporation').removeClass('hide');
+                    var cIncTr = '';
+                    var categoryTr = '';
+                    var ownerTr = '';
+                    for(var i in data){
+                        if(data[i].attachmentFor == 'InSole' || data[i].attachmentFor == null) {
+                            cIncTr = cIncTr + "<tr>" +
+                            "<td></td>" +
+                            "<td>" + data[i].documentName + "</td>" +
+                            "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                            "<td></td>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
+                            "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                            "</tr>";
+                        }
+                        if(data[i].attachmentFor == 'AL'){
+                            categoryTr = categoryTr + "<tr>" +
+                            "<td></td>" +
+                            "<td>" + data[i].documentName + "</td>" +
+                            "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                            "<td></td>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
+                            "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                            "</tr>";
+                        }
+                        if(data[i].attachmentFor == 'OC'){
+                            ownerTr = ownerTr + "<tr>" +
+                            "<td></td>" +
+                            "<td>" + data[i].documentName + "</td>" +
+                            "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                            "<td></td>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
+                            "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                            "</tr>";
+                        }
+                    }
+                    $('#certificateTbl').find('tbody').html(cIncTr);
+                    $('#certificateTblOwner').find('tbody').html(ownerTr);
+                    $('#certificateTblCategory').find('tbody').html(categoryTr);
+
                 }else{
                     $('#cIncorporation').addClass('hide');
                 }
@@ -477,7 +528,7 @@ var contractorRC = (function () {
                             }
                             hrTr = hrTr + "<tr class=''>" +
                             "<td class='salutationName'><input type='hidden' class='contractorHRid' name='contractorHRs[0].id' value='"+contractorHrs[i].id +"'/>" +
-                            "<input type='hidden' class='joiningDate' value='"+contractorHrs[i].joiningDate +"'/>"+
+                            "<input type='hidden' class='joiningDate' name='contractorHRs[0].joiningDate' value='"+contractorHrs[i].joinDate +"'/>"+
                             contractorHrs[i].salutationName + "</td>" +
                             "<td class='name'>" + contractorHrs[i].name + "</td>" +
                             "<td class='cidNo'>" + contractorHrs[i].cidNo + "</td>" +

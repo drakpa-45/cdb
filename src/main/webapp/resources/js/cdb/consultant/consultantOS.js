@@ -31,6 +31,7 @@ function showAcknowledgement() {
     $("#registrtaionFormCard").hide();
     $("#acknowledgementCard").show();
 }
+
 function saveAndPreview(presentClass, nextClass) {
     var content = '<h3 class="pt-3 text-center">Fee Structure</h3>' + $(".feesStructure > .div-actual").html() +
         '<h3 class="pt-3 text-center">General Information</h3>' + $(".generalInformation > .div-actual").html() +
@@ -40,6 +41,7 @@ function saveAndPreview(presentClass, nextClass) {
         $('.tab-content').removeClass("active").addClass("active");
         $("." + nextClass).addClass("active");
         $("." + presentClass + ">a").append("<i class='fa fa-check ml-1'></i>");
+
 }
 
 function nextTab(presentClass) {
@@ -58,6 +60,19 @@ function nextTab(presentClass) {
         $("." + nextClass).addClass("active");
         $("." + presentClass + ">a").append("<i class='fa fa-check ml-1'></i>");
         $('.nextBackBtn').addClass('hide');
+
+        $('#btn1').hide();
+        $('#btn2').hide();
+        $('#btn3').hide();
+        $('#btn4').hide();
+        $('#btnValCCNext').hide();
+        $('#btnValHRNext').hide();
+        $('#btn5').hide();
+        $('#btnValEqNext').hide();
+        $('#btn6').hide();
+        $('#btn7').hide();
+        $('#btn8').hide();
+        window.scroll(0, 0);
     }else{ //next
         $("." + presentClass + ">a").addClass('bg-blue text-white');
         $('.tab-pane').removeClass("active");
@@ -257,7 +272,7 @@ var consultantOS = (function () {
             if (~option.indexOf("Incorporated") || ~option.indexOf("Sole Proprietorship")) {
                 $('#cIncorporation').removeClass('hide');
                 certificateTbl.html(cert);
-            } else{
+            }else{
                 $('#cIncorporation').addClass('hide');
                 certificateTbl.empty();
             }
@@ -412,6 +427,7 @@ var consultantOS = (function () {
                     $('#changeOfFirmName').prop('disabled', true);
                     $('#ownerPartner').removeClass('hide');
                     $('#changeOfOwnerId').prop('disabled', true);
+                    $('#ownerShipchangeId').removeClass('hide');
                     getOwnerFinal();
                 }else{
                     $('#ownershipList').prop('disabled',true);
@@ -437,11 +453,13 @@ var consultantOS = (function () {
             }else if(id == 'changeOfOwnerId' ){
                 if($this.is(':checked')) {
                     $('#ownerPartner').removeClass('hide');
+                    $('#ownerShipchangeId').removeClass('hide');
                     getOwnerFinal();
                    // sCertOwner();
                 }else{
                     $('#ownerPartner').addClass('hide');
                     $('#cOwnershipId').addClass('hide');
+                    $('#ownerShipchangeId').addClass('hide');
                 }
             }
         });
@@ -525,29 +543,31 @@ var consultantOS = (function () {
     }
 
     function getOwnerFinal(){
-        $.ajax({
-            url: _baseURL() + '/getConsultantHRsFinal',
-            type: 'GET',
-            data: {consultantId:$('#consultantIdFinal').val(),ownerOrHR:'O'},
-            success: function (res) {
-                var consultantHrs = res;
-                for (var i in consultantHrs) {
-                    var tblRow = $('#partnerDtls').find('tbody tr:eq(' + (parseInt(i)) + ')');
-                    tblRow.find('#countryList').val(tblRow.find('#countryList option:contains("' + consultantHrs[i].countryName + '")').val());
-                    tblRow.find('.hr-cid').val(consultantHrs[i].cidNo);
-                    tblRow.find('#salutation').val(tblRow.find('#salutation option:contains("' + consultantHrs[i].salutationName + '")').val());
-                    tblRow.find('#designation').val(tblRow.find('#designation option:contains("' + consultantHrs[i].designationName + '")').val());
-                    tblRow.find('.name').val(consultantHrs[i].name);
-                    tblRow.find('#gender').val(consultantHrs[i].sex);
-                    if (consultantHrs[i].siCertificate == '1') {
-                        tblRow.find('.showCert').prop('checked', true);
-                    } else {
-                        tblRow.find('.showCert').prop('checked', false);
-                    }
+        $('#btn3').on('click',function() {
+            $.ajax({
+                url: _baseURL() + '/getConsultantHRsFinal',
+                type: 'GET',
+                data: {consultantId: $('#consultantIdFinal').val(), ownerOrHR: 'O'},
+                success: function (res) {
+                    var consultantHrs = res;
+                    for (var i in consultantHrs) {
+                        var tblRow = $('#partnerDtls').find('tbody tr:eq(' + (parseInt(i)) + ')');
+                        tblRow.find('#countryList').val(tblRow.find('#countryList option:contains("' + consultantHrs[i].countryName + '")').val());
+                        tblRow.find('.hr-cid').val(consultantHrs[i].cidNo);
+                        tblRow.find('#salutation').val(tblRow.find('#salutation option:contains("' + consultantHrs[i].salutationName + '")').val());
+                        tblRow.find('#designation').val(tblRow.find('#designation option:contains("' + consultantHrs[i].designationName + '")').val());
+                        tblRow.find('.name').val(consultantHrs[i].name);
+                        tblRow.find('#gender').val(consultantHrs[i].sex);
+                        if (consultantHrs[i].siCertificate == '1') {
+                            tblRow.find('.showCert').prop('checked', true);
+                        } else {
+                            tblRow.find('.showCert').prop('checked', false);
+                        }
 
+                    }
                 }
-            }
-        });
+            });
+        })
     }
 
     function getEQsFinal(){

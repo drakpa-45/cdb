@@ -31,8 +31,7 @@ public class SpecializedFirmRCActionDao extends BaseDao {
 
     public List<ContractorHrDTO> getDeleteHrRequest(String cdbNo) {
         sqlQuery = properties.getProperty("SpecializedFirmRCActionDao.getDeleteHrRequest");
-        return hibernateQuery(sqlQuery, SpFirmHrDTO.class)
-                .setParameter("cdbNo", cdbNo).list();
+        return hibernateQuery(sqlQuery, SpFirmHrDTO.class).setParameter("cdbNo", cdbNo).list();
     }
 
     public List getProposedCategories(String appNo) {
@@ -46,11 +45,7 @@ public class SpecializedFirmRCActionDao extends BaseDao {
         if (createdBy ==  null){
             createdBy = userId;
         }
-        hibernateQuery(sqlQuery)
-                .setParameter("specializedFirmId", specializedFirmId)
-                .setParameter("userId",userId)
-                .setParameter("appStatusId",appStatusId)
-                .setParameter("createdBy",createdBy)
-                .executeUpdate();
+        hibernateQuery(sqlQuery).setParameter("specializedFirmId", specializedFirmId).setParameter("userId",userId)
+                .setParameter("appStatusId",appStatusId).setParameter("createdBy",createdBy).executeUpdate();
     }
 }

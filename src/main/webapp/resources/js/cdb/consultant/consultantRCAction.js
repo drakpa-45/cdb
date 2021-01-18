@@ -305,9 +305,8 @@ var consultantRCAction = (function () {
                             }
                         }
                         $('#partnerDtls').find('tbody').html(partnerHrTr);
-
                         getConsultantFinal(applicationNo);
-                    } else {
+                    } else{
                         warningMsg(res.text);
                     }
                 }

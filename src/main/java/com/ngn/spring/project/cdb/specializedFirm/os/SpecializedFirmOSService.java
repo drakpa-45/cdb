@@ -168,13 +168,13 @@ public class SpecializedFirmOSService extends BaseService {
         //endregion
 
         //region update HR
-        if(renewalServiceType.getUpdateHR() != null){
+        if(renewalServiceType.getUpdateHR() != null) {
             List<SpFirmHR> hrList = spFirmDTO.getSpFirmHRs();
             for(SpFirmHR spFirmHR:hrList){
                 if(spFirmHR.getDeleteRequest() != null && spFirmHR.getDeleteRequest() == 1){
                     //to save deleted hr
                     specializedFirmRDao.saveDeleteHrRequest(spFirmHR.getId());
-                }else{
+                } else {
                     if(emptyNullCheck(spFirmHR.getId())){
                         spFirmHR.setId(commonService.getRandomGeneratedId());
                     }

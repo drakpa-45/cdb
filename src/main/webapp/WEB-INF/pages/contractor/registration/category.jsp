@@ -42,9 +42,9 @@
     </table>
 </div>
 <div class="col-lg-12 form-group">
-    <button type="button" onclick="backTab('category_details', 'general_Information')"
+    <button type="button" id="btn3" onclick="backTab('category_details', 'general_Information')"
             class="btn btn-azure col-lg-offset-9">
-        <i class="fa fa-arrow-circle-left"></i> &nbsp; Back
+        <i class="fa fa-arrow-circle-left" ></i> &nbsp; Back
     </button>
     <button type="button" id="btnValCCNext" class="btn btn-primary">Next &nbsp;
         <i class="fa fa-arrow-circle-right"></i>

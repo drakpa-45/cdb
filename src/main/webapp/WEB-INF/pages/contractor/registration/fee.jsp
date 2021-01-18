@@ -31,7 +31,7 @@
     <div class="col-md-offset-11 col-lg-offset-10 col-xs-offset-10">
         <button type="button"
                 onclick="nextTab('fees_structure','general_Information')"
-                class="btn btn-primary">Next &nbsp;
+                class="btn btn-primary" id="btn1">Next &nbsp;
             <i class="fa fa-arrow-circle-right"></i>
         </button>
     </div>

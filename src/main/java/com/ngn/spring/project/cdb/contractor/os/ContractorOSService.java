@@ -227,6 +227,20 @@ public class ContractorOSService extends BaseService {
         }
         //endregion
 
+        //region to save owner details if both of incoporation & change of owner service is not availed
+        if(renewalServiceType.getIncorporation() == null || renewalServiceType.getChangeOfOwner() == null){
+            List<ContractorHR> ownerList = contractorDTO.getContractor().getContractorHRs();
+            contractor.setOwnershipChangeRemarks(contractorDTO.getContractor().getOwnershipChangeRemarks());
+            for(ContractorHR contractorHR:ownerList){
+                String hrId = commonService.getRandomGeneratedId();
+                contractorHR.setId(hrId);
+                contractorHR.setContractorID(contractorId);
+                contractorHR.setIsPartnerOrOwner(TRUE_INT);
+                contractorNRService.saveHR(contractorHR, loggedInUser);
+            }
+        }
+       //end region
+
         //region save applied service and payment
         appliedServicesList.stream().filter(c-> !c.isEmpty()).forEach(
                 c->contractorRCService.saveAppliedS(contractorId,c,loggedInUser)
@@ -251,6 +265,7 @@ public class ContractorOSService extends BaseService {
             }
         }
     }
+
     public String saveOS(Contractor contractor,LoggedInUser loggedInUser){
         String referenceNo = commonService.getNextID("crpcontractor", "ReferenceNo").toString();
         contractor.setReferenceNo(referenceNo);
@@ -280,11 +295,9 @@ public class ContractorOSService extends BaseService {
         contractorRCDao.saveOrUpdate(contractor);
 
         return referenceNo;
-
     }
 
     public void saveCCUpgrade(Contractor contractor,List<ConCategory> categories, LoggedInUser loggedInUser){
-
         categories = categories.stream().filter(c-> c.getProjectCateID() != null).collect(Collectors.toList());
 
         BigDecimal totalRenewalFee = BigDecimal.ZERO;

@@ -326,7 +326,7 @@
     </div>
 </div>
 <div class="col-lg-12 form-group">
-    <button type="button" onclick="backTab('equipment_details','human_resource_criteria')" class="btn btn-azure col-lg-offset-9">
+    <button type="button" onclick="backTab('equipment_details','human_resource_criteria')" id="btn5" class="btn btn-azure col-lg-offset-9">
         <i class="fa fa-arrow-circle-left"></i>&nbsp; Back
     </button>
     <button type="button" class="btn btn-primary" id="btnValEqNext">Save & Preview &nbsp;
@@ -368,7 +368,7 @@
                 $('#eq2').prop('disabled', false).prop('required', true);
                 $('#eq3').val(1).prop('disabled', true);
             } else {
-                $('#eq2').val('').prop('disabled', true);
+                $('#eq2').val('').prop('disabled', true).prop('required', false);
                 $('#eq3').val('').prop('disabled', false);
             }
         })

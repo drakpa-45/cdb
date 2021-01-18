@@ -1,4 +1,3 @@
-
 /*Contractor Dao*/
 ContractorDao.gFeeStructure = SELECT cc.`Id` AS id,cc.`Name` AS name,cc.`Code` AS code,cc.`RegistrationFee` AS registrationFee,cc.`RenewalFee` AS renewalFee FROM `cmncontractorclassification` cc where (:category is null or cc.Id =:category) ORDER BY referenceNo ASC
 ContractorDao.gContractCategory = SELECT wc.Id AS id, wc.`Name` AS name,wc.`Code` AS code FROM `cmncontractorworkcategory` wc ORDER BY referenceNo ASC
@@ -61,11 +60,11 @@ LEFT JOIN `cmnlistitem` st ON st.`Id` = hr.`CmnServiceTypeId` LEFT JOIN `cmnlist
 ContractorRCDao.getEquipmentFinal = SELECT ce.`Id` id, eq.`Name` equipmentName,ce.`RegistrationNo` registrationNo,ce.`SerialNo` serialNo,ce.`Quantity` quantity,ce.`ModelNo` modelNo ,ce.DeleteRequest AS deleteRequest FROM `crpcontractorequipmentfinal` ce INNER JOIN `cmnequipment`  eq ON ce.`CmnEquipmentId` = eq.`Id` WHERE ce.`CrpContractorFinalId` =:contractorId
 ContractorRCDao.getHRAttachmentsFinal = SELECT a.Id as id,a.`DocumentName` documentName,`DocumentPath` documentPath, `FileType` fileType FROM `crpcontractorhumanresourceattachmentfinal` a WHERE a.`CrpContractorHumanResourceFinalId` = :hrId
 ContractorRCDao.getEQAttachmentsFinal = SELECT a.Id as id,a.`DocumentName` documentName,`DocumentPath` documentPath, `FileType` fileType FROM `crpcontractorequipmentattachmentfinal` a WHERE a.`CrpContractorEquipmentFinalId`  = :eqId
-ContractorRCDao.getCategoryClassFinal = SELECT 	`Id` AS id, `CrpContractorFinalId` AS contractorId,`CmnProjectCategoryId` AS categoryId,`CmnAppliedClassificationId` AS aClassId, `CmnVerifiedClassificationId` AS vClassId, `CmnApprovedClassificationId` AS apClassId FROM `crpcontractorworkclassificationfinal` WHERE CrpContractorFinalId =:contractorId
+ContractorRCDao.getCategoryClassFinal = SELECT 	`Id` AS id, `CrpContractorFinalId` AS contractorId,`CmnProjectCategoryId` AS categoryId,`CmnAppliedClassificationId` AS aClassId, `CmnVerifiedClassificationId` AS vClassId, `CmnApprovedClassificationId` AS apClassId FROM `crpcontractorworkclassificationfinal` WHERE CrpContractorFinalId =:contractorId ORDER BY CmnProjectCategoryId
 ContractorRCDao.saveDeleteHrRequest = Update crpcontractorhumanresourcefinal set DeleteRequest = 1 where Id =:hrId
 ContractorRCDao.saveDeleteEqRequest = Update crpcontractorequipmentfinal set DeleteRequest = 1 where Id =:eqId
 ContractorRCDao.auditMemo = SELECT CONCAT('You have following audit memo:<br>',AIN,' : ',`AuditObservation`) AS auditObservation FROM `crpcontractorauditclearance` WHERE `CrpContractorConsultantId` =:contractorFinalId AND  `Dropped` = '0'
-ContractorRCDao.getIncAttachmentFinal = SELECT DocumentName AS documentName, DocumentPath documentPath,FileType AS fileType FROM crpcontractorattachmentfinal WHERE CrpContractorFinalId =:contractorFinalId
+ContractorRCDao.getIncAttachmentFinal = SELECT DocumentName AS documentName, DocumentPath documentPath,FileType AS fileType,AttachmentFor AS attachmentFor FROM crpcontractorattachmentfinal WHERE CrpContractorFinalId =:contractorFinalId
 
 /*Contractor Renewal Action Dao*/
 ContractorRCActionDao.getAppliedServices = SELECT a.ReferenceNo applicationNo,c.CmnServiceTypeId serviceId,d.referenceNo serviceRefNo, d.Name serviceName, e.PaymentAmount ,a.NameOfFirm firmName,b.Name AS appStatus,a.ApplicationDate applicationDate FROM crpcontractor a INNER JOIN cmnlistitem b ON b.Id  = a.CmnApplicationRegistrationStatusId INNER JOIN crpcontractorappliedservice c ON c.CrpContractorId = a.CrpContractorId INNER JOIN crpservice d ON d.Id = c.CmnServiceTypeId INNER JOIN crpcontractorservicepayment  e ON e.CrpContractorId = c.CrpContractorId AND e.CmnServiceTypeId = c.CmnServiceTypeId WHERE a.ReferenceNo=:applicationNo

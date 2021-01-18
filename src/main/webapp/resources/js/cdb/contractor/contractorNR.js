@@ -41,7 +41,18 @@ function saveAndPreview(presentClass, nextClass) {
     $("." + nextClass).addClass("active");
     $("." + presentClass + ">a").append("<i class='fa fa-check ml-1'></i>");
 
-    //$("#" + nextClass).prepend(content);
+    $('#btn1').hide();
+    $('#btn2').hide();
+    $('#btnValGINext').hide();
+    $('#btnValCCNext').hide();
+    $('#btn3').hide();
+    $('#btn4').hide();
+    $('#btnValHRNext').hide();
+    $('#btn5').hide();
+    $('#btnValEqNext').hide();
+    $('#btn6').hide();
+
+    window.scroll(0, 0);
 }
 
 var hr_modal = $("#hrModal").html();

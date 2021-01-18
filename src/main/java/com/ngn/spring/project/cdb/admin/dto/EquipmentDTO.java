@@ -154,4 +154,20 @@ public class EquipmentDTO {
     public void setVehicleDetailses(List<VehicleDetails> vehicleDetailses) {
         this.vehicleDetailses = vehicleDetailses;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        EquipmentDTO that = (EquipmentDTO) o;
+
+        if (!registrationNo.equals(that.registrationNo)) return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return registrationNo.hashCode();
+    }
 }
