@@ -268,6 +268,8 @@
                                                                     <th>Gender</th>
                                                                     <th>Designation</th>
                                                                     <th>Show<br>in<br>certificate</th>
+                                                                    <th>Delete Request?</th>
+                                                                   <%-- <th>Action</th>--%>
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -309,6 +311,8 @@
                                                                             <i class="custom-control-label"></i>
                                                                         </label>
                                                                     </td>
+                                                                    <td><input type='checkbox' name='contractor.contractorHRs[0].deleteRequest' value='1'></td>
+                                                                    <%--<td class='action'><button class='btn-sm btn-info btn-block edit-rowOW'>Edit</button></td>--%>
                                                                 </tr>
                                                                 </tbody>
                                                             </table>
@@ -961,6 +965,88 @@
                         </div>
                     </div>
                 </div>
+                          <%--Owner add model--%>
+                        <div aria-hidden="true" aria-labelledby="hrModalLabel" role="dialog" class="modal fade in"
+                             id="addOwModal">
+                            <div class="modal-dialog modal-lg" id="ownerModal">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 id="ownerModalLabel" class="modal-title">Add Human Resource</h4>
+                                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button"></button>
+                                    </div>
+                                    <div class="modal-body form-horizontal">
+                                        <div class="modal-div">
+                                            <div class="form-group">
+                                                <input type="hidden" id="id5Edit" name="contractorHRs[0].id">
+                                                <label class="col-lg-2">Nationality
+                                                    <span class="text-danger">*</span>:</label>
+                                                <div class="col-lg-4">
+                                                    <select name="contractorHRs[0].countryId" id="country" required="" class="form-control custom-select text-left select-beast country">
+                                                        <option value="">Select Country</option>
+                                                        <c:forEach var="item" items="${countryList}">
+                                                            <option value="${item.value}"><c:out value="${item.text}"/></option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                                <label class="col-md-2 col-lg-2">CID/Work Permit No <span class="text-danger">*</span>:</label>
+                                                <div class="col-lg-4">
+                                                    <div class="input-icon">
+                                                      <span class="input-icon-addon">
+                                                         <i class="fa fa-address-card-o"></i>
+                                                      </span>
+                                                        <input type="text" name="contractorHRs[0].cidNo" class="form-control hr-cid" id="cidNo1" required="" placeholder="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-2">Salutation
+                                                    <span class="text-danger">*</span>:</label>
+                                                <div class="col-lg-4">
+                                                    <select name="contractorHRs[0].salutationId" id="salutationId" required="" class="form-control custom-select text-left select-beast">
+                                                        <option value="">Select Salutation</option>
+                                                        <c:forEach var="item" items="${salutationList}">
+                                                            <option value="${item.value}"><c:out value="${item.text}"/></option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                                <label class="col-lg-2">Name
+                                                    <span class="text-danger">*</span>:</label>
+                                                <div class="col-lg-4">
+                                                    <div class="input-icon">
+                                                        <span class="input-icon-addon"><i class="fe fe-user"></i></span>
+                                                        <input type="text" name="contractorHRs[0].name" id="name" class="form-control name" required="" placeholder="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-2">Gender<span class="text-danger">*</span>:</label>
+                                                <div class="col-lg-4">
+                                                    <select name="contractorHRs[0].sex" id="sex" required="" class="form-control custom-select text-left select-beast sex">
+                                                        <option value="">Select Gender</option>
+                                                        <option value="M">Male</option>
+                                                        <option value="F">Female</option>
+                                                    </select>
+                                                </div>
+                                                <label class="col-lg-2">Designation
+                                                    <span class="text-danger">*</span>:</label>
+                                                <div class="col-lg-4">
+                                                    <select name="contractorHRs[0].designationId" id="designationId" required="" class="form-control custom-select text-left select-beast">
+                                                        <option value="">Select Designation</option>
+                                                        <c:forEach var="item" items="${designationList}">
+                                                            <option value="${item.value}"><c:out value="${item.text}"/></option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary" onclick="getModalData('partnerDtls','hr',7)" type="button">OK</button>
+                                        <button data-dismiss="modal" class="btn btn-warning" target="#addHRModal" type="button">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <%--Equipment addmore model--%>
                 <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" class="modal fade in" id="eqModal">
                     <div class="modal-dialog modal-lg">

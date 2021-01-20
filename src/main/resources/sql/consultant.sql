@@ -25,7 +25,7 @@ ConsultantDao.getConsultantOngoingApp = SELECT aa.`CrpConsultantId` consultantId
 ConsultantActionDao.getCDBNoFromAppNo = SELECT b.cdbno FROM  crpconsultant a INNER JOIN crpconsultantfinal b ON a.email = b.email WHERE a.referenceNo =:appNo
 
 ConsultantActionDao.getConsultantHRs = SELECT hr.Id AS id,hr.CrpConsultantId consultantID,hr.CIDNo cidNo,hr.Name AS name, hr.Sex sex,hr.ShowInCertificate AS siCertificate, hr.Verified as verified,hr.Approved \
-,hr.IsPartnerOrOwner isPartnerOrOwner,DATE_FORMAT(hr.JoiningDate, '%d-%m-%Y') joinDate,sa.Name salutationName,co.Name countryName,qu.Name qualificationName,st.Name serviceTypeName,td.Name tradeName,de.Name designationName \
+,hr.IsPartnerOrOwner isPartnerOrOwner,hr.DeleteRequest AS deleteRequest,DATE_FORMAT(hr.JoiningDate, '%d-%m-%Y') joinDate,sa.Name salutationName,co.Name countryName,qu.Name qualificationName,st.Name serviceTypeName,td.Name tradeName,de.Name designationName \
 FROM crpconsultanthumanresource hr INNER JOIN cmnlistitem sa ON sa.Id = hr.CmnSalutationId INNER JOIN cmncountry co ON co.Id = hr.CmnCountryId LEFT JOIN cmnlistitem qu ON qu.Id = hr.CmnQualificationId \
 LEFT JOIN cmnlistitem st ON st.Id = hr.CmnServiceTypeId LEFT JOIN cmnlistitem td ON td.Id = hr.CmnTradeId INNER JOIN cmnlistitem de ON de.Id = hr.CmnDesignationId WHERE hr.CrpConsultantId =:consultantId
 

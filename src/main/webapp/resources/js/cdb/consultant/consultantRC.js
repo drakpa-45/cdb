@@ -968,6 +968,7 @@ var consultantRC = (function () {
         enableRegistrationNo();
         editIncAttachment();
         isFirmNameUnique();
+        getOwnerFinal();
     }
     return {
         init:init

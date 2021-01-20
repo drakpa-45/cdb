@@ -100,6 +100,10 @@ public class ContractorOSService extends BaseService {
             List<ContractorHR> ownerList = contractorDTO.getContractor().getContractorHRs();
             contractor.setOwnershipChangeRemarks(contractorDTO.getContractor().getOwnershipChangeRemarks());
             for(ContractorHR contractorHR:ownerList){
+                if(contractorHR.getDeleteRequest() != null && contractorHR.getDeleteRequest() == 1){
+                    //to save deleted hr
+                    contractorRCDao.saveDeleteHrRequest(contractorHR.getId());
+                }
                 String hrId = commonService.getRandomGeneratedId();
                 contractorHR.setId(hrId);
                 contractorHR.setContractorID(contractorId);
@@ -154,6 +158,11 @@ public class ContractorOSService extends BaseService {
             List<ContractorHR> ownerList = contractorDTO.getContractor().getContractorHRs();
 
             for(ContractorHR contractorHR:ownerList){
+                if(contractorHR.getDeleteRequest() != null && contractorHR.getDeleteRequest() == 1){
+                    //to save deleted hr
+                    contractorHR.setDeleteRequest(1);
+                    contractorRCDao.saveDeleteHrRequest(contractorHR.getId());
+                }
                 String hrId = commonService.getRandomGeneratedId();
                 contractorHR.setId(hrId);
                 contractorHR.setContractorID(contractorId);
@@ -228,7 +237,7 @@ public class ContractorOSService extends BaseService {
         //endregion
 
         //region to save owner details if both of incoporation & change of owner service is not availed
-        if(renewalServiceType.getIncorporation() == null || renewalServiceType.getChangeOfOwner() == null){
+        if(renewalServiceType.getIncorporation() == null && renewalServiceType.getChangeOfOwner() == null){
             List<ContractorHR> ownerList = contractorDTO.getContractor().getContractorHRs();
             contractor.setOwnershipChangeRemarks(contractorDTO.getContractor().getOwnershipChangeRemarks());
             for(ContractorHR contractorHR:ownerList){

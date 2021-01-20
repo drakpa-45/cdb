@@ -1095,6 +1095,7 @@ var consultantOS = (function () {
         editIncAttachment();
         editInModalOwner();
         isFirmNameUnique();
+        getOwnerFinal();
     }
     return {
         init:init

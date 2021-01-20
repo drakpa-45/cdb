@@ -334,6 +334,7 @@ var spFirmRC = (function () {
                     $('#changeOfFirmName').prop('disabled', true);
                     $('#ownerPartner').removeClass('hide');
                     $('#changeOfOwnerId').prop('disabled', true);
+                    $('#ownerShipchangeId').removeClass('hide');
                     getOwnerFinal();
                     //  sCertOwner();
                 }else{
@@ -360,11 +361,13 @@ var spFirmRC = (function () {
             }else if(id == 'changeOfOwnerId' ){
                 if($this.is(':checked')) {
                     $('#ownerPartner').removeClass('hide');
+                    $('#ownerShipchangeId').removeClass('hide');
                     getOwnerFinal();
                     //  sCertOwner();
                 }else{
                     $('#ownerPartner').addClass('hide');
                     $('#cOwnershipId').addClass('hide');
+                    $('#ownerShipchangeId').addClass('hide');
                 }
             }
         });
@@ -510,30 +513,31 @@ var spFirmRC = (function () {
     }
 
     function getOwnerFinal(){
-        $.ajax({
-            url: _baseURL() + '/getSpFirmHRsFinal',
-            type: 'GET',
-            data: {specializedFirmId:$('#spFirmHRidIdFinal').val(),ownerOrHR:'O'},
-            success: function (res) {
-                var specializedFirmHrs = res;
+        $('#btn7').on('click',function() {
+            $.ajax({
+                url: _baseURL() + '/getSpFirmHRsFinal',
+                type: 'GET',
+                data: {specializedFirmId: $('#spFirmHRidIdFinal').val(), ownerOrHR: 'O'},
+                success: function (res) {
+                    var specializedFirmHrs = res;
 
-                for (var i in specializedFirmHrs) {
-                    var tblRow = $('#partnerDtls').find('tbody tr:eq(' + (parseInt(i)) + ')');
-                    tblRow.find('#countryList').val(tblRow.find('#countryList option:contains("' + specializedFirmHrs[i].countryName + '")').val());
-                    tblRow.find('.hr-cid').val(specializedFirmHrs[i].cidNo);
-                    tblRow.find('#salutation').val(tblRow.find('#salutation option:contains("' + specializedFirmHrs[i].salutationName + '")').val());
-                    tblRow.find('#designation').val(tblRow.find('#designation option:contains("' + specializedFirmHrs[i].designationName + '")').val());
-                    tblRow.find('.name').val(specializedFirmHrs[i].name);
-                    tblRow.find('#gender').val(specializedFirmHrs[i].sex);
-                    if (specializedFirmHrs[i].siCertificate == '1') {
-                        tblRow.find('.showCert').prop('checked', true);
-                    } else {
-                        tblRow.find('.showCert').prop('checked', false);
+                    for (var i in specializedFirmHrs) {
+                        var tblRow = $('#partnerDtls').find('tbody tr:eq(' + (parseInt(i)) + ')');
+                        tblRow.find('#countryList').val(tblRow.find('#countryList option:contains("' + specializedFirmHrs[i].countryName + '")').val());
+                        tblRow.find('.hr-cid').val(specializedFirmHrs[i].cidNo);
+                        tblRow.find('#salutation').val(tblRow.find('#salutation option:contains("' + specializedFirmHrs[i].salutationName + '")').val());
+                        tblRow.find('#designation').val(tblRow.find('#designation option:contains("' + specializedFirmHrs[i].designationName + '")').val());
+                        tblRow.find('.name').val(specializedFirmHrs[i].name);
+                        tblRow.find('#gender').val(specializedFirmHrs[i].sex);
+                        if (specializedFirmHrs[i].siCertificate == '1') {
+                            tblRow.find('.showCert').prop('checked', true);
+                        } else {
+                            tblRow.find('.showCert').prop('checked', false);
+                        }
                     }
                 }
-            }
-
-        });
+            });
+        })
     }
 
     function getEQsFinal(){
@@ -898,6 +902,7 @@ var spFirmRC = (function () {
         getPersonalInfoHR();
         editIncAttachment();
         isFirmNameUnique();
+        getOwnerFinal();
     }
 
     return {

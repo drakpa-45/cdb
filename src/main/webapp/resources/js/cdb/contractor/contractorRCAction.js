@@ -269,7 +269,7 @@ var contractorRCAction = (function () {
                             }else{
                                 verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' disabled class='check' value='1'  required=''></td>";
                             }
-                            if (contractorHrs[i].isPartnerOrOwner == '1') {
+                            if (contractorHrs[i].isPartnerOrOwner == '1' && contractorHrs[i].deleteRequest != '1') {
                                 owner = contractorHrs[i].name;
                                 m++;
                                 partnerHrTr = partnerHrTr + "<tr><td>" + m + "</td>" +

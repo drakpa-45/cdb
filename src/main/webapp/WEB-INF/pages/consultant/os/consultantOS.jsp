@@ -267,7 +267,7 @@
                                                                     <th>Designation</th>
                                                                     <th>Show<br>in<br>certificate</th>
                                                                     <th>Delete Request?</th>
-                                                                    <th>Action</th>
+                                                                   <%-- <th>Action</th>--%>
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -305,8 +305,8 @@
                                                                             <i class="custom-control-label"></i>
                                                                         </label>
                                                                     </td>
-                                                                    <td><input type='checkbox' name='consultantHRs[0].deleteRequest' value='1'></td>
-                                                                   <td class='action'><button class='btn-sm btn-info btn-block edit-rowOW'>Edit</button></td>
+                                                                    <td><input type='checkbox' name='consultant.consultantHRs[0].deleteRequest' value='1'></td>
+                                                                  <%-- <td class='action'><button class='btn-sm btn-info btn-block edit-rowOW'>Edit</button></td>--%>
                                                                 </tr>
                                                                 </tbody>
                                                             </table>
@@ -420,17 +420,17 @@
                                                                 <input type="email" class=" form-control col-lg-7" name="consultant.regEmail" id="regEmail" required="true" placeholder="Text..">
                                                             </div>
                                                             <div class="col-lg-6 col-md-6 ">
-                                                                <label class="col-lg-4 form-label">Mobile No <span class="text-danger">*</span></label>
+                                                                <label class="col-lg-4 form-label">Mobile Number <span class="text-danger">*</span></label>
                                                                 <input type="text" class=" form-control col-lg-7" name="consultant.regMobileNo" id="regMobileNo" required="true" placeholder="Text..">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <div class="col-lg-6 col-md-6">
-                                                                <label class="col-lg-4 form-label">Telephone No </label>
+                                                                <label class="col-lg-4 form-label">Telephone Number </label>
                                                                 <input type="text" class="form-control col-lg-7" name="consultant.regPhoneNo" id="regPhoneNo" placeholder="Text..">
                                                             </div>
                                                             <div class="col-lg-6 col-md-6">
-                                                                <label class="col-lg-4 form-label">Fax No </label>
+                                                                <label class="col-lg-4 form-label">Fax Number </label>
                                                                 <input type="text" class="form-control col-lg-7" name="consultant.regFaxNo" id="regFaxNo" placeholder="Text..">
                                                             </div>
                                                         </div>

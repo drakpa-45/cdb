@@ -237,6 +237,20 @@ public class SpecializedFirmRService extends BaseService {
         }
         //endregion
 
+        //region to save owner when both incoporation & ownerchanged is not availed
+        if(renewalServiceType.getChangeOfOwner() == null || renewalServiceType.getIncorporation() ==  null){
+            List<SpFirmHR> ownerList = spFirmDTO.getSpecializedFirm().getSpFirmHRs();
+            specializedFirm.setOwnershipChangeRemarks(spFirmDTO.getSpecializedFirm().getOwnershipChangeRemarks());
+            for(SpFirmHR spFirmHR:ownerList){
+                String hrId = commonService.getRandomGeneratedId();
+                spFirmHR.setId(hrId);
+                spFirmHR.setSpecializedID(specializedFirmId);
+                spFirmHR.setIsPartnerOrOwner(TRUE_INT);
+                specializedFirmService.saveHR(spFirmHR, loggedInUser);
+            }
+        }
+        //endregion
+
         //region late fee service id
         BigDecimal lateFee = new BigDecimal(responseMessage.getVal2());
         if(lateFee.compareTo(BigDecimal.ZERO) != 0){

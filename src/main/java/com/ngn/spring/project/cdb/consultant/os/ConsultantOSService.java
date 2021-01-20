@@ -78,7 +78,6 @@ public class ConsultantOSService extends BaseService {
      */
     @Transactional(readOnly = false)
     public ResponseMessage save(ConsultantDTO consultantDTO, RenewalServiceType renewalServiceType, LoggedInUser loggedInUser, HttpServletRequest request) throws Exception {
-
         if(renewalServiceType == null){
             return responseMessage;
         }
@@ -112,6 +111,11 @@ public class ConsultantOSService extends BaseService {
 
             List<ConsultantHR> ownerList = consultantDTO.getConsultant().getConsultantHRs();
             for(ConsultantHR consultantHR:ownerList){
+                if(consultantHR.getDeleteRequest() != null && consultantHR.getDeleteRequest() == 1){
+                    //to save deleted owner
+                    consultantHR.setDeleteRequest(1);
+                    consultantRCDao.saveDeleteHrRequest(consultantHR.getId());
+                }
                 String hrId = commonService.getRandomGeneratedId();
                 consultantHR.setId(hrId);
                 consultantHR.setConsultantID(consultantId);
@@ -166,6 +170,11 @@ public class ConsultantOSService extends BaseService {
             List<ConsultantHR> ownerList = consultantDTO.getConsultant().getConsultantHRs();
 
             for(ConsultantHR consultantHR:ownerList){
+                if(consultantHR.getDeleteRequest() != null && consultantHR.getDeleteRequest() == 1){
+                    //to save deleted owner
+                    consultantHR.setDeleteRequest(1);
+                    consultantRCDao.saveDeleteHrRequest(consultantHR.getId());
+                }
                 String hrId = commonService.getRandomGeneratedId();
                 consultantHR.setId(hrId);
                 consultantHR.setConsultantID(consultantId);
@@ -239,6 +248,19 @@ public class ConsultantOSService extends BaseService {
             }
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "9");
             appliedServicesList.add(appliedService);
+        }
+        //endregion
+
+        //region to save owner when both incoporation & ownerchanged is not availed
+        if(renewalServiceType.getIncorporation() == null || renewalServiceType.getChangeOfOwner() == null){
+            List<ConsultantHR> ownerList = consultantDTO.getConsultant().getConsultantHRs();
+            for(ConsultantHR consultantHR:ownerList){
+                String hrId = commonService.getRandomGeneratedId();
+                consultantHR.setId(hrId);
+                consultantHR.setConsultantID(consultantId);
+                consultantHR.setIsPartnerOrOwner(TRUE_INT);
+                consultantNRService.saveHR(consultantHR, loggedInUser);
+            }
         }
         //endregion
 

@@ -241,6 +241,19 @@ public class ConsultantRCService extends BaseService {
         }
         //endregion
 
+        //region to save owner when both incoporation & ownerchanged is not availed
+        if(renewalServiceType.getIncorporation() == null || renewalServiceType.getChangeOfOwner() == null){
+            List<ConsultantHR> ownerList = consultantDTO.getConsultant().getConsultantHRs();
+            for(ConsultantHR consultantHR:ownerList){
+                String hrId = commonService.getRandomGeneratedId();
+                consultantHR.setId(hrId);
+                consultantHR.setConsultantID(consultantId);
+                consultantHR.setIsPartnerOrOwner(TRUE_INT);
+                consultantNRService.saveHR(consultantHR, loggedInUser);
+            }
+        }
+        //endregion
+
         //late fee service id
         BigDecimal lateFee = new BigDecimal(responseMessage.getVal2());
         if(lateFee.compareTo(BigDecimal.ZERO) == 0){

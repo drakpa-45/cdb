@@ -36,6 +36,8 @@ public class ContractorEQ extends BaseModel implements Serializable {
     private String modelNo;
     @Column(name = "Quantity")
     private Integer quantity;
+    @Column(name = "EditCheck")
+    private Integer editCheck;
 
     @Column(name = "Verified")
     private Integer verified;
@@ -104,6 +106,14 @@ public class ContractorEQ extends BaseModel implements Serializable {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Integer getEditCheck() {
+        return editCheck;
+    }
+
+    public void setEditCheck(Integer editCheck) {
+        this.editCheck = editCheck;
     }
 
     public Integer getVerified() {

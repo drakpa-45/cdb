@@ -54,7 +54,7 @@ public class ContractorHR extends BaseModel implements Serializable{
     private Integer verified;
     @Column(name = "Approved")
     private Integer Approved;
-    @Transient
+    @Column(name = "DeleteRequest")
     private Integer deleteRequest;
 
     @Transient

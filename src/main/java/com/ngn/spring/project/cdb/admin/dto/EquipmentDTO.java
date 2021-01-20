@@ -27,6 +27,7 @@ public class EquipmentDTO {
     private Integer verified;
     private Integer approved;
     private Integer deleteRequest;
+    private Integer editCheck;
 
     private String equipmentName;
 
@@ -133,6 +134,14 @@ public class EquipmentDTO {
 
     public void setDeleteRequest(Integer deleteRequest) {
         this.deleteRequest = deleteRequest;
+    }
+
+    public Integer getEditCheck() {
+        return editCheck;
+    }
+
+    public void setEditCheck(Integer editCheck) {
+        this.editCheck = editCheck;
     }
 
     public void setEqAttachments(List<AttachmentDTO> eqAttachments) {

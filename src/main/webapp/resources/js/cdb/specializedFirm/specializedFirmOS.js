@@ -346,6 +346,7 @@ var specializedFirmOS = (function () {
                     $('#changeOfFirmName').prop('disabled', true);
                     $('#ownerPartner').removeClass('hide');
                     $('#changeOfOwnerId').prop('disabled', true);
+                    $('#ownerShipchangeId').removeClass('hide');
                     getOwnerFinal();
                   //  sCertOwner();
                 }else{
@@ -372,11 +373,13 @@ var specializedFirmOS = (function () {
             }else if(id == 'changeOfOwnerId' ){
                 if($this.is(':checked')) {
                     $('#ownerPartner').removeClass('hide');
+                    $('#ownerShipchangeId').removeClass('hide');
                     getOwnerFinal();
                   //  sCertOwner();
                 }else{
                     $('#ownerPartner').addClass('hide');
                     $('#cOwnershipId').addClass('hide');
+                    $('#ownerShipchangeId').addClass('hide');
                 }
             }
         });
@@ -512,29 +515,31 @@ var specializedFirmOS = (function () {
     function getOwnerFinal(){
        // var specializedFirmId =$('#specializedFirmIdFinal').val();
       //  alert(specializedFirmId);
-        $.ajax({
-            url: _baseURL() + '/getSpecializedFirmHRsFinal',
-            type: 'GET',
-            data: {specializedFirmId:$('#specializedFirmIdFinal').val(),ownerOrHR:'O'},
-            success: function (res) {
-                var spFirmHrs = res;
-                for (var i in spFirmHrs) {
-                    var tblRow = $('#partnerDtls').find('tbody tr:eq(' + (parseInt(i)) + ')');
-                    tblRow.find('#countryList').val(tblRow.find('#countryList option:contains("' + spFirmHrs[i].countryName + '")').val());
-                    tblRow.find('.hr-cid').val(spFirmHrs[i].cidNo);
-                    tblRow.find('#salutation').val(tblRow.find('#salutation option:contains("' + spFirmHrs[i].salutationName + '")').val());
-                    tblRow.find('#designation').val(tblRow.find('#designation option:contains("' + spFirmHrs[i].designationName + '")').val());
-                    tblRow.find('.name').val(spFirmHrs[i].name);
-                    tblRow.find('#gender').val(spFirmHrs[i].sex);
-                    if (spFirmHrs[i].siCertificate == '1') {
-                        tblRow.find('.showCert').prop('checked', true);
-                    } else {
-                        tblRow.find('.showCert').prop('checked', false);
+        $('#btn7').on('click',function() {
+            $.ajax({
+                url: _baseURL() + '/getSpecializedFirmHRsFinal',
+                type: 'GET',
+                data: {specializedFirmId: $('#specializedFirmIdFinal').val(), ownerOrHR: 'O'},
+                success: function (res) {
+                    var spFirmHrs = res;
+                    for (var i in spFirmHrs) {
+                        var tblRow = $('#partnerDtls').find('tbody tr:eq(' + (parseInt(i)) + ')');
+                        tblRow.find('#countryList').val(tblRow.find('#countryList option:contains("' + spFirmHrs[i].countryName + '")').val());
+                        tblRow.find('.hr-cid').val(spFirmHrs[i].cidNo);
+                        tblRow.find('#salutation').val(tblRow.find('#salutation option:contains("' + spFirmHrs[i].salutationName + '")').val());
+                        tblRow.find('#designation').val(tblRow.find('#designation option:contains("' + spFirmHrs[i].designationName + '")').val());
+                        tblRow.find('.name').val(spFirmHrs[i].name);
+                        tblRow.find('#gender').val(spFirmHrs[i].sex);
+                        if (spFirmHrs[i].siCertificate == '1') {
+                            tblRow.find('.showCert').prop('checked', true);
+                        } else {
+                            tblRow.find('.showCert').prop('checked', false);
+                        }
                     }
                 }
-            }
 
-        });
+            });
+        })
     }
 
     function getPersonalInfo(){
@@ -921,6 +926,7 @@ var specializedFirmOS = (function () {
         getPersonalInfo();
         editIncAttachment();
         isFirmNameUnique();
+        getOwnerFinal();
     }
     return {
         init:init

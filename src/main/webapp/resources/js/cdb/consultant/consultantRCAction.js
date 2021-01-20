@@ -289,7 +289,7 @@ var consultantRCAction = (function () {
                             }else{
                                 verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' disabled value='1'  required=''></td>";
                             }
-                            if (consultantHrs[i].isPartnerOrOwner == '1') {
+                            if (consultantHrs[i].isPartnerOrOwner == '1' && consultantHrs[i].deleteRequest != '1') {
                                 owner = consultantHrs[i].name;
                                 m++;
                                 partnerHrTr = partnerHrTr + "<tr><td>" + m + "</td>" +
