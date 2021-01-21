@@ -18,6 +18,7 @@
 
   <build>
     <plugins>
+
       <!-- JFlex is used to generate the tag lexer Java class -->
       <plugin>
         <groupId>de.jflex</groupId>
@@ -77,10 +78,12 @@
           </includes>
         </configuration>
       </plugin>
+
     </plugins>
   </build>
 
   <dependencies>
+
     <!-- Dependencies needed at compile time -->
     <dependency>
       <groupId>javax.servlet</groupId>

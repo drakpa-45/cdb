@@ -31,9 +31,9 @@ import java.util.List;
  * Reason :
  * ==================================================================================
  */
+
 @Repository
 public class ConsultantRCDao extends BaseDao {
-
 
     public void saveUpdate(Object object) {
         saveOrUpdate(object);

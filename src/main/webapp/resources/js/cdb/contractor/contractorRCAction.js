@@ -392,7 +392,7 @@ var contractorRCAction = (function () {
                 var contractor = res;
                 $('#oldfirmName').html(contractor.firmName);
                 $('#estAddressExist').html(contractor.estAddress);
-                $('#estDzongkhagExist').val(contractor.regDzongkhagId).prop('disabled',true);
+                $('#estDzongkhagExist').html(contractor.oldDzongkhag).prop('disabled',true);
                 $('#regEmailExist').html(contractor.regEmail);
                 $('#regMobileNoExist').html(contractor.regMobileNo);
                 $('#regPhoneNoExist').html(contractor.regPhoneNo);
