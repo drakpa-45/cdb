@@ -311,7 +311,7 @@
                                                                             <i class="custom-control-label"></i>
                                                                         </label>
                                                                     </td>
-                                                                    <td><input type='checkbox' name='contractor.contractorHRs[0].deleteRequest' value='1'></td>
+                                                                    <td><input type='checkbox' id="deleteRequest" name='contractor.contractorHRs[0].deleteRequest' disabled value='1'></td>
                                                                     <%--<td class='action'><button class='btn-sm btn-info btn-block edit-rowOW'>Edit</button></td>--%>
                                                                 </tr>
                                                                 </tbody>

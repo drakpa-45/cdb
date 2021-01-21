@@ -335,6 +335,7 @@ var contractorOS = (function () {
                     $('#changeOfOwnerId').prop('disabled', true);
                     $('#ownerPartnerNoChange').addClass('hide');
                     $('#ownerShipchangeId').removeClass('hide');
+                    $('#deleteRequest').prop('disabled',false);
                     getOwnerFinal();
                 }else{
                     $('#ownershipList').prop('disabled',true);
@@ -342,7 +343,8 @@ var contractorOS = (function () {
                     $('#changeOfFirmName').prop('disabled', false);
                     $('#changeOfOwnerId').prop('disabled', false);
                     $('#ownerPartner').addClass('hide');
-                    $('#changeOfOwnerId').prop('disabled', true);
+                    $('#ownerShipchangeId').addClass('hide');
+                    $('#deleteRequest').prop('disabled',true);
                 }
             }else if(id == 'changeOfFirmName' ){
                 if($this.is(':checked')) {
@@ -362,10 +364,12 @@ var contractorOS = (function () {
                 if($this.is(':checked')) {
                     $('#ownerPartner').removeClass('hide');
                     $('#ownerShipchangeId').removeClass('hide');
+                    $('#deleteRequest').prop('disabled',false);
                     getOwnerFinal();
                 }else{
                     $('#ownerPartner').addClass('hide');
                     $('#ownerShipchangeId').addClass('hide');
+                    $('#deleteRequest').prop('disabled',true);
                 }
             }
         });
