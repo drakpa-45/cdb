@@ -385,7 +385,7 @@
                                         <button type="button" onclick="backTab('consultantEquipmentDtls','humanResourceCriteria')" id="back3" class="btn btn-azure col-lg-offset-9">
                                             <i class="fa fa-arrow-circle-left"></i>&nbsp; Back
                                         </button>
-                                        <button type="button" disabled class="btn btn-primary" id="btnValEqNext" onclick="saveAndPreview('consultantEquipmentDtls', 'saveAndPreview')">Save & Preview &nbsp;
+                                        <button type="button" class="btn btn-primary" id="btnValEqNext" onclick="saveAndPreview('consultantEquipmentDtls', 'saveAndPreview')">Save & Preview &nbsp;
                                             <i class="fa fa-life-saver"></i>
                                         </button>
                                     </div>

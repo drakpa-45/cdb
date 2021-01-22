@@ -130,5 +130,4 @@ public class SpecializedFirmOSController extends BaseController {
     public void viewDownload(HttpServletRequest request, HttpServletResponse response, String documentPath) throws Exception{
         commonService.viewDownloadFile(documentPath, response);
     }
-
 }
