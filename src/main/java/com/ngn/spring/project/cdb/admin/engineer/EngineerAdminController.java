@@ -108,7 +108,6 @@ public class EngineerAdminController extends BaseController {
                     return "engineer/registration/engineer_verification";
                 }
             }else if(dto.getServiceTypeId().equalsIgnoreCase("Renewal of CDB Certificate")){
-
                 if(request.isUserInRole("ROLE_PAYMENT")){
                     return "engineer/renewal/renewal_payment_engineer";
                 }else{

@@ -105,7 +105,7 @@ public class ConsultantRCController extends BaseController {
     @RequestMapping(value ="/getConsultant", method = RequestMethod.GET)
     public Object getConsultant(HttpServletRequest request){
         String cdbNo = request.getSession().getAttribute("CDBNo").toString();
-        return consultantNRService.getConsultantFinal(cdbNo.split("999")[1]);
+        return cRenewalService.getConsultantFinal(cdbNo.split("999")[1]);
     }
 
     @ResponseBody

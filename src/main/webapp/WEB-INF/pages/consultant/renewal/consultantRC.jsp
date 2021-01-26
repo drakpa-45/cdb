@@ -100,7 +100,7 @@
                                         <div class="col-lg-12 form-group nextBackBtn">
                                             <div class="col-md-offset-11 col-lg-offset-10 col-xs-offset-10">
                                                 <button type="button" onclick="nextTab('feesStructure')" class="btn btn-primary">
-                                                    <i class="fa fa-arrow-right mr-2"></i>Next
+                                                    <i class="fa fa-arrow-circle-right mr-2"></i>Next
                                                 </button>
                                             </div>
                                         </div>
@@ -167,12 +167,12 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div class="col-lg-12 form-group nextBackBtn">
-                                            <button type="button" onclick="backTab('services')" class="btn btn-azure col-lg-offset-9">
-                                                <i class="fa fa-arrow-left"></i>Back
+                                        <div class="col-lg-12 form-group">
+                                            <button type="button" id="btn2" onclick="backTab('services')" class="btn btn-azure col-lg-offset-9">
+                                                <i class="fa fa-arrow-circle-left"></i>Back
                                             </button>
-                                            <button type="button" onclick="nextTab('services')" class="btn btn-primary">
-                                                <i class="fa fa-arrow-right"></i>Next
+                                            <button type="button" id="btn3" onclick="nextTab('services')" class="btn btn-primary">
+                                                <i class="fa fa-arrow-circle-right"></i>Next
                                             </button>
                                         </div>
                                     </div>
@@ -259,10 +259,12 @@
                                                                 <th>Gender</th>
                                                                 <th>Designation</th>
                                                                 <th>Show<br>in<br>certificate</th>
+                                                                <th>Delete Request?</th>
+                                                                <th>Action</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
-                                                            <tr>
+                                                            <%--<tr>
                                                                 <td class="country">
                                                                     <form:select id="countryList" class="form-control" name="consultant.consultantHRs[0].countryId" data-msg-required="" data-rule-required="true" path="countryList">
                                                                         <form:option value="" label="Select Country"/>
@@ -301,12 +303,12 @@
                                                                         <i class="custom-control-label"></i>
                                                                     </label>
                                                                 </td>
-                                                            </tr>
+                                                            </tr>--%>
                                                             </tbody>
                                                         </table>
                                                         <div class="col-lg-12 text-right hide" id="ownerPartner">
-                                                            <button type="button" class="btn btn-outline-primary btn-sm" onclick="addRow('partnerDtls')">
-                                                                <i class="fe fe-plus mr-2"></i>Add More
+                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addOwModal">
+                                                                <i class="fa fa-plus"></i> Add More HR
                                                             </button>
                                                             <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeRow('partnerDtls')">
                                                                 <i class="fe fe-trash mr-2"></i>Remove Last Row
@@ -353,32 +355,30 @@
                                                 </div>
                                                 </div>
                                             </div>
-                                            <div class="card ">
-                                                <div class="bg-blue card-status card-status-left"></div>
-                                                <div class="card-header">
-                                                    <h3 class="card-title">Permanent Address</h3>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="col-lg-12">
-                                                        <div class="col-lg-6 col-md-6 form-group">
-                                                            <label class="col-lg-4 form-label">Dzongkhag</label>
-                                                            <select id="pDzongkhagId" class="form-control input-sm col-lg-8" name="consultant.pDzongkhagId">
-                                                                <option value="">Select Dzongkhag</option>
-                                                                <c:forEach var="item" items="${dzongkhagList}">
-                                                                    <option value="${item.value}"><c:out value="${item.text}"/></option>
-                                                                </c:forEach>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 form-group">
-                                                            <label class="col-lg-4 form-label">Gewog </label>
-                                                            <select name="consultant.pGewogId" id="pGewogId" class="form-control col-lg-8"></select>
-                                                        </div>
+                                            <div class="card-body">
+                                                <div class="col-lg-12">
+                                                    <div class="col-lg-6 col-md-6 form-group">
+                                                        <label class="col-lg-4 form-label">Dzongkhag</label>
+                                                            <%-- <select id="pDzongkhagId"
+                                                                     class="form-control input-sm col-lg-8"
+                                                                     name="consultant.pDzongkhagId">
+                                                                 <option value="">Select Dzongkhag</option>
+                                                                 <c:forEach var="item" items="${dzongkhagList}">
+                                                                     <option value="${item.value}"><c:out
+                                                                             value="${item.text}"/></option>
+                                                                 </c:forEach>
+                                                             </select>--%>
+                                                        <input type="text" class="col-lg-7 form-control" id="pDzongkhagId" name="consultant.pDzongkhagId" required="true" class="form-control col-lg-8">
                                                     </div>
-                                                    <div class="col-lg-12">
-                                                        <div class="col-lg-6 col-md-6 form-group">
-                                                            <label class="col-lg-4 form-label">Village </label>
-                                                            <select name="consultant.pVillageId" id="pVillageId" class="form-control col-lg-8"></select>
-                                                        </div>
+                                                    <div class="col-lg-6 col-md-6 form-group">
+                                                        <label class="col-lg-4 form-label">Gewog </label>
+                                                        <input type="text" class="col-lg-7 form-control" id="pGewogId" name="consultant.pGewogId" required="true" class="form-control col-lg-8">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="col-lg-6 col-md-6 form-group">
+                                                        <label class="col-lg-4 form-label">Village </label>
+                                                        <input type="text" class="col-lg-7 form-control" id="pVillageId" name="consultant.pVillageId" required="true" class="form-control col-lg-8">
                                                     </div>
                                                 </div>
                                             </div>
@@ -424,13 +424,20 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-12 form-group nextBackBtn">
+                                       <%-- <div class="col-lg-12 form-group nextBackBtn">
                                             <button type="button" onclick="backTab('generalInformation')" class="btn btn-azure col-lg-offset-9 backTab">
-                                                <i class="fa fa-arrow-left"></i>Back
+                                                <i class="fa fa-arrow-circle-left"></i>Back
                                             </button>
                                             <button type="button" onclick="nextTab('generalInformation')" class="btn btn-primary nextTab">
-                                                <i class="fa fa-arrow-right"></i>Next &nbsp;
+                                                <i class="fa fa-arrow-circle-right"></i>Next &nbsp;
                                             </button>
+                                        </div>--%>
+                                        <div class="col-lg-12 form-group nextBackBtn">
+                                            <div class="col-md-offset-11 col-lg-offset-10 col-xs-offset-10">
+                                                <button type="button" onclick="nextTab('generalInformation')" class="btn btn-primary nextTab">
+                                                    <i class="fa fa-arrow-circle-right"></i>Next &nbsp;
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -1008,6 +1015,88 @@
                         </div>
                     </div>
                 </div>
+                            <%--Owner add model--%>
+                        <div aria-hidden="true" aria-labelledby="hrModalLabel" role="dialog" class="modal fade in"
+                             id="addOwModal">
+                            <div class="modal-dialog modal-lg" id="ownerModal">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 id="ownerModalLabel" class="modal-title">Add Human Resource</h4>
+                                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button"></button>
+                                    </div>
+                                    <div class="modal-body form-horizontal">
+                                        <div class="modal-div">
+                                            <div class="form-group">
+                                                <input type="hidden" id="id5Edit" name="consultantHRs[0].id">
+                                                <label class="col-lg-2">Nationality
+                                                    <span class="text-danger">*</span>:</label>
+                                                <div class="col-lg-4">
+                                                    <select name="consultantHRs[0].countryId" id="ow1" required="" class="form-control custom-select text-left select-beast country">
+                                                        <option value="">Select Country</option>
+                                                        <c:forEach var="item" items="${countryList}">
+                                                            <option value="${item.value}"><c:out value="${item.text}"/></option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                                <label class="col-md-2 col-lg-2">CID/Work Permit No <span class="text-danger">*</span>:</label>
+                                                <div class="col-lg-4">
+                                                    <div class="input-icon">
+                                                      <span class="input-icon-addon">
+                                                         <i class="fa fa-address-card-o"></i>
+                                                      </span>
+                                                        <input type="text" name="consultantHRs[0].cidNo" class="form-control hr-cid" id="ow2" required="" placeholder="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-2">Salutation
+                                                    <span class="text-danger">*</span>:</label>
+                                                <div class="col-lg-4">
+                                                    <select name="consultantHRs[0].salutationId" id="ow3" required="" class="form-control custom-select text-left select-beast">
+                                                        <option value="">Select Salutation</option>
+                                                        <c:forEach var="item" items="${salutationList}">
+                                                            <option value="${item.value}"><c:out value="${item.text}"/></option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                                <label class="col-lg-2">Name
+                                                    <span class="text-danger">*</span>:</label>
+                                                <div class="col-lg-4">
+                                                    <div class="input-icon">
+                                                        <span class="input-icon-addon"><i class="fe fe-user"></i></span>
+                                                        <input type="text" name="consultantHRs[0].name" id="ow4" class="form-control name" required="" placeholder="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-2">Gender<span class="text-danger">*</span>:</label>
+                                                <div class="col-lg-4">
+                                                    <select name="consultantHRs[0].sex" id="ow5" required="" class="form-control custom-select text-left select-beast sex">
+                                                        <option value="">Select Gender</option>
+                                                        <option value="M">Male</option>
+                                                        <option value="F">Female</option>
+                                                    </select>
+                                                </div>
+                                                <label class="col-lg-2">Designation
+                                                    <span class="text-danger">*</span>:</label>
+                                                <div class="col-lg-4">
+                                                    <select name="consultantHRs[0].designationId" id="ow6" required="" class="form-control custom-select text-left select-beast">
+                                                        <option value="">Select Designation</option>
+                                                        <c:forEach var="item" items="${designationList}">
+                                                            <option value="${item.value}"><c:out value="${item.text}"/></option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary" onclick="getOwnerModalData('partnerDtls','ow',6)" type="button">OK</button>
+                                        <button data-dismiss="modal" class="btn btn-warning" target="#addOwModal" type="button">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <%--Equipment addmore model--%>
                 <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
                      class="modal fade in" id="eqModal">

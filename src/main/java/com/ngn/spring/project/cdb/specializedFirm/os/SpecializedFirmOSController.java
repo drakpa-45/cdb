@@ -104,8 +104,8 @@ public class SpecializedFirmOSController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value ="/getSpecializedFirmHRsFinal", method = RequestMethod.GET)
-    public List getSpecializedFirmHRsFinal(HttpServletRequest request, String specializedFirmId,Character ownerOrHR){
-        return cRenewalService.getSpecializedFirmHRsFinal(specializedFirmId, ownerOrHR);
+    public List getSpecializedFirmHRsFinal(HttpServletRequest request, String specializedFirmId,Character ownerOrHR, ModelMap model){
+       return cRenewalService.getSpecializedFirmHRsFinal(specializedFirmId, ownerOrHR);
     }
 
     @ResponseBody

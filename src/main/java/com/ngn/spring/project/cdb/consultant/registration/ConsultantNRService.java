@@ -109,6 +109,7 @@ public class ConsultantNRService extends BaseService {
             }
         }
         //endregion
+
         //region Save Consultant HR
         for(ConsultantHR consultantHR:consultantHRs){
             String hrId = commonService.getRandomGeneratedId();

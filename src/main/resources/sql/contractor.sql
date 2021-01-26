@@ -53,7 +53,7 @@ ContractorRCDao.getContractorStatus =select bb.Id value,bb.Name text,bb.Referenc
 ContractorRCDao.getServicesFee = SELECT Id,ReferenceNo, Name AS serviceName, ContractorAmount AS feeAmount  FROM `crpservice` WHERE ((:refNo is null and ReferenceNo IN (4,6,7,8,9,10,12)) or ReferenceNo = :refNo)
 
 ContractorRCDao.getContractorHRsFinal = SELECT hr.`Id` AS id,hr.`CrpContractorFinalId` contractorID,hr.`CIDNo`cidNo,hr.`Name` AS name, hr.`Sex` sex,hr.`ShowInCertificate` AS siCertificate, hr.DeleteRequest AS deleteRequest \
-,hr.`IsPartnerOrOwner` isPartnerOrOwner,DATE_FORMAT(hr.`JoiningDate`,'%d-%m-%Y') joiningDate,sa.`Name` salutationName,co.`Name` countryName,qu.`Name` qualificationName,st.`Name` serviceTypeName,td.`Name` tradeName,de.`Name` designationName \
+,hr.`IsPartnerOrOwner` isPartnerOrOwner,DATE_FORMAT(hr.`JoiningDate`,'%d-%m-%Y') joiningDate,sa.`Name` salutationName,co.`Name` countryName,qu.`Name` qualificationName,st.`Name` serviceTypeName,td.`Name` tradeName,de.`Name` designationName,hr.CmnCountryId countryId, hr.CmnDesignationId designationId, hr.CmnSalutationId salutationId \
 FROM `crpcontractorhumanresourcefinal` hr INNER JOIN `cmnlistitem` sa ON sa.`Id` = hr.`CmnSalutationId` INNER JOIN `cmncountry` co ON co.`Id` = hr.`CmnCountryId` LEFT JOIN `cmnlistitem` qu ON qu.`Id` = hr.`CmnQualificationId` \
 LEFT JOIN `cmnlistitem` st ON st.`Id` = hr.`CmnServiceTypeId` LEFT JOIN `cmnlistitem` td ON td.`Id` = hr.`CmnTradeId` INNER JOIN `cmnlistitem` de ON de.`Id` = hr.`CmnDesignationId` WHERE hr.`CrpContractorFinalId` =:contractorId and (:ownerOrPartner is null or hr.`IsPartnerOrOwner` =:ownerOrPartner)
 

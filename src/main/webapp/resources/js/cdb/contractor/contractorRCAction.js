@@ -74,6 +74,7 @@ var contractorRCAction = (function () {
             data: {appNo: applicationNo},
             success: function (res) {
                 getContractorInfo();
+                getContractorInfoOwner();
                 for(var i in res){
                     if(res[i].serviceRefNo == '4'){
                         $('#changeOfOwnerId').prop('checked',true);
@@ -258,7 +259,7 @@ var contractorRCAction = (function () {
                         var hrTr = "";
                         var m = 0, n = 0;
                         var owner='';
-                        for (var i in contractorHrs) {
+                        /*for (var i in contractorHrs) {
                             var verifiedApproved = '';
                             if(contractorHrs[i].Approved == '1'){
                                 verifiedApproved = verifiedApproved + "<td>(✔)</td>";
@@ -286,7 +287,7 @@ var contractorRCAction = (function () {
                             }
                         }
                         $('#partnerDtls').find('tbody').html(partnerHrTr);
-
+*/
                         getContractorFinal(applicationNo);
 
                     } else {
@@ -298,6 +299,31 @@ var contractorRCAction = (function () {
         getServicesFee(applicationNo);
     }
 
+    function getContractorInfoOwner() {
+        var applicationNo = $('#appNoVA').val();
+        if (applicationNo) {
+            $.ajax({
+                url: _baseURL() + '/getContractorInfoOwner',
+                type: 'GET',
+                data: {appNo: applicationNo},
+                success: function (res) {
+                    //  if (res.status == '1') {
+                    var existingHrs = res.existing;
+                    var editedHrs = res.edited;
+                    var newlyAddedHrs = res.newlyAdded;
+                    var deletedHRs = res.deleted;
+
+                    addOW("existing-ow",existingHrs);
+                    addOW("edited-ow",editedHrs);
+                    addOW("newly-added-ow",newlyAddedHrs);
+                    addOW("deleted-ow",deletedHRs);
+                    /*} else {
+                     warningMsg(res.text);
+                     }*/
+                }
+            });
+        }
+    }
 
     function getHrsEQs(hrOrEq) {
         var applicationNo = $('#appNoVA').val();
@@ -333,6 +359,42 @@ var contractorRCAction = (function () {
                 }
             }
         })
+    }
+
+
+    function addOW(tBodyClass, contractorHrs){
+
+        var partnerHrTr = "";
+        var hrTr = "", owner, m=0;
+
+        for (var i in contractorHrs) {
+            var verifiedApproved = '';
+            if(contractorHrs[i].Approved == '1'){
+                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+            }else if(contractorHrs[i].verified == '1'){
+                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check'  value='1'  required='true'></td>";
+            }else{
+                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' value='1'  required='true'></td>";
+            }
+            if (contractorHrs[i].isPartnerOrOwner == '1') {
+                owner = contractorHrs[i].name;
+                m++;
+                partnerHrTr = partnerHrTr + "<tr><td>" + m + "</td>" +
+                "<td class='countryName'>" + contractorHrs[i].countryName + "</td>" +
+                "<td class='cidNo'>" + contractorHrs[i].cidNo + "</td>" +
+                "<td class='salutationName'>" + contractorHrs[i].salutationName + "</td>" +
+                "<td class='name'>" + contractorHrs[i].name + "</td>" +
+                "<td class='sex'>" + contractorHrs[i].sex + "</td>" +
+                "<td class='designationName'>" + contractorHrs[i].designationName + "</td>" +
+                "<td>" + ((contractorHrs[i].siCertificate == '1')?'(✔)':'') + "</td>" +
+                "<td><input type='button' name='humanResource' value='Check for this CID' class='checkCid btn btn-success'></td>" +
+                verifiedApproved+"</tr>";
+            }
+        }
+        //$('#partnerDtls').find('tbody').html(partnerHrTr);
+        $('#partnerDtls').find('.'+tBodyClass).append(partnerHrTr);
     }
 
     function addHR(tBodyClass, contractorHrs){

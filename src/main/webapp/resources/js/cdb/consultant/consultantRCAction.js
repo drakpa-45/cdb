@@ -74,6 +74,7 @@ var consultantRCAction = (function () {
             data: {appNo: applicationNo},
             success: function (res) {
                 getConsultantInfo();
+                getConsultantInfoOwner();
                 for(var i in res){
                     if(res[i].serviceRefNo == '4'){
                         $('#changeOfOwnerId').prop('checked',true).prop('disabled',true);
@@ -278,7 +279,7 @@ var consultantRCAction = (function () {
                         var hrTr = "";
                         var m = 0, n = 0;
                         var owner='';
-                        for (var i in consultantHrs) {
+                      /*  for (var i in consultantHrs) {
                             var verifiedApproved = '';
                             if(consultantHrs[i].Approved == '1'){
                                 verifiedApproved = verifiedApproved + "<td>(✔)</td>";
@@ -305,6 +306,7 @@ var consultantRCAction = (function () {
                             }
                         }
                         $('#partnerDtls').find('tbody').html(partnerHrTr);
+                        */
                         getConsultantFinal(applicationNo);
                     } else{
                         warningMsg(res.text);
@@ -314,7 +316,66 @@ var consultantRCAction = (function () {
         }
         getServicesFee(applicationNo);
     }
+    function getConsultantInfoOwner() {
+        var applicationNo = $('#appNoVA').val();
+        if (applicationNo) {
+            $.ajax({
+                url: _baseURL() + '/getConsultantInfoOwner',
+                type: 'GET',
+                data: {appNo: applicationNo},
+                success: function (res) {
+                    //  if (res.status == '1') {
+                    var existingHrs = res.existing;
+                    var editedHrs = res.edited;
+                    var newlyAddedHrs = res.newlyAdded;
+                    var deletedHRs = res.deleted;
 
+                    addOW("existing-ow",existingHrs);
+                    addOW("edited-ow",editedHrs);
+                    addOW("newly-added-ow",newlyAddedHrs);
+                    addOW("deleted-ow",deletedHRs);
+                    /*} else {
+                     warningMsg(res.text);
+                     }*/
+                }
+            });
+        }
+    }
+
+    function addOW(tBodyClass, consultantHrs){
+
+        var partnerHrTr = "";
+        var hrTr = "", owner, m=0;
+
+        for (var i in consultantHrs) {
+            var verifiedApproved = '';
+            if(consultantHrs[i].Approved == '1'){
+                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+            }else if(consultantHrs[i].verified == '1'){
+                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check'  value='1'  required='true'></td>";
+            }else{
+                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' value='1'  required='true'></td>";
+            }
+            if (consultantHrs[i].isPartnerOrOwner == '1') {
+                owner = consultantHrs[i].name;
+                m++;
+                partnerHrTr = partnerHrTr + "<tr><td>" + m + "</td>" +
+                "<td class='countryName'>" + consultantHrs[i].countryName + "</td>" +
+                "<td class='cidNo'>" + consultantHrs[i].cidNo + "</td>" +
+                "<td class='salutationName'>" + consultantHrs[i].salutationName + "</td>" +
+                "<td class='name'>" + consultantHrs[i].name + "</td>" +
+                "<td class='sex'>" + consultantHrs[i].sex + "</td>" +
+                "<td class='designationName'>" + consultantHrs[i].designationName + "</td>" +
+                "<td>" + ((consultantHrs[i].siCertificate == '1')?'(✔)':'') + "</td>" +
+                "<td><input type='button' name='humanResource' value='Check for this CID' class='checkCid btn btn-success'></td>" +
+                verifiedApproved+"</tr>";
+            }
+        }
+        //$('#partnerDtls').find('tbody').html(partnerHrTr);
+        $('#partnerDtls').find('.'+tBodyClass).append(partnerHrTr);
+    }
     function getConsultantFinal(appNo){
         $.ajax({
             url: _baseURL() + '/getConsultantFinal',

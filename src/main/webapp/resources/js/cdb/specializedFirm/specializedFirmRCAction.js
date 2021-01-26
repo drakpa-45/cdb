@@ -74,7 +74,7 @@ var specializedFirmRCAction = (function () {
             data: {appNo: applicationNo},
             success: function (res) {
                 getSpecializedFirmInfo();
-
+                getSpecializedFirmOwner();
                 for(var i in res){
                     if(res[i].serviceRefNo == '4'){
                         $('#changeOfOwnerId').prop('checked',true).prop('disabled', true);
@@ -283,13 +283,14 @@ var specializedFirmRCAction = (function () {
 
                         for (var i in appHistoryDTOs) {
                             var actionTakenBy = appHistoryDTOs[i].userName;
-                            actionTakenBy = (actionTakenBy==null)?'By Citizen':actionTakenBy
+                            actionTakenBy = (actionTakenBy==null)?'By Citizen':actionTakenBy;
                             appHistoryTr = appHistoryTr +
                             "<tr><td>" + appHistoryDTOs[i].appStatus + "</td>" +
                             "<td>" + actionTakenBy + "</td>" +
                             "<td>" + formatAsDate(appHistoryDTOs[i].actionDate) + "</td>" +
                             "<td>"+ appHistoryDTOs[i].remarks +"</td></tr>";
                         }
+
                         $('#appStatusTbl').find('tbody').html(appHistoryTr);
 
                         var specializedFirmHrs = spFirmDTO.spFirmHRs;
@@ -297,18 +298,18 @@ var specializedFirmRCAction = (function () {
                         var hrTr = "";
                         var m = 0, n = 0;
                         var owner='';
-                        for (var i in specializedFirmHrs) {
+                      /*  for (var i in specializedFirmHrs) {
                             var verifiedApproved = '';
                             if(specializedFirmHrs[i].Approved == '1'){
                                 verifiedApproved = verifiedApproved + "<td>(✔)</td>";
                                 verifiedApproved = verifiedApproved + "<td>(✔)</td>";
-                            }else if(specializedFirmHrs[i].verified == '1'){
+                            } else if(specializedFirmHrs[i].verified == '1'){
                                 verifiedApproved = verifiedApproved + "<td>(✔)</td>";
                                 verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' disabled value='1'  required='true'></td>";
-                            }else{
+                            } else{
                                 verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' disabled value='1'  required='true'></td>";
                             }
-                            if (specializedFirmHrs[i].isPartnerOrOwner == '1') {
+                            if (specializedFirmHrs[i].isPartnerOrOwner == '1' && specializedFirmHrs[i].deleteRequest != '1') {
                                 owner = specializedFirmHrs[i].name;
                                 m++;
                                 partnerHrTr = partnerHrTr + "<tr><td>" + m + "</td>" +
@@ -323,15 +324,76 @@ var specializedFirmRCAction = (function () {
                                 verifiedApproved+"</tr>";
                             }
                         }
-                        $('#partnerDtls').find('tbody').html(partnerHrTr);
+                        $('#partnerDtls').find('tbody').html(partnerHrTr);*/
                         getSpFirmFinal(applicationNo);
-                    } else {
+                    } else{
                         warningMsg(res.text);
                     }
                 }
             });
         }
         getServicesFee(applicationNo);
+    }
+
+    function getSpecializedFirmOwner() {
+        var applicationNo = $('#appNoVA').val();
+        if (applicationNo) {
+            $.ajax({
+                url: _baseURL() + '/getSpecializedFirmOwner',
+                type: 'GET',
+                data: {appNo: applicationNo},
+                success: function (res) {
+                  //  if (res.status == '1') {
+                        var existingHrs = res.existing;
+                        var editedHrs = res.edited;
+                        var newlyAddedHrs = res.newlyAdded;
+                        var deletedHRs = res.deleted;
+
+                        addOW("existing-ow",existingHrs);
+                        addOW("edited-ow",editedHrs);
+                        addOW("newly-added-ow",newlyAddedHrs);
+                        addOW("deleted-ow",deletedHRs);
+                    /*} else {
+                        warningMsg(res.text);
+                    }*/
+                }
+            });
+        }
+    }
+
+    function addOW(tBodyClass, specializedFirmHrs){
+
+        var partnerHrTr = "";
+        var hrTr = "", owner, m=0;
+
+        for (var i in specializedFirmHrs) {
+            var verifiedApproved = '';
+            if(specializedFirmHrs[i].Approved == '1'){
+                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+            }else if(specializedFirmHrs[i].verified == '1'){
+                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check'  value='1'  required='true'></td>";
+            }else{
+                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' value='1'  required='true'></td>";
+            }
+            if (specializedFirmHrs[i].isPartnerOrOwner == '1') {
+                owner = specializedFirmHrs[i].name;
+                m++;
+                partnerHrTr = partnerHrTr + "<tr><td>" + m + "</td>" +
+                "<td class='countryName'>" + specializedFirmHrs[i].countryName + "</td>" +
+                "<td class='cidNo'>" + specializedFirmHrs[i].cidNo + "</td>" +
+                "<td class='salutationName'>" + specializedFirmHrs[i].salutationName + "</td>" +
+                "<td class='name'>" + specializedFirmHrs[i].name + "</td>" +
+                "<td class='sex'>" + specializedFirmHrs[i].sex + "</td>" +
+                "<td class='designationName'>" + specializedFirmHrs[i].designationName + "</td>" +
+                "<td>" + ((specializedFirmHrs[i].siCertificate == '1')?'(✔)':'') + "</td>" +
+                "<td><input type='button' name='humanResource' value='Check for this CID' class='checkCid btn btn-success'></td>" +
+                verifiedApproved+"</tr>";
+            }
+        }
+        //$('#partnerDtls').find('tbody').html(partnerHrTr);
+        $('#partnerDtls').find('.'+tBodyClass).append(partnerHrTr);
     }
 
     function getSpFirmFinal(appNo) {
@@ -643,6 +705,7 @@ var specializedFirmRCAction = (function () {
     }
 
     function getServicesFee(applicationNo){
+        alert(applicationNo);
         $.ajax({
             url: _baseURL() + '/getAppliedServices',
             type: 'GET',
@@ -692,10 +755,10 @@ var specializedFirmRCAction = (function () {
         approve();
         reject();
         verify();
-        //getSpecializedFirmInfo();
+      //  getSpecializedFirmInfo();
         getSpFirmInfoForPayment();
         paymentUpdate();
-       checkHR();
+        checkHR();
         sendBack();
         getAppliedServices();
         checkEquipment();

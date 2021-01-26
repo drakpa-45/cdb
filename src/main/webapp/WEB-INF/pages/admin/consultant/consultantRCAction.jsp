@@ -216,8 +216,17 @@
                                                     </security:authorize>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
-
+                                                <tbody class="existing-ow">
+                                                <tr><th colspan="11"> Existing Owner Resource List</th></tr>
+                                                </tbody>
+                                                <tbody class="newly-added-ow">
+                                                <tr><th colspan="11"> Newly Added Owner Resource List</th></tr>
+                                                </tbody>
+                                                <tbody class="edited-ow">
+                                                <tr><th colspan="11"> Edited Owner Resource List</th></tr>
+                                                </tbody>
+                                                <tbody class="deleted-ow">
+                                                <tr><th colspan="11"> Deleted Owner Resource List</th></tr>
                                                 </tbody>
                                             </table>
                                         </div>

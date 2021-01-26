@@ -102,6 +102,11 @@ public class SpecializedFirmOSService extends BaseService {
             List<SpFirmHR> ownerList = spFirmDTO.getSpecializedFirm().getSpFirmHRs();
             specializedFirm.setOwnershipChangeRemarks(spFirmDTO.getSpecializedFirm().getOwnershipChangeRemarks());
             for(SpFirmHR spFirmHR:ownerList){
+                if(spFirmHR.getDeleteRequest() != null && spFirmHR.getDeleteRequest() == 1){
+                    //to save deleted hr
+                   // spFirmHR.setDeleteRequest(1);
+                    specializedFirmRDao.saveDeleteHrRequest(spFirmHR.getId());
+                }
                 String hrId = commonService.getRandomGeneratedId();
                 spFirmHR.setId(hrId);
                 spFirmHR.setSpecializedID(specializedFirmId);
@@ -153,14 +158,21 @@ public class SpecializedFirmOSService extends BaseService {
 
         //region change of owner or partner
         if(renewalServiceType.getChangeOfOwner() != null){
-            List<SpFirmHR> ownerList = spFirmDTO.getSpecializedFirm().getSpFirmHRs();
+           // List<SpFirmHR> ownerList = spFirmDTO.getSpecializedFirm().getSpFirmHRs();
+            List<SpFirmHR> ownerList = spFirmDTO.getSpFirmHRs();
             specializedFirm.setOwnershipChangeRemarks(spFirmDTO.getSpecializedFirm().getOwnershipChangeRemarks());
             for(SpFirmHR spFirmHR:ownerList){
-                String hrId = commonService.getRandomGeneratedId();
-                spFirmHR.setId(hrId);
-                spFirmHR.setSpecializedID(specializedFirmId);
-                spFirmHR.setIsPartnerOrOwner(TRUE_INT);
-                specializedFirmService.saveHR(spFirmHR, loggedInUser);
+                if(spFirmHR.getDeleteRequest() != null && spFirmHR.getDeleteRequest() == 1){
+                    //to save deleted hr
+                  //  spFirmHR.setDeleteRequest(1);
+                    specializedFirmRDao.saveDeleteHrRequest(spFirmHR.getId());
+                }else{
+                    String hrId = commonService.getRandomGeneratedId();
+                    spFirmHR.setId(hrId);
+                    spFirmHR.setSpecializedID(specializedFirmId);
+                    spFirmHR.setIsPartnerOrOwner(TRUE_INT);
+                    specializedFirmService.saveHR(spFirmHR, loggedInUser);
+                }
             }
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "4");
             appliedServicesList.add(appliedService);
@@ -232,7 +244,7 @@ public class SpecializedFirmOSService extends BaseService {
         //endregion
 
         //region to save owner when both incoporation & ownerchanged is not availed
-        if(renewalServiceType.getChangeOfOwner() == null || renewalServiceType.getIncorporation() ==  null){
+        if(renewalServiceType.getChangeOfOwner() == null && renewalServiceType.getIncorporation() ==  null){
             List<SpFirmHR> ownerList = spFirmDTO.getSpecializedFirm().getSpFirmHRs();
             specializedFirm.setOwnershipChangeRemarks(spFirmDTO.getSpecializedFirm().getOwnershipChangeRemarks());
             for(SpFirmHR spFirmHR:ownerList){

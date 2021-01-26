@@ -3,6 +3,8 @@ package com.ngn.spring.project.cdb.specializedFirm.renewal;
 import com.ngn.spring.project.base.BaseService;
 import com.ngn.spring.project.cdb.admin.dto.CategoryClassDTO;
 import com.ngn.spring.project.cdb.admin.dto.EquipmentDTO;
+import com.ngn.spring.project.cdb.admin.dto.NewDeleteExistDTO;
+import com.ngn.spring.project.cdb.admin.specializedFirm.SpecializedFirmActionService;
 import com.ngn.spring.project.cdb.common.CommonService;
 import com.ngn.spring.project.cdb.common.dto.ServiceFeeDTO;
 import com.ngn.spring.project.cdb.contractor.registration.dto.FeeStructureDTO;
@@ -56,6 +58,9 @@ public class SpecializedFirmRService extends BaseService {
 
     @Autowired
     private SpecializedFirmRService specializedFirmRService;
+
+    @Autowired
+    SpecializedFirmActionService nrActionService;
 
     @Autowired
     private SpecializedFirmDao dao;
@@ -617,4 +622,5 @@ public class SpecializedFirmRService extends BaseService {
     public List<SpFirmAttachment> getIncAttachmentFinal(String specializedFirmId) {
         return  specializedFirmRDao.getIncAttachmentFinal(specializedFirmId);
     }
+
 }

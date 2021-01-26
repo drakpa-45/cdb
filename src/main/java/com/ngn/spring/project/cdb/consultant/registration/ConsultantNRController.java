@@ -58,7 +58,6 @@ public class ConsultantNRController extends BaseController {
         return "consultant/registration/consultantNR";
 	}
 
-
     @RequestMapping(value ="/save", method = RequestMethod.POST)
     public String save(HttpServletRequest request,ConsultantDTO consultantDTO,RedirectAttributes redirectAttributes) throws Exception{
         loggedInUser = gLoggedInUser(request);

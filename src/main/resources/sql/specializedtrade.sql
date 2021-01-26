@@ -119,7 +119,7 @@ SpecializedFirmRCDao.getServicesFee = SELECT Id,ReferenceNo, Name AS serviceName
 SpecializedFirmRCActionDao.getAppliedServices=SELECT a.ReferenceNo applicationNo,c.CmnServiceTypeId serviceId,d.referenceNo serviceRefNo, d.Name serviceName, e.PaymentAmount ,a.NameOfFirm firmName,b.Name AS appStatus,a.ApplicationDate applicationDate FROM crpspecializedtrade a  INNER JOIN cmnlistitem b ON b.Id  = a.CmnApplicationRegistrationStatusId INNER JOIN crpspecializedtradeappliedservice c ON c.CrpSpecializedTradeId = a.CrpSpecializedTradeId INNER JOIN crpservice d ON d.Id = c.CmnServiceTypeId INNER JOIN crpspecializedtradeservicepayment  e ON e.CrpSpecializedTradeId = c.CrpSpecializedTradeId AND e.CmnServiceTypeId = c.CmnServiceTypeId WHERE a.ReferenceNo = :applicationNo
 
 SpecializedFirmRCActionDao.getDeleteHrRequest = SELECT hr.Id AS id,hr.CrpSpecializedTradeFinalId specializedFirmID,hr.CIDNo cidNo,hr.Name AS NAME, hr.Sex sex,hr.ShowInCertificate AS siCertificate, hr.DeleteRequest AS deleteRequest \
-,hr.IsPartnerOrOwner isPartnerOrOwner,hr.JoiningDate joiningDate,sa.Name salutationName,co.Name countryName,qu.Name qualificationName,st.Name serviceTypeName,td.Name tradeName,de.Name designationName \
+,hr.IsPartnerOrOwner isPartnerOrOwner,hr.DeleteRequest AS deleteRequest,hr.JoiningDate joiningDate,sa.Name salutationName,co.Name countryName,qu.Name qualificationName,st.Name serviceTypeName,td.Name tradeName,de.Name designationName \
 FROM crpspecializedtradehumanresourcefinal hr INNER JOIN cmnlistitem sa ON sa.Id = hr.CmnSalutationId INNER JOIN cmncountry co ON co.Id = hr.CmnCountryId LEFT JOIN cmnlistitem qu ON qu.Id = hr.CmnQualificationId \
 LEFT JOIN cmnlistitem st ON st.Id = hr.CmnServiceTypeId LEFT JOIN cmnlistitem td ON td.Id = hr.CmnTradeId INNER JOIN cmnlistitem de ON de.Id = hr.CmnDesignationId WHERE hr.CrpSpecializedTradeFinalId =:specializedFirmId AND (:ownerOrPartner IS NULL OR hr.IsPartnerOrOwner =:ownerOrPartner)
 
@@ -131,7 +131,7 @@ SpecializedFirmRCDao.saveDeleteHrRequest = Update crpspecializedtradehumanresour
 
 SpecializedFirmRCDao.saveDeleteEqRequest=Update crpspecializedtradeequipmentfinal set DeleteRequest = 1 where Id =:eqId
 
-SpecializedFirmRCDao.getIncAttachmentFinal = SELECT DocumentName AS documentName, DocumentPath documentPath,FileType AS fileType FROM crpspecializedtradeattachmentfinal WHERE CrpSpecializedTradeFinalId =:specializedFirmId
+SpecializedFirmRCDao.getIncAttachmentFinal = SELECT DocumentName AS documentName, DocumentPath documentPath,FileType AS fileType,AttachmentFor AS attachmentFor FROM crpspecializedtradeattachmentfinal WHERE CrpSpecializedTradeFinalId =:specializedFirmId
 
 SpecializedFirmRCDao.auditMemo=SELECT CONCAT('You have following audit memo:<br>',AIN,' : ',`AuditObservation`) AS auditObservation FROM `crpcontractorauditclearance` WHERE `CrpContractorConsultantId` =:specializedFirmFinalId AND  `Dropped` = '0';
 

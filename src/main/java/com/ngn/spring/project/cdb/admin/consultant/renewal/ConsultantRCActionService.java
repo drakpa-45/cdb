@@ -60,6 +60,23 @@ public class ConsultantRCActionService extends BaseService{
     }
 
     @Transactional(readOnly =  true)
+    public Object getConsultantInfoOwner(String applicationNo){
+        NewDeleteExistDTO ndeDTOhr = new NewDeleteExistDTO();
+        String cdbNo = nrActionService.getCDBNoFromAppNo(applicationNo);
+        String consultantFinalId = getFinalIdFromCDBNo(cdbNo);
+        List<ConsultantHrDTO> existingHRs = consultantRCService.getConsultantHRsFinal(consultantFinalId, 'O');
+        List<ConsultantHrDTO> newHRs = nrActionService.getConsultantHRs(getIdFromAppNo(applicationNo), 'O');
+        List<ConsultantHrDTO> editedHRs = newHRs.stream().filter(existingHRs::contains).collect(Collectors.toList());
+        List<ConsultantHrDTO> newlyAddedHRs = newHRs.stream().filter(e->!editedHRs.contains(e)).collect(Collectors.toList());
+        List<ConsultantHrDTO> deletedHRs = existingHRs.stream().filter(e->e.getDeleteRequest() != null && e.getDeleteRequest() == 1).collect(Collectors.toList());
+        ndeDTOhr.setExisting(existingHRs);
+        ndeDTOhr.setEdited(editedHRs);
+        ndeDTOhr.setNewlyAdded(newlyAddedHRs);
+        ndeDTOhr.setDeleted(deletedHRs);
+        return ndeDTOhr;
+    }
+
+    @Transactional(readOnly =  true)
     public Object getHrsExistingAndNew(String applicationNo){
         NewDeleteExistDTO ndeDTOhr = new NewDeleteExistDTO();
         String cdbNo = nrActionService.getCDBNoFromAppNo(applicationNo);

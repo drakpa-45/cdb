@@ -80,6 +80,11 @@ public class ContractorRCActionController extends BaseController {
         return cNRActionService.getContractorData(appNo, flag);
     }
 
+    @ResponseBody
+    @RequestMapping(value ="/getContractorInfoOwner", method = RequestMethod.GET)
+    public Object getContractorInfoOwnerFinal(HttpServletRequest request,String appNo) {
+        return cRCActionService.getContractorInfoOwnerFinal(appNo);
+    }
     @RequestMapping(value = "/viewDownload", method = RequestMethod.GET)
     public void viewDownload(HttpServletRequest request, HttpServletResponse response, String documentPath) throws Exception{
         commonService.viewDownloadFile(documentPath, response);
