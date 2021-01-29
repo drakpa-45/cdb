@@ -336,11 +336,15 @@
 <script>
     function validateNo(vNo) {
         if (validateVehNo(vNo)) {
+            checkDuplicateEQ(vNo);
             return true;
         } else {
             $('#eq2').val('');
             errorMsg('oops!! please check your vehicle Number format');
             return false;
+        }
+        if (checkDuplicateEQ(vNo)) {
+            return true;
         }
     }
     function validateVehNo() {
@@ -348,17 +352,17 @@
         const re = /\w[BPG]-\d-\w\d{4}$/;
         return re.test(vNo);
     }
-    function checkDuplicateEQ() {
+    function checkDuplicateEQ(vNo) {
         var $this = $(this);
         var isEqExist = false;
-        $('#eqdatatable').find('tbody tr td:nth-child(3)').each(function () {
+       // $('#eqdatatable').find('tbody tr td:nth-child(3)').each(function () {
             if ($this.val() == $(this).text()) {
                 warningMsg("This Registration Number is already exists in your list!!!");
                 $this.val('');
                 isEqExist = true;
                 return isEqExist;
             }
-        });
+       // });
     }
 
     function enableRegistrationNo() {

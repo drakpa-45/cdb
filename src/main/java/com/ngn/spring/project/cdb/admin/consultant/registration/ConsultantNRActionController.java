@@ -117,11 +117,12 @@ public class ConsultantNRActionController extends BaseController {
     public ResponseMessage validateCorporateCidNo(HttpServletRequest request,String cidNo) {
       //  String cidNo = request.getParameter("cidNo");
         try{
-            ResponseMessage validateCorporateCidNo=commonService.validateCorporateCidNo(request,cidNo);
-            return validateCorporateCidNo;
+          //  ResponseMessage validateCorporateCidNo=commonService.validateCorporateCidNo(request,cidNo);
+           // return validateCorporateCidNo;
         }catch (Exception e){
             System.out.print(e);
             return  null;
         }
+        return null;
     }
 }

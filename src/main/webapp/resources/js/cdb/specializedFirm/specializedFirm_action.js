@@ -68,20 +68,21 @@ var specializedFirm_action = (function () {
                         $('#photoM').html("<img src='"+imagelink+"'  width='200px'  height='200px' class='pull-right'/>");
                         $("#hrModal").modal('show');
                         $("#closeModal").modal('show');
-
+debugger;
                         var employeeDetailsDTO = dto.employeeDetailsDTOs;
                         var empDtls ="",empDtls1="",empDtls2="";
-                        if(employeeDetailsDTO != ""){
+                        if(employeeDetailsDTO !=''){
                             for(var i in employeeDetailsDTO){
                                 var workId = employeeDetailsDTO[i].workId;
                                 if(workId !=''|| workId !='null'){
                                     $('#engagedId').show();
+                                    $('#dcbinfo').append("<br/> <b>CDB No: </b> "+employeeDetailsDTO[i].cdbNo+"   <b> Procuring Agency:  </b> "+employeeDetailsDTO[i].procuringAgency+"   <b> Work ID:</b>"+employeeDetailsDTO[i].workId+"");
                                     $('#dcbinfo').append("<br/> This person is engaged with cdb number <b>"+employeeDetailsDTO[i].cdbNo+"</b> in <b>"+employeeDetailsDTO[i].procuringAgency+"</b> with work Id:<b>"+employeeDetailsDTO[i].workId+"</b>");
                                     $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
                                 } else{
                                     $('#dcbinfo').hide();
                                     $('#engagedId').show();
-                                    $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project");
+                                    $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project.");
                                 }
                             }
                         }else{

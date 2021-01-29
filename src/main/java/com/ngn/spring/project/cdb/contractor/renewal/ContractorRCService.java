@@ -489,8 +489,6 @@ public class ContractorRCService extends BaseService {
             return responseMessage;
         }
 
-
-
         //region check expiry date and calculate late fee
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         LocalDate curDate = LocalDate.parse(sdf.format(new Date()));

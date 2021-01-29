@@ -65,46 +65,46 @@ var contractorNRAction = (function () {
                         $('#gewogM').text(dto.gowegName);
                         $('#villageM').text(dto.villageName);
                         $('#dobM').text(dto.dob);
+                        $('#cidchecked').text(cidNo);
                         var imagelink='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo='+cidNo;
                         $('#photoM').html("<img src='"+imagelink+"'  width='200px'  height='200px' class='pull-right'/>");
                         $("#hrModal").modal('show');
                         $("#closeModal").modal('show');
 
                         var employeeDetailsDTO = dto.employeeDetailsDTOs;
-                        var empDtls ="",empDtls1="",empDtls2="";
-                    //    alert(employeeDetailsDTO != null);
-                        if(employeeDetailsDTO !=null){
-                            $('#engagedId').show();
+                        var govCopDTO = dto.govCopDTOs;
+                        var cdbDTO = dto.cdbDTOs;
+
+                        if(employeeDetailsDTO !=''){
                             for(var i in employeeDetailsDTO){
-                                empDtls = empDtls +
-                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
-                                "<td>" +  + "</td>" +
-                                "<td>" + + "</td>" +
-                                "<td>" + employeeDetailsDTO[i].contractorCDBNo+ "</td>" +
-                                "<td>" + employeeDetailsDTO[i].contractorFirmname + "</td>" +"</tr>";
+                                var workId = employeeDetailsDTO[i].workId;
+                                if(workId !='' && workId != null){
+                                    alert(workId);
+                                    $('#dcbinfo').append("<br/> <b>CDB No: </b> "+employeeDetailsDTO[i].cdbNo+"  ||  <b> Procuring Agency:  </b> "+employeeDetailsDTO[i].procuringAgency+"  ||  <b> Work ID:</b>"+employeeDetailsDTO[i].workId+"");
+                                   // $('#dcbinfo').append("<br/> This person is engaged with cdb number <b>"+employeeDetailsDTO[i].cdbNo+"</b> in <b>"+employeeDetailsDTO[i].procuringAgency+"</b> with work Id:<b>"+employeeDetailsDTO[i].workId+"</b>");
+                                    $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
+                                }else{
+                                    $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project.");
+                                }
                             }
-                            $('#employeeDTLS').find('tbody').html(empDtls);
-                            for(var i in employeeDetailsDTO){
-                                empDtls1 = empDtls1 +
-                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
-                                "<td>" +  + "</td>" +
-                                "<td>" + + "</td>" +
-                                "<td>" + employeeDetailsDTO[i].consultantCDBNo+ "</td>" +
-                                "<td>" + employeeDetailsDTO[i].consultantFirmname + "</td>" +"</tr>";
+                        }else{
+                           // $('#dcbinfo').hide();
+                            $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project.");
+                        }
+
+                        if(govCopDTO !=''){
+                            for(var i in govCopDTO){
+                                var agency = govCopDTO[i].agency;
+                                if(agency !='' && agency !=null){
+                                    alert(agency);
+                                    $('#dcbinfo').append("<br/> <b>Position Title: </b> "+govCopDTO[i].positionTitle+"  ||  <b> Agency:  </b> "+govCopDTO[i].agency+"");
+                                } else{
+                                    $('#dcbinfonotEngaged').append("<br/> This person is not a government/coperate employee.");
+                                }
                             }
-                            $('#employeeDTLS1').find('tbody').html(empDtls1);
-                            for(var i in employeeDetailsDTO){
-                                empDtls2 = empDtls2 +
-                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
-                                "<td>" +  + "</td>" +
-                                "<td>" + + "</td>" +
-                                "<td>" + employeeDetailsDTO[i].spCDBNo+ "</td>" +
-                                "<td>" + employeeDetailsDTO[i].spFirmname + "</td>" +"</tr>";
-                            }
-                            $('#employeeDTLS2').find('tbody').html(empDtls2);
-                            $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
-                        } else{
-                            $('#notEngagedId').show();
+                        }else{
+                           // $('#dcbinfo').hide();
+                            $('#dcbinfonotEngaged').append("<br/> This person is not a government/coperate employee.");
                         }
                     }
                 }
@@ -136,41 +136,78 @@ var contractorNRAction = (function () {
                         $("#closeModal1").modal('show');
 
                         var employeeDetailsDTO = dto.employeeDetailsDTOs;
+                        var govCopDTO = dto.govCopDTOs;
+                        var cdbDTO = dto.cdbDTOs;
+
+                        if(employeeDetailsDTO !=''){
+                            for(var i in employeeDetailsDTO){
+                                var workId = employeeDetailsDTO[i].workId;
+                                if(workId !='' && workId != null){
+                                    alert(workId);
+                                    $('#dcbinfo').append("<br/> <b>CDB No: </b> "+employeeDetailsDTO[i].cdbNo+"  ||  <b> Procuring Agency:  </b> "+employeeDetailsDTO[i].procuringAgency+"  ||  <b> Work ID:</b>"+employeeDetailsDTO[i].workId+"");
+                                    // $('#dcbinfo').append("<br/> This person is engaged with cdb number <b>"+employeeDetailsDTO[i].cdbNo+"</b> in <b>"+employeeDetailsDTO[i].procuringAgency+"</b> with work Id:<b>"+employeeDetailsDTO[i].workId+"</b>");
+                                    $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
+                                }else{
+                                    $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project.");
+                                }
+                            }
+                        }else{
+                            // $('#dcbinfo').hide();
+                            $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project.");
+                        }
+
+                        if(govCopDTO !=''){
+                            for(var i in govCopDTO){
+                                var agency = govCopDTO[i].agency;
+                                if(agency !='' && agency !=null){
+                                    alert(agency);
+                                    $('#dcbinfo').append("<br/> <b>Position Title: </b> "+govCopDTO[i].positionTitle+"  ||  <b> Agency:  </b> "+govCopDTO[i].agency+"");
+                                } else{
+                                    $('#dcbinfonotEngaged').append("<br/> This person is not a government/coperate employee.");
+                                }
+                            }
+                        }else{
+                            // $('#dcbinfo').hide();
+                            $('#dcbinfonotEngaged').append("<br/> This person is not a government/coperate employee.");
+                        }
+
+                       /* var employeeDetailsDTO = dto.employeeDetailsDTOs;
                         var empDtls ="",empDtls1="",empDtls2="";
                         //alert(employeeDetailsDTO != null);
-                        if(employeeDetailsDTO !=null){
+                        if(employeeDetailsDTO !=null) {
                             $('#engagedId').show();
-                            for(var i in employeeDetailsDTO){
+                            for (var i in employeeDetailsDTO) {
                                 empDtls = empDtls +
                                 "<tr><td>" + (parseInt(i) + 1) + "</td>" +
-                                "<td>" +  + "</td>" +
-                                "<td>" + + "</td>" +
-                                "<td>" + employeeDetailsDTO[i].contractorCDBNo+ "</td>" +
-                                "<td>" + employeeDetailsDTO[i].contractorFirmname + "</td>" +"</tr>";
+                                "<td>" + +"</td>" +
+                                "<td>" + +"</td>" +
+                                "<td>" + employeeDetailsDTO[i].contractorCDBNo + "</td>" +
+                                "<td>" + employeeDetailsDTO[i].contractorFirmname + "</td>" + "</tr>";
                             }
                             $('#employeeDTLS').find('tbody').html(empDtls);
-                            for(var i in employeeDetailsDTO){
+                            for (var i in employeeDetailsDTO) {
                                 empDtls1 = empDtls1 +
                                 "<tr><td>" + (parseInt(i) + 1) + "</td>" +
-                                "<td>" +  + "</td>" +
-                                "<td>" + + "</td>" +
-                                "<td>" + employeeDetailsDTO[i].consultantCDBNo+ "</td>" +
-                                "<td>" + employeeDetailsDTO[i].consultantFirmname + "</td>" +"</tr>";
+                                "<td>" + +"</td>" +
+                                "<td>" + +"</td>" +
+                                "<td>" + employeeDetailsDTO[i].consultantCDBNo + "</td>" +
+                                "<td>" + employeeDetailsDTO[i].consultantFirmname + "</td>" + "</tr>";
                             }
                             $('#employeeDTLS1').find('tbody').html(empDtls1);
-                            for(var i in employeeDetailsDTO){
+                            for (var i in employeeDetailsDTO) {
                                 empDtls2 = empDtls2 +
                                 "<tr><td>" + (parseInt(i) + 1) + "</td>" +
-                                "<td>" +  + "</td>" +
-                                "<td>" + + "</td>" +
-                                "<td>" + employeeDetailsDTO[i].spCDBNo+ "</td>" +
-                                "<td>" + employeeDetailsDTO[i].spFirmname + "</td>" +"</tr>";
+                                "<td>" + +"</td>" +
+                                "<td>" + +"</td>" +
+                                "<td>" + employeeDetailsDTO[i].spCDBNo + "</td>" +
+                                "<td>" + employeeDetailsDTO[i].spFirmname + "</td>" + "</tr>";
                             }
                             $('#employeeDTLS2').find('tbody').html(empDtls2);
-                            $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
+                            $('#cidNumber').text(dto.cidNo);
+                            $('#hrName').text((dto.fullName));
                         } else{
                             $('#notEngagedId').show();
-                        }
+                        }*/
                     }
                 }
             });
@@ -527,7 +564,7 @@ var contractorNRAction = (function () {
     }
 
     function incorporation(data){
-        if(data){
+        if(data > 0){
             $('#cIncorporation').removeClass('hide');
             var tr = '';
             for(var i in data){

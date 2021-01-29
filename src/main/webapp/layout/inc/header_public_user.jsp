@@ -195,7 +195,7 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a href="<c:url value="/public_access/changepassword"/>" class="nav-link" style="color:black"><i class="fa fa-lock"></i> Change Password</a>
+                                <a href="#"  data-toggle="modal" data-target="#addOwModal" class="nav-link" style="color:black"><i class="fa fa-lock"></i> Change Password</a>
                             </li>
                         </ul>
                     <%}else if (cdbNo.startsWith("SpecializedFirm")){%>
@@ -223,11 +223,50 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a href="<c:url value="/public_access/changepassword"/>" class="nav-link" style="color:black"><i class="fa fa-lock"></i> Change Password</a>
+                            <a href="#" data-toggle="modal" data-target="#addOwModal" class="nav-link" style="color:black"><i class="fa fa-lock"></i> Change Password</a>
                         </li>
                     </ul>
                     <%}%>
                 </strong>
+            </div>
+        </div>
+    </div>
+</div>
+<div aria-hidden="true" aria-labelledby="hrModalLabel" role="dialog" class="modal fade in"
+     id="addOwModal">
+    <div class="modal-dialog modal-lg" id="ownerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="ownerModalLabel" class="modal-title">Change/Update Password</h4>
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button"></button>
+            </div>
+            <div class="modal-body form-horizontal">
+                <div class="modal-div">
+                    <div class="form-group">
+                        <label class="col-lg-4">User Name
+                            <span class="text-danger">*</span>:</label>
+                        <div class="col-lg-8">
+                            <input type="text" id="usename" onchange="existUsename(this.value)" class="form-control name" required="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4">New Password
+                            <span class="text-danger">*</span>:</label>
+                        <div class="col-lg-8">
+                            <input type="password" name="contractorHRs[0].name" id="npwd" class="form-control name" required="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-4">Confirm Password<span class="text-danger">*</span>:</label>
+                        <div class="col-lg-8">
+                            <input type="password" name="contractorHRs[0].name" onchange="confirmPassword(this.value)" id="cpwd" class="form-control name" required="" placeholder="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" onclick="getOwnerModalData('partnerDtls','ow',6)" type="button">Update</button>
+                <button data-dismiss="modal" class="btn btn-danger" target="#addOwModal" type="button">Close</button>
             </div>
         </div>
     </div>
@@ -241,6 +280,37 @@
     .hcolor:active {
         color: blue;
     }
+
 </style>
+<script>
+    function existUsename(username){
+        var $this = $('#usename').val();
+        $.ajax({
+            url:'/cdb/public_access/isUsenameExist',
+            type: 'GET',
+            data: {username: username},
+            success: function (res) {
+                alert(res == true);
+                if(res == true){
+                    warningMsg("This username is not registered in CDB. Please enter your valid username");
+                    $this.val('').focus();
+                } else{
+
+                }
+            }
+        });
+    }
+
+    function confirmPassword(confirmPw){
+            if(!confirmPw){
+                return;
+            }
+            if(confirmPw != $('#npwd').val()){
+               // $('#npwd').focus().val('');
+                warningMsg("Confirmation email does not match.");
+                $('#cpwd').focus().val('');
+            }
+    }
+</script>
 </body>
 </html>

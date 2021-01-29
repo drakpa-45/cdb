@@ -650,7 +650,7 @@ var contractorOS = (function () {
                             "<td class='qty'>" + equipments[i].quantity + "</td>" +
                             "<td>" + attachment + "</td>" +
                             "<td><input type='checkbox' style='zoom:1.6' name='equipments[0].deleteRequest' value='1'></td>" +
-                            '<td class="action"><input type="checkbox" class="checkedid" onclick="enablebtn(i)" style="zoom: 1.2" name="equipments[0].editCheck" value="1"><button  class="btn-sm btn-info btn-block edit_row" disabled id="edit_'+i+'">Edit</button></td>' +
+                            "<td class='action'><input type='checkbox' class='editCheck' name='equipments[0].editCheck' value=''><button  class='btn-sm btn-info btn-block edit_row_eq'>Edit</button></td>" +
                             "</tr>";
                         }
                         $('#equipmentTbl').find('tbody').html(eqTr);
@@ -661,11 +661,6 @@ var contractorOS = (function () {
             }
             //positionTab('equipment_details');
         })
-    }
-
-    function enablebtn(i){
-        alert(i);
-        $('#edit_'+i).prop('disable',false);
     }
 
     function getClassCategory(){
@@ -821,8 +816,10 @@ var contractorOS = (function () {
     }
 
     function editInEq(){
-            $('#equipmentTbl').on('click','.edit_row',function(e){
+            $('#equipmentTbl').on('click','.edit_row_eq',function(e){
                     e.preventDefault();
+                    var editcheck = $(this).closest('tr').find('.editCheck').prop('checked',true).val(1);
+
                     var row = $(this).closest('tr');
                     var modal = $('#eqModal');
                     modal.find('.id4Edit').val(row.find('.contractorEQid').val())//for Edit
@@ -839,6 +836,7 @@ var contractorOS = (function () {
                             /*"<td></td>" +*/
                         "<td><button class='change'>Change</button><button class='del_row'>Delete</button></td></tr>";
                     });
+
                     modal.find('#eqUploadTbl tbody').empty().html(eqaTr);
                     row.addClass('tbd');
                     openModal('eqModal')

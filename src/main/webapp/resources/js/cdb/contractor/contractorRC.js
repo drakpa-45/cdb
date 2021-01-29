@@ -1059,6 +1059,7 @@ var contractorRC = (function () {
         editIncAttachment();
         isEmailUnique();
         editInModalOwner();
+        getOwnerFinal();
     }
 
     return {

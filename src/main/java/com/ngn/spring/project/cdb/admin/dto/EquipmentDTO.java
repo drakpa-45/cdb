@@ -171,7 +171,7 @@ public class EquipmentDTO {
 
         EquipmentDTO that = (EquipmentDTO) o;
 
-        if (!registrationNo.equals(that.registrationNo)) return false;
+         if (!equipmentId.equals(that.equipmentId)) return false;
         return true;
     }
 

@@ -21,7 +21,7 @@ FROM `crpcontractorregistrationpayment` cc INNER JOIN `cmncontractorworkcategory
 LEFT JOIN `cmncontractorclassification` ap ON ap.`Id` = cc.`CmnApprovedClassificationId`  WHERE cc.`CrpContractorFinalId` =:contractorId
 
 ContractorActionDao.getEquipment = SELECT ce.`Id` id, ce.`CrpContractorId` contractorId, eq.`Name` equipmentName,ce.`RegistrationNo` registrationNo,ce.`SerialNo` serialNo,ce.`Quantity` quantity,ce.`ModelNo` modelNo \
-,ce.Verified as verified, ce.Approved as approved \
+,ce.Verified as verified, ce.Approved as approved,ce.CmnEquipmentId equipmentId \
 FROM `crpcontractorequipment` ce INNER JOIN `cmnequipment`  eq ON ce.`CmnEquipmentId` = eq.`Id`WHERE ce.`CrpContractorId` = :contractorId
 
 ContractorActionDao.verify = CALL ProCrpContractorApplicationVerify(:contractorId,:vUserId,:vRemarks)
@@ -57,12 +57,13 @@ ContractorRCDao.getContractorHRsFinal = SELECT hr.`Id` AS id,hr.`CrpContractorFi
 FROM `crpcontractorhumanresourcefinal` hr INNER JOIN `cmnlistitem` sa ON sa.`Id` = hr.`CmnSalutationId` INNER JOIN `cmncountry` co ON co.`Id` = hr.`CmnCountryId` LEFT JOIN `cmnlistitem` qu ON qu.`Id` = hr.`CmnQualificationId` \
 LEFT JOIN `cmnlistitem` st ON st.`Id` = hr.`CmnServiceTypeId` LEFT JOIN `cmnlistitem` td ON td.`Id` = hr.`CmnTradeId` INNER JOIN `cmnlistitem` de ON de.`Id` = hr.`CmnDesignationId` WHERE hr.`CrpContractorFinalId` =:contractorId and (:ownerOrPartner is null or hr.`IsPartnerOrOwner` =:ownerOrPartner)
 
-ContractorRCDao.getEquipmentFinal = SELECT ce.`Id` id, eq.`Name` equipmentName,ce.`RegistrationNo` registrationNo,ce.`SerialNo` serialNo,ce.`Quantity` quantity,ce.`ModelNo` modelNo ,ce.DeleteRequest AS deleteRequest FROM `crpcontractorequipmentfinal` ce INNER JOIN `cmnequipment`  eq ON ce.`CmnEquipmentId` = eq.`Id` WHERE ce.`CrpContractorFinalId` =:contractorId
+ContractorRCDao.getEquipmentFinal = SELECT ce.`Id` id, eq.`Name` equipmentName,ce.`RegistrationNo` registrationNo,ce.`SerialNo` serialNo,ce.`Quantity` quantity,ce.`ModelNo` modelNo ,ce.DeleteRequest AS deleteRequest,ce.EditCheck editCheck,ce.CmnEquipmentId equipmentId FROM `crpcontractorequipmentfinal` ce INNER JOIN `cmnequipment`  eq ON ce.`CmnEquipmentId` = eq.`Id` WHERE ce.`CrpContractorFinalId` =:contractorId
 ContractorRCDao.getHRAttachmentsFinal = SELECT a.Id as id,a.`DocumentName` documentName,`DocumentPath` documentPath, `FileType` fileType FROM `crpcontractorhumanresourceattachmentfinal` a WHERE a.`CrpContractorHumanResourceFinalId` = :hrId
 ContractorRCDao.getEQAttachmentsFinal = SELECT a.Id as id,a.`DocumentName` documentName,`DocumentPath` documentPath, `FileType` fileType FROM `crpcontractorequipmentattachmentfinal` a WHERE a.`CrpContractorEquipmentFinalId`  = :eqId
 ContractorRCDao.getCategoryClassFinal = SELECT 	`Id` AS id, `CrpContractorFinalId` AS contractorId,`CmnProjectCategoryId` AS categoryId,`CmnAppliedClassificationId` AS aClassId, `CmnVerifiedClassificationId` AS vClassId, `CmnApprovedClassificationId` AS apClassId FROM `crpcontractorworkclassificationfinal` WHERE CrpContractorFinalId =:contractorId ORDER BY CmnProjectCategoryId
 ContractorRCDao.saveDeleteHrRequest = Update crpcontractorhumanresourcefinal set DeleteRequest = 1 where Id =:hrId
 ContractorRCDao.saveDeleteEqRequest = Update crpcontractorequipmentfinal set DeleteRequest = 1 where Id =:eqId
+ContractorRCDao.saveEditEqRequest = Update crpcontractorequipmentfinal set EditCheck = 1 where Id =:eqId
 ContractorRCDao.auditMemo = SELECT CONCAT('You have following audit memo:<br>',AIN,' : ',`AuditObservation`) AS auditObservation FROM `crpcontractorauditclearance` WHERE `CrpContractorConsultantId` =:contractorFinalId AND  `Dropped` = '0'
 ContractorRCDao.getIncAttachmentFinal = SELECT DocumentName AS documentName, DocumentPath documentPath,FileType AS fileType,AttachmentFor AS attachmentFor FROM crpcontractorattachmentfinal WHERE CrpContractorFinalId =:contractorFinalId
 

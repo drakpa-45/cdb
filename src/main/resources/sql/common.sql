@@ -12,7 +12,6 @@ CommonDao.getTrackRecord = SELECT 	`Year1` years,`CDBNo` cdbNo,`firmName` firmNa
 
 CommonDao.isExpiredConsultant = SELECT `RegistrationExpiryDate` < NOW() FROM`crpconsultantfinal` where cdbNo =:cdbNo
 
-
 CommonDao.isExpiredSpecializedFirm = SELECT `RegistrationExpiryDate` < NOW() FROM`crpspecializedtradefinal` where SPNo =:cdbNo
 
 CommonDao.isExpiredEngineer = SELECT `RegistrationExpiryDate` < NOW() FROM`crpengineerfinal` WHERE CDBNo =:cdbNo
@@ -32,3 +31,7 @@ LEFT JOIN etltenderbiddercontractordetail t3 ON t3.EtlTenderBidderContractorId=t
 LEFT JOIN crpcontractorfinal t4 ON t4.Id=t3.CrpContractorFinalId LEFT JOIN etltender t5 ON t5.Id=t2.EtlTenderId \
 LEFT JOIN cmnprocuringagency t6 ON t6.Id=t5.CmnProcuringAgencyId \
 WHERE t2.ActualStartDate IS NOT NULL AND t5.CmnWorkExecutionStatusId ='1ec69344-a256-11e4-b4d2-080027dcfac6' AND t1.CIDNo =:cidNo GROUP BY id
+
+CommonDao.validateCorporateCidNo =SELECT c.PositionTitle positionTitle,c.Agency agency,c.CIDNo cidNo FROM crpgovermentengineer c WHERE c.CIDNo =:cidNo AND Releaved=0
+
+CommonDao.isUsenameExist = SELECT a.username FROM sysuser a WHERE a.username =:username

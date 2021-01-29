@@ -110,6 +110,19 @@ public class ContractorNRActionService extends BaseService {
 
     @Transactional(readOnly = false)
     public ResponseMessage approve(BigInteger appNo, String aRemarks, LoggedInUser loggedInUser)throws Exception {
+        String applicationNo = String.valueOf(appNo);
+        Contractor contractor = contractorNRService.getContractor(applicationNo);
+        contractor.setRegApprovedDate(loggedInUser.getServerDate());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(loggedInUser.getServerDate());
+        if(contractor.getpCountryId() != "ae79af58-1af2-42a9-9ef4-fb476515f48f"){ //if non-bhutanese then the certificate validity year is 1 else 2.
+            calendar.add(Calendar.YEAR, 1);
+        }else{
+            calendar.add(Calendar.YEAR, 2);
+        }
+        contractor.setRegExpiryDate(calendar.getTime());
+        contractorNRActionDao.saveOrUpdate(contractor);
+
         String contractorId = (String)commonService.getValue("crpcontractor","CrpContractorId","ReferenceNo",appNo.toString());
         contractorNRActionDao.approve(contractorId, loggedInUser.getUserID(), aRemarks);
 
@@ -139,13 +152,8 @@ public class ContractorNRActionService extends BaseService {
        //contractor.setLockedByUserId("null");
         contractor.setPaymentReceiptDate(paymentUpdateDTO.getPaymentDate());
         contractor.setPaymentReceiptNo(paymentUpdateDTO.getPaymentReceiptNo());
-        contractor.setRegApprovedDate(loggedInUser.getServerDate());
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(loggedInUser.getServerDate());
         contractor.setHasNotification("0");
-        calendar.add(Calendar.YEAR, 2);
-        contractor.setRegExpiryDate(calendar.getTime());
+
         contractorNRActionDao.saveOrUpdate(contractor);
 
         paymentUpdateDTO.setContractorId(contractor.getContractorId());
@@ -158,7 +166,6 @@ public class ContractorNRActionService extends BaseService {
                 "Password : 123" +
                 "Please change your default password after login.";
         MailSender.sendMail(contractor.getRegEmail(), "cdb@gov.bt", null, mailContent, "Application approved");
-
         return responseMessage;
     }
 

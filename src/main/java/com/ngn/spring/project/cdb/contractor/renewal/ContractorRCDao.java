@@ -121,6 +121,13 @@ public class ContractorRCDao extends BaseDao {
         hibernateQuery(sqlQuery).setParameter("eqId", eqId).executeUpdate();
     }
 
+    @Transactional
+    public void saveEditEqRequest(String eqId) {
+        sqlQuery = properties.getProperty("ContractorRCDao.saveEditEqRequest");
+        hibernateQuery(sqlQuery).setParameter("eqId", eqId).executeUpdate();
+    }
+
+
     @Transactional(readOnly = true)
     public String auditMemo(String contractorFinalId) {
         sqlQuery = properties.getProperty("ContractorRCDao.auditMemo");

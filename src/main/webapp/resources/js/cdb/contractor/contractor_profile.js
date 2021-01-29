@@ -39,7 +39,7 @@ var contractorPr = (function () {
                     "<td class='qualificationName'>" + contractorHrs[i].qualificationName + "</td>" +
                     "<td class='tradeName'>" + contractorHrs[i].tradeName + "</td>" +
                     "<td class='serviceTypeName'>" + contractorHrs[i].serviceTypeName + "</td>" +
-                    "<td>" + nullif(contractorHrs[i].joinDate) + "</td>" +
+                    "<td>" + nullif(contractorHrs[i].joiningDate) + "</td>" +
                     "<td class='attachments'>" + attachments + "</td>" +
                     "</tr>";
                 }
@@ -170,8 +170,6 @@ var contractorPr = (function () {
             success: function (res) {
                 var tr='';
                 for (var i in res) {
-
-
                     tr = tr +
                     "<tr><td>"+(parseInt(i)+1)+"</td>" +
                     "<td>"+ res[i].pAgency + "</td>" +

@@ -520,7 +520,7 @@
                                                     <div class="form-group">
                                                         <div class="col-lg-12" align="center">
                                                             <p ><span id="dcbinfo"><b>The Individual holding CID/permit no.<label id="cidNumber"></label>(<label id="hrName"></label>) is engaged in following project(s):</b></span></p>
-                                                            <p><span id="dcbinfo1"></span></p>
+                                                            <p><span id="dcbinfonotEngaged"></span></p>
                                                         </div>
                                                     </div>
                                                     <%--<form action="" method="post" class="">
@@ -596,12 +596,13 @@
                                                     </form>--%>
                                                 </div>
                                             </div>
+                                            <hr />
                                         </div>
+
                                         <div class="form-group">
-                                            <p align="center">With regard to Corporate Employee please verify with the
-                                                concern agencies. There may be certain inconsistency.</p>
-                                            <hr>
-                                            <p align="center"><strong>Print this page as an evidence to prove that particular HR is engaged or not in a work or project</strong></p>
+                                            <p align="center">With regard to Corporate Employee please verify with the concern agencies. There may be certain inconsistency.</p>
+                                            <hr />
+                                            <p align="center"><strong>Print this page as an evidence to prove that particular HR is engaged or not in a work or project.</strong></p>
                                             <p align="center">
                                                 Printed on:  <%=new Date()%>
                                                 By: ${auth.fullName}

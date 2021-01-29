@@ -260,7 +260,6 @@ public class ContractorOSService extends BaseService {
                 c->contractorRCService.saveAppliedS(contractorId,c,loggedInUser)
         );
         //endregion
-
         responseMessage.reset();
         responseMessage.setStatus(SUCCESSFUL_STATUS);
         responseMessage.setText("Your application for Renewal Of Contractor has been submitted and your application number is "+referenceNo+"<br>" +

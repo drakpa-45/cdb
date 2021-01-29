@@ -6,6 +6,7 @@ import com.ngn.spring.project.cdb.common.CommonService;
 import com.ngn.spring.project.commonDto.TasklistDto;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
 import com.ngn.spring.project.lib.LoggedInUser;
+import com.ngn.spring.project.lib.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -156,6 +157,7 @@ public class IndexController extends BaseController {
             return "index_public";
         }
 	}
+
     @RequestMapping(value = "/resubmissionIndex")
     public String redirectToPage( ModelMap model,HttpServletRequest request,TasklistDto dto) {
         return "resubmissionIndex";
@@ -164,6 +166,24 @@ public class IndexController extends BaseController {
     @RequestMapping(value = "/acknowledgement")
     public String acknowledgement( ModelMap model,HttpServletRequest request,@ModelAttribute("acknowledgement_message")String acknowledgement_message) {
         model.addAttribute("ackMessage",acknowledgement_message);
+        return "acknowledgement";
+    }
+
+    @RequestMapping(value ="/public_access/isUsenameExist", method = RequestMethod.GET)
+    public Boolean isUsenameExist(String username){
+        /* if(commonService.isUsenameExist(username) == true){
+             responseMessage.setStatus(1);
+         }else{
+             responseMessage.setStatus(0);
+         }
+        return responseMessage;*/
+        return commonService.isUsenameExist(username);
+    }
+
+    @RequestMapping(value = "/public_access/changepassword")
+    public String changepassword( ModelMap model,HttpServletRequest request) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        LoginDTO loginDTO = (LoginDTO) auth.getPrincipal();
         return "acknowledgement";
     }
 }

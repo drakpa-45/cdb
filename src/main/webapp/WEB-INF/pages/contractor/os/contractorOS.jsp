@@ -444,7 +444,7 @@
                                                 <button type="button" onclick="backTab('generalInformation')" id="btn4" class="btn btn-azure col-lg-offset-9">
                                                     <i class="fa fa-arrow-circle-left"></i>Back
                                                 </button>
-                                                <button type="button" onclick="nextTab('generalInformation')"id="btn5" class="btn btn-primary nextTab">
+                                                <button type="button" onclick="nextTab('generalInformation')" id="btn5" class="btn btn-primary nextTab">
                                                     <i class="fa fa-arrow-circle-right"></i>Next &nbsp;
                                                 </button>
                                             </div>
@@ -587,7 +587,7 @@
                                                                     <th style="width: 5%">Title</th>
                                                                     <th style="width: 15%">Name</th>
                                                                     <th style="width: 15%">ID/Work Permit No.</th>
-                                                                    <th style="width: 10%">Sex</th>
+                                                                    <th style="width: 10%">Gender</th>
                                                                     <th style="width: 10%">Country</th>
                                                                     <th style="width: 10%">Designation</th>
                                                                     <th style="width: 10%">Qualification</th>
@@ -1083,6 +1083,7 @@
                                         <div class="col-lg-4">
                                             <div class="input-icon">
                                                 <input type="text" name="equipments[0].quantity" class="form-control" required="" id="eq3">
+
                                             </div>
                                         </div>
                                     </div>
