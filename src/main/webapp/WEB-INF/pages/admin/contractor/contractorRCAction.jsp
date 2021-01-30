@@ -632,6 +632,7 @@
                             <div id="modal-print">
                                 <div class="form-group">
                                     <p align="center"><strong><u>Caution</u></strong></p>
+
                                     <p align="center"><strong>An engineer is allowed to execute only two work at a time for that particular firm.</strong></p>
                                     <p align="center"><strong>For any other Human Resource they are allowed to involve only in a single project of work</strong></p>
                                     <p align="center"><font size="5px;">Details of CID No: <span id="cidchecked"></span></font></p>
@@ -639,6 +640,7 @@
                                 <div class="form-group">
                                     <div class="col-lg-9 mt-8">
                                         <span class=""><b>From DCRC database</b></span>
+
                                         <div class="col-lg-12 form-group mb-0 pt-4">
                                             <label class="col-lg-3 form-label">Sex</label>
                                             <label class="col-lg-8 form-label" id="sexM"></label>
@@ -670,10 +672,19 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-12" align="center">
-                                        <p><span id="dcbinfo"><b>Human Resource is not registered in any of the
+                                        <%--<p id="notEngagedId" style="display: none"><span id="dcbinfo"><b>Human Resource is not registered in any of the
                                             CDB firm</b><br><br> This person is not engaged in any work or project<br>This person is not a civil servant</span>
-                                        </p>
+                                        </p>--%>
+                                        <div class="tab-pane employeeDetails" id="engagedId">
+                                            <div class="form-group">
+                                                <div class="col-lg-12" align="center">
+                                                    <p><span id="dcbinfo"><b>The Individual holding CID/permit no.<label id="cidNumber"></label>(<label id="hrName"></label>) is engaged in following project(s):</b></span></p>
+                                                    <p><span id="dcbinfonotEngaged"></span></p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <hr />
                                 </div>
                                 <div class="form-group">
                                     <p align="center">With regard to Corporate Employee please verify with the
@@ -689,11 +700,17 @@
                             </div>
                             <div class="col-md-12 col-lg-12 col-sm-12">
                                 <div class="col-md-1 col-lg-1 col-sm-2">
-                                    <button type="button" class="btn btn-primary" onclick="javascript:printDiv('modal-print')">Print</button>
+                                    <button type="button" class="btn btn-primary"
+                                            onclick="javascript:printDiv('modal-print')">Print
+                                    </button>
                                 </div>
                                 <div class="col-md-4 col-lg-4 col-sm-4">
-                                    <button type="button" class="btn btn-success" id="closeModal" style="display: none" onclick="checkBtn('owner')" data-dismiss="modal">OK</button>
-                                    <button type="button" class="btn btn-success " id="closeModal1"  style="display: none" onclick="checkBtn('Hr')" data-dismiss="modal">OK</button>
+                                    <button type="button" class="btn btn-success" id="closeModal" style="display: none"
+                                            onclick="checkBtn('owner')" data-dismiss="modal">OK
+                                    </button>
+                                    <button type="button" class="btn btn-success " id="closeModal1"  style="display: none"
+                                            onclick="checkBtn('Hr')" data-dismiss="modal">OK
+                                    </button>
                                 </div>
                             </div>
                         </div>

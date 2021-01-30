@@ -674,6 +674,64 @@ try {
         sqlQuery = properties.getProperty("CommonDao.isUsenameExist");
         return hibernateQuery(sqlQuery).setParameter("username", username).list().isEmpty();
     }
+
+    public ResponseMessage updatePhoneNumber(LoginDTO loginDTO, String phoneNumber) {
+        ResponseMessage responseMessage = null;
+
+        String getCdbNoForSp = getCdbNoForSp(loginDTO);
+        String getCdbNoForSurvey = getCdbNoForSurvey(loginDTO);
+        String getCdbNoForArchitect = getCdbNoForArchitect(loginDTO);
+        String getCdbNoForEngineer= getCdbNoForEngineer(loginDTO);
+        String getConsultantCdbNo = getConsultantCdbNo(loginDTO);
+        String getCdbNoForContractor = getCdbNoForContractor(loginDTO);
+        String cdbdet="";
+        if(getCdbNoForSp != null){
+           // if(getCdbNoForSp.contains("SP-") || getCdbNoForSp.contains("SF-")) {
+                org.hibernate.query.Query query1 = sqlQuery("UPDATE crpspecializedtradefinal SET MobileNo = ? WHERE Email = ?");
+                query1.setParameter(1, phoneNumber).setParameter(2, loginDTO.getUsername());
+                int save = query1.executeUpdate();
+            if (save > 0) {
+                responseMessage.setStatus(1);
+            }
+           // }
+        } else if(getCdbNoForSurvey != null) {
+            org.hibernate.query.Query query1 = sqlQuery("UPDATE crpsurveyfinal SET MobileNo = ? WHERE Email = ?");
+            query1.setParameter(1, phoneNumber).setParameter(2, loginDTO.getUsername());
+            int save = query1.executeUpdate();
+            if (save > 0) {
+                responseMessage.setStatus(1);
+            }
+        }else if(getCdbNoForEngineer != null) {
+            org.hibernate.query.Query query1 = sqlQuery("UPDATE crpengineerfinal SET MobileNo = ? WHERE Email = ?");
+            query1.setParameter(1, phoneNumber).setParameter(2, loginDTO.getUsername());
+            int save = query1.executeUpdate();
+            if (save > 0) {
+                responseMessage.setStatus(1);
+            }
+        }else if(getCdbNoForArchitect != null) {
+            org.hibernate.query.Query query1 = sqlQuery("UPDATE crparchitectfinal SET MobileNo = ? WHERE Email = ?");
+            query1.setParameter(1, phoneNumber).setParameter(2, loginDTO.getUsername());
+            int save = query1.executeUpdate();
+            if (save > 0) {
+                responseMessage.setStatus(1);
+            }
+        }else if(getConsultantCdbNo!=null){
+            org.hibernate.query.Query query1 = sqlQuery("UPDATE crpconsultantfinal SET MobileNo = ? WHERE Email = ?");
+            query1.setParameter(1, phoneNumber).setParameter(2, loginDTO.getUsername());
+            int save = query1.executeUpdate();
+            if (save > 0) {
+                responseMessage.setStatus(1);
+            }
+        }else if(getCdbNoForContractor!=null){
+            org.hibernate.query.Query query1 = sqlQuery("UPDATE crpcontractorfinal SET MobileNo = ? WHERE Email = ?");
+            query1.setParameter(1, phoneNumber).setParameter(2, loginDTO.getUsername());
+            int save = query1.executeUpdate();
+            if (save > 0) {
+                responseMessage.setStatus(1);
+            }
+        }
+        return responseMessage;
+    }
 }
 
 

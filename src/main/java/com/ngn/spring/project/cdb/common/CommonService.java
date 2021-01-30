@@ -690,4 +690,10 @@ public class CommonService extends BaseService {
     public Boolean isUsenameExist(String username) {
         return commonDao.isUsenameExist(username);
     }
+
+    @Transactional
+    public ResponseMessage updatePhoneNumber(LoginDTO loginDTO, String phoneNumber) {
+        return commonDao.updatePhoneNumber(loginDTO,phoneNumber);
+    }
+
 }

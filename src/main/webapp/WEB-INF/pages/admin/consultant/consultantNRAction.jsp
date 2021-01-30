@@ -445,94 +445,179 @@
                         </div>
                     </div>
                 </div>
-            <%--HR Modal--%>
-            <div id="hrModal" class="modal fade in " tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" style=" max-width: 900px;">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 id="myModalLabel" class="modal-title"><i class="fa fa-info-circle fa-lg"></i> Personal Check<span id="cid"></span></h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <div id="modal-print">
-                                        <div class="form-group">
-                                            <p align="center"><strong><u>Caution</u></strong></p>
-                                            <p align="center"><strong>An engineer is allowed to execute only two work at a time for that particular firm.</strong></p>
-                                            <p align="center"><strong>For any other Human Resource they are allowed to involve only in a single project of work</strong></p>
-                                            <p align="center"><font size="5px;">Details of CID No:</font><label class="form-label" id="cidNo"></label></p>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-9 mt-8">
-                                                <span class=""><b>From DCRC database</b></span>
-                                                <div class="col-lg-12 form-group mb-0 pt-4">
-                                                    <label class="col-lg-3 form-label">Sex</label>
-                                                    <label class="col-lg-8 form-label" id="sexM"></label>
-                                                </div>
-                                                <div class="col-lg-12 form-group mb-0">
-                                                    <label class="col-lg-3 form-label">Name</label>
-                                                    <label class="col-lg-8 form-label" id="nameM"></label>
-                                                </div>
-                                                <div class="col-lg-12 form-group mb-0">
-                                                    <label class="col-lg-3 form-label">Dzongkhag</label>
-                                                    <label class="col-lg-8 form-label" id="dzongkhagM"></label>
-                                                </div>
-                                                <div class="col-lg-12 form-group mb-0">
-                                                    <label class="col-lg-3 form-label">Gewog</label>
-                                                    <label class="col-lg-8 form-label" id="gewogM"></label>
-                                                </div>
-                                                <div class="col-lg-12 form-group mb-0">
-                                                    <label class="col-lg-3 form-label">Village</label>
-                                                    <label class="col-lg-8 form-label" id="villageM"></label>
-                                                </div>
-                                                <div class="col-lg-12 form-group mb-0">
-                                                    <label class="col-lg-3 form-label">DOB</label>
-                                                    <label class="col-lg-8 form-label" id="dobM"></label>
-                                                </div>
+                <%--HR Modal--%>
+                <div id="hrModal" class="modal fade in " tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" style=" max-width: 900px;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 id="myModalLabel" class="modal-title"><i class="fa fa-info-circle fa-lg"></i> Personal Check<span id="cid"></span></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div id="modal-print">
+                                            <div class="form-group">
+                                                <p align="center"><strong><u>Caution</u></strong></p>
+
+                                                <p align="center"><strong>An engineer is allowed to execute only two work at a time for that particular firm.</strong></p>
+                                                <p align="center"><strong>For any other Human Resource they are allowed to involve only in a single project of work</strong></p>
+                                                <p align="center"><font size="5px;">Details of CID No: <span id="cidchecked"></span></font></p>
                                             </div>
-                                            <div class="col-lg-3" align="center">
-                                                <br><br><span id="photoM"></span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-lg-12" align="center">
-                                                <div class="tab-pane employeeDetails" style="display: none" id="engagedId">
-                                                <div class="form-group">
-                                                    <div class="col-lg-12" align="center">
-                                                        <p ><span id="dcbinfo"><b>The Individual holding CID/permit no.<label id="cidNumber"></label>(<label id="hrName"></label>) is engaged in following project(s):</b></span></p>
-                                                        <p><span id="dcbinfonotEngaged"></span></p>
+                                            <div class="form-group">
+                                                <div class="col-lg-9 mt-8">
+                                                    <span class=""><b>From DCRC database</b></span>
+
+                                                    <div class="col-lg-12 form-group mb-0 pt-4">
+                                                        <label class="col-lg-3 form-label">Sex</label>
+                                                        <label class="col-lg-8 form-label" id="sexM"></label>
+                                                    </div>
+                                                    <div class="col-lg-12 form-group mb-0">
+                                                        <label class="col-lg-3 form-label">Name</label>
+                                                        <label class="col-lg-8 form-label" id="nameM"></label>
+                                                    </div>
+                                                    <div class="col-lg-12 form-group mb-0">
+                                                        <label class="col-lg-3 form-label">Dzongkhag</label>
+                                                        <label class="col-lg-8 form-label" id="dzongkhagM"></label>
+                                                    </div>
+                                                    <div class="col-lg-12 form-group mb-0">
+                                                        <label class="col-lg-3 form-label">Gewog</label>
+                                                        <label class="col-lg-8 form-label" id="gewogM"></label>
+                                                    </div>
+                                                    <div class="col-lg-12 form-group mb-0">
+                                                        <label class="col-lg-3 form-label">Village</label>
+                                                        <label class="col-lg-8 form-label" id="villageM"></label>
+                                                    </div>
+                                                    <div class="col-lg-12 form-group mb-0">
+                                                        <label class="col-lg-3 form-label">DOB</label>
+                                                        <label class="col-lg-8 form-label" id="dobM"></label>
                                                     </div>
                                                 </div>
+                                                <div class="col-lg-3" align="center">
+                                                    <br><br><span id="photoM"></span>
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-12" align="center">
+                                                    <%--<p id="notEngagedId" style="display: none"><span id="dcbinfo"><b>Human Resource is not registered in any of the
+                                                        CDB firm</b><br><br> This person is not engaged in any work or project<br>This person is not a civil servant</span>
+                                                    </p>--%>
+                                                    <div class="tab-pane employeeDetails" id="engagedId">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-12" align="center">
+                                                                <p><span id="dcbinfo"><b>The Individual holding CID/permit no.<label id="cidNumber"></label>(<label id="hrName"></label>) is engaged in following project(s):</b></span></p>
+                                                                <p><span id="dcbinfonotEngaged"></span></p>
+                                                            </div>
+                                                        </div>
+                                                        <%--<form action="" method="post" class="">
+                                                            <div id="employeeDetails" style="">
+                                                                <i><strong>Employee Engagement Details</strong></i>
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-body">
+                                                                        <span>Contractor</span>
+                                                                        <div class="table-responsive">
+                                                                            <table class="table table-bordered table-hover"
+                                                                                   id="employeeDTLS">
+                                                                                <thead>
+                                                                                <tr style="background-color: #e6f9ff">
+                                                                                    <th>SLNo</th>
+                                                                                    <th>Work </th>
+                                                                                    <th>Procuring Agency</th>
+                                                                                    <th>CDB Number</th>
+                                                                                    <th>Firm Name</th>
+                                                                                </tr>
+                                                                                </thead>
+                                                                                <tbody>
+
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-body">
+                                                                        <span>Consultant</span>
+                                                                        <div class="table-responsive">
+                                                                            <table class="table table-bordered table-hover"
+                                                                                   id="employeeDTLS1">
+                                                                                <thead>
+                                                                                <tr style="background-color: #e6f9ff">
+                                                                                    <th>SLNo</th>
+                                                                                    <th>Work </th>
+                                                                                    <th>Procuring Agency</th>
+                                                                                    <th>CDB Number</th>
+                                                                                    <th>Firm Name</th>
+                                                                                </tr>
+                                                                                </thead>
+                                                                                <tbody>
+
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-body">
+                                                                        <span>Specialized Firm</span>
+                                                                        <div class="table-responsive">
+                                                                            <table class="table table-bordered table-hover"
+                                                                                   id="employeeDTLS2">
+                                                                                <thead>
+                                                                                <tr style="background-color: #e6f9ff">
+                                                                                    <th>SLNo</th>
+                                                                                    <th>Work </th>
+                                                                                    <th>Procuring Agency</th>
+                                                                                    <th>CDB Number</th>
+                                                                                    <th>Firm Name</th>
+                                                                                </tr>
+                                                                                </thead>
+                                                                                <tbody>
+
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>--%>
+                                                    </div>
+                                                </div>
+                                                <hr />
+                                            </div>
+                                            <div class="form-group">
+                                                <p align="center">With regard to Corporate Employee please verify with the
+                                                    concern agencies. There may be certain inconsistency.</p>
+                                                <hr>
+                                                <p align="center"><strong>Print this page as an evidence to prove that
+                                                    particular HR is engaged or not in a work or project</strong></p>
+
+                                                <p align="center">
+                                                    Printed on:  <%=new Date()%>
+
+                                                    By: ${auth.fullName}
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <p align="center">With regard to Corporate Employee please verify with the
-                                                concern agencies. There may be certain inconsistency.</p>
-                                            <hr>
-                                            <p align="center"><strong>Print this page as an evidence to prove that
-                                                particular HR is engaged or not in a work or project</strong></p>
-                                            <p align="center">
-                                                Printed on:  <%=new Date()%>
-                                                By: ${auth.fullName}
-                                            </p>
+                                        <div class="col-md-12 col-lg-12 col-sm-12">
+                                            <div class="col-md-1 col-lg-1 col-sm-2">
+                                                <button type="button" class="btn btn-primary"
+                                                        onclick="javascript:printDiv('modal-print')">Print
+                                                </button>
+                                            </div>
+                                            <div class="col-md-4 col-lg-4 col-sm-4">
+                                                <button type="button" class="btn btn-success" id="closeModal" style="display: none"
+                                                        onclick="checkBtn('owner')" data-dismiss="modal">OK
+                                                </button>
+                                                <button type="button" class="btn btn-success " id="closeModal1"  style="display: none"
+                                                        onclick="checkBtn('Hr')" data-dismiss="modal">OK
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 col-lg-12 col-sm-12">
-                                        <div class="col-md-1 col-lg-1 col-sm-2">
-                                             <button type="button" class="btn btn-primary" onclick="javascript:printDiv('modal-print')">Print</button>
-                                        </div>
-                                        <div class="col-md-4 col-lg-4 col-sm-4">
-                                             <button type="button" class="btn btn-success" id="closeModal" style="display: none" onclick="checkBtn('owner')" data-dismiss="modal">OK</button>
-                                             <button type="button" class="btn btn-success " id="closeModal1"  style="display: none" onclick="checkBtn('Hr')" data-dismiss="modal">OK</button>
-                                        </div>
-                                  </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
             <%--Equipment Modal--%>
             <div id="CheckModalEquipment" class="modal fade in" tabindex="-1" role="dialog"
                  aria-labelledby="myModalLabel" aria-hidden="false">

@@ -131,7 +131,6 @@ public class ContractorRCActionService extends BaseService {
         List<EquipmentDTO> existingEQs = contractorRCService.getEquipmentFinal(contractorFinalId);
         List<EquipmentDTO> newEQs = nrActionService.getContractorEQs(getIdFromAppNo(appNo));
         List<EquipmentDTO> editedEQs = newEQs.stream().filter(existingEQs::contains).collect(Collectors.toList());
-        //List<EquipmentDTO> editedEQs = existingEQs.stream().filter(e->e.getEditCheck() != null && e.getEditCheck() == 1).collect(Collectors.toList());
         List<EquipmentDTO> newlyAddedEQs = newEQs.stream().filter(e->!editedEQs.contains(e)).collect(Collectors.toList());
         List<EquipmentDTO> deletedEQs = existingEQs.stream().filter(e->e.getDeleteRequest() != null && e.getDeleteRequest() == 1).collect(Collectors.toList());
         ndeDTOeq.setExisting(existingEQs);

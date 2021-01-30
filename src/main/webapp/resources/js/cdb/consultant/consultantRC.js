@@ -678,7 +678,7 @@ var consultantRC = (function () {
                             "<td>" + equipments[i].quantity + "</td>" +
                             "<td style='text-align: center'>"+attachment+"</td>" +
                             "<td><input type='checkbox' name='equipments[0].deleteRequest' value='1'></td>" +
-                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button></td>"  +
+                            "<td class='action'><input type='checkbox' class='editCheck' name='equipments[0].editCheck' value=''><button class='btn-sm btn-info btn-block edit_row_eq'>Edit</button></td>"  +
                             "</tr>";
                         }
                         $('#equipmentTbl').find('tbody').html(eqTr);
@@ -906,8 +906,9 @@ var consultantRC = (function () {
     }
 
     function editInModalEQ(){
-        $('body').on('click','.edit_row',function(e){
+        $('body').on('click','.edit_row_eq',function(e){
             e.preventDefault();
+            var editcheck = $(this).closest('tr').find('.editCheck').prop('checked',true).val(1);
             var row = $(this).closest('tr');
             var modal = $('#eqModal');
             modal.find('.id4Edit').val(row.find('.consultantEQid').val());

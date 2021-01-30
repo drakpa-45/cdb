@@ -180,6 +180,14 @@ public class IndexController extends BaseController {
         return commonService.isUsenameExist(username);
     }
 
+    @RequestMapping(value ="/public_access/updatePhoneNumber", method = RequestMethod.GET)
+    public ResponseMessage updatePhoneNumber(String phoneNumber){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        LoginDTO loginDTO = (LoginDTO) auth.getPrincipal();
+
+        return commonService.updatePhoneNumber(loginDTO,phoneNumber);
+    }
+
     @RequestMapping(value = "/public_access/changepassword")
     public String changepassword( ModelMap model,HttpServletRequest request) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

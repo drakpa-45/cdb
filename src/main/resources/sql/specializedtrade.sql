@@ -74,7 +74,7 @@ LEFT JOIN cmnlistitem st ON st.Id = hr.CmnServiceTypeId LEFT JOIN cmnlistitem td
 
 SpecializedFirmActionDao.getHRAttachments=SELECT a.DocumentName documentName,DocumentPath documentPath, FileType fileType FROM crpspecializedtradehumanresourceattachment a WHERE a.CrpSpecializedtradeHumanResourceId = :hrId
 
-SpecializedFirmActionDao.getEquipment=SELECT ce.Id id, ce.CrpSpecializedTradeId specializedFirmId, eq.Name equipmentName,ce.RegistrationNo registrationNo,ce.SerialNo serialNo,ce.Quantity quantity,ce.ModelNo modelNo ,ce.Verified AS verified, ce.Approved AS approved \
+SpecializedFirmActionDao.getEquipment=SELECT ce.Id id, ce.CrpSpecializedTradeId specializedFirmId,ce.CmnEquipmentId equipmentId, eq.Name equipmentName,ce.RegistrationNo registrationNo,ce.SerialNo serialNo,ce.Quantity quantity,ce.ModelNo modelNo ,ce.Verified AS verified, ce.Approved AS approved \
 FROM crpspecializedtradeequipment ce LEFT JOIN cmnequipment  eq ON ce.CmnEquipmentId = eq.Id LEFT JOIN cmnspecializedtradecategory cl ON cl.Id = ce.CmnEquipmentId WHERE ce.CrpSpecializedTradeId =:specializedFirmId
 
 SpecializedFirmActionDao.getEQAttachments=SELECT a.DocumentName documentName,DocumentPath documentPath, FileType fileType FROM crpspecializedtradeequipmentattachment a WHERE a.CrpSpecializedtradeEquipmentId  = :eqId
@@ -106,7 +106,7 @@ LEFT JOIN cmnlistitem st ON st.Id = hr.CmnServiceTypeId LEFT JOIN cmnlistitem td
 
 SpecializedFirmRCDao.getHRAttachmentsFinal=SELECT a.Id AS id,a.DocumentName documentName,DocumentPath documentPath, FileType fileType FROM crpspecializedtradehumanresourceattachmentfinal a WHERE a.CrpSpecializedTradeHumanResourceFinalId = :hrId
 
-SpecializedFirmRCDao.getEquipmentFinal=SELECT ce.Id id, eq.Name equipmentName,ce.RegistrationNo registrationNo,ce.SerialNo serialNo,ce.Quantity quantity,ce.ModelNo modelNo ,ce.DeleteRequest AS deleteRequest FROM crpspecializedtradeequipmentfinal ce INNER JOIN cmnequipment  eq ON ce.CmnEquipmentId = eq.Id WHERE ce.CrpSpecializedtradeFinalId =:specializedFirmId
+SpecializedFirmRCDao.getEquipmentFinal=SELECT ce.Id id, eq.Name equipmentName,ce.RegistrationNo registrationNo,ce.SerialNo serialNo,ce.Quantity quantity,ce.ModelNo modelNo ,ce.DeleteRequest AS deleteRequest,ce.CmnEquipmentId equipmentId FROM crpspecializedtradeequipmentfinal ce INNER JOIN cmnequipment  eq ON ce.CmnEquipmentId = eq.Id WHERE ce.CrpSpecializedtradeFinalId =:specializedFirmId
 
 SpecializedFirmRCDao.getEQAttachmentsFinal=SELECT a.Id AS id,a.DocumentName documentName,DocumentPath documentPath, FileType fileType FROM crpspecializedtradeequipmentattachmentfinal a WHERE a.CrpSpecializedtradeEquipmentFinalId  = :eqId
 

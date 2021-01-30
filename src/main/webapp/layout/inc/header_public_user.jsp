@@ -60,11 +60,11 @@
                         <li class="nav-item" style="color:black">
                             <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fa fa-edit"></i> Update <i class="fa fa-chevron-down"></i></a>
                             <div class="dropdown-menu dropdown-menu-arrow">
-                                <a href="<c:url value="/public_access/update?param=<%=cdbNo%>"/>" class="nav-link active pl-2" style="color:black"><i class="fa fa-phone"></i> Update Phone Number</a>
+                                <a href="#"  data-toggle="modal" data-target="#phonedModal" class="nav-link active pl-2" style="color:black"><i class="fa fa-phone"></i> Update Phone Number</a>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a href="<c:url value="/public_access/changepassowrd?param=${App_Details}"/>" class="nav-link active" style="color:black"><i class="fa fa-lock"></i> Change Password</a>
+                            <a href="#"  data-toggle="modal" data-target="#changePwdModal" class="nav-link active" style="color:black"><i class="fa fa-lock"></i> Change Password</a>
                         </li>
                     </ul>
                     <%}else if (cdbNo.startsWith("Architect")){%>
@@ -84,12 +84,12 @@
                         <li class="nav-item" style="color:black">
                             <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fa fa-edit "></i> Update <i class="fa fa-chevron-down"></i></a>
                             <div class="dropdown-menu dropdown-menu-arrow">
-                                <a href="<c:url value="/public_access/update?param=<%=cdbNo%>"/>" class="nav-link active pl-2" style="color:black"><i class="fa fa-phone"></i> Update Phone Number</a>
+                                <a href="#"  data-toggle="modal" data-target="#phonedModal" class="nav-link active pl-2" style="color:black"><i class="fa fa-phone"></i> Update Phone Number</a>
                                 <a href="<c:url value="/public_access/update?param=<%=cdbNo%>"/>" class="nav-link active pl-2" style="color:black"><i class="fa fa-envelope"></i> Update Email</a>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a href="<c:url value="/public_access/changepassowrd?param=${App_Details}"/>" class="nav-link active" style="color:black"><i class="fa fa-lock"></i> Change Password</a>
+                            <a href="#"  data-toggle="modal" data-target="#changePwdModal" class="nav-link active" style="color:black"><i class="fa fa-lock"></i> Change Password</a>
                         </li>
                     </ul>
                     <%}else if (cdbNo.startsWith("Survey")){%>
@@ -109,12 +109,12 @@
                         <li class="nav-item" style="color:black">
                             <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fa fa-edit"></i> Update <i class="fa fa-chevron-down"></i></a>
                             <div class="dropdown-menu dropdown-menu-arrow">
-                                <a href="<c:url value="/public_access/update?param=<%=cdbNo%>"/>" class="nav-link active pl-2" style="color:black"><i class="fa fa-phone"></i> Update Phone Number</a>
+                                <a href="#"  data-toggle="modal" data-target="#phonedModal" class="nav-link active pl-2" style="color:black"><i class="fa fa-phone"></i> Update Phone Number</a>
                                 <a href="<c:url value="/public_access/update?param=<%=cdbNo%>"/>" class="nav-link active pl-2" style="color:black"><i class="fa fa-envelope"></i> Update Email</a>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a href="<c:url value="/public_access/changepassowrd?param=${App_Details}"/>" class="nav-link active" style="color:black"><i class="fa fa-lock"></i> Change Password</a>
+                            <a href="#"  data-toggle="modal" data-target="#changePwdModal" class="nav-link active" style="color:black"><i class="fa fa-lock"></i> Change Password</a>
                         </li>
                     </ul>
                     <%} else if (cdbNo.startsWith("Engineer")){%>
@@ -134,12 +134,12 @@
                         <li class="nav-item" style="color:black">
                             <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fa fa-edit"></i> Update <i class="fa fa-chevron-down"></i></a>
                             <div class="dropdown-menu dropdown-menu-arrow">
-                                <a href="<c:url value="/public_access/update?param=<%=cdbNo%>"/>" class="nav-link active pl-2" style="color:black"><i class="fa fa-phone"></i> Update Phone Number</a>
+                                <a href="#"  data-toggle="modal" data-target="#phonedModal" class="nav-link active pl-2" style="color:black"><i class="fa fa-phone"></i> Update Phone Number</a>
                                 <a href="<c:url value="/public_access/update?param=<%=cdbNo%>"/>" class="nav-link active pl-2" style="color:black"><i class="fa fa-envelope"></i> Update Email</a>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a href="<c:url value="/public_access/changepassowrd?param=${App_Details}"/>" class="nav-link active" style="color:black"><i class="fa fa-lock"></i> Change Password</a>
+                            <a href="#"  data-toggle="modal" data-target="#changePwdModal" class="nav-link active" style="color:black"><i class="fa fa-lock"></i> Change Password</a>
                         </li>
                     </ul>
                     <%}else if (cdbNo.startsWith("Consultant")){%>
@@ -162,15 +162,15 @@
                         <li class="nav-item" style="color:black">
                             <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fa fa-edit"></i> Update <i class="fa fa-chevron-down"></i></a>
                             <div class="dropdown-menu dropdown-menu-arrow">
-                                <a href="<c:url value="/public_access/update"/>" class="nav-link active pl-2" style="color:black"><i class="fa fa-phone"></i> Update Phone Number</a>
+                                <a href="#"  data-toggle="modal" data-target="#phonedModal" class="nav-link active pl-2" style="color:black"><i class="fa fa-phone"></i> Update Phone Number</a>
                                 <a href="<c:url value="/public_access/update"/>" class="nav-link active pl-2" style="color:black"><i class="fa fa-envelope"></i> Update Email</a>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a href="<c:url value="/public_access/changepassword"/>" class="nav-link active" style="color:black"><i class="fa fa-lock"></i> Change Password</a>
+                            <a href="#"  data-toggle="modal" data-target="#changePwdModal" class="nav-link active" style="color:black"><i class="fa fa-lock"></i> Change Password</a>
                         </li>
                     </ul>
-                            <%}else if (cdbNo.startsWith("Contractor")){%>
+                    <%}else if (cdbNo.startsWith("Contractor")){%>
                         <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                             <li class="nav-item">
                                 <a href="<c:url value="/admin/"/>" class="nav-link" style="color:black"><i class="fa fa-Dashboard"></i>Dashboard</a>
@@ -190,12 +190,12 @@
                             <li class="nav-item" style="color:black">
                                 <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fa fa-edit"></i> Update <i class="fa fa-chevron-down"></i></a>
                                 <div class="dropdown-menu dropdown-menu-arrow">
-                                    <a href="<c:url value="/public_access/update"/>" class="nav-link active pl-2" style="color:black"><i class="fa fa-phone"></i> Update Phone Number</a>
+                                    <a href="#"  data-toggle="modal" data-target="#phonedModal" class="nav-link active pl-2" style="color:black"><i class="fa fa-phone"></i> Update Phone Number</a>
                                     <a href="<c:url value="/public_access/update"/>" class="nav-link active pl-2" style="color:black"><i class="fa fa-envelope"></i> Update Email</a>
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a href="#"  data-toggle="modal" data-target="#addOwModal" class="nav-link" style="color:black"><i class="fa fa-lock"></i> Change Password</a>
+                                <a href="#"  data-toggle="modal" data-target="#changePwdModal" class="nav-link" style="color:black"><i class="fa fa-lock"></i> Change Password</a>
                             </li>
                         </ul>
                     <%}else if (cdbNo.startsWith("SpecializedFirm")){%>
@@ -218,12 +218,12 @@
                         <li class="nav-item" style="color:black">
                             <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fa fa-edit"></i> Update <i class="fa fa-chevron-down"></i></a>
                             <div class="dropdown-menu dropdown-menu-arrow">
-                                <a href="<c:url value="/public_access/update"/>" class="nav-link active pl-2" style="color:black"><i class="fa fa-phone"></i> Update Phone Number</a>
+                                <a href="#"  data-toggle="modal" data-target="#phonedModal" class="nav-link active pl-2" style="color:black"><i class="fa fa-phone"></i> Update Phone Number</a>
                                 <a href="<c:url value="/public_access/update"/>" class="nav-link active pl-2" style="color:black"><i class="fa fa-envelope"></i> Update Email</a>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a href="#" data-toggle="modal" data-target="#addOwModal" class="nav-link" style="color:black"><i class="fa fa-lock"></i> Change Password</a>
+                            <a href="#" data-toggle="modal" data-target="#changePwdModal" class="nav-link" style="color:black"><i class="fa fa-lock"></i> Change Password</a>
                         </li>
                     </ul>
                     <%}%>
@@ -233,7 +233,7 @@
     </div>
 </div>
 <div aria-hidden="true" aria-labelledby="hrModalLabel" role="dialog" class="modal fade in"
-     id="addOwModal">
+     id="changePwdModal">
     <div class="modal-dialog modal-lg" id="ownerModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -266,7 +266,34 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-success" onclick="getOwnerModalData('partnerDtls','ow',6)" type="button">Update</button>
-                <button data-dismiss="modal" class="btn btn-danger" target="#addOwModal" type="button">Close</button>
+                <button data-dismiss="modal" class="btn btn-danger" target="#changePwdModal" type="button">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="hrModalLabel" role="dialog" class="modal fade in"
+     id="phonedModal">
+    <div class="modal-dialog modal-lg" id="pModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="pModalLabel" class="modal-title">Update Phone Number</h4>
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button"></button>
+            </div>
+            <div class="modal-body form-horizontal">
+                <div class="modal-div">
+                    <div class="form-group">
+                        <label class="col-lg-4">Phone Number
+                            <span class="text-danger">*</span>:</label>
+                        <div class="col-lg-8">
+                            <input type="text" id="phoneNumber" class="form-control number" required="" placeholder="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" onclick="updatePhoneNumber()" type="button">Update</button>
+                <button data-dismiss="modal" class="btn btn-danger" target="#phonedModal" type="button">Close</button>
             </div>
         </div>
     </div>
@@ -296,6 +323,20 @@
                     $this.val('').focus();
                 } else{
 
+                }
+            }
+        });
+    }
+
+    function updatePhoneNumber(){
+        var $this = $('#phoneNumber').val();
+        $.ajax({
+            url:'/cdb/public_access/updatePhoneNumber',
+            type: 'GET',
+            data: {phoneNumber: $this},
+            success: function (res) {
+                if(res.status == 1){
+                    successMsg('Your phone number is successfully updated.')
                 }
             }
         });
