@@ -1,4 +1,4 @@
-#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
-#Tue Nov 05 15:59:58 BDT 2019
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Thu Jan 21 16:46:05 BDT 2021
 okhttp-2.7.5.jar>central=
 okhttp-2.7.5.pom>central=

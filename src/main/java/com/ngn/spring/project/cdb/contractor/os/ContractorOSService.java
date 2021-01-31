@@ -154,8 +154,6 @@ public class ContractorOSService extends BaseService {
         }
         //endregion
 
-
-
         //region change of owner or partner
         if(renewalServiceType.getChangeOfOwner() != null){
            // List<ContractorHR> ownerList = contractorDTO.getContractor().getContractorHRs();
@@ -198,8 +196,17 @@ public class ContractorOSService extends BaseService {
                     contractorNRService.saveHR(contractorHR, loggedInUser);
                     //Save Human resource attachment
                     for (ContractorHRAttachment contractorHRA : contractorHR.getContractorHRAs()) {
-                        if(contractorHRA.getAttachment() == null){ //No changes, so no need to save
-                            continue;
+                        if(!emptyNullCheck(contractorHRA.getId())){
+                            if(contractorHRA.getAttachment() == null){ // no changes
+                                contractorHRA = contractorNRService.getHRAttachmentFinal(contractorHRA.getId());
+                            }else{ // for edit
+                                contractorHRA.setEditedBy(loggedInUser.getUserID());
+                                contractorHRA.setEditedOn(loggedInUser.getServerDate());
+                            }
+                        }else {
+                            if (contractorHRA.getAttachment() == null) { //No changes, so no need to save
+                                continue;
+                            }
                         }
                         contractorHRA.setContractorHrId(contractorHR.getId());
                         contractorNRService.saveHRA(contractorHRA, loggedInUser);
@@ -262,7 +269,7 @@ public class ContractorOSService extends BaseService {
         //endregion
         responseMessage.reset();
         responseMessage.setStatus(SUCCESSFUL_STATUS);
-        responseMessage.setText("Your application for Renewal Of Contractor has been submitted and your application number is "+referenceNo+"<br>" +
+        responseMessage.setText("Your application for Other Services has been submitted and your application number is "+referenceNo+"<br>" +
                 "You will receive an email with the Application summary.<br><br>" +
                 "You can track your application using above Application Number. <br>" +
                 "Thanks You.");

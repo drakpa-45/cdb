@@ -488,8 +488,13 @@ try {
             sqlQuery = properties.getProperty("CommonDao.isExpiredSpecializedTrade");
         }
 
+<<<<<<< HEAD
+        BigInteger bigIntValue = (BigInteger)hibernateQuery(sqlQuery).setParameter("cdbNo", cdbNo).list().get(0);
+        //Integer bigIntValue = (Integer) hibernateQuery(sqlQuery).setParameter("cdbNo", cdbNo).list().get(0);
+=======
         //BigInteger bigIntValue = (BigInteger)hibernateQuery(sqlQuery).setParameter("cdbNo", cdbNo).list().get(0);
         Integer bigIntValue = (Integer) hibernateQuery(sqlQuery).setParameter("cdbNo", cdbNo).list().get(0);
+>>>>>>> 576cf8d8b35d518effcd0c1e95ac9c2e0f7f1da2
         return (bigIntValue.intValue() == 1);
     }
 
