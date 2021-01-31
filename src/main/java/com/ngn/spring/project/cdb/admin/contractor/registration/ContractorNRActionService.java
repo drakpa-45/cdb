@@ -210,7 +210,7 @@ public class ContractorNRActionService extends BaseService {
     public String getCDBNoFromAppNo(String appNo){
         return contractorNRActionDao.getCDBNoFromAppNo(appNo);
         //return (String)commonService.getValue("crpcontractor","CDBNo","ReferenceNo",appNo);
-    }
+}
 
     @Transactional(readOnly = true)
     public String getNextCDBNo(String appNo){

@@ -17,6 +17,7 @@ import com.ngn.spring.project.cdb.specializedFirm.dto.SpFirmDTOFetch;
 import com.ngn.spring.project.cdb.specializedFirm.dto.SpFirmHrDTO;
 import com.ngn.spring.project.cdb.specializedFirm.model.*;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
+import com.ngn.spring.project.global.global.MailSender;
 import com.ngn.spring.project.lib.DropdownDTO;
 import com.ngn.spring.project.lib.LoggedInUser;
 import com.ngn.spring.project.lib.ResponseMessage;
@@ -103,6 +104,12 @@ public class SpecializedFirmRService extends BaseService {
         //insert undertaking letter
         if(spFirmDTO.getcAttachments() != null && !spFirmDTO.getcAttachments().isEmpty())
             specializedFirmRService.updateIncorporation(spFirmDTO.getcAttachments(), loggedInUser, specializedFirmId);
+
+        if(spFirmDTO.getOwnerAttachments() != null && !spFirmDTO.getOwnerAttachments().isEmpty())
+            updateIncorporation(spFirmDTO.getOwnerAttachments(), loggedInUser, specializedFirmId);
+
+        if(spFirmDTO.getCategoryAttachments() != null && !spFirmDTO.getCategoryAttachments().isEmpty())
+            updateIncorporation(spFirmDTO.getCategoryAttachments(), loggedInUser, specializedFirmId);
 
         //region incorporation (Name are also allowed to change)
         if(renewalServiceType.getIncorporation() != null){
@@ -199,8 +206,17 @@ public class SpecializedFirmRService extends BaseService {
                     specializedFirmService.saveHR(spFirmHR, loggedInUser);
                     //Save Human resource attachment
                     for (SpFirmtHRAttachment spFirmtHRA : spFirmHR.getSpFirmHRAs()) {
-                        if(spFirmtHRA.getAttachment() == null){ //No changes, so no need to save
-                            continue;
+                        if(!emptyNullCheck(spFirmtHRA.getId())){
+                            if(spFirmtHRA.getAttachment() == null){ // no changes
+                                spFirmtHRA = specializedFirmService.getHRAttachmentFinal(spFirmtHRA.getId());
+                            }else{ // for edit
+                                spFirmtHRA.setEditedBy(loggedInUser.getUserID());
+                                spFirmtHRA.setEditedOn(loggedInUser.getServerDate());
+                            }
+                        }else {
+                            if (spFirmtHRA.getAttachment() == null) { //No changes, so no need to save
+                                continue;
+                            }
                         }
                         spFirmtHRA.setSpecializedHrId(spFirmHR.getId());
                         specializedFirmService.saveHRA(spFirmtHRA, loggedInUser);
@@ -623,4 +639,17 @@ public class SpecializedFirmRService extends BaseService {
         return  specializedFirmRDao.getIncAttachmentFinal(specializedFirmId);
     }
 
+    @Transactional(readOnly = false)
+    public ResponseMessage sendNotification(String cdbNo, String email, LoggedInUser loggedInUser) {
+        String contractorId = (String)commonService.getValue("crpspecializedtradefinal","Id","SPNo",cdbNo);
+        String mailContent = "Dear User, This is to notify that please replace your Hr for recently deleted Hr from your firm. Replacement should be done within a month otherwise your firm will be down graded.";
+        try {
+            MailSender.sendMail(email, "cdb@gov.bt", null, mailContent, "Hr replacement");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        responseMessage.setStatus(SUCCESSFUL_STATUS);
+        responseMessage.setText("Hr replacement notification is successfully sent to "+email);
+        return responseMessage;
+    }
 }

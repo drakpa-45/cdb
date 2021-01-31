@@ -15,6 +15,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <sec:authentication var="auth" property="principal"/>
 <div class="header py-4" style="background: #120f65;">
     <div class="container ">
@@ -52,8 +53,8 @@
 <div class="collapse d-lg-flex header p-0 shadow-sm" id="headerMenuCollapse">
     <div class="container">
         <div class="row col-lg-12 col-md-12 col-sm-12" >
-            <div class="col-sm-12 col-md-3 col-lg-3"></div>
-                <div class="col-sm-12 col-md-3 col-lg-3">
+            <div class="col-sm-12 col-md-2 col-lg-2"></div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
                 <strong>
                     <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                         <li class="nav-item">
@@ -70,6 +71,9 @@
                                 <a href="<c:url value="/admin_specializedTrade/specializedTrade_print_Certificate"/>" class="nav-link pl-4" style="color:black"> <i class="fa fa-check"></i>Specialized Trader</a>
 
                             </div>
+                        </li>
+                        <li class="nav-item">
+                            <security:authorize access="hasRole('ROLE_APPROVER')"><i class="fa fa-bell-o mt-4" style="zoom: 1.4"></i></security:authorize>
                         </li>
                     </ul>
                 </strong>

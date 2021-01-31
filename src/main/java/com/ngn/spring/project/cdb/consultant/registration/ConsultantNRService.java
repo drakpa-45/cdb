@@ -446,4 +446,7 @@ public class ConsultantNRService extends BaseService {
         return consultantDao.isFirmNameUnique(firmName);
     }
 
+    public ConsultantHRAttachment getHRAttachmentFinal(String hraId) {
+        return consultantDao.getHRAttachmentFinal(hraId);
+    }
 }

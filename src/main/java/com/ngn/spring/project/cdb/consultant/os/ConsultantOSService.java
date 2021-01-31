@@ -101,6 +101,12 @@ public class ConsultantOSService extends BaseService {
         if(consultantDTO.getcAttachments() != null && !consultantDTO.getcAttachments().isEmpty())
             updateIncorporation(consultantDTO.getcAttachments(), loggedInUser, consultantId);
 
+        if(consultantDTO.getOwnerAttachments() != null && !consultantDTO.getOwnerAttachments().isEmpty())
+            updateIncorporation(consultantDTO.getOwnerAttachments(), loggedInUser, consultantId);
+
+        if(consultantDTO.getCategoryAttachments() != null && !consultantDTO.getCategoryAttachments().isEmpty())
+            updateIncorporation(consultantDTO.getCategoryAttachments(), loggedInUser, consultantId);
+
         //region incorporation (Name are also allowed to change)
         if(renewalServiceType.getIncorporation() != null){
             String ownershipTypeId = consultantDTO.getConsultant().getOwnershipTypeId();
@@ -207,10 +213,20 @@ public class ConsultantOSService extends BaseService {
                     consultantHR.setConsultantID(consultantId);
                     consultantHR.setIsPartnerOrOwner(FALSE_INT);
                     consultantNRService.saveHR(consultantHR, loggedInUser);
+
                     //Save Human resource attachment
                     for (ConsultantHRAttachment consultantHRA : consultantHR.getConsultantHRAs()) {
-                        if(consultantHRA.getAttachment() == null){ //No changes, so no need to save
-                            continue;
+                        if(!emptyNullCheck(consultantHRA.getId())){
+                            if(consultantHRA.getAttachment() == null){ // no changes
+                                consultantHRA = consultantNRService.getHRAttachmentFinal(consultantHRA.getId());
+                            }else{ // for edit
+                                consultantHRA.setEditedBy(loggedInUser.getUserID());
+                                consultantHRA.setEditedOn(loggedInUser.getServerDate());
+                            }
+                        }else {
+                            if (consultantHRA.getAttachment() == null) { //No changes, so no need to save
+                                continue;
+                            }
                         }
                         consultantHRA.setConsultantHrId(consultantHR.getId());
                         consultantNRService.saveHRA(consultantHRA, loggedInUser);

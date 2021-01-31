@@ -15,6 +15,7 @@ import com.ngn.spring.project.cdb.contractor.registration.model.*;
 import com.ngn.spring.project.cdb.contractor.renewal.LateFeeDTO;
 import com.ngn.spring.project.cdb.contractor.renewal.RenewalServiceType;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
+import com.ngn.spring.project.global.global.MailSender;
 import com.ngn.spring.project.lib.DropdownDTO;
 import com.ngn.spring.project.lib.LoggedInUser;
 import com.ngn.spring.project.lib.ResponseMessage;
@@ -92,6 +93,11 @@ public class ConsultantRCService extends BaseService {
         if(consultantDTO.getcAttachments() != null && !consultantDTO.getcAttachments().isEmpty())
             updateIncorporation(consultantDTO.getcAttachments(), loggedInUser, consultantId);
 
+        if(consultantDTO.getOwnerAttachments() != null && !consultantDTO.getOwnerAttachments().isEmpty())
+            updateIncorporation(consultantDTO.getOwnerAttachments(), loggedInUser, consultantId);
+
+        if(consultantDTO.getCategoryAttachments() != null && !consultantDTO.getCategoryAttachments().isEmpty())
+            updateIncorporation(consultantDTO.getCategoryAttachments(), loggedInUser, consultantId);
 
         //region incorporation (Name are also allowed to change)
         if(renewalServiceType.getIncorporation() != null){
@@ -102,20 +108,21 @@ public class ConsultantRCService extends BaseService {
             consultant.setOwnershipChangeRemarks(consultantDTO.getConsultant().getOwnershipChangeRemarks());
 
             List<ConsultantHR> ownerList = consultantDTO.getConsultantHRs();
-            for(ConsultantHR consultantHR:ownerList){
-               // String hrId = commonService.getRandomGeneratedId();
-                if(emptyNullCheck(consultantHR.getId())){
-                    consultantHR.setId(commonService.getRandomGeneratedId());
+
+                for(ConsultantHR consultantHR:ownerList){
+                    // String hrId = commonService.getRandomGeneratedId();
+                    if(emptyNullCheck(consultantHR.getId())){
+                        consultantHR.setId(commonService.getRandomGeneratedId());
+                    }
+                    //currentHRs.add(contractorHR.getId());
+                    if(emptyNullCheck(consultantHR.getCidNo())){
+                        continue;
+                    }
+                    //   consultantHR.setId(hrId);
+                    consultantHR.setConsultantID(consultantId);
+                    consultantHR.setIsPartnerOrOwner(TRUE_INT);
+                    consultantNRService.saveHR(consultantHR, loggedInUser);
                 }
-                //currentHRs.add(contractorHR.getId());
-                if(emptyNullCheck(consultantHR.getCidNo())){
-                    continue;
-                }
-             //   consultantHR.setId(hrId);
-                consultantHR.setConsultantID(consultantId);
-                consultantHR.setIsPartnerOrOwner(TRUE_INT);
-                consultantNRService.saveHR(consultantHR, loggedInUser);
-            }
 
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "12");
             appliedServicesList.add(appliedService);
@@ -171,8 +178,7 @@ public class ConsultantRCService extends BaseService {
 
         //region change of owner or partner
         if(renewalServiceType.getChangeOfOwner() != null){
-            List<ConsultantHR> ownerList = consultantDTO.getConsultant().getConsultantHRs();
-
+            List<ConsultantHR> ownerList = consultantDTO.getConsultantHRs();
             for(ConsultantHR consultantHR:ownerList){
                 String hrId = commonService.getRandomGeneratedId();
                 consultantHR.setId(hrId);
@@ -203,10 +209,20 @@ public class ConsultantRCService extends BaseService {
                     consultantHR.setConsultantID(consultantId);
                     consultantHR.setIsPartnerOrOwner(FALSE_INT);
                     consultantNRService.saveHR(consultantHR, loggedInUser);
+
                     //Save Human resource attachment
                     for (ConsultantHRAttachment consultantHRA : consultantHR.getConsultantHRAs()) {
-                        if(consultantHRA.getAttachment() == null){ //No changes, so no need to save
-                            continue;
+                        if(!emptyNullCheck(consultantHRA.getId())){
+                            if(consultantHRA.getAttachment() == null){ // no changes
+                                consultantHRA = consultantNRService.getHRAttachmentFinal(consultantHRA.getId());
+                            }else{ // for edit
+                                consultantHRA.setEditedBy(loggedInUser.getUserID());
+                                consultantHRA.setEditedOn(loggedInUser.getServerDate());
+                            }
+                        }else {
+                            if (consultantHRA.getAttachment() == null) { //No changes, so no need to save
+                                continue;
+                            }
                         }
                         consultantHRA.setConsultantHrId(consultantHR.getId());
                         consultantNRService.saveHRA(consultantHRA, loggedInUser);
@@ -245,19 +261,6 @@ public class ConsultantRCService extends BaseService {
             }
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "9");
             appliedServicesList.add(appliedService);
-        }
-        //endregion
-
-        //region to save owner when both incoporation & ownerchanged is not availed
-        if(renewalServiceType.getIncorporation() == null || renewalServiceType.getChangeOfOwner() == null){
-            List<ConsultantHR> ownerList = consultantDTO.getConsultant().getConsultantHRs();
-            for(ConsultantHR consultantHR:ownerList){
-                String hrId = commonService.getRandomGeneratedId();
-                consultantHR.setId(hrId);
-                consultantHR.setConsultantID(consultantId);
-                consultantHR.setIsPartnerOrOwner(TRUE_INT);
-                consultantNRService.saveHR(consultantHR, loggedInUser);
-            }
         }
         //endregion
 
@@ -631,5 +634,19 @@ public class ConsultantRCService extends BaseService {
     @Transactional(readOnly = true)
     public List<ConsultantAttachment> getIncAttachmentFinal(String consultantIdFinal) {
         return  consultantRCDao.getIncAttachmentFinal(consultantIdFinal);
+    }
+
+    @Transactional(readOnly = false)
+    public ResponseMessage sendNotification(String cdbNo, String email, LoggedInUser loggedInUser) {
+        String contractorId = (String)commonService.getValue("crpconsultantfinal","Id","CDBNo",cdbNo);
+        String mailContent = "Dear User, This is to notify that please replace your Hr for recently deleted Hr from your firm. Replacement should be done within a month otherwise your firm will be down graded.";
+        try {
+            MailSender.sendMail(email, "cdb@gov.bt", null, mailContent, "Hr replacement");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        responseMessage.setStatus(SUCCESSFUL_STATUS);
+        responseMessage.setText("Hr replacement notification is successfully sent to "+email);
+        return responseMessage;
     }
 }

@@ -4,6 +4,7 @@ import com.ngn.spring.project.base.BaseDao;
 import com.ngn.spring.project.cdb.consultant.registration.dto.ConsultantTrainingDTO;
 
 import com.ngn.spring.project.cdb.specializedFirm.dto.SpFirmDTOFetch;
+import com.ngn.spring.project.cdb.specializedFirm.model.SpFirmtHRAttachment;
 import com.ngn.spring.project.cdb.specializedFirm.model.SpecializedFirm;
 
 import com.ngn.spring.project.cdb.contractor.registration.dto.FeeStructureDTO;
@@ -91,5 +92,11 @@ public class SpecializedFirmDao extends BaseDao {
         sqlQuery = properties.getProperty("SpecializedDao.getSpecializedFirmOngoingApp");
         List list = hibernateQuery(sqlQuery, SpFirmDTOFetch.class).setParameter("cdbNo", cdbNo).list();
         return (SpFirmDTOFetch)(list.isEmpty()?null:list.get(0));
+    }
+
+    @Transactional(readOnly = true)
+    public SpFirmtHRAttachment getHRAttachmentFinal(String hraId) {
+        sqlQuery = properties.getProperty("SpecializedDao.getHRAttachmentFinal");
+        return (SpFirmtHRAttachment)hibernateQuery(sqlQuery,SpFirmtHRAttachment.class).setParameter("hraId",hraId).list().get(0);
     }
 }

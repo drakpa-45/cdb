@@ -21,8 +21,7 @@
                 <security:authorize access="hasRole('ROLE_APPROVER')">Approval</security:authorize>
             </h3>
             <span style="font-size: small;color: #444444"> >> CDB No: ${cdbNo} >> Application Number : ${appNo}</span>
-
-            <input type="hidden"name="cdbNo" value="${cdbNo}" id="cdbNo" >
+            <input type="hidden" name="cdbNo" value="${cdbNo}" id="cdbNo" >
         </div>
 
         <div class="card-body">
@@ -286,6 +285,7 @@
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-5 form-label">Email</label>
                                                 <label class="col-lg-7 form-label form-control" id="regEmailExist"></label>
+                                                <input type="hidden" id="regEmail">
                                             </div>
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-5 form-label">Mobile Number</label>
@@ -480,7 +480,7 @@
                                             </table>
                                         </div>
                                         <security:authorize access="hasRole('ROLE_APPROVER')">
-                                            <span class="text-danger"> Would you like to send Hr replacement notification on approval? Please tick if you wish to:<input type='checkbox' name='contractorHRs[0].sendNotification' id= "sendNotification" onclick="sendNotification()" style='zoom:1.6' value='1'></span>
+                                            <span class="text-danger"> Would you like to send Hr replacement notification on approval? Please tick if you wish to:<input type='checkbox' name='contractorHRs[0].sendNotification' id= "sendNotification" style='zoom:1.6' value='1'></span>
                                         </security:authorize>
                                     </div>
                                 </div>

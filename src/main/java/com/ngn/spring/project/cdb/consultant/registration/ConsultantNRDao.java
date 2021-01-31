@@ -1,6 +1,7 @@
 package com.ngn.spring.project.cdb.consultant.registration;
 
 import com.ngn.spring.project.base.BaseDao;
+import com.ngn.spring.project.cdb.consultant.model.ConsultantHRAttachment;
 import com.ngn.spring.project.cdb.consultant.registration.dto.ConsultantCategoryDTO;
 import com.ngn.spring.project.cdb.consultant.registration.dto.ConsultantDTOFetch;
 import com.ngn.spring.project.cdb.consultant.registration.dto.ConsultantTrainingDTO;
@@ -105,5 +106,11 @@ public class ConsultantNRDao extends BaseDao {
     public List gFeeStructureRO(String category) {
         sqlQuery = properties.getProperty("ConsultantDao.gConsultantCategoryRO");
         return hibernateQuery(sqlQuery, FeeStructureDTO.class).setParameter("category",category).list();
+    }
+
+    @Transactional(readOnly = true)
+    public ConsultantHRAttachment getHRAttachmentFinal(String hraId) {
+        sqlQuery = properties.getProperty("ConsultantDao.getHRAttachmentFinal");
+        return (ConsultantHRAttachment)hibernateQuery(sqlQuery,ConsultantHRAttachment.class).setParameter("hraId",hraId).list().get(0);
     }
 }

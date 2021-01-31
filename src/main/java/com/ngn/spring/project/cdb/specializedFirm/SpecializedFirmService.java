@@ -404,4 +404,8 @@ public class SpecializedFirmService extends BaseService {
     public Boolean isFirmNameUnique(String firmName) {
         return dao.isFirmNameUnique(firmName);
     }
+
+    public SpFirmtHRAttachment getHRAttachmentFinal(String hraId) {
+        return dao.getHRAttachmentFinal(hraId);
+    }
 }

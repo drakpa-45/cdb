@@ -92,6 +92,12 @@ public class SpecializedFirmOSService extends BaseService {
         if(spFirmDTO.getcAttachments() != null && !spFirmDTO.getcAttachments().isEmpty())
             updateIncorporation(spFirmDTO.getcAttachments(), loggedInUser, specializedFirmId);
 
+        if(spFirmDTO.getOwnerAttachments() != null && !spFirmDTO.getOwnerAttachments().isEmpty())
+            updateIncorporation(spFirmDTO.getOwnerAttachments(), loggedInUser, specializedFirmId);
+
+        if(spFirmDTO.getCategoryAttachments() != null && !spFirmDTO.getCategoryAttachments().isEmpty())
+            updateIncorporation(spFirmDTO.getCategoryAttachments(), loggedInUser, specializedFirmId);
+
         //region incorporation (Name are also allowed to change)
         if(renewalServiceType.getIncorporation() != null){
             String ownershipTypeId = spFirmDTO.getSpecializedFirm().getOwnershipTypeId();
@@ -197,10 +203,20 @@ public class SpecializedFirmOSService extends BaseService {
                     spFirmHR.setSpecializedID(specializedFirmId);
                     spFirmHR.setIsPartnerOrOwner(FALSE_INT);
                     specializedFirmService.saveHR(spFirmHR, loggedInUser);
+
                     //Save Human resource attachment
                     for (SpFirmtHRAttachment spFirmtHRA : spFirmHR.getSpFirmHRAs()) {
-                        if(spFirmtHRA.getAttachment() == null){ //No changes, so no need to save
-                            continue;
+                        if(!emptyNullCheck(spFirmtHRA.getId())){
+                            if(spFirmtHRA.getAttachment() == null){ // no changes
+                                spFirmtHRA = specializedFirmService.getHRAttachmentFinal(spFirmtHRA.getId());
+                            }else{ // for edit
+                                spFirmtHRA.setEditedBy(loggedInUser.getUserID());
+                                spFirmtHRA.setEditedOn(loggedInUser.getServerDate());
+                            }
+                        }else {
+                            if (spFirmtHRA.getAttachment() == null) { //No changes, so no need to save
+                                continue;
+                            }
                         }
                         spFirmtHRA.setSpecializedHrId(spFirmHR.getId());
                         specializedFirmService.saveHRA(spFirmtHRA, loggedInUser);

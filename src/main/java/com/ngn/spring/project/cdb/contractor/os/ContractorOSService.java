@@ -91,6 +91,12 @@ public class ContractorOSService extends BaseService {
         if(contractorDTO.getcAttachments() != null && !contractorDTO.getcAttachments().isEmpty())
            updateIncorporation(contractorDTO.getcAttachments(), loggedInUser, contractorId);
 
+        if(contractorDTO.getcAttachments() != null && !contractorDTO.getcAttachments().isEmpty())
+            updateIncorporation(contractorDTO.getcAttachments(), loggedInUser, contractorId);
+
+        if(contractorDTO.getcAttachments() != null && !contractorDTO.getcAttachments().isEmpty())
+            updateIncorporation(contractorDTO.getcAttachments(), loggedInUser, contractorId);
+
         //region incorporation (Name are also allowed to change)
         if(renewalServiceType.getIncorporation() != null){
             String ownershipTypeId = contractorDTO.getContractor().getOwnershipTypeId();

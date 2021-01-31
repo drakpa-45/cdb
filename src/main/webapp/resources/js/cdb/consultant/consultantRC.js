@@ -262,6 +262,8 @@ function submitApplication(){
     cdbGlobal.formIndexing($('#partnerDtls').find('tbody'));
     cdbGlobal.formIndexing($('#equipmentTbl').find('tbody'));
     cdbGlobal.formIndexing($('#hrDtlsTable').find('tbody'));
+    cdbGlobal.formIndexing($('#certificateTblOwner').find('tbody'));
+    cdbGlobal.formIndexing($('#certificateTblCategory').find('tbody'));
     $("#addHRModal").find(":input").prop('disabled',true);
 
     var itemId = [];
@@ -337,17 +339,17 @@ var consultantRC = (function () {
     }
 
     var certCategory ="<tr><td></td>" +
-        "<td><input type='hidden' class='form-control aFor' name='cAttachments[2].attachmentFor' value='AL'/>" +
-        "<input type='text' class='form-control' name='cAttachments[2].documentName'/> </td>"+
-        "<td><input type='file' name='cAttachments[2].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
+        "<td><input type='hidden' class='form-control aFor' name='categoryAttachments[0].attachmentFor' value='AL'/>" +
+        "<input type='text' class='form-control' name='categoryAttachments[0].documentName'/> </td>"+
+        "<td><input type='file' name='categoryAttachments[2].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
         "<td class='file-size'></td>" +
         "<td><a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a></td>" +
         "</tr>";
 
     var certOSC = "<tr><td></td>" +
-        "<td><input type='hidden' class='form-control aFor' name='cAttachments[1].attachmentFor' value='OC'/>" +
-        "<input type='text' class='form-control' name='cAttachments[1].documentName'/> </td>"+
-        "<td><input type='file' name='cAttachments[1].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
+        "<td><input type='hidden' class='form-control aFor' name='ownerAttachments[0].attachmentFor' value='OC'/>" +
+        "<input type='text' class='form-control' name='ownerAttachments[0].documentName'/> </td>"+
+        "<td><input type='file' name='ownerAttachments[1].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
         "<td class='file-size'></td>" +
         "<td><a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a></td>" +
         "</tr>";
@@ -606,7 +608,7 @@ var consultantRC = (function () {
                     var consultantHrs = res;
                     for (var i in consultantHrs) {
                         partnerHrTr = partnerHrTr + "<tr>" +
-                        "<td class='countryName'>" + consultantHrs[i].countryName + "</td>" +
+                        "<td class='countryName'> <input type='hidden' class='consultantHRid' name='consultantHRs[0].id' value='"+consultantHrs[i].id +"'/>" + consultantHrs[i].countryName + "</td>" +
                         "<td class='cidNo'>" + consultantHrs[i].cidNo + "</td>" +
                         "<td class='salutationName'>" + consultantHrs[i].salutationName + "</td>" +
                         "<td class='name'>" + consultantHrs[i].name + "</td>" +

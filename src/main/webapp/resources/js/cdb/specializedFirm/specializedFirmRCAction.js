@@ -442,6 +442,8 @@ var specializedFirmRCAction = (function () {
                 $('#regMobileNoExist').html(spFirm.regMobileNo);
                 $('#regPhoneNoExist').html(spFirm.regPhoneNo);
                 $('#regFaxNoExist').html(spFirm.regFaxNo);
+
+                $('#regEmail').val(consultant.regEmail);
             }
         });
     }
@@ -783,6 +785,22 @@ var specializedFirmRCAction = (function () {
         })
     }
 
+    function sendNotification(){
+        $('#sendNotification').on('click',function() {
+            var emailId = $('#regEmail').val();
+            var cdbNo = $('#cdbNo').val();
+            alert(emailId);
+            $.ajax({
+                url: _baseURL() + '/sendNotification',
+                type: 'GET',
+                data: {email: emailId,cdbNo:cdbNo},
+                success: function (res) {
+                    successMsg(res.text);
+                }
+            });
+        });
+    }
+
     function init(){
         approve();
         reject();
@@ -794,6 +812,7 @@ var specializedFirmRCAction = (function () {
         sendBack();
         getAppliedServices();
         checkEquipment();
+        sendNotification();
     }
     return {
         init:init

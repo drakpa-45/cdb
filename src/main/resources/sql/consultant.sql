@@ -10,6 +10,9 @@ ConsultantDao.gEquipment = SELECT a.`Id` AS value,a.`Name` AS text,a.IsRegistere
 ConsultantDao.isEmailUnique = SELECT a.Email FROM `sysuser` a WHERE a.Email =:email
 ConsultantDao.getTrainingDtl = SELECT a.`CmnTrainingTypeId` tTypeId,a.`CmnTrainingModuleId` tModuleId,tt.`Name` tType,tm.`Name` tModule,a.`TrainingFromDate` fromDate,a.`TrainingToDate` toDate,b.`CIDNo` cidNo,b.`Participant` participant FROM `crpcontractortraining` a INNER JOIN `crpcontractortrainingdetail` b ON a.`Id` = b.`CrpContractorTrainingId` INNER JOIN `cmnlistitem` tt ON tt.Id = a.`CmnTrainingTypeId` INNER JOIN `cmnlistitem` tm ON tm.Id = a.`CmnTrainingModuleId` WHERE b.`CIDNo` =:cidNo
 ConsultantDao.isFirmNameUnique= SELECT a.NameOfFirm FROM `crpconsultant` a WHERE a.NameOfFirm =:firmName
+
+ConsultantDao.getHRAttachmentFinal =
+SELECT Id id,CrpConsultantHumanResourceFinalId consultantHrId,DocumentName documentName,DocumentPath documentPath,FileType fileType,CreatedBy createdBy,CreatedOn createdOn  FROM crpconsultanthumanresourceattachmentfinal WHERE Id = :hraId
 /** ConsultantActionDao */
 
 ConsultantActionDao.gTaskList=CALL ProCrpConsultantTaskList (:userId,:status,:service);

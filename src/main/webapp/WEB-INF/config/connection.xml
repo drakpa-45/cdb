@@ -9,8 +9,8 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <!--<property name="username" value="root"/>
         <property name="password" value="root"/>-->
-        <property name="username" value="ccruser"/>
-        <property name="password" value="ccruser2020@!"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
         <property name="validationQuery" value="SELECT 1"/>
     </bean>
 

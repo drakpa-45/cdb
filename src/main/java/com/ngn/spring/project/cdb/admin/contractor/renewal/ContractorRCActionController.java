@@ -130,6 +130,13 @@ public class ContractorRCActionController extends BaseController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/sendNotification", method = RequestMethod.GET)
+    public ResponseMessage sendNotification(HttpServletRequest request, String cdbNo, String email) {
+        loggedInUser = gLoggedInUser(request);
+        return contractorRCService.sendNotification(cdbNo, email, loggedInUser);
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/paymentUpdate", method = RequestMethod.POST)
     public ResponseMessage paymentUpdate(HttpServletRequest request, PaymentUpdateDTO paymentUpdateDTO) throws Exception{
         loggedInUser = gLoggedInUser(request);

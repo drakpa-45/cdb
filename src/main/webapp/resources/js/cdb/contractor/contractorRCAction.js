@@ -491,6 +491,8 @@ var contractorRCAction = (function () {
                 $('#regMobileNoExist').html(contractor.regMobileNo);
                 $('#regPhoneNoExist').html(contractor.regPhoneNo);
                 $('#regFaxNoExist').html(contractor.regFaxNo);
+
+                $('#regEmail').val(contractor.regEmail);
             }
         });
     }
@@ -787,18 +789,19 @@ var contractorRCAction = (function () {
     }
 
     function sendNotification(){
-        if($('#sendNotification').prop('checked')){
-            var emailId= $('#regEmailExist').val();
+        $('#sendNotification').on('click',function() {
+            var emailId = $('#regEmail').val();
+            var cdbNo = $('#cdbNo').val();
             alert(emailId);
             $.ajax({
-                url:_baseURL() + '/sendNotification',
+                url: _baseURL() + '/sendNotification',
                 type: 'GET',
-                data: {cidNo: cidNo},
+                data: {email: emailId,cdbNo:cdbNo},
                 success: function (res) {
-
+                        successMsg(res.text);
                 }
-            })
-        }
+            });
+        });
     }
 
     function init(){

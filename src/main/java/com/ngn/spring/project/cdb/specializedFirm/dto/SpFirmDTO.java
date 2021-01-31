@@ -18,6 +18,8 @@ public class SpFirmDTO {
     private List<SpFirmCategory> categories;
     private List<SpFirmEQ> equipments;
     private List<SpFirmAttachment> cAttachments;
+    private List<SpFirmAttachment> ownerAttachments;
+    private List<SpFirmAttachment> categoryAttachments;
 
     public SpecializedFirm getSpecializedFirm() {
         return specializedFirm;
@@ -57,5 +59,21 @@ public class SpFirmDTO {
 
     public void setcAttachments(List<SpFirmAttachment> cAttachments) {
         this.cAttachments = cAttachments;
+    }
+
+    public List<SpFirmAttachment> getOwnerAttachments() {
+        return ownerAttachments;
+    }
+
+    public void setOwnerAttachments(List<SpFirmAttachment> ownerAttachments) {
+        this.ownerAttachments = ownerAttachments;
+    }
+
+    public List<SpFirmAttachment> getCategoryAttachments() {
+        return categoryAttachments;
+    }
+
+    public void setCategoryAttachments(List<SpFirmAttachment> categoryAttachments) {
+        this.categoryAttachments = categoryAttachments;
     }
 }

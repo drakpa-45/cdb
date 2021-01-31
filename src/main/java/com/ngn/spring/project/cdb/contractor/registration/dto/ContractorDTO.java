@@ -19,6 +19,8 @@ public class ContractorDTO {
     private List<ConCategory> categories;
     private List<ContractorEQ> equipments;
     private List<ContractorAttachment> cAttachments;
+    private List<ContractorAttachment> ownerAttachments;
+    private List<ContractorAttachment> categoryAttachments;
 
 
     public Contractor getContractor() {
@@ -59,5 +61,21 @@ public class ContractorDTO {
 
     public void setcAttachments(List<ContractorAttachment> cAttachments) {
         this.cAttachments = cAttachments;
+    }
+
+    public List<ContractorAttachment> getOwnerAttachments() {
+        return ownerAttachments;
+    }
+
+    public void setOwnerAttachments(List<ContractorAttachment> ownerAttachments) {
+        this.ownerAttachments = ownerAttachments;
+    }
+
+    public List<ContractorAttachment> getCategoryAttachments() {
+        return categoryAttachments;
+    }
+
+    public void setCategoryAttachments(List<ContractorAttachment> categoryAttachments) {
+        this.categoryAttachments = categoryAttachments;
     }
 }

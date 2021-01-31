@@ -422,6 +422,7 @@ var consultantRCAction = (function () {
                 $('#regMobileNoExist').html(consultant.regMobileNo);
                 $('#regPhoneNoExist').html(consultant.regPhoneNo);
                 $('#regFaxNoExist').html(consultant.regFaxNo);
+                $('#regEmail').val(consultant.regEmail);
             }
         });
     }
@@ -760,6 +761,21 @@ var consultantRCAction = (function () {
             })
         })
     }
+    function sendNotification(){
+        $('#sendNotification').on('click',function() {
+            var emailId = $('#regEmail').val();
+            var cdbNo = $('#cdbNo').val();
+            alert(emailId);
+            $.ajax({
+                url: _baseURL() + '/sendNotification',
+                type: 'GET',
+                data: {email: emailId,cdbNo:cdbNo},
+                success: function (res) {
+                    successMsg(res.text);
+                }
+            });
+        });
+    }
 
     function init(){
 
@@ -773,6 +789,7 @@ var consultantRCAction = (function () {
         sendBack();
         getAppliedServices();
         checkEquipment();
+        sendNotification();
     }
     return {
         init:init

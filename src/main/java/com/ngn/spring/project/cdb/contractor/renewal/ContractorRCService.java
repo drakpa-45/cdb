@@ -13,6 +13,7 @@ import com.ngn.spring.project.cdb.contractor.registration.dto.ContractorHrDTO;
 import com.ngn.spring.project.cdb.contractor.registration.dto.FeeStructureDTO;
 import com.ngn.spring.project.cdb.contractor.registration.model.*;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
+import com.ngn.spring.project.global.global.MailSender;
 import com.ngn.spring.project.lib.DropdownDTO;
 import com.ngn.spring.project.lib.LoggedInUser;
 import com.ngn.spring.project.lib.ResponseMessage;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -186,8 +188,17 @@ public class ContractorRCService extends BaseService {
                     contractorNRService.saveHR(contractorHR, loggedInUser);
                     //Save Human resource attachment
                     for (ContractorHRAttachment contractorHRA : contractorHR.getContractorHRAs()) {
-                        if(contractorHRA.getAttachment() == null){ //No changes, so no need to save
-                            continue;
+                        if(!emptyNullCheck(contractorHRA.getId())){
+                            if(contractorHRA.getAttachment() == null){ // no changes
+                                contractorHRA = contractorNRService.getHRAttachmentFinal(contractorHRA.getId());
+                            }else{ // for edit
+                                contractorHRA.setEditedBy(loggedInUser.getUserID());
+                                contractorHRA.setEditedOn(loggedInUser.getServerDate());
+                            }
+                        }else {
+                            if (contractorHRA.getAttachment() == null) { //No changes, so no need to save
+                                continue;
+                            }
                         }
                         contractorHRA.setContractorHrId(contractorHR.getId());
                         contractorNRService.saveHRA(contractorHRA, loggedInUser);
@@ -604,5 +615,19 @@ public class ContractorRCService extends BaseService {
             spDetail.setCreatedOn(loggedInUser.getServerDate());
             contractorRCDao.saveUpdate(spDetail);
         }
+    }
+
+    @Transactional(readOnly = false)
+    public ResponseMessage sendNotification(String cdbNo, String email, LoggedInUser loggedInUser) {
+        String contractorId = (String)commonService.getValue("crpcontractorfinal","Id","CDBNo",cdbNo);
+        String mailContent = "Dear User, This is to notify that please replace your Hr for recently deleted Hr from your firm. Replacement should be done within a month otherwise your firm will be down graded.";
+        try {
+            MailSender.sendMail(email, "cdb@gov.bt", null, mailContent, "Hr replacement");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        responseMessage.setStatus(SUCCESSFUL_STATUS);
+        responseMessage.setText("Hr replacement notification is successfully sent to "+email);
+        return responseMessage;
     }
 }

@@ -33,6 +33,8 @@ SpecializedDao.getPrintList=SELECT f.SPNo cdbNo,f.ApplicationDate applicationDat
 
 SpecializedDao.getFirmName=SELECT a.NameOfFirm FROM crpspecializedtrade a WHERE a.NameOfFirm =?
 
+SpecializedDao.getHRAttachmentFinal= SELECT Id id,CrpSpecializedTradeHumanResourceFinalId specializedHrId,DocumentName documentName,DocumentPath documentPath,FileType fileType,CreatedBy createdBy,CreatedOn createdOn  FROM crpspecializedtradehumanresourceattachmentfinal WHERE Id = :hraId
+
 SpecializedDao.appliedserviceid=SELECT w.Id AS id, w.CmnAppliedCategoryId AS appliedCategoryId,CONCAT(c.Code,'-',c.Name) code FROM crpspecializedtradeworkclassification w LEFT JOIN cmnspecializedtradecategory c ON w.CmnAppliedCategoryId = c.Id WHERE w.CrpSpecializedTradeId=?;
 
 /*Queries for Incorporated goes here....*/

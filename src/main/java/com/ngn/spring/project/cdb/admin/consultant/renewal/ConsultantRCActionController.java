@@ -141,6 +141,14 @@ public class ConsultantRCActionController extends BaseController {
         return cNRActionService.reject(appNo, remarks, loggedInUser);
     }
 
+
+    @ResponseBody
+    @RequestMapping(value = "/sendNotification", method = RequestMethod.GET)
+    public ResponseMessage sendNotification(HttpServletRequest request, String cdbNo, String email) {
+        loggedInUser = gLoggedInUser(request);
+        return consultantRCService.sendNotification(cdbNo, email, loggedInUser);
+    }
+
     @ResponseBody
     @RequestMapping(value = "/paymentUpdate", method = RequestMethod.POST)
     public ResponseMessage paymentUpdate(HttpServletRequest request, PaymentUpdateDTO paymentUpdateDTO) throws Exception{

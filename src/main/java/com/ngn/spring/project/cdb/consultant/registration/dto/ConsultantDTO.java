@@ -19,6 +19,8 @@ public class ConsultantDTO {
     private List<ConsultantCategory> categories;
     private List<ConsultantEQ> equipments;
     private List<ConsultantAttachment> cAttachments;
+    private List<ConsultantAttachment> ownerAttachments;
+    private List<ConsultantAttachment> categoryAttachments;
 
     private ConsultantServicePayment servicePayment;
 
@@ -68,5 +70,21 @@ public class ConsultantDTO {
 
     public void setServicePayment(ConsultantServicePayment servicePayment) {
         this.servicePayment = servicePayment;
+    }
+
+    public List<ConsultantAttachment> getOwnerAttachments() {
+        return ownerAttachments;
+    }
+
+    public void setOwnerAttachments(List<ConsultantAttachment> ownerAttachments) {
+        this.ownerAttachments = ownerAttachments;
+    }
+
+    public List<ConsultantAttachment> getCategoryAttachments() {
+        return categoryAttachments;
+    }
+
+    public void setCategoryAttachments(List<ConsultantAttachment> categoryAttachments) {
+        this.categoryAttachments = categoryAttachments;
     }
 }
