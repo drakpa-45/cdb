@@ -325,6 +325,8 @@ public class CommonService extends BaseService {
             personalInfoDTO.setCidNo(citizendetailsObj.getCid());
             if(type.equalsIgnoreCase("check")){
                 personalInfoDTO.setEmployeeDetailsDTOs(commonDao.validateWorkEngagementCidNo(cid));
+                personalInfoDTO.setCdbDTOs(commonDao.validatePartnerCidNoFromCDBdatabase(cid));
+                personalInfoDTO.setGovCopDTOs(commonDao.validateCorporateCidNo(cid));
             }
             responseMessage = new ResponseMessage();
             responseMessage.setStatus(SUCCESSFUL_STATUS);
@@ -338,7 +340,7 @@ public class CommonService extends BaseService {
             responseMessage.setDto(personalInfoDTO);
             return responseMessage;*/
 
-            personalInfoDTO.setFullName("Full Name");
+            personalInfoDTO.setFullName("Drakpa");
             personalInfoDTO.setSex("M");
             personalInfoDTO.setCidNo("11214002875");
             personalInfoDTO.setDzongkhagNmae("Thimphu");
@@ -348,8 +350,10 @@ public class CommonService extends BaseService {
             personalInfoDTO.setVillageName("Thimthrom");
             String dzong1=commonDao.getValue("cmndzongkhag","Id","NameEn","Thimphu").toString();
             personalInfoDTO.setDzongkhagId(dzong1);
-            if(type.equalsIgnoreCase("check")){
+            if (type.equalsIgnoreCase("check")) {
                 personalInfoDTO.setEmployeeDetailsDTOs(commonDao.validateWorkEngagementCidNo(cid));
+                personalInfoDTO.setCdbDTOs(commonDao.validatePartnerCidNoFromCDBdatabase(cid));
+                personalInfoDTO.setGovCopDTOs(commonDao.validateCorporateCidNo(cid));
             }
             // System.out.print("Exception in CommonDaoImpl # getPersonalDetails: "+e);
             e.printStackTrace();
@@ -682,12 +686,14 @@ public class CommonService extends BaseService {
         return dto;
     }
 
-    @Transactional
-    public ResponseMessage validateCorporateCidNo(HttpServletRequest request, String cidNo) {
-        responseMessage = new ResponseMessage();
-        EmployeeDetailsDTO employeeDetailsDTO =  commonDao.validateCorporateCidNo(cidNo);
-        responseMessage.setStatus(SUCCESSFUL_STATUS);
-        responseMessage.setDto(employeeDetailsDTO);
-        return responseMessage;
+    @Transactional(readOnly = true)
+    public Boolean isUsenameExist(String username) {
+        return commonDao.isUsenameExist(username);
     }
+
+    @Transactional
+    public ResponseMessage updatePhoneNumber(LoginDTO loginDTO, String phoneNumber) {
+        return commonDao.updatePhoneNumber(loginDTO,phoneNumber);
+    }
+
 }

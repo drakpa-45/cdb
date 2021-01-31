@@ -120,8 +120,17 @@ public class SpecializedFirmActionService extends BaseService {
     public ResponseMessage approve(BigInteger appNo, String aRemarks, LoggedInUser loggedInUser) {
         String applicationNumber = String.valueOf(appNo);
         SpecializedFirm specializedFirm = specializedFirmService.getSpecializedFirm(applicationNumber);
+
         ResourceBundle resourceBundle1 = ResourceBundle.getBundle("wsEndPointURL_en_US");
         String CLICK_HERE_TO_PAY =resourceBundle1.getString("G2CPaymentAggregatorStg.endPointURL");
+
+        specializedFirm.setRegApprovedDate(loggedInUser.getServerDate());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(loggedInUser.getServerDate());
+        specializedFirm.setHasNotification("0");
+        calendar.add(Calendar.YEAR, 2);
+        specializedFirm.setRegExpiryDate(calendar.getTime());
+        specializedFirmActionDao.saveOrUpdate(specializedFirm);
 
         String specializedFirmId = (String)commonService.getValue("crpspecializedtrade","CrpSpecializedTradeId","ReferenceNo",appNo.toString());
         specializedFirmActionDao.approve(specializedFirmId, loggedInUser.getUserID(), aRemarks);
@@ -156,14 +165,6 @@ public class SpecializedFirmActionService extends BaseService {
        //contractor.setLockedByUserId("null");
         specializedFirm.setPaymentReceiptDate(paymentUpdateDTO.getPaymentDate());
         specializedFirm.setPaymentReceiptNo(paymentUpdateDTO.getPaymentReceiptNo());
-        specializedFirm.setRegApprovedDate(loggedInUser.getServerDate());
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(loggedInUser.getServerDate());
-        specializedFirm.setHasNotification("0");
-        calendar.add(Calendar.YEAR, 2);
-        specializedFirm.setRegExpiryDate(calendar.getTime());
-        specializedFirmActionDao.saveOrUpdate(specializedFirm);
 
         paymentUpdateDTO.setSpecializedFirmId(specializedFirm.getCrpSpecializedTradeId());
         specializedFirmActionDao.paymentUpdate(specializedFirm.getCrpSpecializedTradeId(),loggedInUser.getUserID(),approvedApplicationStatusId,specializedFirm.getCreatedBy());

@@ -48,8 +48,7 @@ public class SpecializedFirmRCActionController extends BaseController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(ModelMap model, HttpServletRequest request, HttpServletResponse response, @ModelAttribute("appNo")String appNo) {
-
-        if(appNo == null || appNo.isEmpty()){ //if no appNo, redirect task list again
+        if(appNo == null || appNo.isEmpty()) { //if no appNo, redirect task list again
             model.remove("appNo");
             return "redirect:/admin/specializedFirm";
         }
@@ -78,13 +77,19 @@ public class SpecializedFirmRCActionController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value ="/getSpFirmFinal", method = RequestMethod.GET)
-    public Object getSpecializedFirmFinal(HttpServletRequest request, String appNo){
+    public Object getSpecializedFirmFinal(HttpServletRequest request, String appNo) {
         String cdbNo = cNRActionService.getCDBNoFromAppNo(appNo);
         return specializedFirmRService.getSpecializedFirmFinal(cdbNo);
     }
 
+    @ResponseBody
+    @RequestMapping(value ="/getSpecializedFirmOwner", method = RequestMethod.GET)
+    public Object getSpecializedFirmHRsFinal(HttpServletRequest request,String appNo) {
+        return cRCActionService.getSpecializedFirmOWsFinal(appNo);
+    }
+
     @RequestMapping(value = "/viewDownload", method = RequestMethod.GET)
-    public void viewDownload(HttpServletRequest request, HttpServletResponse response, String documentPath) throws Exception{
+    public void viewDownload(HttpServletRequest request, HttpServletResponse response, String documentPath) throws Exception {
         commonService.viewDownloadFile(documentPath, response);
     }
 
@@ -96,13 +101,13 @@ public class SpecializedFirmRCActionController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/getEQs", method = RequestMethod.GET)
-    public Object getEQs(HttpServletRequest request, String appNo) throws Exception{
+    public Object getEQs(HttpServletRequest request, String appNo) throws Exception {
         return cRCActionService.getEQs(appNo);
     }
 
     @ResponseBody
     @RequestMapping(value = "/getProposedCategories", method = RequestMethod.GET)
-    public List getProposedCategories(HttpServletRequest request, String appNo) throws Exception{
+    public List getProposedCategories(HttpServletRequest request, String appNo) throws Exception {
         return cRCActionService.getProposedCategories(appNo);
     }
 
@@ -129,10 +134,11 @@ public class SpecializedFirmRCActionController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/paymentUpdate", method = RequestMethod.POST)
-    public ResponseMessage paymentUpdate(HttpServletRequest request, PaymentUpdateDTO paymentUpdateDTO) throws Exception{
+    public ResponseMessage paymentUpdate(HttpServletRequest request, PaymentUpdateDTO paymentUpdateDTO) throws Exception {
         loggedInUser = gLoggedInUser(request);
         return cRCActionService.paymentUpdate(paymentUpdateDTO, loggedInUser);
     }
+
     @ResponseBody
     @RequestMapping(value = "/sendBack", method = RequestMethod.POST)
     public ResponseMessage sendBack(HttpServletRequest request, BigInteger appNo, String remarks) throws Exception {
@@ -141,7 +147,7 @@ public class SpecializedFirmRCActionController extends BaseController {
         String ver = null;
         if(request.isUserInRole("ROLE_APPROVER")) {
             appStatus= ApplicationStatus.UNDER_PROCESS.getCode();
-        } else if(request.isUserInRole("ROLE_PAYMENT")){
+        } else if(request.isUserInRole("ROLE_PAYMENT")) {
             appStatus= ApplicationStatus.VERIFIED.getCode();
         }
         return cNRActionService.sendBack(appNo, remarks,appStatus,loggedInUser);
@@ -149,9 +155,8 @@ public class SpecializedFirmRCActionController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/getServicesFee", method = RequestMethod.GET)
-    public List getServicesFee(HttpServletRequest request, BigInteger appNo, String remarks) throws Exception{
+    public List getServicesFee(HttpServletRequest request, BigInteger appNo, String remarks) throws Exception {
         //loggedInUser = gLoggedInUser(request);
         return specializedFirmRService.getServicesFee(appNo.intValue());
     }
-
 }

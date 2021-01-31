@@ -137,7 +137,6 @@ var consultantCC = (function () {
                     if (categories[i].apClassId == "42914a22-bc17-11e4-81ac-080027dcfac6") {
                         $('#asthree').prop('checked', true).prop('hide', false);
                     }
-
                     if (categories[i].apClassId == "51f58a70-bc17-11e4-81ac-080027dcfac6") {
                         $('#cvsone').prop('checked', true);
                     }
@@ -181,7 +180,6 @@ var consultantCC = (function () {
                     if (categories[i].apClassId == "4461b1b0-bc18-11e4-81ac-080027dcfac6") {
                         $('#eesseven').prop('checked', true);
                     }
-
                     if (categories[i].apClassId == "8a6ea970-be66-11e9-9ac2-0026b988eaa8") {
                         $('#sone').prop('checked', true);
                     }

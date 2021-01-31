@@ -34,6 +34,10 @@ public class PersonalInfoDTO {
 
     private List<EmployeeDetailsDTO> employeeDetailsDTOs;
 
+    private List<GovCopDTO> govCopDTOs;
+
+    private List<CdbDTO> cdbDTOs;
+
     public String getDob() {
         return dob;
     }
@@ -168,5 +172,21 @@ public class PersonalInfoDTO {
 
     public void setEmployeeDetailsDTOs(List<EmployeeDetailsDTO> employeeDetailsDTOs) {
         this.employeeDetailsDTOs = employeeDetailsDTOs;
+    }
+
+    public List<GovCopDTO> getGovCopDTOs() {
+        return govCopDTOs;
+    }
+
+    public void setGovCopDTOs(List<GovCopDTO> govCopDTOs) {
+        this.govCopDTOs = govCopDTOs;
+    }
+
+    public List<CdbDTO> getCdbDTOs() {
+        return cdbDTOs;
+    }
+
+    public void setCdbDTOs(List<CdbDTO> cdbDTOs) {
+        this.cdbDTOs = cdbDTOs;
     }
 }

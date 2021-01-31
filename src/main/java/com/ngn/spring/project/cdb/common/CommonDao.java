@@ -488,8 +488,13 @@ try {
             sqlQuery = properties.getProperty("CommonDao.isExpiredSpecializedTrade");
         }
 
+<<<<<<< HEAD
         BigInteger bigIntValue = (BigInteger)hibernateQuery(sqlQuery).setParameter("cdbNo", cdbNo).list().get(0);
         //Integer bigIntValue = (Integer) hibernateQuery(sqlQuery).setParameter("cdbNo", cdbNo).list().get(0);
+=======
+        //BigInteger bigIntValue = (BigInteger)hibernateQuery(sqlQuery).setParameter("cdbNo", cdbNo).list().get(0);
+        Integer bigIntValue = (Integer) hibernateQuery(sqlQuery).setParameter("cdbNo", cdbNo).list().get(0);
+>>>>>>> 576cf8d8b35d518effcd0c1e95ac9c2e0f7f1da2
         return (bigIntValue.intValue() == 1);
     }
 
@@ -518,26 +523,6 @@ try {
          employeeDetailsDTOs =(List<EmployeeDetailsDTO>) hibernateQuery(sqlQuery, EmployeeDetailsDTO.class).setParameter("cidNo", cidNo).list();
 
         return employeeDetailsDTOs;
-
-     /* List<EmployeeDetailsDTO> employeeDetailsDTOs = new ArrayList<>();
-        try {
-            sqlQuery = "SELECT DISTINCT(t5.Id) id, GROUP_CONCAT(t4.CDBNo SEPARATOR ', ' ) cdbNo,\n" +
-                    "CASE WHEN T5.migratedworkid IS NULL THEN CONCAT(T6.Code,'/',YEAR(T5.UploadedDate),'/',T5.WorkId) ELSE T5.migratedworkid END AS workId,\n" +
-                    "T6.Name AS procuringAgency\n" +
-                    "FROM etlcontractorhumanresource t1\n" +
-                    "LEFT JOIN etltenderbiddercontractor t2 ON t1.EtlTenderBidderContractorId=t2.Id\n" +
-                    "LEFT JOIN etltenderbiddercontractordetail t3 ON t3.EtlTenderBidderContractorId=t2.Id\n" +
-                    "LEFT JOIN crpcontractorfinal t4 ON t4.Id=t3.CrpContractorFinalId\n" +
-                    "LEFT JOIN etltender t5 ON t5.Id=t2.EtlTenderId\n" +
-                    "LEFT JOIN cmnprocuringagency t6 ON t6.Id=t5.CmnProcuringAgencyId\n" +
-                    "WHERE t2.ActualStartDate IS NOT NULL AND t5.CmnWorkExecutionStatusId ='1ec69344-a256-11e4-b4d2-080027dcfac6' AND t1.CIDNo =?\n" +
-                    "GROUP BY id";
-            employeeDetailsDTOs = (List<EmployeeDetailsDTO>) hibernateQuery(sqlQuery, EmployeeDetailsDTO.class).setParameter(1, cidNo).list();
-        } catch (Exception e) {
-            System.out.print("Exception in CommonDao # validateWorkEngagementCidNo:" + e);
-            e.printStackTrace();
-        }*/
-      //  return employeeDetailsDTOs;
     }
 
     @Transactional
@@ -678,16 +663,79 @@ try {
         return cdbNo;
     }
 
-    public EmployeeDetailsDTO validateCorporateCidNo(String cidNo) {
-        EmployeeDetailsDTO dto=new EmployeeDetailsDTO();
-        try {
-            sqlQuery = "SELECT c.PositionTitle positionTitle,c.Agency agency,c.CIDNo cidNo FROM crpgovermentengineer c WHERE c.CIDNo = ? AND Releaved=0";
-            dto = (EmployeeDetailsDTO) hibernateQuery(sqlQuery, EmployeeDetailsDTO.class).setParameter(1, cidNo);
-        } catch (Exception e) {
-            System.out.print("Exception in CommonDao # validateCorporateCidNo: " + e);
-            e.printStackTrace();
-        }
+    @Transactional
+    public List<GovCopDTO> validateCorporateCidNo(String cidNo) {
+        List<GovCopDTO> dto=new ArrayList<GovCopDTO>();
+        sqlQuery = properties.getProperty("CommonDao.validateCorporateCidNo");
+        dto =(List<GovCopDTO>) hibernateQuery(sqlQuery, GovCopDTO.class).setParameter("cidNo", cidNo).list();
         return dto;
+    }
+
+    public List<CdbDTO> validatePartnerCidNoFromCDBdatabase(String cid) {
+        return null;
+    }
+
+    public Boolean isUsenameExist(String username) {
+        sqlQuery = properties.getProperty("CommonDao.isUsenameExist");
+        return hibernateQuery(sqlQuery).setParameter("username", username).list().isEmpty();
+    }
+
+    public ResponseMessage updatePhoneNumber(LoginDTO loginDTO, String phoneNumber) {
+        ResponseMessage responseMessage = null;
+
+        String getCdbNoForSp = getCdbNoForSp(loginDTO);
+        String getCdbNoForSurvey = getCdbNoForSurvey(loginDTO);
+        String getCdbNoForArchitect = getCdbNoForArchitect(loginDTO);
+        String getCdbNoForEngineer= getCdbNoForEngineer(loginDTO);
+        String getConsultantCdbNo = getConsultantCdbNo(loginDTO);
+        String getCdbNoForContractor = getCdbNoForContractor(loginDTO);
+        String cdbdet="";
+        if(getCdbNoForSp != null){
+           // if(getCdbNoForSp.contains("SP-") || getCdbNoForSp.contains("SF-")) {
+                org.hibernate.query.Query query1 = sqlQuery("UPDATE crpspecializedtradefinal SET MobileNo = ? WHERE Email = ?");
+                query1.setParameter(1, phoneNumber).setParameter(2, loginDTO.getUsername());
+                int save = query1.executeUpdate();
+            if (save > 0) {
+                responseMessage.setStatus(1);
+            }
+           // }
+        } else if(getCdbNoForSurvey != null) {
+            org.hibernate.query.Query query1 = sqlQuery("UPDATE crpsurveyfinal SET MobileNo = ? WHERE Email = ?");
+            query1.setParameter(1, phoneNumber).setParameter(2, loginDTO.getUsername());
+            int save = query1.executeUpdate();
+            if (save > 0) {
+                responseMessage.setStatus(1);
+            }
+        }else if(getCdbNoForEngineer != null) {
+            org.hibernate.query.Query query1 = sqlQuery("UPDATE crpengineerfinal SET MobileNo = ? WHERE Email = ?");
+            query1.setParameter(1, phoneNumber).setParameter(2, loginDTO.getUsername());
+            int save = query1.executeUpdate();
+            if (save > 0) {
+                responseMessage.setStatus(1);
+            }
+        }else if(getCdbNoForArchitect != null) {
+            org.hibernate.query.Query query1 = sqlQuery("UPDATE crparchitectfinal SET MobileNo = ? WHERE Email = ?");
+            query1.setParameter(1, phoneNumber).setParameter(2, loginDTO.getUsername());
+            int save = query1.executeUpdate();
+            if (save > 0) {
+                responseMessage.setStatus(1);
+            }
+        }else if(getConsultantCdbNo!=null){
+            org.hibernate.query.Query query1 = sqlQuery("UPDATE crpconsultantfinal SET MobileNo = ? WHERE Email = ?");
+            query1.setParameter(1, phoneNumber).setParameter(2, loginDTO.getUsername());
+            int save = query1.executeUpdate();
+            if (save > 0) {
+                responseMessage.setStatus(1);
+            }
+        }else if(getCdbNoForContractor!=null){
+            org.hibernate.query.Query query1 = sqlQuery("UPDATE crpcontractorfinal SET MobileNo = ? WHERE Email = ?");
+            query1.setParameter(1, phoneNumber).setParameter(2, loginDTO.getUsername());
+            int save = query1.executeUpdate();
+            if (save > 0) {
+                responseMessage.setStatus(1);
+            }
+        }
+        return responseMessage;
     }
 }
 

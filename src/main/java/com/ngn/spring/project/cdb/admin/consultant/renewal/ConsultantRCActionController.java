@@ -79,6 +79,12 @@ public class ConsultantRCActionController extends BaseController {
         return consultantData;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/getConsultantInfoOwner", method = RequestMethod.GET)
+    public Object getConsultantInfoOwner(HttpServletRequest request, String appNo) throws Exception{
+        return cRCActionService.getConsultantInfoOwner(appNo);
+    }
+
     @RequestMapping(value = "/viewDownload", method = RequestMethod.GET)
     public void viewDownload(HttpServletRequest request, HttpServletResponse response, String documentPath) throws Exception{
         commonService.viewDownloadFile(documentPath, response);

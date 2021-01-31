@@ -123,7 +123,6 @@ public class ContractorNRService extends BaseService {
                 attachment.setContractorId(contractorID);
                 saveAttachment(attachment,loggedInUser);
             }
-
         }
         //endregion
         //region Save Contractor HR

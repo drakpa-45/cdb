@@ -15,6 +15,7 @@ public class NewDeleteExistDTO {
     private Object existing;
     private Object deleted;
     private Object edited;
+    private Object ownerList;
 
     public Object getNewlyAdded() {
         return newlyAdded;
@@ -46,5 +47,13 @@ public class NewDeleteExistDTO {
 
     public void setEdited(Object edited) {
         this.edited = edited;
+    }
+
+    public Object getOwnerList() {
+        return ownerList;
+    }
+
+    public void setOwnerList(Object ownerList) {
+        this.ownerList = ownerList;
     }
 }

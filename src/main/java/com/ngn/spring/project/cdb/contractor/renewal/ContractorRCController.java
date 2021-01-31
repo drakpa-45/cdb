@@ -144,5 +144,4 @@ public class ContractorRCController extends BaseController {
     public ResponseMessage getPersonalInfo(String cidNo,String type){
         return commonService.getPersonalInfo(cidNo, type);
     }
-
 }

@@ -489,8 +489,6 @@ public class ContractorRCService extends BaseService {
             return responseMessage;
         }
 
-
-
         //region check expiry date and calculate late fee
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         LocalDate curDate = LocalDate.parse(sdf.format(new Date()));
@@ -535,7 +533,13 @@ public class ContractorRCService extends BaseService {
 
     @Transactional(readOnly = true)
     public ContractorFinal getContractorFinal(String cdbNo){
-        return contractorRCDao.getContractorFinal(cdbNo);
+        ContractorFinal contractorFinal =  contractorRCDao.getContractorFinal(cdbNo);
+        if(!emptyNullCheck(contractorFinal.getpDzongkhagId())) {
+            contractorFinal.setDzongkhagName(commonService.getValue("cmndzongkhag", "NameEn", "Id", contractorFinal.getpDzongkhagId()).toString());
+        }
+        contractorFinal.setRegDzongkhagName(commonService.getValue("cmndzongkhag", "NameEn", "Id", contractorFinal.getRegDzongkhagId()).toString());
+        contractorFinal.setOldDzongkhag(commonService.getValue("cmndzongkhag", "NameEn", "Id", contractorFinal.getRegDzongkhagId()).toString());
+        return contractorFinal;
     }
 
     /**
@@ -583,7 +587,6 @@ public class ContractorRCService extends BaseService {
     public List<ContractorAttachment> getIncAttachmentFinal(String contractorFinalId) {
         return  contractorRCDao.getIncAttachmentFinal(contractorFinalId);
     }
-
 
     @Transactional
     public void saveServicePaymentDetailOS(String servicePaymentId,List<CategoryClassDTO> classDTOs,LoggedInUser loggedInUser){

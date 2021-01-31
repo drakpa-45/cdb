@@ -1,3 +1,5 @@
+<%@ page import="com.ngn.spring.project.cdb.specializedFirm.dto.SpFirmHrDTO" %>
+<%@ page import="java.util.List" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -267,13 +269,15 @@
                                                                     <th>Gender</th>
                                                                     <th>Designation</th>
                                                                     <th>Show<br>in<br>certificate</th>
+                                                                    <th>Delete Request?</th>
+                                                                    <th>Action</th>
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                <tr>
+                                                               <%-- <tr>
                                                                     <td class="country">
-                                                                        <form:select id="countryList" class="form-control" name="specializedFirm.spFirmHRs[0].countryId" data-msg-required="" data-rule-required="true" path="countryList">
-                                                                            <form:option value="" label="Select Country"/>
+                                                                        <form:select id="countryList" class="form-control countryList" name="specializedFirm.spFirmHRs[0].countryId" data-msg-required="" data-rule-required="true" path="countryList">
+                                                                            <form:option value="${att.countryName}" label="Select Country"/>
                                                                             <form:options items="${countryList}" itemValue="value" itemLabel="text"/>
                                                                         </form:select>
                                                                     </td>
@@ -281,7 +285,7 @@
                                                                         <input type="text" name="specializedFirm.spFirmHRs[0].cidNo" class="form-control hr-cid" placeholder="Text..">
                                                                     </td>
                                                                     <td>
-                                                                        <form:select id="salutation" name="specializedFirm.spFirmHRs[0].salutationId" class="form-control input-sm" data-msg-required="true" data-rule-required="true" path="salutationList">
+                                                                        <form:select id="salutation" name="specializedFirm.spFirmHRs[0].salutationId" class="form-control input-sm salutation" data-msg-required="true" data-rule-required="true" path="salutationList">
                                                                             <form:option value="" label="Select Salutation"/>
                                                                             <form:options items="${salutationList}" itemValue="value" itemLabel="text"/>
                                                                         </form:select>
@@ -290,14 +294,14 @@
                                                                         <input type="text" class="form-control name" name="specializedFirm.spFirmHRs[0].name" placeholder="Text..">
                                                                     </td>
                                                                     <td>
-                                                                        <select id="gender" name="specializedFirm.spFirmHRs[0].sex" class="form-control sex">
+                                                                        <select id="gender" name="specializedFirm.spFirmHRs[0].sex" class="form-control sex gender">
                                                                             <option value="">Select Gender</option>
                                                                             <option value="M">Male</option>
                                                                             <option value="F">Female</option>
                                                                         </select>
                                                                     </td>
                                                                     <td>
-                                                                        <form:select id="designation" name="specializedFirm.spFirmHRs[0].designationId" class="form-control input-sm" data-msg-required="" data-rule-required="true" path="designationList">
+                                                                        <form:select id="designation" name="specializedFirm.spFirmHRs[0].designationId" class="form-control input-sm designation" data-msg-required="" data-rule-required="true" path="designationList">
                                                                             <form:option value="" label="Select Designation"/>
                                                                             <form:options items="${designationList}" itemValue="value" itemLabel="text"/>
                                                                         </form:select>
@@ -308,12 +312,17 @@
                                                                             <i class="custom-control-label"></i>
                                                                         </label>
                                                                     </td>
-                                                                </tr>
+                                                                    <td><input type='checkbox' id="deleteRequest" class="deleteRequest" name='specializedFirm.spFirmHRs[0].deleteRequest' disabled value='1'></td>
+                                                                </tr>--%>
+
                                                                 </tbody>
                                                             </table>
                                                             <div class="col-lg-12 text-right hide" id="ownerPartner">
-                                                                <button type="button" class="btn btn-outline-primary btn-sm" onclick="addRow('partnerDtls')">
+                                                                <%--<button type="button" class="btn btn-outline-primary btn-sm" onclick="addRow('partnerDtls')">
                                                                     <i class="fe fe-plus mr-2"></i>Add More
+                                                                </button>--%>
+                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addOwModal">
+                                                                    <i class="fa fa-plus"></i> Add More HR
                                                                 </button>
                                                                 <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeRow('partnerDtls')">
                                                                     <i class="fe fe-trash mr-2"></i>Remove Last Row
@@ -966,6 +975,88 @@
                         </div>
                     </div>
                 </div>
+                            <%--Owner add model--%>
+                        <div aria-hidden="true" aria-labelledby="hrModalLabel" role="dialog" class="modal fade in"
+                             id="addOwModal">
+                            <div class="modal-dialog modal-lg" id="ownerModal">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 id="ownerModalLabel" class="modal-title">Add Human Resource</h4>
+                                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button"></button>
+                                    </div>
+                                    <div class="modal-body form-horizontal">
+                                        <div class="modal-div">
+                                            <div class="form-group">
+                                                <input type="hidden" id="id5Edit" name="consultantHRs[0].id">
+                                                <label class="col-lg-2">Nationality
+                                                    <span class="text-danger">*</span>:</label>
+                                                <div class="col-lg-4">
+                                                    <select name="spFirmHRs[0].countryId" id="ow1" required="" class="form-control custom-select text-left select-beast country">
+                                                        <option value="">Select Country</option>
+                                                        <c:forEach var="item" items="${countryList}">
+                                                            <option value="${item.value}"><c:out value="${item.text}"/></option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                                <label class="col-md-2 col-lg-2">CID/Work Permit No <span class="text-danger">*</span>:</label>
+                                                <div class="col-lg-4">
+                                                    <div class="input-icon">
+                                                      <span class="input-icon-addon">
+                                                         <i class="fa fa-address-card-o"></i>
+                                                      </span>
+                                                        <input type="text" name="spFirmHRs[0].cidNo" class="form-control hr-cid" id="ow2" required="" placeholder="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-2">Salutation
+                                                    <span class="text-danger">*</span>:</label>
+                                                <div class="col-lg-4">
+                                                    <select name="spFirmHRs[0].salutationId" id="ow3" required="" class="form-control custom-select text-left select-beast">
+                                                        <option value="">Select Salutation</option>
+                                                        <c:forEach var="item" items="${salutationList}">
+                                                            <option value="${item.value}"><c:out value="${item.text}"/></option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                                <label class="col-lg-2">Name
+                                                    <span class="text-danger">*</span>:</label>
+                                                <div class="col-lg-4">
+                                                    <div class="input-icon">
+                                                        <span class="input-icon-addon"><i class="fe fe-user"></i></span>
+                                                        <input type="text" name="spFirmHRs[0].name" id="ow4" class="form-control name" required="" placeholder="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-2">Gender<span class="text-danger">*</span>:</label>
+                                                <div class="col-lg-4">
+                                                    <select name="spFirmHRs[0].sex" id="ow5" required="" class="form-control custom-select text-left select-beast sex">
+                                                        <option value="">Select Gender</option>
+                                                        <option value="M">Male</option>
+                                                        <option value="F">Female</option>
+                                                    </select>
+                                                </div>
+                                                <label class="col-lg-2">Designation
+                                                    <span class="text-danger">*</span>:</label>
+                                                <div class="col-lg-4">
+                                                    <select name="spFirmHRs[0].designationId" id="ow6" required="" class="form-control custom-select text-left select-beast">
+                                                        <option value="">Select Designation</option>
+                                                        <c:forEach var="item" items="${designationList}">
+                                                            <option value="${item.value}"><c:out value="${item.text}"/></option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary" onclick="getOwnerModalData('partnerDtls','ow',6)" type="button">OK</button>
+                                        <button data-dismiss="modal" class="btn btn-warning" target="#addOwModal" type="button">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <%--Equipment addmore model--%>
                 <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
                      class="modal fade in" id="eqModal">

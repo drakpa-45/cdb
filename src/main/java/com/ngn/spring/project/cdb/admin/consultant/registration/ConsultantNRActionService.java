@@ -121,6 +121,17 @@ public class ConsultantNRActionService extends BaseService {
 
     @Transactional(readOnly = false)
     public ResponseMessage approve(BigInteger appNo, String aRemarks, LoggedInUser loggedInUser) {
+        String applicationNo = String.valueOf(appNo);
+        Consultant consultant = consultantService.getConsultant(applicationNo);
+        consultant.setRegApprovedDate(loggedInUser.getServerDate());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(loggedInUser.getServerDate());
+        consultant.setHasNotification("0");
+        calendar.add(Calendar.YEAR, 2);
+        consultant.setRegExpiryDate(calendar.getTime());
+        consultantActionDao.saveOrUpdate(consultant);
+
         String consultantId = (String)commonService.getValue("crpconsultant","CrpConsultantId","ReferenceNo",appNo.toString());
         consultantActionDao.approve(consultantId, loggedInUser.getUserID(), aRemarks);
 
@@ -174,14 +185,6 @@ public class ConsultantNRActionService extends BaseService {
         consultant.setPaymentApproverRemark(paymentUpdateDTO.getPaymentRemarks());
         consultant.setPaymentReceiptDate(paymentUpdateDTO.getPaymentDate());
         consultant.setPaymentReceiptNo(paymentUpdateDTO.getPaymentReceiptNo());
-        consultant.setRegApprovedDate(loggedInUser.getServerDate());
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(loggedInUser.getServerDate());
-        consultant.setHasNotification("0");
-        calendar.add(Calendar.YEAR, 2);
-        consultant.setRegExpiryDate(calendar.getTime());
-        consultantActionDao.saveOrUpdate(consultant);
 
         paymentUpdateDTO.setConsultantId(consultant.getConsultantId());
         consultantActionDao.paymentUpdate(consultant.getConsultantId(),loggedInUser.getUserID()

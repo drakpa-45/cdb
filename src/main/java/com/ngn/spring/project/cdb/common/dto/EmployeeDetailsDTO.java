@@ -4,68 +4,11 @@ package com.ngn.spring.project.cdb.common.dto;
  * Created by USER on 03-Dec-20.
  */
 public class EmployeeDetailsDTO {
-    private String consultantFirmname;
-    private String consultantCDBNo;
-    private String contractorFirmname;
-    private String contractorCDBNo;
-    private String spFirmname;
-    private String spCDBNo;
     private String id;
     private String cdbNo;
     private String workId;
     private String procuringAgency;
-    private String positionTitle;
-    private String agency;
     private String cidNo;
-
-
-    public String getConsultantFirmname() {
-        return consultantFirmname;
-    }
-
-    public void setConsultantFirmname(String consultantFirmname) {
-        this.consultantFirmname = consultantFirmname;
-    }
-
-    public String getConsultantCDBNo() {
-        return consultantCDBNo;
-    }
-
-    public void setConsultantCDBNo(String consultantCDBNo) {
-        this.consultantCDBNo = consultantCDBNo;
-    }
-
-    public String getContractorFirmname() {
-        return contractorFirmname;
-    }
-
-    public void setContractorFirmname(String contractorFirmname) {
-        this.contractorFirmname = contractorFirmname;
-    }
-
-    public String getContractorCDBNo() {
-        return contractorCDBNo;
-    }
-
-    public void setContractorCDBNo(String contractorCDBNo) {
-        this.contractorCDBNo = contractorCDBNo;
-    }
-
-    public String getSpFirmname() {
-        return spFirmname;
-    }
-
-    public void setSpFirmname(String spFirmname) {
-        this.spFirmname = spFirmname;
-    }
-
-    public String getSpCDBNo() {
-        return spCDBNo;
-    }
-
-    public void setSpCDBNo(String spCDBNo) {
-        this.spCDBNo = spCDBNo;
-    }
 
     public String getId() {
         return id;
@@ -97,22 +40,6 @@ public class EmployeeDetailsDTO {
 
     public void setProcuringAgency(String procuringAgency) {
         this.procuringAgency = procuringAgency;
-    }
-
-    public String getPositionTitle() {
-        return positionTitle;
-    }
-
-    public void setPositionTitle(String positionTitle) {
-        this.positionTitle = positionTitle;
-    }
-
-    public String getAgency() {
-        return agency;
-    }
-
-    public void setAgency(String agency) {
-        this.agency = agency;
     }
 
     public String getCidNo() {

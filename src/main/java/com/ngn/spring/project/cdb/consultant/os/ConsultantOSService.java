@@ -109,18 +109,19 @@ public class ConsultantOSService extends BaseService {
             consultant.setFirmName(consultantDTO.getConsultant().getFirmName());
             consultant.setOwnershipChangeRemarks(consultantDTO.getConsultant().getOwnershipChangeRemarks());
 
-            List<ConsultantHR> ownerList = consultantDTO.getConsultant().getConsultantHRs();
+            List<ConsultantHR> ownerList = consultantDTO.getConsultantHRs();
             for(ConsultantHR consultantHR:ownerList){
                 if(consultantHR.getDeleteRequest() != null && consultantHR.getDeleteRequest() == 1){
                     //to save deleted owner
-                    consultantHR.setDeleteRequest(1);
+                    //consultantHR.setDeleteRequest(1);
                     consultantRCDao.saveDeleteHrRequest(consultantHR.getId());
+                }else {
+                    String hrId = commonService.getRandomGeneratedId();
+                    consultantHR.setId(hrId);
+                    consultantHR.setConsultantID(consultantId);
+                    consultantHR.setIsPartnerOrOwner(TRUE_INT);
+                    consultantNRService.saveHR(consultantHR, loggedInUser);
                 }
-                String hrId = commonService.getRandomGeneratedId();
-                consultantHR.setId(hrId);
-                consultantHR.setConsultantID(consultantId);
-                consultantHR.setIsPartnerOrOwner(TRUE_INT);
-                consultantNRService.saveHR(consultantHR, loggedInUser);
             }
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "12");
             appliedServicesList.add(appliedService);
@@ -167,21 +168,21 @@ public class ConsultantOSService extends BaseService {
 
         //region change of owner or partner
         if(renewalServiceType.getChangeOfOwner() != null){
-            List<ConsultantHR> ownerList = consultantDTO.getConsultant().getConsultantHRs();
-
+            //List<ConsultantHR> ownerList = consultantDTO.getConsultant().getConsultantHRs();
+            List<ConsultantHR> ownerList = consultantDTO.getConsultantHRs();
             for(ConsultantHR consultantHR:ownerList){
                 if(consultantHR.getDeleteRequest() != null && consultantHR.getDeleteRequest() == 1){
                     //to save deleted owner
-                    consultantHR.setDeleteRequest(1);
+                   // consultantHR.setDeleteRequest(1);
                     consultantRCDao.saveDeleteHrRequest(consultantHR.getId());
+                }else {
+                    String hrId = commonService.getRandomGeneratedId();
+                    consultantHR.setId(hrId);
+                    consultantHR.setConsultantID(consultantId);
+                    consultantHR.setIsPartnerOrOwner(TRUE_INT);
+                    consultantNRService.saveHR(consultantHR, loggedInUser);
                 }
-                String hrId = commonService.getRandomGeneratedId();
-                consultantHR.setId(hrId);
-                consultantHR.setConsultantID(consultantId);
-                consultantHR.setIsPartnerOrOwner(TRUE_INT);
-                consultantNRService.saveHR(consultantHR, loggedInUser);
             }
-
             consultant.setOwnershipChangeRemarks(consultantDTO.getConsultant().getOwnershipChangeRemarks());
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "4");
             appliedServicesList.add(appliedService);
@@ -252,8 +253,8 @@ public class ConsultantOSService extends BaseService {
         //endregion
 
         //region to save owner when both incoporation & ownerchanged is not availed
-        if(renewalServiceType.getIncorporation() == null || renewalServiceType.getChangeOfOwner() == null){
-            List<ConsultantHR> ownerList = consultantDTO.getConsultant().getConsultantHRs();
+        if(renewalServiceType.getIncorporation() == null && renewalServiceType.getChangeOfOwner() == null){
+            List<ConsultantHR> ownerList = consultantDTO.getConsultantHRs();
             for(ConsultantHR consultantHR:ownerList){
                 String hrId = commonService.getRandomGeneratedId();
                 consultantHR.setId(hrId);

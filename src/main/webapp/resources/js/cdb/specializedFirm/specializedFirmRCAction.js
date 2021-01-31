@@ -74,7 +74,7 @@ var specializedFirmRCAction = (function () {
             data: {appNo: applicationNo},
             success: function (res) {
                 getSpecializedFirmInfo();
-
+                getSpecializedFirmOwner();
                 for(var i in res){
                     if(res[i].serviceRefNo == '4'){
                         $('#changeOfOwnerId').prop('checked',true).prop('disabled', true);
@@ -134,6 +134,42 @@ var specializedFirmRCAction = (function () {
                         $('#photoM').html("<img src='"+imagelink+"'  width='200px'  height='200px' class='pull-right'/>");
                         $("#hrModal").modal('show');
                         $("#closeModal").modal('show');
+
+                        var employeeDetailsDTO = dto.employeeDetailsDTOs;
+                        var govCopDTO = dto.govCopDTOs;
+                        var cdbDTO = dto.cdbDTOs;
+
+                        if(employeeDetailsDTO !=''){
+                            for(var i in employeeDetailsDTO){
+                                var workId = employeeDetailsDTO[i].workId;
+                                if(workId !='' && workId != null){
+                                    alert(workId);
+                                    $('#dcbinfo').append("<br/> <b>CDB No: </b> "+employeeDetailsDTO[i].cdbNo+"  ||  <b> Procuring Agency:  </b> "+employeeDetailsDTO[i].procuringAgency+"  ||  <b> Work ID:</b>"+employeeDetailsDTO[i].workId+"");
+                                    // $('#dcbinfo').append("<br/> This person is engaged with cdb number <b>"+employeeDetailsDTO[i].cdbNo+"</b> in <b>"+employeeDetailsDTO[i].procuringAgency+"</b> with work Id:<b>"+employeeDetailsDTO[i].workId+"</b>");
+                                    $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
+                                }else{
+                                    $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project.");
+                                }
+                            }
+                        }else{
+                            // $('#dcbinfo').hide();
+                            $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project.");
+                        }
+
+                        if(govCopDTO !=''){
+                            for(var i in govCopDTO){
+                                var agency = govCopDTO[i].agency;
+                                if(agency !='' && agency !=null){
+                                    alert(agency);
+                                    $('#dcbinfo').append("<br/> <b>Position Title: </b> "+govCopDTO[i].positionTitle+"  ||  <b> Agency:  </b> "+govCopDTO[i].agency+"");
+                                } else{
+                                    $('#dcbinfonotEngaged').append("<br/> This person is not a government/coperate employee.");
+                                }
+                            }
+                        }else{
+                            // $('#dcbinfo').hide();
+                            $('#dcbinfonotEngaged').append("<br/> This person is not a government/coperate employee.");
+                        }
                     }
                 }
             });
@@ -164,43 +200,39 @@ var specializedFirmRCAction = (function () {
                         $("#closeModal1").modal('show');
 
                         var employeeDetailsDTO = dto.employeeDetailsDTOs;
-                        var empDtls ="",empDtls1="",empDtls2="";
-                        //alert(employeeDetailsDTO != null);
-                        if(employeeDetailsDTO !=null){
-                            $('#engagedId').show();
-                            for(var i in employeeDetailsDTO){
-                                empDtls = empDtls +
-                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
-                                "<td>" +  + "</td>" +
-                                "<td>" + + "</td>" +
-                                "<td>" + employeeDetailsDTO[i].contractorCDBNo+ "</td>" +
-                                "<td>" + employeeDetailsDTO[i].contractorFirmname + "</td>" +"</tr>";
-                            }
-                            $('#employeeDTLS').find('tbody').html(empDtls);
+                        var govCopDTO = dto.govCopDTOs;
+                        var cdbDTO = dto.cdbDTOs;
 
+                        if(employeeDetailsDTO !=''){
                             for(var i in employeeDetailsDTO){
-                                empDtls1 = empDtls1 +
-                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
-                                "<td>" +  + "</td>" +
-                                "<td>" + + "</td>" +
-                                "<td>" + employeeDetailsDTO[i].consultantCDBNo+ "</td>" +
-                                "<td>" + employeeDetailsDTO[i].consultantFirmname + "</td>" +"</tr>";
+                                var workId = employeeDetailsDTO[i].workId;
+                                if(workId !='' && workId != null){
+                                    alert(workId);
+                                    $('#dcbinfo').append("<br/> <b>CDB No: </b> "+employeeDetailsDTO[i].cdbNo+"  ||  <b> Procuring Agency:  </b> "+employeeDetailsDTO[i].procuringAgency+"  ||  <b> Work ID:</b>"+employeeDetailsDTO[i].workId+"");
+                                    // $('#dcbinfo').append("<br/> This person is engaged with cdb number <b>"+employeeDetailsDTO[i].cdbNo+"</b> in <b>"+employeeDetailsDTO[i].procuringAgency+"</b> with work Id:<b>"+employeeDetailsDTO[i].workId+"</b>");
+                                    $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
+                                }else{
+                                    $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project.");
+                                }
                             }
-                            $('#employeeDTLS1').find('tbody').html(empDtls1);
+                        }else{
+                            // $('#dcbinfo').hide();
+                            $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project.");
+                        }
 
-                            for(var i in employeeDetailsDTO){
-                                empDtls2 = empDtls2 +
-                                "<tr><td>" + (parseInt(i) + 1) + "</td>" +
-                                "<td>" +  + "</td>" +
-                                "<td>" + + "</td>" +
-                                "<td>" + employeeDetailsDTO[i].spCDBNo+ "</td>" +
-                                "<td>" + employeeDetailsDTO[i].spFirmname + "</td>" +"</tr>";
+                        if(govCopDTO !=''){
+                            for(var i in govCopDTO){
+                                var agency = govCopDTO[i].agency;
+                                if(agency !='' && agency !=null){
+                                    alert(agency);
+                                    $('#dcbinfo').append("<br/> <b>Position Title: </b> "+govCopDTO[i].positionTitle+"  ||  <b> Agency:  </b> "+govCopDTO[i].agency+"");
+                                } else{
+                                    $('#dcbinfonotEngaged').append("<br/> This person is not a government/coperate employee.");
+                                }
                             }
-                            $('#employeeDTLS2').find('tbody').html(empDtls2);
-
-                            $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
-                        } else{
-                            $('#notEngagedId').show();
+                        }else{
+                            // $('#dcbinfo').hide();
+                            $('#dcbinfonotEngaged').append("<br/> This person is not a government/coperate employee.");
                         }
                     }
                 }
@@ -283,13 +315,14 @@ var specializedFirmRCAction = (function () {
 
                         for (var i in appHistoryDTOs) {
                             var actionTakenBy = appHistoryDTOs[i].userName;
-                            actionTakenBy = (actionTakenBy==null)?'By Citizen':actionTakenBy
+                            actionTakenBy = (actionTakenBy==null)?'By Citizen':actionTakenBy;
                             appHistoryTr = appHistoryTr +
                             "<tr><td>" + appHistoryDTOs[i].appStatus + "</td>" +
                             "<td>" + actionTakenBy + "</td>" +
                             "<td>" + formatAsDate(appHistoryDTOs[i].actionDate) + "</td>" +
                             "<td>"+ appHistoryDTOs[i].remarks +"</td></tr>";
                         }
+
                         $('#appStatusTbl').find('tbody').html(appHistoryTr);
 
                         var specializedFirmHrs = spFirmDTO.spFirmHRs;
@@ -297,18 +330,18 @@ var specializedFirmRCAction = (function () {
                         var hrTr = "";
                         var m = 0, n = 0;
                         var owner='';
-                        for (var i in specializedFirmHrs) {
+                      /*  for (var i in specializedFirmHrs) {
                             var verifiedApproved = '';
                             if(specializedFirmHrs[i].Approved == '1'){
                                 verifiedApproved = verifiedApproved + "<td>(✔)</td>";
                                 verifiedApproved = verifiedApproved + "<td>(✔)</td>";
-                            }else if(specializedFirmHrs[i].verified == '1'){
+                            } else if(specializedFirmHrs[i].verified == '1'){
                                 verifiedApproved = verifiedApproved + "<td>(✔)</td>";
                                 verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' disabled value='1'  required='true'></td>";
-                            }else{
+                            } else{
                                 verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' disabled value='1'  required='true'></td>";
                             }
-                            if (specializedFirmHrs[i].isPartnerOrOwner == '1') {
+                            if (specializedFirmHrs[i].isPartnerOrOwner == '1' && specializedFirmHrs[i].deleteRequest != '1') {
                                 owner = specializedFirmHrs[i].name;
                                 m++;
                                 partnerHrTr = partnerHrTr + "<tr><td>" + m + "</td>" +
@@ -323,15 +356,76 @@ var specializedFirmRCAction = (function () {
                                 verifiedApproved+"</tr>";
                             }
                         }
-                        $('#partnerDtls').find('tbody').html(partnerHrTr);
+                        $('#partnerDtls').find('tbody').html(partnerHrTr);*/
                         getSpFirmFinal(applicationNo);
-                    } else {
+                    } else{
                         warningMsg(res.text);
                     }
                 }
             });
         }
         getServicesFee(applicationNo);
+    }
+
+    function getSpecializedFirmOwner() {
+        var applicationNo = $('#appNoVA').val();
+        if (applicationNo) {
+            $.ajax({
+                url: _baseURL() + '/getSpecializedFirmOwner',
+                type: 'GET',
+                data: {appNo: applicationNo},
+                success: function (res) {
+                  //  if (res.status == '1') {
+                        var existingHrs = res.existing;
+                        var editedHrs = res.edited;
+                        var newlyAddedHrs = res.newlyAdded;
+                        var deletedHRs = res.deleted;
+
+                        addOW("existing-ow",existingHrs);
+                        addOW("edited-ow",editedHrs);
+                        addOW("newly-added-ow",newlyAddedHrs);
+                        addOW("deleted-ow",deletedHRs);
+                    /*} else {
+                        warningMsg(res.text);
+                    }*/
+                }
+            });
+        }
+    }
+
+    function addOW(tBodyClass, specializedFirmHrs){
+
+        var partnerHrTr = "";
+        var hrTr = "", owner, m=0;
+
+        for (var i in specializedFirmHrs) {
+            var verifiedApproved = '';
+            if(specializedFirmHrs[i].Approved == '1'){
+                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+            }else if(specializedFirmHrs[i].verified == '1'){
+                verifiedApproved = verifiedApproved + "<td>(✔)</td>";
+                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check'  value='1'  required='true'></td>";
+            }else{
+                verifiedApproved = verifiedApproved + "<td><input type='checkbox' style='zoom:1.6' class='check' value='1'  required='true'></td>";
+            }
+            if (specializedFirmHrs[i].isPartnerOrOwner == '1') {
+                owner = specializedFirmHrs[i].name;
+                m++;
+                partnerHrTr = partnerHrTr + "<tr><td>" + m + "</td>" +
+                "<td class='countryName'>" + specializedFirmHrs[i].countryName + "</td>" +
+                "<td class='cidNo'>" + specializedFirmHrs[i].cidNo + "</td>" +
+                "<td class='salutationName'>" + specializedFirmHrs[i].salutationName + "</td>" +
+                "<td class='name'>" + specializedFirmHrs[i].name + "</td>" +
+                "<td class='sex'>" + specializedFirmHrs[i].sex + "</td>" +
+                "<td class='designationName'>" + specializedFirmHrs[i].designationName + "</td>" +
+                "<td>" + ((specializedFirmHrs[i].siCertificate == '1')?'(✔)':'') + "</td>" +
+                "<td><input type='button' name='humanResource' value='Check for this CID' class='checkCid btn btn-success'></td>" +
+                verifiedApproved+"</tr>";
+            }
+        }
+        //$('#partnerDtls').find('tbody').html(partnerHrTr);
+        $('#partnerDtls').find('.'+tBodyClass).append(partnerHrTr);
     }
 
     function getSpFirmFinal(appNo) {
@@ -643,6 +737,7 @@ var specializedFirmRCAction = (function () {
     }
 
     function getServicesFee(applicationNo){
+        alert(applicationNo);
         $.ajax({
             url: _baseURL() + '/getAppliedServices',
             type: 'GET',
@@ -692,10 +787,10 @@ var specializedFirmRCAction = (function () {
         approve();
         reject();
         verify();
-        //getSpecializedFirmInfo();
+      //  getSpecializedFirmInfo();
         getSpFirmInfoForPayment();
         paymentUpdate();
-       checkHR();
+        checkHR();
         sendBack();
         getAppliedServices();
         checkEquipment();

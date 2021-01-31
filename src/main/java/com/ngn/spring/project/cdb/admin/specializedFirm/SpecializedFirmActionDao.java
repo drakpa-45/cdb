@@ -93,7 +93,6 @@ public class SpecializedFirmActionDao extends BaseDao {
                     spTradeNo = firstpart + num;
                 }
             }
-
         } catch (Exception e) {
             System.out.print("Exception in SpecializedDao # generatespecializedFirmNo: " + e);
             e.printStackTrace();

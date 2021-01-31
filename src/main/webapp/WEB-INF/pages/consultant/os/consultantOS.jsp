@@ -267,11 +267,11 @@
                                                                     <th>Designation</th>
                                                                     <th>Show<br>in<br>certificate</th>
                                                                     <th>Delete Request?</th>
-                                                                   <%-- <th>Action</th>--%>
+                                                                    <th>Action</th>
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                <tr>
+                                                                <%--<tr>
                                                                     <td class="country">
                                                                         <form:select id="countryList" class="form-control" name="consultant.consultantHRs[0].countryId" data-msg-required="" data-rule-required="true" path="countryList">
                                                                             <form:option value="" label="Select Country"/>
@@ -305,15 +305,18 @@
                                                                             <i class="custom-control-label"></i>
                                                                         </label>
                                                                     </td>
-                                                                    <td><input type='checkbox' name='consultant.consultantHRs[0].deleteRequest' value='1'></td>
-                                                                  <%-- <td class='action'><button class='btn-sm btn-info btn-block edit-rowOW'>Edit</button></td>--%>
-                                                                </tr>
+                                                                    <td><input type='checkbox' id="deleteRequest" disabled name='consultant.consultantHRs[0].deleteRequest' value='1'></td>
+                                                                  &lt;%&ndash; <td class='action'><button class='btn-sm btn-info btn-block edit-rowOW'>Edit</button></td>&ndash;%&gt;
+                                                                </tr>--%>
                                                                 </tbody>
                                                             </table>
                                                             <div class="col-lg-12 text-right hide" id="ownerPartner">
-                                                                <button type="button" class="btn btn-outline-primary btn-sm" onclick="addRow('partnerDtls')">
+                                                               <%-- <button type="button" class="btn btn-outline-primary btn-sm" onclick="addRow('partnerDtls')">
                                                                     <i class="fe fe-plus mr-2"></i>Add More
-                                                                </button>
+                                                                </button>--%>
+                                                                   <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addOwModal">
+                                                                       <i class="fa fa-plus"></i> Add More HR
+                                                                   </button>
                                                                 <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeRow('partnerDtls')">
                                                                     <i class="fe fe-trash mr-2"></i>Remove Last Row
                                                                 </button>
@@ -323,7 +326,7 @@
                                                             <div class="col-lg-12 col-md-12 ">
                                                                 <label class="col-lg-3 col-md-3 form-label" for="ownershipChangeRemarks">Reason for Change of Owner:
                                                                     <span class="text-danger">*</span></label>
-                                                                <input type="text" class="col-lg-6 form-control" name="specializedFirm.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true" placeholder="Text..">
+                                                                <input type="text" class="col-lg-6 form-control" name="consultant.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true" placeholder="Text..">
                                                             </div>
                                                         <div class="card-body">
                                                             <div class="col-lg-12">
@@ -437,13 +440,20 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12 form-group">
+                                           <%-- <div class="col-lg-12 form-group">
                                                 <button type="button" id="btn4" onclick="backTab('generalInformation')" class="btn btn-azure col-lg-offset-9">
                                                     <i class="fa fa-arrow-circle-left"></i>Back
                                                 </button>
                                                 <button type="button" id="btn5"  onclick="nextTab('generalInformation')" class="btn btn-primary nextTab">
                                                     <i class="fa fa-arrow-circle-right"></i>Next &nbsp;
                                                 </button>
+                                            </div>--%>
+                                            <div class="col-lg-12 form-group nextBackBtn">
+                                                <div class="col-md-offset-11 col-lg-offset-10 col-xs-offset-10">
+                                                    <button type="button" onclick="nextTab('generalInformation')" class="btn btn-primary nextTab">
+                                                        <i class="fa fa-arrow-circle-right"></i>Next &nbsp;
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="tab-pane category_details hide">
@@ -1119,7 +1129,7 @@
                                                 <label class="col-lg-2">Nationality
                                                     <span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="consultantHRs[0].countryId" id="country" required="" class="form-control custom-select text-left select-beast country">
+                                                    <select name="consultantHRs[0].countryId" id="ow1" required="" class="form-control custom-select text-left select-beast country">
                                                         <option value="">Select Country</option>
                                                         <c:forEach var="item" items="${countryList}">
                                                             <option value="${item.value}"><c:out value="${item.text}"/></option>
@@ -1132,7 +1142,7 @@
                                                       <span class="input-icon-addon">
                                                          <i class="fa fa-address-card-o"></i>
                                                       </span>
-                                                        <input type="text" name="consultantHRs[0].cidNo" class="form-control hr-cid" id="cidNo1" required="" placeholder="">
+                                                        <input type="text" name="consultantHRs[0].cidNo" class="form-control hr-cid" id="ow2" required="" placeholder="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1140,7 +1150,7 @@
                                                 <label class="col-lg-2">Salutation
                                                     <span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="consultantHRs[0].salutationId" id="salutationId" required="" class="form-control custom-select text-left select-beast">
+                                                    <select name="consultantHRs[0].salutationId" id="ow3" required="" class="form-control custom-select text-left select-beast">
                                                         <option value="">Select Salutation</option>
                                                         <c:forEach var="item" items="${salutationList}">
                                                             <option value="${item.value}"><c:out value="${item.text}"/></option>
@@ -1152,14 +1162,14 @@
                                                 <div class="col-lg-4">
                                                     <div class="input-icon">
                                                         <span class="input-icon-addon"><i class="fe fe-user"></i></span>
-                                                        <input type="text" name="consultantHRs[0].name" id="name" class="form-control name" required="" placeholder="">
+                                                        <input type="text" name="consultantHRs[0].name" id="ow4" class="form-control name" required="" placeholder="">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-lg-2">Gender<span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="consultantHRs[0].sex" id="sex" required="" class="form-control custom-select text-left select-beast sex">
+                                                    <select name="consultantHRs[0].sex" id="ow5" required="" class="form-control custom-select text-left select-beast sex">
                                                         <option value="">Select Gender</option>
                                                         <option value="M">Male</option>
                                                         <option value="F">Female</option>
@@ -1168,7 +1178,7 @@
                                                 <label class="col-lg-2">Designation
                                                     <span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="consultantHRs[0].designationId" id="designationId" required="" class="form-control custom-select text-left select-beast">
+                                                    <select name="consultantHRs[0].designationId" id="ow6" required="" class="form-control custom-select text-left select-beast">
                                                         <option value="">Select Designation</option>
                                                         <c:forEach var="item" items="${designationList}">
                                                             <option value="${item.value}"><c:out value="${item.text}"/></option>
@@ -1179,8 +1189,8 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn btn-primary" onclick="getModalData('partnerDtls','hr',7)" type="button">OK</button>
-                                        <button data-dismiss="modal" class="btn btn-warning" target="#addHRModal" type="button">Close</button>
+                                        <button class="btn btn-primary" onclick="getOwnerModalData('partnerDtls','ow',6)" type="button">OK</button>
+                                        <button data-dismiss="modal" class="btn btn-warning" target="#addOwModal" type="button">Close</button>
                                     </div>
                                 </div>
                             </div>

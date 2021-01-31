@@ -68,26 +68,41 @@ var specializedFirm_action = (function () {
                         $('#photoM').html("<img src='"+imagelink+"'  width='200px'  height='200px' class='pull-right'/>");
                         $("#hrModal").modal('show');
                         $("#closeModal").modal('show');
-
+debugger;
                         var employeeDetailsDTO = dto.employeeDetailsDTOs;
-                        var empDtls ="",empDtls1="",empDtls2="";
-                        if(employeeDetailsDTO != ""){
+                        var govCopDTO = dto.govCopDTOs;
+                        var cdbDTO = dto.cdbDTOs;
+
+                        if(employeeDetailsDTO !=''){
                             for(var i in employeeDetailsDTO){
                                 var workId = employeeDetailsDTO[i].workId;
-                                if(workId !=''|| workId !='null'){
-                                    $('#engagedId').show();
-                                    $('#dcbinfo').append("<br/> This person is engaged with cdb number <b>"+employeeDetailsDTO[i].cdbNo+"</b> in <b>"+employeeDetailsDTO[i].procuringAgency+"</b> with work Id:<b>"+employeeDetailsDTO[i].workId+"</b>");
+                                if(workId !='' && workId != null){
+                                    alert(workId);
+                                    $('#dcbinfo').append("<br/> <b>CDB No: </b> "+employeeDetailsDTO[i].cdbNo+"  ||  <b> Procuring Agency:  </b> "+employeeDetailsDTO[i].procuringAgency+"  ||  <b> Work ID:</b>"+employeeDetailsDTO[i].workId+"");
+                                    // $('#dcbinfo').append("<br/> This person is engaged with cdb number <b>"+employeeDetailsDTO[i].cdbNo+"</b> in <b>"+employeeDetailsDTO[i].procuringAgency+"</b> with work Id:<b>"+employeeDetailsDTO[i].workId+"</b>");
                                     $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
-                                } else{
-                                    $('#dcbinfo').hide();
-                                    $('#engagedId').show();
-                                    $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project");
+                                }else{
+                                    $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project.");
                                 }
                             }
                         }else{
-                            $('#dcbinfo').hide();
-                            $('#engagedId').show();
-                            $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project");
+                            // $('#dcbinfo').hide();
+                            $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project.");
+                        }
+
+                        if(govCopDTO !=''){
+                            for(var i in govCopDTO){
+                                var agency = govCopDTO[i].agency;
+                                if(agency !='' && agency !=null){
+                                    alert(agency);
+                                    $('#dcbinfo').append("<br/> <b>Position Title: </b> "+govCopDTO[i].positionTitle+"  ||  <b> Agency:  </b> "+govCopDTO[i].agency+"");
+                                } else{
+                                    $('#dcbinfonotEngaged').append("<br/> This person is not a government/coperate employee.");
+                                }
+                            }
+                        }else{
+                            // $('#dcbinfo').hide();
+                            $('#dcbinfonotEngaged').append("<br/> This person is not a government/coperate employee.");
                         }
 
                       /*  if(employeeDetailsDTO !=null){
@@ -126,6 +141,69 @@ var specializedFirm_action = (function () {
                         } else{
                             $('#notEngagedId').show();
                         }*/
+                    }
+                }
+            });
+        });
+
+        $('body').on('click','.checkCidHr',function(){
+            var cidNo = $(this).closest('tr').find('.cidNo').text();
+            $check = $(this).closest('tr').find('.check');
+            if(!cidNo){
+                return;
+            }
+            $.ajax({
+                url: cdbGlobal.baseURL() + "/contractorNR/getPersonalInfo",
+                type: 'GET',
+                data: {cidNo: cidNo,type:"check"},
+                success: function (res) {
+                    if (res.status == '1') {
+                        var dto = res.dto;
+                        $('#nameM').text(dto.fullName);
+                        $('#sexM').text(dto.sex);
+                        $('#dzongkhagM').text(dto.dzongkhagNmae);
+                        $('#gewogM').text(dto.gowegName);
+                        $('#villageM').text(dto.villageName);
+                        $('#dobM').text(dto.dob);
+                        var imagelink='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo='+cidNo;
+                        $('#photoM').html("<img src='"+imagelink+"'  width='200px'  height='200px' class='pull-right'/>");
+                        $("#hrModal").modal('show');
+                        $("#closeModal1").modal('show');
+
+                        var employeeDetailsDTO = dto.employeeDetailsDTOs;
+                        var govCopDTO = dto.govCopDTOs;
+                        var cdbDTO = dto.cdbDTOs;
+
+                        if(employeeDetailsDTO !=''){
+                            for(var i in employeeDetailsDTO){
+                                var workId = employeeDetailsDTO[i].workId;
+                                if(workId !='' && workId != null){
+                                    alert(workId);
+                                    $('#dcbinfo').append("<br/> <b>CDB No: </b> "+employeeDetailsDTO[i].cdbNo+"  ||  <b> Procuring Agency:  </b> "+employeeDetailsDTO[i].procuringAgency+"  ||  <b> Work ID:</b>"+employeeDetailsDTO[i].workId+"");
+                                    // $('#dcbinfo').append("<br/> This person is engaged with cdb number <b>"+employeeDetailsDTO[i].cdbNo+"</b> in <b>"+employeeDetailsDTO[i].procuringAgency+"</b> with work Id:<b>"+employeeDetailsDTO[i].workId+"</b>");
+                                    $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
+                                }else{
+                                    $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project.");
+                                }
+                            }
+                        }else{
+                            // $('#dcbinfo').hide();
+                            $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project.");
+                        }
+                        if(govCopDTO !=''){
+                            for(var i in govCopDTO){
+                                var agency = govCopDTO[i].agency;
+                                if(agency !='' && agency !=null){
+                                    alert(agency);
+                                    $('#dcbinfo').append("<br/> <b>Position Title: </b> "+govCopDTO[i].positionTitle+"  ||  <b> Agency:  </b> "+govCopDTO[i].agency+"");
+                                } else{
+                                    $('#dcbinfonotEngaged').append("<br/> This person is not a government/coperate employee.");
+                                }
+                            }
+                        }else{
+                            // $('#dcbinfo').hide();
+                            $('#dcbinfonotEngaged').append("<br/> This person is not a government/coperate employee.");
+                        }
                     }
                 }
             });
@@ -249,7 +327,7 @@ var specializedFirm_action = (function () {
                                 "<td>" + specializedFirmHrs[i].serviceTypeName + "</td>" +
                                     //"<td><a href='javascript:void(0);' class='vAttachment'>View/Download</a> </td>" +
                                 "<td>"+attachments+"</td>" +
-                                "<td><input type='button'  value='Check for this CID' class='checkCid btn btn-success'></td>" +
+                                "<td><input type='button'  value='Check for this CID' class='checkCidHr btn btn-success'></td>" +
                                 verifiedApproved+"</tr>";
                             }
                         }

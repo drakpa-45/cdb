@@ -72,6 +72,7 @@ public class ContractorOSService extends BaseService {
         String cdbNo = loggedInUser.getCdbNo().split("999")[1];
         List<String> appliedServicesList = new ArrayList<>();
         responseMessage = check4Renewal(cdbNo);
+
         /*if(responseMessage.getStatus() == UNSUCCESSFUL_STATUS){
             return responseMessage;
         }*/
@@ -97,18 +98,20 @@ public class ContractorOSService extends BaseService {
             contractor.setOwnershipTypeId(ownershipTypeId);
             contractor.setFirmName(contractorDTO.getContractor().getFirmName());
 
-            List<ContractorHR> ownerList = contractorDTO.getContractor().getContractorHRs();
+            List<ContractorHR> ownerList = contractorDTO.getContractorHRs();
             contractor.setOwnershipChangeRemarks(contractorDTO.getContractor().getOwnershipChangeRemarks());
             for(ContractorHR contractorHR:ownerList){
                 if(contractorHR.getDeleteRequest() != null && contractorHR.getDeleteRequest() == 1){
                     //to save deleted hr
+                    //contractorHR.setDeleteRequest(1);
                     contractorRCDao.saveDeleteHrRequest(contractorHR.getId());
+                }else {
+                    String hrId = commonService.getRandomGeneratedId();
+                    contractorHR.setId(hrId);
+                    contractorHR.setContractorID(contractorId);
+                    contractorHR.setIsPartnerOrOwner(TRUE_INT);
+                    contractorNRService.saveHR(contractorHR, loggedInUser);
                 }
-                String hrId = commonService.getRandomGeneratedId();
-                contractorHR.setId(hrId);
-                contractorHR.setContractorID(contractorId);
-                contractorHR.setIsPartnerOrOwner(TRUE_INT);
-                contractorNRService.saveHR(contractorHR, loggedInUser);
             }
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "12");
             appliedServicesList.add(appliedService);
@@ -153,20 +156,22 @@ public class ContractorOSService extends BaseService {
 
         //region change of owner or partner
         if(renewalServiceType.getChangeOfOwner() != null){
-            List<ContractorHR> ownerList = contractorDTO.getContractor().getContractorHRs();
-
+           // List<ContractorHR> ownerList = contractorDTO.getContractor().getContractorHRs();
+            List<ContractorHR> ownerList = contractorDTO.getContractorHRs();
             for(ContractorHR contractorHR:ownerList){
                 if(contractorHR.getDeleteRequest() != null && contractorHR.getDeleteRequest() == 1){
                     //to save deleted hr
-                    contractorHR.setDeleteRequest(1);
+                  //  contractorHR.setDeleteRequest(1);
                     contractorRCDao.saveDeleteHrRequest(contractorHR.getId());
+                }else{
+                    String hrId = commonService.getRandomGeneratedId();
+                    contractorHR.setId(hrId);
+                    contractorHR.setContractorID(contractorId);
+                    contractorHR.setIsPartnerOrOwner(TRUE_INT);
+                    contractorNRService.saveHR(contractorHR, loggedInUser);
                 }
-                String hrId = commonService.getRandomGeneratedId();
-                contractorHR.setId(hrId);
-                contractorHR.setContractorID(contractorId);
-                contractorHR.setIsPartnerOrOwner(TRUE_INT);
-                contractorNRService.saveHR(contractorHR, loggedInUser);
             }
+            contractor.setOwnershipChangeRemarks(contractorDTO.getContractor().getOwnershipChangeRemarks());
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "4");
             appliedServicesList.add(appliedService);
         }
@@ -244,7 +249,7 @@ public class ContractorOSService extends BaseService {
         //endregion
 
         //region to save owner details if both of incoporation & change of owner service is not availed
-        if(renewalServiceType.getIncorporation() == null && renewalServiceType.getChangeOfOwner() == null){
+   /*     if(renewalServiceType.getIncorporation() == null && renewalServiceType.getChangeOfOwner() == null){
             List<ContractorHR> ownerList = contractorDTO.getContractor().getContractorHRs();
             contractor.setOwnershipChangeRemarks(contractorDTO.getContractor().getOwnershipChangeRemarks());
             for(ContractorHR contractorHR:ownerList){
@@ -254,7 +259,7 @@ public class ContractorOSService extends BaseService {
                 contractorHR.setIsPartnerOrOwner(TRUE_INT);
                 contractorNRService.saveHR(contractorHR, loggedInUser);
             }
-        }
+        }*/
        //end region
 
         //region save applied service and payment
@@ -262,7 +267,6 @@ public class ContractorOSService extends BaseService {
                 c->contractorRCService.saveAppliedS(contractorId,c,loggedInUser)
         );
         //endregion
-
         responseMessage.reset();
         responseMessage.setStatus(SUCCESSFUL_STATUS);
         responseMessage.setText("Your application for Other Services has been submitted and your application number is "+referenceNo+"<br>" +
@@ -276,8 +280,10 @@ public class ContractorOSService extends BaseService {
     public void updateIncorporation(List<ContractorAttachment> cAttachments, LoggedInUser loggedInUser,String contractorId) throws Exception{
         if(cAttachments != null && cAttachments.size() >= 1) {
             for(ContractorAttachment cAttachment:cAttachments) {
-                cAttachment.setContractorId(contractorId);
-                contractorNRService.saveAttachment(cAttachment, loggedInUser);
+                if(cAttachment.getDocumentName() !=null){
+                    cAttachment.setContractorId(contractorId);
+                    contractorNRService.saveAttachment(cAttachment, loggedInUser);
+                }
             }
         }
     }

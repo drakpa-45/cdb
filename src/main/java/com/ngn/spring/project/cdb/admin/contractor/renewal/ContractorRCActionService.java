@@ -90,6 +90,23 @@ public class ContractorRCActionService extends BaseService {
     }
 
     @Transactional(readOnly =  true)
+    public Object getContractorInfoOwnerFinal(String applicationNo){
+        NewDeleteExistDTO ndeDTOhr = new NewDeleteExistDTO();
+        String cdbNo = nrActionService.getCDBNoFromAppNo(applicationNo);
+        String contractorFinalId = getFinalIdFromCDBNo(cdbNo);
+        List<ContractorHrDTO> existingHRs = contractorRCService.getContractorHRsFinal(contractorFinalId, 'O');
+        List<ContractorHrDTO> newHRs = nrActionService.getContractorHRs(getIdFromAppNo(applicationNo), 'O');
+        List<ContractorHrDTO> editedHRs = newHRs.stream().filter(existingHRs::contains).collect(Collectors.toList());
+        List<ContractorHrDTO> newlyAddedHRs = newHRs.stream().filter(e->!editedHRs.contains(e)).collect(Collectors.toList());
+        List<ContractorHrDTO> deletedHRs = existingHRs.stream().filter(e->e.getDeleteRequest() != null && e.getDeleteRequest() == 1).collect(Collectors.toList());
+        ndeDTOhr.setExisting(existingHRs);
+        ndeDTOhr.setEdited(editedHRs);
+        ndeDTOhr.setNewlyAdded(newlyAddedHRs);
+        ndeDTOhr.setDeleted(deletedHRs);
+        return ndeDTOhr;
+    }
+
+    @Transactional(readOnly =  true)
     public Object getHrsExistingAndNew(String applicationNo){
         NewDeleteExistDTO ndeDTOhr = new NewDeleteExistDTO();
         String cdbNo = nrActionService.getCDBNoFromAppNo(applicationNo);
@@ -113,8 +130,7 @@ public class ContractorRCActionService extends BaseService {
         String contractorFinalId = getFinalIdFromCDBNo(cdbNo);
         List<EquipmentDTO> existingEQs = contractorRCService.getEquipmentFinal(contractorFinalId);
         List<EquipmentDTO> newEQs = nrActionService.getContractorEQs(getIdFromAppNo(appNo));
-      //  List<EquipmentDTO> editedEQs = newEQs.stream().filter(existingEQs::contains).collect(Collectors.toList());
-        List<EquipmentDTO> editedEQs = newEQs.stream().filter(e->e.getEditCheck() != null && e.getEditCheck() == 1).collect(Collectors.toList());
+        List<EquipmentDTO> editedEQs = newEQs.stream().filter(existingEQs::contains).collect(Collectors.toList());
         List<EquipmentDTO> newlyAddedEQs = newEQs.stream().filter(e->!editedEQs.contains(e)).collect(Collectors.toList());
         List<EquipmentDTO> deletedEQs = existingEQs.stream().filter(e->e.getDeleteRequest() != null && e.getDeleteRequest() == 1).collect(Collectors.toList());
         ndeDTOeq.setExisting(existingEQs);

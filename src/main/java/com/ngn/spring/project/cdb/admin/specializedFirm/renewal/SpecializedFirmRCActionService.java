@@ -92,6 +92,23 @@ public class SpecializedFirmRCActionService extends BaseService {
     }
 
     @Transactional(readOnly =  true)
+    public Object getSpecializedFirmOWsFinal(String applicationNo){
+        NewDeleteExistDTO ndeDTOhr = new NewDeleteExistDTO();
+        String cdbNo = nrActionService.getCDBNoFromAppNo(applicationNo);
+        String specializedFirmFinalId = getFinalIdFromCDBNo(cdbNo);
+        List<SpFirmHrDTO> existingHRs = specializedFirmRService.getSpecializedFirmHRsFinal(specializedFirmFinalId, 'O');
+        List<SpFirmHrDTO> newHRs = nrActionService.getSpecializedFirmHRs(getIdFromAppNo(applicationNo), 'O');
+        List<SpFirmHrDTO> editedHRs = newHRs.stream().filter(existingHRs::contains).collect(Collectors.toList());
+        List<SpFirmHrDTO> newlyAddedHRs = newHRs.stream().filter(e->!editedHRs.contains(e)).collect(Collectors.toList());
+        List<SpFirmHrDTO> deletedHRs = existingHRs.stream().filter(e->e.getDeleteRequest() != null && e.getDeleteRequest() == 1).collect(Collectors.toList());
+        ndeDTOhr.setExisting(existingHRs);
+        ndeDTOhr.setEdited(editedHRs);
+        ndeDTOhr.setNewlyAdded(newlyAddedHRs);
+        ndeDTOhr.setDeleted(deletedHRs);
+        return ndeDTOhr;
+    }
+
+    @Transactional(readOnly =  true)
     public Object getHrsExistingAndNew(String applicationNo){
         NewDeleteExistDTO ndeDTOhr = new NewDeleteExistDTO();
         String cdbNo = nrActionService.getCDBNoFromAppNo(applicationNo);
