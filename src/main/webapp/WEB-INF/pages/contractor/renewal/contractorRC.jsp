@@ -319,7 +319,7 @@
                                                         <div class="col-lg-12 col-md-12 ">
                                                             <label class="col-lg-3 col-md-3 form-label" for="ownershipChangeRemarks">Reason for Change of Owner:
                                                                 <span class="text-danger">*</span></label>
-                                                            <input type="text" class="col-lg-6 form-control" name="specializedFirm.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true" placeholder="Text..">
+                                                            <input type="text" class="col-lg-6 form-control" name="contractor.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true" placeholder="Text..">
                                                         </div>
                                                     <div class="card-body">
                                                         <div class="col-lg-12">

@@ -334,7 +334,6 @@
                                                                     <span class="text-danger">*</span></label>
                                                                 <input type="text" class="col-lg-6 form-control" name="contractor.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true" placeholder="Text..">
                                                             </div>
-
                                                         <div class="card-body">
                                                             <div class="col-lg-12">
                                                                 <span><h5 class="text-orange">Attach Certificates of Ownership change</h5></span>

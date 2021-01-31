@@ -20,6 +20,8 @@ public class ConsultantDTO {
     private List<ConsultantEQ> equipments;
     private List<ConsultantAttachment> cAttachments;
 
+    private ConsultantServicePayment servicePayment;
+
     public Consultant getConsultant() {
         return consultant;
     }
@@ -58,5 +60,13 @@ public class ConsultantDTO {
 
     public void setcAttachments(List<ConsultantAttachment> cAttachments) {
         this.cAttachments = cAttachments;
+    }
+
+    public ConsultantServicePayment getServicePayment() {
+        return servicePayment;
+    }
+
+    public void setServicePayment(ConsultantServicePayment servicePayment) {
+        this.servicePayment = servicePayment;
     }
 }

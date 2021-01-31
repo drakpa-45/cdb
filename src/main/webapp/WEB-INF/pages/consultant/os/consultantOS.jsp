@@ -1119,7 +1119,7 @@
                             <div class="modal-dialog modal-lg" id="ownerModal">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 id="ownerModalLabel" class="modal-title">Add Human Resource</h4>
+                                        <h4 id="ownerModalLabel" class="modal-title">Add Owner</h4>
                                         <button aria-hidden="true" data-dismiss="modal" class="close" type="button"></button>
                                     </div>
                                     <div class="modal-body form-horizontal">

@@ -648,7 +648,7 @@ var consultantOS = (function () {
                     var consultantHrs = res;
                     for (var i in consultantHrs) {
                         partnerHrTr = partnerHrTr + "<tr>" +
-                        "<td class='countryName'><input type='hidden' class='consultantHRid' name='consultantHRs[0].id' value='"+consultantHrs[i].id +"'/>" + consultantHrs[i].countryName + "</td>" +
+                        "<td class='countryName'>" + consultantHrs[i].countryName + "</td>" +
                         "<td class='cidNo'>" + consultantHrs[i].cidNo + "</td>" +
                         "<td class='salutationName'>" + consultantHrs[i].salutationName + "</td>" +
                         "<td class='name'>" + consultantHrs[i].name + "</td>" +
@@ -879,22 +879,18 @@ var consultantOS = (function () {
             openModal('addOwModal');
         });
 
-        $('body').on('click','.edit-hr',function(e){
+        $('body').on('click','.edit-ow',function(e){
             e.preventDefault();
             var row = $(this).closest('tr');
-            var hrModal = $('#addHRModal');
-            hrModal.find('#hr5').val(row.find('.hr5').val());
-            hrModal.find('#hr3').val(row.find('.hr3').val());
-            hrModal.find('#hr1').val(row.find('.hr1').val());
-            hrModal.find('#hr2').val(row.find('.hr2').val());
-            hrModal.find('#hr4').val(row.find('.hr4').val());
-            hrModal.find('#hr6').val(row.find('.hr6').val());
-            hrModal.find('#hr7').val(row.find('.hr7').val());
-            hrModal.find('#hr8').val(row.find('.hr8').val());
-            hrModal.find('#hr9').val(row.find('.hr9').val());
-            hrModal.find('#hr10').val(row.find('.hr10').val());
+            var hrModal = $('#addOwModal');
+            hrModal.find('#ow1').val(row.find('.ow1').val());
+            hrModal.find('#ow2').val(row.find('.ow2').val());
+            hrModal.find('#ow3').val(row.find('.ow3').val());
+            hrModal.find('#ow4').val(row.find('.ow4').val());
+            hrModal.find('#ow5').val(row.find('.ow5').val());
+            hrModal.find('#ow6').val(row.find('.ow6').val());
             row.addClass('tbd'); //add class to be deleted
-            openModal('addHRModal');
+            openModal('addOwModal');
         });
     }
 
@@ -1038,7 +1034,7 @@ var consultantOS = (function () {
             $('#changeOfLocation').prop('disabled',true);
             $('#changeOfOwnerId').prop('disabled',true);
             $('#upgradeDowngrade').prop('disabled',true);
-            $('#err-expired-audit-memo').val('Your application is expired. You can only avail HR update and Equipment Update.');
+            $('#err-expired-audit-memo').html('Your application is expired. You can only avail HR update and Equipment Update.');
         }
         var auditMemo = $('#auditMemo').val();
         if(auditMemo != ''){

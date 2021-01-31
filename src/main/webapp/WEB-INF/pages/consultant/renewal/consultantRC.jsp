@@ -30,6 +30,10 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert alert-danger text-center" style="font-size: 10px">
                             <c:if test="${renewalCheck.status eq 1}">
                                 <span class="error">${renewalCheck.text}</span>
+                                <input type="hidden" class="form-control" name="servicePayment.noOfDaysLate" value="${renewalCheck.dto1.noOfDaysLate}">
+                                <input type="hidden" class="form-control" name="servicePayment.noOfDaysAfterGracePeriod" value="${renewalCheck.dto1.noOfDaysAfterGracePeriod}">
+                                <input type="hidden" class="form-control" name="servicePayment.paymentAmount" value="${renewalCheck.dto1.paymentAmount}">
+                                <input type="hidden" class="form-control" name="servicePayment.waiveOffLateFee" value="${renewalCheck.dto1.waiveOffLateFee}">
                             </c:if>
                             <c:if test="${renewalCheck.status eq 0}">
                                 <span class="error">${renewalCheck.text}</span>
@@ -245,7 +249,7 @@
                                             <div class="card" id="ownerPartner1">
                                                 <div class="bg-blue card-status card-status-left"></div>
                                                 <div class="card-header">
-                                                    <h3 class="card-title">Name of Owner, Partners and/or otherswith Controlling Interest</h3>
+                                                    <h3 class="card-title">Name of Owner, Partners and/or others with Controlling Interest</h3>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="col-lg-12">
@@ -318,7 +322,7 @@
                                                 </div>
                                                 <div class="form-group row hide" id="ownerShipchangeId">
                                                     <div class="col-lg-12 col-md-12 ">
-                                                        <label class="col-lg-3 col-md-3 form-label" for="ownershipChangeRemarks">Reason for Change of Owner:
+                                                        <label class="col-lg-3 col-md-3 form-label">Reason for Change of Owner:
                                                             <span class="text-danger">*</span></label>
                                                         <input type="text" class="col-lg-6 form-control" name="consultant.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true" placeholder="Text..">
                                                     </div>
@@ -597,7 +601,7 @@
                                                                 <th style="width: 5%">Title</th>
                                                                 <th style="width: 15%">Name</th>
                                                                 <th style="width: 15%">ID/Work Permit No.</th>
-                                                                <th style="width: 10%">Sex</th>
+                                                                <th style="width: 10%">Gender</th>
                                                                 <th style="width: 10%">Country</th>
                                                                 <th style="width: 10%">Designation</th>
                                                                 <th style="width: 10%">Qualification</th>
@@ -1021,7 +1025,7 @@
                             <div class="modal-dialog modal-lg" id="ownerModal">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 id="ownerModalLabel" class="modal-title">Add Human Resource</h4>
+                                        <h4 id="ownerModalLabel" class="modal-title">Add Owner</h4>
                                         <button aria-hidden="true" data-dismiss="modal" class="close" type="button"></button>
                                     </div>
                                     <div class="modal-body form-horizontal">

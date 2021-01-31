@@ -101,10 +101,17 @@ public class ConsultantRCService extends BaseService {
             consultant.setFirmName(consultantDTO.getConsultant().getFirmName());
             consultant.setOwnershipChangeRemarks(consultantDTO.getConsultant().getOwnershipChangeRemarks());
 
-            List<ConsultantHR> ownerList = consultantDTO.getConsultant().getConsultantHRs();
+            List<ConsultantHR> ownerList = consultantDTO.getConsultantHRs();
             for(ConsultantHR consultantHR:ownerList){
-                String hrId = commonService.getRandomGeneratedId();
-                consultantHR.setId(hrId);
+               // String hrId = commonService.getRandomGeneratedId();
+                if(emptyNullCheck(consultantHR.getId())){
+                    consultantHR.setId(commonService.getRandomGeneratedId());
+                }
+                //currentHRs.add(contractorHR.getId());
+                if(emptyNullCheck(consultantHR.getCidNo())){
+                    continue;
+                }
+             //   consultantHR.setId(hrId);
                 consultantHR.setConsultantID(consultantId);
                 consultantHR.setIsPartnerOrOwner(TRUE_INT);
                 consultantNRService.saveHR(consultantHR, loggedInUser);
@@ -257,6 +264,16 @@ public class ConsultantRCService extends BaseService {
         //late fee service id
         BigDecimal lateFee = new BigDecimal(responseMessage.getVal2());
         if(lateFee.compareTo(BigDecimal.ZERO) == 0){
+            ConsultantServicePayment servicePayment = consultantDTO.getServicePayment();
+            servicePayment.setConsultantId(consultantId);
+            servicePayment.setNoOfDaysLate(servicePayment.getNoOfDaysLate());
+            servicePayment.setNoOfDaysAfterGracePeriod(servicePayment.getNoOfDaysAfterGracePeriod());
+            servicePayment.setPaymentAmount(servicePayment.getPaymentAmount());
+            servicePayment.setWaiveOffLateFee(servicePayment.getWaiveOffLateFee());
+            servicePayment.setPenaltyPerDay(BigDecimal.valueOf(100));
+
+            consultantRCDao.save(servicePayment);
+
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "11");
             appliedServicesList.add(appliedService);
         }
