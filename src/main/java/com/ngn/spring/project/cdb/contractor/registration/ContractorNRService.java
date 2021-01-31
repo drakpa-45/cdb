@@ -288,18 +288,18 @@ public class ContractorNRService extends BaseService {
         if(documentName == null || documentName.isEmpty()){
             contractorHRA.setDocumentName("CV_UT_AT_"+i);
         }*/
-        String docNameUpload = contractorHRA.getDocumentName()+commonService.getFileEXT(attachment);
-        String specificLoc = UPLOAD_LOC+"//HR";
-        String docPath = commonService.uploadDocument(attachment, specificLoc, docNameUpload);
-
+        if(attachment != null) {
+            String docNameUpload = contractorHRA.getDocumentName() + commonService.getFileEXT(attachment);
+            String specificLoc = UPLOAD_LOC + "//HR";
+            String docPath = commonService.uploadDocument(attachment, specificLoc, docNameUpload);
+            contractorHRA.setDocumentPath(docPath);
+            contractorHRA.setDocumentName(docNameUpload);
+            contractorHRA.setFileType(attachment.getContentType());
+        }
         if(emptyNullCheck(contractorHRA.getId())){
             String hrAttachmentID = commonService.getRandomGeneratedId();
             contractorHRA.setId(hrAttachmentID);
         }
-
-        contractorHRA.setDocumentPath(docPath);
-        contractorHRA.setDocumentName(docNameUpload);
-        contractorHRA.setFileType(attachment.getContentType());
         contractorHRA.setCreatedBy(loggedInUser.getUserID());
         contractorHRA.setCreatedOn(loggedInUser.getServerDate());
         contractorNRDao.saveUpdate(contractorHRA);
@@ -397,6 +397,10 @@ public class ContractorNRService extends BaseService {
 
     public ContractorDTOFetch getContractorOngoingApp(String cdbNo){
         return contractorNRDao.getContractorOngoingApp(cdbNo);
+    }
+
+    public ContractorHRAttachment getHRAttachmentFinal(String hraId){
+        return contractorNRDao.getHRAttachmentFinal(hraId);
     }
 
     @Transactional(readOnly = true)

@@ -6,6 +6,7 @@ import com.ngn.spring.project.cdb.contractor.registration.dto.ContractorDTOFetch
 import com.ngn.spring.project.cdb.contractor.registration.dto.ContractorTrainingDTO;
 import com.ngn.spring.project.cdb.contractor.registration.dto.FeeStructureDTO;
 import com.ngn.spring.project.cdb.contractor.registration.model.Contractor;
+import com.ngn.spring.project.cdb.contractor.registration.model.ContractorHRAttachment;
 import com.ngn.spring.project.lib.DropdownDTO;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -89,5 +90,11 @@ public class ContractorNRDao extends BaseDao {
         sqlQuery = properties.getProperty("ContractorDao.isFirmNameUnique");
         return hibernateQuery(sqlQuery).setParameter("firmName",firmName).list().isEmpty();
 
+    }
+
+    @Transactional(readOnly = true)
+    public ContractorHRAttachment getHRAttachmentFinal(String hraId) {
+        sqlQuery = properties.getProperty("ContractorDao.getHRAttachmentFinal");
+        return (ContractorHRAttachment)hibernateQuery(sqlQuery,ContractorHRAttachment.class).setParameter("hraId",hraId).list().get(0);
     }
 }

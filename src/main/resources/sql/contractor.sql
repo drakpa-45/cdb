@@ -7,6 +7,7 @@ ContractorDao.isEmailUnique = SELECT a.Email FROM `crpcontractor` a WHERE a.Emai
 ContractorDao.isFirmNameUnique = SELECT a.NameOfFirm FROM `crpcontractor` a WHERE a.NameOfFirm =:firmName
 ContractorDao.getTrainingDtl = SELECT a.`CmnTrainingTypeId` tTypeId,a.`CmnTrainingModuleId` tModuleId,tt.`Name` tType,tm.`Name` tModule,a.`TrainingFromDate` fromDate,a.`TrainingToDate` toDate,b.`CIDNo` cidNo,b.`Participant` participant FROM `crpcontractortraining` a INNER JOIN `crpcontractortrainingdetail` b ON a.`Id` = b.`CrpContractorTrainingId` INNER JOIN `cmnlistitem` tt ON tt.Id = a.`CmnTrainingTypeId` INNER JOIN `cmnlistitem` tm ON tm.Id = a.`CmnTrainingModuleId` WHERE b.`CIDNo` =:cidNo
 ContractorDao.getContractorOngoingApp = SELECT aa.`CrpContractorId` contractorId,aa.`ReferenceNo` AS referenceNo, aa.ApplicationDate AS applicationDate, aa.CDBNo AS cdbNo,aa.Id AS appStatusId,bb.Name AS appStatusName FROM `crpcontractor` aa INNER JOIN cmnlistitem bb ON aa.`CmnApplicationRegistrationStatusId`=bb.Id WHERE  bb.Id IN ('262a3f11-adbd-11e4-99d7-080027dcfac6','36f9627a-adbd-11e4-99d7-080027dcfac6','6195664d-c3c5-11e4-af9f-080027dcfac6') AND aa.CDBNo =:cdbNo
+ContractorDao.getHRAttachmentFinal = SELECT Id id, CrpContractorHumanResourceFinalId contractorHrId,DocumentName documentName,DocumentPath documentPath, FileType fileType,CreatedBy createdBy ,CreatedOn createdOn FROM crpcontractorhumanresourceattachmentfinal WHERE Id=:hraId
 
 /** ContractorActionDao */
 ContractorActionDao.gTaskList = CALL ProCrpContractorTaskList (:userId,:status,:service);

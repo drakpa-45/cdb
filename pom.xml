@@ -65,17 +65,17 @@
             <version>1.2</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-        <dependency>
+        <!--<dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.6</version>
-        </dependency>
+        </dependency>-->
 
-       <!--  <dependency>
+         <dependency>
              <groupId>mysql</groupId>
              <artifactId>mysql-connector-java</artifactId>
              <version>8.0.18</version>
-         </dependency>-->
+         </dependency>
 
         <!-- database connection pool -->
         <!--<dependency>
@@ -304,7 +304,7 @@
             <version>6.0.0</version>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports-functions</artifactId>
             <version>6.0.0</version>
@@ -314,7 +314,7 @@
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports-chart-themes</artifactId>
             <version>6.1.0</version>
-        </dependency>
+        </dependency>-->
 
         <!-- itextpdf -->
         <dependency>
