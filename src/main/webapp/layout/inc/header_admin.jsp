@@ -17,6 +17,28 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <sec:authentication var="auth" property="principal"/>
+
+<style>
+    .notification {
+        text-decoration: none;
+        position: relative;
+        display: inline-block;
+        border-radius: 1px;
+    }
+  /*  .notification:hover {
+        background: red;
+    }*/
+    .notification .badge {
+        position: absolute;
+        top: 20px;
+        right: 10px;
+        padding: 5px 8px;
+        border-radius: 50%;
+        background-color: red;
+        color: white;
+    }
+</style>
+
 <div class="header py-4" style="background: #120f65;">
     <div class="container ">
         <div class="d-flex">
@@ -69,11 +91,12 @@
                                 <a href="<c:url value="#"/>" class="nav-link pl-4" style="color:black"> <i class="fa fa-check"></i>Consultant</a>
                                 <a href="<c:url value="/admin_survey/survey_print_Certificate"/>" class="nav-link pl-4" style="color:black"> <i class="fa fa-check"></i>Surveyor</a>
                                 <a href="<c:url value="/admin_specializedTrade/specializedTrade_print_Certificate"/>" class="nav-link pl-4" style="color:black"> <i class="fa fa-check"></i>Specialized Trader</a>
-
                             </div>
                         </li>
                         <li class="nav-item">
-                            <security:authorize access="hasRole('ROLE_APPROVER')"><i class="fa fa-bell-o mt-4" style="zoom: 1.4"></i></security:authorize>
+                            <a href="#" class="notification">
+                                <security:authorize access="hasRole('ROLE_APPROVER')"><i class="notification fa fa-bell-o mt-3" style="zoom: 1.4"></i><span class="badge">0</span></security:authorize>
+                            </a>
                         </li>
                     </ul>
                 </strong>

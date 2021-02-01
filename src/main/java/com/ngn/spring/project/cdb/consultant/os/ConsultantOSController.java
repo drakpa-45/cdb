@@ -130,7 +130,6 @@ public class ConsultantOSController extends BaseController {
         return cRenewalService.getCategoryClassFinal(consultantId);
     }
 
-
     @RequestMapping(value = "/viewDownload", method = RequestMethod.GET)
     public void viewDownload(HttpServletRequest request, HttpServletResponse response, String documentPath) throws Exception{
         commonService.viewDownloadFile(documentPath, response);

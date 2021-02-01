@@ -66,7 +66,7 @@ ContractorRCDao.saveDeleteHrRequest = Update crpcontractorhumanresourcefinal set
 ContractorRCDao.saveDeleteEqRequest = Update crpcontractorequipmentfinal set DeleteRequest = 1 where Id =:eqId
 ContractorRCDao.saveEditEqRequest = Update crpcontractorequipmentfinal set EditCheck = 1 where Id =:eqId
 ContractorRCDao.auditMemo = SELECT CONCAT('You have following audit memo:<br>',AIN,' : ',`AuditObservation`) AS auditObservation FROM `crpcontractorauditclearance` WHERE `CrpContractorConsultantId` =:contractorFinalId AND  `Dropped` = '0'
-ContractorRCDao.getIncAttachmentFinal = SELECT DocumentName AS documentName, DocumentPath documentPath,FileType AS fileType,AttachmentFor AS attachmentFor FROM crpcontractorattachmentfinal WHERE CrpContractorFinalId =:contractorFinalId
+ContractorRCDao.getIncAttachmentFinal = SELECT Id id, DocumentName AS documentName, DocumentPath documentPath,FileType AS fileType,AttachmentFor AS attachmentFor FROM crpcontractorattachmentfinal WHERE CrpContractorFinalId =:contractorFinalId
 
 /*Contractor Renewal Action Dao*/
 ContractorRCActionDao.getAppliedServices = SELECT a.ReferenceNo applicationNo,c.CmnServiceTypeId serviceId,d.referenceNo serviceRefNo, d.Name serviceName, e.PaymentAmount ,a.NameOfFirm firmName,b.Name AS appStatus,a.ApplicationDate applicationDate FROM crpcontractor a INNER JOIN cmnlistitem b ON b.Id  = a.CmnApplicationRegistrationStatusId INNER JOIN crpcontractorappliedservice c ON c.CrpContractorId = a.CrpContractorId INNER JOIN crpservice d ON d.Id = c.CmnServiceTypeId INNER JOIN crpcontractorservicepayment  e ON e.CrpContractorId = c.CrpContractorId AND e.CmnServiceTypeId = c.CmnServiceTypeId WHERE a.ReferenceNo=:applicationNo

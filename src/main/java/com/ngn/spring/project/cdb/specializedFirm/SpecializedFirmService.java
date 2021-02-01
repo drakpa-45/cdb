@@ -289,14 +289,19 @@ public class SpecializedFirmService extends BaseService {
         if(documentName == null || documentName.isEmpty()){
             contractorHRA.setDocumentName("CV_UT_AT_"+i);
         }*/
-        String docNameUpload = spFirmtHRA.getDocumentName()+commonService.getFileEXT(attachment);
-        String specificLoc = UPLOAD_LOC+"//HR";
-        String docPath = commonService.uploadDocument(attachment, specificLoc, docNameUpload);
-        String hrAttachmentID = commonService.getRandomGeneratedId();
-        spFirmtHRA.setId(hrAttachmentID);
-        spFirmtHRA.setDocumentPath(docPath);
-        spFirmtHRA.setDocumentName(docNameUpload);
-        spFirmtHRA.setFileType(attachment.getContentType());
+
+        if(attachment != null) {
+            String docNameUpload = spFirmtHRA.getDocumentName() + commonService.getFileEXT(attachment);
+            String specificLoc = UPLOAD_LOC + "//HR";
+            String docPath = commonService.uploadDocument(attachment, specificLoc, docNameUpload);
+            spFirmtHRA.setDocumentPath(docPath);
+            spFirmtHRA.setDocumentName(docNameUpload);
+            spFirmtHRA.setFileType(attachment.getContentType());
+        }
+        if(emptyNullCheck(spFirmtHRA.getId())){
+            String hrAttachmentID = commonService.getRandomGeneratedId();
+            spFirmtHRA.setId(hrAttachmentID);
+        }
         spFirmtHRA.setCreatedBy(loggedInUser.getUserID());
         spFirmtHRA.setCreatedOn(loggedInUser.getServerDate());
         dao.saveUpdate(spFirmtHRA);

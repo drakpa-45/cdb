@@ -851,6 +851,7 @@ var consultantRC = (function () {
             openModal('addOwModal');
         });
     }
+
     function editInModal(){
         $('body').on('click','.edit-row',function(e){
             e.preventDefault();
@@ -982,7 +983,6 @@ var consultantRC = (function () {
         });
     }
 
-
     function showFileSize() {
         $('tbody').on('change', '.file', function () {
             //this.files[0].size gets the size of your file.
@@ -1100,6 +1100,7 @@ var consultantRC = (function () {
             }
         })
     }
+
     function isFirmNameUnique(){
         $('#firmName').on('change',function(){
             var $this = $(this);
@@ -1119,6 +1120,7 @@ var consultantRC = (function () {
             });
         });
     }
+
     function init(){
         viewDownloadAttachment();
         getConsultant();
@@ -1148,6 +1150,7 @@ var consultantRC = (function () {
         isFirmNameUnique();
         getOwnerFinal();
         editInModalOwner();
+        isFirmNameUnique();
     }
     return {
         init:init

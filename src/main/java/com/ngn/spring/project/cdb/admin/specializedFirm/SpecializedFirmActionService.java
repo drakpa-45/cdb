@@ -162,9 +162,11 @@ public class SpecializedFirmActionService extends BaseService {
         specializedFirm.setPaymentApprovedDate(loggedInUser.getServerDate());
         specializedFirm.setPaymentApproverUserId(loggedInUser.getUserID());
         specializedFirm.setPaymentApproverRemark(paymentUpdateDTO.getPaymentRemarks());
+        specializedFirm.setHasNotification("0");
        //contractor.setLockedByUserId("null");
         specializedFirm.setPaymentReceiptDate(paymentUpdateDTO.getPaymentDate());
         specializedFirm.setPaymentReceiptNo(paymentUpdateDTO.getPaymentReceiptNo());
+        specializedFirmActionDao.saveOrUpdate(specializedFirm);
 
         paymentUpdateDTO.setSpecializedFirmId(specializedFirm.getCrpSpecializedTradeId());
         specializedFirmActionDao.paymentUpdate(specializedFirm.getCrpSpecializedTradeId(),loggedInUser.getUserID(),approvedApplicationStatusId,specializedFirm.getCreatedBy());

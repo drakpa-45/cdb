@@ -288,14 +288,19 @@ public class ConsultantNRService extends BaseService {
         if(documentName == null || documentName.isEmpty()){
             contractorHRA.setDocumentName("CV_UT_AT_"+i);
         }*/
-        String docNameUpload = consultantHRA.getDocumentName()+commonService.getFileEXT(attachment);
-        String specificLoc = UPLOAD_LOC+"//HR";
-        String docPath = commonService.uploadDocument(attachment, specificLoc, docNameUpload);
-        String hrAttachmentID = commonService.getRandomGeneratedId();
-        consultantHRA.setId(hrAttachmentID);
-        consultantHRA.setDocumentPath(docPath);
-        consultantHRA.setDocumentName(docNameUpload);
-        consultantHRA.setFileType(attachment.getContentType());
+
+        if(attachment != null) {
+            String docNameUpload = consultantHRA.getDocumentName() + commonService.getFileEXT(attachment);
+            String specificLoc = UPLOAD_LOC + "//HR";
+            String docPath = commonService.uploadDocument(attachment, specificLoc, docNameUpload);
+            consultantHRA.setDocumentPath(docPath);
+            consultantHRA.setDocumentName(docNameUpload);
+            consultantHRA.setFileType(attachment.getContentType());
+        }
+        if(emptyNullCheck(consultantHRA.getId())){
+            String hrAttachmentID = commonService.getRandomGeneratedId();
+            consultantHRA.setId(hrAttachmentID);
+        }
         consultantHRA.setCreatedBy(loggedInUser.getUserID());
         consultantHRA.setCreatedOn(loggedInUser.getServerDate());
         consultantDao.saveUpdate(consultantHRA);

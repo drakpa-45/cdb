@@ -565,6 +565,7 @@ var consultantOS = (function () {
                             "<td></td>" +
                             "<td>" +
                             "<input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='InSole'/>" +
+                            "<input type='hidden' class='aId' name='cAttachments[0].id' value='"+data[i].id+"'>"+
                             "<input type='text' class='form-control docName' name='cAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
                             "<td class='attachment'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
                             "<td></td>" +
@@ -575,7 +576,10 @@ var consultantOS = (function () {
                         if(data[i].attachmentFor == 'AL'){
                             categoryTr = categoryTr + "<tr>" +
                             "<td></td>" +
-                            "<td>" + data[i].documentName + "</td>" +
+                            "<td>" +
+                            "<input type='hidden' class='form-control aFor' name='ownerAttachments[0].attachmentFor' value='AL'/>" +
+                            "<input type='hidden' class='aId' name='ownerAttachments[0].id' value='"+data[i].id+"'>"+
+                            "<input type='text' class='form-control docName' name='ownerAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
                             "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
                             "<td></td>" +
                             "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
@@ -585,7 +589,10 @@ var consultantOS = (function () {
                         if(data[i].attachmentFor == 'OC'){
                             ownerTr = ownerTr + "<tr>" +
                             "<td></td>" +
-                            "<td>" + data[i].documentName + "</td>" +
+                            "<td>" +
+                            "<input type='hidden' class='form-control aFor' name='categoryAttachments[0].attachmentFor' value='OC'/>" +
+                            "<input type='hidden' class='aId' name='categoryAttachments[0].id' value='"+data[i].id+"'>"+
+                            "<input type='text' class='form-control docName' name='categoryAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>"+
                             "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
                             "<td></td>" +
                             "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
@@ -1217,7 +1224,6 @@ var consultantOS = (function () {
         editIncAttachment();
         editInModalOwner();
         isFirmNameUnique();
-        getOwnerFinal();
     }
     return {
         init:init

@@ -133,7 +133,7 @@ SpecializedFirmRCDao.saveDeleteHrRequest = Update crpspecializedtradehumanresour
 
 SpecializedFirmRCDao.saveDeleteEqRequest=Update crpspecializedtradeequipmentfinal set DeleteRequest = 1 where Id =:eqId
 
-SpecializedFirmRCDao.getIncAttachmentFinal = SELECT DocumentName AS documentName, DocumentPath documentPath,FileType AS fileType,AttachmentFor AS attachmentFor FROM crpspecializedtradeattachmentfinal WHERE CrpSpecializedTradeFinalId =:specializedFirmId
+SpecializedFirmRCDao.getIncAttachmentFinal = SELECT Id id, DocumentName AS documentName, DocumentPath documentPath,FileType AS fileType,AttachmentFor AS attachmentFor FROM crpspecializedtradeattachmentfinal WHERE CrpSpecializedTradeFinalId =:specializedFirmId
 
 SpecializedFirmRCDao.auditMemo=SELECT CONCAT('You have following audit memo:<br>',AIN,' : ',`AuditObservation`) AS auditObservation FROM `crpcontractorauditclearance` WHERE `CrpContractorConsultantId` =:specializedFirmFinalId AND  `Dropped` = '0';
 

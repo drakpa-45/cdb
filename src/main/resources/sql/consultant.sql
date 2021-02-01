@@ -10,9 +10,8 @@ ConsultantDao.gEquipment = SELECT a.`Id` AS value,a.`Name` AS text,a.IsRegistere
 ConsultantDao.isEmailUnique = SELECT a.Email FROM `sysuser` a WHERE a.Email =:email
 ConsultantDao.getTrainingDtl = SELECT a.`CmnTrainingTypeId` tTypeId,a.`CmnTrainingModuleId` tModuleId,tt.`Name` tType,tm.`Name` tModule,a.`TrainingFromDate` fromDate,a.`TrainingToDate` toDate,b.`CIDNo` cidNo,b.`Participant` participant FROM `crpcontractortraining` a INNER JOIN `crpcontractortrainingdetail` b ON a.`Id` = b.`CrpContractorTrainingId` INNER JOIN `cmnlistitem` tt ON tt.Id = a.`CmnTrainingTypeId` INNER JOIN `cmnlistitem` tm ON tm.Id = a.`CmnTrainingModuleId` WHERE b.`CIDNo` =:cidNo
 ConsultantDao.isFirmNameUnique= SELECT a.NameOfFirm FROM `crpconsultant` a WHERE a.NameOfFirm =:firmName
+ConsultantDao.getHRAttachmentFinal = SELECT Id id,CrpConsultantHumanResourceFinalId consultantHrId,DocumentName documentName,DocumentPath documentPath,FileType fileType,CreatedBy createdBy,CreatedOn createdOn  FROM crpconsultanthumanresourceattachmentfinal WHERE Id = :hraId
 
-ConsultantDao.getHRAttachmentFinal =
-SELECT Id id,CrpConsultantHumanResourceFinalId consultantHrId,DocumentName documentName,DocumentPath documentPath,FileType fileType,CreatedBy createdBy,CreatedOn createdOn  FROM crpconsultanthumanresourceattachmentfinal WHERE Id = :hraId
 /** ConsultantActionDao */
 
 ConsultantActionDao.gTaskList=CALL ProCrpConsultantTaskList (:userId,:status,:service);
@@ -128,7 +127,7 @@ ConsultantRCDao.saveDeleteEqRequest = Update crpconsultantequipmentfinal set Del
 
 ConsultantRCDao.getServicesFee= SELECT Id,ReferenceNo, Name AS serviceName, ConsultantAmount AS feeAmount  FROM `crpservice` WHERE ((:refNo is null and ReferenceNo IN (4,6,7,8,9,10,12)) or ReferenceNo = :refNo)
 
-ConsultantRCDao.getIncAttachmentFinal = SELECT DocumentName AS documentName, DocumentPath documentPath,FileType AS fileType FROM crpconsultantattachmentfinal WHERE CrpConsultantFinalId =:consultantIdFinal
+ConsultantRCDao.getIncAttachmentFinal = SELECT Id id, DocumentName AS documentName, DocumentPath documentPath,FileType AS fileType FROM crpconsultantattachmentfinal WHERE CrpConsultantFinalId =:consultantIdFinal
 /*Consultant Renewal Action dao*/
 ConsultantRCActionDao.getAppliedServices=SELECT a.ReferenceNo applicationNo,c.CmnServiceTypeId serviceId,d.referenceNo serviceRefNo,d.Name serviceName,e.PaymentAmount,a.NameOfFirm firmName,b.Name AS appStatus,a.ApplicationDate applicationDate FROM crpconsultant a INNER JOIN cmnlistitem b ON b.Id = a.CmnApplicationRegistrationStatusId INNER JOIN crpconsultantappliedservice c ON c.CrpConsultantId = a.CrpConsultantId INNER JOIN crpservice d ON d.Id = c.CmnServiceTypeId INNER JOIN crpconsultantservicepayment e ON e.CrpConsultantId = c.CrpConsultantId AND e.CmnServiceTypeId = c.CmnServiceTypeId WHERE a.ReferenceNo =:applicationNo
 

@@ -281,7 +281,7 @@
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-5 form-label">Email</label>
                                                 <label class="col-lg-7 form-label form-control" id="regEmailExist"></label>
-                                                <input type="hidden" id="regEmail">
+                                                <input type="hidden" id="regEmails" value="">
                                             </div>
                                             <div class="col-lg-6 col-md-6 form-group">
                                                 <label class="col-lg-5 form-label">Mobile Number</label>

@@ -304,13 +304,12 @@ var specializedFirmRCAction = (function () {
                         $('#regPhoneNo').text(specializedFirm.regPhoneNo);
                         $('#regFaxNo').text(specializedFirm.regFaxNo);
                         $('#ownershipChangeRemarks').text(spFirmDTO.ownershipChangeRemarks);
+                        $('#regEmails').val(specializedFirm.regEmail);
 
                         incorporation(spFirmDTO.incAttachments);
-
                         getSpFirmFinal(applicationNo);
 
                         var appHistoryDTOs = spFirmDTO.appHistoryDTOs;
-
                         var appHistoryTr = "";
 
                         for (var i in appHistoryDTOs) {
@@ -442,8 +441,6 @@ var specializedFirmRCAction = (function () {
                 $('#regMobileNoExist').html(spFirm.regMobileNo);
                 $('#regPhoneNoExist').html(spFirm.regPhoneNo);
                 $('#regFaxNoExist').html(spFirm.regFaxNo);
-
-                $('#regEmail').val(consultant.regEmail);
             }
         });
     }
@@ -786,8 +783,8 @@ var specializedFirmRCAction = (function () {
     }
 
     function sendNotification(){
-        $('#sendNotification').on('click',function() {
-            var emailId = $('#regEmail').val();
+        $('#sendNotification').on('change',function() {
+            var emailId = $('#regEmails').val();
             var cdbNo = $('#cdbNo').val();
             alert(emailId);
             $.ajax({

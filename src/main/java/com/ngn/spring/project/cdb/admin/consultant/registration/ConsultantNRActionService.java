@@ -185,10 +185,11 @@ public class ConsultantNRActionService extends BaseService {
         consultant.setPaymentApproverRemark(paymentUpdateDTO.getPaymentRemarks());
         consultant.setPaymentReceiptDate(paymentUpdateDTO.getPaymentDate());
         consultant.setPaymentReceiptNo(paymentUpdateDTO.getPaymentReceiptNo());
+        consultant.setHasNotification("0");
+        consultantActionDao.saveOrUpdate(consultant);
 
         paymentUpdateDTO.setConsultantId(consultant.getConsultantId());
-        consultantActionDao.paymentUpdate(consultant.getConsultantId(),loggedInUser.getUserID()
-                , approvedApplicationStatusId,loggedInUser.getUserID());//consultant.getCreatedBy()
+        consultantActionDao.paymentUpdate(consultant.getConsultantId(),loggedInUser.getUserID(), approvedApplicationStatusId,loggedInUser.getUserID());//consultant.getCreatedBy()
         responseMessage.setStatus(SUCCESSFUL_STATUS);
         responseMessage.setText("Consultant application number :"+paymentUpdateDTO.getAppNo().charAt(0)+" Payment Approved. Your CDBNo is:"+paymentUpdateDTO.getCdbNo());
         String mailContent = "Dear User,Your application for application number : "+paymentUpdateDTO.getAppNo()+" is approved."+
