@@ -364,7 +364,7 @@ var consultant_action = (function () {
                             eqTr = eqTr +
                             "<tr><td>" + (parseInt(i) + 1) + "</td>" +
                             "<td>" + equipments[i].equipmentName + "</td>" +
-                            "<td></td>" +
+                            "<td>" + equipments[i].equipmentType + "</td>" +
                             "<td class='registrationNo'>" + equipments[i].registrationNo + "</td>" +
                             "<td>"+owner+"</td>" +
                             "<td>" + equipments[i].quantity + "</td>" +

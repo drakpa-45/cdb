@@ -30,6 +30,10 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert alert-danger text-center" style="font-size: 10px">
                             <c:if test="${renewalCheck.status eq 1}">
                                 <span class="error">${renewalCheck.text}</span>
+                                <input type="hidden" class="form-control" name="servicePayment.noOfDaysLate" value="${renewalCheck.dto1.noOfDaysLate}">
+                                <input type="hidden" class="form-control" name="servicePayment.noOfDaysAfterGracePeriod" value="${renewalCheck.dto1.noOfDaysAfterGracePeriod}">
+                                <input type="hidden" class="form-control" name="servicePayment.paymentAmount" value="${renewalCheck.dto1.paymentAmount}">
+                                <input type="hidden" class="form-control" name="servicePayment.waiveOffLateFee" value="${renewalCheck.dto1.waiveOffLateFee}">
                             </c:if>
                             <c:if test="${renewalCheck.status eq 0}">
                                 <span class="error">${renewalCheck.text}</span>
@@ -173,7 +177,7 @@
                                             <button type="button" onclick="backTab('services')" class="btn btn-azure col-lg-offset-9">
                                                 <i class="fa fa-arrow-left"></i>Back
                                             </button>
-                                            <button type="button" onclick="nextTab('services')" class="btn btn-primary">
+                                            <button type="button" onclick="nextTab('services')" id="btn7" class="btn btn-primary">
                                                 <i class="fa fa-arrow-right"></i>Next
                                             </button>
                                         </div>
@@ -549,7 +553,7 @@
                                                                 <th style="width: 5%">Title</th>
                                                                 <th style="width: 15%">Name</th>
                                                                 <th style="width: 15%">ID/Work Permit No.</th>
-                                                                <th style="width: 10%">Sex</th>
+                                                                <th style="width: 10%">Gender</th>
                                                                 <th style="width: 10%">Country</th>
                                                                 <th style="width: 10%">Designation</th>
                                                                 <th style="width: 10%">Qualification</th>
@@ -967,7 +971,7 @@
                             <div class="modal-dialog modal-lg" id="ownerModal">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 id="ownerModalLabel" class="modal-title">Add Human Resource</h4>
+                                        <h4 id="ownerModalLabel" class="modal-title">Add Owner</h4>
                                         <button aria-hidden="true" data-dismiss="modal" class="close" type="button"></button>
                                     </div>
                                     <div class="modal-body form-horizontal">

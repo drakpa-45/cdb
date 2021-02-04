@@ -289,7 +289,6 @@ public class SpecializedFirmService extends BaseService {
         if(documentName == null || documentName.isEmpty()){
             contractorHRA.setDocumentName("CV_UT_AT_"+i);
         }*/
-
         if(attachment != null) {
             String docNameUpload = spFirmtHRA.getDocumentName() + commonService.getFileEXT(attachment);
             String specificLoc = UPLOAD_LOC + "//HR";
@@ -373,15 +372,18 @@ public class SpecializedFirmService extends BaseService {
     @Transactional(readOnly = false)
     public void saveEQA(SpFirmEQAttachment spFirmEQA, LoggedInUser loggedInUser) throws Exception{
         MultipartFile attachment = spFirmEQA.getAttachment();
-
-        String docName = spFirmEQA.getDocumentName()+commonService.getFileEXT(attachment);
-        String specificLoc = UPLOAD_LOC+"//EQUIPMENT";
-        String docPath = commonService.uploadDocument(attachment,specificLoc,docName);
-        String eqAttachmentID = commonService.getRandomGeneratedId();
-        spFirmEQA.setId(eqAttachmentID);
-        spFirmEQA.setDocumentPath(docPath);
-        spFirmEQA.setDocumentName(docName);
-        spFirmEQA.setFileType(attachment.getContentType());
+        if(attachment != null) {
+            String docNameUpload = spFirmEQA.getDocumentName() + commonService.getFileEXT(attachment);
+            String specificLoc = UPLOAD_LOC + "//EQUIPMENT";
+            String docPath = commonService.uploadDocument(attachment, specificLoc, docNameUpload);
+            spFirmEQA.setDocumentPath(docPath);
+            spFirmEQA.setDocumentName(docNameUpload);
+            spFirmEQA.setFileType(attachment.getContentType());
+        }
+        if(emptyNullCheck(spFirmEQA.getId())){
+            String hrAttachmentID = commonService.getRandomGeneratedId();
+            spFirmEQA.setId(hrAttachmentID);
+        }
         spFirmEQA.setCreatedBy(loggedInUser.getUserID());
         spFirmEQA.setCreatedOn(loggedInUser.getServerDate());
         dao.saveUpdate(spFirmEQA);
@@ -412,5 +414,9 @@ public class SpecializedFirmService extends BaseService {
 
     public SpFirmtHRAttachment getHRAttachmentFinal(String hraId) {
         return dao.getHRAttachmentFinal(hraId);
+    }
+
+    public SpFirmEQAttachment getEQAttachmentFinal(String eqaId) {
+        return dao.getEQAttachmentFinal(eqaId);
     }
 }

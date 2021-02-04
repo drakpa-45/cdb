@@ -686,7 +686,6 @@ public class CommonService extends BaseService {
         return dto;
     }
 
-    @Transactional(readOnly = true)
     public Boolean isUsenameExist(String username) {
         return commonDao.isUsenameExist(username);
     }

@@ -28,8 +28,8 @@ public class EquipmentDTO {
     private Integer approved;
     private Integer deleteRequest;
     private Integer editCheck;
-
     private String equipmentName;
+    private String equipmentType;
 
 
     List<AttachmentDTO> eqAttachments;
@@ -164,6 +164,14 @@ public class EquipmentDTO {
         this.vehicleDetailses = vehicleDetailses;
     }
 
+    public String getEquipmentType() {
+        return equipmentType;
+    }
+
+    public void setEquipmentType(String equipmentType) {
+        this.equipmentType = equipmentType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -174,7 +182,6 @@ public class EquipmentDTO {
          if (!equipmentId.equals(that.equipmentId)) return false;
         return true;
     }
-
     @Override
     public int hashCode() {
         return registrationNo.hashCode();

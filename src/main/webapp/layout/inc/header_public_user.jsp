@@ -85,7 +85,6 @@
                             <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fa fa-edit "></i> Update <i class="fa fa-chevron-down"></i></a>
                             <div class="dropdown-menu dropdown-menu-arrow">
                                 <a href="#"  data-toggle="modal" data-target="#phonedModal" class="nav-link active pl-2" style="color:black"><i class="fa fa-phone"></i> Update Phone Number</a>
-                                <a href="<c:url value="/public_access/update?param=<%=cdbNo%>"/>" class="nav-link active pl-2" style="color:black"><i class="fa fa-envelope"></i> Update Email</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -110,7 +109,6 @@
                             <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fa fa-edit"></i> Update <i class="fa fa-chevron-down"></i></a>
                             <div class="dropdown-menu dropdown-menu-arrow">
                                 <a href="#"  data-toggle="modal" data-target="#phonedModal" class="nav-link active pl-2" style="color:black"><i class="fa fa-phone"></i> Update Phone Number</a>
-                                <a href="<c:url value="/public_access/update?param=<%=cdbNo%>"/>" class="nav-link active pl-2" style="color:black"><i class="fa fa-envelope"></i> Update Email</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -135,7 +133,6 @@
                             <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fa fa-edit"></i> Update <i class="fa fa-chevron-down"></i></a>
                             <div class="dropdown-menu dropdown-menu-arrow">
                                 <a href="#"  data-toggle="modal" data-target="#phonedModal" class="nav-link active pl-2" style="color:black"><i class="fa fa-phone"></i> Update Phone Number</a>
-                                <a href="<c:url value="/public_access/update?param=<%=cdbNo%>"/>" class="nav-link active pl-2" style="color:black"><i class="fa fa-envelope"></i> Update Email</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -163,7 +160,6 @@
                             <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fa fa-edit"></i> Update <i class="fa fa-chevron-down"></i></a>
                             <div class="dropdown-menu dropdown-menu-arrow">
                                 <a href="#"  data-toggle="modal" data-target="#phonedModal" class="nav-link active pl-2" style="color:black"><i class="fa fa-phone"></i> Update Phone Number</a>
-                                <a href="<c:url value="/public_access/update"/>" class="nav-link active pl-2" style="color:black"><i class="fa fa-envelope"></i> Update Email</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -191,7 +187,6 @@
                                 <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fa fa-edit"></i> Update <i class="fa fa-chevron-down"></i></a>
                                 <div class="dropdown-menu dropdown-menu-arrow">
                                     <a href="#"  data-toggle="modal" data-target="#phonedModal" class="nav-link active pl-2" style="color:black"><i class="fa fa-phone"></i> Update Phone Number</a>
-                                    <a href="<c:url value="/public_access/update"/>" class="nav-link active pl-2" style="color:black"><i class="fa fa-envelope"></i> Update Email</a>
                                 </div>
                             </li>
                             <li class="nav-item">
@@ -219,7 +214,6 @@
                             <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fa fa-edit"></i> Update <i class="fa fa-chevron-down"></i></a>
                             <div class="dropdown-menu dropdown-menu-arrow">
                                 <a href="#"  data-toggle="modal" data-target="#phonedModal" class="nav-link active pl-2" style="color:black"><i class="fa fa-phone"></i> Update Phone Number</a>
-                                <a href="<c:url value="/public_access/update"/>" class="nav-link active pl-2" style="color:black"><i class="fa fa-envelope"></i> Update Email</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -309,20 +303,21 @@
     }
 
 </style>
-<script>
+<script type="text/javascript" src="<c:url value="/resources/JqueryAjaxFormSubmit.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/jquery.form.js"/>"></script>
+<script type="text/javascript" >
+
     function existUsename(username){
         var $this = $('#usename').val();
         $.ajax({
-            url:'/cdb/public_access/isUsenameExist',
-            type: 'GET',
-            data: {username: username},
+            url:'/cdb/public_access/isUsenameExist?username='+username,
             success: function (res) {
-                alert(res == true);
-                if(res == true){
-                    warningMsg("This username is not registered in CDB. Please enter your valid username");
-                    $this.val('').focus();
+                alert(res);
+                if(res == false){
+                    $('#usename').val('').focus();
+                    warningMsg("This username is registered in CDB. Please enter your valid username");
                 } else{
-
+                    warningMsg("This username is not registered in CDB.");
                 }
             }
         });

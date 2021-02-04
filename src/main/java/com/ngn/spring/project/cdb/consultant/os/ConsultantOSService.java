@@ -115,15 +115,21 @@ public class ConsultantOSService extends BaseService {
             consultant.setFirmName(consultantDTO.getConsultant().getFirmName());
             consultant.setOwnershipChangeRemarks(consultantDTO.getConsultant().getOwnershipChangeRemarks());
 
-            List<ConsultantHR> ownerList = consultantDTO.getConsultantHRs();
+            List<ConsultantHR> ownerList = consultantDTO.getConsultantOWs();
             for(ConsultantHR consultantHR:ownerList){
                 if(consultantHR.getDeleteRequest() != null && consultantHR.getDeleteRequest() == 1){
                     //to save deleted owner
                     //consultantHR.setDeleteRequest(1);
                     consultantRCDao.saveDeleteHrRequest(consultantHR.getId());
                 }else {
-                    String hrId = commonService.getRandomGeneratedId();
-                    consultantHR.setId(hrId);
+                    if(emptyNullCheck(consultantHR.getId())){
+                        consultantHR.setId(commonService.getRandomGeneratedId());
+                    }
+                    if(emptyNullCheck(consultantHR.getCidNo())){
+                        continue;
+                    }
+                   // String hrId = commonService.getRandomGeneratedId();
+                   // consultantHR.setId(hrId);
                     consultantHR.setConsultantID(consultantId);
                     consultantHR.setIsPartnerOrOwner(TRUE_INT);
                     consultantNRService.saveHR(consultantHR, loggedInUser);
@@ -175,15 +181,21 @@ public class ConsultantOSService extends BaseService {
         //region change of owner or partner
         if(renewalServiceType.getChangeOfOwner() != null){
             //List<ConsultantHR> ownerList = consultantDTO.getConsultant().getConsultantHRs();
-            List<ConsultantHR> ownerList = consultantDTO.getConsultantHRs();
+            List<ConsultantHR> ownerList = consultantDTO.getConsultantOWs();
             for(ConsultantHR consultantHR:ownerList){
                 if(consultantHR.getDeleteRequest() != null && consultantHR.getDeleteRequest() == 1){
                     //to save deleted owner
                    // consultantHR.setDeleteRequest(1);
                     consultantRCDao.saveDeleteHrRequest(consultantHR.getId());
                 }else {
-                    String hrId = commonService.getRandomGeneratedId();
-                    consultantHR.setId(hrId);
+                    if(emptyNullCheck(consultantHR.getId())){
+                        consultantHR.setId(commonService.getRandomGeneratedId());
+                    }
+                    if(emptyNullCheck(consultantHR.getCidNo())){
+                        continue;
+                    }
+                    // String hrId = commonService.getRandomGeneratedId();
+                    // consultantHR.setId(hrId);
                     consultantHR.setConsultantID(consultantId);
                     consultantHR.setIsPartnerOrOwner(TRUE_INT);
                     consultantNRService.saveHR(consultantHR, loggedInUser);
@@ -259,25 +271,24 @@ public class ConsultantOSService extends BaseService {
                     if(consultantEQA.getAttachment() == null){ //No changes, so no need to save
                         continue;
                     }
+                    if(!emptyNullCheck(consultantEQA.getId())){
+                        if(consultantEQA.getAttachment() == null){ // no changes
+                            consultantEQA = consultantNRService.getEQAttachmentFinal(consultantEQA.getId());
+                        }else{ // for edit
+                            consultantEQA.setEditedBy(loggedInUser.getUserID());
+                            consultantEQA.setEditedOn(loggedInUser.getServerDate());
+                        }
+                    }else {
+                        if (consultantEQA.getAttachment() == null) { //No changes, so no need to save
+                            continue;
+                        }
+                    }
                     consultantEQA.setEquipmentId(consultantEQ.getId());
                     consultantNRService.saveEQA(consultantEQA, loggedInUser);
                 }
             }
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "9");
             appliedServicesList.add(appliedService);
-        }
-        //endregion
-
-        //region to save owner when both incoporation & ownerchanged is not availed
-        if(renewalServiceType.getIncorporation() == null && renewalServiceType.getChangeOfOwner() == null){
-            List<ConsultantHR> ownerList = consultantDTO.getConsultantHRs();
-            for(ConsultantHR consultantHR:ownerList){
-                String hrId = commonService.getRandomGeneratedId();
-                consultantHR.setId(hrId);
-                consultantHR.setConsultantID(consultantId);
-                consultantHR.setIsPartnerOrOwner(TRUE_INT);
-                consultantNRService.saveHR(consultantHR, loggedInUser);
-            }
         }
         //endregion
 

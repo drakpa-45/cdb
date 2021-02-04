@@ -14,7 +14,9 @@ import java.util.List;
  */
 public class ContractorDTO {
     private Contractor contractor;
+    private ContractorServicePayment servicePayment;
     private List<ContractorHR> contractorHRs;
+    private List<ContractorHR> contractorOWs;
     //private List<ContractorHRAttachment> contractorHRAs;
     private List<ConCategory> categories;
     private List<ContractorEQ> equipments;
@@ -37,6 +39,14 @@ public class ContractorDTO {
 
     public void setContractorHRs(List<ContractorHR> contractorHRs) {
         this.contractorHRs = contractorHRs;
+    }
+
+    public List<ContractorHR> getContractorOWs() {
+        return contractorOWs;
+    }
+
+    public void setContractorOWs(List<ContractorHR> contractorOWs) {
+        this.contractorOWs = contractorOWs;
     }
 
     public List<ConCategory> getCategories() {
@@ -77,5 +87,13 @@ public class ContractorDTO {
 
     public void setCategoryAttachments(List<ContractorAttachment> categoryAttachments) {
         this.categoryAttachments = categoryAttachments;
+    }
+
+    public ContractorServicePayment getServicePayment() {
+        return servicePayment;
+    }
+
+    public void setServicePayment(ContractorServicePayment servicePayment) {
+        this.servicePayment = servicePayment;
     }
 }

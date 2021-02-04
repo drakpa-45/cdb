@@ -7,6 +7,7 @@ import com.ngn.spring.project.commonDto.TasklistDto;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
 import com.ngn.spring.project.lib.LoggedInUser;
 import com.ngn.spring.project.lib.ResponseMessage;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -16,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -169,15 +171,10 @@ public class IndexController extends BaseController {
         return "acknowledgement";
     }
 
+    @ResponseBody
     @RequestMapping(value ="/public_access/isUsenameExist", method = RequestMethod.GET)
     public Boolean isUsenameExist(String username){
-        /* if(commonService.isUsenameExist(username) == true){
-             responseMessage.setStatus(1);
-         }else{
-             responseMessage.setStatus(0);
-         }
-        return responseMessage;*/
-        return commonService.isUsenameExist(username);
+        return  commonService.isUsenameExist(username);
     }
 
     @RequestMapping(value ="/public_access/updatePhoneNumber", method = RequestMethod.GET)

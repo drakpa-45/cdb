@@ -454,4 +454,8 @@ public class ConsultantNRService extends BaseService {
     public ConsultantHRAttachment getHRAttachmentFinal(String hraId) {
         return consultantDao.getHRAttachmentFinal(hraId);
     }
+
+    public ConsultantEQAttachment getEQAttachmentFinal(String eqaId) {
+        return consultantDao.getEQAttachmentFinal(eqaId);
+    }
 }

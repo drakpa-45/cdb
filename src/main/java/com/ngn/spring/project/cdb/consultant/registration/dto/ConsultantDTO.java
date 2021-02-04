@@ -15,6 +15,7 @@ import java.util.List;
 public class ConsultantDTO {
     private Consultant consultant;
         private List<ConsultantHR> consultantHRs;
+        private List<ConsultantHR> consultantOWs;
     //private List<ContractorHRAttachment> contractorHRAs;
     private List<ConsultantCategory> categories;
     private List<ConsultantEQ> equipments;
@@ -38,6 +39,14 @@ public class ConsultantDTO {
 
     public void setConsultantHRs(List<ConsultantHR> consultantHRs) {
         this.consultantHRs = consultantHRs;
+    }
+
+    public List<ConsultantHR> getConsultantOWs() {
+        return consultantOWs;
+    }
+
+    public void setConsultantOWs(List<ConsultantHR> consultantOWs) {
+        this.consultantOWs = consultantOWs;
     }
 
     public List<ConsultantCategory> getCategories() {

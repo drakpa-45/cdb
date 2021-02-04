@@ -103,9 +103,8 @@ var consultantCC = (function () {
                     "<tr><td>"+(parseInt(i)+1)+"</td>" +
                     "<td><input type='hidden' class='consultantEQid' name='consultantEQs[0].id' value='"+equipments[i].id +"'/>"
                     + equipments[i].equipmentName + "</td>" +
-                    "<td></td>" +
+                    "<td>" + equipments[i].equipmentType + "</td>" +
                     "<td>" + equipments[i].registrationNo + "</td>" +
-                    "<td></td>" +
                     "<td>" + equipments[i].quantity + "</td>" +
                     "<td>" + attachment + "</td>" +
                     "</tr>";
@@ -144,7 +143,7 @@ var consultantCC = (function () {
                         $('#cvstwo').prop('checked', true);
                     }
                     if (categories[i].apClassId == "6516bfdd-bc17-11e4-81ac-080027dcfac6") {
-                        $('#cvsthree').prop('checked', true);
+                        $('#cvsthree').prop('checked', true).prop('readonly', true);
                     }
                     if (categories[i].apClassId == "7b84fd72-bc17-11e4-81ac-080027dcfac6") {
                         $('#cvsfour').prop('checked', true);

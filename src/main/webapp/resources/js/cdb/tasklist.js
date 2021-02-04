@@ -11,8 +11,6 @@ var tasklist = (function (){
         return cdbGlobal.baseURL()+"/admin";
     }
 
-
-
     function getContractorInfo(){
         $('#btnSubmit').on('click',function(e) {
                     $.ajax({

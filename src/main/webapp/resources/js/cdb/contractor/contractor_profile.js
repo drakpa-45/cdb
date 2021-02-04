@@ -39,7 +39,7 @@ var contractorPr = (function () {
                     "<td class='qualificationName'>" + contractorHrs[i].qualificationName + "</td>" +
                     "<td class='tradeName'>" + contractorHrs[i].tradeName + "</td>" +
                     "<td class='serviceTypeName'>" + contractorHrs[i].serviceTypeName + "</td>" +
-                    "<td>" + nullif(contractorHrs[i].joiningDate) + "</td>" +
+                    "<td>" + nullif(contractorHrs[i].joinDate) + "</td>" +
                     "<td class='attachments'>" + attachments + "</td>" +
                     "</tr>";
                 }
@@ -95,7 +95,6 @@ var contractorPr = (function () {
                 var equipments = res;
                 var eqTr = "";
                 for (var i in equipments) {
-
                     var attachment = '';
                     for (var j in equipments[i].eqAttachments){
                         attachment = attachment + "<a href='"+_baseURL() + "/viewDownload?documentPath="+equipments[i].eqAttachments[j].documentPath+"' target='_blank'>"+equipments[i].eqAttachments[j].documentName+"</a><br>";
@@ -104,16 +103,14 @@ var contractorPr = (function () {
                     "<tr><td>"+(parseInt(i)+1)+"</td>" +
                     "<td><input type='hidden' class='contractorEQid' name='contractorEQs[0].id' value='"+equipments[i].id +"'/>"
                     + equipments[i].equipmentName + "</td>" +
-                    "<td></td>" +
+                    "<td>" + equipments[i].equipmentType + "</td>" +
                     "<td>" + equipments[i].registrationNo + "</td>" +
-                    "<td></td>" +
                     "<td>" + equipments[i].quantity + "</td>" +
                     "<td>" + attachment + "</td>" +
                     "</tr>";
                 }
                 $('#equipmentTbl').find('tbody').html(eqTr);
             }
-
         });
     }
 
@@ -129,13 +126,13 @@ var contractorPr = (function () {
                     var category = '';
                     var className = '';
                     if(categories[i].aClassId == 'e19afe94-c3ea-11e4-af9f-080027dcfac6'){
-                        className = 'L:Large';
+                        className = 'Large';
                     }else if(categories[i].aClassId == '003f9a02-c3eb-11e4-af9f-080027dcfac6'){
-                        className = 'M:Medium';
+                        className = 'Medium';
                     }else if(categories[i].aClassId == 'ef832830-c3ea-11e4-af9f-080027dcfac6'){
-                        className = 'S:Small';
+                        className = 'Small';
                     }else if(categories[i].aClassId == '0c14ebea-c3eb-11e4-af9f-080027dcfac6'){
-                        className = 'R:Registered';
+                        className = 'Registered';
                     }
 
                     if (categories[i].categoryId == "6cd737d4-a2b7-11e4-b4d2-080027dcfac6") {

@@ -4,6 +4,7 @@ import com.ngn.spring.project.base.BaseDao;
 import com.ngn.spring.project.cdb.consultant.registration.dto.ConsultantTrainingDTO;
 
 import com.ngn.spring.project.cdb.specializedFirm.dto.SpFirmDTOFetch;
+import com.ngn.spring.project.cdb.specializedFirm.model.SpFirmEQAttachment;
 import com.ngn.spring.project.cdb.specializedFirm.model.SpFirmtHRAttachment;
 import com.ngn.spring.project.cdb.specializedFirm.model.SpecializedFirm;
 
@@ -98,5 +99,11 @@ public class SpecializedFirmDao extends BaseDao {
     public SpFirmtHRAttachment getHRAttachmentFinal(String hraId) {
         sqlQuery = properties.getProperty("SpecializedDao.getHRAttachmentFinal");
         return (SpFirmtHRAttachment)hibernateQuery(sqlQuery,SpFirmtHRAttachment.class).setParameter("hraId",hraId).list().get(0);
+    }
+
+    @Transactional(readOnly = true)
+    public SpFirmEQAttachment getEQAttachmentFinal(String eqaId) {
+        sqlQuery = properties.getProperty("SpecializedDao.getEQAttachmentFinal");
+        return (SpFirmEQAttachment)hibernateQuery(sqlQuery,SpFirmEQAttachment.class).setParameter("eqaId",eqaId).list().get(0);
     }
 }

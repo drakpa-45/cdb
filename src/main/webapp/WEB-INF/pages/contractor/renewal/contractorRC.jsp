@@ -32,6 +32,10 @@
                              style="font-size: 10px">
                             <c:if test="${renewalCheck.status eq 1}">
                                 <span class="error">${renewalCheck.text}</span>
+                                <input type="hidden" class="form-control" name="servicePayment.noOfDaysLate" value="${renewalCheck.dto1.noOfDaysLate}">
+                                <input type="hidden" class="form-control" name="servicePayment.noOfDaysAfterGracePeriod" value="${renewalCheck.dto1.noOfDaysAfterGracePeriod}">
+                                <input type="hidden" class="form-control" name="servicePayment.paymentAmount" value="${renewalCheck.dto1.paymentAmount}">
+                                <input type="hidden" class="form-control" name="servicePayment.waiveOffLateFee" value="${renewalCheck.dto1.waiveOffLateFee}">
                             </c:if>
                             <c:if test="${renewalCheck.status eq 0}">
                                 <span class="error">${renewalCheck.text}</span>
@@ -120,16 +124,6 @@
                                                     <th style="width: 25%">Fees (Nu.)</th>
                                                 </tr>
                                                 </thead>
-                                                    <%--<tbody>
-                                                    <c:forEach items="${osFees}" var="os" varStatus="loop">
-                                                        <tr>
-                                                            <td><input type="checkbox" style="zoom:1.6" name="services[${loop.index}]"
-                                                                       value="${os.referenceNo}" class="service_check"></td>
-                                                            <td>${os.serviceName}</td>
-                                                            <td>${os.feeAmount}</td>
-                                                        </tr>
-                                                    </c:forEach>
-                                                    </tbody>--%>
                                                 <tbody>
                                                 <tr>
                                                     <td>
@@ -222,7 +216,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card hide" id="cIncorporation">
+                                            <div class="card hidden" id="cIncorporation">
                                                 <div class="bg-blue card-status card-status-left"></div>
                                                 <div class="card-header">
                                                     <h3 class="card-title">Attach Certificates of Incorporation/Sole Proprietorship</h3>
@@ -230,7 +224,7 @@
                                                 <div class="card-body">
                                                     <div class="col-lg-12">
                                                         <div class=""><input id="addMoreCert" type="button" value="Add More Certificate" class="btn btn-primary"></div>
-                                                        <table class="table table-bordered table-center table-responsive-lg auto-index" id="IncCertificateTbl">
+                                                        <table class="table table-bordered table-center table-responsive-lg auto-index" id="certificateTbl">
                                                             <thead>
                                                             <tr>
                                                                 <th>Sl no</th>
@@ -269,41 +263,7 @@
                                                             </tr>
                                                             </thead>
                                                             <tbody>
-                                                            <%--<tr>
-                                                                <td class="country">
-                                                                    <form:select id="countryList" class="form-control" name="contractor.contractorHRs[0].countryId" data-msg-required="" data-rule-required="true" path="countryList">
-                                                                        <form:option value="" label="Select Country"/>
-                                                                        <form:options items="${countryList}" itemValue="value" itemLabel="text"/>
-                                                                    </form:select>
-                                                                </td>
-                                                                <td><input type="text" name="contractor.contractorHRs[0].cidNo" class="form-control hr-cid" placeholder="Text.."></td>
-                                                                <td>
-                                                                    <form:select id="salutation" name="contractor.contractorHRs[0].salutationId" class="form-control input-sm" data-msg-required="true" data-rule-required="true" path="salutationList">
-                                                                        <form:option value="" label="Select Salutation"/>
-                                                                        <form:options items="${salutationList}" itemValue="value" itemLabel="text"/>
-                                                                    </form:select>
-                                                                </td>
-                                                                <td><input type="text" class="form-control name" name="contractor.contractorHRs[0].name" placeholder="Text.."></td>
-                                                                <td>
-                                                                    <select id="gender" name="contractor.contractorHRs[0].sex" class="form-control sex">
-                                                                        <option value="">Select Gender</option>
-                                                                        <option value="M">Male</option>
-                                                                        <option value="F">Female</option>
-                                                                    </select>
-                                                                </td>
-                                                                <td>
-                                                                    <form:select id="designation" name="contractor.contractorHRs[0].designationId" class="form-control input-sm" data-msg-required="" data-rule-required="true" path="designationList">
-                                                                        <form:option value="" label="Select Designation"/>
-                                                                        <form:options items="${designationList}" itemValue="value" itemLabel="text"/>
-                                                                    </form:select>
-                                                                </td>
-                                                                <td>
-                                                                    <label class="custom-control custom-checkbox ml-6">
-                                                                        <input type="checkbox" class="custom-control-input showCert" name="contractor.contractorHRs[0].siCertificate" value="1">
-                                                                        <i class="custom-control-label"></i>
-                                                                    </label>
-                                                                </td>
-                                                            </tr>--%>
+
                                                             </tbody>
                                                         </table>
                                                         <div class="col-lg-12 text-right hide" id="ownerPartner">
@@ -325,9 +285,10 @@
                                                         <div class="col-lg-12">
                                                             <h5 class="text-orange">Attach Certificates of Ownership change</h5>
                                                             <div class=""><input id="addMoreCertOwner" type="button" value="Add More Certificate" class="btn btn-primary"></div>
-                                                            <table class="table table-bordered table-hover" id="certificateTblOwner">
+                                                                <table class="table table-bordered table-center table-responsive-lg auto-index" id="certificateTblOwner">
                                                                 <thead>
                                                                 <tr>
+                                                                    <th>Sl No</th>
                                                                     <th>Document Name</th>
                                                                     <th>Document Attached</th>
                                                                     <th>File Size</th>
@@ -335,18 +296,7 @@
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody class="files">
-                                                                <tr>
-                                                                    <td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/></td>
-                                                                    <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/></td>
-                                                                    <td class='file-size'></td>
-                                                                    <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/></td>
-                                                                    <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/></td>
-                                                                    <td class='file-size'></td>
-                                                                    <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
-                                                                </tr>
+
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -518,9 +468,10 @@
                                                 <br/>
                                                 <input type="button" id="addMoreCertCategory" value="Add More File" class="btn btn-primary eqFile">
                                                 <div class="table-responsive">
-                                                    <table class="table table-bordered table-hover" id="certificateTblCategory">
+                                                    <table class="table table-bordered table-center table-responsive-lg auto-index" id="certificateTblCategory">
                                                         <thead>
                                                         <tr>
+                                                            <th>Sl No</th>
                                                             <th>Document Name</th>
                                                             <th>Document Attached</th>
                                                             <th>File Size</th>
@@ -528,23 +479,7 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody class="files">
-                                                        <tr>
-                                                            <td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/></td>
-                                                            <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/></td>
-                                                            <td class='file-size'></td>
-                                                            <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/></td>
-                                                            <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/></td>
-                                                            <td class='file-size'></td>
-                                                            <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
-                                                        </tr>
-                                                            <%--  <tr><td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/> </td>
-                                                                  <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
-                                                                  <td class='file-size'></td>
-                                                                  <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
-                                                              </tr>--%>
+
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -574,7 +509,7 @@
                                                                 <th style="width: 5%">Title</th>
                                                                 <th style="width: 15%">Name</th>
                                                                 <th style="width: 15%">ID/Work Permit No.</th>
-                                                                <th style="width: 10%">Sex</th>
+                                                                <th style="width: 10%">Gender</th>
                                                                 <th style="width: 10%">Country</th>
                                                                 <th style="width: 10%">Designation</th>
                                                                 <th style="width: 10%">Qualification</th>
@@ -777,11 +712,9 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="col-lg-12">
-                                                            <span><input type="checkbox" id="agreeCheck" name="tnc" class="required" onclick="enableSubmit()"
-                                                                         style="width:15px;height:15px;"></span>
+                                                            <span><input type="checkbox" id="agreeCheck" name="tnc" class="required" onclick="enableSubmit()" style="width:15px;height:15px;"></span>
                                                                 <span class="bold"> I agree to the above Terms Conditions</span>
                                                             </label>
-                                                            <!-- <br /><span class="text-danger" id="termAndConErrorClass"></span> -->
                                                         </div>
                                                         <input type="hidden" name="addedeqCount" id="addedeqCount">
                                                     </div>
@@ -984,11 +917,11 @@
                                     <div class="modal-body form-horizontal">
                                         <div class="modal-div">
                                             <div class="form-group">
-                                                <input type="hidden" id="id5Edit" name="contractorHRs[0].id">
+                                                <input type="hidden" id="id5Edit" name="contractorOWs[0].id">
                                                 <label class="col-lg-2">Nationality
                                                     <span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="contractorHRs[0].countryId" id="ow1" required="" class="form-control custom-select text-left select-beast country">
+                                                    <select name="contractorOWs[0].countryId" id="ow1" required="" class="form-control custom-select text-left select-beast country">
                                                         <option value="">Select Country</option>
                                                         <c:forEach var="item" items="${countryList}">
                                                             <option value="${item.value}"><c:out value="${item.text}"/></option>
@@ -1001,7 +934,7 @@
                                                       <span class="input-icon-addon">
                                                          <i class="fa fa-address-card-o"></i>
                                                       </span>
-                                                        <input type="text" name="contractorHRs[0].cidNo" class="form-control hr-cid" id="ow2" required="" placeholder="">
+                                                        <input type="text" name="contractorOWs[0].cidNo" class="form-control hr-cid" id="ow2" required="" placeholder="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1009,7 +942,7 @@
                                                 <label class="col-lg-2">Salutation
                                                     <span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="contractorHRs[0].salutationId" id="ow3" required="" class="form-control custom-select text-left select-beast">
+                                                    <select name="contractorOWs[0].salutationId" id="ow3" required="" class="form-control custom-select text-left select-beast">
                                                         <option value="">Select Salutation</option>
                                                         <c:forEach var="item" items="${salutationList}">
                                                             <option value="${item.value}"><c:out value="${item.text}"/></option>
@@ -1021,14 +954,14 @@
                                                 <div class="col-lg-4">
                                                     <div class="input-icon">
                                                         <span class="input-icon-addon"><i class="fe fe-user"></i></span>
-                                                        <input type="text" name="contractorHRs[0].name" id="ow4" class="form-control name" required="" placeholder="">
+                                                        <input type="text" name="contractorOWs[0].name" id="ow4" class="form-control name" required="" placeholder="">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-lg-2">Gender<span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="contractorHRs[0].sex" id="ow5" required="" class="form-control custom-select text-left select-beast sex">
+                                                    <select name="contractorOWs[0].sex" id="ow5" required="" class="form-control custom-select text-left select-beast sex">
                                                         <option value="">Select Gender</option>
                                                         <option value="M">Male</option>
                                                         <option value="F">Female</option>
@@ -1037,7 +970,7 @@
                                                 <label class="col-lg-2">Designation
                                                     <span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="contractorHRs[0].designationId" id="ow6" required="" class="form-control custom-select text-left select-beast">
+                                                    <select name="contractorOWs[0].designationId" id="ow6" required="" class="form-control custom-select text-left select-beast">
                                                         <option value="">Select Designation</option>
                                                         <c:forEach var="item" items="${designationList}">
                                                             <option value="${item.value}"><c:out value="${item.text}"/></option>

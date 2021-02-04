@@ -130,23 +130,23 @@
                     <div class="panel with-nav-tabs">
                         <div class="panel-heading">
                             <ul class="nav nav-tabs">
-                                <li class="">
-                                    <a href="#ownerpartner" data-toggle="tab" class="active show">Owner or Partner</a>
+                                <li class="tab-pane active">
+                                    <a href="#ownerpartner" data-toggle="tab" class="show text-info">Owner or Partner</a>
                                 </li>
                                 <li>
-                                    <a href="#humanresourceSection" data-toggle="tab">Human Resource</a>
+                                    <a href="#humanresourceSection" data-toggle="tab" class="text-info"> Human Resource</a>
                                 </li>
                                 <li>
-                                    <a href="#equipmentSection" data-toggle="tab">Equipment</a>
+                                    <a href="#equipmentSection" data-toggle="tab" class="text-info"> Equipment</a>
                                 </li>
                                 <li>
-                                    <a href="#classification" data-toggle="tab">Classification Details</a>
+                                    <a href="#classification" data-toggle="tab" class="text-info">Classification Details</a>
                                 </li>
                                 <li>
-                                    <a href="#trackrecord" data-toggle="tab">Track Records</a>
+                                    <a href="#trackRecord" data-toggle="tab" class="text-info">Track Records</a>
                                 </li>
                                 <li>
-                                    <a href="#command" data-toggle="tab">Comments/Adverse Record</a>
+                                    <a href="#command" data-toggle="tab" class="text-info">Comments/Adverse Record/Monitoring report</a>
                                 </li>
                             </ul>
                         </div>
@@ -205,7 +205,6 @@
                                             <th>Equipment Name</th>
                                             <th>Equipment Type</th>
                                             <th>Registration No</th>
-                                            <th>Registration To</th>
                                             <th>Quantity</th>
                                             <th>Attachment</th>
                                         </tr>
@@ -286,6 +285,18 @@
                                         <tbody>
                                         </tbody>
                                     </table>
+                                    <span>Monitoring Reports</span>
+                                    <table width="100%">
+                                        <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Remarks</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -295,8 +306,7 @@
         </div>
     </div>
 </div>
-<script type="text/javascript"
-        src="<c:url value="/resources/js/cdb/specializedFirm/specializedFirm_profile.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/cdb/specializedFirm/specializedFirm_profile.js"/>"></script>
 </div>
 <script>
     function printInfo(cdbNo) {

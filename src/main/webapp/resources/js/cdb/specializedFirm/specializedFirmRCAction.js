@@ -143,7 +143,7 @@ var specializedFirmRCAction = (function () {
                             for(var i in employeeDetailsDTO){
                                 var workId = employeeDetailsDTO[i].workId;
                                 if(workId !='' && workId != null){
-                                    alert(workId);
+                                   // alert(workId);
                                     $('#dcbinfo').append("<br/> <b>CDB No: </b> "+employeeDetailsDTO[i].cdbNo+"  ||  <b> Procuring Agency:  </b> "+employeeDetailsDTO[i].procuringAgency+"  ||  <b> Work ID:</b>"+employeeDetailsDTO[i].workId+"");
                                     // $('#dcbinfo').append("<br/> This person is engaged with cdb number <b>"+employeeDetailsDTO[i].cdbNo+"</b> in <b>"+employeeDetailsDTO[i].procuringAgency+"</b> with work Id:<b>"+employeeDetailsDTO[i].workId+"</b>");
                                     $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
@@ -160,7 +160,7 @@ var specializedFirmRCAction = (function () {
                             for(var i in govCopDTO){
                                 var agency = govCopDTO[i].agency;
                                 if(agency !='' && agency !=null){
-                                    alert(agency);
+                                    //alert(agency);
                                     $('#dcbinfo').append("<br/> <b>Position Title: </b> "+govCopDTO[i].positionTitle+"  ||  <b> Agency:  </b> "+govCopDTO[i].agency+"");
                                 } else{
                                     $('#dcbinfonotEngaged').append("<br/> This person is not a government/coperate employee.");
@@ -736,7 +736,7 @@ var specializedFirmRCAction = (function () {
     }
 
     function getServicesFee(applicationNo){
-        alert(applicationNo);
+      //  alert(applicationNo);
         $.ajax({
             url: _baseURL() + '/getAppliedServices',
             type: 'GET',
@@ -786,7 +786,6 @@ var specializedFirmRCAction = (function () {
         $('#sendNotification').on('change',function() {
             var emailId = $('#regEmails').val();
             var cdbNo = $('#cdbNo').val();
-            alert(emailId);
             $.ajax({
                 url: _baseURL() + '/sendNotification',
                 type: 'GET',

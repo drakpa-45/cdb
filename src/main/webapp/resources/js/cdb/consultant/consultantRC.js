@@ -486,20 +486,24 @@ var consultantRC = (function () {
                         if(data[i].attachmentFor == 'AL'){
                             categoryTr = categoryTr + "<tr>" +
                             "<td></td>" +
-                            "<td>" + data[i].documentName + "</td>" +
-                            "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                            "<td>" +
+                            "<input type='hidden' class='form-control aFor' name='categoryAttachments[0].attachmentFor' value='AL'/>" +
+                            "<input type='text' class='form-control docName' name='categoryAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
+                            "<td class='attachmentcc'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
                             "<td></td>" +
-                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row_cc' >Edit</button>" +
                             "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
                             "</tr>";
                         }
                         if(data[i].attachmentFor == 'OC'){
                             ownerTr = ownerTr + "<tr>" +
                             "<td></td>" +
-                            "<td>" + data[i].documentName + "</td>" +
-                            "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                            "<td>" +
+                            "<input type='hidden' class='form-control aFor' name='ownerAttachments[0].attachmentFor' value='OC'/>" +
+                            "<input type='text' class='form-control docName' name='ownerAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
+                            "<td class='attachmentoc'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
                             "<td></td>" +
-                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row_oc' >Edit</button>" +
                             "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
                             "</tr>";
                         }
@@ -536,9 +540,25 @@ var consultantRC = (function () {
             $(this).closest('tr').find('.docName').prop('disabled',false);
             var attachment = $(this).closest('tr').find('.attachment');
             attachment.html("<input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'>");
-
         })
     }
+
+    function editOCAttachment(){
+        $('#certificateTblOwner').on('click','.edit_row_oc',function(){
+            $(this).closest('tr').find('.docName').prop('disabled',false);
+            var attachment = $(this).closest('tr').find('.attachmentoc');
+            attachment.html("<input type='file' name='ownerAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'>");
+        })
+    }
+
+    function editCCAttachment(){
+        $('#certificateTblCategory').on('click','.edit_row_cc',function(){
+            $(this).closest('tr').find('.docName').prop('disabled',false);
+            var attachment = $(this).closest('tr').find('.attachmentcc');
+            attachment.html("<input type='file' name='categoryAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'>");
+        })
+    }
+
     function viewDownloadAttachment(){
         $('body').on('click','.vAttachment',function(){
             var id = $(this).closest('tr').find('.consultantHRid').val();
@@ -1147,6 +1167,8 @@ var consultantRC = (function () {
         showFileSize();
         enableRegistrationNo();
         editIncAttachment();
+        editOCAttachment();
+        editCCAttachment();
         isFirmNameUnique();
         getOwnerFinal();
         editInModalOwner();

@@ -47,7 +47,7 @@
                         </tr>
                         <tr>
                             <td><strong>Country</strong></td>
-                            <td></td>
+                            <td>${appDetail.countryName}</td>
                         </tr>
                         <tr>
                             <td><strong>Application Date</strong></td>
@@ -67,7 +67,7 @@
                         </tr>
                         <tr>
                             <td><strong>Dzongkhag</strong></td>
-                            <td></td>
+                            <td>${appDetail.dzongkhagName}</td>
                         </tr>
                         <tr>
                             <td><strong>Village</strong></td>
@@ -123,23 +123,23 @@
                     <div class="panel with-nav-tabs">
                         <div class="panel-heading">
                             <ul class="nav nav-tabs">
-                                <li class="">
-                                    <a href="#ownerpartner" data-toggle="tab" class="active show">Owner or Partner</a>
+                                <li class="tab-pane active">
+                                    <a href="#ownerpartner" data-toggle="tab" class="show text-info">Owner or Partner</a>
                                 </li>
                                 <li>
-                                    <a href="#humanresourceSection" data-toggle="tab">Contractor Human Resource</a>
+                                    <a href="#humanresourceSection" data-toggle="tab" class="text-info"> Human Resource</a>
                                 </li>
                                 <li>
-                                    <a href="#equipmentSection" data-toggle="tab">Contractor Equipment</a>
+                                    <a href="#equipmentSection" data-toggle="tab" class="text-info"> Equipment</a>
                                 </li>
                                 <li>
-                                    <a href="#classification" data-toggle="tab">Classification Details</a>
+                                    <a href="#classification" data-toggle="tab" class="text-info">Classification Details</a>
                                 </li>
                                 <li>
-                                    <a href="#trackRecord" data-toggle="tab">Track Records</a>
+                                    <a href="#trackRecord" data-toggle="tab" class="text-info">Track Records</a>
                                 </li>
                                 <li>
-                                    <a href="#command" data-toggle="tab">Comments/Adverse Record</a>
+                                    <a href="#command" data-toggle="tab" class="text-info">Comments/Adverse Record/Monitoring report</a>
                                 </li>
                             </ul>
                         </div>
@@ -172,7 +172,7 @@
                                         <thead>
                                         <tr style="background-color: #e6f9ff">
                                             <th>Sl No</th>
-                                            <th>Salutation</th>
+                                            <th>Title</th>
                                             <th>Name</th>
                                             <th>CID Number</th>
                                             <th>Gender</th>
@@ -198,7 +198,6 @@
                                             <th>Equipment Name</th>
                                             <th>Equipment Type</th>
                                             <th>Registration Number</th>
-                                            <th>Registration To</th>
                                             <th>Quantity</th>
                                             <th>Attachment</th>
                                         </tr>
@@ -210,7 +209,7 @@
                                 <div class="tab-pane fade in" id="classification">
                                     <table id="classificationTbl" class="table table-bordered table-hover">
                                         <thead>
-                                        <tr style="background-color: #EAEDED">
+                                        <tr style="background-color: #e6f9ff">
                                             <th colspan="2" align="center">Category</th>
                                             <th align="center">Applied</th>
                                             <th align="center">Verified</th>
@@ -225,7 +224,7 @@
                                 <div class="tab-pane fade in" id="trackRecord">
                                     <table id="trackRecordTbl" class="table table-bordered table-hover">
                                         <thead>
-                                        <tr style="background-color: #EAEDED">
+                                        <tr style="background-color: #e6f9ff">
                                             <th>Sl No</th>
                                             <th>Agency</th>
                                             <th>Work Id</th>
@@ -263,9 +262,19 @@
                                         </tr>
                                         </tbody>
                                     </table>
-											<span>
-												Adverse Record
-											</span>
+                                    <span>Adverse Record</span>
+                                    <table width="100%">
+                                        <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Remarks</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                    <span>Monitoring Reports</span>
                                     <table width="100%">
                                         <thead>
                                         <tr>
@@ -286,6 +295,9 @@
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
 <script type="text/javascript" src="<c:url value="/resources/js/cdb/contractor/contractor_profile.js"/>"></script>
 </div>
 <script>

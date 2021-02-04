@@ -61,8 +61,8 @@
                                         </div>
                                         <div class="card tab2">
                                             <div class="bg-blue card-status card-status-left"></div>
-                                            <div class="card-header">
-                                                <h3 class="card-title">Existing Establishment Addresses</h3>
+                                            <div class="card-header bg-indigo-light">
+                                                <h3 class="card-title text-white">Existing Establishment Addresses</h3>
                                             </div>
                                             <div class="card-body">
                                                 <div class="col-lg-12">
@@ -97,7 +97,7 @@
                                                 </div>
                                             </div>
                                             <div class="card-header">
-                                                <h3 class="card-title">Proposed Establishment Addresses</h3>
+                                                <h3 class="card-title text-danger">Proposed Establishment Addresses</h3>
                                             </div>
                                             <div class="card-body">
                                                 <div class="col-lg-12">
@@ -124,7 +124,7 @@
                                         </div>
                                         <div class="card tab2">
                                             <div class="bg-blue card-status card-status-left"></div>
-                                            <div class="card-header">Category</div>
+                                            <div class="card-header bg-indigo-light text-white">Category</div>
                                             <div class="div-actual">
                                                 <table id="contractorCCTbl1" class="table table-bordered table-hover">
                                                     <thead style="background-color: #F2F2F2">
@@ -144,7 +144,7 @@
                                         </div>
                                         <div class="card tab2">
                                             <div class="bg-blue card-status card-status-left"></div>
-                                            <div class="card-header">Service Applied and Fee</div>
+                                            <div class="card-header bg-indigo-light text-white">Service Applied and Fee</div>
                                             <div class="card-body">
                                                 <table class="table table-bordered table-condensed table-striped" id="serviceTbl">
                                                     <thead>
@@ -165,7 +165,7 @@
                                         <div class="card tab2">
                                             <div class="bg-blue card-status card-status-left"></div>
                                             <div class="card-header">
-                                                <h3 class="card-title">Fees Applied</h3>
+                                                <div class="card-header bg-indigo-light text-white">Fees Applied</h3>
                                             </div>
                                             <div class="card-body">
 

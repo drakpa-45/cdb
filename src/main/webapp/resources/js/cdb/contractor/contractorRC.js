@@ -453,36 +453,14 @@ var contractorRC = (function () {
             }
         });
     }
-
     function getIncAttachmentFinal(){
         $.ajax({
             url: _baseURL() + '/getIncAttachmentFinal',
             type: 'GET',
-            data: {contractorId:$('#contractorIdFinal').val(),ownerOrHR:'O'},
+            data: {contractorId:$('#contractorIdFinal').val()},
             success: function (data) {
-
-               /* if(data){
-                    $('#cIncorporation').removeClass('hide');
-                    var tr = '';
-                    for(var i in data) {
-                        if (data[i].attachmentFor == 'InSole') {
-                            tr = tr + "<tr>" +
-                            "<td></td>" +
-                            "<td>" + data[i].documentName + "</td>" +
-                            "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
-                            "<td class='file-size'></td>" +
-                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row'>Edit</button>" +
-                            "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
-                            "</tr>";
-                        }
-                    }
-                    $('#IncCertificateTbl').find('tbody').html(tr);
-                }else{
-                    $('#cIncorporation').addClass('hide');
-                }*/
-
                 if(data){
-                    $('#cIncorporation').removeClass('hide');
+                    $('#cIncorporation').removeClass('hidden');
                     $('#oIncorporation').removeClass('hide');
                     var cIncTr = '';
                     var categoryTr = '';
@@ -491,8 +469,10 @@ var contractorRC = (function () {
                         if(data[i].attachmentFor == 'InSole' || data[i].attachmentFor == null) {
                             cIncTr = cIncTr + "<tr>" +
                             "<td></td>" +
-                            "<td>" + data[i].documentName + "</td>" +
-                            "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                            "<td>" +
+                            "<input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='InSole'/>" +
+                            "<input type='text' class='form-control docName' name='cAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
+                            "<td class='attachment'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
                             "<td></td>" +
                             "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
                             "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
@@ -501,20 +481,24 @@ var contractorRC = (function () {
                         if(data[i].attachmentFor == 'AL'){
                             categoryTr = categoryTr + "<tr>" +
                             "<td></td>" +
-                            "<td>" + data[i].documentName + "</td>" +
-                            "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                            "<td>" +
+                            "<input type='hidden' class='form-control aFor' name='categoryAttachments[0].attachmentFor' value='AL'/>" +
+                            "<input type='text' class='form-control docName' name='categoryAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
+                            "<td class='attachmentcc'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
                             "<td></td>" +
-                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row_cc' >Edit</button>" +
                             "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
                             "</tr>";
                         }
                         if(data[i].attachmentFor == 'OC'){
                             ownerTr = ownerTr + "<tr>" +
                             "<td></td>" +
-                            "<td>" + data[i].documentName + "</td>" +
-                            "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                            "<td>" +
+                            "<input type='hidden' class='form-control aFor' name='ownerAttachments[0].attachmentFor' value='OC'/>" +
+                            "<input type='text' class='form-control docName' name='ownerAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
+                            "<td class='attachmentoc'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
                             "<td></td>" +
-                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row_oc' >Edit</button>" +
                             "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
                             "</tr>";
                         }
@@ -522,20 +506,34 @@ var contractorRC = (function () {
                     $('#certificateTbl').find('tbody').html(cIncTr);
                     $('#certificateTblOwner').find('tbody').html(ownerTr);
                     $('#certificateTblCategory').find('tbody').html(categoryTr);
-
                 }else{
-                    $('#cIncorporation').addClass('hide');
+                    $('#cIncorporation').addClass('hidden');
                 }
             }
-
         });
     }
+
     function editIncAttachment(){
         $('#certificateTbl').on('click','.edit_row',function(){
             $(this).closest('tr').find('.docName').prop('disabled',false);
             var attachment = $(this).closest('tr').find('.attachment');
             attachment.html("<input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'>");
+        })
+    }
 
+    function editOCAttachment(){
+        $('#certificateTblOwner').on('click','.edit_row_oc',function(){
+            $(this).closest('tr').find('.docName').prop('disabled',false);
+            var attachment = $(this).closest('tr').find('.attachmentoc');
+            attachment.html("<input type='file' name='ownerAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'>");
+        })
+    }
+
+    function editCCAttachment(){
+        $('#certificateTblCategory').on('click','.edit_row_cc',function(){
+            $(this).closest('tr').find('.docName').prop('disabled',false);
+            var attachment = $(this).closest('tr').find('.attachmentcc');
+            attachment.html("<input type='file' name='categoryAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'>");
         })
     }
 
@@ -546,7 +544,6 @@ var contractorRC = (function () {
                 url: _baseURL() + '/viewDownload',
                 type: 'GET',
                 data: {tableName:'crpcontractorhumanresourceattachment',filterCol:'CrpContractorHumanResourceId',filterVal:id}
-
             });
         });
     }
@@ -600,9 +597,7 @@ var contractorRC = (function () {
                         }
                         $('#hrDtlsTable').find('tbody').append(hrTr);
                     }
-
                 });
-
             }else{
                 $('.human_resource_criteria').addClass('hide');
             }
@@ -621,14 +616,14 @@ var contractorRC = (function () {
                     for (var i in contractorHrs) {
                         partnerHrTr = partnerHrTr + "<tr>" +
                         "<td class='countryName'>" +
-                        "<input type='hidden' class='contractorHRid' name='contractorHRs[0].id' value='"+contractorHrs[i].id +"'/>" + contractorHrs[i].countryName + "</td>" +
+                        "<input type='hidden' class='contractorOWid' name='contractorOWs[0].id' value='"+contractorHrs[i].id +"'/>" + contractorHrs[i].countryName + "</td>" +
                         "<td class='cidNo'>" + contractorHrs[i].cidNo + "</td>" +
                         "<td class='salutationName'>" + contractorHrs[i].salutationName + "</td>" +
                         "<td class='name'>" + contractorHrs[i].name + "</td>" +
                         "<td class='sex'>" + contractorHrs[i].sex + "</td>" +
                         "<td class='designationName'>" + contractorHrs[i].designationName + "</td>" +
                         "<td>" + ((contractorHrs[i].siCertificate == '1')?'(✔)':'') + "</td>"+
-                        "<td><input type='checkbox' class='deleteRequest' id='deleteRequest' name='contractorHRs[0].deleteRequest' value='1'></td>"+
+                        "<td><input type='checkbox' class='deleteRequest' id='deleteRequest' name='contractorOWs[0].deleteRequest' value='1'></td>"+
                         "<td class='action'><button class='btn-sm btn-info btn-block edit-rowOW'>Edit</button></td>" +
                         "</tr>";
                     }
@@ -645,7 +640,6 @@ var contractorRC = (function () {
             data: {contractorId:$('#contractorIdFinal').val(),ownerOrHR:'O'},
             success: function (res) {
                 var contractorHrs = res;
-
                 for (var i in contractorHrs) {
                     var tblRow = $('#partnerDtls').find('tbody tr:eq(' + (parseInt(i)) + ')');
                     tblRow.find('#countryList').val(tblRow.find('#countryList option:contains("' + contractorHrs[i].countryName + '")').val());
@@ -661,9 +655,9 @@ var contractorRC = (function () {
                     }
                 }
             }
-
         });
     }
+
     function getEQsFinal(){
         $('#updateEq').on('click',function(){
             if($(this).is(':checked')){
@@ -706,7 +700,7 @@ var contractorRC = (function () {
         $('#addMoreEq').on('click',function(e){
             var uplTbl = $('#eqUploadTbl').find('tbody');
             var tr = "<tr><td><input type='text' required class='form-control docName' name='equipments[0].contractorEQAs[0].documentName'/> </td>" +
-                "<td><input type='file' required class='file' name='equipments[0].contractorEQAs[0].attachment' accept='application/pdfimage/gif, image/jpeg, image/jpg'/> </td><td class='file-size'></td>" +
+                "<td><input type='file' required class='file' name='equipments[0].contractorEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>" +
                 "<td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td></tr>";
             uplTbl.append(tr);
         });
@@ -771,7 +765,7 @@ var contractorRC = (function () {
             e.preventDefault();
             var row = $(this).closest('tr');
             var hrModal = $('#addOwModal');
-            hrModal.find('#hrId').val(row.find('.contractorHRid').val())//for Edit
+            hrModal.find('#hrId').val(row.find('.contractorOWid').val())//for Edit
             hrModal.find('#ow1').val(hrModal.find('#ow1 option:contains("'+row.find('.countryName').text()+'")').val());
             hrModal.find('#ow2').val(row.find('.cidNo').text());
             hrModal.find('#ow3').val(hrModal.find('#ow3 option:contains("'+row.find('.salutationName').text()+'")').val());
@@ -867,9 +861,9 @@ var contractorRC = (function () {
                 var name = $(this).find('a').text();
                 var hra = $(this).find('a').parent().html();
                 hraTr = hraTr+"<tr><td><input type='hidden' class='eqId' value='"+$(this).find('.hraId').val()+"'>" +
-                "<input type='text' required class='form-control docName' name='equipments[0].contractorEQAs[0].documentName' value='"+name.substring(0,name.lastIndexOf('.'))+"' disabled></td>" +
+                "<input type='text' required class='form-control docName' name='equipments[0].contractorEQAs[0].documentName' value='"+name.substring(0,name.lastIndexOf('.'))+"'></td>" +
                 "<td><span class='aName'> "+hra+"</span><span class='aFile'></span> </td>" +
-                    /*"<td></td>" +*/
+                /*"<td></td>" +*/
                 "<td><button class='change'>Change</button><button class='del_row'>Delete</button></td></tr>";
             });
             modal.find('#eqUploadTbl tbody').empty().html(hraTr);
@@ -933,35 +927,32 @@ var contractorRC = (function () {
         });
     }
 
-    function getPersonalInfo($this,country,hrOrPartner){
-        if(country == '8f897032-c6e6-11e4-b574-080027dcfac6') { //if bhutanese fetch from DCRC
-            $.ajax({
-                url:cdbGlobal.baseURL() +'/contractorNR/getPersonalInfo',
-                type: 'GET',
-                async:false,
-                data: {cidNo: $this.val(),type:"fetch"},
-                success: function (res) {
-                    if (res.status == '1') {
-                        var dto = res.dto;
-                        // var index = $this.closest("tr").index();
-                        if(hrOrPartner == 'H') {
-                            $('#hr2').val(dto.fullName).prop('readonly', true);
-                            $('#hr4').val(dto.sex).prop('readonly', true);
-                        }else{
-                            var index = $this.closest("tr").index();
-                            $this.closest('tr').find('.name').val(dto.fullName).prop('readonly', true);
-                            $this.closest('tr').find('.sex').val(dto.sex).prop('readonly', true);
-                            //$('#pDzongkhagId').val(dto.dzongkhagId);
-                            if (parseInt(index) == 0) {
-                                $('#pDzongkhagId').val(dto.dzongkhagId);
-                                $('#pGewogId').html("<option value='"+dto.gowegName+"'>"+dto.gowegName+"</option>");
-                                $('#pVillageId').html("<option value='"+dto.villageName+"'>"+dto.villageName+"</option>");
-                            }
+    function getPersonalInfo(){
+        $('#addOwModal').on('change','.hr-cid', function (e) {
+            var $this = $(this);
+            var country = $('#ow1').val();
+            if(country == '8f897032-c6e6-11e4-b574-080027dcfac6') { //if bhutanese fetch from DCRC
+                $.ajax({
+                    url: cdbGlobal.baseURL() + '/contractorNR/getPersonalInfo',
+                    type: 'GET',
+                    data: {cidNo: $this.val(),type:"fetch"},
+                    success: function (res) {
+                        if (res.status == '1') {
+                            var dto = res.dto;
+                            // var index = $this.closest("tr").index();
+                            $('#ow4').val(dto.fullName).prop('readonly', true);
+                            $('#ow5').val(dto.sex).prop('readonly', true);
+                        }
+                        else{
+                            warningMsg(res.text);
+                            $('#ow4').val(dto.fullName).prop('readonly', false);
+                            $('#ow5').val(dto.sex).prop('readonly', false);
                         }
                     }
-                }
-            });
-        }
+                });
+            }
+            getTrainingDtl($this.val());
+        })
     }
 
     function getPersonalInfoHR(){
@@ -1001,7 +992,6 @@ var contractorRC = (function () {
                 hrOrPartner = 'H';
                 country = $('#hr5').val();
             }
-
             $('#partnerDtls').find('.ownerCidNo').each(function(e){
                 if(hrOrPartner == 'H' && $this.val() == $(this).val()){
                     warningMsg("This is CID is already added your Owner/Partner list!!!");
@@ -1066,6 +1056,8 @@ var contractorRC = (function () {
         getPersonalInfo();
         getPersonalInfoHR();
         editIncAttachment();
+        editOCAttachment();
+        editCCAttachment();
         isEmailUnique();
         editInModalOwner();
         getOwnerFinal();

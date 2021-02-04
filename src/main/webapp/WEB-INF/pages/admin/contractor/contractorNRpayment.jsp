@@ -64,8 +64,8 @@
 
                                         <div class="card tab2">
                                             <div class="bg-blue card-status card-status-left"></div>
-                                            <div class="card-header">
-                                                <h3 class="card-title">Establishment Addresses</h3>
+                                            <div class="card-header bg-indigo-light">
+                                                <h3 class="card-title text-white">Establishment Addresses</h3>
                                             </div>
                                             <div class="card-body">
                                                 <div class="col-lg-12">
@@ -103,8 +103,8 @@
 
                                         <div class="card tab2">
                                             <div class="bg-blue card-status card-status-left"></div>
-                                            <div class="card-header">
-                                                <h3 class="card-title">Name of Owner, Partners and/or others with
+                                            <div class="card-header bg-indigo-light">
+                                                <h3 class="card-title text-white">Name of Owner, Partners and/or others with
                                                     Controlling Interest</h3>
                                             </div>
                                             <div class="card-body">
@@ -116,7 +116,7 @@
                                                             <th>Sl No</th>
                                                             <th>Nationality</th>
                                                             <th>CID/Work Permit No.</th>
-                                                            <th>Salutation</th>
+                                                            <th>Title</th>
                                                             <th>Name</th>
                                                             <th>Gender</th>
                                                             <th>Designation</th>
@@ -134,8 +134,8 @@
 
                                         <div class="card tab2">
                                             <div class="bg-blue card-status card-status-left"></div>
-                                            <div class="card-header">
-                                                <h3 class="card-title">Permanent Address</h3>
+                                            <div class="card-header bg-indigo-light">
+                                                <h3 class="card-title text-white">Permanent Address</h3>
                                             </div>
                                             <div class="card-body">
                                                 <div class="col-lg-12">
@@ -158,8 +158,8 @@
                                         </div>
                                         <div class="card tab2">
                                             <div class="bg-blue card-status card-status-left"></div>
-                                            <div class="card-header">
-                                                <h3 class="card-title">Category Details</h3>
+                                            <div class="card-header bg-indigo-light">
+                                                <h3 class="card-title text-white">Category Details</h3>
                                             </div>
                                             <div class="card-body">
                                                 <div class="col-lg-12">
@@ -192,8 +192,8 @@
 
                                         <div class="card tab2">
                                             <div class="bg-blue card-status card-status-left"></div>
-                                            <div class="card-header">
-                                                <h3 class="card-title">Fees Applied</h3>
+                                            <div class="card-header bg-indigo-light">
+                                                <h3 class="card-title text-white">Fees Applied</h3>
                                             </div>
                                             <div class="card-body">
 

@@ -330,9 +330,9 @@
                                                         </div>
                                                         <div class="form-group row hide" id="ownerShipchangeId">
                                                             <div class="col-lg-12 col-md-12 ">
-                                                                <label class="col-lg-3 col-md-3 form-label" for="ownershipChangeRemarks">Reason for Change of Owner:
+                                                                <label class="col-lg-3 col-md-3">Reason for Change of Owner:
                                                                     <span class="text-danger">*</span></label>
-                                                                <input type="text" class="col-lg-6 form-control" name="contractor.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true" placeholder="Text..">
+                                                                <input type="text" class="col-lg-6 form-control" name="contractor.ownershipChangeRemarks" id="ownershipChangeRemarks" required="" placeholder="Text..">
                                                             </div>
                                                         <div class="card-body">
                                                             <div class="col-lg-12">
@@ -439,13 +439,20 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12 form-group">
+                                           <%-- <div class="col-lg-12 form-group">
                                                 <button type="button" onclick="backTab('generalInformation')" id="btn4" class="btn btn-azure col-lg-offset-9">
                                                     <i class="fa fa-arrow-circle-left"></i>Back
                                                 </button>
-                                                <button type="button" onclick="nextTab('generalInformation')" id="btn5" class="btn btn-primary nextTab">
-                                                    <i class="fa fa-arrow-circle-right"></i>Next &nbsp;
-                                                </button>
+                                                   <button type="button" onclick="nextTab('generalInformation')" id="btn5" class="btn btn-primary nextTab">
+                                                       <i class="fa fa-arrow-circle-right"></i>Next &nbsp;
+                                                   </button>
+                                            </div>--%>
+                                            <div class="col-lg-12 form-group">
+                                                <div class="col-md-offset-11 col-lg-offset-10 col-xs-offset-10">
+                                                    <button type="button" onclick="nextTab('generalInformation')" id="btn5" class="btn btn-primary nextTab">
+                                                        <i class="fa fa-arrow-circle-right"></i>Next &nbsp;
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="tab-pane category_details hide">
@@ -979,11 +986,11 @@
                                     <div class="modal-body form-horizontal">
                                         <div class="modal-div">
                                             <div class="form-group">
-                                                <input type="hidden" id="id5Edit" name="contractorHRs[0].id">
+                                                <input type="hidden" id="id5Edit" name="contractorOWs[0].id">
                                                 <label class="col-lg-2">Nationality
                                                     <span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="contractorHRs[0].countryId" id="ow1" required="" class="form-control custom-select text-left select-beast country">
+                                                    <select name="contractorOWs[0].countryId" id="ow1" required="" class="form-control custom-select text-left select-beast country">
                                                         <option value="">Select Country</option>
                                                         <c:forEach var="item" items="${countryList}">
                                                             <option value="${item.value}"><c:out value="${item.text}"/></option>
@@ -996,15 +1003,15 @@
                                                       <span class="input-icon-addon">
                                                          <i class="fa fa-address-card-o"></i>
                                                       </span>
-                                                        <input type="text" name="contractorHRs[0].cidNo" class="form-control hr-cid" id="ow2" required="" placeholder="">
+                                                        <input type="text" name="contractorOWs[0].cidNo" class="form-control hr-cid" id="ow2" required="" placeholder="">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-lg-2">Salutation
+                                                <label class="col-lg-2">Title
                                                     <span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="contractorHRs[0].salutationId" id="ow3" required="" class="form-control custom-select text-left select-beast">
+                                                    <select name="contractorOWs[0].salutationId" id="ow3" required="" class="form-control custom-select text-left select-beast">
                                                         <option value="">Select Salutation</option>
                                                         <c:forEach var="item" items="${salutationList}">
                                                             <option value="${item.value}"><c:out value="${item.text}"/></option>
@@ -1016,14 +1023,14 @@
                                                 <div class="col-lg-4">
                                                     <div class="input-icon">
                                                         <span class="input-icon-addon"><i class="fe fe-user"></i></span>
-                                                        <input type="text" name="contractorHRs[0].name" id="ow4" class="form-control name" required="" placeholder="">
+                                                        <input type="text" name="contractorOWs[0].name" id="ow4" class="form-control name" required="" placeholder="">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-lg-2">Gender<span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="contractorHRs[0].sex" id="ow5" required="" class="form-control custom-select text-left select-beast sex">
+                                                    <select name="contractorOWs[0].sex" id="ow5" required="" class="form-control custom-select text-left select-beast sex">
                                                         <option value="">Select Gender</option>
                                                         <option value="M">Male</option>
                                                         <option value="F">Female</option>
@@ -1032,7 +1039,7 @@
                                                 <label class="col-lg-2">Designation
                                                     <span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="contractorHRs[0].designationId" id="ow6" required="" class="form-control custom-select text-left select-beast">
+                                                    <select name="contractorOWs[0].designationId" id="ow6" required="" class="form-control custom-select text-left select-beast">
                                                         <option value="">Select Designation</option>
                                                         <c:forEach var="item" items="${designationList}">
                                                             <option value="${item.value}"><c:out value="${item.text}"/></option>

@@ -496,20 +496,24 @@ var specializedFirmOS = (function () {
                         if(data[i].attachmentFor == 'AL'){
                             categoryTr = categoryTr + "<tr>" +
                             "<td></td>" +
-                            "<td>" + data[i].documentName + "</td>" +
-                            "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                            "<td>" +
+                            "<input type='hidden' class='form-control aFor' name='categoryAttachments[0].attachmentFor' value='AL'/>" +
+                            "<input type='text' class='form-control docName' name='categoryAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
+                            "<td class='attachmentcc'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
                             "<td></td>" +
-                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row_cc' >Edit</button>" +
                             "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
                             "</tr>";
                         }
                         if(data[i].attachmentFor == 'OC'){
                             ownerTr = ownerTr + "<tr>" +
                             "<td></td>" +
-                            "<td>" + data[i].documentName + "</td>" +
-                            "<td><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                            "<td>" +
+                            "<input type='hidden' class='form-control aFor' name='ownerAttachments[0].attachmentFor' value='OC'/>" +
+                            "<input type='text' class='form-control docName' name='ownerAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
+                            "<td class='attachmentoc'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
                             "<td></td>" +
-                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row_oc' >Edit</button>" +
                             "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
                             "</tr>";
                         }
@@ -532,6 +536,22 @@ var specializedFirmOS = (function () {
             var attachment = $(this).closest('tr').find('.attachment');
             attachment.html("<input type='file' name='cAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'>");
 
+        })
+    }
+
+    function editOCAttachment(){
+        $('#certificateTblOwner').on('click','.edit_row_oc',function(){
+            $(this).closest('tr').find('.docName').prop('disabled',false);
+            var attachment = $(this).closest('tr').find('.attachmentoc');
+            attachment.html("<input type='file' name='ownerAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'>");
+        })
+    }
+
+    function editCCAttachment(){
+        $('#certificateTblCategory').on('click','.edit_row_cc',function(){
+            $(this).closest('tr').find('.docName').prop('disabled',false);
+            var attachment = $(this).closest('tr').find('.attachmentcc');
+            attachment.html("<input type='file' name='categoryAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'>");
         })
     }
 
@@ -604,14 +624,14 @@ var specializedFirmOS = (function () {
                     var spFirmHrs = res;
                     for (var i in spFirmHrs) {
                         partnerHrTr = partnerHrTr + "<tr>" +
-                        "<td class='countryName'><input type='hidden' class='specializedFirmHRid' name='spFirmHRs[0].id' value='"+spFirmHrs[i].id +"'/>" + spFirmHrs[i].countryName + "</td>" +
+                        "<td class='countryName'><input type='hidden' class='specializedFirmOWid' name='spFirmOWs[0].id' value='"+spFirmHrs[i].id +"'/>" + spFirmHrs[i].countryName + "</td>" +
                         "<td class='cidNo'>" + spFirmHrs[i].cidNo + "</td>" +
                         "<td class='salutationName'>" + spFirmHrs[i].salutationName + "</td>" +
                         "<td class='name'>" + spFirmHrs[i].name + "</td>" +
                         "<td class='sex'>" + spFirmHrs[i].sex + "</td>" +
                         "<td class='designationName'>" + spFirmHrs[i].designationName + "</td>" +
                         "<td>" + ((spFirmHrs[i].siCertificate == '1')?'(✔)':'') + "</td>"+
-                        "<td><input type='checkbox' class='deleteRequest' id='deleteRequest' name='spFirmHRs[0].deleteRequest' value='1'></td>"+
+                        "<td><input type='checkbox' class='deleteRequest' id='deleteRequest' name='spFirmOWs[0].deleteRequest' value='1'></td>"+
                         "<td class='action'><button class='btn-sm btn-info btn-block edit-rowOW'>Edit</button></td>" +
                         "</tr>";
                     }
@@ -722,7 +742,7 @@ var specializedFirmOS = (function () {
                             }
                             eqTr = eqTr +
                             "<tr>" +
-                            "<td><input type='hidden' class='specializedFirmEQid' name='spFirmEQs[0].id' value='"+equipments[i].id +"'/>"
+                            "<td><input type='hidden' class='specializedFirmEQid' name='equipments[0].id' value='"+equipments[i].id +"'/>"
                             + equipments[i].equipmentName + "</td>" +
                             "<td>" + equipments[i].registrationNo + "</td>" +
                             "<td>" + equipments[i].quantity + "</td>" +
@@ -733,7 +753,6 @@ var specializedFirmOS = (function () {
                         }
                         $('#equipmentTbl').find('tbody').html(eqTr);
                     }
-
                 });
             }else{
                 $('.equipment_details').addClass('hide');
@@ -807,7 +826,7 @@ var specializedFirmOS = (function () {
             e.preventDefault();
             var row = $(this).closest('tr');
             var hrModal = $('#addOwModal');
-            hrModal.find('#hrId').val(row.find('.consultantHRid').val())//for Edit
+            hrModal.find('#hrId').val(row.find('.specializedFirmOWid').val())//for Edit
             hrModal.find('#ow1').val(hrModal.find('#ow1 option:contains("'+row.find('.countryName').text()+'")').val());
             hrModal.find('#ow2').val(row.find('.cidNo').text());
             hrModal.find('#ow3').val(hrModal.find('#ow3 option:contains("'+row.find('.salutationName').text()+'")').val());
@@ -902,7 +921,7 @@ var specializedFirmOS = (function () {
             row.find('.eqa').each(function(){
                 var name = $(this).find('a').text();
                 var eqa = $(this).find('a').parent().html();
-                eqaTr = eqaTr+"<tr><td><input type='hidden' class='eqId' value='"+$(this).find('.hraId').val()+"'>" +
+                eqaTr = eqaTr+"<tr><td><input type='hidden' class='eqaId' value='" + $(this).find('.eqaId').val() + "'>" +
                 "<input type='text' required class='form-control docName' name='equipments[0].spFirmEQAs[0].documentName' value='"+name.substring(0,name.lastIndexOf('.'))+"' disabled></td>" +
                 "<td><span class='aName'> "+eqa+"</span><span class='aFile'></span> </td>" +
                     "<td></td>" +
@@ -1090,6 +1109,8 @@ var specializedFirmOS = (function () {
         getPersonalInfoHR();
         getPersonalInfo();
         editIncAttachment();
+        editOCAttachment();
+        editCCAttachment();
         isFirmNameUnique();
         getOwnerFinal();
         changeFileEq();

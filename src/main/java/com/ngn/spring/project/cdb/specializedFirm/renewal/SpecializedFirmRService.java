@@ -258,23 +258,18 @@ public class SpecializedFirmRService extends BaseService {
         }
         //endregion
 
-        //region to save owner when both incoporation & ownerchanged is not availed
-        if(renewalServiceType.getChangeOfOwner() == null || renewalServiceType.getIncorporation() ==  null){
-            List<SpFirmHR> ownerList = spFirmDTO.getSpecializedFirm().getSpFirmHRs();
-            specializedFirm.setOwnershipChangeRemarks(spFirmDTO.getSpecializedFirm().getOwnershipChangeRemarks());
-            for(SpFirmHR spFirmHR:ownerList){
-                String hrId = commonService.getRandomGeneratedId();
-                spFirmHR.setId(hrId);
-                spFirmHR.setSpecializedID(specializedFirmId);
-                spFirmHR.setIsPartnerOrOwner(TRUE_INT);
-                specializedFirmService.saveHR(spFirmHR, loggedInUser);
-            }
-        }
-        //endregion
-
         //region late fee service id
         BigDecimal lateFee = new BigDecimal(responseMessage.getVal2());
         if(lateFee.compareTo(BigDecimal.ZERO) != 0){
+            SpFirmServicePayment servicePayment = spFirmDTO.getServicePayment();
+            servicePayment.setSpecializedFirmId(specializedFirmId);
+            servicePayment.setNoOfDaysLate(servicePayment.getNoOfDaysLate());
+            servicePayment.setNoOfDaysAfterGracePeriod(servicePayment.getNoOfDaysAfterGracePeriod());
+            servicePayment.setPaymentAmount(servicePayment.getPaymentAmount());
+            servicePayment.setWaiveOffLateFee(servicePayment.getWaiveOffLateFee());
+            servicePayment.setPenaltyPerDay(BigDecimal.valueOf(100));
+
+            specializedFirmRDao.save(servicePayment);
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "11");
             appliedServicesList.add(appliedService);
         }

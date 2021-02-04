@@ -107,7 +107,7 @@
                                     <tr>
                                         <td align="center">Site Supervisor</td>
                                         <td align="center">2(Civil)</td>
-                                        <td align="center">1(Electrical)</td>
+                                        <td align="center">2(Electrical)</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -128,10 +128,10 @@
                         <table class="table table-bordered" id="hrDtlsTable">
                             <thead>
                             <tr>
-                                <th style="width: 5%">Salutation</th>
+                                <th style="width: 5%">Title</th>
                                 <th style="width: 10%">Name</th>
                                 <th style="width: 10%">ID/Work Permit No.</th>
-                                <th style="width: 5%">Sex</th>
+                                <th style="width: 5%">Gender</th>
                                 <th style="width: 10%">Country</th>
                                 <th style="width: 10%">Designation</th>
                                 <th style="width: 10%">Qualification</th>
@@ -147,7 +147,7 @@
                             </tbody>
                         </table>
                         <div class="col-lg-12 text-right">
-                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addHRModal"><i class="fa fa-plus"></i> Add More HR</button>
+                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" id="addMoreHrBtn" data-target="#addHRModal"><i class="fa fa-plus"></i> Add More HR</button>
                         </div>
                     </div>
                 </div>
@@ -188,11 +188,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2">Salutation
+                        <label class="col-lg-2">Tilte
                             <span class="text-danger">*</span>:</label>
                         <div class="col-lg-4">
                             <select name="contractorHRs[0].salutationId" id="hr1" required="" class="form-control custom-select text-left select-beast">
-                                <option value="">Select Salutation</option>
+                                <option value="">Select Title</option>
                                 <c:forEach var="item" items="${salutationList}">
                                     <option value="${item.value}"><c:out value="${item.text}"/></option>
                                 </c:forEach>
@@ -291,7 +291,7 @@
                                     </thead>
                                     <tbody id="fileListhrsection" class="files">
                                     <tr>
-                                        <td><input type='text' required="" value="CID" class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/></td>
+                                        <td><input type='text' required="" value="Certificate" class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/></td>
                                         <td><input type='file' required="" class='file' name='contractorHRs[0].contractorHRAs[0].attachment'
                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                         </td>
@@ -299,7 +299,7 @@
                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                     </tr>
                                     <tr>
-                                        <td><input type='text' required="" value="Certificate" class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/></td>
+                                        <td><input type='text' required="" value="Undertaking" class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/></td>
                                         <td><input type='file' required="" class='file' name='contractorHRs[0].contractorHRAs[0].attachment'
                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                         </td>

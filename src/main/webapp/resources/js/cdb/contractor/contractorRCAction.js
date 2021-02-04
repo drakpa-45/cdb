@@ -6,6 +6,7 @@ function checkBtn(checkBoxId) {
     $check.prop('checked',true);
     if (checkBoxId == "owner") {
         $('#nextGIBtn').prop('disabled', false);
+        $('#hrModal').prop('refresh', true)
     } else if(checkBoxId == 'equipment'){
         $('#btnValEqNext').prop('disabled', false);
     }else{
@@ -22,6 +23,7 @@ function nextTab(presentClass) {
             return false;
         }
     });
+
     if(nextClass == "saveAndPreview") { //nextAndPreview
         $("." + presentClass + ">a").addClass('bg-blue text-white');
         $('.tab-pane').removeClass("active").addClass("active");
@@ -38,6 +40,7 @@ function nextTab(presentClass) {
         $('.nextBackBtn').removeClass('hide');
     }
 }
+
 function backTab(presentClass) {
     var $this =  $('#'+presentClass);
     var prevClass = "";
@@ -173,6 +176,7 @@ var contractorRCAction = (function () {
                 }
             });
         });
+
 
         $('body').on('click','.checkCidHr',function(){
             var cidNo = $(this).closest('tr').find('.cidNo').text();
@@ -354,6 +358,7 @@ var contractorRCAction = (function () {
                      }*/
                 }
             });
+
         }
     }
 
@@ -423,7 +428,9 @@ var contractorRCAction = (function () {
                 "<td>" + ((contractorHrs[i].siCertificate == '1')?'(✔)':'') + "</td>" +
                 "<td><input type='button' name='humanResource' value='Check for this CID' class='checkCid btn btn-success'></td>" +
                 verifiedApproved+"</tr>";
+                getTrainingDtl(contractorHrs[i].cidNo);
             }
+
         }
         //$('#partnerDtls').find('tbody').html(partnerHrTr);
         $('#partnerDtls').find('.'+tBodyClass).append(partnerHrTr);
@@ -767,32 +774,31 @@ var contractorRCAction = (function () {
         }
     }
     function getTrainingDtl(cidNo){
-        $.ajax({
-            url: cdbGlobal.baseURL() + '/contractorNR/getTrainingDtl',
-            type: 'GET',
-            data: {cidNo: cidNo},
-            success: function (res) {
-                var trainingTbl = $('#inductionCourseDtl');
-                trainingTbl.find('tbody').find('.noRecord').remove();
-                var tr = '';
-                for (var i in res) {
-                    tr = tr + "<tr><td></td>" +
-                    "<td>" + res[i].tType + "</td>" +
-                    "<td>" + (formatAsDate(res[i].fromDate) + ' to ' + formatAsDate(res[i].toDate) ) + "</td>" +
-                    "<td>" + res[i].tModule + "</td>" +
-                    "<td>" + res[i].participant + "</td>" +
-                    "<td>" + res[i].cidNo + "</td></tr>";
+            $.ajax({
+                url: cdbGlobal.baseURL() + '/contractorNR/getTrainingDtl',
+                type: 'GET',
+                data: {cidNo: cidNo},
+                success: function (res) {
+                    var trainingTbl = $('#inductionCourseDtl');
+                    trainingTbl.find('tbody').find('.noRecord').remove();
+                    var tr = '';
+                    for (var i in res) {
+                        tr = tr + "<tr><td></td>" +
+                        "<td>" + res[i].tType + "</td>" +
+                        "<td>" + (formatAsDate(res[i].fromDate) + ' to ' + formatAsDate(res[i].toDate) ) + "</td>" +
+                        "<td>" + res[i].tModule + "</td>" +
+                        "<td>" + res[i].participant + "</td>" +
+                        "<td>" + res[i].cidNo + "</td></tr>";
+                    }
+                    trainingTbl.find('tbody').append(tr);
                 }
-                trainingTbl.find('tbody').append(tr);
-            }
-        })
-    }
+            })
+        }
 
     function sendNotification(){
         $('#sendNotification').on('click',function() {
             var emailId = $('#regEmail').val();
             var cdbNo = $('#cdbNo').val();
-            alert(emailId);
             $.ajax({
                 url: _baseURL() + '/sendNotification',
                 type: 'GET',

@@ -105,9 +105,8 @@ var specializedFirmCC = (function () {
                     "<tr><td>"+(parseInt(i)+1)+"</td>" +
                     "<td><input type='hidden' class='specializedFirmEQid' name='spFirmEQs[0].id' value='"+equipments[i].id +"'/>"
                     + equipments[i].equipmentName + "</td>" +
-                    "<td></td>" +
+                    "<td>" + equipments[i].equipmentType + "</td>" +
                     "<td>" + equipments[i].registrationNo + "</td>" +
-                    "<td></td>" +
                     "<td>" + equipments[i].quantity + "</td>" +
                     "<td>" + attachment + "</td>" +
                     "</tr>";

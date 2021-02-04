@@ -67,12 +67,12 @@ public class ContractorRCActionService extends BaseService {
         contractor.setPaymentReceiptDate(paymentUpdateDTO.getPaymentDate());
         contractor.setPaymentReceiptNo(paymentUpdateDTO.getPaymentReceiptNo());
         contractor.setRegApprovedDate(loggedInUser.getServerDate());
-
-        Calendar calendar = Calendar.getInstance();
+        contractor.setHasNotification("0");
+        /*Calendar calendar = Calendar.getInstance();
         calendar.setTime(loggedInUser.getServerDate());
         contractor.setHasNotification("0");
         calendar.add(Calendar.YEAR, 2);
-        contractor.setRegExpiryDate(calendar.getTime());
+        contractor.setRegExpiryDate(calendar.getTime());*/
         contractorRCActionDao.saveOrUpdate(contractor);
 
         paymentUpdateDTO.setContractorId(contractor.getContractorId());

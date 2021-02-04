@@ -80,16 +80,16 @@ var contractorNRAction = (function () {
                                 var workId = employeeDetailsDTO[i].workId;
                                 if(workId !='' && workId != null){
                                     alert(workId);
-                                    $('#dcbinfo').append("<br/> <b>CDB No: </b> "+employeeDetailsDTO[i].cdbNo+"  ||  <b> Procuring Agency:  </b> "+employeeDetailsDTO[i].procuringAgency+"  ||  <b> Work ID:</b>"+employeeDetailsDTO[i].workId+"");
+                                    $('#dcbinfo').html("<br/> <b>CDB No: </b> "+employeeDetailsDTO[i].cdbNo+"  ||  <b> Procuring Agency:  </b> "+employeeDetailsDTO[i].procuringAgency+"  ||  <b> Work ID:</b>"+employeeDetailsDTO[i].workId+"");
                                    // $('#dcbinfo').append("<br/> This person is engaged with cdb number <b>"+employeeDetailsDTO[i].cdbNo+"</b> in <b>"+employeeDetailsDTO[i].procuringAgency+"</b> with work Id:<b>"+employeeDetailsDTO[i].workId+"</b>");
                                     $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
                                 }else{
-                                    $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project.");
+                                    $('#dcbinfonotEngaged').html("<br/> This person is not engaged in any work or project.");
                                 }
                             }
                         }else{
                            // $('#dcbinfo').hide();
-                            $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project.");
+                            $('#dcbinfonotEngaged').html("<br/> This person is not engaged in any work or project.");
                         }
 
                         if(govCopDTO !=''){
@@ -97,14 +97,14 @@ var contractorNRAction = (function () {
                                 var agency = govCopDTO[i].agency;
                                 if(agency !='' && agency !=null){
                                     alert(agency);
-                                    $('#dcbinfo').append("<br/> <b>Position Title: </b> "+govCopDTO[i].positionTitle+"  ||  <b> Agency:  </b> "+govCopDTO[i].agency+"");
+                                    $('#dcbinfo').html("<br/> <b>Position Title: </b> "+govCopDTO[i].positionTitle+"  ||  <b> Agency:  </b> "+govCopDTO[i].agency+"");
                                 } else{
-                                    $('#dcbinfonotEngaged').append("<br/> This person is not a government/coperate employee.");
+                                    $('#dcbinfonotEngaged').html("<br/> This person is not a government/coperate employee.");
                                 }
                             }
                         }else{
                            // $('#dcbinfo').hide();
-                            $('#dcbinfonotEngaged').append("<br/> This person is not a government/coperate employee.");
+                            $('#dcbinfonotEngaged').html("<br/> This person is not a government/coperate employee.");
                         }
                     }
                 }
@@ -144,16 +144,16 @@ var contractorNRAction = (function () {
                                 var workId = employeeDetailsDTO[i].workId;
                                 if(workId !='' && workId != null){
                                     alert(workId);
-                                    $('#dcbinfo').append("<br/> <b>CDB No: </b> "+employeeDetailsDTO[i].cdbNo+"  ||  <b> Procuring Agency:  </b> "+employeeDetailsDTO[i].procuringAgency+"  ||  <b> Work ID:</b>"+employeeDetailsDTO[i].workId+"");
+                                    $('#dcbinfo').html("<br/> <b>CDB No: </b> "+employeeDetailsDTO[i].cdbNo+"  ||  <b> Procuring Agency:  </b> "+employeeDetailsDTO[i].procuringAgency+"  ||  <b> Work ID:</b>"+employeeDetailsDTO[i].workId+"");
                                     // $('#dcbinfo').append("<br/> This person is engaged with cdb number <b>"+employeeDetailsDTO[i].cdbNo+"</b> in <b>"+employeeDetailsDTO[i].procuringAgency+"</b> with work Id:<b>"+employeeDetailsDTO[i].workId+"</b>");
                                     $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
                                 }else{
-                                    $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project.");
+                                    $('#dcbinfonotEngaged').html("<br/> This person is not engaged in any work or project.");
                                 }
                             }
                         }else{
                             // $('#dcbinfo').hide();
-                            $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project.");
+                            $('#dcbinfonotEngaged').html("<br/> This person is not engaged in any work or project.");
                         }
 
                         if(govCopDTO !=''){
@@ -161,14 +161,14 @@ var contractorNRAction = (function () {
                                 var agency = govCopDTO[i].agency;
                                 if(agency !='' && agency !=null){
                                     alert(agency);
-                                    $('#dcbinfo').append("<br/> <b>Position Title: </b> "+govCopDTO[i].positionTitle+"  ||  <b> Agency:  </b> "+govCopDTO[i].agency+"");
+                                    $('#dcbinfo').html("<br/> <b>Position Title: </b> "+govCopDTO[i].positionTitle+"  ||  <b> Agency:  </b> "+govCopDTO[i].agency+"");
                                 } else{
-                                    $('#dcbinfonotEngaged').append("<br/> This person is not a government/coperate employee.");
+                                    $('#dcbinfonotEngaged').html("<br/> This person is not a government/coperate employee.");
                                 }
                             }
                         }else{
                             // $('#dcbinfo').hide();
-                            $('#dcbinfonotEngaged').append("<br/> This person is not a government/coperate employee.");
+                            $('#dcbinfonotEngaged').html("<br/> This person is not a government/coperate employee.");
                         }
 
                        /* var employeeDetailsDTO = dto.employeeDetailsDTOs;
@@ -346,7 +346,7 @@ var contractorNRAction = (function () {
                             eqTr = eqTr +
                             "<tr><td>" + (parseInt(i) + 1) + "</td>" +
                             "<td>" + equipments[i].equipmentName + "</td>" +
-                            "<td></td>" +
+                            "<td>" + equipments[i].equipmentType + "</td>" +
                             "<td>" + equipments[i].registrationNo + "</td>" +
                             "<td>"+owner+"</td>" +
                             "<td>" + equipments[i].quantity + "</td>" +

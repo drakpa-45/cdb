@@ -146,8 +146,8 @@
                                 </div>
                                 <div class="card hide" id="cIncorporation">
                                     <div class="bg-blue card-status card-status-left"></div>
-                                    <div class="card-header">
-                                        <h3 class="card-title">Attach Certificates of Incorporation</h3>
+                                    <div class="card-header bg-indigo-light">
+                                        <h3 class="card-title text-white">Attach Certificates of Incorporation</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12">
@@ -167,8 +167,8 @@
                                 </div>
                                 <div class="card tab2">
                                     <div class="bg-blue card-status card-status-left"></div>
-                                    <div class="card-header">
-                                        <h3 class="card-title">Permanent Address</h3>
+                                    <div class="card-header bg-indigo-light">
+                                        <h3 class="card-title  text-white">Permanent Address</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12">
@@ -192,8 +192,8 @@
 
                                 <div class="card tab2">
                                     <div class="bg-blue card-status card-status-left"></div>
-                                    <div class="card-header">
-                                        <h3 class="card-title">Name of Owner, Partners and/or others with Controlling Interest</h3>
+                                    <div class="card-header bg-indigo-light">
+                                        <h3 class="card-title  text-white">Name of Owner, Partners and/or others with Controlling Interest</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12">
@@ -204,7 +204,7 @@
                                                     <th>Sl No</th>
                                                     <th>Nationality</th>
                                                     <th>CID/Work Permit No.</th>
-                                                    <th>Salutation</th>
+                                                    <th>Title</th>
                                                     <th>Name</th>
                                                     <th>Gender</th>
                                                     <th>Designation</th>
@@ -239,8 +239,8 @@
                                 </div>
                                 <div class="card hide" id="oIncorporation">
                                     <div class="bg-blue card-status card-status-left"></div>
-                                    <div class="card-header">
-                                        <h3 class="card-title">Attach Certificates of ownership change</h3>
+                                    <div class="card-header bg-indigo-light">
+                                        <h3 class="card-title  text-white">Attach Certificates of ownership change</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12">
@@ -260,8 +260,8 @@
                                 </div>
                                 <div class="card tab2">
                                     <div class="bg-blue card-status card-status-left"></div>
-                                    <div class="card-header">
-                                        <h3 class="card-title">Existing Establishment Addresses</h3>
+                                    <div class="card-header bg-indigo-light">
+                                        <h3 class="card-title text-white">Existing Establishment Addresses</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12">
@@ -305,7 +305,7 @@
                                     </div>
 
                                     <div class="card-header">
-                                        <h3 class="card-title">Proposed Establishment Addresses</h3>
+                                        <h3 class="card-title text-danger">Proposed Establishment Addresses</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12">
@@ -333,8 +333,8 @@
 
                                 <div class="card tab2">
                                     <div class="bg-blue card-status card-status-left"></div>
-                                    <div class="card-header">
-                                        <h3 class="card-title">Induction course Details</h3>
+                                    <div class="card-header bg-indigo-light">
+                                        <h3 class="card-title  text-white">Induction course Details</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12">
@@ -405,7 +405,7 @@
                             </div>
                             <div class="card tab2">
                                 <div class="bg-blue card-status card-status-left"></div>
-                                <div class="card-header">Service Applied and Fee</div>
+                                <div class="card-header bg-indigo-light">Service Applied and Fee</div>
                                 <div class="card-body">
                                     <table class="table table-bordered table-condensed table-striped" id="serviceTbl">
                                         <thead>
@@ -437,7 +437,7 @@
                                 <div class="card tab4">
                                     <div class="bg-blue card-status card-status-left"></div>
                                     <div class="card-header">
-                                        <h3 class="card-title">Human Resource Form</h3>
+                                        <h3 class="card-title"><div class="card-header bg-indigo-light">Human Resource Form</h3>
                                     </div>
                                     <div class="card-body">
                                         <div style="overflow-x: auto;white-space: nowrap;">
@@ -447,7 +447,7 @@
                                                     <th style="width: 5%">Title</th>
                                                     <th style="width: 15%">Name</th>
                                                     <th style="width: 15%">ID/Work Permit No.</th>
-                                                    <th style="width: 10%">Sex</th>
+                                                    <th style="width: 10%">Gender</th>
                                                     <th style="width: 10%">Country</th>
                                                     <th style="width: 10%">Designation</th>
                                                     <th style="width: 10%">Qualification</th>
@@ -498,7 +498,6 @@
                         <div class="tab-pane equipment_details hide">
                             <div class="div-actual">
                                 <i><strong> Equipment Details</strong></i>
-
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-striped"
                                            id="equipmentTbl">

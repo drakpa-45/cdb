@@ -1125,11 +1125,11 @@
                                     <div class="modal-body form-horizontal">
                                         <div class="modal-div">
                                             <div class="form-group">
-                                                <input type="hidden" id="id5Edit" name="consultantHRs[0].id">
+                                                <input type="hidden" id="id5Edit" name="consultantOWs[0].id">
                                                 <label class="col-lg-2">Nationality
                                                     <span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="consultantHRs[0].countryId" id="ow1" required="" class="form-control custom-select text-left select-beast country">
+                                                    <select name="consultantOWs[0].countryId" id="ow1" required="" class="form-control custom-select text-left select-beast country">
                                                         <option value="">Select Country</option>
                                                         <c:forEach var="item" items="${countryList}">
                                                             <option value="${item.value}"><c:out value="${item.text}"/></option>
@@ -1142,7 +1142,7 @@
                                                       <span class="input-icon-addon">
                                                          <i class="fa fa-address-card-o"></i>
                                                       </span>
-                                                        <input type="text" name="consultantHRs[0].cidNo" class="form-control hr-cid" id="ow2" required="" placeholder="">
+                                                        <input type="text" name="consultantOWs[0].cidNo" class="form-control hr-cid" id="ow2" required="" placeholder="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1150,7 +1150,7 @@
                                                 <label class="col-lg-2">Salutation
                                                     <span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="consultantHRs[0].salutationId" id="ow3" required="" class="form-control custom-select text-left select-beast">
+                                                    <select name="consultantOWs[0].salutationId" id="ow3" required="" class="form-control custom-select text-left select-beast">
                                                         <option value="">Select Salutation</option>
                                                         <c:forEach var="item" items="${salutationList}">
                                                             <option value="${item.value}"><c:out value="${item.text}"/></option>
@@ -1162,14 +1162,14 @@
                                                 <div class="col-lg-4">
                                                     <div class="input-icon">
                                                         <span class="input-icon-addon"><i class="fe fe-user"></i></span>
-                                                        <input type="text" name="consultantHRs[0].name" id="ow4" class="form-control name" required="" placeholder="">
+                                                        <input type="text" name="consultantOWs[0].name" id="ow4" class="form-control name" required="" placeholder="">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-lg-2">Gender<span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="consultantHRs[0].sex" id="ow5" required="" class="form-control custom-select text-left select-beast sex">
+                                                    <select name="consultantOWs[0].sex" id="ow5" required="" class="form-control custom-select text-left select-beast sex">
                                                         <option value="">Select Gender</option>
                                                         <option value="M">Male</option>
                                                         <option value="F">Female</option>
@@ -1178,7 +1178,7 @@
                                                 <label class="col-lg-2">Designation
                                                     <span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="consultantHRs[0].designationId" id="ow6" required="" class="form-control custom-select text-left select-beast">
+                                                    <select name="consultantOWs[0].designationId" id="ow6" required="" class="form-control custom-select text-left select-beast">
                                                         <option value="">Select Designation</option>
                                                         <c:forEach var="item" items="${designationList}">
                                                             <option value="${item.value}"><c:out value="${item.text}"/></option>

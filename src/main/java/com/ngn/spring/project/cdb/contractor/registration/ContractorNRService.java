@@ -374,7 +374,7 @@ public class ContractorNRService extends BaseService {
      */
     @Transactional(readOnly = false)
     public void saveEQA(ContractorEQAttachment contractorEQA, LoggedInUser loggedInUser) throws Exception{
-        MultipartFile attachment = contractorEQA.getAttachment();
+       /* MultipartFile attachment = contractorEQA.getAttachment();
 
         String docName = contractorEQA.getDocumentName()+commonService.getFileEXT(attachment);
         String specificLoc = UPLOAD_LOC+"//EQUIPMENT";
@@ -384,6 +384,23 @@ public class ContractorNRService extends BaseService {
         contractorEQA.setDocumentPath(docPath);
         contractorEQA.setDocumentName(docName);
         contractorEQA.setFileType(attachment.getContentType());
+        contractorEQA.setCreatedBy(loggedInUser.getUserID());
+        contractorEQA.setCreatedOn(loggedInUser.getServerDate());
+        contractorNRDao.saveUpdate(contractorEQA);
+*/
+        MultipartFile attachment = contractorEQA.getAttachment();
+        if(attachment != null) {
+            String docNameUpload = contractorEQA.getDocumentName() + commonService.getFileEXT(attachment);
+            String specificLoc = UPLOAD_LOC + "//EQUIPMENT";
+            String docPath = commonService.uploadDocument(attachment, specificLoc, docNameUpload);
+            contractorEQA.setDocumentPath(docPath);
+            contractorEQA.setDocumentName(docNameUpload);
+            contractorEQA.setFileType(attachment.getContentType());
+        }
+        if(emptyNullCheck(contractorEQA.getId())){
+            String hrAttachmentID = commonService.getRandomGeneratedId();
+            contractorEQA.setId(hrAttachmentID);
+        }
         contractorEQA.setCreatedBy(loggedInUser.getUserID());
         contractorEQA.setCreatedOn(loggedInUser.getServerDate());
         contractorNRDao.saveUpdate(contractorEQA);
@@ -400,6 +417,10 @@ public class ContractorNRService extends BaseService {
 
     public ContractorHRAttachment getHRAttachmentFinal(String hraId){
         return contractorNRDao.getHRAttachmentFinal(hraId);
+    }
+
+    public ContractorEQAttachment getEQAttachmentFinal(String eqaId){
+        return contractorNRDao.getEQAttachmentFinal(eqaId);
     }
 
     @Transactional(readOnly = true)

@@ -14,17 +14,6 @@
         <div class="panel-body">
             <span><b>Requirements for different Category and Classification</b></span>
             <div class="form-group">
-                <div class="col-lg-1">
-                </div>
-                <div class="col-lg-11">
-                    <p>1.&nbsp;&nbsp;&nbsp;No equipment requirement for small class contractors.</p>
-                    <p>2.&nbsp;&nbsp;&nbsp;Submit valid blue book copies supported by valid insurances for all RSTA
-                        registered equipments.</p>
-                    <p>3.&nbsp;&nbsp;&nbsp;Submit equipments verification reports duly endorsed by a Govt. Engineer (not
-                        less than the rank of AE) for those equipment, which are not dealt by RSTA.</p>
-                </div>
-            </div>
-            <div class="form-group">
                 <div class="col-lg-6">
                     <div><i>Note for small Class (S)</i></div>
                     <div class="table-responsive">
@@ -230,7 +219,7 @@
                 </table>
 
                 <div class="col-lg-12 text-right">
-                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#eqModal"><i class="fa fa-plus"></i> Add More Equipment</button>
+                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" id="addMoreEqup" data-target="#eqModal"><i class="fa fa-plus"></i> Add More Equipment</button>
                 </div>
                 <%--<div class="col-lg-12 text-right">
                     <button type="button" class="btn btn-outline-primary btn-sm" onclick="addRow('eqdatatable')">
@@ -291,7 +280,7 @@
                                     </thead>
                                     <tbody class="files">
                                     <tr>
-                                        <td><input type='text' required="" class='form-control docName' name='equipments[0].contractorEQAs[0].documentName'/></td>
+                                        <td><input type='text' required="" class='form-control docName' value="Bluebook" name='equipments[0].contractorEQAs[0].documentName'/></td>
                                         <td><input type='file' required="true" class='file' name='equipments[0].contractorEQAs[0].attachment'
                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                         </td>
@@ -299,18 +288,18 @@
                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                     </tr>
                                     <tr>
-                                        <td><input type='text' required="" class='form-control docName' name='equipments[0].contractorEQAs[0].documentName'/></td>
+                                        <td><input type='text' required="" class='form-control docName'value="Insurance Certificate" name='equipments[0].contractorEQAs[0].documentName'/></td>
                                         <td><input type='file' required="true" class='file' name='equipments[0].contractorEQAs[0].attachment'
                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                         </td>
                                         <td class='file-size'></td>
                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                     </tr>
-                                    <%--   <tr><td><input type='text' required="" class='form-control docName' name='equipments[0].contractorEQAs[0].documentName'/> </td>
+                                       <tr><td><input type='text' required="" class='form-control docName' value="Others" name='equipments[0].contractorEQAs[0].documentName'/> </td>
                                            <td><input type='file' required="" class='file' name='equipments[0].contractorEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
                                            <td class='file-size'></td>
                                            <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
-                                       </tr>--%>
+                                       </tr>
                                     </tbody>
                                 </table>
                             </div>

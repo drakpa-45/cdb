@@ -57,6 +57,8 @@ SpecializedDao.fetchEQAttdetails=SELECT e.Id id,e.CrpSpecializedtradeEquipmentId
 
 SpecializedDao.checkOwnerShipType=SELECT CmnOwnershipTypeId FROM crpspecializedtrade WHERE SPNo=?
 
+SpecializedDao.getEQAttachmentFinal = SELECT Id id,CrpSpecializedtradeEquipmentFinalId equipmentId,DocumentName documentName,DocumentPath documentPath,FileType fileType,CreatedBy createdBy,CreatedOn createdOn FROM crpspecializedtradeequipmentattachmentfinal WHERE Id = :eqaId
+
 /** Firm Queries here*/
 
 SpecializedDao.getFirmFee=SELECT f.NewRegistrationFee registrationFee,f.FirstRenewalFee renewalFee,f.Name name,f.RegistrationValidity validaty FROM crpservicefeestructure f WHERE f.Name ='Specialized Trade Firm';
@@ -76,7 +78,7 @@ LEFT JOIN cmnlistitem st ON st.Id = hr.CmnServiceTypeId LEFT JOIN cmnlistitem td
 
 SpecializedFirmActionDao.getHRAttachments=SELECT a.DocumentName documentName,DocumentPath documentPath, FileType fileType FROM crpspecializedtradehumanresourceattachment a WHERE a.CrpSpecializedtradeHumanResourceId = :hrId
 
-SpecializedFirmActionDao.getEquipment=SELECT ce.Id id, ce.CrpSpecializedTradeId specializedFirmId,ce.CmnEquipmentId equipmentId, eq.Name equipmentName,ce.RegistrationNo registrationNo,ce.SerialNo serialNo,ce.Quantity quantity,ce.ModelNo modelNo ,ce.Verified AS verified, ce.Approved AS approved \
+SpecializedFirmActionDao.getEquipment=SELECT ce.Id id, ce.CrpSpecializedTradeId specializedFirmId,ce.CmnEquipmentId equipmentId, eq.Name equipmentName,ce.RegistrationNo registrationNo,ce.SerialNo serialNo,ce.Quantity quantity,ce.ModelNo modelNo, CASE WHEN eq.IsRegistered = '1' THEN 'Registered' ELSE 'Not Registered' END AS equipmentType,ce.Verified AS verified, ce.Approved AS approved \
 FROM crpspecializedtradeequipment ce LEFT JOIN cmnequipment  eq ON ce.CmnEquipmentId = eq.Id LEFT JOIN cmnspecializedtradecategory cl ON cl.Id = ce.CmnEquipmentId WHERE ce.CrpSpecializedTradeId =:specializedFirmId
 
 SpecializedFirmActionDao.getEQAttachments=SELECT a.DocumentName documentName,DocumentPath documentPath, FileType fileType FROM crpspecializedtradeequipmentattachment a WHERE a.CrpSpecializedtradeEquipmentId  = :eqId
@@ -108,7 +110,7 @@ LEFT JOIN cmnlistitem st ON st.Id = hr.CmnServiceTypeId LEFT JOIN cmnlistitem td
 
 SpecializedFirmRCDao.getHRAttachmentsFinal=SELECT a.Id AS id,a.DocumentName documentName,DocumentPath documentPath, FileType fileType FROM crpspecializedtradehumanresourceattachmentfinal a WHERE a.CrpSpecializedTradeHumanResourceFinalId = :hrId
 
-SpecializedFirmRCDao.getEquipmentFinal=SELECT ce.Id id, eq.Name equipmentName,ce.RegistrationNo registrationNo,ce.SerialNo serialNo,ce.Quantity quantity,ce.ModelNo modelNo ,ce.DeleteRequest AS deleteRequest,ce.CmnEquipmentId equipmentId FROM crpspecializedtradeequipmentfinal ce INNER JOIN cmnequipment  eq ON ce.CmnEquipmentId = eq.Id WHERE ce.CrpSpecializedtradeFinalId =:specializedFirmId
+SpecializedFirmRCDao.getEquipmentFinal=SELECT ce.Id id, eq.Name equipmentName,ce.RegistrationNo registrationNo,ce.SerialNo serialNo,ce.Quantity quantity,ce.ModelNo modelNo ,ce.DeleteRequest AS deleteRequest,ce.CmnEquipmentId equipmentId,CASE WHEN eq.IsRegistered = '1' THEN 'Registered' ELSE 'Not Registered' END AS equipmentType FROM crpspecializedtradeequipmentfinal ce INNER JOIN cmnequipment  eq ON ce.CmnEquipmentId = eq.Id WHERE ce.CrpSpecializedtradeFinalId =:specializedFirmId
 
 SpecializedFirmRCDao.getEQAttachmentsFinal=SELECT a.Id AS id,a.DocumentName documentName,DocumentPath documentPath, FileType fileType FROM crpspecializedtradeequipmentattachmentfinal a WHERE a.CrpSpecializedtradeEquipmentFinalId  = :eqId
 

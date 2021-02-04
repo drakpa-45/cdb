@@ -173,7 +173,7 @@ function getOwnerModalData(tableId, prefix, totalCol) {
     $("#" + tableId).append(tr).find(".noRecord").hide();
 
     j= j+1;
-    bodyId ++;
+    //bodyId ++;
 
     modal.modal('hide');
     $("#ownerModal").empty().html(ow_modal);
@@ -458,21 +458,52 @@ var spFirmRC = (function () {
             type: 'GET',
             data: {specializedFirmId:$('#spFirmHRidIdFinal').val(),ownerOrHR:'O'},
             success: function (data) {
-
                 if(data){
                     $('#cIncorporation').removeClass('hide');
-                    var tr = '';
+                    var cIncTr = '';
+                    var categoryTr = '';
+                    var ownerTr = '';
                     for(var i in data){
-                        tr = tr + "<tr>"+
-                        "<td><input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='InSole'/></td>" +
-                        "<td ><input type='text' class='form-control docName' name='cAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>"+
-                        "<td class='attachment'><a href='"+_baseURL() + "/viewDownload?documentPath="+data[i].documentPath+"' target='_blank'> View </a></td>" +
-                        "<td class='file-size'></td>" +
-                        "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
-                        "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
-                        "</tr>";
+                        if(data[i].attachmentFor == 'InSole' || data[i].attachmentFor == null) {
+                            cIncTr = cIncTr + "<tr>" +
+                            "<td></td>" +
+                            "<td>" +
+                            "<input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='InSole'/>" +
+                            "<input type='text' class='form-control docName' name='cAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
+                            "<td class='attachment'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                            "<td></td>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
+                            "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                            "</tr>";
+                        }
+                        if(data[i].attachmentFor == 'AL'){
+                            categoryTr = categoryTr + "<tr>" +
+                            "<td></td>" +
+                            "<td>" +
+                            "<input type='hidden' class='form-control aFor' name='categoryAttachments[0].attachmentFor' value='AL'/>" +
+                            "<input type='text' class='form-control docName' name='categoryAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
+                            "<td class='attachmentcc'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                            "<td></td>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row_cc' >Edit</button>" +
+                            "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                            "</tr>";
+                        }
+                        if(data[i].attachmentFor == 'OC'){
+                            ownerTr = ownerTr + "<tr>" +
+                            "<td></td>" +
+                            "<td>" +
+                            "<input type='hidden' class='form-control aFor' name='ownerAttachments[0].attachmentFor' value='OC'/>" +
+                            "<input type='text' class='form-control docName' name='ownerAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
+                            "<td class='attachmentoc'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
+                            "<td></td>" +
+                            "<td class='action'><button class='btn-sm btn-info btn-block edit_row_oc' >Edit</button>" +
+                            "<button class='btn-sm btn-info btn-block del_row'>Delete</button></td>" +
+                            "</tr>";
+                        }
                     }
-                    $('#certificateTbl').find('tbody').html(tr);
+                    $('#certificateTbl').find('tbody').html(cIncTr);
+                    $('#certificateTblOwner').find('tbody').html(ownerTr);
+                    $('#certificateTblCategory').find('tbody').html(categoryTr);
                 }else{
                     $('#cIncorporation').addClass('hide');
                 }
@@ -490,9 +521,25 @@ var spFirmRC = (function () {
         })
     }
 
+    function editOCAttachment(){
+        $('#certificateTblOwner').on('click','.edit_row_oc',function(){
+            $(this).closest('tr').find('.docName').prop('disabled',false);
+            var attachment = $(this).closest('tr').find('.attachmentoc');
+            attachment.html("<input type='file' name='ownerAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'>");
+        })
+    }
+
+    function editCCAttachment(){
+        $('#certificateTblCategory').on('click','.edit_row_cc',function(){
+            $(this).closest('tr').find('.docName').prop('disabled',false);
+            var attachment = $(this).closest('tr').find('.attachmentcc');
+            attachment.html("<input type='file' name='categoryAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'>");
+        })
+    }
+
     function viewDownloadAttachment(){
         $('body').on('click','.vAttachment',function(){
-            var id = $(this).closest('tr').find('.spFirmHRid').val();
+            var id = $(this).closest('tr').find('.spFirmHRidIdFinal').val();
             $.ajax({
                 url: _baseURL() + '/viewDownload',
                 type: 'GET',
@@ -516,7 +563,7 @@ var spFirmRC = (function () {
             if($(this).is(':checked')){
                 $('.human_resource_criteria').removeClass('hide');
                 $.ajax({
-                    url: _baseURL() + '/getSpFirmHRsFinal',
+                    url: _baseURL() + '/getSpecializedFirmHRsFinal',
                     type: 'GET',
                     data: {specializedFirmId:$('#spFirmHRidIdFinal').val(),ownerOrHR:'H'},
                     success: function (res) {
@@ -567,7 +614,6 @@ var spFirmRC = (function () {
                 data: {specializedFirmId: $('#spFirmHRidIdFinal').val(), ownerOrHR: 'O'},
                 success: function (res) {
                     var specializedFirmHrs = res;
-
                     for (var i in specializedFirmHrs) {
                         var tblRow = $('#partnerDtls').find('tbody tr:eq(' + (parseInt(i)) + ')');
                         tblRow.find('#countryList').val(tblRow.find('#countryList option:contains("' + specializedFirmHrs[i].countryName + '")').val());
@@ -593,12 +639,12 @@ var spFirmRC = (function () {
             $.ajax({
                 url: _baseURL() + '/getSpecializedFirmHRsFinal',
                 type: 'GET',
-                data: {specializedFirmId: $('#specializedFirmIdFinal').val(), ownerOrHR: 'O'},
+                data: {specializedFirmId: $('#spFirmHRidIdFinal').val(), ownerOrHR: 'O'},
                 success: function (res) {
                     var spFirmHrs = res;
                     for (var i in spFirmHrs) {
                         partnerHrTr = partnerHrTr + "<tr>" +
-                        "<td class='countryName'><input type='hidden' class='specializedFirmHRid' name='spFirmHRs[0].id' value='"+spFirmHrs[i].id +"'/>" + spFirmHrs[i].countryName + "</td>" +
+                        "<td class='countryName'><input type='hidden' class='spFirmHRid' name='spFirmHRs[0].id' value='"+spFirmHrs[i].id +"'/>" + spFirmHrs[i].countryName + "</td>" +
                         "<td class='cidNo'>" + spFirmHrs[i].cidNo + "</td>" +
                         "<td class='salutationName'>" + spFirmHrs[i].salutationName + "</td>" +
                         "<td class='name'>" + spFirmHrs[i].name + "</td>" +
@@ -925,7 +971,6 @@ var spFirmRC = (function () {
                     async:false,
                     data: {cidNo: $this.val(),type:"fetch"},
                     success: function (res) {
-                        alert(res.status);
                         if (res.status == '1') {
                             var dto = res.dto;
                             // var index = $this.closest("tr").index();
@@ -1010,6 +1055,8 @@ var spFirmRC = (function () {
         getPersonalInfo();
         getPersonalInfoHR();
         editIncAttachment();
+        editOCAttachment();
+        editCCAttachment();
         isFirmNameUnique();
         getOwnerFinal();
         editInModalOwner();

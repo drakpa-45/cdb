@@ -105,21 +105,29 @@ public class SpecializedFirmOSService extends BaseService {
             specializedFirm.setOwnershipTypeId(ownershipTypeId);
             specializedFirm.setFirmName(spFirmDTO.getSpecializedFirm().getFirmName());
 
-            List<SpFirmHR> ownerList = spFirmDTO.getSpecializedFirm().getSpFirmHRs();
+            List<SpFirmHR> ownerList = spFirmDTO.getSpFirmOWs();
             specializedFirm.setOwnershipChangeRemarks(spFirmDTO.getSpecializedFirm().getOwnershipChangeRemarks());
+
             for(SpFirmHR spFirmHR:ownerList){
                 if(spFirmHR.getDeleteRequest() != null && spFirmHR.getDeleteRequest() == 1){
                     //to save deleted hr
-                   // spFirmHR.setDeleteRequest(1);
+                    //contractorHR.setDeleteRequest(1);
                     specializedFirmRDao.saveDeleteHrRequest(spFirmHR.getId());
+                } else {
+                    if(emptyNullCheck(spFirmHR.getId())){
+                        spFirmHR.setId(commonService.getRandomGeneratedId());
+                    }
+                    //currentHRs.add(contractorHR.getId());
+                    if(emptyNullCheck(spFirmHR.getCidNo())){
+                        continue;
+                    }
+                    //   String hrId = commonService.getRandomGeneratedId();
+                    //  contractorHR.setId(hrId);
+                    spFirmHR.setSpecializedID(specializedFirmId);
+                    spFirmHR.setIsPartnerOrOwner(TRUE_INT);
+                    specializedFirmService.saveHR(spFirmHR, loggedInUser);
                 }
-                String hrId = commonService.getRandomGeneratedId();
-                spFirmHR.setId(hrId);
-                spFirmHR.setSpecializedID(specializedFirmId);
-                spFirmHR.setIsPartnerOrOwner(TRUE_INT);
-                specializedFirmService.saveHR(spFirmHR, loggedInUser);
             }
-
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "12");
             appliedServicesList.add(appliedService);
         }
@@ -170,11 +178,18 @@ public class SpecializedFirmOSService extends BaseService {
             for(SpFirmHR spFirmHR:ownerList){
                 if(spFirmHR.getDeleteRequest() != null && spFirmHR.getDeleteRequest() == 1){
                     //to save deleted hr
-                  //  spFirmHR.setDeleteRequest(1);
+                    //contractorHR.setDeleteRequest(1);
                     specializedFirmRDao.saveDeleteHrRequest(spFirmHR.getId());
-                }else{
-                    String hrId = commonService.getRandomGeneratedId();
-                    spFirmHR.setId(hrId);
+                } else {
+                    if(emptyNullCheck(spFirmHR.getId())){
+                        spFirmHR.setId(commonService.getRandomGeneratedId());
+                    }
+                    //currentHRs.add(contractorHR.getId());
+                    if(emptyNullCheck(spFirmHR.getCidNo())){
+                        continue;
+                    }
+                    //   String hrId = commonService.getRandomGeneratedId();
+                    //  contractorHR.setId(hrId);
                     spFirmHR.setSpecializedID(specializedFirmId);
                     spFirmHR.setIsPartnerOrOwner(TRUE_INT);
                     specializedFirmService.saveHR(spFirmHR, loggedInUser);
@@ -244,10 +259,22 @@ public class SpecializedFirmOSService extends BaseService {
                 }
                 spFirmEQ.setSpecializedTradeId(specializedFirmId);
                 specializedFirmService.saveEQ(spFirmEQ, loggedInUser);
-                //Save Human resource attachment
+                //Save eq resource attachment
                 for (SpFirmEQAttachment spFirmEQA : spFirmEQ.getSpFirmEQAs()) {
                     if(spFirmEQA.getAttachment() == null){ //No changes, so no need to save
                         continue;
+                    }
+                    if(!emptyNullCheck(spFirmEQA.getId())){
+                        if(spFirmEQA.getAttachment() == null){ // no changes
+                            spFirmEQA = specializedFirmService.getEQAttachmentFinal(spFirmEQA.getId());
+                        }else{ // for edit
+                            spFirmEQA.setEditedBy(loggedInUser.getUserID());
+                            spFirmEQA.setEditedOn(loggedInUser.getServerDate());
+                        }
+                    }else {
+                        if (spFirmEQA.getAttachment() == null) { //No changes, so no need to save
+                            continue;
+                        }
                     }
                     spFirmEQA.setEquipmentId(spFirmEQ.getId());
                     specializedFirmService.saveEQA(spFirmEQA, loggedInUser);

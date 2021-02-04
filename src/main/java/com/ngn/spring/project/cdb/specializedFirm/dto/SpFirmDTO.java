@@ -14,7 +14,9 @@ import java.util.List;
  */
 public class SpFirmDTO {
     private SpecializedFirm specializedFirm;
+    private SpFirmServicePayment servicePayment;
     private List<SpFirmHR> spFirmHRs;
+    private List<SpFirmHR> spFirmOWs;
     private List<SpFirmCategory> categories;
     private List<SpFirmEQ> equipments;
     private List<SpFirmAttachment> cAttachments;
@@ -35,6 +37,14 @@ public class SpFirmDTO {
 
     public void setSpFirmHRs(List<SpFirmHR> spFirmHRs) {
         this.spFirmHRs = spFirmHRs;
+    }
+
+    public List<SpFirmHR> getSpFirmOWs() {
+        return spFirmOWs;
+    }
+
+    public void setSpFirmOWs(List<SpFirmHR> spFirmOWs) {
+        this.spFirmOWs = spFirmOWs;
     }
 
     public List<SpFirmCategory> getCategories() {
@@ -75,5 +85,13 @@ public class SpFirmDTO {
 
     public void setCategoryAttachments(List<SpFirmAttachment> categoryAttachments) {
         this.categoryAttachments = categoryAttachments;
+    }
+
+    public SpFirmServicePayment getServicePayment() {
+        return servicePayment;
+    }
+
+    public void setServicePayment(SpFirmServicePayment servicePayment) {
+        this.servicePayment = servicePayment;
     }
 }

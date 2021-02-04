@@ -88,14 +88,15 @@ public class ContractorOSService extends BaseService {
         String appliedService;
         contractor.setContractorId(contractorId);
         //insert undertaking letter
+
         if(contractorDTO.getcAttachments() != null && !contractorDTO.getcAttachments().isEmpty())
            updateIncorporation(contractorDTO.getcAttachments(), loggedInUser, contractorId);
 
-        if(contractorDTO.getcAttachments() != null && !contractorDTO.getcAttachments().isEmpty())
-            updateIncorporation(contractorDTO.getcAttachments(), loggedInUser, contractorId);
+        if(contractorDTO.getOwnerAttachments() != null && !contractorDTO.getOwnerAttachments().isEmpty())
+            updateIncorporation(contractorDTO.getOwnerAttachments(), loggedInUser, contractorId);
 
-        if(contractorDTO.getcAttachments() != null && !contractorDTO.getcAttachments().isEmpty())
-            updateIncorporation(contractorDTO.getcAttachments(), loggedInUser, contractorId);
+        if(contractorDTO.getCategoryAttachments() != null && !contractorDTO.getCategoryAttachments().isEmpty())
+            updateIncorporation(contractorDTO.getCategoryAttachments(), loggedInUser, contractorId);
 
         //region incorporation (Name are also allowed to change)
         if(renewalServiceType.getIncorporation() != null){
@@ -104,16 +105,24 @@ public class ContractorOSService extends BaseService {
             contractor.setOwnershipTypeId(ownershipTypeId);
             contractor.setFirmName(contractorDTO.getContractor().getFirmName());
 
-            List<ContractorHR> ownerList = contractorDTO.getContractorHRs();
+            List<ContractorHR> ownerList = contractorDTO.getContractorOWs();
             contractor.setOwnershipChangeRemarks(contractorDTO.getContractor().getOwnershipChangeRemarks());
             for(ContractorHR contractorHR:ownerList){
                 if(contractorHR.getDeleteRequest() != null && contractorHR.getDeleteRequest() == 1){
                     //to save deleted hr
                     //contractorHR.setDeleteRequest(1);
                     contractorRCDao.saveDeleteHrRequest(contractorHR.getId());
-                }else {
-                    String hrId = commonService.getRandomGeneratedId();
-                    contractorHR.setId(hrId);
+                } else {
+                    if(emptyNullCheck(contractorHR.getId())){
+                        contractorHR.setId(commonService.getRandomGeneratedId());
+                    }
+                    //currentHRs.add(contractorHR.getId());
+                    if(emptyNullCheck(contractorHR.getCidNo())){
+                        continue;
+                    }
+
+                 //   String hrId = commonService.getRandomGeneratedId();
+                  //  contractorHR.setId(hrId);
                     contractorHR.setContractorID(contractorId);
                     contractorHR.setIsPartnerOrOwner(TRUE_INT);
                     contractorNRService.saveHR(contractorHR, loggedInUser);
@@ -163,15 +172,20 @@ public class ContractorOSService extends BaseService {
         //region change of owner or partner
         if(renewalServiceType.getChangeOfOwner() != null){
            // List<ContractorHR> ownerList = contractorDTO.getContractor().getContractorHRs();
-            List<ContractorHR> ownerList = contractorDTO.getContractorHRs();
+            List<ContractorHR> ownerList = contractorDTO.getContractorOWs();
             for(ContractorHR contractorHR:ownerList){
                 if(contractorHR.getDeleteRequest() != null && contractorHR.getDeleteRequest() == 1){
                     //to save deleted hr
                   //  contractorHR.setDeleteRequest(1);
                     contractorRCDao.saveDeleteHrRequest(contractorHR.getId());
                 }else{
-                    String hrId = commonService.getRandomGeneratedId();
-                    contractorHR.setId(hrId);
+                    if(emptyNullCheck(contractorHR.getId())){
+                        contractorHR.setId(commonService.getRandomGeneratedId());
+                    }
+                    //currentHRs.add(contractorHR.getId());
+                    if(emptyNullCheck(contractorHR.getCidNo())){
+                        continue;
+                    }
                     contractorHR.setContractorID(contractorId);
                     contractorHR.setIsPartnerOrOwner(TRUE_INT);
                     contractorNRService.saveHR(contractorHR, loggedInUser);
@@ -182,6 +196,7 @@ public class ContractorOSService extends BaseService {
             appliedServicesList.add(appliedService);
         }
         //endregion
+
         //region update HR
         if(renewalServiceType.getUpdateHR() != null){
             List<ContractorHR> hrList = contractorDTO.getContractorHRs();
@@ -245,6 +260,18 @@ public class ContractorOSService extends BaseService {
                     if(contractorEQA.getAttachment() == null){ //No changes, so no need to save
                         continue;
                     }
+                    if(!emptyNullCheck(contractorEQA.getId())){
+                        if(contractorEQA.getAttachment() == null){ // no changes
+                            contractorEQA = contractorNRService.getEQAttachmentFinal(contractorEQA.getId());
+                        }else{ // for edit
+                            contractorEQA.setEditedBy(loggedInUser.getUserID());
+                            contractorEQA.setEditedOn(loggedInUser.getServerDate());
+                        }
+                    }else {
+                        if (contractorEQA.getAttachment() == null) { //No changes, so no need to save
+                            continue;
+                        }
+                    }
                     contractorEQA.setEquipmentId(contractorEQ.getId());
                     contractorNRService.saveEQA(contractorEQA, loggedInUser);
                 }
@@ -253,20 +280,6 @@ public class ContractorOSService extends BaseService {
             appliedServicesList.add(appliedService);
         }
         //endregion
-
-        //region to save owner details if both of incoporation & change of owner service is not availed
-   /*     if(renewalServiceType.getIncorporation() == null && renewalServiceType.getChangeOfOwner() == null){
-            List<ContractorHR> ownerList = contractorDTO.getContractor().getContractorHRs();
-            contractor.setOwnershipChangeRemarks(contractorDTO.getContractor().getOwnershipChangeRemarks());
-            for(ContractorHR contractorHR:ownerList){
-                String hrId = commonService.getRandomGeneratedId();
-                contractorHR.setId(hrId);
-                contractorHR.setContractorID(contractorId);
-                contractorHR.setIsPartnerOrOwner(TRUE_INT);
-                contractorNRService.saveHR(contractorHR, loggedInUser);
-            }
-        }*/
-       //end region
 
         //region save applied service and payment
         appliedServicesList.stream().filter(c-> !c.isEmpty()).forEach(
@@ -351,9 +364,9 @@ public class ContractorOSService extends BaseService {
             ccRenewal = getCategoryClassFinal(contractorFinalId);
         }
         for(CategoryClassDTO classDTO : ccRenewal){
-            BigDecimal renewalFee = ((FeeStructureDTO) contractorNRService.gFeeStructure(classDTO.getaClassId()).get(0)).getRenewalFee();
+           // BigDecimal renewalFee = ((FeeStructureDTO) contractorNRService.gFeeStructure(classDTO.getaClassId()).get(0)).getRenewalFee();
             classDTO.setvAmount(BigDecimal.valueOf(00.00));
-            totalRenewalFee = totalRenewalFee.add(renewalFee);
+            totalRenewalFee = totalRenewalFee.add(BigDecimal.valueOf(00.00));
         }
         for(CategoryClassDTO classDTO : ccUpDown){
             BigDecimal fee = ((FeeStructureDTO) contractorNRService.gFeeStructure(classDTO.getaClassId()).get(0)).getRegistrationFee();

@@ -103,14 +103,11 @@
 
                                             <div class="card hide" id="cIncorporation">
                                                 <div class="bg-blue card-status card-status-left"></div>
-                                                <div class="card-header">
-                                                    <h3 class="card-title">Attach Certificates of Incorporation</h3>
+                                                <div class="card-header bg-indigo-light">
+                                                    <h3 class="card-title text-white">Attach Certificates of Incorporation</h3>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="col-lg-12">
-                                                        <%--<div class=""><input id="addMoreCert" type="button"
-                                                                             value="Add More Certificate"
-                                                                             class="btn btn-primary"></div>--%>
                                                         <table class="table table-bordered table-center table-responsive-lg auto-index"
                                                                id="IncCertificateTbl">
                                                             <thead>
@@ -130,8 +127,8 @@
 
                                             <div class="card tab2">
                                                 <div class="bg-blue card-status card-status-left"></div>
-                                                <div class="card-header">
-                                                    <h3 class="card-title">Name of Owner, Partners and/or others with
+                                                <div class="card-header bg-indigo-light">
+                                                    <h3 class="card-title text-white">Name of Owner, Partners and/or others with
                                                         Controlling Interest</h3>
                                                 </div>
                                                 <div class="card-body">
@@ -169,8 +166,8 @@
                                             <!-- Box Open -->
                                             <div class="card tab2">
                                                 <div class="bg-blue card-status card-status-left"></div>
-                                                <div class="card-header">
-                                                    <h3 class="card-title">Permanent Address</h3>
+                                                <div class="card-header bg-indigo-light">
+                                                    <h3 class="card-title text-white">Permanent Address</h3>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="col-lg-12">
@@ -195,8 +192,8 @@
                                             <!-- Box Open -->
                                             <div class="card tab2">
                                                 <div class="bg-blue card-status card-status-left"></div>
-                                                <div class="card-header">
-                                                    <h3 class="card-title">Induction course Details</h3>
+                                                <div class="card-header bg-indigo-light">
+                                                    <h3 class="card-title text-white">Induction course Details</h3>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="col-lg-12">
@@ -225,8 +222,8 @@
                                             <!-- Box Open -->
                                             <div class="card tab2">
                                                 <div class="bg-blue card-status card-status-left"></div>
-                                                <div class="card-header">
-                                                    <h3 class="card-title">Establishment Addresses</h3>
+                                                <div class="card-header bg-indigo-light">
+                                                    <h3 class="card-title text-white">Establishment Addresses</h3>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="col-lg-12">
@@ -310,8 +307,8 @@
                                                     <!-- Box Open -->
                                                     <div class="card tab4">
                                                         <div class="bg-blue card-status card-status-left"></div>
-                                                        <div class="card-header">
-                                                            <h3 class="card-title">Human Resource Form</h3>
+                                                        <div class="card-header bg-indigo-light">
+                                                            <h3 class="card-title text-white">Human Resource Form</h3>
                                                         </div>
                                                         <div class="card-body">
                                                             <div class="col-sm-12 table-responsive">
@@ -367,8 +364,7 @@
                                 <div class="tab-pane contractorEquipmentDtls">
                                     <form action="" method="post" class="">
                                         <div id="contractorEquipment" style="">
-                                            <i><strong>Contractor Equipment Details</strong></i>
-
+                                            <i><strong> Equipment Details</strong></i>
                                             <div class="panel panel-default">
                                                 <div class="panel-body">
                                                     <div class="table-responsive">
