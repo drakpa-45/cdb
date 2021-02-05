@@ -1,5 +1,8 @@
 package com.ngn.spring.project.cdb.admin.contractor.registration;
 
+import bt.gov.g2c.aggregator.business.InvokePaymentWS;
+import bt.gov.g2c.aggregator.dto.PaymentDTO;
+import bt.gov.g2c.aggregator.dto.RequestDTO;
 import com.ngn.spring.project.base.BaseService;
 import com.ngn.spring.project.cdb.admin.dto.*;
 import com.ngn.spring.project.cdb.common.CommonService;
@@ -12,15 +15,19 @@ import com.ngn.spring.project.cdb.contractor.registration.model.ContractorFinal;
 import com.ngn.spring.project.cdb.contractor.renewal.ContractorRCService;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
 import com.ngn.spring.project.global.global.MailSender;
+import com.ngn.spring.project.global.global.SmsSender;
 import com.ngn.spring.project.lib.LoggedInUser;
 import com.ngn.spring.project.lib.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * ==================================================================================
@@ -127,13 +134,35 @@ public class ContractorNRActionService extends BaseService {
         String contractorId = (String)commonService.getValue("crpcontractor","CrpContractorId","ReferenceNo",appNo.toString());
         contractorNRActionDao.approve(contractorId, loggedInUser.getUserID(), aRemarks);
 
+        RequestDTO dto = new RequestDTO();
+        dto.setApplicationNo(applicationNo);
+        dto.setAgencyCode("CDB");
+        dto.setServiceName("New Registration of Contractor");
+        dto.setExpiryDate(null);
+        ArrayList<PaymentDTO> paymentList = new ArrayList<PaymentDTO>();
+        PaymentDTO paymentdto = new PaymentDTO();
+        //Integer amount = passportUploadDAO.getServiceFees(applicationNo);
+        BigDecimal amount = (BigDecimal) commonService.getValue("crpcontractorregistrationpayment","ApprovedAmount","CrpContractorFinalId",contractorId);
+        paymentdto.setServiceFee(String.valueOf(amount));
+
+        paymentdto.setAccountHeadId("Choneywangmo@cdb.gov.bt");
+        paymentList.add(paymentdto);
+        dto.setPaymentList(paymentList.toArray(new PaymentDTO[paymentList.size()]));
+        System.out.println("Response from Aggregator: "+paymentdto.getServiceFee());
+        ResourceBundle bundle = ResourceBundle.getBundle("wsEndPointURL_en_US");
+        InvokePaymentWS invokews = new InvokePaymentWS(bundle.getString("getPayment.endPointURL"));
+        boolean isSaved = invokews.insertPaymentDetailsOnApproval(dto);
+        System.out.println("Response from Aggregator: "+isSaved);
+
         String emailId = (String)commonService.getValue("crpcontractor","Email","ReferenceNo",appNo.toString());
+        String phoneNumber = (String)commonService.getValue("crpcontractor","MobileNo","ReferenceNo",appNo.toString());
         String mailContent = "Dear User,<br>Your application for application number : "+appNo.toString()+" is approved."+
                 "<br>You may pay the required fee online through following link:<br>" +
-                "<a target='_blank' href='https://www.citizenservices.gov.bt/G2CPaymentAggregatorStg'>https://www.citizenservices.gov.bt/G2CPaymentAggregatorStg</a>" +
+                "<a target='_blank' href='https://tinyurl.com/y3m7wa3c'>https://tinyurl.com/y3m7wa3c</a>" +
                 "<br>Or You may visit our CDB counters to pay the fee. " +
                 "<br><br>Note: Only after payment confirmation, your application will be done final approval. And you will get the login credential to log into system.";
-        MailSender.sendMail(emailId, "cdb@gov.bt", null, mailContent, "Application approved");
+        MailSender.sendMail(emailId, "cdb@gov.bt", null, mailContent, "Application approved for Payment");
+        SmsSender.smsSender(phoneNumber, "cdb@gov.bt", null, mailContent, "Application approved for Payment");
         responseMessage.setStatus(SUCCESSFUL_STATUS);
         responseMessage.setText("Contractor application number :" + appNo + " approved successfully.");
         return responseMessage;
@@ -167,6 +196,7 @@ public class ContractorNRActionService extends BaseService {
                 "Password : 123" +
                 "Please change your default password after login.";
         MailSender.sendMail(contractor.getRegEmail(), "cdb@gov.bt", null, mailContent, "Application approved");
+        SmsSender.smsSender(contractor.getRegEmail(), "cdb@gov.bt", null, mailContent, "Application approved");
         return responseMessage;
     }
 

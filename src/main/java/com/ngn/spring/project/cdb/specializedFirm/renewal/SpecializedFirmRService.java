@@ -18,6 +18,7 @@ import com.ngn.spring.project.cdb.specializedFirm.dto.SpFirmHrDTO;
 import com.ngn.spring.project.cdb.specializedFirm.model.*;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
 import com.ngn.spring.project.global.global.MailSender;
+import com.ngn.spring.project.global.global.SmsSender;
 import com.ngn.spring.project.lib.DropdownDTO;
 import com.ngn.spring.project.lib.LoggedInUser;
 import com.ngn.spring.project.lib.ResponseMessage;
@@ -640,6 +641,7 @@ public class SpecializedFirmRService extends BaseService {
         String mailContent = "Dear User, This is to notify that please replace your Hr for recently deleted Hr from your firm. Replacement should be done within a month otherwise your firm will be down graded.";
         try {
             MailSender.sendMail(email, "cdb@gov.bt", null, mailContent, "Hr replacement");
+            SmsSender.smsSender(email, "cdb@gov.bt", null, mailContent, "Hr replacement");
         } catch (Exception e) {
             e.printStackTrace();
         }

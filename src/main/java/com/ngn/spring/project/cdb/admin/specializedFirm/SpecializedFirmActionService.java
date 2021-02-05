@@ -1,5 +1,8 @@
 package com.ngn.spring.project.cdb.admin.specializedFirm;
 
+import bt.gov.g2c.aggregator.business.InvokePaymentWS;
+import bt.gov.g2c.aggregator.dto.PaymentDTO;
+import bt.gov.g2c.aggregator.dto.RequestDTO;
 import com.ngn.spring.project.base.BaseService;
 import com.ngn.spring.project.cdb.admin.dto.*;
 import com.ngn.spring.project.cdb.common.CommonService;
@@ -11,13 +14,16 @@ import com.ngn.spring.project.cdb.specializedFirm.model.SpecializedFirmFinal;
 import com.ngn.spring.project.cdb.specializedFirm.renewal.SpecializedFirmRService;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
 import com.ngn.spring.project.global.global.MailSender;
+import com.ngn.spring.project.global.global.SmsSender;
 import com.ngn.spring.project.lib.LoggedInUser;
 import com.ngn.spring.project.lib.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -121,9 +127,6 @@ public class SpecializedFirmActionService extends BaseService {
         String applicationNumber = String.valueOf(appNo);
         SpecializedFirm specializedFirm = specializedFirmService.getSpecializedFirm(applicationNumber);
 
-        ResourceBundle resourceBundle1 = ResourceBundle.getBundle("wsEndPointURL_en_US");
-        String CLICK_HERE_TO_PAY =resourceBundle1.getString("G2CPaymentAggregatorStg.endPointURL");
-
         specializedFirm.setRegApprovedDate(loggedInUser.getServerDate());
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(loggedInUser.getServerDate());
@@ -134,17 +137,41 @@ public class SpecializedFirmActionService extends BaseService {
 
         String specializedFirmId = (String)commonService.getValue("crpspecializedtrade","CrpSpecializedTradeId","ReferenceNo",appNo.toString());
         specializedFirmActionDao.approve(specializedFirmId, loggedInUser.getUserID(), aRemarks);
+
+        RequestDTO dto = new RequestDTO();
+        dto.setApplicationNo(applicationNumber);
+        dto.setAgencyCode("CDB");
+        dto.setServiceName("New Registration of Specialized Firm");
+        dto.setExpiryDate(null);
+        ArrayList<PaymentDTO> paymentList = new ArrayList<PaymentDTO>();
+        PaymentDTO paymentdto = new PaymentDTO();
+        //Integer amount = passportUploadDAO.getServiceFees(applicationNo);
+        BigDecimal amount = (BigDecimal) commonService.getValue("crpspecializedtraderegistrationpayment","ApprovedAmount","CrpSpecializedTradeFinalId",specializedFirmId);
+        paymentdto.setServiceFee(String.valueOf(amount));
+
+        paymentdto.setAccountHeadId("Choneywangmo@cdb.gov.bt");
+        paymentList.add(paymentdto);
+        dto.setPaymentList(paymentList.toArray(new PaymentDTO[paymentList.size()]));
+        System.out.println("Response from Aggregator: "+paymentdto.getServiceFee());
+        ResourceBundle bundle = ResourceBundle.getBundle("wsEndPointURL_en_US");
+        InvokePaymentWS invokews = new InvokePaymentWS(bundle.getString("getPayment.endPointURL"));
+        boolean isSaved = invokews.insertPaymentDetailsOnApproval(dto);
+        System.out.println("Response from Aggregator: "+isSaved);
+
         responseMessage.setStatus(SUCCESSFUL_STATUS);
         responseMessage.setText("Specialized Firm application number:"+appNo+" approved successfully.");
 
         String emailId = (String)commonService.getValue("crpconsultant","Email","ReferenceNo",appNo.toString());
+        String phoneNumber = (String)commonService.getValue("crpspecializedtrade","MobileNo","ReferenceNo",appNo.toString());
+
         String mailContent = "Dear User,<br>Your application for application number : "+appNo.toString()+" is approved."+
                 "<br>You may pay the required fee online through following link:<br>" +
                 "<a target='_blank' href='https://www.citizenservices.gov.bt/G2CPaymentAggregatorStg'>https://www.citizenservices.gov.bt/G2CPaymentAggregatorStg</a>" +
                 "<br>Or You may visit our CDB counters to pay the fee. " +
                 "<br><br>Note: Only after payment confirmation, your application will be done final approval. And you will get the login credential to log into system. ";
         try {
-            MailSender.sendMail(specializedFirm.getRegEmail(), "cdb@gov.bt", null, mailContent, "Application Payment approved");
+            MailSender.sendMail(specializedFirm.getRegEmail(), "cdb@gov.bt", null, mailContent, "Application approved for Payment");
+            SmsSender.smsSender(phoneNumber, "cdb@gov.bt", null, mailContent, "Application approved for Payment");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -178,6 +205,7 @@ public class SpecializedFirmActionService extends BaseService {
                 "Password : 123" +
                 "Please change your default password after login.";
         MailSender.sendMail(specializedFirm.getRegEmail(), "cdb@gov.bt", null, mailContent, "Application Payment approved");
+        SmsSender.smsSender(specializedFirm.getRegEmail(), "cdb@gov.bt", null, mailContent, "Application Payment approved");
 
         return responseMessage;
     }
@@ -194,6 +222,7 @@ public class SpecializedFirmActionService extends BaseService {
                 "<a target='_blank' href='/cdb/public_access/renewal'>Click here for resubmission of an application</a>" ;
         try {
             MailSender.sendMail(specializedFirm.getRegEmail(), "cdb@gov.bt", null, mailContent, "Application Rejected");
+            SmsSender.smsSender(specializedFirm.getRegEmail(), "cdb@gov.bt", null, mailContent, "Application Rejected");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -15,7 +15,6 @@
             <c:if test="${res.status eq 0}">
                 <span class="error"> ${res.text}</span>
             </c:if>
-
         </div>
     </div>
 </c:if>
@@ -32,10 +31,6 @@
                              style="font-size: 10px">
                             <c:if test="${renewalCheck.status eq 1}">
                                 <span class="error">${renewalCheck.text}</span>
-                                <input type="hidden" class="form-control" name="servicePayment.noOfDaysLate" value="${renewalCheck.dto1.noOfDaysLate}">
-                                <input type="hidden" class="form-control" name="servicePayment.noOfDaysAfterGracePeriod" value="${renewalCheck.dto1.noOfDaysAfterGracePeriod}">
-                                <input type="hidden" class="form-control" name="servicePayment.paymentAmount" value="${renewalCheck.dto1.paymentAmount}">
-                                <input type="hidden" class="form-control" name="servicePayment.waiveOffLateFee" value="${renewalCheck.dto1.waiveOffLateFee}">
                             </c:if>
                             <c:if test="${renewalCheck.status eq 0}">
                                 <span class="error">${renewalCheck.text}</span>
@@ -111,6 +106,10 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <input type="hidden" class="form-control" name="servicePayment.noOfDaysLate" value="${renewalCheck.dto1.noOfDaysLate}">
+                                    <input type="hidden" class="form-control" name="servicePayment.noOfDaysAfterGracePeriod" value="${renewalCheck.dto1.noOfDaysAfterGracePeriod}">
+                                    <input type="hidden" class="form-control" name="servicePayment.paymentAmount" value="${renewalCheck.dto1.paymentAmount}">
+                                    <input type="hidden" class="form-control" name="servicePayment.waiveOffLateFee" value="${renewalCheck.dto1.waiveOffLateFee}">
                                     <div class="tab-pane services">
                                         <div class="panel-body table-responsive div-actual">
                                          <span>
@@ -253,7 +252,7 @@
                                                             <tr>
                                                                 <th>Nationality</th>
                                                                 <th>CID/Work Permit No.</th>
-                                                                <th>Salutation</th>
+                                                                <th>Title</th>
                                                                 <th>Name</th>
                                                                 <th>Gender</th>
                                                                 <th>Designation</th>
@@ -377,16 +376,19 @@
                                         </div>
                                         <div class="col-lg-12 form-group nextBackBtn">
                                             <button type="button" onclick="backTab('generalInformation')" class="btn btn-azure col-lg-offset-9 backTab">
-                                                <i class="fa fa-arrow-left"></i>Back
+                                                <i class="fa fa-arrow-circle-left"></i>Back
                                             </button>
                                             <button type="button" onclick="nextTab('generalInformation')" class="btn btn-primary nextTab">
-                                                <i class="fa fa-arrow-right"></i>Next &nbsp;
+                                                <i class="fa fa-arrow-circle-right"></i>Next &nbsp;
                                             </button>
                                         </div>
                                     </div>
 
                                     <div class="tab-pane category_details hide">
                                         <div class="div-actual">
+                                            <div class="card">
+                                                <b class="text-orange">Note: If you are upgrading/down grade class,it is necessary to attach Letter of Undertaking</b> &nbsp; &nbsp;
+                                            </div>
                                             <table id="contractorCCTbl" class="table table-bordered table-hover">
                                                 <thead style="background-color: #F2F2F2">
                                                 <tr>
@@ -464,8 +466,6 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <b class="text-orange">Attach your UnderTaking Below</b> &nbsp; &nbsp;
-                                                <br/>
                                                 <input type="button" id="addMoreCertCategory" value="Add More File" class="btn btn-primary eqFile">
                                                 <div class="table-responsive">
                                                     <table class="table table-bordered table-center table-responsive-lg auto-index" id="certificateTblCategory">
@@ -767,11 +767,11 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-lg-2">Salutation
+                                        <label class="col-lg-2">Title
                                             <span class="text-danger">*</span>:</label>
                                         <div class="col-lg-4">
                                             <select name="contractorHRs[0].salutationId" id="hr1" required="" class="form-control custom-select text-left select-beast">
-                                                <option value="">Select Salutation</option>
+                                                <option value="">Select Title</option>
                                                 <c:forEach var="item" items="${salutationList}">
                                                     <option value="${item.value}"><c:out value="${item.text}"/></option>
                                                 </c:forEach>

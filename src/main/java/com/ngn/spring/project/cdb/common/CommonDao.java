@@ -487,7 +487,7 @@ try {
         }else if(type.equalsIgnoreCase("SpecializedTrade")){
             sqlQuery = properties.getProperty("CommonDao.isExpiredSpecializedTrade");
         }
-      //  BigInteger bigIntValue = (BigInteger)hibernateQuery(sqlQuery).setParameter("cdbNo", cdbNo).list().get(0);
+       // BigInteger bigIntValue = (BigInteger)hibernateQuery(sqlQuery).setParameter("cdbNo", cdbNo).list().get(0);
        Integer bigIntValue = (Integer) hibernateQuery(sqlQuery).setParameter("cdbNo", cdbNo).list().get(0);
 
         return (bigIntValue.intValue() == 1);
@@ -715,6 +715,28 @@ try {
         }
         if (save > 0) {
             responseMessage.setStatus(1);
+        }
+        return responseMessage;
+    }
+
+    public ResponseMessage updatePassword(LoginDTO loginDTO, String username, String newPwd) {
+      ResponseMessage responseMessage=null;
+        String digit=newPwd;
+        StringBuilder salt=new StringBuilder();
+        Random rnd=new Random();
+        while (salt.length()<4){
+            int index=(int) (rnd.nextFloat() * digit.length());
+            salt.append(digit.charAt(index));
+        }
+        String saltString=salt.toString();
+        String pw_hash= BCrypt.hashpw(saltString, BCrypt.gensalt());
+        try {
+            Query query1 = sqlQuery("UPDATE sysuser s SET s.password=? WHERE s.username = ?");
+            query1.setParameter(1, pw_hash).setParameter(2,loginDTO.getUsername());
+             query1.executeUpdate();
+        }catch (Exception e) {
+            System.out.print("Exception in ConsultantDao # updatesysuser: " + e);
+            e.printStackTrace();
         }
         return responseMessage;
     }

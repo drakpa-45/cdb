@@ -13,6 +13,7 @@ import com.ngn.spring.project.cdb.survey.service.SurveyServices;
 import com.ngn.spring.project.cdb.trade.service.SpecializedService;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
 import com.ngn.spring.project.global.global.MailSender;
+import com.ngn.spring.project.global.global.SmsSender;
 import com.ngn.spring.project.lib.ResponseMessage;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,6 +129,7 @@ public class ArchitectController extends BaseController {
                             "(CDB)";
                     try {
                         MailSender.sendMail(dto.getEmail(), "cdb@gov.bt", null, mailContent, "Application Registered Success");
+                        SmsSender.smsSender(dto.getMobileNo(), "cdb@gov.bt", null, mailContent, "Application Registered Success");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

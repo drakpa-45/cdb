@@ -10,6 +10,7 @@ import com.ngn.spring.project.cdb.trade.dto.TradeFeesDto;
 import com.ngn.spring.project.cdb.trade.entity.TradeDocument;
 import com.ngn.spring.project.cdb.trade.service.SpecializedService;
 import com.ngn.spring.project.global.global.MailSender;
+import com.ngn.spring.project.global.global.SmsSender;
 import com.ngn.spring.project.lib.DropdownDTO;
 import com.ngn.spring.project.lib.ResponseMessage;
 import org.apache.commons.io.IOUtils;
@@ -145,6 +146,7 @@ public class SpecializedController extends BaseController {
                             "(CDB)";
                     try {
                         MailSender.sendMail(dto.getEmail(), "cdb@gov.bt", null, mailContent, "Application Registered Success");
+                        SmsSender.smsSender(dto.getMobileNo(), "cdb@gov.bt", null, mailContent, "Application Registered Success");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

@@ -1,6 +1,9 @@
 package com.ngn.spring.project.cdb.architect.services;
 
 import bt.gov.ditt.sso.client.dto.UserSessionDetailDTO;
+import bt.gov.g2c.aggregator.business.InvokePaymentWS;
+import bt.gov.g2c.aggregator.dto.PaymentDTO;
+import bt.gov.g2c.aggregator.dto.RequestDTO;
 import com.ngn.spring.project.base.BaseService;
 import com.ngn.spring.project.cdb.architect.dao.ArchitectDao;
 import com.ngn.spring.project.cdb.architect.dto.ArchitectDto;
@@ -16,6 +19,7 @@ import com.ngn.spring.project.cdb.contractor.renewal.LateFeeDTO;
 import com.ngn.spring.project.cdb.engineer.dao.EngineerDao;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
 import com.ngn.spring.project.global.global.MailSender;
+import com.ngn.spring.project.global.global.SmsSender;
 import com.ngn.spring.project.lib.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +36,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * Created by USER on 3/19/2020.
@@ -202,6 +207,7 @@ public class ArchitectServices extends BaseService{
                         "<a target='_blank' href='/cdb/public_access/renewal'>Click here for resubmission of an application</a>" ;
                 try {
                     MailSender.sendMail(dto.getEmail(), "cdb@gov.bt", null, mailContent, "Application Rejected");
+                    SmsSender.smsSender(dto.getMobileNo(), "cdb@gov.bt", null, mailContent, "Application Rejected");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -242,11 +248,32 @@ public class ArchitectServices extends BaseService{
                 String mailContent = "Dear User,<br>Your application for  Cancellation of Certificate is approved with application number : " + dto.getReferenceNo();
                 try {
                     MailSender.sendMail(dto.getEmail(), "cdb@gov.bt", null, mailContent, "CDB certificate Cancelled");
+                    SmsSender.smsSender(dto.getMobileNo(), "cdb@gov.bt", null, mailContent, "CDB certificate Cancelled");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }else {
                 //send sms and email notification
+                RequestDTO requestDTO = new RequestDTO();
+                requestDTO.setApplicationNo(String.valueOf(dto.getReferenceNo()));
+                requestDTO.setAgencyCode("CDB");
+                requestDTO.setServiceName("New Registration of Architect");
+                requestDTO.setExpiryDate(null);
+                ArrayList<PaymentDTO> paymentList = new ArrayList<PaymentDTO>();
+                PaymentDTO paymentdto = new PaymentDTO();
+                //Integer amount = passportUploadDAO.getServiceFees(applicationNo);
+                BigDecimal amount = (BigDecimal) commonService.getValue("crparchitectservicepayment","TotalAmount","CrpArchitectId",dto.getCrpArchitectId());
+                paymentdto.setServiceFee(String.valueOf(amount));
+
+                paymentdto.setAccountHeadId("131310001");
+                paymentList.add(paymentdto);
+                requestDTO.setPaymentList(paymentList.toArray(new PaymentDTO[paymentList.size()]));
+                System.out.println("Response from Aggregator: "+paymentdto.getServiceFee());
+                ResourceBundle bundle = ResourceBundle.getBundle("wsEndPointURL_en_US");
+                InvokePaymentWS invokews = new InvokePaymentWS(bundle.getString("getPayment.endPointURL"));
+                boolean isSaved = invokews.insertPaymentDetailsOnApproval(requestDTO);
+                System.out.println("Response from Aggregator: "+isSaved);
+
                 String mailContent = "Dear User,<br>Your application for application number : " + dto.getReferenceNo() + " is approved." +
                         "<br>You may pay the required fee online through following link:<br>" +
                         "<a target='_blank' href='https://www.citizenservices.gov.bt/G2CPaymentAggregatorStg'>https://www.citizenservices.gov.bt/G2CPaymentAggregatorStg</a>" +
@@ -254,6 +281,7 @@ public class ArchitectServices extends BaseService{
                         "<br><br>Note: Only after payment confirmation, your application will be done final approval. And you will get the login credential to log into system. ";
                 try {
                     MailSender.sendMail(dto.getEmail(), "cdb@gov.bt", null, mailContent, "Application approved for payment");
+                    SmsSender.smsSender(dto.getMobileNo(), "cdb@gov.bt", null, mailContent, "Application approved for Payment");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -267,7 +295,7 @@ public class ArchitectServices extends BaseService{
        // dto= dao.updateApplicationForPayment(dto, userID, request);
         String insert="",deletePrevRecord="",deleteFromSysuser="";
       //  if(dto.getUpdateStatus().equalsIgnoreCase("Success")){
-            ArchitectDto dto1=dao.getarchitectapplicationdetails(dto);
+        ArchitectDto dto1=dao.getarchitectapplicationdetails(dto);
 
         dto1.setServiceSectorType(dto.getServiceSectorType());
         dto1.setServiceTypeId(dto.getServiceTypeId());
@@ -323,6 +351,7 @@ public class ArchitectServices extends BaseService{
                         "Please change your default password after login.";
                 try {
                     MailSender.sendMail(dto1.getEmail(), "cdb@gov.bt", null, mailContent, "Application approved successfully");
+                    SmsSender.smsSender(dto1.getMobileNo(), "cdb@gov.bt", null, mailContent, "Application approved successfully");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -401,6 +430,7 @@ public class ArchitectServices extends BaseService{
                     "Please wait until your process is complete.";
             try {
                 MailSender.sendMail(dto.getEmail(), "cdb@gov.bt", null, mailContent, "Application is submitted successfully");
+                SmsSender.smsSender(dto.getMobileNo(), "cdb@gov.bt", null, mailContent, "Application is submitted successfully");
             } catch (Exception e) {
                 e.printStackTrace();
             }

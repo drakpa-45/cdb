@@ -694,5 +694,11 @@ public class CommonService extends BaseService {
     public ResponseMessage updatePhoneNumber(LoginDTO loginDTO, String phoneNumber) {
         return commonDao.updatePhoneNumber(loginDTO,phoneNumber);
     }
-
+    @Transactional
+    public ResponseMessage updatePassword(LoginDTO loginDTO, String username, String newPwd) {
+         commonDao.updatePassword(loginDTO,username,newPwd);
+        responseMessage.setStatus(SUCCESSFUL_STATUS);
+        responseMessage.setText("Your password is successfully updated .");
+        return responseMessage;
+    }
 }

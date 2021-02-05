@@ -1,5 +1,8 @@
 package com.ngn.spring.project.cdb.admin.consultant.registration;
 
+import bt.gov.g2c.aggregator.business.InvokePaymentWS;
+import bt.gov.g2c.aggregator.dto.PaymentDTO;
+import bt.gov.g2c.aggregator.dto.RequestDTO;
 import com.ngn.spring.project.base.BaseService;
 import com.ngn.spring.project.cdb.admin.dto.*;
 import com.ngn.spring.project.cdb.common.CommonService;
@@ -10,15 +13,19 @@ import com.ngn.spring.project.cdb.consultant.model.Consultant;
 import com.ngn.spring.project.cdb.consultant.model.ConsultantFinal;
 import com.ngn.spring.project.cdb.consultant.renewal.ConsultantRCService;
 import com.ngn.spring.project.global.global.MailSender;
+import com.ngn.spring.project.global.global.SmsSender;
 import com.ngn.spring.project.lib.LoggedInUser;
 import com.ngn.spring.project.lib.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * ==================================================================================
@@ -135,10 +142,31 @@ public class ConsultantNRActionService extends BaseService {
         String consultantId = (String)commonService.getValue("crpconsultant","CrpConsultantId","ReferenceNo",appNo.toString());
         consultantActionDao.approve(consultantId, loggedInUser.getUserID(), aRemarks);
 
+        RequestDTO dto = new RequestDTO();
+        dto.setApplicationNo(applicationNo);
+        dto.setAgencyCode("CDB");
+        dto.setServiceName("New Registration of Consultant");
+        dto.setExpiryDate(null);
+        ArrayList<PaymentDTO> paymentList = new ArrayList<PaymentDTO>();
+        PaymentDTO paymentdto = new PaymentDTO();
+        //Integer amount = passportUploadDAO.getServiceFees(applicationNo);
+        BigDecimal amount = (BigDecimal) commonService.getValue("crpconsultantregistrationpayment","ApprovedAmount","CrpConsultantFinalId",consultantId);
+        paymentdto.setServiceFee(String.valueOf(amount));
+
+        paymentdto.setAccountHeadId("131310001");
+        paymentList.add(paymentdto);
+        dto.setPaymentList(paymentList.toArray(new PaymentDTO[paymentList.size()]));
+        System.out.println("Response from Aggregator: "+paymentdto.getServiceFee());
+        ResourceBundle bundle = ResourceBundle.getBundle("wsEndPointURL_en_US");
+        InvokePaymentWS invokews = new InvokePaymentWS(bundle.getString("getPayment.endPointURL"));
+        boolean isSaved = invokews.insertPaymentDetailsOnApproval(dto);
+        System.out.println("Response from Aggregator: "+isSaved);
+
         List<CategoryClassDTO> categoryClassDTOs = consultantActionDao.getCategoryClass(consultantId);
         Integer tFeeAmount = 0;
      //   tFeeAmount + categoryClassDTOs[i].aAmount;
         String emailId = (String)commonService.getValue("crpconsultant","Email","ReferenceNo",appNo.toString());
+        String phoneNumber = (String)commonService.getValue("crpconsultant","MobileNo","ReferenceNo",appNo.toString());
         String mailContent = "Dear User,<br>Your application for application number : "+appNo.toString()+" is approved."+
                 "<br>You may pay the required fee online through following link:<br>" +
                 "<a target='_blank' href='https://www.citizenservices.gov.bt/G2CPaymentAggregatorStg'>https://www.citizenservices.gov.bt/G2CPaymentAggregatorStg</a>" +
@@ -164,7 +192,8 @@ public class ConsultantNRActionService extends BaseService {
                 "</table>"+
                 "</html>";
         try {
-            MailSender.sendMail(emailId,"cdb@gov.bt",null,mailContent,"Application approved for payment");
+            MailSender.sendMail(emailId, "cdb@gov.bt", null, mailContent, "Application approved for Payment");
+            SmsSender.smsSender(phoneNumber, "cdb@gov.bt", null, mailContent, "Application approved for Payment");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -198,6 +227,7 @@ public class ConsultantNRActionService extends BaseService {
                 "Password : 123" +
                 "Please change your default password after login.";
         MailSender.sendMail(consultant.getRegEmail(),"cdb@gov.bt",null,mailContent,"Application approved");
+        SmsSender.smsSender(consultant.getRegEmail(),"cdb@gov.bt",null,mailContent,"Application approved");
         return responseMessage;
     }
 
@@ -212,6 +242,7 @@ public class ConsultantNRActionService extends BaseService {
                 "<a target='_blank' href='/cdb/public_access/renewal'>Click here for resubmission of an application</a>" ;
         try {
             MailSender.sendMail(emailId, "cdb@gov.bt", null, mailContent, "Application Rejected");
+            SmsSender.smsSender(emailId, "cdb@gov.bt", null, mailContent, "Application Rejected");
         } catch (Exception e) {
             e.printStackTrace();
         }

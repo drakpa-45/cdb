@@ -259,7 +259,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success" onclick="getOwnerModalData('partnerDtls','ow',6)" type="button">Update</button>
+                <button data-dismiss="modal" class="btn btn-success" onclick="updatePassword()" type="button">Update</button>
                 <button data-dismiss="modal" class="btn btn-danger" target="#changePwdModal" type="button">Close</button>
             </div>
         </div>
@@ -305,19 +305,34 @@
 </style>
 <script type="text/javascript" src="<c:url value="/resources/JqueryAjaxFormSubmit.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/jquery.form.js"/>"></script>
-<script type="text/javascript" >
 
+<script type="text/javascript" >
     function existUsename(username){
         var $this = $('#usename').val();
         $.ajax({
             url:'/cdb/public_access/isUsenameExist?username='+username,
             success: function (res) {
-                alert(res);
                 if(res == false){
-                    $('#usename').val('').focus();
-                    warningMsg("This username is registered in CDB. Please enter your valid username");
+                    //warningMsg("This username is registered in CDB. Please enter your valid username");
                 } else{
+                    $('#usename').val('').focus();
+
                     warningMsg("This username is not registered in CDB.");
+                }
+            }
+        });
+    }
+
+    function updatePassword(){
+        var $password = $('#cpwd').val();
+        var $this = $('#usename').val();
+        $.ajax({
+            url:'/cdb/public_access/updatePassword',
+            type: 'GET',
+            data: {username: $this, newPwd: $password},
+            success: function (res) {
+                if(res.status == 1){
+                    successMsg('Your password is successfully updated.')
                 }
             }
         });

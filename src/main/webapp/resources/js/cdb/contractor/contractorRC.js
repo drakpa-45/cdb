@@ -673,7 +673,7 @@ var contractorRC = (function () {
 
                             var attachment = '';
                             for (var j in equipments[i].eqAttachments){
-                                attachment = attachment + "<span class='attachment'><input type='hidden' class='eqId' value='"+equipments[i].eqAttachments[j].id+"'>" +
+                                attachment = attachment + "<span class='attachment'><input type='hidden' class='eqaId' value='"+equipments[i].eqAttachments[j].id+"'>" +
                                 "<a href='"+_baseURL() + "/viewDownload?documentPath="+equipments[i].eqAttachments[j].documentPath+"' target='_blank'>"+equipments[i].eqAttachments[j].documentName+"</a></span><br>";
                             }
                             eqTr = eqTr +
@@ -860,7 +860,7 @@ var contractorRC = (function () {
             row.find('.attachment').each(function(){
                 var name = $(this).find('a').text();
                 var hra = $(this).find('a').parent().html();
-                hraTr = hraTr+"<tr><td><input type='hidden' class='eqId' value='"+$(this).find('.hraId').val()+"'>" +
+                hraTr = hraTr+"<tr><td><input type='hidden' class='eqaId' value='"+$(this).find('.eqaId').val()+"'>" +
                 "<input type='text' required class='form-control docName' name='equipments[0].contractorEQAs[0].documentName' value='"+name.substring(0,name.lastIndexOf('.'))+"'></td>" +
                 "<td><span class='aName'> "+hra+"</span><span class='aFile'></span> </td>" +
                 /*"<td></td>" +*/

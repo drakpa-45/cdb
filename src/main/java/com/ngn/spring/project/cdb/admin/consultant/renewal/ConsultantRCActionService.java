@@ -16,6 +16,7 @@ import com.ngn.spring.project.cdb.consultant.renewal.ConsultantRCDao;
 import com.ngn.spring.project.cdb.consultant.renewal.ConsultantRCService;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
 import com.ngn.spring.project.global.global.MailSender;
+import com.ngn.spring.project.global.global.SmsSender;
 import com.ngn.spring.project.lib.LoggedInUser;
 import com.ngn.spring.project.lib.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -179,6 +180,7 @@ public class ConsultantRCActionService extends BaseService{
                 "Password : 123" +
                 "Please change your default password after login.";
         MailSender.sendMail(consultant.getRegEmail(), "cdb@gov.bt", null, mailContent, "Application approved");
+        SmsSender.smsSender(consultant.getRegEmail(), "cdb@gov.bt", null, mailContent, "Application approved");
         return responseMessage;
     }
 

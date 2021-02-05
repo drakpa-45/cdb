@@ -21,24 +21,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "crpcontractorservicepayment")
 public class ContractorServicePayment extends BaseModel implements Serializable {
-    /*
-    * INSERT INTO `cdb_local`.`crpcontractorservicepayment`
-        (`Id`,
-        `CrpContractorId`,
-        `CmnServiceTypeId`,
-        `NoOfDaysLate`,
-        `NoOfDaysAfterGracePeriod`,
-        `PenaltyPerDay`,
-        `TotalAmount`,
-        `PaymentAmount`,
-        `WaiveOffLateFee`,
-        `NewLateFeeAmount`,
-        `CreatedBy`,
-        `EditedBy`,
-        `CreatedOn`,
-        `EditedOn`
-        )
-    * */
+
     @Id
     @NotNull
     @Column(name = "Id")

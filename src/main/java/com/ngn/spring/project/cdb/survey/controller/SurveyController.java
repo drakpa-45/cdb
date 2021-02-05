@@ -9,6 +9,7 @@ import com.ngn.spring.project.cdb.common.CommonService;
 import com.ngn.spring.project.cdb.survey.entity.SurveyDocument;
 import com.ngn.spring.project.cdb.survey.service.SurveyServices;
 import com.ngn.spring.project.global.global.MailSender;
+import com.ngn.spring.project.global.global.SmsSender;
 import com.ngn.spring.project.lib.ResponseMessage;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,6 +121,7 @@ public class SurveyController extends BaseController {
                             "(CDB)";
                     try {
                         MailSender.sendMail(dto.getEmail(), "cdb@gov.bt", null, mailContent, "Application Registered Success");
+                        SmsSender.smsSender(dto.getMobileNo(), "cdb@gov.bt", null, mailContent, "Application Registered Success");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -152,6 +154,7 @@ public class SurveyController extends BaseController {
                         "Thank You," +
                         "(CDB)";
                 MailSender.sendMail(dto.getEmail(), "cdb@gov.bt", null, mailContent, "Application Registered Success");
+                SmsSender.smsSender(dto.getMobileNo(), "cdb@gov.bt", null, mailContent, "Application Registered Success");
             }
             model.addAttribute("acknowledgement_message", "Your application for <label class='control-label'>Renewal of Surveyor</label> has been submitted and your application number is <b>"+resdto.getReferenceNo()+"</b> <br><p>You will receive an email as well as SMS notification once take further action.</p><label class='control-label'>You can track your application using above Application Number. <br /> Thank you.</label>");
             return "/architect/acknowledgement";

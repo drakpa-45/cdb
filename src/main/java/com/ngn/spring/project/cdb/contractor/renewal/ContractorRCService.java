@@ -14,6 +14,7 @@ import com.ngn.spring.project.cdb.contractor.registration.dto.FeeStructureDTO;
 import com.ngn.spring.project.cdb.contractor.registration.model.*;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
 import com.ngn.spring.project.global.global.MailSender;
+import com.ngn.spring.project.global.global.SmsSender;
 import com.ngn.spring.project.lib.DropdownDTO;
 import com.ngn.spring.project.lib.LoggedInUser;
 import com.ngn.spring.project.lib.ResponseMessage;
@@ -156,18 +157,19 @@ public class ContractorRCService extends BaseService {
 
         //region edit in contractor information
         contractor.setId(contractorId);
-        String referenceNo = saveRC(contractor,loggedInUser);
-        List<CategoryClassDTO> classDTOs = saveRCFeeCCUpgrade(contractor,contractorDTO.getCategories(),loggedInUser);
+        String referenceNo = saveRC(contractor, loggedInUser);
         //endregion
-
-        //region Upgrade or downgrade
-        classDTOs.stream().filter(c->c.getCategoryId() != null).forEach(c -> {
-            ConCategory conCategory = new ConCategory();
-            conCategory.setContractorID(contractorId);
-            conCategory.setProjectCateID(c.getCategoryId());
-            conCategory.setAppliedClassID(c.getaClassId());
-            contractorNRService.saveCC(conCategory, loggedInUser);
-        });
+        if(renewalServiceType.getUpgradeDowngrade() != null) {
+            List<CategoryClassDTO> classDTOs = saveRCFeeCCUpgrade(contractor,contractorDTO.getCategories(),loggedInUser);
+            //region Upgrade or downgrade
+            classDTOs.stream().filter(c -> c.getCategoryId() != null).forEach(c -> {
+                ConCategory conCategory = new ConCategory();
+                conCategory.setContractorID(contractorId);
+                conCategory.setProjectCateID(c.getCategoryId());
+                conCategory.setAppliedClassID(c.getaClassId());
+                contractorNRService.saveCC(conCategory, loggedInUser);
+            });
+        }
         //endregion
 
         //region change of owner or partner
@@ -661,6 +663,7 @@ public class ContractorRCService extends BaseService {
         String mailContent = "Dear User, This is to notify that your request for HR delete has been approved. Its replacement should be done within a month, if not  your firm will be downgraded to lower class without further notice.";
         try {
             MailSender.sendMail(email, "cdb@gov.bt", null, mailContent, "Hr replacement");
+            SmsSender.smsSender(email, "cdb@gov.bt", null, mailContent, "Hr replacement");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -13,6 +13,7 @@ import com.ngn.spring.project.cdb.specializedFirm.model.SpecializedFirm;
 import com.ngn.spring.project.cdb.specializedFirm.renewal.SpecializedFirmRService;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
 import com.ngn.spring.project.global.global.MailSender;
+import com.ngn.spring.project.global.global.SmsSender;
 import com.ngn.spring.project.lib.LoggedInUser;
 import com.ngn.spring.project.lib.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,6 +88,7 @@ public class SpecializedFirmRCActionService extends BaseService {
                 "Password : 123" +
                 "Please change your default password after login.";
         MailSender.sendMail(specializedFirm.getRegEmail(), "cdb@gov.bt", null, mailContent, "Application approved");
+        SmsSender.smsSender(specializedFirm.getRegEmail(), "cdb@gov.bt", null, mailContent, "Application approved");
 
         return responseMessage;
     }

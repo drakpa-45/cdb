@@ -16,11 +16,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 public class  MailSender{
-
-	public static Boolean sendMail(String destinationEmail, String sentMailFrom, File attachmentFile,String messageBody,
-			String subject) throws Exception {
+	public static Boolean sendMail(String destinationEmail, String sentMailFrom, File attachmentFile,String messageBody, String subject) throws Exception {
 			
 			boolean isMailSent = false;
 			String trayMessage;

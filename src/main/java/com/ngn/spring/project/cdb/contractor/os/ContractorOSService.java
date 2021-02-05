@@ -313,7 +313,6 @@ public class ContractorOSService extends BaseService {
         if(contractor.getContractorId() == null){
             contractor.setContractorId(contractor.getId());
         }
-
         contractor.setLockedByUserId(null);
         contractor.setWaiveOffLateFee(BigDecimal.ZERO);
         contractor.setAppStatusId(ApplicationStatus.UNDER_PROCESS.getCode());

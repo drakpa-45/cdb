@@ -8,6 +8,7 @@ import com.ngn.spring.project.cdb.contractor.registration.dto.FeeStructureDTO;
 import com.ngn.spring.project.cdb.contractor.registration.model.*;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
 import com.ngn.spring.project.global.global.MailSender;
+import com.ngn.spring.project.global.global.SmsSender;
 import com.ngn.spring.project.lib.LoggedInUser;
 import com.ngn.spring.project.lib.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -192,6 +193,8 @@ public class ContractorNRService extends BaseService {
                 "Thank You," +
                 "(CDB)";
         MailSender.sendMail(contractor.getRegEmail(), "cdb@gov.bt", null, mailContent, "Application Registered Success");
+        SmsSender.smsSender(contractor.getRegMobileNo(), "cdb@gov.bt", null, mailContent, "Application Registered Success");
+
         return responseMessage;
     }
 

@@ -9,6 +9,7 @@ import com.ngn.spring.project.cdb.common.CommonService;
 import com.ngn.spring.project.cdb.engineer.model.EngineerAttachment;
 import com.ngn.spring.project.cdb.engineer.service.EngineerServices;
 import com.ngn.spring.project.global.global.MailSender;
+import com.ngn.spring.project.global.global.SmsSender;
 import com.ngn.spring.project.lib.ResponseMessage;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,6 +118,7 @@ public class EngineerController extends BaseController {
                             "Thank You," +
                             "(CDB)";
                         MailSender.sendMail(dto.getEmail(), "cdb@gov.bt", null, mailContent, "Application Registered Success");
+                        SmsSender.smsSender(dto.getMobileNo(), "cdb@gov.bt", null, mailContent, "Application Registered Success");
                 }
             model.addAttribute("acknowledgement_message", "Your application for <label class='control-label'>Registration of Engineer</label> has been submitted successfully and your application number is <b>" + resdto.getReferenceNo() + "."+"</b> <br><p>You will receive an email as well as SMS notification once taken further action.</p><label class='control-label'>You can track your application using above Application Number.</label>");
             return "/architect/acknowledgement";

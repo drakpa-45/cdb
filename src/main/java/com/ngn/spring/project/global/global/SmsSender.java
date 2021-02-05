@@ -1,86 +1,57 @@
 package com.ngn.spring.project.global.global;
+import com.sun.xml.fastinfoset.sax.Properties;
 
-import org.springframework.util.StringUtils;
-
-import java.util.Properties;
+import javax.mail.MessagingException;
+import javax.mail.Transport;
+import java.io.File;
+import java.util.ResourceBundle;
 
 /**
- * Created by USER on 10/21/2020.
+ * Created by USER on 3/9/2020.
  */
 public class SmsSender {
-
-    //private EmailUtil emailSender = null;
     private SMSUtil smsSender = null;
-    private static final String EMAIL_BODY_PART1 = "Your application";
-    private static final String SMS_BODY_PART2 = ".Click on the link above to make payment";
-    private static String SMS_URL = null;
     Properties properties = null;
-
-    public static boolean notifyOnRejection(String appNumber, String[] contactNumbers, String reason)
-    {
+    private static String SMS_URL = null;
+    public static Boolean smsSender(String phoneNumber, String sentSMSFrom, File attachmentFile,String messageBody, String subject) throws Exception {
         boolean result = false;
-        try
-        {
-            if(appNumber!=null && contactNumbers!=null)
-            {
-                //System.out.println("Inside SMS");
+      ;String trayMessage = null;
+        try{
                 SmsSender notification =new SmsSender();
-                notification.properties = GlobalUtil.getPropertiesFromFile(ProtocolConstant.DOP_COMMON_PROPERTIES_FILE_PATH);
-                //notification.properties = ResourceBundle.getBundle("documentuploads");
-                if(notification.properties.getProperty("smsNotificationURL")!=null)
-                    SMS_URL = notification.properties.getProperty("smsNotificationURL");
-
-                for(String mobile : contactNumbers){
-                    System.out.println("mo"+mobile);
-                    System.out.println("SMS_URL::::"+SMS_URL);
-                    if(!StringUtils.isEmpty(mobile)){
+                ResourceBundle resourceBundle1 = ResourceBundle.getBundle("wsEndPointURL_en_US");
+                String smsurl =resourceBundle1.getString("smsNotificationURL");
+                if(smsurl!=null)
+                    SMS_URL = smsurl;
+                    if(!phoneNumber.equalsIgnoreCase("")){
                         notification.smsSender = new SMSUtil();
-                        notification.smsSender.setMobileNo(mobile);
+                        notification.smsSender.setMobileNo(phoneNumber);
                         notification.smsSender.setSmsUrl(SMS_URL);
-                        notification.smsSender.setSmsContent(EMAIL_BODY_PART1+" "+appNumber+" has been rejected."+reason+" ");
+                        notification.smsSender.setSmsContent(messageBody);
+                        notification.smsSender.setSubject(subject);
+                        notification.smsSender.sentFrom(sentSMSFrom);
                         notification.smsSender.sendSMS();
+
+                        trayMessage = "SMS is sent successfully to "+ phoneNumber ;
                     }
-                }
-            }
             result = true;
         }
         catch(Exception ee){
             ee.printStackTrace();
         }
-        return result;
-    }
-
-    public static boolean notifyOnApproval(String appNumber, String[] contactNumbers,String smsContent, String allotRange) {
-        boolean result = false;
-        try
-        {
-            if(appNumber!=null && contactNumbers!=null)
-            {
-                //System.out.println("Inside SMS");
-                SmsSender notification =new SmsSender();
-                notification.properties = GlobalUtil.getPropertiesFromFile(ProtocolConstant.DOP_COMMON_PROPERTIES_FILE_PATH);
-                //notification.properties = ResourceBundle.getBundle("documentuploads");
-                if(notification.properties.getProperty("smsNotificationURL")!=null)
-                    SMS_URL = notification.properties.getProperty("smsNotificationURL");
-
-                for(String mobile : contactNumbers){
-                    System.out.println("mo"+mobile);
-                    System.out.println("SMS_URL::::"+SMS_URL);
-                    if(!StringUtils.isEmpty(mobile)){
-                        notification.smsSender = new SMSUtil();
-                        notification.smsSender.setMobileNo(mobile);
-                        notification.smsSender.setSmsUrl(SMS_URL);
-                        notification.smsSender.setSmsContent(EMAIL_BODY_PART1 + " " + appNumber +  "" + smsContent+   allotRange+" Office");
-                        notification.smsSender.sendSMS();
-                    }
+        final String finalTrayMessage = trayMessage;
+        new Thread(){
+            public void run(){
+                try{
+                    //Transport.send(message);
+                    SystemTrayIcon.displayTray(finalTrayMessage);
+                } catch(Exception e){
+                    String errorMsg = "Mail cannot be sent. Check your net connection or configuration or "+
+                            "if destination email address is valid or not.";
+                    SystemTrayIcon.displayTray(errorMsg);
                 }
             }
-            result = true;
-        }
-        catch(Exception ee){
-            ee.printStackTrace();
-        }
+        }.start();
+
         return result;
     }
-
 }

@@ -458,8 +458,7 @@
                                         <div class="tab-pane category_details hide">
                                             <div class="div-actual">
                                                 <div class="card">
-                                                    Note: If you are upgrading/down grade class,it is necessary to
-                                                    attach Letter of Undertaking
+                                                    <b class="text-orange">Note: If you are upgrading/down grade class,it is necessary to attach Letter of Undertaking</b> &nbsp; &nbsp;
                                                 </div>
                                                 <table id="contractorCCTbl" class="table table-bordered table-hover">
                                                     <thead style="background-color: #F2F2F2">

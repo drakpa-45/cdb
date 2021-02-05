@@ -8,6 +8,7 @@ import com.ngn.spring.project.cdb.consultant.model.*;
 import com.ngn.spring.project.cdb.contractor.registration.dto.FeeStructureDTO;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
 import com.ngn.spring.project.global.global.MailSender;
+import com.ngn.spring.project.global.global.SmsSender;
 import com.ngn.spring.project.lib.LoggedInUser;
 import com.ngn.spring.project.lib.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -169,6 +170,7 @@ public class ConsultantNRService extends BaseService {
                 "You can check your application status using above application number."+
                 "Thank You.";
         MailSender.sendMail(consultant.getRegEmail(), "cdb@gov.bt", null, mailContent, "Application Submitted");
+        SmsSender.smsSender(consultant.getRegPhoneNo(), "cdb@gov.bt", null, mailContent, "Application Submitted");
         return responseMessage;
     }
 
