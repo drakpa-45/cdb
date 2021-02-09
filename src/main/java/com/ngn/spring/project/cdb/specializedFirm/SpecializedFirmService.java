@@ -297,7 +297,7 @@ public class SpecializedFirmService extends BaseService {
             spFirmtHRA.setDocumentName(docNameUpload);
             spFirmtHRA.setFileType(attachment.getContentType());
         }
-        if(emptyNullCheck(spFirmtHRA.getId())){
+        if(emptyNullCheck(spFirmtHRA.getId()) || spFirmtHRA.getId().equalsIgnoreCase("undefined")){
             String hrAttachmentID = commonService.getRandomGeneratedId();
             spFirmtHRA.setId(hrAttachmentID);
         }
@@ -380,7 +380,7 @@ public class SpecializedFirmService extends BaseService {
             spFirmEQA.setDocumentName(docNameUpload);
             spFirmEQA.setFileType(attachment.getContentType());
         }
-        if(emptyNullCheck(spFirmEQA.getId())){
+        if(emptyNullCheck(spFirmEQA.getId())  || spFirmEQA.getId().equalsIgnoreCase("undefined")){
             String hrAttachmentID = commonService.getRandomGeneratedId();
             spFirmEQA.setId(hrAttachmentID);
         }

@@ -233,6 +233,7 @@ function cloneEqFiles(tableId,modal,i){
 
     uplTbl.find('.docName').each(function(e){
         var index = $(this).closest('tr').index();
+        docName = docName +"<input type='hidden' name='equipments[0].spFirmEQAs["+index+"].id' value='"+$(this).closest('tr').find('.eqaId').val()+"'/>";
         docName = docName +"<input type='hidden' name='equipments[0].spFirmEQAs["+index+"].documentName' value='"+$(this).val()+"'/><b>"+$(this).val() +'</b><br>';
     });
     var curTr = $("#" + tableId).find('#'+i);
@@ -672,26 +673,25 @@ var specializedFirmOS = (function () {
     }
 
     function getPersonalInfo(){
-        $('#partnerDtls').on('blur','.hr-cid', function () {
+        $('#addOwModal').on('change','.hr-cid', function (e) {
             var $this = $(this);
-            var country = $this.closest('tr').find('.country #countryList').val();
+            var country = $('#ow1').val();
             if(country == '8f897032-c6e6-11e4-b574-080027dcfac6') { //if bhutanese fetch from DCRC
                 $.ajax({
-                    url:cdbGlobal.baseURL() +'/specializedFirm/getPersonalInfo',
+                    url: cdbGlobal.baseURL() + '/specializedFirm/getPersonalInfo',
                     type: 'GET',
-                    async:false,
                     data: {cidNo: $this.val(),type:"fetch"},
                     success: function (res) {
                         if (res.status == '1') {
                             var dto = res.dto;
                             // var index = $this.closest("tr").index();
-                            $this.closest('tr').find('.name').val(dto.fullName).prop('readonly', true);
-                            $this.closest('tr').find('.sex').val(dto.sex).prop('readonly', true);
+                            $('#ow4').val(dto.fullName).prop('readonly', true);
+                            $('#ow5').val(dto.sex).prop('readonly', true);
                         }
                         else{
                             warningMsg(res.text);
-                            $this.closest('tr').find('.name').prop('readonly', false);
-                            $this.closest('tr').find('.sex').prop('readonly', false);
+                            $('#ow4').val(dto.fullName).prop('readonly', false);
+                            $('#ow5').val(dto.sex).prop('readonly', false);
                         }
                     }
                 });
@@ -705,9 +705,9 @@ var specializedFirmOS = (function () {
             var country = $('#hr5').val();
             if(country == '8f897032-c6e6-11e4-b574-080027dcfac6') { //if bhutanese fetch from DCRC
                 $.ajax({
-                    url: cdbGlobal.baseURL() +'/specializedFirm/getPersonalInfo',
+                    url:cdbGlobal.baseURL() + '/specializedFirm/getPersonalInfo',
                     type: 'GET',
-                    data: {cidNo: $this.val(), type: "fetch"},
+                    data: {cidNo: $this.val(),type:"fetch"},
                     success: function (res) {
                         if (res.status == '1') {
                             var dto = res.dto;
@@ -737,7 +737,7 @@ var specializedFirmOS = (function () {
 
                             var attachment = '';
                             for (var j in equipments[i].eqAttachments){
-                                attachment = attachment + "<span class='eqa'><input type='hidden' class='eqId' value='"+equipments[i].eqAttachments[j].id+"'>" +
+                                attachment = attachment + "<span class='attachment'><input type='hidden' class='eqaId' value='"+equipments[i].eqAttachments[j].id+"'>" +
                                 "<a href='"+_baseURL() + "/viewDownload?documentPath="+equipments[i].eqAttachments[j].documentPath+"' target='_blank'>"+equipments[i].eqAttachments[j].documentName+"</a><br>";
                             }
                             eqTr = eqTr +
@@ -918,7 +918,7 @@ var specializedFirmOS = (function () {
             modal.find('#eq2').val(row.find('td:eq(2)').text());
             modal.find('#eq3').val(row.find('td:eq(2)').text());
             var eqaTr = "";
-            row.find('.eqa').each(function(){
+            row.find('.attachment').each(function(){
                 var name = $(this).find('a').text();
                 var eqa = $(this).find('a').parent().html();
                 eqaTr = eqaTr+"<tr><td><input type='hidden' class='eqaId' value='" + $(this).find('.eqaId').val() + "'>" +

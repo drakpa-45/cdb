@@ -129,10 +129,10 @@
                                     <a href="#ownerpartner" data-toggle="tab" class="active show">Owner or Partner</a>
                                 </li>
                                 <li>
-                                    <a href="#humanresourceSection" data-toggle="tab" class="text-info">consultant Human Resource</a>
+                                    <a href="#humanresourceSection" data-toggle="tab" class="text-info"> Human Resource</a>
                                 </li>
                                 <li>
-                                    <a href="#equipmentSection" data-toggle="tab" class="text-info">consultant Equipment</a>
+                                    <a href="#equipmentSection" data-toggle="tab" class="text-info"> Equipment</a>
                                 </li>
                                 <li>
                                     <a href="#classification" data-toggle="tab" class="text-info">Classification Details</a>

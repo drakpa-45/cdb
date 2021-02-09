@@ -23,7 +23,6 @@ import java.math.BigDecimal;
 public class ContractorServicePayment extends BaseModel implements Serializable {
 
     @Id
-    @NotNull
     @Column(name = "Id")
     private String id;
     @Column(name = "CrpContractorId")

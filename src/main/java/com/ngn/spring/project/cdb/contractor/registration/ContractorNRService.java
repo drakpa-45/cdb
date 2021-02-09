@@ -400,9 +400,9 @@ public class ContractorNRService extends BaseService {
             contractorEQA.setDocumentName(docNameUpload);
             contractorEQA.setFileType(attachment.getContentType());
         }
-        if(emptyNullCheck(contractorEQA.getId())){
-            String hrAttachmentID = commonService.getRandomGeneratedId();
-            contractorEQA.setId(hrAttachmentID);
+        if(emptyNullCheck(contractorEQA.getId()) || contractorEQA.getId().equalsIgnoreCase("undefined")){
+            String eqAttachmentID = commonService.getRandomGeneratedId();
+            contractorEQA.setId(eqAttachmentID);
         }
         contractorEQA.setCreatedBy(loggedInUser.getUserID());
         contractorEQA.setCreatedOn(loggedInUser.getServerDate());

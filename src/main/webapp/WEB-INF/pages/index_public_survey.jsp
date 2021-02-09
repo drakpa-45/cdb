@@ -11,7 +11,7 @@
             </div>
             <div class="card" id="rejectTab" style="/* display: none */">
                 <div class="card-header">
-                    <h3 class="card-title font-weight-bold">News/Notices</h3>
+                    <h3 class="card-title font-weight-bold">Notices</h3>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
@@ -23,7 +23,7 @@
                     </div>
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" href="#Messages"  style="color: #000099"><u>Messages</u><i class="fa fa-chevron-down"></i></a>
+                            <a data-toggle="collapse" href="#Messages"  style="color: #000099"><u>Messages</u> <i class="fa fa-arrow-circle-o-down"></i></a>
                         </h4>
                     </div>
 

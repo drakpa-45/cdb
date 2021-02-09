@@ -107,23 +107,25 @@ public class ConsultantRCService extends BaseService {
             consultant.setFirmName(consultantDTO.getConsultant().getFirmName());
             consultant.setOwnershipChangeRemarks(consultantDTO.getConsultant().getOwnershipChangeRemarks());
 
-            List<ConsultantHR> ownerList = consultantDTO.getConsultantHRs();
-
-                for(ConsultantHR consultantHR:ownerList){
-                    // String hrId = commonService.getRandomGeneratedId();
+            List<ConsultantHR> ownerList = consultantDTO.getConsultantOWs();
+            for(ConsultantHR consultantHR:ownerList){
+                if(consultantHR.getDeleteRequest() != null && consultantHR.getDeleteRequest() == 1){
+                    //to save deleted hr
+                    //consultantHR.setDeleteRequest(1);
+                    consultantRCDao.saveDeleteHrRequest(consultantHR.getId());
+                } else {
                     if(emptyNullCheck(consultantHR.getId())){
                         consultantHR.setId(commonService.getRandomGeneratedId());
                     }
-                    //currentHRs.add(contractorHR.getId());
+                    //currentHRs.add(consultantHR.getId());
                     if(emptyNullCheck(consultantHR.getCidNo())){
                         continue;
                     }
-                    //   consultantHR.setId(hrId);
                     consultantHR.setConsultantID(consultantId);
                     consultantHR.setIsPartnerOrOwner(TRUE_INT);
                     consultantNRService.saveHR(consultantHR, loggedInUser);
                 }
-
+            }
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "12");
             appliedServicesList.add(appliedService);
         }
@@ -178,14 +180,26 @@ public class ConsultantRCService extends BaseService {
 
         //region change of owner or partner
         if(renewalServiceType.getChangeOfOwner() != null){
-            List<ConsultantHR> ownerList = consultantDTO.getConsultantHRs();
+            List<ConsultantHR> ownerList = consultantDTO.getConsultantOWs();
             for(ConsultantHR consultantHR:ownerList){
-                String hrId = commonService.getRandomGeneratedId();
-                consultantHR.setId(hrId);
-                consultantHR.setConsultantID(consultantId);
-                consultantHR.setIsPartnerOrOwner(TRUE_INT);
-                consultantNRService.saveHR(consultantHR, loggedInUser);
+                if(consultantHR.getDeleteRequest() != null && consultantHR.getDeleteRequest() == 1){
+                    //to save deleted hr
+                    //consultantHR.setDeleteRequest(1);
+                    consultantRCDao.saveDeleteHrRequest(consultantHR.getId());
+                } else {
+                    if(emptyNullCheck(consultantHR.getId())){
+                        consultantHR.setId(commonService.getRandomGeneratedId());
+                    }
+                    //currentHRs.add(consultantHR.getId());
+                    if(emptyNullCheck(consultantHR.getCidNo())){
+                        continue;
+                    }
+                    consultantHR.setConsultantID(consultantId);
+                    consultantHR.setIsPartnerOrOwner(TRUE_INT);
+                    consultantNRService.saveHR(consultantHR, loggedInUser);
+                }
             }
+            consultant.setOwnershipChangeRemarks(consultantDTO.getConsultant().getOwnershipChangeRemarks());
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "4");
             appliedServicesList.add(appliedService);
         }
@@ -252,8 +266,17 @@ public class ConsultantRCService extends BaseService {
                 consultantNRService.saveEQ(consultantEQ, loggedInUser);
                 //Save Human resource attachment
                 for (ConsultantEQAttachment consultantEQA : consultantEQ.getConsultantEQAs()) {
-                    if(consultantEQA.getAttachment() == null){ //No changes, so no need to save
-                        continue;
+                    if(!emptyNullCheck(consultantEQA.getId())){
+                        if(consultantEQA.getAttachment() == null){ // no changes
+                            consultantEQA = consultantNRService.getEQAttachmentFinal(consultantEQA.getId());
+                        }else{ // for edit
+                            consultantEQA.setEditedBy(loggedInUser.getUserID());
+                            consultantEQA.setEditedOn(loggedInUser.getServerDate());
+                        }
+                    }else {
+                        if (consultantEQA.getAttachment() == null) { //No changes, so no need to save
+                            continue;
+                        }
                     }
                     consultantEQA.setEquipmentId(consultantEQ.getId());
                     consultantNRService.saveEQA(consultantEQA, loggedInUser);
@@ -266,28 +289,21 @@ public class ConsultantRCService extends BaseService {
 
         //late fee service id
         BigDecimal lateFee = new BigDecimal(responseMessage.getVal2());
-        if(lateFee.compareTo(BigDecimal.ZERO) == 0){
-            ConsultantServicePayment servicePayment = consultantDTO.getServicePayment();
-            servicePayment.setConsultantId(consultantId);
-            servicePayment.setNoOfDaysLate(servicePayment.getNoOfDaysLate());
-            servicePayment.setNoOfDaysAfterGracePeriod(servicePayment.getNoOfDaysAfterGracePeriod());
-            servicePayment.setPaymentAmount(servicePayment.getPaymentAmount());
-            servicePayment.setWaiveOffLateFee(servicePayment.getWaiveOffLateFee());
-            servicePayment.setPenaltyPerDay(BigDecimal.valueOf(100));
-
-            consultantRCDao.save(servicePayment);
-
+        if(lateFee.compareTo(BigDecimal.ZERO)  >= 0){
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "11");
+            if(renewalServiceType.getUpgradeDowngrade() == null){
+                String appliedServiceId = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "2"); //renewal service id
+                appliedServicesList.add(appliedServiceId);
+            }
             appliedServicesList.add(appliedService);
         }
 
         //region save applied service and payment
         appliedServicesList.stream().filter(c-> !c.isEmpty()).forEach(
-                c->saveAppliedS(consultantId,c,loggedInUser)
+                c->saveAppliedS(consultantId,c,loggedInUser,consultantDTO)
         );
 
         //endregion
-
         responseMessage.reset();
         responseMessage.setStatus(SUCCESSFUL_STATUS);
         responseMessage.setText("Your application for Renewal Of Consultant has been submitted and your application number is "+referenceNo+"<br>" +
@@ -438,7 +454,7 @@ public class ConsultantRCService extends BaseService {
     }
 
     @Transactional
-    public void saveAppliedS(String consultantId, String appliedServiceId, LoggedInUser loggedInUser){
+    public void saveAppliedS(String consultantId, String appliedServiceId, LoggedInUser loggedInUser, ConsultantDTO consultantDTO){
         ConsultantAppliedS consultantAppliedS = new ConsultantAppliedS();
         consultantAppliedS.setConsultantId(consultantId);
         consultantAppliedS.setServiceTypeId(appliedServiceId);
@@ -449,15 +465,33 @@ public class ConsultantRCService extends BaseService {
         Object feeObj = commonService.getValue("crpservice", "ConsultantAmount","Id",appliedServiceId);
         fee = (feeObj == null)?BigDecimal.ZERO:new BigDecimal(feeObj.toString());
 
-        ConsultantServicePayment servicePayment = new ConsultantServicePayment();
-        servicePayment.setId(commonService.getRandomGeneratedId());
-        servicePayment.setConsultantId(consultantId);
-        servicePayment.setCmnServiceTypeId(appliedServiceId);
-        servicePayment.setTotalAmount(fee);
-        servicePayment.setPaymentAmount(fee);
-        servicePayment.setCreatedBy(loggedInUser.getUserID());
-        servicePayment.setCreatedOn(loggedInUser.getServerDate());
-        consultantRCDao.saveUpdate(servicePayment);
+        BigDecimal lateFee = new BigDecimal(responseMessage.getVal2());
+        if(appliedServiceId.equalsIgnoreCase("21b6caa9-ff97-11e4-9b95-080027dcfac6")){
+            ConsultantServicePayment servicePayment = consultantDTO.getServicePayment();
+            servicePayment.setId(commonService.getRandomGeneratedId());
+            servicePayment.setConsultantId(consultantId);
+            servicePayment.setCmnServiceTypeId(appliedServiceId);
+            servicePayment.setNoOfDaysLate(servicePayment.getNoOfDaysLate());
+            servicePayment.setNoOfDaysAfterGracePeriod(servicePayment.getNoOfDaysAfterGracePeriod());
+            servicePayment.setPaymentAmount(servicePayment.getPaymentAmount());
+            servicePayment.setTotalAmount(lateFee);
+            servicePayment.setPaymentAmount(lateFee);
+            servicePayment.setWaiveOffLateFee(servicePayment.getWaiveOffLateFee());
+            servicePayment.setPenaltyPerDay(BigDecimal.valueOf(100));
+            servicePayment.setCreatedBy(loggedInUser.getUserID());
+            servicePayment.setCreatedOn(loggedInUser.getServerDate());
+            consultantRCDao.save(servicePayment);
+        }else {
+            ConsultantServicePayment servicePayment = new ConsultantServicePayment();
+            servicePayment.setId(commonService.getRandomGeneratedId());
+            servicePayment.setConsultantId(consultantId);
+            servicePayment.setCmnServiceTypeId(appliedServiceId);
+            servicePayment.setTotalAmount(fee);
+            servicePayment.setPaymentAmount(fee);
+            servicePayment.setCreatedBy(loggedInUser.getUserID());
+            servicePayment.setCreatedOn(loggedInUser.getServerDate());
+            consultantRCDao.saveUpdate(servicePayment);
+        }
     }
 
     @Transactional

@@ -537,6 +537,7 @@ var consultant = (function () {
             });
         });
     }
+
     function addMoreFile(){
         $('.hrFile').on('click',function(e){
             var uplTbl = $('#hrUploadTbl').find('tbody');

@@ -6,8 +6,7 @@ function checkBtn(checkBoxId) {
     $check.prop('checked',true);
     if (checkBoxId == "owner") {
         $('#nextGIBtn').prop('disabled', false);
-        $('#hrModal').prop('refresh', true)
-    } else if(checkBoxId == 'equipment'){
+    }else if(checkBoxId == 'equipment'){
         $('#btnValEqNext').prop('disabled', false);
     }else{
         $('#nextHRBtn').prop('disabled', false);
@@ -175,6 +174,7 @@ var contractorRCAction = (function () {
                     }
                 }
             });
+
         });
 
 
@@ -400,10 +400,8 @@ var contractorRCAction = (function () {
 
 
     function addOW(tBodyClass, contractorHrs){
-
         var partnerHrTr = "";
         var hrTr = "", owner, m=0;
-
         for (var i in contractorHrs) {
             var verifiedApproved = '';
             if(contractorHrs[i].Approved == '1'){
@@ -437,9 +435,7 @@ var contractorRCAction = (function () {
     }
 
     function addHR(tBodyClass, contractorHrs){
-
         var hrTr = "";
-
         for (var i in contractorHrs) {
             var verifiedApproved = '';
             if(contractorHrs[i].Approved == '1'){

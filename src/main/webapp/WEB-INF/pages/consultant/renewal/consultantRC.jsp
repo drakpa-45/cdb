@@ -30,10 +30,6 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert alert-danger text-center" style="font-size: 10px">
                             <c:if test="${renewalCheck.status eq 1}">
                                 <span class="error">${renewalCheck.text}</span>
-                                <input type="hidden" class="form-control" name="servicePayment.noOfDaysLate" value="${renewalCheck.dto1.noOfDaysLate}">
-                                <input type="hidden" class="form-control" name="servicePayment.noOfDaysAfterGracePeriod" value="${renewalCheck.dto1.noOfDaysAfterGracePeriod}">
-                                <input type="hidden" class="form-control" name="servicePayment.paymentAmount" value="${renewalCheck.dto1.paymentAmount}">
-                                <input type="hidden" class="form-control" name="servicePayment.waiveOffLateFee" value="${renewalCheck.dto1.waiveOffLateFee}">
                             </c:if>
                             <c:if test="${renewalCheck.status eq 0}">
                                 <span class="error">${renewalCheck.text}</span>
@@ -109,6 +105,10 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <input type="hidden" class="form-control" name="servicePayment.noOfDaysLate" value="${renewalCheck.dto1.noOfDaysLate}">
+                                    <input type="hidden" class="form-control" name="servicePayment.noOfDaysAfterGracePeriod" value="${renewalCheck.dto1.noOfDaysAfterGracePeriod}">
+                                    <input type="hidden" class="form-control" name="servicePayment.paymentAmount" value="${renewalCheck.dto1.paymentAmount}">
+                                    <input type="hidden" class="form-control" name="servicePayment.waiveOffLateFee" value="${renewalCheck.dto1.waiveOffLateFee}">
                                     <div class="tab-pane services">
                                         <div class="panel-body table-responsive div-actual">
                                              <span>
@@ -122,16 +122,6 @@
                                                     <th style="width: 25%">Fees (Nu.)</th>
                                                 </tr>
                                                 </thead>
-                                                    <%--<tbody>
-                                                    <c:forEach items="${osFees}" var="os" varStatus="loop">
-                                                        <tr>
-                                                            <td><input type="checkbox" style="zoom:1.6" name="services[${loop.index}]"
-                                                                       value="${os.referenceNo}" class="service_check"></td>
-                                                            <td>${os.serviceName}</td>
-                                                            <td>${os.feeAmount}</td>
-                                                        </tr>
-                                                    </c:forEach>
-                                                    </tbody>--%>
                                                 <tbody>
                                                 <tr>
                                                     <td><input type="checkbox" style="zoom:1.6" name="incorporation" value="1" id="Incorporation" class="service_check"></td>
@@ -258,7 +248,7 @@
                                                             <tr>
                                                                 <th>Nationality</th>
                                                                 <th>CID/Work Permit No.</th>
-                                                                <th>Salutation</th>
+                                                                <th>Title</th>
                                                                 <th>Name</th>
                                                                 <th>Gender</th>
                                                                 <th>Designation</th>
@@ -268,46 +258,6 @@
                                                             </tr>
                                                             </thead>
                                                             <tbody>
-                                                            <%--<tr>
-                                                                <td class="country">
-                                                                    <form:select id="countryList" class="form-control" name="consultant.consultantHRs[0].countryId" data-msg-required="" data-rule-required="true" path="countryList">
-                                                                        <form:option value="" label="Select Country"/>
-                                                                        <form:options items="${countryList}" itemValue="value" itemLabel="text"/>
-                                                                    </form:select>
-                                                                </td>
-                                                                <td>
-                                                                    <input type="text" name="consultant.consultantHRs[0].cidNo" class="form-control hr-cid number" placeholder="Text..">
-                                                                </td>
-                                                                <td>
-                                                                    <form:select id="salutation" name="consultant.consultantHRs[0].salutationId" class="form-control input-sm" data-msg-required="true" data-rule-required="true" path="salutationList">
-                                                                        <form:option value="" label="Select Salutation"/>
-                                                                        <form:options items="${salutationList}" itemValue="value" itemLabel="text"/>
-                                                                    </form:select>
-                                                                </td>
-                                                                <td>
-                                                                    <input type="text" class="form-control name" name="consultant.consultantHRs[0].name" placeholder="Text..">
-                                                                </td>
-                                                                <td>
-                                                                    <select id="gender" name="consultant.consultantHRs[0].sex" class="form-control sex">
-                                                                        <option value="">Select Gender</option>
-                                                                        <option value="M">Male</option>
-                                                                        <option value="F">Female</option>
-                                                                    </select>
-
-                                                                </td>
-                                                                <td>
-                                                                    <form:select id="designation" name="consultant.consultantHRs[0].designationId" class="form-control input-sm" data-msg-required="" data-rule-required="true" path="designationList">
-                                                                        <form:option value="" label="Select Designation"/>
-                                                                        <form:options items="${designationList}" itemValue="value" itemLabel="text"/>
-                                                                    </form:select>
-                                                                </td>
-                                                                <td>
-                                                                    <label class="custom-control custom-checkbox ml-6">
-                                                                        <input type="checkbox" class="custom-control-input showCert" name="consultant.consultantHRs[0].siCertificate" value="1">
-                                                                        <i class="custom-control-label"></i>
-                                                                    </label>
-                                                                </td>
-                                                            </tr>--%>
                                                             </tbody>
                                                         </table>
                                                         <div class="col-lg-12 text-right hide" id="ownerPartner">
@@ -322,7 +272,7 @@
                                                 </div>
                                                 <div class="form-group row hide" id="ownerShipchangeId">
                                                     <div class="col-lg-12 col-md-12 ">
-                                                        <label class="col-lg-3 col-md-3 form-label">Reason for Change of Owner:
+                                                        <label class="col-lg-3 col-md-3 form-label" for="ownershipChangeRemarks">Reason for Change of Owner:
                                                             <span class="text-danger">*</span></label>
                                                         <input type="text" class="col-lg-6 form-control" name="consultant.ownershipChangeRemarks" id="ownershipChangeRemarks" required="true" placeholder="Text..">
                                                     </div>
@@ -341,48 +291,39 @@
                                                             </tr>
                                                             </thead>
                                                             <tbody class="files">
-                                                            <%--<tr>
-                                                                <td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/></td>
-                                                                <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/></td>
-                                                                <td class='file-size'></td>
-                                                                <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/></td>
-                                                                <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/></td>
-                                                                <td class='file-size'></td>
-                                                                <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
-                                                            </tr>--%>
+
                                                             </tbody>
                                                         </table>
                                                     </div>
                                                 </div>
                                                 </div>
                                             </div>
-                                            <div class="card-body">
-                                                <div class="col-lg-12">
-                                                    <div class="col-lg-6 col-md-6 form-group">
-                                                        <label class="col-lg-4 form-label">Dzongkhag</label>
-                                                            <%-- <select id="pDzongkhagId"
-                                                                     class="form-control input-sm col-lg-8"
-                                                                     name="consultant.pDzongkhagId">
-                                                                 <option value="">Select Dzongkhag</option>
-                                                                 <c:forEach var="item" items="${dzongkhagList}">
-                                                                     <option value="${item.value}"><c:out
-                                                                             value="${item.text}"/></option>
-                                                                 </c:forEach>
-                                                             </select>--%>
-                                                        <input type="text" class="col-lg-7 form-control" id="pDzongkhagId" name="consultant.pDzongkhagId" required="true" class="form-control col-lg-8">
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 form-group">
-                                                        <label class="col-lg-4 form-label">Gewog </label>
-                                                        <input type="text" class="col-lg-7 form-control" id="pGewogId" name="consultant.pGewogId" required="true" class="form-control col-lg-8">
-                                                    </div>
+                                            <div class="card ">
+                                                <div class="bg-blue card-status card-status-left"></div>
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Permanent Address</h3>
                                                 </div>
-                                                <div class="col-lg-12">
-                                                    <div class="col-lg-6 col-md-6 form-group">
-                                                        <label class="col-lg-4 form-label">Village </label>
-                                                        <input type="text" class="col-lg-7 form-control" id="pVillageId" name="consultant.pVillageId" required="true" class="form-control col-lg-8">
+                                                <div class="card-body">
+                                                    <div class="col-lg-12">
+                                                        <div class="col-lg-6 col-md-6 form-group">
+                                                            <label class="col-lg-4 form-label">Dzongkhag</label>
+                                                            <select id="pDzongkhagId" class="form-control input-sm col-lg-8" name="consultant.pDzongkhagId">
+                                                                <option value="">Select Dzongkhag</option>
+                                                                <c:forEach var="item" items="${dzongkhagList}">
+                                                                    <option value="${item.value}"><c:out value="${item.text}"/></option>
+                                                                </c:forEach>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6 form-group">
+                                                            <label class="col-lg-4 form-label">Gewog </label>
+                                                            <input type="text" class="form-control col-lg-8 form-control" name="consultant.pGewogId" id="pGewogId" required="true" placeholder="Text..">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="col-lg-6 col-md-6 form-group">
+                                                            <label class="col-lg-4 form-label">Village </label>
+                                                            <input type="text" class="form-control col-lg-8 form-control" name="consultant.pVillageId" id="pVillageId" required="true" placeholder="Text..">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -977,7 +918,7 @@
                                                     <tbody id="fileListhrsection" class="files">
                                                     <tr>
                                                         <td><input type="hidden" class="hraId">
-                                                            <input type='text' required="" value="CID" class='form-control docName' name='consultantHRs[0].consultantHRAs[0].documentName'/>
+                                                            <input type='text' required="" value="Certificate" class='form-control docName' name='consultantHRs[0].consultantHRAs[0].documentName'/>
                                                         </td>
                                                         <td><input type='file' required="" class='file' name='consultantHRs[0].consultantHRAs[0].attachment'
                                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
@@ -987,7 +928,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td><input type="hidden" class="hraId">
-                                                            <input type='text' required="" value="Certificate" class='form-control docName' name='consultantHRs[0].consultantHRAs[0].documentName'/>
+                                                            <input type='text' required="" value="Undertaking" class='form-control docName' name='consultantHRs[0].consultantHRAs[0].documentName'/>
                                                         </td>
                                                         <td><input type='file' required="" class='file' name='consultantHRs[0].consultantHRAs[0].attachment'
                                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
@@ -1025,39 +966,39 @@
                             <div class="modal-dialog modal-lg" id="ownerModal">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 id="ownerModalLabel" class="modal-title">Add Owner</h4>
+                                        <h4 id="ownerModalLabel" class="modal-title">Add Owner(s)</h4>
                                         <button aria-hidden="true" data-dismiss="modal" class="close" type="button"></button>
                                     </div>
                                     <div class="modal-body form-horizontal">
                                         <div class="modal-div">
                                             <div class="form-group">
-                                                <input type="hidden" id="id5Edit" name="consultantHRs[0].id">
+                                                <input type="hidden" id="id5Edit" name="consultantOWs[0].id">
                                                 <label class="col-lg-2">Nationality
                                                     <span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="consultantHRs[0].countryId" id="ow1" required="" class="form-control custom-select text-left select-beast country">
+                                                    <select name="consultantOWs[0].countryId" id="ow1" required="" class="form-control custom-select text-left select-beast country">
                                                         <option value="">Select Country</option>
                                                         <c:forEach var="item" items="${countryList}">
                                                             <option value="${item.value}"><c:out value="${item.text}"/></option>
                                                         </c:forEach>
                                                     </select>
                                                 </div>
-                                                <label class="col-md-2 col-lg-2">CID/Work Permit No <span class="text-danger">*</span>:</label>
+                                                <label class="col-md-2 col-lg-2">CID/Work Permit No. <span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
                                                     <div class="input-icon">
                                                       <span class="input-icon-addon">
                                                          <i class="fa fa-address-card-o"></i>
                                                       </span>
-                                                        <input type="text" name="consultantHRs[0].cidNo" class="form-control hr-cid" id="ow2" required="" placeholder="">
+                                                        <input type="text" name="consultantOWs[0].cidNo" class="form-control hr-cid" id="ow2" required="" placeholder="">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-lg-2">Salutation
+                                                <label class="col-lg-2">Title
                                                     <span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="consultantHRs[0].salutationId" id="ow3" required="" class="form-control custom-select text-left select-beast">
-                                                        <option value="">Select Salutation</option>
+                                                    <select name="consultantOWs[0].salutationId" id="ow3" required="" class="form-control custom-select text-left select-beast">
+                                                        <option value="">Select Title</option>
                                                         <c:forEach var="item" items="${salutationList}">
                                                             <option value="${item.value}"><c:out value="${item.text}"/></option>
                                                         </c:forEach>
@@ -1068,14 +1009,14 @@
                                                 <div class="col-lg-4">
                                                     <div class="input-icon">
                                                         <span class="input-icon-addon"><i class="fe fe-user"></i></span>
-                                                        <input type="text" name="consultantHRs[0].name" id="ow4" class="form-control name" required="" placeholder="">
+                                                        <input type="text" name="consultantOWs[0].name" id="ow4" class="form-control name" required="" placeholder="">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-lg-2">Gender<span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="consultantHRs[0].sex" id="ow5" required="" class="form-control custom-select text-left select-beast sex">
+                                                    <select name="consultantOWs[0].sex" id="ow5" required="" class="form-control custom-select text-left select-beast sex">
                                                         <option value="">Select Gender</option>
                                                         <option value="M">Male</option>
                                                         <option value="F">Female</option>
@@ -1084,7 +1025,7 @@
                                                 <label class="col-lg-2">Designation
                                                     <span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="consultantHRs[0].designationId" id="ow6" required="" class="form-control custom-select text-left select-beast">
+                                                    <select name="consultantOWs[0].designationId" id="ow6" required="" class="form-control custom-select text-left select-beast">
                                                         <option value="">Select Designation</option>
                                                         <c:forEach var="item" items="${designationList}">
                                                             <option value="${item.value}"><c:out value="${item.text}"/></option>
@@ -1154,7 +1095,7 @@
                                                     </thead>
                                                     <tbody class="files">
                                                     <tr>
-                                                        <td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/></td>
+                                                        <td><input type='text' required="" class='form-control docName' value="Bluebook" name='equipments[0].consultantEQAs[0].documentName'/></td>
                                                         <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment'
                                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                         </td>
@@ -1162,7 +1103,7 @@
                                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/></td>
+                                                        <td><input type='text' required="" class='form-control docName' value="Insurance certificate" name='equipments[0].consultantEQAs[0].documentName'/></td>
                                                         <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment'
                                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                         </td>
@@ -1170,7 +1111,7 @@
                                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/></td>
+                                                        <td><input type='text' required="" class='form-control docName' value="Others" name='equipments[0].consultantEQAs[0].documentName'/></td>
                                                         <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment'
                                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                         </td>

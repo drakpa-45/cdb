@@ -6,12 +6,14 @@ import bt.gov.g2c.aggregator.dto.RequestDTO;
 import com.ngn.spring.project.base.BaseService;
 import com.ngn.spring.project.cdb.admin.dto.*;
 import com.ngn.spring.project.cdb.common.CommonService;
+import com.ngn.spring.project.cdb.common.dto.ServiceFeeDTO;
 import com.ngn.spring.project.cdb.contractor.registration.ContractorNRService;
 import com.ngn.spring.project.cdb.contractor.registration.dto.ContractorHrDTO;
 import com.ngn.spring.project.cdb.contractor.registration.dto.ContractorTrainingDTO;
 import com.ngn.spring.project.cdb.contractor.registration.model.Contractor;
 import com.ngn.spring.project.cdb.contractor.registration.model.ContractorAttachment;
 import com.ngn.spring.project.cdb.contractor.registration.model.ContractorFinal;
+import com.ngn.spring.project.cdb.contractor.renewal.ContractorRCDao;
 import com.ngn.spring.project.cdb.contractor.renewal.ContractorRCService;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
 import com.ngn.spring.project.global.global.MailSender;
@@ -46,6 +48,8 @@ public class ContractorNRActionService extends BaseService {
     private CommonService commonService;
     @Autowired
     private ContractorNRService contractorNRService;
+    @Autowired
+    private ContractorRCDao contractorRCDao;
 
     @Autowired
     private ContractorRCService cRenewalService;
@@ -154,14 +158,36 @@ public class ContractorNRActionService extends BaseService {
         boolean isSaved = invokews.insertPaymentDetailsOnApproval(dto);
         System.out.println("Response from Aggregator: "+isSaved);
 
+         List<ServiceFeeDTO> serviceFeeList = contractorRCDao.getServicesFee(Integer.valueOf(applicationNo));
+
         String emailId = (String)commonService.getValue("crpcontractor","Email","ReferenceNo",appNo.toString());
         String phoneNumber = (String)commonService.getValue("crpcontractor","MobileNo","ReferenceNo",appNo.toString());
         String mailContent = "Dear User,<br>Your application for application number : "+appNo.toString()+" is approved."+
                 "<br>You may pay the required fee online through following link:<br>" +
                 "<a target='_blank' href='https://tinyurl.com/y3m7wa3c'>https://tinyurl.com/y3m7wa3c</a>" +
                 "<br>Or You may visit our CDB counters to pay the fee. " +
-                "<br><br>Note: Only after payment confirmation, your application will be done final approval. And you will get the login credential to log into system.";
-        MailSender.sendMail(emailId, "cdb@gov.bt", null, mailContent, "Application approved for Payment");
+                "<br><br>Note: Only after payment confirmation, your application will be done final approval. And you will get the login credential to log into system."+
+                "<br><br><html>"+
+                "<div class='card-body'>"+
+                "<table width='1000px' cellpadding=\"1\" cellspacing=\"1\" border=\"1\" style=\"background: green border-collapse: collapse\" class='table table-bordered table-condensed table-striped'" +
+                "<thead>" +
+                "<tr>"+
+                "<th style='width: 45%'>Service Name</th>" +
+                "<th style='width: 25%'>Fees (Nu.)</th>" +
+                "</tr>" +
+                "</thead>" +
+                "<tbody>" +
+                "<tr>"+
+                "<td></td>" +
+                "<td></td>" +
+                "</tr>"+
+                "</tbody>" +
+                "<tfoot>" +
+                "</tfoot>" +
+                "</table>"+
+                "</div>"+
+                "</html>";
+        MailSender.sendMail("pemadrkpa45@gmail.com", "cdb@gov.bt", null, mailContent, "Application approved for Payment");
         SmsSender.smsSender(phoneNumber, "cdb@gov.bt", null, mailContent, "Application approved for Payment");
         responseMessage.setStatus(SUCCESSFUL_STATUS);
         responseMessage.setText("Contractor application number :" + appNo + " approved successfully.");

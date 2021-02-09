@@ -120,7 +120,7 @@ ConsultantRCDao.getConsultantHRsFinal = SELECT hr.Id AS id,hr.CrpConsultantFinal
 ConsultantRCDao.getHRAttachmentsFinal=SELECT Id id, a.DocumentName documentName,DocumentPath documentPath, FileType fileType FROM crpconsultanthumanresourceattachmentfinal a WHERE a.CrpConsultantHumanResourceFinalId = :hrId
 
 ConsultantRCDao.getEquipmentFinal = SELECT ce.`Id` id, eq.`Name` equipmentName,ce.`RegistrationNo` registrationNo,ce.`SerialNo` serialNo,ce.`Quantity` quantity,ce.`ModelNo` modelNo ,ce.DeleteRequest AS deleteRequest,ce.CmnEquipmentId equipmentId,CASE WHEN eq.IsRegistered = '1' THEN 'Registered' ELSE 'Not Registered' END AS equipmentType FROM `crpconsultantequipmentfinal` ce INNER JOIN `cmnequipment`  eq ON ce.`CmnEquipmentId` = eq.`Id` WHERE ce.`CrpConsultantFinalId` =:consultantId
-ConsultantRCDao.getEQAttachmentsFinal=SELECT a.DocumentName documentName,DocumentPath documentPath, FileType fileType FROM crpconsultantequipmentattachmentfinal a WHERE a.CrpConsultantEquipmentFinalId  = :eqId
+ConsultantRCDao.getEQAttachmentsFinal=SELECT a.Id id, a.DocumentName documentName,DocumentPath documentPath, FileType fileType FROM crpconsultantequipmentattachmentfinal a WHERE a.CrpConsultantEquipmentFinalId  = :eqId
 
 ConsultantRCDao.saveDeleteHrRequest = Update crpconsultanthumanresourcefinal set DeleteRequest = 1 where Id =:hrId
 ConsultantRCDao.saveDeleteEqRequest = Update crpconsultantequipmentfinal set DeleteRequest = 1 where Id =:eqId

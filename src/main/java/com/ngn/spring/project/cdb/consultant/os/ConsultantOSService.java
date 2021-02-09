@@ -13,7 +13,6 @@ import com.ngn.spring.project.cdb.consultant.registration.dto.ConsultantDTOFetch
 import com.ngn.spring.project.cdb.consultant.renewal.ConsultantRCDao;
 import com.ngn.spring.project.cdb.consultant.renewal.ConsultantRCService;
 import com.ngn.spring.project.cdb.contractor.registration.dto.FeeStructureDTO;
-import com.ngn.spring.project.cdb.contractor.registration.model.*;
 import com.ngn.spring.project.cdb.contractor.renewal.LateFeeDTO;
 import com.ngn.spring.project.cdb.contractor.renewal.RenewalServiceType;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
@@ -268,9 +267,6 @@ public class ConsultantOSService extends BaseService {
                 consultantNRService.saveEQ(consultantEQ, loggedInUser);
                 //Save Human resource attachment
                 for (ConsultantEQAttachment consultantEQA : consultantEQ.getConsultantEQAs()) {
-                    if(consultantEQA.getAttachment() == null){ //No changes, so no need to save
-                        continue;
-                    }
                     if(!emptyNullCheck(consultantEQA.getId())){
                         if(consultantEQA.getAttachment() == null){ // no changes
                             consultantEQA = consultantNRService.getEQAttachmentFinal(consultantEQA.getId());
@@ -294,7 +290,7 @@ public class ConsultantOSService extends BaseService {
 
         //region save applied service and payment
         appliedServicesList.stream().filter(c-> !c.isEmpty()).forEach(
-                c->consultantRCService.saveAppliedS(consultantId,c,loggedInUser)
+                c->consultantRCService.saveAppliedS(consultantId,c,loggedInUser, consultantDTO)
         );
         //endregion
 

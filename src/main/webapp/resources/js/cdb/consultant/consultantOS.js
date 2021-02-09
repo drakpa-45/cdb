@@ -235,6 +235,7 @@ function cloneEqFiles(tableId,modal,i){
     });
     uplTbl.find('.docName').each(function(e){
         var index = $(this).closest('tr').index();
+        docName = docName +"<input type='hidden' name='equipments[0].consultantEQAs["+index+"].id' value='"+$(this).closest('tr').find('.eqaId').val()+"'/>";
         docName = docName +"<input type='hidden' name='equipments[0].consultantEQAs["+index+"].documentName' value='"+$(this).val()+"'/><b>"+$(this).val() +'</b><br>';
     });
     var curTr = $("#" + tableId).find('#'+i);
@@ -707,7 +708,7 @@ var consultantOS = (function () {
                         for (var i in equipments) {
                             var attachment = '';
                             for (var j in equipments[i].eqAttachments){
-                                attachment = attachment + "<span class='eqa'><input type='hidden' class='eqId' value='"+equipments[i].eqAttachments[j].id+"'>" +
+                                attachment = attachment + "<span class='attachment'><input type='hidden' class='eqaId' value='"+equipments[i].eqAttachments[j].id+"'>" +
                                 "<a href='"+_baseURL() + "/viewDownload?documentPath="+equipments[i].eqAttachments[j].documentPath+"' target='_blank'>"+equipments[i].eqAttachments[j].documentName+"</a></span><br>";
                             }
                             eqTr = eqTr +
@@ -948,27 +949,26 @@ var consultantOS = (function () {
 
     function editInModalEQ(){
         $('body').on('click','.edit_row_eq',function(e){
-            var editcheck = $(this).closest('tr').find('.editCheck').prop('checked',true).val(1);
             e.preventDefault();
+            var editcheck = $(this).closest('tr').find('.editCheck').prop('checked',true).val(1);
             var row = $(this).closest('tr');
             var modal = $('#eqModal');
-            modal.find('.id4Edit').val(row.find('.consultantEQid').val());
+            modal.find('#eqId').val(row.find('.consultantEQid').val());
             modal.find('#eq1').val(modal.find('#eq1 option:contains("'+row.find('td:nth-child(1)').text()+'")').val());
             modal.find('#eq2').val(row.find('td:nth-child(2)').text());
             modal.find('#eq3').val(row.find('td:nth-child(3)').text());
-            var eqaTr = "";
-            row.find('.eqa').each(function(){
+            var hraTr = "";
+            row.find('.attachment').each(function(){
                 var name = $(this).find('a').text();
-                var eqa = $(this).find('a').parent().html();
-                eqaTr = eqaTr+"<tr><td><input type='hidden' class='eqaId' value='"+$(this).find('.eqaId').val()+"'>" +
+                var hra = $(this).find('a').parent().html();
+                hraTr = hraTr+"<tr><td><input type='hidden' class='eqaId' value='"+$(this).find('.eqaId').val()+"'>" +
                 "<input type='text' required class='form-control docName' name='equipments[0].consultantEQAs[0].documentName' value='"+name.substring(0,name.lastIndexOf('.'))+"' disabled></td>" +
-                "<td><span class='aName'> "+eqa+"</span><span class='aFile'></span> </td>" +
-                    "<td></td>" +
+                "<td><span class='aName'> "+hra+"</span><span class='aFile'></span> </td>" +
+                "<td></td>" +
                 "<td><button class='change'>Change</button><button class='del_row'>Delete</button></td></tr>";
             });
-            modal.find('#eqUploadTbl tbody').empty().html(eqaTr);
-           // row.remove();
-            row.addClass('tbd');
+            modal.find('#eqUploadTbl tbody').empty().html(hraTr);
+            // row.remove();
             openModal('eqModal');
         });
 
@@ -1119,9 +1119,9 @@ var consultantOS = (function () {
     }
 
     function getPersonalInfo(){
-        $('#partnerDtls').on('change','.hr-cid', function (e) {
+        $('#addOwModal').on('change','.hr-cid', function (e) {
             var $this = $(this);
-            var country = $this.closest('tr').find('.country #countryList').val();
+            var country = $('#ow1').val();
             if(country == '8f897032-c6e6-11e4-b574-080027dcfac6') { //if bhutanese fetch from DCRC
                 $.ajax({
                     url: cdbGlobal.baseURL() + '/consultantNR/getPersonalInfo',
@@ -1131,18 +1131,17 @@ var consultantOS = (function () {
                         if (res.status == '1') {
                             var dto = res.dto;
                             // var index = $this.closest("tr").index();
-                            $this.closest('tr').find('.name').val(dto.fullName).prop('readonly', true);
-                            $this.closest('tr').find('.sex').val(dto.sex).prop('readonly', true);
+                            $('#ow4').val(dto.fullName).prop('readonly', true);
+                            $('#ow5').val(dto.sex).prop('readonly', true);
                         }
                         else{
                             warningMsg(res.text);
-                            $this.closest('tr').find('.name').prop('readonly', false);
-                            $this.closest('tr').find('.sex').prop('readonly', false);
+                            $('#ow4').val(dto.fullName).prop('readonly', false);
+                            $('#ow5').val(dto.sex).prop('readonly', false);
                         }
                     }
                 });
             }
-            getTrainingDtl($this.val());
         })
     }
 

@@ -257,9 +257,6 @@ public class ContractorOSService extends BaseService {
                 contractorNRService.saveEQ(contractorEQ, loggedInUser);
                 //Save Human resource attachment
                 for (ContractorEQAttachment contractorEQA : contractorEQ.getContractorEQAs()) {
-                    if(contractorEQA.getAttachment() == null){ //No changes, so no need to save
-                        continue;
-                    }
                     if(!emptyNullCheck(contractorEQA.getId())){
                         if(contractorEQA.getAttachment() == null){ // no changes
                             contractorEQA = contractorNRService.getEQAttachmentFinal(contractorEQA.getId());
@@ -283,7 +280,7 @@ public class ContractorOSService extends BaseService {
 
         //region save applied service and payment
         appliedServicesList.stream().filter(c-> !c.isEmpty()).forEach(
-                c->contractorRCService.saveAppliedS(contractorId,c,loggedInUser)
+                c->contractorRCService.saveAppliedS(contractorId,c,loggedInUser, contractorDTO)
         );
         //endregion
         responseMessage.reset();

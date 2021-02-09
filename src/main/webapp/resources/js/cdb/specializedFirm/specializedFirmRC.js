@@ -216,6 +216,7 @@ function cloneEqFiles(tableId,modal,i){
 
     uplTbl.find('.docName').each(function(e){
         var index = $(this).closest('tr').index();
+        docName = docName +"<input type='hidden' name='equipments[0].spFirmEQAs["+index+"].id' value='"+$(this).closest('tr').find('.eqaId').val()+"'/>";
         docName = docName +"<input type='hidden' name='equipments[0].spFirmEQAs["+index+"].documentName' value='"+$(this).val()+"'/><b>"+$(this).val() +'</b><br>';
     });
     var curTr = $("#" + tableId).find('#'+i);
@@ -675,7 +676,7 @@ var spFirmRC = (function () {
                         for (var i in equipments) {
                             var attachment = '';
                             for (var j in equipments[i].eqAttachments){
-                                attachment = attachment + "<span class='attachment'><input type='hidden' class='eqId' value='"+equipments[i].eqAttachments[j].id+"'>" +
+                                attachment = attachment + "<span class='attachment'><input type='hidden' class='eqaId' value='"+equipments[i].eqAttachments[j].id+"'>" +
                                 "<a href='"+_baseURL() + "/viewDownload?documentPath="+equipments[i].eqAttachments[j].documentPath+"' target='_blank'>"+equipments[i].eqAttachments[j].documentName+"</a></span><br>";
                             }
                             eqTr = eqTr +
@@ -856,7 +857,7 @@ var spFirmRC = (function () {
             row.find('.attachment').each(function(){
                 var name = $(this).find('a').text();
                 var hra = $(this).find('a').parent().html();
-                hraTr = hraTr+"<tr><td><input type='hidden' class='eqId' value='"+$(this).find('.hraId').val()+"'>" +
+                hraTr = hraTr+"<tr><td><input type='hidden' class='eqaId' value='"+$(this).find('.eqaId').val()+"'>" +
                 "<input type='text' required class='form-control docName' name='equipments[0].spFirmEQAs[0].documentName' value='"+name.substring(0,name.lastIndexOf('.'))+"' disabled></td>" +
                 "<td><span class='aName'> "+hra+"</span><span class='aFile'></span> </td>" +
                     "<td></td>" +
@@ -959,28 +960,26 @@ var spFirmRC = (function () {
             }
         })
     }
-
     function getPersonalInfo(){
-        $('#partnerDtls').on('blur','.hr-cid', function () {
+        $('#addOwModal').on('change','.hr-cid', function (e) {
             var $this = $(this);
-            var country = $this.closest('tr').find('.country #countryList').val();
+            var country = $('#ow1').val();
             if(country == '8f897032-c6e6-11e4-b574-080027dcfac6') { //if bhutanese fetch from DCRC
                 $.ajax({
-                    url:cdbGlobal.baseURL() +'/specializedFirm/getPersonalInfo',
+                    url: cdbGlobal.baseURL() + '/specializedFirm/getPersonalInfo',
                     type: 'GET',
-                    async:false,
                     data: {cidNo: $this.val(),type:"fetch"},
                     success: function (res) {
                         if (res.status == '1') {
                             var dto = res.dto;
                             // var index = $this.closest("tr").index();
-                            $this.closest('tr').find('.name').val(dto.fullName).prop('readonly', true);
-                            $this.closest('tr').find('.sex').val(dto.sex).prop('readonly', true);
+                            $('#ow4').val(dto.fullName).prop('readonly', true);
+                            $('#ow5').val(dto.sex).prop('readonly', true);
                         }
                         else{
                             warningMsg(res.text);
-                            $this.closest('tr').find('.name').prop('readonly', false);
-                            $this.closest('tr').find('.sex').prop('readonly', false);
+                            $('#ow4').val(dto.fullName).prop('readonly', false);
+                            $('#ow5').val(dto.sex).prop('readonly', false);
                         }
                     }
                 });
@@ -994,9 +993,9 @@ var spFirmRC = (function () {
             var country = $('#hr5').val();
             if(country == '8f897032-c6e6-11e4-b574-080027dcfac6') { //if bhutanese fetch from DCRC
                 $.ajax({
-                    url: cdbGlobal.baseURL() +'/specializedFirm/getPersonalInfo',
+                    url:cdbGlobal.baseURL() + '/specializedFirm/getPersonalInfo',
                     type: 'GET',
-                    data: {cidNo: $this.val(), type: "fetch"},
+                    data: {cidNo: $this.val(),type:"fetch"},
                     success: function (res) {
                         if (res.status == '1') {
                             var dto = res.dto;
@@ -1010,7 +1009,6 @@ var spFirmRC = (function () {
             }
         })
     }
-
     function isFirmNameUnique(){
         $('#firmName').on('change',function(){
             var $this = $(this);

@@ -260,9 +260,6 @@ public class ContractorRCService extends BaseService {
                 contractorNRService.saveEQ(contractorEQ, loggedInUser);
                 //Save Human resource attachment
                 for (ContractorEQAttachment contractorEQA : contractorEQ.getContractorEQAs()) {
-                    if(contractorEQA.getAttachment() == null){ //No changes, so no need to save
-                        continue;
-                    }
                     if(!emptyNullCheck(contractorEQA.getId())){
                         if(contractorEQA.getAttachment() == null){ // no changes
                             contractorEQA = contractorNRService.getEQAttachmentFinal(contractorEQA.getId());
@@ -286,24 +283,19 @@ public class ContractorRCService extends BaseService {
 
         //region late fee service id
         BigDecimal lateFee = new BigDecimal(responseMessage.getVal2());
-        if(lateFee.compareTo(BigDecimal.ZERO)  != 0){
-            ContractorServicePayment servicePayment = contractorDTO.getServicePayment();
-            servicePayment.setContractorId(contractorId);
-            servicePayment.setNoOfDaysLate(servicePayment.getNoOfDaysLate());
-            servicePayment.setNoOfDaysAfterGracePeriod(servicePayment.getNoOfDaysAfterGracePeriod());
-            servicePayment.setPaymentAmount(servicePayment.getPaymentAmount());
-            servicePayment.setWaiveOffLateFee(servicePayment.getWaiveOffLateFee());
-            servicePayment.setPenaltyPerDay(BigDecimal.valueOf(100));
-
-            contractorRCDao.save(servicePayment);
+        if(lateFee.compareTo(BigDecimal.ZERO)  >= 0){
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "11");
+            if(renewalServiceType.getUpgradeDowngrade() == null){
+                String appliedServiceId = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "2"); //renewal service id
+                appliedServicesList.add(appliedServiceId);
+            }
             appliedServicesList.add(appliedService);
         }
         //endregion
 
         //region save applied service and payment
         appliedServicesList.stream().filter(c-> !c.isEmpty()).forEach(
-                c->saveAppliedS(contractorId,c,loggedInUser)
+                c->saveAppliedS(contractorId,c,loggedInUser,contractorDTO)
         );
         //endregion
         responseMessage.reset();
@@ -452,7 +444,7 @@ public class ContractorRCService extends BaseService {
     }
 
     @Transactional
-    public void saveAppliedS(String contractorId,String appliedServiceId,LoggedInUser loggedInUser){
+    public void saveAppliedS(String contractorId, String appliedServiceId, LoggedInUser loggedInUser, ContractorDTO contractorDTO){
         ContractorAppliedS contractorAppliedS = new ContractorAppliedS();
         contractorAppliedS.setContractorId(contractorId);
         contractorAppliedS.setServiceTypeId(appliedServiceId);
@@ -463,15 +455,34 @@ public class ContractorRCService extends BaseService {
         Object feeObj = commonService.getValue("crpservice", "ContractorAmount","Id",appliedServiceId);
         fee = (feeObj == null)?BigDecimal.ZERO:new BigDecimal(feeObj.toString());
 
-        ContractorServicePayment servicePayment = new ContractorServicePayment();
-        servicePayment.setId(commonService.getRandomGeneratedId());
-        servicePayment.setContractorId(contractorId);
-        servicePayment.setCmnServiceTypeId(appliedServiceId);
-        servicePayment.setTotalAmount(fee);
-        servicePayment.setPaymentAmount(fee);
-        servicePayment.setCreatedBy(loggedInUser.getUserID());
-        servicePayment.setCreatedOn(loggedInUser.getServerDate());
-        contractorRCDao.saveUpdate(servicePayment);
+        BigDecimal lateFee = new BigDecimal(responseMessage.getVal2());
+        if(appliedServiceId.equalsIgnoreCase("21b6caa9-ff97-11e4-9b95-080027dcfac6")){
+            ContractorServicePayment servicePayment = contractorDTO.getServicePayment();
+            servicePayment.setId(commonService.getRandomGeneratedId());
+            servicePayment.setContractorId(contractorId);
+            servicePayment.setCmnServiceTypeId(appliedServiceId);
+            servicePayment.setNoOfDaysLate(servicePayment.getNoOfDaysLate());
+            servicePayment.setNoOfDaysAfterGracePeriod(servicePayment.getNoOfDaysAfterGracePeriod());
+            servicePayment.setPaymentAmount(servicePayment.getPaymentAmount());
+            servicePayment.setTotalAmount(lateFee);
+            servicePayment.setPaymentAmount(lateFee);
+            servicePayment.setWaiveOffLateFee(servicePayment.getWaiveOffLateFee());
+            servicePayment.setPenaltyPerDay(BigDecimal.valueOf(100));
+            servicePayment.setCreatedBy(loggedInUser.getUserID());
+            servicePayment.setCreatedOn(loggedInUser.getServerDate());
+            contractorRCDao.save(servicePayment);
+        }else {
+            ContractorServicePayment servicePayment = new ContractorServicePayment();
+            servicePayment.setId(commonService.getRandomGeneratedId());
+            servicePayment.setContractorId(contractorId);
+            servicePayment.setCmnServiceTypeId(appliedServiceId);
+            servicePayment.setTotalAmount(fee);
+            servicePayment.setPaymentAmount(fee);
+            servicePayment.setCreatedBy(loggedInUser.getUserID());
+            servicePayment.setCreatedOn(loggedInUser.getServerDate());
+            contractorRCDao.saveUpdate(servicePayment);
+        }
+
     }
 
     @Transactional

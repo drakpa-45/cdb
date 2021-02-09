@@ -937,7 +937,7 @@
                                                     <tbody id="fileListhrsection" class="files">
                                                     <tr>
                                                         <td><input type="hidden" class="hraId">
-                                                            <input type='text' required="" value="CID" class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/>
+                                                            <input type='text' required="" value="Certificate" class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/>
                                                         </td>
                                                         <td><input type='file' required="" class='file' name='contractorHRs[0].contractorHRAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/></td>
                                                         <td class='file-size'></td>
@@ -945,7 +945,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td><input type="hidden" class="hraId">
-                                                            <input type='text' required="" value="Certificate" class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/>
+                                                            <input type='text' required="" value="Undertaking" class='form-control docName' name='contractorHRs[0].contractorHRAs[0].documentName'/>
                                                         </td>
                                                         <td><input type='file' required="" class='file' name='contractorHRs[0].contractorHRAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/></td>
                                                         <td class='file-size'></td>
@@ -1106,13 +1106,13 @@
                                                     </thead>
                                                     <tbody class="files">
                                                     <tr>
-                                                        <td><input type='text' required="" class='form-control docName' name='equipments[0].contractorEQAs[0].documentName'/>
+                                                        <td><input type='text' required="" class='form-control docName' value="Bluebook" name='equipments[0].contractorEQAs[0].documentName'/>
                                                         </td>
                                                         <td><input type='file' required="" class='file' name='equipments[0].contractorEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/></td>
                                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type='text' required="" class='form-control docName' name='equipments[0].contractorEQAs[0].documentName'/>
+                                                        <td><input type='text' required="" class='form-control docName' value="Insurance Certificate" name='equipments[0].contractorEQAs[0].documentName'/>
                                                         </td>
                                                         <td><input type='file' required="" class='file' name='equipments[0].contractorEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/></td>
                                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>

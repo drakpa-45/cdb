@@ -547,7 +547,7 @@
                                 <div class="form-group">
                                     <div class="table-responsive">
                                         <fieldset><h3>Application Status</h3>
-                                            <table id="appStatusTbl" width="1000px" cellpadding="1" cellspacing="1" border="1" style="border-collapse: collapse" class="table table-bordered">
+                                            <table id="appStatusTbl" width="1000px" cellpadding="1" cellspacing="1" border="1" style="border-collapse: collapse" class="table table-bordered table-dark">
                                                 <thead>
                                                 <tr class="Caption">
                                                     <td width="20%" align="center" valign="top"><strong>Status</strong></td>

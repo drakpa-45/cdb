@@ -114,7 +114,8 @@ function getModalData(tableId, prefix, totalCol) {
     $('#'+tableId).find('.tbd').remove();
     $('#modalForm').validate();
     var modal = $('#' + prefix + '1').closest('.modal');
-    if (modal.find(':input').valid() == false) {
+    if(modal.find(':text,:file,:checkbox,select').valid() == false){
+        warningMsg('Please provide your information');
         return false;
     }
     for (var i = 1; i <= totalCol; i++) {
@@ -188,10 +189,11 @@ function getOwnerModalData(tableId, prefix, totalCol) {
 
     $("#" + tableId).append(tr).find(".noRecord").hide();
 
-    j= j+1;
-
     modal.modal('hide');
     $("#ownerModal").empty().html(ow_modal);
+
+    j= j+1;
+
 }
 
 function cloneHrFiles(tableId,modal,i){
@@ -231,6 +233,7 @@ function cloneEqFiles(tableId,modal,i){
 
     uplTbl.find('.docName').each(function(e){
         var index = $(this).closest('tr').index();
+        docName = docName +"<input type='hidden' name='equipments[0].contractorEQAs["+index+"].id' value='"+$(this).closest('tr').find('.eqaId').val()+"'/>";
         docName = docName +"<input type='hidden' name='equipments[0].contractorEQAs["+index+"].documentName' value='"+$(this).val()+"'/><b>"+$(this).val() +'</b><br>';
     });
     var curTr = $("#" + tableId).find('#'+i);
@@ -660,7 +663,7 @@ var contractorOS = (function () {
                         for (var i in equipments) {
                             var attachment = '';
                             for (var j in equipments[i].eqAttachments){
-                                attachment = attachment + "<span class='eqa'><input type='hidden' class='eqId' value='"+equipments[i].eqAttachments[j].id+"'>" +
+                                attachment = attachment + "<span class='attachment'><input type='hidden' class='eqaId' value='"+equipments[i].eqAttachments[j].id+"'>" +
                                 "<a href='"+_baseURL() + "/viewDownload?documentPath="+equipments[i].eqAttachments[j].documentPath+"' target='_blank'>"+equipments[i].eqAttachments[j].documentName+"</a></span><br>";
                             }
                             eqTr = eqTr +
@@ -839,7 +842,7 @@ var contractorOS = (function () {
 
                     var row = $(this).closest('tr');
                     var modal = $('#eqModal');
-                    modal.find('.id4Edit').val(row.find('.contractorEQid').val())//for Edit
+                    modal.find('.id4Edit').val(row.find('.contractorEQid').val()); //for Edit
                     modal.find('#eq1').val(modal.find('#eq1 option:contains("' + row.find('td:nth-child(1)').text() + '")').val());
                     modal.find('#eq2').val(row.find('td:nth-child(2)').text());
                     modal.find('#eq3').val(row.find('td:nth-child(3)').text());

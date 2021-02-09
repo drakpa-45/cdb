@@ -436,11 +436,11 @@
                                                         </div>
                                                         <div class="form-group row">
                                                             <div class="col-lg-6 col-md-6">
-                                                                <label class="col-lg-4 form-label">Telephone No </label>
+                                                                <label class="col-lg-4 form-label">Telephone Number </label>
                                                                 <input type="text" class="form-control col-lg-7" name="specializedFirm.regPhoneNo" id="regPhoneNo" placeholder="Text..">
                                                             </div>
                                                             <div class="col-lg-6 col-md-6">
-                                                                <label class="col-lg-4 form-label">Fax No </label>
+                                                                <label class="col-lg-4 form-label">Fax Number </label>
                                                                 <input type="text" class="form-control col-lg-7" name="specializedFirm.regFaxNo" id="regFaxNo" placeholder="Text..">
                                                             </div>
                                                         </div>
@@ -834,11 +834,11 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-lg-2">Salutation
+                                        <label class="col-lg-2">Title
                                             <span class="text-danger">*</span>:</label>
                                         <div class="col-lg-4">
                                             <select name="spFirmHRs[0].salutationId" id="hr1" required="" class="form-control custom-select text-left select-beast">
-                                                <option value="">Select Salutation</option>
+                                                <option value="">Select Title</option>
                                                 <c:forEach var="item" items="${salutationList}">
                                                     <option value="${item.value}"><c:out value="${item.text}"/></option>
                                                 </c:forEach>
@@ -937,27 +937,26 @@
                                                     </thead>
                                                     <tbody id="fileListhrsection" class="files">
                                                     <tr>
-                                                        <td><input type="hidden" class="hraId">
-                                                            <input type='text' required="" value="CID" class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/>
+                                                        <td><input type='text' required="" value="Certificate" class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/></td>
+                                                        <td><input type='file' required="" class='file' name='spFirmHRs[0].spFirmHRAs[0].attachment'
+                                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                         </td>
-                                                        <td><input type='file' required="" class='file' name='spFirmHRs[0].spFirmHRAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/></td>
                                                         <td class='file-size'></td>
                                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type="hidden" class="hraId">
-                                                            <input type='text' required="" value="Certificate" class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/>
+                                                        <td><input type='text' required="" value="Undertaking" class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/></td>
+                                                        <td><input type='file' required="" class='file' name='spFirmHRs[0].spFirmHRAs[0].attachment'
+                                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                         </td>
-                                                        <td><input type='file' required="" class='file' name='spFirmHRs[0].spFirmHRAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
-                                                       </td>
                                                         <td class='file-size'></td>
                                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type="hidden" class="hraId">
-                                                            <input type='text' required="" value="Others" class='form-control docName' name='spFirmHRs[0].spFirmHRs[0].documentName'/>
+                                                        <td><input type='text' required="" value="Others" class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/></td>
+                                                        <td><input type='file' required="" class='file' name='spFirmHRs[0].spFirmHRAs[0].attachment'
+                                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                         </td>
-                                                        <td><input type='file' required="" class='file' name='spFirmHRs[0].spFirmHRs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/></td>
                                                         <td class='file-size'></td>
                                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                     </tr>
@@ -981,7 +980,7 @@
                             <div class="modal-dialog modal-lg" id="ownerModal">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 id="ownerModalLabel" class="modal-title">Add Human Resource</h4>
+                                        <h4 id="ownerModalLabel" class="modal-title">Add Owner(s)</h4>
                                         <button aria-hidden="true" data-dismiss="modal" class="close" type="button"></button>
                                     </div>
                                     <div class="modal-body form-horizontal">
@@ -1009,11 +1008,11 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-lg-2">Salutation
+                                                <label class="col-lg-2">Title
                                                     <span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
                                                     <select name="spFirmOWs[0].salutationId" id="ow3" required="" class="form-control custom-select text-left select-beast">
-                                                        <option value="">Select Salutation</option>
+                                                        <option value="">Select Title</option>
                                                         <c:forEach var="item" items="${salutationList}">
                                                             <option value="${item.value}"><c:out value="${item.text}"/></option>
                                                         </c:forEach>
@@ -1111,7 +1110,7 @@
                                                     </thead>
                                                     <tbody class="files">
                                                     <tr>
-                                                        <td><input type='text' required="" class='form-control docName' name='equipments[0].spFirmEQAs[0].documentName'/></td>
+                                                        <td><input type='text' required="" value="Bluebook" class='form-control docName' name='equipments[0].spFirmEQAs[0].documentName'/></td>
                                                         <td><input type='file' required="" class='file' name='equipments[0].spFirmEQAs[0].attachment'
                                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                         </td>
@@ -1119,7 +1118,7 @@
                                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type='text' required="" class='form-control docName' name='equipments[0].spFirmEQAs[0].documentName'/></td>
+                                                        <td><input type='text' required=""  value="Insurance Certificate" class='form-control docName' name='equipments[0].spFirmEQAs[0].documentName'/></td>
                                                         <td><input type='file' required="" class='file' name='equipments[0].spFirmEQAs[0].attachment'
                                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                         </td>
@@ -1127,8 +1126,10 @@
                                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type='text' required="" class='form-control docName' name='equipments[0].spFirmEQAs[0].documentName'/></td>
-                                                        <td><input type='file' required="" class='file' name='equipments[0].spFirmEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/></td>
+                                                        <td><input type='text' required="" value="Others" class='form-control docName' name='equipments[0].spFirmEQAs[0].documentName'/></td>
+                                                        <td><input type='file' required="" class='file' name='equipments[0].spFirmEQAs[0].attachment'
+                                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
+                                                        </td>
                                                         <td class='file-size'></td>
                                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                     </tr>

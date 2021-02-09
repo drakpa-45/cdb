@@ -161,14 +161,10 @@
                                                 </table>
                                             </div>
                                         </div>
-
                                         <div class="card tab2">
                                             <div class="bg-blue card-status card-status-left"></div>
-                                            <div class="card-header">
-                                                <div class="card-header bg-indigo-light text-white">Fees Applied</h3>
-                                            </div>
+                                                <div class="card-header bg-indigo-light text-white">Fees Applied</div>
                                             <div class="card-body">
-
                                                 <div class="col-lg-12">
                                                     <div class="panel-body">
                                                         <div class="form-group">

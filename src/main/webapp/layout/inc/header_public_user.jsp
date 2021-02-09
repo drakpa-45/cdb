@@ -228,7 +228,7 @@
 </div>
 <div aria-hidden="true" aria-labelledby="hrModalLabel" role="dialog" class="modal fade in"
      id="changePwdModal">
-    <div class="modal-dialog modal-lg" id="ownerModal">
+    <div class="modal-dialog modal-lg" id="pwdModal">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 id="ownerModalLabel" class="modal-title">Change/Update Password</h4>

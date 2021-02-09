@@ -92,7 +92,6 @@ function openModal(modalId) {
 //region model
 var hr_modal = $("#hrModal").html();
 var eq_modal = $("#eqModal").html();
-var ow_modal = $("#ownerModal").html();
 var j= 0;
 function getModalData(tableId, prefix, totalCol) {
 
@@ -139,7 +138,7 @@ function getModalData(tableId, prefix, totalCol) {
     }
     j= j+1;
 }
-
+var ow_modal = $("#ownerModal").html();
 function getOwnerModalData(tableId, prefix, totalCol) {
     $('#'+tableId).find('.tbd').remove();
     var td = "";
@@ -176,10 +175,12 @@ function getOwnerModalData(tableId, prefix, totalCol) {
 
     $("#" + tableId).append(tr).find(".noRecord").hide();
 
+        modal.modal('hide');
+        $("#ownerModal").empty('').html(ow_modal);
+
     j= j+1;
 
-    modal.modal('hide');
-    $("#ownerModal").empty().html(ow_modal);
+
 }
 
 function cloneHrFiles(tableId,modal,i){
@@ -216,9 +217,9 @@ function cloneEqFiles(tableId,modal,i){
         var index = $(this).closest('tr').index();
         $(this).attr('name', 'equipments[0].contractorEQAs['+index+'].attachment');
     });
-
     uplTbl.find('.docName').each(function(e){
         var index = $(this).closest('tr').index();
+        docName = docName +"<input type='hidden' name='equipments[0].contractorEQAs["+index+"].id' value='"+$(this).closest('tr').find('.eqaId').val()+"'/>";
         docName = docName +"<input type='hidden' name='equipments[0].contractorEQAs["+index+"].documentName' value='"+$(this).val()+"'/><b>"+$(this).val() +'</b><br>';
     });
     var curTr = $("#" + tableId).find('#'+i);
@@ -391,6 +392,7 @@ var contractorRC = (function () {
                     $('#firmName').prop('disabled', true);
                     $('#changeOfFirmName').prop('disabled', false).prop('required', true);
                     $('#changeOfOwnerId').prop('disabled', false).prop('required', true);
+                    $('#ownerShipchangeId').addClass('hide');
                     $('#ownerPartner').addClass('hide');
                 }
             }else if(id == 'changeOfFirmName' ){
@@ -670,7 +672,6 @@ var contractorRC = (function () {
                         var equipments = res;
                         var eqTr = "";
                         for (var i in equipments) {
-
                             var attachment = '';
                             for (var j in equipments[i].eqAttachments){
                                 attachment = attachment + "<span class='attachment'><input type='hidden' class='eqaId' value='"+equipments[i].eqAttachments[j].id+"'>" +
@@ -682,7 +683,7 @@ var contractorRC = (function () {
                             "<td>" + equipments[i].registrationNo + "</td>" +
                             "<td>" + equipments[i].quantity + "</td>" +
                             "<td style='text-align: center'>"+attachment+"</td>" +
-                            "<td> <input type='checkbox' name='contractorHRs[0].deleteRequest' value='1'></td>" +
+                            "<td> <input type='checkbox' name='equipments[0].deleteRequest' value='1'></td>" +
                             "<td class='action'><input type='checkbox' class='editCheck' name='equipments[0].editCheck' value=''><button class='btn-sm btn-info btn-block edit_row_eq'>Edit</button></td>" +
                             "</tr>";
                         }
@@ -765,7 +766,7 @@ var contractorRC = (function () {
             e.preventDefault();
             var row = $(this).closest('tr');
             var hrModal = $('#addOwModal');
-            hrModal.find('#hrId').val(row.find('.contractorOWid').val())//for Edit
+            hrModal.find('#hrId').val(row.find('.contractorOWid').val()); //for Edit
             hrModal.find('#ow1').val(hrModal.find('#ow1 option:contains("'+row.find('.countryName').text()+'")').val());
             hrModal.find('#ow2').val(row.find('.cidNo').text());
             hrModal.find('#ow3').val(hrModal.find('#ow3 option:contains("'+row.find('.salutationName').text()+'")').val());
@@ -852,7 +853,7 @@ var contractorRC = (function () {
             var row = $(this).closest('tr');
             //alert(row.find('.contractorEQid').val());
             var modal = $('#eqModal');
-            modal.find('#eq1').val(row.find('.contractorEQid').val());
+            modal.find('#eqId').val(row.find('.contractorEQid').val());
             modal.find('#eq1').val(modal.find('#eq1 option:contains("'+row.find('td:nth-child(1)').text()+'")').val());
             modal.find('#eq2').val(row.find('td:nth-child(2)').text());
             modal.find('#eq3').val(row.find('td:nth-child(3)').text());
@@ -951,7 +952,6 @@ var contractorRC = (function () {
                     }
                 });
             }
-            getTrainingDtl($this.val());
         })
     }
 
@@ -1032,6 +1032,26 @@ var contractorRC = (function () {
             });
         });
     }
+    function isFirmNameUnique(){
+        $('#firmName').on('change',function(){
+            var $this = $(this);
+            $.ajax({
+                url:cdbGlobal.baseURL() + '/contractorNR/isFirmNameUnique',
+                type: 'GET',
+                data: {firmName: $this.val()},
+                success: function (res) {
+                    if(res == true){
+                        //$this.val()
+                    }else{
+                        $this.val('').focus();
+                        warningMsg("This firm name has been already taken. Please choose another name.");
+                        $this.val('').focus();
+                    }
+                }
+            });
+        });
+    }
+
     function init(){
         viewDownloadAttachment();
         getContractor();
@@ -1059,6 +1079,7 @@ var contractorRC = (function () {
         editOCAttachment();
         editCCAttachment();
         isEmailUnique();
+        isFirmNameUnique();
         editInModalOwner();
         getOwnerFinal();
     }

@@ -92,7 +92,7 @@ public class ConsultantOSController extends BaseController {
         responseMessage =otherService.save(consultantDTO,renewalService,loggedInUser,request);
         if(responseMessage.getStatus() == 1){
             redirectAttributes.addFlashAttribute("acknowledgement_message",responseMessage.getText());
-        } else{
+        }else{
             redirectAttributes.addFlashAttribute("res", responseMessage);
             return "redirect:/public_access/contractorOS";
         }

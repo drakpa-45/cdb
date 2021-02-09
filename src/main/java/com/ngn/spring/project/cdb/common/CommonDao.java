@@ -365,15 +365,11 @@ public class CommonDao extends BaseDao {
 
     @Transactional
     public String getConsultantCdbNo(LoginDTO loginDTO) {
-        String cdbNo="";
+        String cdbNo=null;
         String consquery="SELECT f.CDBNo cdbNo FROM sysuser s LEFT JOIN crpconsultantfinal f ON f.SysUserId=s.Id WHERE s.username=?";
         Query arNo = sqlQuery(consquery).setParameter(1, loginDTO.getUsername());
-        if(arNo.list().size()>0)
-            cdbNo="Consultant999"+ arNo.list().get(0);
-        if(cdbNo==""){
-            //get cdbno for others
-        }
-        return cdbNo;
+        return (String) arNo.list().get(0);
+
     }
 
     public Boolean checkIfMailExists(PersonalInfoDTO dto1) {
@@ -522,15 +518,10 @@ try {
 
     @Transactional
     public String getCdbNoForContractor(LoginDTO loginDTO) {
-        String cdbNo="";
+        String cdbNo=null;
         String consquery="SELECT f.CDBNo cdbNo FROM sysuser s LEFT JOIN crpcontractorfinal f ON f.SysUserId=s.Id WHERE s.username=?";
         Query arNo = sqlQuery(consquery).setParameter(1, loginDTO.getUsername());
-        if(arNo.list().size()>0)
-            cdbNo="Contractor999"+ arNo.list().get(0);
-        if(cdbNo==""){
-            //get cdbno for others
-        }
-        return cdbNo;
+        return (String) arNo.list().get(0);
     }
 
     @Transactional

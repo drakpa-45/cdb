@@ -30,10 +30,6 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert alert-danger text-center" style="font-size: 10px">
                             <c:if test="${renewalCheck.status eq 1}">
                                 <span class="error">${renewalCheck.text}</span>
-                                <input type="hidden" class="form-control" name="servicePayment.noOfDaysLate" value="${renewalCheck.dto1.noOfDaysLate}">
-                                <input type="hidden" class="form-control" name="servicePayment.noOfDaysAfterGracePeriod" value="${renewalCheck.dto1.noOfDaysAfterGracePeriod}">
-                                <input type="hidden" class="form-control" name="servicePayment.paymentAmount" value="${renewalCheck.dto1.paymentAmount}">
-                                <input type="hidden" class="form-control" name="servicePayment.waiveOffLateFee" value="${renewalCheck.dto1.waiveOffLateFee}">
                             </c:if>
                             <c:if test="${renewalCheck.status eq 0}">
                                 <span class="error">${renewalCheck.text}</span>
@@ -111,6 +107,10 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <input type="hidden" class="form-control" name="servicePayment.noOfDaysLate" value="${renewalCheck.dto1.noOfDaysLate}">
+                                    <input type="hidden" class="form-control" name="servicePayment.noOfDaysAfterGracePeriod" value="${renewalCheck.dto1.noOfDaysAfterGracePeriod}">
+                                    <input type="hidden" class="form-control" name="servicePayment.paymentAmount" value="${renewalCheck.dto1.paymentAmount}">
+                                    <input type="hidden" class="form-control" name="servicePayment.waiveOffLateFee" value="${renewalCheck.dto1.waiveOffLateFee}">
                                     <div class="tab-pane services">
                                         <div class="panel-body table-responsive div-actual">
                                           <span>
@@ -423,17 +423,17 @@
                                                             <input type="email" class=" form-control col-lg-7" name="specializedFirm.regEmail" id="regEmail" required="true" placeholder="Text..">
                                                         </div>
                                                         <div class="col-lg-6 col-md-6 ">
-                                                            <label class="col-lg-4 form-label">Mobile No <span class="text-danger">*</span></label>
+                                                            <label class="col-lg-4 form-label">Mobile Number <span class="text-danger">*</span></label>
                                                             <input type="text" class=" form-control col-lg-7" name="specializedFirm.regMobileNo" id="regMobileNo" required="true" placeholder="Text..">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="col-lg-6 col-md-6">
-                                                            <label class="col-lg-4 form-label">Telephone No </label>
+                                                            <label class="col-lg-4 form-label">Telephone Number </label>
                                                             <input type="text" class="form-control col-lg-7" name="specializedFirm.regPhoneNo" id="regPhoneNo" placeholder="Text..">
                                                         </div>
                                                         <div class="col-lg-6 col-md-6">
-                                                            <label class="col-lg-4 form-label">Fax No </label>
+                                                            <label class="col-lg-4 form-label">Fax Number </label>
                                                             <input type="text" class="form-control col-lg-7" name="specializedFirm.regFaxNo" id="regFaxNo" placeholder="Text..">
                                                         </div>
                                                     </div>
@@ -825,11 +825,11 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-lg-2">Salutation
+                                        <label class="col-lg-2">Title
                                             <span class="text-danger">*</span>:</label>
                                         <div class="col-lg-4">
                                             <select name="spFirmHRs[0].salutationId" id="hr1" required="" class="form-control custom-select text-left select-beast">
-                                                <option value="">Select Salutation</option>
+                                                <option value="">Select Title</option>
                                                 <c:forEach var="item" items="${salutationList}">
                                                     <option value="${item.value}"><c:out value="${item.text}"/></option>
                                                 </c:forEach>
@@ -928,7 +928,7 @@
                                                     </thead>
                                                     <tbody id="fileListhrsection" class="files">
                                                     <tr>
-                                                        <td><input type='text' required="" value="CID" class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/></td>
+                                                        <td><input type='text' required="" value="Certificate" class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/></td>
                                                         <td><input type='file' required="" class='file' name='spFirmHRs[0].spFirmHRAs[0].attachment'
                                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                         </td>
@@ -936,7 +936,7 @@
                                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type='text' required="" value="Certificate" class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/></td>
+                                                        <td><input type='text' required="" value="Undertaking" class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/></td>
                                                         <td><input type='file' required="" class='file' name='spFirmHRs[0].spFirmHRAs[0].attachment'
                                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                         </td>
@@ -977,11 +977,11 @@
                                     <div class="modal-body form-horizontal">
                                         <div class="modal-div">
                                             <div class="form-group">
-                                                <input type="hidden" id="id5Edit" name="consultantHRs[0].id">
+                                                <input type="hidden" id="id5Edit" name="spFirmHRs[0].id">
                                                 <label class="col-lg-2">Nationality
                                                     <span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="spFirmHRs[0].countryId" id="ow1" required="" class="form-control custom-select text-left select-beast country">
+                                                    <select name="spFirmOWs[0].countryId" id="ow1" required="" class="form-control custom-select text-left select-beast country">
                                                         <option value="">Select Country</option>
                                                         <c:forEach var="item" items="${countryList}">
                                                             <option value="${item.value}"><c:out value="${item.text}"/></option>
@@ -994,16 +994,16 @@
                                                       <span class="input-icon-addon">
                                                          <i class="fa fa-address-card-o"></i>
                                                       </span>
-                                                        <input type="text" name="spFirmHRs[0].cidNo" class="form-control hr-cid" id="ow2" required="" placeholder="">
+                                                        <input type="text" name="spFirmOWs[0].cidNo" class="form-control hr-cid" id="ow2" required="" placeholder="">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-lg-2">Salutation
+                                                <label class="col-lg-2">Title
                                                     <span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="spFirmHRs[0].salutationId" id="ow3" required="" class="form-control custom-select text-left select-beast">
-                                                        <option value="">Select Salutation</option>
+                                                    <select name="spFirmOWs[0].salutationId" id="ow3" required="" class="form-control custom-select text-left select-beast">
+                                                        <option value="">Select Title</option>
                                                         <c:forEach var="item" items="${salutationList}">
                                                             <option value="${item.value}"><c:out value="${item.text}"/></option>
                                                         </c:forEach>
@@ -1014,14 +1014,14 @@
                                                 <div class="col-lg-4">
                                                     <div class="input-icon">
                                                         <span class="input-icon-addon"><i class="fe fe-user"></i></span>
-                                                        <input type="text" name="spFirmHRs[0].name" id="ow4" class="form-control name" required="" placeholder="">
+                                                        <input type="text" name="spFirmOWs[0].name" id="ow4" class="form-control name" required="" placeholder="">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-lg-2">Gender<span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="spFirmHRs[0].sex" id="ow5" required="" class="form-control custom-select text-left select-beast sex">
+                                                    <select name="spFirmOWs[0].sex" id="ow5" required="" class="form-control custom-select text-left select-beast sex">
                                                         <option value="">Select Gender</option>
                                                         <option value="M">Male</option>
                                                         <option value="F">Female</option>
@@ -1030,7 +1030,7 @@
                                                 <label class="col-lg-2">Designation
                                                     <span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
-                                                    <select name="spFirmHRs[0].designationId" id="ow6" required="" class="form-control custom-select text-left select-beast">
+                                                    <select name="spFirmOWs[0].designationId" id="ow6" required="" class="form-control custom-select text-left select-beast">
                                                         <option value="">Select Designation</option>
                                                         <c:forEach var="item" items="${designationList}">
                                                             <option value="${item.value}"><c:out value="${item.text}"/></option>
@@ -1100,7 +1100,7 @@
                                                     </thead>
                                                     <tbody class="files">
                                                     <tr>
-                                                        <td><input type='text' required="" class='form-control docName' name='equipments[0].spFirmEQAs[0].documentName'/></td>
+                                                        <td><input type='text' required="" value="Bluebook" class='form-control docName' name='equipments[0].spFirmEQAs[0].documentName'/></td>
                                                         <td><input type='file' required="" class='file' name='equipments[0].spFirmEQAs[0].attachment'
                                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                         </td>
@@ -1108,7 +1108,7 @@
                                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type='text' required="" class='form-control docName' name='equipments[0].spFirmEQAs[0].documentName'/></td>
+                                                        <td><input type='text' required=""  value="Insurance Certificate" class='form-control docName' name='equipments[0].spFirmEQAs[0].documentName'/></td>
                                                         <td><input type='file' required="" class='file' name='equipments[0].spFirmEQAs[0].attachment'
                                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                         </td>
@@ -1116,7 +1116,7 @@
                                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><input type='text' required="" class='form-control docName' name='equipments[0].spFirmEQAs[0].documentName'/></td>
+                                                        <td><input type='text' required="" value="Others" class='form-control docName' name='equipments[0].spFirmEQAs[0].documentName'/></td>
                                                         <td><input type='file' required="" class='file' name='equipments[0].spFirmEQAs[0].attachment'
                                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                                         </td>

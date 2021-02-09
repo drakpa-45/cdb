@@ -118,16 +118,26 @@ public class SpecializedFirmRService extends BaseService {
          //  updateIncorporation(spFirmDTO.getcAttachments(), loggedInUser, specializedFirmId);
             specializedFirm.setOwnershipTypeId(ownershipTypeId);
             specializedFirm.setFirmName(spFirmDTO.getSpecializedFirm().getFirmName());
-
-            List<SpFirmHR> ownerList = spFirmDTO.getSpecializedFirm().getSpFirmHRs();
             specializedFirm.setOwnershipChangeRemarks(spFirmDTO.getSpecializedFirm().getOwnershipChangeRemarks());
 
+            List<SpFirmHR> ownerList = spFirmDTO.getSpFirmOWs();
             for(SpFirmHR spFirmHR:ownerList){
-                String hrId = commonService.getRandomGeneratedId();
-                spFirmHR.setId(hrId);
-                spFirmHR.setSpecializedID(specializedFirmId);
-                spFirmHR.setIsPartnerOrOwner(TRUE_INT);
-                specializedFirmService.saveHR(spFirmHR, loggedInUser);
+                if(spFirmHR.getDeleteRequest() != null && spFirmHR.getDeleteRequest() == 1){
+                    //to save deleted hr
+                    //consultantHR.setDeleteRequest(1);
+                    specializedFirmRDao.saveDeleteHrRequest(spFirmHR.getId());
+                } else {
+                    if(emptyNullCheck(spFirmHR.getId())){
+                        spFirmHR.setId(commonService.getRandomGeneratedId());
+                    }
+                    //currentHRs.add(consultantHR.getId());
+                    if(emptyNullCheck(spFirmHR.getCidNo())){
+                        continue;
+                    }
+                    spFirmHR.setSpecializedID(specializedFirmId);
+                    spFirmHR.setIsPartnerOrOwner(TRUE_INT);
+                    specializedFirmService.saveHR(spFirmHR, loggedInUser);
+                }
             }
 
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "12");
@@ -174,13 +184,24 @@ public class SpecializedFirmRService extends BaseService {
 
         //region change of owner or partner
         if(renewalServiceType.getChangeOfOwner() != null){
-            List<SpFirmHR> ownerList = spFirmDTO.getSpecializedFirm().getSpFirmHRs();
+            List<SpFirmHR> ownerList = spFirmDTO.getSpFirmOWs();
             for(SpFirmHR spFirmHR:ownerList){
-                String hrId = commonService.getRandomGeneratedId();
-                spFirmHR.setId(hrId);
-                spFirmHR.setSpecializedID(specializedFirmId);
-                spFirmHR.setIsPartnerOrOwner(TRUE_INT);
-               specializedFirmService.saveHR(spFirmHR, loggedInUser);
+                if(spFirmHR.getDeleteRequest() != null && spFirmHR.getDeleteRequest() == 1){
+                    //to save deleted hr
+                    //consultantHR.setDeleteRequest(1);
+                    specializedFirmRDao.saveDeleteHrRequest(spFirmHR.getId());
+                } else {
+                    if(emptyNullCheck(spFirmHR.getId())){
+                        spFirmHR.setId(commonService.getRandomGeneratedId());
+                    }
+                    //currentHRs.add(consultantHR.getId());
+                    if(emptyNullCheck(spFirmHR.getCidNo())){
+                        continue;
+                    }
+                    spFirmHR.setSpecializedID(specializedFirmId);
+                    spFirmHR.setIsPartnerOrOwner(TRUE_INT);
+                    specializedFirmService.saveHR(spFirmHR, loggedInUser);
+                }
             }
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "4");
             appliedServicesList.add(appliedService);
@@ -247,8 +268,17 @@ public class SpecializedFirmRService extends BaseService {
                 specializedFirmService.saveEQ(spFirmEQ, loggedInUser);
                 //Save Human resource attachment
                 for (SpFirmEQAttachment spFirmEQA : spFirmEQ.getSpFirmEQAs()) {
-                    if(spFirmEQA.getAttachment() == null){ //No changes, so no need to save
-                        continue;
+                    if(!emptyNullCheck(spFirmEQA.getId())){
+                        if(spFirmEQA.getAttachment() == null){ // no changes
+                            spFirmEQA = specializedFirmService.getEQAttachmentFinal(spFirmEQA.getId());
+                        }else{ // for edit
+                            spFirmEQA.setEditedBy(loggedInUser.getUserID());
+                            spFirmEQA.setEditedOn(loggedInUser.getServerDate());
+                        }
+                    }else {
+                        if (spFirmEQA.getAttachment() == null) { //No changes, so no need to save
+                            continue;
+                        }
                     }
                     spFirmEQA.setEquipmentId(spFirmEQ.getId());
                     specializedFirmService.saveEQA(spFirmEQA, loggedInUser);
@@ -261,24 +291,19 @@ public class SpecializedFirmRService extends BaseService {
 
         //region late fee service id
         BigDecimal lateFee = new BigDecimal(responseMessage.getVal2());
-        if(lateFee.compareTo(BigDecimal.ZERO) != 0){
-            SpFirmServicePayment servicePayment = spFirmDTO.getServicePayment();
-            servicePayment.setSpecializedFirmId(specializedFirmId);
-            servicePayment.setNoOfDaysLate(servicePayment.getNoOfDaysLate());
-            servicePayment.setNoOfDaysAfterGracePeriod(servicePayment.getNoOfDaysAfterGracePeriod());
-            servicePayment.setPaymentAmount(servicePayment.getPaymentAmount());
-            servicePayment.setWaiveOffLateFee(servicePayment.getWaiveOffLateFee());
-            servicePayment.setPenaltyPerDay(BigDecimal.valueOf(100));
-
-            specializedFirmRDao.save(servicePayment);
+        if(lateFee.compareTo(BigDecimal.ZERO)  >= 0){
             appliedService = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "11");
+            if(renewalServiceType.getUpgradeDowngrade() == null){
+                String appliedServiceId = (String) commonService.getValue("crpservice", "Id", "ReferenceNo", "2"); //renewal service id
+                appliedServicesList.add(appliedServiceId);
+            }
             appliedServicesList.add(appliedService);
         }
         //endregion
 
         //region save applied service and payment
         appliedServicesList.stream().filter(c-> !c.isEmpty()).forEach(
-                c->saveAppliedS(specializedFirmId,c,loggedInUser)
+                c->saveAppliedS(specializedFirmId,c,loggedInUser,spFirmDTO)
         );
         //endregion
         responseMessage.reset();
@@ -455,7 +480,7 @@ public class SpecializedFirmRService extends BaseService {
     }
 
     @Transactional
-    public void saveAppliedS(String specializedFirmId, String appliedServiceId, LoggedInUser loggedInUser){
+    public void saveAppliedS(String specializedFirmId, String appliedServiceId, LoggedInUser loggedInUser, SpFirmDTO spFirmDTO){
         SpFirmAppliedS spFirmAppliedS = new SpFirmAppliedS();
         spFirmAppliedS.setSpecializedTradeId(specializedFirmId);
         spFirmAppliedS.setServiceTypeId(appliedServiceId);
@@ -466,15 +491,33 @@ public class SpecializedFirmRService extends BaseService {
         Object feeObj = commonService.getValue("crpservice", "SpecializedTradeFirstRenewAmount","Id",appliedServiceId);
         fee = (feeObj == null)?BigDecimal.ZERO:new BigDecimal(feeObj.toString());
 
-        SpFirmServicePayment servicePayment = new SpFirmServicePayment();
-        servicePayment.setId(commonService.getRandomGeneratedId());
-        servicePayment.setSpecializedFirmId(specializedFirmId);
-        servicePayment.setCmnServiceTypeId(appliedServiceId);
-        servicePayment.setTotalAmount(fee);
-        servicePayment.setPaymentAmount(fee);
-        servicePayment.setCreatedBy(loggedInUser.getUserID());
-        servicePayment.setCreatedOn(loggedInUser.getServerDate());
-        specializedFirmRDao.saveUpdate(servicePayment);
+        BigDecimal lateFee = new BigDecimal(responseMessage.getVal2());
+        if(appliedServiceId.equalsIgnoreCase("21b6caa9-ff97-11e4-9b95-080027dcfac6")){
+            SpFirmServicePayment servicePayment = spFirmDTO.getServicePayment();
+            servicePayment.setId(commonService.getRandomGeneratedId());
+            servicePayment.setSpecializedFirmId(specializedFirmId);
+            servicePayment.setCmnServiceTypeId(appliedServiceId);
+            servicePayment.setNoOfDaysLate(servicePayment.getNoOfDaysLate());
+            servicePayment.setNoOfDaysAfterGracePeriod(servicePayment.getNoOfDaysAfterGracePeriod());
+            servicePayment.setPaymentAmount(servicePayment.getPaymentAmount());
+            servicePayment.setTotalAmount(lateFee);
+            servicePayment.setPaymentAmount(lateFee);
+            servicePayment.setWaiveOffLateFee(servicePayment.getWaiveOffLateFee());
+            servicePayment.setPenaltyPerDay(BigDecimal.valueOf(100));
+            servicePayment.setCreatedBy(loggedInUser.getUserID());
+            servicePayment.setCreatedOn(loggedInUser.getServerDate());
+            specializedFirmRDao.save(servicePayment);
+        }else {
+            SpFirmServicePayment servicePayment = new SpFirmServicePayment();
+            servicePayment.setId(commonService.getRandomGeneratedId());
+            servicePayment.setSpecializedFirmId(specializedFirmId);
+            servicePayment.setCmnServiceTypeId(appliedServiceId);
+            servicePayment.setTotalAmount(fee);
+            servicePayment.setPaymentAmount(fee);
+            servicePayment.setCreatedBy(loggedInUser.getUserID());
+            servicePayment.setCreatedOn(loggedInUser.getServerDate());
+            specializedFirmRDao.saveUpdate(servicePayment);
+        }
     }
 
     @Transactional

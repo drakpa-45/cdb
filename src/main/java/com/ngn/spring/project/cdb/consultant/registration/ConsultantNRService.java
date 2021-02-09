@@ -410,15 +410,18 @@ public class ConsultantNRService extends BaseService {
     @Transactional(readOnly = false)
     public void saveEQA(ConsultantEQAttachment consultantEQA, LoggedInUser loggedInUser) throws Exception{
         MultipartFile attachment = consultantEQA.getAttachment();
-
-        String docName = consultantEQA.getDocumentName()+commonService.getFileEXT(attachment);
-        String specificLoc = UPLOAD_LOC+"//EQUIPMENT";
-        String docPath = commonService.uploadDocument(attachment,specificLoc,docName);
-        String eqAttachmentID = commonService.getRandomGeneratedId();
-        consultantEQA.setId(eqAttachmentID);
-        consultantEQA.setDocumentPath(docPath);
-        consultantEQA.setDocumentName(docName);
-        consultantEQA.setFileType(attachment.getContentType());
+        if(attachment != null) {
+            String docNameUpload = consultantEQA.getDocumentName() + commonService.getFileEXT(attachment);
+            String specificLoc = UPLOAD_LOC + "//EQUIPMENT";
+            String docPath = commonService.uploadDocument(attachment, specificLoc, docNameUpload);
+            consultantEQA.setDocumentPath(docPath);
+            consultantEQA.setDocumentName(docNameUpload);
+            consultantEQA.setFileType(attachment.getContentType());
+        }
+        if(emptyNullCheck(consultantEQA.getId()) || consultantEQA.getId().equalsIgnoreCase("undefined")){
+            String eqAttachmentID = commonService.getRandomGeneratedId();
+            consultantEQA.setId(eqAttachmentID);
+        }
         consultantEQA.setCreatedBy(loggedInUser.getUserID());
         consultantEQA.setCreatedOn(loggedInUser.getServerDate());
         consultantDao.saveUpdate(consultantEQA);
