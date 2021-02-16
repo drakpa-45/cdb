@@ -545,6 +545,7 @@ var consultantOS = (function () {
                             "<td></td>" +
                             "<td>" +
                             "<input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='InSole'/>" +
+                            "<input type='hidden' class='form-control' name='cAttachments[0].id' value='"+data[i].id+"'/>" +
                             "<input type='text' class='form-control docName' name='cAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
                             "<td class='attachment'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
                             "<td></td>" +
@@ -557,6 +558,7 @@ var consultantOS = (function () {
                             "<td></td>" +
                             "<td>" +
                             "<input type='hidden' class='form-control aFor' name='categoryAttachments[0].attachmentFor' value='AL'/>" +
+                            "<input type='hidden' class='form-control' name='categoryAttachments[0].id' value='"+data[i].id+"'/>" +
                             "<input type='text' class='form-control docName' name='categoryAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
                             "<td class='attachmentcc'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
                             "<td></td>" +
@@ -569,6 +571,7 @@ var consultantOS = (function () {
                             "<td></td>" +
                             "<td>" +
                             "<input type='hidden' class='form-control aFor' name='ownerAttachments[0].attachmentFor' value='OC'/>" +
+                            "<input type='hidden' class='form-control' name='ownerAttachments[0].id' value='"+data[i].id+"'/>" +
                             "<input type='text' class='form-control docName' name='ownerAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
                             "<td class='attachmentoc'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
                             "<td></td>" +
@@ -751,14 +754,13 @@ var consultantOS = (function () {
                     type: 'GET',
                     data: {consultantId:$('#consultantIdFinal').val()},
                     success: function (res) {
-
                         var categories = res;
                         for (var i in categories) {
                             if (categories[i].categoryId == "e6372584-bc15-11e4-81ac-080027dcfac6") {
                                 $('#cateId0').prop('checked', true).prop('disabled',false);
                             }
                             if (categories[i].categoryId == "f39b9245-bc15-11e4-81ac-080027dcfac6") {
-                                $('#cateId01').prop('checked', true).prop('disabled',false);
+                                $('#cateId1').prop('checked', true).prop('disabled',false);
                             }
                             if (categories[i].categoryId == "fb2aa1a7-bc15-11e4-81ac-080027dcfac6") {
                                 $('#cateId2').prop('checked', true).prop('disabled',false);
@@ -766,7 +768,6 @@ var consultantOS = (function () {
                             if (categories[i].categoryId == "2adfae00-be66-11e9-9ac2-0026b988eaa8") {
                                 $('#cateId3').prop('checked', true).prop('disabled',false);
                             }
-
 
                             if (categories[i].apClassId == "2dc059a3-bc17-11e4-81ac-080027dcfac6") {
                                 $('#asone').prop('checked', true).prop('disabled',false);
@@ -948,28 +949,30 @@ var consultantOS = (function () {
     }
 
     function editInModalEQ(){
-        $('body').on('click','.edit_row_eq',function(e){
+        $('#equipmentTbl').on('click','.edit_row_eq',function(e){
             e.preventDefault();
             var editcheck = $(this).closest('tr').find('.editCheck').prop('checked',true).val(1);
+
             var row = $(this).closest('tr');
             var modal = $('#eqModal');
-            modal.find('#eqId').val(row.find('.consultantEQid').val());
-            modal.find('#eq1').val(modal.find('#eq1 option:contains("'+row.find('td:nth-child(1)').text()+'")').val());
+            modal.find('.id4Edit').val(row.find('.consultantEQid').val()); //for Edit
+            modal.find('#eq1').val(modal.find('#eq1 option:contains("' + row.find('td:nth-child(1)').text() + '")').val());
             modal.find('#eq2').val(row.find('td:nth-child(2)').text());
             modal.find('#eq3').val(row.find('td:nth-child(3)').text());
-            var hraTr = "";
-            row.find('.attachment').each(function(){
+            var eqaTr = "";
+            row.find('.attachment').each(function () {
                 var name = $(this).find('a').text();
-                var hra = $(this).find('a').parent().html();
-                hraTr = hraTr+"<tr><td><input type='hidden' class='eqaId' value='"+$(this).find('.eqaId').val()+"'>" +
-                "<input type='text' required class='form-control docName' name='equipments[0].consultantEQAs[0].documentName' value='"+name.substring(0,name.lastIndexOf('.'))+"' disabled></td>" +
-                "<td><span class='aName'> "+hra+"</span><span class='aFile'></span> </td>" +
-                "<td></td>" +
+                var eqa = $(this).find('a').parent().html();
+                eqaTr = eqaTr + "<tr><td><input type='hidden' class='eqaId' value='" + $(this).find('.eqaId').val() + "'>" +
+                "<input type='text' required class='form-control docName' name='equipments[0].consultantEQAs[0].documentName' value='" + name.substring(0, name.lastIndexOf('.')) + "' disabled></td>" +
+                "<td><span class='aName'> " + eqa + "</span><span class='aFile'></span> </td>" +
+                    /*"<td></td>" +*/
                 "<td><button class='change'>Change</button><button class='del_row'>Delete</button></td></tr>";
             });
-            modal.find('#eqUploadTbl tbody').empty().html(hraTr);
-            // row.remove();
-            openModal('eqModal');
+
+            modal.find('#eqUploadTbl tbody').empty().html(eqaTr);
+            row.addClass('tbd');
+            openModal('eqModal')
         });
 
         $('body').on('click','.edit-eq',function(e){

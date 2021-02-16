@@ -3,14 +3,12 @@ package com.ngn.spring.project.cdb.admin.consultant.renewal;
 import com.ngn.spring.project.base.BaseService;
 import com.ngn.spring.project.cdb.admin.consultant.registration.ConsultantNRActionService;
 import com.ngn.spring.project.cdb.admin.contractor.renewal.ContractorRCActionDao;
-import com.ngn.spring.project.cdb.admin.dto.AppliedServiceFeeDTO;
-import com.ngn.spring.project.cdb.admin.dto.EquipmentDTO;
-import com.ngn.spring.project.cdb.admin.dto.NewDeleteExistDTO;
-import com.ngn.spring.project.cdb.admin.dto.PaymentUpdateDTO;
+import com.ngn.spring.project.cdb.admin.dto.*;
 import com.ngn.spring.project.cdb.common.CommonService;
 import com.ngn.spring.project.cdb.common.dto.ServiceFeeDTO;
 import com.ngn.spring.project.cdb.consultant.model.Consultant;
 import com.ngn.spring.project.cdb.consultant.registration.ConsultantNRService;
+import com.ngn.spring.project.cdb.consultant.registration.dto.ConsultantDTO;
 import com.ngn.spring.project.cdb.consultant.registration.dto.ConsultantHrDTO;
 import com.ngn.spring.project.cdb.consultant.renewal.ConsultantRCDao;
 import com.ngn.spring.project.cdb.consultant.renewal.ConsultantRCService;
@@ -142,8 +140,14 @@ public class ConsultantRCActionService extends BaseService{
     }
 
     @Transactional(readOnly = true)
-    public List getProposedCategories(String appNo) {
-        return consultantRCDao.getProposedCategories(appNo);
+    public ResponseMessage getProposedCategories(String appNo) {
+        ConsultantInfoDTO consultantDTO = new ConsultantInfoDTO();
+        String consultantId = (String) commonService.getValue("crpconsultant", "CrpConsultantId", "ReferenceNo", appNo);
+        List<CategoryClassDTO> categoryClassDTOs = consultantRCDao.getProposedCategories(consultantId);
+        consultantDTO.setCategories(categoryClassDTOs);
+        responseMessage.setDto(consultantDTO);
+        responseMessage.setStatus(SUCCESSFUL_STATUS);
+        return responseMessage;
     }
 
     @Transactional(readOnly = false)

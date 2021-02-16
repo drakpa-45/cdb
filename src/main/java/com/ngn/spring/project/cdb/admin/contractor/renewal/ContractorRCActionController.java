@@ -4,12 +4,14 @@ import com.ngn.spring.project.base.BaseController;
 import com.ngn.spring.project.cdb.admin.contractor.registration.ContractorNRActionService;
 import com.ngn.spring.project.cdb.admin.dto.PaymentUpdateDTO;
 import com.ngn.spring.project.cdb.common.CommonService;
+import com.ngn.spring.project.cdb.contractor.registration.ContractorNRService;
 import com.ngn.spring.project.cdb.contractor.renewal.ContractorRCService;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
 import com.ngn.spring.project.lib.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,19 +41,24 @@ public class ContractorRCActionController extends BaseController {
 
     @Autowired
     private ContractorRCActionService cRCActionService;
+
     @Autowired
     private ContractorNRActionService cNRActionService;
+
     @Autowired
     private ContractorRCService contractorRCService;
+
     @Autowired
     private CommonService commonService;
+
+    @Autowired
+    private ContractorNRService contractorNRService;
 
     @Autowired
     private ContractorRCService cRenewalService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(ModelMap model, HttpServletRequest request, HttpServletResponse response, @ModelAttribute("appNo")String appNo) {
-
         if(appNo == null || appNo.isEmpty()){ //if no appNo, redirect task list again
             model.remove("appNo");
             return "redirect:/admin/contractor";
@@ -65,7 +72,6 @@ public class ContractorRCActionController extends BaseController {
         } else {
             return "admin/contractor/contractorRCAction";
         }
-
     }
 
     @ResponseBody
@@ -85,6 +91,7 @@ public class ContractorRCActionController extends BaseController {
     public Object getContractorInfoOwnerFinal(HttpServletRequest request,String appNo) {
         return cRCActionService.getContractorInfoOwnerFinal(appNo);
     }
+
     @RequestMapping(value = "/viewDownload", method = RequestMethod.GET)
     public void viewDownload(HttpServletRequest request, HttpServletResponse response, String documentPath) throws Exception{
         commonService.viewDownloadFile(documentPath, response);
@@ -170,6 +177,4 @@ public class ContractorRCActionController extends BaseController {
         String cdbNo = cNRActionService.getCDBNoFromAppNo(appNo);
         return contractorRCService.getContractorFinal(cdbNo);
     }
-
-
 }

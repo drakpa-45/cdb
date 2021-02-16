@@ -35,3 +35,7 @@ WHERE t2.ActualStartDate IS NOT NULL AND t5.CmnWorkExecutionStatusId ='1ec69344-
 CommonDao.validateCorporateCidNo =SELECT c.PositionTitle positionTitle,c.Agency agency,c.CIDNo cidNo FROM crpgovermentengineer c WHERE c.CIDNo =:cidNo AND Releaved=0
 
 CommonDao.isUsenameExist = SELECT a.username FROM sysuser a WHERE a.username =:username
+
+CommonDao.consultantFetchEqDtlsFromCDB = SELECT c.NameOfFirm consultantFirmname,c.CDBNo consultantCDBNo FROM crpconsultantfinal c WHERE c.Id IN (SELECT e.CrpConsultantFinalId FROM crpconsultantequipmentfinal e WHERE e.RegistrationNo =:regNo)
+CommonDao.contractorFetchEqDtlsFromCDB = SELECT c.NameOfFirm consultantFirmname,c.CDBNo consultantCDBNo FROM crpcontractorfinal c WHERE c.Id IN (SELECT e.CrpContractorFinalId FROM crpcontractorequipmentfinal e WHERE e.RegistrationNo =:regNo)
+CommonDao.specializedFirmFetchEqDtlsFromCDB = SELECT c.NameOfFirm consultantFirmname,c.SPNo consultantCDBNo FROM crpspecializedtradefinal c WHERE c.Id IN (SELECT e.CrpSpecializedtradeFinalId FROM crpspecializedtradeequipmentfinal e WHERE e.RegistrationNo =:regNo)

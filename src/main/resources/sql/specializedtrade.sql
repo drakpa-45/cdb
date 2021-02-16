@@ -114,6 +114,8 @@ SpecializedFirmRCDao.getEquipmentFinal=SELECT ce.Id id, eq.Name equipmentName,ce
 
 SpecializedFirmRCDao.getEQAttachmentsFinal=SELECT a.Id AS id,a.DocumentName documentName,DocumentPath documentPath, FileType fileType FROM crpspecializedtradeequipmentattachmentfinal a WHERE a.CrpSpecializedtradeEquipmentFinalId  = :eqId
 
+SpecializedDao.getAttachmentFinal=SELECT Id id,CrpSpecializedTradeFinalId specializedTradeId,DocumentName documentName,DocumentPath documentPath,AttachmentFor attachmentFor,FileType fileType,CreatedBy createdBy,CreatedOn createdOn FROM crpspecializedtradeattachmentfinal WHERE Id = :aId
+
 SpecializedFirmRCDao.getCategoryClassFinal=SELECT Id AS id,CrpSpecializedTradeFinalId AS specializedFirmId,CmnAppliedCategoryId AS categoryId,CmnVerifiedCategoryId AS aClassId,CmnApprovedCategoryId AS vClassId FROM crpspecializedtradeworkclassificationfinal WHERE CrpSpecializedTradeFinalId = :specializedFirmId ORDER BY CmnAppliedCategoryId
 
 SpecializedFirmRCDao.getSpFirmStatus=SELECT bb.Id value,bb.Name text,bb.ReferenceNo obj1 FROM crpspecializedtradefinal aa INNER JOIN cmnlistitem bb ON aa.CmnApplicationRegistrationStatusId=bb.Id WHERE cdbNo = :cdbNo

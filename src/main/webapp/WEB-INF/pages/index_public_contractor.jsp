@@ -75,8 +75,7 @@
                     <div class="col-lg-12"><h4>
                         Rejected Application
                     </h4>
-                        <b> Note: You need to reapply the following services within 10 days. Your reapply link will be
-                            disabled after 10 days</b>
+                        <b> Note: You need to reapply the following services within 10 days. Your reapply link will be disabled after 10 days.</b>
                         </br></br>
                         <div class="table-responsive">
                             <table class="card-table table table-bordered table-vcenter" id="rejectedTblId">
@@ -93,7 +92,7 @@
                                 <c:forEach items="${rejectedApplications}" var="history" varStatus="i">
                                     <tr>
                                         <td>${i.index+1}</td>
-                                        <td><a href="<c:url value="/public_access/emptylayout/contractoropenRejectedApplication?appNo="/>${history.applicationNo}" onclick="openAndClaimRejectedApplication2('${history.applicationNo}')"
+                                        <td><a href="<c:url value="/public_access/contractorRC?appNo="/>${history.applicationNo}" onclick="openAndClaimRejectedApplication2('${history.applicationNo}')"
                                                data-toggle="tooltip" data-placement="top"> ${history.applicationNo}</a></td>
                                         <td>${history.serviceName}</td>
                                         <td>${history.appStatus}</td>
@@ -109,48 +108,4 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    $('#fees_structure').prop('class', 'tab-pane active');
-    function next(val) {
-        if (val == "fees_structure") {
-            $('#locationcontent').prop('class', 'tab-pane active');
-            $('#personalDetials').removeClass("active");
-            $('#personal_tab').removeClass("active");
-            $("#personalh").css("color", "white");
-            $('#personalcheck').html('<i class="fa fa-check text-white"></i>');
-            $("#personalh").css("background-color", "#120f65");
-            $("#locationh").css("background-color", "rgb(18, 18, 19)");
-            $("#locationh").css("color", "white");
-        }
-        else if (val == "location" && validatelocation()) {
-            $('#attachmentcontent').prop('class', 'tab-pane active');
-            $('#locationhead').removeClass("active");
-            $('#locationcontent').removeClass("active");
-            $('#locationcheck').html('<i class="fa fa-check text-white"></i>');
-            $("#personalh").css("color", "white");
-            $("#personalh").css("background-color", "#120f65");
-            $("#locationh").css("background-color", "#120f65");
-            $("#attachmenthead").css("background-color", "rgb(18, 18, 19)");
-            $("#attachmenthead").css("color", "white");
-        }
-    }
-    function pretab(val) {
-        if (val == "location") {
-            $('#personal_tab').prop('class', 'tab-pane active');
-            $('#locationhead').removeClass("active");
-            $('#locationcontent').removeClass("active");
-            $("#personalh").css("background-color", "rgb(18, 18, 19)");
-            $("#locationh").css("background-color", "#120f65");
-        }
-        else if ("attachment" == val) {
-            $('#locationcontent').prop('class', 'tab-pane active');
-            $('#attachmenthead').removeClass("active");
-            $('#attachmentcontent').removeClass("active");
-            $("#locationh").css("background-color", "rgb(18, 18, 19)");
-            $("#attachmenthead").css("background-color", "#120f65");
-        }
-    }
-</script>
-
 </body>

@@ -472,7 +472,8 @@ var contractorOS = (function () {
                             "<td></td>" +
                             "<td>" +
                             "<input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='InSole'/>" +
-                            "<input type='text' class='form-control docName' name='cAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
+                            "<input type='hidden' class='form-control' name='cAttachments[0].id' value='"+data[i].id+"'/>" +
+                            "<input type='text' class='form-control docName' name='cAttachments[0].documentName' value='" +data[i].documentName +"'></td>" +
                             "<td class='attachment'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
                             "<td></td>" +
                             "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
@@ -484,6 +485,7 @@ var contractorOS = (function () {
                             "<td></td>" +
                             "<td>" +
                             "<input type='hidden' class='form-control aFor' name='categoryAttachments[0].attachmentFor' value='AL'/>" +
+                            "<input type='hidden' class='form-control' name='categoryAttachments[0].id' value='"+data[i].id+"'/>" +
                             "<input type='text' class='form-control docName' name='categoryAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
                             "<td class='attachmentcc'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
                             "<td></td>" +
@@ -496,6 +498,7 @@ var contractorOS = (function () {
                             "<td></td>" +
                             "<td>" +
                             "<input type='hidden' class='form-control aFor' name='ownerAttachments[0].attachmentFor' value='OC'/>" +
+                            "<input type='hidden' class='form-control' name='ownerAttachments[0].id' value='"+data[i].id+"'/>" +
                             "<input type='text' class='form-control docName' name='ownerAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
                             "<td class='attachmentoc'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
                             "<td></td>" +
@@ -668,13 +671,12 @@ var contractorOS = (function () {
                             }
                             eqTr = eqTr +
                             "<tr>" +
-                            "<td class='eq1'><input type='hidden' class='contractorEQid' name='equipments[0].id' value='"+equipments[i].id +"'/>"
-                            + equipments[i].equipmentName + "</td>" +
-                            "<td class='eq2'>" + equipments[i].registrationNo + "</td>" +
-                            "<td class='qty'>" + equipments[i].quantity + "</td>" +
-                            "<td>" + attachment + "</td>" +
-                            "<td><input type='checkbox' style='zoom:1.6' name='equipments[0].deleteRequest' value='1'></td>" +
-                            "<td class='action'><input type='checkbox' class='editCheck' name='equipments[0].editCheck' value=''><button  class='btn-sm btn-info btn-block edit_row_eq'>Edit</button></td>" +
+                            "<td><input type='hidden' class='contractorEQid' name='equipments[0].id' value='"+equipments[i].id +"'/>" + equipments[i].equipmentName + "</td>" +
+                            "<td>" + equipments[i].registrationNo + "</td>" +
+                            "<td>" + equipments[i].quantity + "</td>" +
+                            "<td style='text-align: center'>"+attachment+"</td>" +
+                            "<td> <input type='checkbox' name='equipments[0].deleteRequest' value='1'></td>" +
+                            "<td class='action'><input type='checkbox' class='editCheck' name='equipments[0].editCheck' value=''><button class='btn-sm btn-info btn-block edit_row_eq'>Edit</button></td>" +
                             "</tr>";
                         }
                         $('#equipmentTbl').find('tbody').html(eqTr);
@@ -847,7 +849,7 @@ var contractorOS = (function () {
                     modal.find('#eq2').val(row.find('td:nth-child(2)').text());
                     modal.find('#eq3').val(row.find('td:nth-child(3)').text());
                     var eqaTr = "";
-                    row.find('.eqa').each(function () {
+                    row.find('.attachment').each(function () {
                         var name = $(this).find('a').text();
                         var eqa = $(this).find('a').parent().html();
                         eqaTr = eqaTr + "<tr><td><input type='hidden' class='eqaId' value='" + $(this).find('.eqaId').val() + "'>" +

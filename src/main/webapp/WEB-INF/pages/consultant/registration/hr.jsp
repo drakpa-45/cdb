@@ -183,7 +183,7 @@
                         <table class="table table-bordered" id="hrDtlsTable">
                             <thead>
                             <tr>
-                                <th style="width: 5%">Salutation</th>
+                                <th style="width: 5%">Title</th>
                                 <th style="width: 10%">Name</th>
                                 <th style="width: 10%">ID/Work Permit No.</th>
                                 <th style="width: 5%">Gender</th>
@@ -244,11 +244,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2">Salutation
+                        <label class="col-lg-2">Title
                             <span class="text-danger">*</span>:</label>
                         <div class="col-lg-4">
                             <select name="consultantHRs[0].salutationId" id="hr1" required="true" class="form-control custom-select text-left select-beast">
-                                <option value="">Select Salutation</option>
+                                <option value="">Select Title</option>
                                 <c:forEach var="item" items="${salutationList}">
                                     <option value="${item.value}"><c:out value="${item.text}"/></option>
                                 </c:forEach>
@@ -347,7 +347,7 @@
                                     </thead>
                                     <tbody id="fileListhrsection" class="files">
                                     <tr>
-                                        <td><input type='text' required="true" value="CID" class='form-control docName' name='consultantHRs[0].consultantHRAs[0].documentName'/></td>
+                                        <td><input type='text' required="true" value="Certificate" class='form-control docName' name='consultantHRs[0].consultantHRAs[0].documentName'/></td>
                                         <td><input type='file' required="true" class='file' name='consultantHRs[0].consultantHRAs[0].attachment'
                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                         </td>
@@ -355,7 +355,7 @@
                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                     </tr>
                                     <tr>
-                                        <td><input type='text' required="true" value="Certificate" class='form-control docName' name='consultantHRs[0].consultantHRAs[0].documentName'/></td>
+                                        <td><input type='text' required="true" value="Undertaking" class='form-control docName' name='consultantHRs[0].consultantHRAs[0].documentName'/></td>
                                         <td><input type='file' required="true" class='file' name='consultantHRs[0].consultantHRAs[0].attachment'
                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                         </td>

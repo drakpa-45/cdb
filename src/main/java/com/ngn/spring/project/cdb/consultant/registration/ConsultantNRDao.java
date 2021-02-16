@@ -1,13 +1,10 @@
 package com.ngn.spring.project.cdb.consultant.registration;
 
 import com.ngn.spring.project.base.BaseDao;
-import com.ngn.spring.project.cdb.consultant.model.ConsultantEQAttachment;
-import com.ngn.spring.project.cdb.consultant.model.ConsultantHRAttachment;
+import com.ngn.spring.project.cdb.consultant.model.*;
 import com.ngn.spring.project.cdb.consultant.registration.dto.ConsultantCategoryDTO;
 import com.ngn.spring.project.cdb.consultant.registration.dto.ConsultantDTOFetch;
 import com.ngn.spring.project.cdb.consultant.registration.dto.ConsultantTrainingDTO;
-import com.ngn.spring.project.cdb.consultant.model.Consultant;
-import com.ngn.spring.project.cdb.consultant.model.ConsultantFinal;
 import com.ngn.spring.project.cdb.contractor.registration.dto.CategoryDTO;
 import com.ngn.spring.project.cdb.contractor.registration.dto.FeeStructureDTO;
 import com.ngn.spring.project.lib.DropdownDTO;
@@ -119,5 +116,10 @@ public class ConsultantNRDao extends BaseDao {
     public ConsultantEQAttachment getEQAttachmentFinal(String eqaId) {
         sqlQuery = properties.getProperty("ConsultantDao.getEQAttachmentFinal");
         return (ConsultantEQAttachment)hibernateQuery(sqlQuery,ConsultantEQAttachment.class).setParameter("eqaId",eqaId).list().get(0);
+    }
+    @Transactional(readOnly = true)
+    public ConsultantAttachment getAttachmentFinal(String aId) {
+        sqlQuery = properties.getProperty("ConsultantDao.getAttachmentFinal");
+        return (ConsultantAttachment)hibernateQuery(sqlQuery,ConsultantAttachment.class).setParameter("aId",aId).list().get(0);
     }
 }

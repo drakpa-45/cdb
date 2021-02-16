@@ -179,7 +179,7 @@
                                         <thead>
                                         <tr style="background-color: #e6f9ff">
                                             <th>Sl No</th>
-                                            <th>Salutation</th>
+                                            <th>Title</th>
                                             <th>Name</th>
                                             <th>CID Number</th>
                                             <th>Gender</th>
@@ -204,7 +204,7 @@
                                             <th>Sl No</th>
                                             <th>Equipment Name</th>
                                             <th>Equipment Type</th>
-                                            <th>Registration No</th>
+                                            <th>Registration Number</th>
                                             <th>Quantity</th>
                                             <th>Attachment</th>
                                         </tr>
@@ -214,10 +214,9 @@
                                     </table>
                                 </div>
                                 <div class="tab-pane fade in" id="classification">
-                                    <table id="classificationTbl"
-                                           class="table table-bordered table-hover">
+                                    <table id="classificationTbl" class="table table-bordered table-hover">
                                         <thead>
-                                        <tr style="background-color: #EAEDED">
+                                        <tr style="background-color: #e6f9ff">
                                             <th colspan="2" align="center">Category</th>
                                             <th align="center">Applied</th>
                                             <th align="center">Verified</th>
@@ -229,10 +228,10 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="tab-pane fade in" id="trackrecord">
+                                <div class="tab-pane fade in" id="trackRecord">
                                     <table id="trackRecordTbl" class="table table-bordered table-hover">
                                         <thead>
-                                        <tr style="background-color: #EAEDED">
+                                        <tr style="background-color: #e6f9ff">
                                             <th>Sl No</th>
                                             <th>Agency</th>
                                             <th>Work Id</th>
@@ -248,13 +247,12 @@
                                             <th>Work Status</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-
+                                        <tbody style="font-size: small !important;">
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="tab-pane fade in" id="command">
-									<span>Comments</span>
+                                    <span>Comments</span>
                                     <table width="100%">
                                         <thead>
                                         <tr>
@@ -271,9 +269,7 @@
                                         </tr>
                                         </tbody>
                                     </table>
-											<span>
-												Adverse Record
-											</span>
+                                    <span>Adverse Record</span>
                                     <table width="100%">
                                         <thead>
                                         <tr>
@@ -306,6 +302,9 @@
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
 <script type="text/javascript" src="<c:url value="/resources/js/cdb/specializedFirm/specializedFirm_profile.js"/>"></script>
 </div>
 <script>

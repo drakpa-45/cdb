@@ -247,13 +247,29 @@ public class ConsultantNRService extends BaseService {
     @Transactional(readOnly = false)
     public void saveAttachment(ConsultantAttachment cAttachment,LoggedInUser loggedInUser) throws Exception {
         MultipartFile attachment = cAttachment.getAttachment();
-        String docName = cAttachment.getDocumentName()+commonService.getFileEXT(attachment);
+        /*String docName = cAttachment.getDocumentName()+commonService.getFileEXT(attachment);
         String specificLoc = UPLOAD_LOC+"//CertIncorporation";
         String docPath = commonService.uploadDocument(attachment, specificLoc, docName);        String attachmentId = commonService.getRandomGeneratedId();
         cAttachment.setId(attachmentId);
         cAttachment.setDocumentPath(docPath);
         cAttachment.setDocumentName(docName);
         cAttachment.setFileType(attachment.getContentType());
+        cAttachment.setCreatedBy(loggedInUser.getUserID());
+        cAttachment.setCreatedOn(loggedInUser.getServerDate());
+        consultantDao.saveUpdate(cAttachment);*/
+
+        if(attachment != null) {
+            String docNameUpload = cAttachment.getDocumentName() + commonService.getFileEXT(attachment);
+            String specificLoc = UPLOAD_LOC+"//IncorporationCertificate";
+            String docPath = commonService.uploadDocument(attachment, specificLoc, docNameUpload);
+            cAttachment.setDocumentPath(docPath);
+            cAttachment.setDocumentName(docNameUpload);
+            cAttachment.setFileType(attachment.getContentType());
+        }
+        if(emptyNullCheck(cAttachment.getId())){
+            String attachmentID = commonService.getRandomGeneratedId();
+            cAttachment.setId(attachmentID);
+        }
         cAttachment.setCreatedBy(loggedInUser.getUserID());
         cAttachment.setCreatedOn(loggedInUser.getServerDate());
         consultantDao.saveUpdate(cAttachment);
@@ -327,9 +343,7 @@ public class ConsultantNRService extends BaseService {
                     conCategory.setAppliedServiceID(s);
                     conCategory.setCreatedBy(loggedInUser.getUserID());
                     conCategory.setCreatedOn(loggedInUser.getServerDate());
-
                     consultantDao.saveUpdate(conCategory);
-
                 });
 
         String serviceCodes = null;
@@ -352,17 +366,16 @@ public class ConsultantNRService extends BaseService {
             consultantPayment.setAppliedServices(serviceCodes);
             consultantPayment.setServiceXFee(String.valueOf(noOfServices +"*"+ "3000"));
             consultantPayment.setAmount(BigDecimal.valueOf(noOfServices * 3000));
-
             consultantPayment.setCreatedBy(loggedInUser.getUserID());
             consultantPayment.setCreatedOn(loggedInUser.getServerDate());
+            String id = commonService.getRandomGeneratedId();
+            consultantPayment.setId(id);
             savePayment(consultantPayment, loggedInUser);
       }
 
     @Transactional(readOnly = false)
     public void savePayment(ConsultantRegPayment consultantRegPayment, LoggedInUser loggedInUser) {
        // FeeStructureDTO feeDTO = (FeeStructureDTO)consultantDao.gFeeStructure(consultantRegPayment.getAppliedServices()).get(0);
-        String id = commonService.getRandomGeneratedId();
-        consultantRegPayment.setId(id);
        // consultantRegPayment.setAmount(feeDTO.getRegistrationFee());
         consultantRegPayment.setCreatedBy(loggedInUser.getUserID());
         consultantRegPayment.setCreatedOn(loggedInUser.getServerDate());
@@ -462,5 +475,9 @@ public class ConsultantNRService extends BaseService {
 
     public ConsultantEQAttachment getEQAttachmentFinal(String eqaId) {
         return consultantDao.getEQAttachmentFinal(eqaId);
+    }
+
+    public ConsultantAttachment getAttachmentFinal(String aId) {
+        return consultantDao.getAttachmentFinal(aId);
     }
 }

@@ -261,7 +261,7 @@
                                                                 <tr>
                                                                     <th>Nationality</th>
                                                                     <th>CID/Work Permit No.</th>
-                                                                    <th>Salutation</th>
+                                                                    <th>Tilte</th>
                                                                     <th>Name</th>
                                                                     <th>Gender</th>
                                                                     <th>Designation</th>
@@ -459,8 +459,8 @@
                                         <div class="tab-pane category_details hide">
                                             <div class="div-actual">
                                                 <div class="card">
-                                                    Note: If you are upgrading/down grade class,it is necessary to
-                                                    attach Letter of Undertaking
+                                                    <b class="text-orange"> Note: If you are upgrading/down grade class,it is necessary to
+                                                        attach Letter of Undertaking</b>
                                                 </div>
                                                 <table id="consultantCCTbl" class="table table-bordered table-hover">
                                                     <thead style="background-color: #F2F2F2">
@@ -487,7 +487,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input type="checkbox" style="zoom:1.6" class=" categoryCheck" id="cateId1" value="f39b9245-bc15-11e4-81ac-080027dcfac6" name="categories[1].serviceCateID">Civil Engineering Services
+                                                            <input type="checkbox" style="zoom:1.6" class="categoryCheck" id="cateId1" value="f39b9245-bc15-11e4-81ac-080027dcfac6" name="categories[1].serviceCateID">Civil Engineering Services
                                                         </td>
                                                         <td>
                                                             <a href="javascript:void(0)" style="color: #006699" title='Structural Design' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
@@ -533,19 +533,19 @@
                                                         </td>
                                                         <td>
                                                             <a href="javascript:void(0)" style="color: #006699" title='Cadastral' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="sone" class="appliedClassID" style="zoom:1.5" disabled name="categories[2].appliedServiceID" value="8a6ea970-be66-11e9-9ac2-0026b988eaa8">S1&nbsp;&nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox" id="sone" class="appliedClassID" style="zoom:1.5" disabled name="categories[3].appliedServiceID" value="8a6ea970-be66-11e9-9ac2-0026b988eaa8">S1&nbsp;&nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='Topographic' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="stwo" class="appliedClassID" style="zoom:1.5" disabled name="categories[2].appliedServiceID" value="b20d9185-be66-11e9-9ac2-0026b988eaa8">S2&nbsp;&nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox" id="stwo" class="appliedClassID" style="zoom:1.5" disabled name="categories[3].appliedServiceID" value="b20d9185-be66-11e9-9ac2-0026b988eaa8">S2&nbsp;&nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='Geodetic & Precision' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="sthree" class="appliedClassID" style="zoom:1.5" disabled name="categories[2].appliedServiceID" value="fb9e92cb-be66-11e9-9ac2-0026b988eaa8">S3&nbsp;&nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox" id="sthree" class="appliedClassID" style="zoom:1.5" disabled name="categories[3].appliedServiceID" value="fb9e92cb-be66-11e9-9ac2-0026b988eaa8">S3&nbsp;&nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='Photogrammetric' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="sfour" class="appliedClassID" style="zoom:1.5" disabled name="categories[2].appliedServiceID" value="1129c568-be67-11e9-9ac2-0026b988eaa8">S4&nbsp;&nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox" id="sfour" class="appliedClassID" style="zoom:1.5" disabled name="categories[3].appliedServiceID" value="1129c568-be67-11e9-9ac2-0026b988eaa8">S4&nbsp;&nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='Instrument Calibration, Maintenance and Certification' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="sfive" class="appliedClassID" style="zoom:1.5" disabled name="categories[2].appliedServiceID" value="3aba7cc5-be67-11e9-9ac2-0026b988eaa8">S5&nbsp;&nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox" id="sfive" class="appliedClassID" style="zoom:1.5" disabled name="categories[3].appliedServiceID" value="3aba7cc5-be67-11e9-9ac2-0026b988eaa8">S5&nbsp;&nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='GIS & Remote Sensing' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="ssix" class="appliedClassID" style="zoom:1.5" disabled name="categories[2].appliedServiceID" value="5fa269a3-be67-11e9-9ac2-0026b988eaa8">S6&nbsp;&nbsp; &nbsp; &nbsp;
+                                                            <input type="checkbox" id="ssix" class="appliedClassID" style="zoom:1.5" disabled name="categories[3].appliedServiceID" value="5fa269a3-be67-11e9-9ac2-0026b988eaa8">S6&nbsp;&nbsp; &nbsp; &nbsp;
                                                             <a href="javascript:void(0)" style="color: #006699" title='Bathymetric' class="tooltipCSSSelector"><i class="fa fa-question-circle"></i></a>
-                                                            <input type="checkbox" id="sseven" class="appliedClassID" style="zoom:1.5" disabled name="categories[2].appliedServiceID" value="4cd73d78-be67-11e9-9ac2-0026b988eaa8">S7
+                                                            <input type="checkbox" id="sseven" class="appliedClassID" style="zoom:1.5" disabled name="categories[3].appliedServiceID" value="4cd73d78-be67-11e9-9ac2-0026b988eaa8">S7
                                                         </td>
                                                     </tr>
                                                     </tbody>
@@ -638,9 +638,6 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                                    <b class="text-orange">Attach your UnderTaking Below</b> &nbsp;
-                                                    &nbsp;
-                                                    <br/>
                                                     <input type="button" id="addMoreCertCategory" value="Add More File" class="btn btn-primary eqFile">
                                                     <div class="table-responsive">
                                                         <table class="table table-bordered table-center table-responsive-lg auto-index" id="certificateTblCategory">

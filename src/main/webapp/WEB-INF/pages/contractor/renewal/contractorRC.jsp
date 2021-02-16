@@ -210,7 +210,7 @@
                                                     <div class="form-group row">
                                                         <div class="col-lg-6 col-md-6">
                                                             <label class="col-lg-4 form-label">TPN Number</label>
-                                                            <input type="text" class="col-lg-7 form-control" name="contractor.tpn" id="tpn" placeholder="Text..">
+                                                            <input type="text" class="col-lg-7 form-control" name="contractor.tpn" id="tpn" required="true" placeholder="Text..">
                                                         </div>
                                                     </div>
                                                 </div>

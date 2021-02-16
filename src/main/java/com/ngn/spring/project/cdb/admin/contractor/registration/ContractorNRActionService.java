@@ -215,7 +215,7 @@ public class ContractorNRActionService extends BaseService {
         paymentUpdateDTO.setContractorId(contractor.getContractorId());
         contractorNRActionDao.paymentUpdate(contractor.getContractorId(),loggedInUser.getUserID(),approvedApplicationStatusId,contractor.getCreatedBy());
         responseMessage.setStatus(SUCCESSFUL_STATUS);
-        responseMessage.setText("Contractor application number :"+paymentUpdateDTO.getAppNo()+" Payment Approved. And CDB Number is: "+paymentUpdateDTO.getCdbNo()+"");
+        responseMessage.setText("Contractor application number :"+paymentUpdateDTO.getAppNo().charAt(0)+" Payment Approved. And CDB Number is: "+paymentUpdateDTO.getCdbNo()+"");
         String mailContent = "Dear User,Your application for application number : <b>"+paymentUpdateDTO.getAppNo().charAt(0)+"</b> is approved. And CDB Number is: <b>"+paymentUpdateDTO.getCdbNo()+"</b>"+
                 "You can login to the system for renewal other services using following credential:" +
                 "Username : your registered email" +

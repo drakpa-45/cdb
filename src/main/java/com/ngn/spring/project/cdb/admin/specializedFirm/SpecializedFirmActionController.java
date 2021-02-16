@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigInteger;
-import java.util.List;
 
 /**
  * ==================================================================================
@@ -65,8 +64,8 @@ public class SpecializedFirmActionController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value ="/checkEquipment", method = RequestMethod.GET)
-    public ResponseMessage checkEquipment(String regNo){
-        return commonService.checkEquipment(regNo);
+    public ResponseMessage checkEquipment(String regNo, String serviceName){
+        return commonService.checkEquipment(regNo, serviceName);
     }
 
     @ResponseBody

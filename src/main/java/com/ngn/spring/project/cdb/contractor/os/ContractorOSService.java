@@ -295,11 +295,29 @@ public class ContractorOSService extends BaseService {
     @Transactional
     public void updateIncorporation(List<ContractorAttachment> cAttachments, LoggedInUser loggedInUser,String contractorId) throws Exception{
         if(cAttachments != null && cAttachments.size() >= 1) {
-            for(ContractorAttachment cAttachment:cAttachments) {
+            /*for(ContractorAttachment cAttachment:cAttachments) {
                 if(cAttachment.getDocumentName() !=null){
                     cAttachment.setContractorId(contractorId);
                     contractorNRService.saveAttachment(cAttachment, loggedInUser);
                 }
+            }*/
+
+            for (ContractorAttachment cAttachment : cAttachments) {
+                if(!emptyNullCheck(cAttachment.getId())){
+                    if(cAttachment.getAttachment() == null){ // no changes
+                        cAttachment = contractorNRService.getAttachmentFinal(cAttachment.getId());
+                        cAttachment.setAttachmentFor(cAttachment.getAttachmentFor());
+                    }else{ // for edit
+                        cAttachment.setEditedBy(loggedInUser.getUserID());
+                        cAttachment.setEditedOn(loggedInUser.getServerDate());
+                    }
+                }else {
+                    if (cAttachment.getAttachment() == null) { //No changes, so no need to save
+                        continue;
+                    }
+                }
+                cAttachment.setContractorId(contractorId);
+                contractorNRService.saveAttachment(cAttachment, loggedInUser);
             }
         }
     }
@@ -336,7 +354,6 @@ public class ContractorOSService extends BaseService {
 
     public void saveCCUpgrade(Contractor contractor,List<ConCategory> categories, LoggedInUser loggedInUser){
         categories = categories.stream().filter(c-> c.getProjectCateID() != null).collect(Collectors.toList());
-
         BigDecimal totalRenewalFee = BigDecimal.ZERO;
         BigDecimal totalCCUpDownFee = BigDecimal.ZERO;
         List<CategoryClassDTO> ccRenewal; //renewal
@@ -360,7 +377,7 @@ public class ContractorOSService extends BaseService {
             ccRenewal = getCategoryClassFinal(contractorFinalId);
         }
         for(CategoryClassDTO classDTO : ccRenewal){
-           // BigDecimal renewalFee = ((FeeStructureDTO) contractorNRService.gFeeStructure(classDTO.getaClassId()).get(0)).getRenewalFee();
+          // BigDecimal renewalFee = ((FeeStructureDTO) contractorNRService.gFeeStructure(classDTO.getaClassId()).get(0)).getRenewalFee();
             classDTO.setvAmount(BigDecimal.valueOf(00.00));
             totalRenewalFee = totalRenewalFee.add(BigDecimal.valueOf(00.00));
         }

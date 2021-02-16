@@ -487,7 +487,8 @@ var specializedFirmOS = (function () {
                             "<td></td>" +
                             "<td>" +
                             "<input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='InSole'/>" +
-                            "<input type='text' class='form-control docName' name='cAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
+                            "<input type='hidden' class='form-control' name='cAttachments[0].id' value='"+data[i].id+"'/>" +
+                            "<input type='text' class='form-control docName' name='cAttachments[0].documentName' value='" +data[i].documentName +"'></td>" +
                             "<td class='attachment'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
                             "<td></td>" +
                             "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
@@ -499,6 +500,7 @@ var specializedFirmOS = (function () {
                             "<td></td>" +
                             "<td>" +
                             "<input type='hidden' class='form-control aFor' name='categoryAttachments[0].attachmentFor' value='AL'/>" +
+                            "<input type='hidden' class='form-control' name='categoryAttachments[0].id' value='"+data[i].id+"'/>" +
                             "<input type='text' class='form-control docName' name='categoryAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
                             "<td class='attachmentcc'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
                             "<td></td>" +
@@ -511,6 +513,7 @@ var specializedFirmOS = (function () {
                             "<td></td>" +
                             "<td>" +
                             "<input type='hidden' class='form-control aFor' name='ownerAttachments[0].attachmentFor' value='OC'/>" +
+                            "<input type='hidden' class='form-control' name='ownerAttachments[0].id' value='"+data[i].id+"'/>" +
                             "<input type='text' class='form-control docName' name='ownerAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
                             "<td class='attachmentoc'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
                             "<td></td>" +
@@ -522,12 +525,10 @@ var specializedFirmOS = (function () {
                     $('#certificateTbl').find('tbody').html(cIncTr);
                     $('#certificateTblOwner').find('tbody').html(ownerTr);
                     $('#certificateTblCategory').find('tbody').html(categoryTr);
-
                 }else{
                     $('#cIncorporation').addClass('hide');
                 }
             }
-
         });
     }
 

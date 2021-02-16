@@ -125,7 +125,7 @@
                     <div class="panel with-nav-tabs">
                         <div class="panel-heading">
                             <ul class="nav nav-tabs">
-                                <li class="">
+                                <li class="tab-pane active">
                                     <a href="#ownerpartner" data-toggle="tab" class="active show">Owner or Partner</a>
                                 </li>
                                 <li>
@@ -174,7 +174,7 @@
                                         <thead>
                                         <tr style="background-color: #e6f9ff">
                                             <th>Sl No</th>
-                                            <th>Salutation</th>
+                                            <th>Title</th>
                                             <th>Name</th>
                                             <th>CID Number</th>
                                             <th>Gender</th>
@@ -368,6 +368,9 @@
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
 <script type="text/javascript" src="<c:url value="/resources/js/cdb/consultant/consultant_profile.js"/>"></script>
 </div>
 <script>

@@ -388,7 +388,7 @@
 
                                     <div class="tab-pane category_details hide">
                                         <div class="div-actual">
-                                            <div class="card">
+                                            <div class="card text-orange">
                                                 Note: If you are upgrading/down grade class,it is necessary to attach Letter of Undertaking
                                             </div>
                                             <table id="consultantCCTbl" class="table table-bordered table-hover">
@@ -814,11 +814,11 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-lg-2">Salutation
+                                        <label class="col-lg-2">Title
                                             <span class="text-danger">*</span>:</label>
                                         <div class="col-lg-4">
                                             <select name="consultantHRs[0].salutationId" id="hr1" required="" class="form-control custom-select text-left select-beast">
-                                                <option value="">Select Salutation</option>
+                                                <option value="">Select Title</option>
                                                 <c:forEach var="item" items="${salutationList}">
                                                     <option value="${item.value}"><c:out value="${item.text}"/></option>
                                                 </c:forEach>

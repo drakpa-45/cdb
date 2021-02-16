@@ -43,4 +43,5 @@ public class ConsultantOSDao extends BaseDao {
         hQuery = hibernateQuery(sqlQuery, ServiceFeeDTO.class).setParameter("consultantFinalId",consultantFinalId);
         return hQuery.list();
     }
+
 }

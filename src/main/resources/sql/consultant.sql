@@ -122,6 +122,8 @@ ConsultantRCDao.getHRAttachmentsFinal=SELECT Id id, a.DocumentName documentName,
 ConsultantRCDao.getEquipmentFinal = SELECT ce.`Id` id, eq.`Name` equipmentName,ce.`RegistrationNo` registrationNo,ce.`SerialNo` serialNo,ce.`Quantity` quantity,ce.`ModelNo` modelNo ,ce.DeleteRequest AS deleteRequest,ce.CmnEquipmentId equipmentId,CASE WHEN eq.IsRegistered = '1' THEN 'Registered' ELSE 'Not Registered' END AS equipmentType FROM `crpconsultantequipmentfinal` ce INNER JOIN `cmnequipment`  eq ON ce.`CmnEquipmentId` = eq.`Id` WHERE ce.`CrpConsultantFinalId` =:consultantId
 ConsultantRCDao.getEQAttachmentsFinal=SELECT a.Id id, a.DocumentName documentName,DocumentPath documentPath, FileType fileType FROM crpconsultantequipmentattachmentfinal a WHERE a.CrpConsultantEquipmentFinalId  = :eqId
 
+ConsultantDao.getAttachmentFinal = SELECT Id id,CrpConsultantFinalId consultantId,DocumentName documentName,DocumentPath documentPath,AttachmentFor attachmentFor,FileType fileType,CreatedBy createdBy,CreatedOn createdOn FROM crpconsultantattachmentfinal WHERE Id = :aId
+
 ConsultantRCDao.saveDeleteHrRequest = Update crpconsultanthumanresourcefinal set DeleteRequest = 1 where Id =:hrId
 ConsultantRCDao.saveDeleteEqRequest = Update crpconsultantequipmentfinal set DeleteRequest = 1 where Id =:eqId
 
@@ -139,6 +141,8 @@ ConsultantRCActionDao.paymentUpdate = CALL ProCrpConsultantRenewalPaymentApprova
 
 ConsultantRCActionDao.getEmployeeDetailsFromCDB = SELECT con.NameOfFirm consultantFirmname,con.CDBNo consultantCDBNo,co.NameOfFirm contractorFirmname,co.CDBNo contractorCDBNo,s.NameOfFirm spFirmname, s.SPNo spCDBNo FROM crpcontractorhumanresourcefinal c LEFT JOIN crpconsultanthumanresourcefinal crp ON c.CIDNo = crp.CIDNo LEFT JOIN crpspecializedtradehumanresourcefinal sf ON sf.CIDNo = c.CIDNo LEFT JOIN crpspecializedtradefinal s ON s.Id = sf.CrpSpecializedTradeFinalId LEFT JOIN crpconsultantfinal con ON con.Id = crp.CrpConsultantFinalId LEFT JOIN crpcontractorfinal co ON co.Id = c.CrpContractorFinalId WHERE c.CIDNo =:cidNo
 
-ConsultantRCDao.getRegisteredService=SELECT c.AppliedService serviceName FROM crpconsultantregistrationpayment c WHERE c.CrpConsultantFinalId=:consultantFinalId GROUP BY AppliedService;
+/* ConsultantRCDao.getRegisteredService=SELECT c.AppliedService serviceName FROM crpconsultantregistrationpayment c WHERE c.CrpConsultantFinalId=:consultantFinalId GROUP BY c.CmnServiceCategoryId; */
 
-ConsultantRCActionDao.getProposedCategories=
+ConsultantRCDao.getRegisteredService=SELECT d.CmnAppliedServiceId serviceName FROM crpconsultantregistrationpayment c LEFT JOIN crpconsultantworkclassification d ON d.CmnServiceCategoryId = c.CmnServiceCategoryId WHERE c.CrpConsultantFinalId=:consultantFinalId GROUP BY c.CmnServiceCategoryId
+
+ConsultantRCActionDao.getProposedCategories=SELECT cs.Id id,cs.Code code,cs.Name name,rp.CmnServiceCategoryId categoryId,rp.Amount aAmount,rp.AppliedService value FROM crpconsultantservicepaymentdetail rp LEFT JOIN cmnconsultantservicecategory cs ON cs.Id = rp.CmnServiceCategoryId LEFT JOIN crpconsultantregistrationpayment c ON c.Id = rp.CrpConsultantServicePaymentId WHERE CrpConsultantFinalId =:consultantId ORDER BY cs.Code ASC

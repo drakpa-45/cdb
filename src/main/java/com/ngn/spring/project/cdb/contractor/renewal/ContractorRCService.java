@@ -368,8 +368,8 @@ public class ContractorRCService extends BaseService {
         }
         for(CategoryClassDTO classDTO : ccRenewal){
             BigDecimal renewalFee = ((FeeStructureDTO) contractorNRService.gFeeStructure(classDTO.getaClassId()).get(0)).getRenewalFee();
-            classDTO.setvAmount(renewalFee);
-            totalRenewalFee = totalRenewalFee.add(renewalFee);
+            classDTO.setvAmount(BigDecimal.valueOf(00.00));
+            totalRenewalFee = totalRenewalFee.add(BigDecimal.valueOf(00.00));
         }
         for(CategoryClassDTO classDTO : ccUpDown){
             BigDecimal fee = ((FeeStructureDTO) contractorNRService.gFeeStructure(classDTO.getaClassId()).get(0)).getRegistrationFee();
@@ -423,7 +423,7 @@ public class ContractorRCService extends BaseService {
         }
         ccUpDown.addAll(ccRenewal);
         return ccUpDown;
- }
+    }
 
     @Transactional
     public void saveServicePaymentDetail(String servicePaymentId,List<CategoryClassDTO> classDTOs,LoggedInUser loggedInUser){
@@ -455,8 +455,9 @@ public class ContractorRCService extends BaseService {
         Object feeObj = commonService.getValue("crpservice", "ContractorAmount","Id",appliedServiceId);
         fee = (feeObj == null)?BigDecimal.ZERO:new BigDecimal(feeObj.toString());
 
-        BigDecimal lateFee = new BigDecimal(responseMessage.getVal2());
         if(appliedServiceId.equalsIgnoreCase("21b6caa9-ff97-11e4-9b95-080027dcfac6")){
+            BigDecimal lateFee = new BigDecimal(responseMessage.getVal2());
+
             ContractorServicePayment servicePayment = contractorDTO.getServicePayment();
             servicePayment.setId(commonService.getRandomGeneratedId());
             servicePayment.setContractorId(contractorId);
@@ -482,18 +483,34 @@ public class ContractorRCService extends BaseService {
             servicePayment.setCreatedOn(loggedInUser.getServerDate());
             contractorRCDao.saveUpdate(servicePayment);
         }
-
     }
 
     @Transactional
     public void updateIncorporation(List<ContractorAttachment> cAttachments, LoggedInUser loggedInUser,String contractorId) throws Exception{
         if(cAttachments != null && cAttachments.size() >= 1) {
-                for(ContractorAttachment cAttachment:cAttachments) {
+               /* for(ContractorAttachment cAttachment:cAttachments) {
                     if(cAttachment.getDocumentName() != null){
                         cAttachment.setContractorId(contractorId);
                         contractorNRService.saveAttachment(cAttachment, loggedInUser);
                     }
+                }*/
+            for (ContractorAttachment cAttachment : cAttachments) {
+                if(!emptyNullCheck(cAttachment.getId())){
+                    if(cAttachment.getAttachment() == null){ // no changes
+                        cAttachment = contractorNRService.getAttachmentFinal(cAttachment.getId());
+                        cAttachment.setAttachmentFor(cAttachment.getAttachmentFor());
+                    }else{ // for edit
+                        cAttachment.setEditedBy(loggedInUser.getUserID());
+                        cAttachment.setEditedOn(loggedInUser.getServerDate());
+                    }
+                }else {
+                    if (cAttachment.getAttachment() == null) { //No changes, so no need to save
+                        continue;
+                    }
                 }
+                cAttachment.setContractorId(contractorId);
+                contractorNRService.saveAttachment(cAttachment, loggedInUser);
+            }
             }
          }
 
@@ -682,4 +699,5 @@ public class ContractorRCService extends BaseService {
         responseMessage.setText("Hr replacement notification is successfully sent to "+email);
         return responseMessage;
     }
+
 }

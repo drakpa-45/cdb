@@ -548,6 +548,17 @@ var consultant = (function () {
         });
     }
 
+    function addMoreEqFile(){
+        $('#addMoreEq').on('click',function(e){
+            var uplTbl = $('#eqUploadTbl').find('tbody');
+            var tr = "<tr><td><input type='text' required class='form-control docName' name='equipments[0].contractorEQAs[0].documentName'/> </td>" +
+                "<td><input type='file' required class='file' name='equipments[0].contractorEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td><td class='file-size'></td>" +
+                "<td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td></tr>";
+            uplTbl.append(tr);
+        });
+    }
+
+
     function delTableRow(){
         $('body').on('click','.del_row',function(){
             if($(this).closest('table').find('tbody tr').length > 1) {
@@ -660,6 +671,7 @@ var consultant = (function () {
         isEmailUnique();
         isFirmNameUnique();
         addMoreFile();
+        addMoreEqFile();
         delTableRow();
         confirmEmail();
         checkDuplicateHR();

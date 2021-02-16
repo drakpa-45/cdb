@@ -6,12 +6,13 @@ function checkBtn(checkBoxId) {
     $check.prop('checked', true);
     if (checkBoxId == "owner") {
         $('#nextGIBtn').prop('disabled', false);
-    } else if(checkBoxId == 'equipment'){
+    } else if(checkBoxId == "equipment"){
         $('#btnValEqNext').prop('disabled', false);
     }else{
         $('#nextHRBtn').prop('disabled', false);
     }
 }
+
 function saveAndPreview(presentClass, nextClass) {
     var content = '<h3 class="pt-3 text-center">Fee Structure</h3>' + $("#fees_structure >.div-actual").html() +
         '<h3 class="pt-3 text-center">General Information</h3>' + $("#general_Information >.div-actual").html() +
@@ -71,6 +72,7 @@ var consultant_action = (function () {
                         $('#photoM').html("<img src='"+imagelink+"'  width='200px'  height='200px' class='pull-right'/>");
                         $("#hrModal").modal('show');
                         $("#closeModal").modal('show');
+                        $("#cidchecked").val(cidNo);
 
                         var employeeDetailsDTO = dto.employeeDetailsDTOs;
                         var govCopDTO = dto.govCopDTOs;
@@ -136,6 +138,9 @@ var consultant_action = (function () {
                         $('#photoM').html("<img src='"+imagelink+"'  width='200px'  height='200px' class='pull-right'/>");
                         $("#hrModal").modal('show');
                         $("#closeModal1").modal('show');
+                        $("#cidchecked").val(cidNo);
+
+                        $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
 
                         var employeeDetailsDTO = dto.employeeDetailsDTOs;
                         var govCopDTO = dto.govCopDTOs;
@@ -148,7 +153,6 @@ var consultant_action = (function () {
                                     alert(workId);
                                     $('#dcbinfo').append("<br/> <b>CDB No: </b> "+employeeDetailsDTO[i].cdbNo+"  ||  <b> Procuring Agency:  </b> "+employeeDetailsDTO[i].procuringAgency+"  ||  <b> Work ID:</b>"+employeeDetailsDTO[i].workId+"");
                                     // $('#dcbinfo').append("<br/> This person is engaged with cdb number <b>"+employeeDetailsDTO[i].cdbNo+"</b> in <b>"+employeeDetailsDTO[i].procuringAgency+"</b> with work Id:<b>"+employeeDetailsDTO[i].workId+"</b>");
-                                    $('#cidNumber').text(dto.cidNo); $('#hrName').text((dto.fullName));
                                 }else{
                                     $('#dcbinfonotEngaged').append("<br/> This person is not engaged in any work or project.");
                                 }
@@ -181,29 +185,55 @@ var consultant_action = (function () {
     function checkEquipment(){
         $('body').on('click','.equipmentCheck',function(){
             //var modal = $(this).closest('.modal').attr('id');
+            $check = $(this).closest('tr').find('.check');
             var registrationNo = $(this).closest('tr').find('.registrationNo').text();
             $.ajax({
                 url: _baseURL() + "/checkEquipment",
                 type: 'GET',
-                data: {registrationNo: registrationNo},
+                data: {registrationNo: registrationNo,serviceName:'consultant'},
                 success: function (res) {
-                    if (res.status == '1') {
+                  /*  if (res.status == '1') {
                         var dto = res.dto;
-                        $('#nameM').text(dto.fullName);
-                        $('#sexM').text(dto.sex);
-                        $('#dzongkhagM').text(dto.dzongkhagNmae);
-                        $('#gewogM').text(dto.gowegName);
-                        $('#villageM').text(dto.villageName);
-                        $('#dobM').text(dto.dob);
-                        var imagelink='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo='+cidNo;
-                        $('#photoM').html("<img src='"+imagelink+"'  width='200px'  height='200px' class='pull-right'/>");
-                        $("#hrModal").modal('show');
+                        $('#regNo').text(dto.fullName);
+                        $('#ownerName').text(dto.sex);
+                        $('#registeredReg').text(dto.dzongkhagNmae);
+                        $('#vType').text(dto.dzongkhagNmae);
+                        $("#CheckModalEquipment").modal('show');
                         $("#closeModal1").modal('show');
+                    }*/
+                    $("#CheckModalEquipment").modal('show');
+
+                    $('#eqInfo').append("<br/> <b>Owner: </b> " + "Drakpa" + "  ||  <b> Owner CID:  </b> "+ "1111111" +"  ||  <b> Region:</b>"+"Thimphu"+" ||  <b> Vehicle Type:</b>"+"Medium"+"");
+
+                    var vehicleDetailses = res.dto.vehicleDetailses;
+                    var cdbDtlsDTO = res.dto.cdbDTOs;
+
+                    $("#regchecked").val(registrationNo);
+                    if(vehicleDetailses !=''){
+                        for(var i in vehicleDetailses){
+                            var vRegNo = employeeDetailsDTO[i].registrationNo;
+                            if(vRegNo !='' && vRegNo != null){
+
+                                $('#eqInfo').append("<br/> <b>Owner: </b> "+vehicleDetailses[i].ownerName+"  ||  <b> Owner CID:  </b> "+ +"  ||  <b> Region:</b>"+vehicleDetailses[i].registeredRegion+" ||  <b> Vehicle Type:</b>"+vehicleDetailses[i].vehicleType+"");
+                            }else{
+                                $('#eqInfo').append("<br/> This equipment is not registered.");
+                            }
+                        }
+                    }else{
+                        // $('#dcbinfo').hide();
+                        $('#eqInfo').append("<br/> This equipment is not registered.");
+                    }
+
+                    if(cdbDtlsDTO !=''){
+                        for(var i in cdbDtlsDTO){
+                                $('#engStatusInfo').append("<br/> <b>Equipment is owned by: </b> "+cdbDtlsDTO[i].consultantFirmname+" ( CDB No." +cdbDtlsDTO[i].consultantCDBNo+" )");
+                            }
+                    }else{
+                        // $('#dcbinfo').hide();
+                        $('#engStatusInfo').append("<br/>This equipment is not registered in any firm. ");
                     }
                 }
             });
-            $("#CheckModalEquipment").modal('show');
-            $check = $(this).closest('tr').find('.check');
         });
     }
 
@@ -371,7 +401,6 @@ var consultant_action = (function () {
                             "<td style='text-align: center'>"+attachment+"</td>" +
                             "<td><input type='button' value='Check for Equipment' class='equipmentCheck btn btn-success'></td>" +
                             verifiedApprovedEq+"</tr>";
-
                         }
                         $('#equipmentTbl').find('tbody').html(eqTr);
 

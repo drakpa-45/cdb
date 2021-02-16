@@ -33,7 +33,7 @@
             <div class="form-group row">
                 <div class="col-lg-6 col-lg-6">
                     <label class="col-lg-4 form-label">Trade License Number</label>
-                    <input type="text" class="col-lg-7 form-control number" name="consultant.tradeLicenseNo" placeholder="Trade License No.." id="tradeLicenseNo">
+                    <input type="text" class="col-lg-7 form-control" name="consultant.tradeLicenseNo" placeholder="Trade License No.." id="tradeLicenseNo">
                 </div>
                 <div class="col-lg-6 col-lg-6">
                     <label class="col-lg-4 form-label">Proposed Firm Name <span class="text-danger">*</span></label>
@@ -85,7 +85,7 @@
                     <tr>
                         <th>Nationality</th>
                         <th>CID/Work Permit No.</th>
-                        <th>Salutation</th>
+                        <th>Title</th>
                         <th>Name</th>
                         <th>Gender</th>
                         <th>Designation</th>
@@ -105,7 +105,7 @@
                         </td>
                         <td>
                             <form:select id="salutation" name="consultant.consultantHRs[0].salutationId" class="form-control input-sm" data-msg-required="true" data-rule-required="true" path="salutationList">
-                                <form:option value="" label="Select Salutation"/>
+                                <form:option value="" label="Select Title"/>
                                 <form:options items="${salutationList}" itemValue="value" itemLabel="text"/>
                             </form:select>
                         </td>

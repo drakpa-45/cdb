@@ -26,17 +26,12 @@ public class ConsultantRCActionDao extends BaseDao{
         if (createdBy ==  null){
             createdBy = userId;
         }
-        hibernateQuery(sqlQuery)
-                .setParameter("consultantId", consultantId)
-                .setParameter("userId",userId)
-                .setParameter("appStatusId",appStatusId)
-                .setParameter("createdBy",createdBy)
-                .executeUpdate();
+        hibernateQuery(sqlQuery).setParameter("consultantId", consultantId).setParameter("userId",userId)
+                .setParameter("appStatusId",appStatusId).setParameter("createdBy",createdBy).executeUpdate();
     }
 
     public List<AppliedServiceFeeDTO> getAppliedServices(String applicationNo) {
         sqlQuery = properties.getProperty("ConsultantRCActionDao.getAppliedServices");
-        return hibernateQuery(sqlQuery, AppliedServiceFeeDTO.class)
-                .setParameter("applicationNo", applicationNo).list();
+        return hibernateQuery(sqlQuery, AppliedServiceFeeDTO.class).setParameter("applicationNo", applicationNo).list();
     }
 }

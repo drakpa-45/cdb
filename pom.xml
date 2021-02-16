@@ -279,17 +279,17 @@
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
-       <!-- <dependency>
-            <groupId>org.wso2.client.RSTA_LicenseAndVehicleInformationAPI</groupId>
-            <artifactId>org.wso2.client.RSTA_LicenseAndVehicleInformationAPI</artifactId>
+        <dependency>
+            <groupId>org.wso2.client</groupId>
+            <artifactId>RSTA_LicenseAndVehicleInformationAPI</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>org.wso2.client.RSTA_OffenceInformationServiceAPI</groupId>
-            <artifactId>org.wso2.client.RSTA_OffenceInformationServiceAPI</artifactId>
+            <groupId>org.wso2.client</groupId>
+            <artifactId>RSTA_OffenceInformationServiceAPI</artifactId>
             <version>1.0.0-SNAPSHOT</version>
-        </dependency>-->
+        </dependency>
 
         <dependency>
             <groupId>G2CPaymentClient</groupId>

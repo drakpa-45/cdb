@@ -98,8 +98,10 @@ public class ConsultantRCActionController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/getProposedCategories", method = RequestMethod.GET)
-    public List getProposedCategories(HttpServletRequest request, String appNo) throws Exception{
-        return cRCActionService.getProposedCategories(appNo);
+    public ResponseMessage getProposedCategories(HttpServletRequest request, String appNo) throws Exception{
+        ResponseMessage consultantData =cRCActionService.getProposedCategories(appNo);
+        return consultantData;
+       // return null;
     }
 
     @ResponseBody
@@ -114,11 +116,6 @@ public class ConsultantRCActionController extends BaseController {
         return commonService.getEmployeeDetailsFromCDB(cidNo);
     }*/
 
-    @ResponseBody
-    @RequestMapping(value = "/checkEquipment", method = RequestMethod.GET)
-    public Object checkEquipment(HttpServletRequest request, String registrationNo) throws Exception{
-        return commonService.checkEquipment(registrationNo);
-    }
 
     @ResponseBody
     @RequestMapping(value = "/verify", method = RequestMethod.POST)

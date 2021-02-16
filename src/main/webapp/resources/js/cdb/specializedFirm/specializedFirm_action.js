@@ -222,25 +222,49 @@ debugger;
             $.ajax({
                 url: _baseURL() + "/checkEquipment",
                 type: 'GET',
-                data: {regNo: regNo},
+                data: {regNo: regNo, serviceName:'specializedFirm'},
                 success: function (res) {
-                    alert('sdfsdafsadfsdf');
-                    var eqDtls ="";
-                    if (res.status == '1') {
-                        var dto = res.dto;
-                        var vehicleDetails = dto.vehicleDetailses;
-                        for(var i in vehicleDetails){
-                            eqDtls = eqDtls +
-                            "<tr><td>" + (parseInt(i) + 1) + "</td>" +
-                            "<td>" +regNo + "</td>" +
-                            "<td>" +vehicleDetails[i].ownerName + "</td>" +
-                            "<td>" + vehicleDetails[i].registeredRegion+ "</td>" +
-                            "<td>" + vehicleDetails[i].vehicleType + "</td>" +"</tr>";
+                    /*  if (res.status == '1') {
+                     var dto = res.dto;
+                     $('#regNo').text(dto.fullName);
+                     $('#ownerName').text(dto.sex);
+                     $('#registeredReg').text(dto.dzongkhagNmae);
+                     $('#vType').text(dto.dzongkhagNmae);
+                     $("#CheckModalEquipment").modal('show');
+                     $("#closeModal1").modal('show');
+                     }*/
+                    $("#CheckModalEquipment").modal('show');
+
+                    $('#eqInfo').append("<br/> <b>Owner: </b> " + "Drakpa" + "  ||  <b> Owner CID:  </b> "+ "1111111" +"  ||  <b> Region:</b>"+"Thimphu"+" ||  <b> Vehicle Type:</b>"+"Medium"+"");
+
+                    var vehicleDetailses = res.dto.vehicleDetailses;
+                    var cdbDtlsDTO = res.dto.cdbDTOs;
+
+                    $("#regchecked").val(registrationNo);
+                    if(vehicleDetailses !=''){
+                        for(var i in vehicleDetailses){
+                            var vRegNo = employeeDetailsDTO[i].registrationNo;
+                            if(vRegNo !='' && vRegNo != null){
+                                alert(vRegNo);
+                                $('#eqInfo').append("<br/> <b>Owner: </b> "+vehicleDetailses[i].ownerName+"  ||  <b> Owner CID:  </b> "+ +"  ||  <b> Region:</b>"+vehicleDetailses[i].registeredRegion+" ||  <b> Vehicle Type:</b>"+vehicleDetailses[i].vehicleType+"");
+                            }else{
+                                $('#eqInfo').append("<br/> This equipment is not registered.");
+                            }
                         }
-                        $('#equipmentDTLS').find('tbody').html(eqDtls);
-                        $("#CheckModalEquipment").modal('show');
                     }else{
-                        warningMsg(dto.text);
+                        // $('#dcbinfo').hide();
+                        $('#eqInfo').append("<br/> This equipment is not registered.");
+                    }
+
+                    if(cdbDtlsDTO !=''){
+                        alert('a');
+                        for(var i in cdbDtlsDTO){
+                            alert('b');
+                            $('#engStatusInfo').append("<br/> <b>Equipment is owned by: </b> "+cdbDtlsDTO[i].consultantFirmname+" ( CDB No." +cdbDtlsDTO[i].consultantCDBNo+" )");
+                        }
+                    }else{
+                        // $('#dcbinfo').hide();
+                        $('#engStatusInfo').append("<br/>This equipment is not registered in any firm. ");
                     }
                 }
             });

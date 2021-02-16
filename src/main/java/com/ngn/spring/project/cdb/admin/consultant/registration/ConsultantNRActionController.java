@@ -64,6 +64,12 @@ public class ConsultantNRActionController extends BaseController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/checkEquipment", method = RequestMethod.GET)
+    public Object checkEquipment(HttpServletRequest request, String registrationNo, String serviceName) throws Exception{
+        return commonService.checkEquipment(registrationNo,serviceName);
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/verify", method = RequestMethod.POST)
     public ResponseMessage verify(HttpServletRequest request, BigInteger appNo, String vRemarks) {
         loggedInUser = gLoggedInUser(request);

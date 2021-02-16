@@ -1,6 +1,7 @@
 package com.ngn.spring.project.cdb.contractor.renewal;
 
 import com.ngn.spring.project.base.BaseController;
+import com.ngn.spring.project.cdb.admin.contractor.renewal.ContractorRCActionService;
 import com.ngn.spring.project.cdb.common.CommonService;
 import com.ngn.spring.project.cdb.contractor.registration.ContractorNRService;
 import com.ngn.spring.project.cdb.contractor.registration.dto.ContractorDTO;
@@ -39,6 +40,9 @@ public class ContractorRCController extends BaseController {
     private ContractorRCService cRenewalService;
     @Autowired
     private ContractorNRService contractorNRService;
+
+    @Autowired
+    private ContractorRCActionService cRCActionService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(ModelMap model, HttpServletRequest request, HttpServletResponse response,@ModelAttribute("res")ResponseMessage res) {

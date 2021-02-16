@@ -1141,9 +1141,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button data-dismiss="modal" class="btn btn-primary"
-                                        onclick="getModalData('equipmentTbl','eq',3)" type="button">OK
-                                </button>
+                                <button data-dismiss="modal" class="btn btn-primary" onclick="getModalData('equipmentTbl','eq',3)" type="button">OK</button>
                                 <button data-dismiss="modal" class="btn btn-warning" type="button">Close</button>
                             </div>
                         </div>

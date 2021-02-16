@@ -97,7 +97,7 @@
                                         <c:forEach items="${rejectedApplications}" var="history" varStatus="i">
                                             <tr>
                                                 <td>${i.index+1}</td>
-                                                <td><a href="<c:url value="/public_access/emptylayout/openRejectedApplication?appNo="/>${history.applicationNo}" onclick="openAndClaimRejectedApplication2('${history.applicationNo}')"
+                                                <td><a href="<c:url value="/public_access/openRejectedApplication?appNo="/>${history.applicationNo}" onclick="openAndClaimRejectedApplication2('${history.applicationNo}')"
                                                        data-toggle="tooltip" data-placement="top"> ${history.applicationNo}</a></td>
                                                 <td>${history.serviceName}</td>
                                                 <td>${history.appStatus}</td>

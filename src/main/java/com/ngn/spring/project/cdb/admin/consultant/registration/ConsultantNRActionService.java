@@ -150,7 +150,7 @@ public class ConsultantNRActionService extends BaseService {
         ArrayList<PaymentDTO> paymentList = new ArrayList<PaymentDTO>();
         PaymentDTO paymentdto = new PaymentDTO();
         //Integer amount = passportUploadDAO.getServiceFees(applicationNo);
-        BigDecimal amount = (BigDecimal) commonService.getValue("crpconsultantregistrationpayment","ApprovedAmount","CrpConsultantFinalId",consultantId);
+        BigDecimal amount = (BigDecimal) commonService.getValue("crpconsultantregistrationpayment","Amount","CrpConsultantFinalId",consultantId);
         paymentdto.setServiceFee(String.valueOf(amount));
 
         paymentdto.setAccountHeadId("131310001");
@@ -220,7 +220,7 @@ public class ConsultantNRActionService extends BaseService {
         paymentUpdateDTO.setConsultantId(consultant.getConsultantId());
         consultantActionDao.paymentUpdate(consultant.getConsultantId(),loggedInUser.getUserID(), approvedApplicationStatusId,loggedInUser.getUserID());//consultant.getCreatedBy()
         responseMessage.setStatus(SUCCESSFUL_STATUS);
-        responseMessage.setText("Consultant application number :"+paymentUpdateDTO.getAppNo().charAt(0)+" Payment Approved. Your CDBNo is:"+paymentUpdateDTO.getCdbNo());
+        responseMessage.setText("Consultant application number :"+paymentUpdateDTO.getAppNo()+" Payment Approved. Your CDBNo is:"+paymentUpdateDTO.getCdbNo());
         String mailContent = "Dear User,Your application for application number : "+paymentUpdateDTO.getAppNo()+" is approved."+
                 "You can login to the system for renewal other services using following credential:" +
                 "Username : your registered email" +

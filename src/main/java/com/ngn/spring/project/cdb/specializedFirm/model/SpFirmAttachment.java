@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by USER on 4/20/2020.
@@ -28,6 +29,10 @@ public class SpFirmAttachment extends BaseModel implements Serializable {
     private String fileType;
     @Column(name = "AttachmentFor")
     private String attachmentFor;
+    @Column(name = "CreatedBy")
+    private String createdBy;
+    @Column(name = "CreatedOn")
+    private Date createdOn;
 
     @Transient
     private MultipartFile attachment;
@@ -86,5 +91,21 @@ public class SpFirmAttachment extends BaseModel implements Serializable {
 
     public void setAttachmentFor(String attachmentFor) {
         this.attachmentFor = attachmentFor;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
     }
 }

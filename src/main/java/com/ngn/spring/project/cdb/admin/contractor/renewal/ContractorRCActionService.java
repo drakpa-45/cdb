@@ -7,6 +7,7 @@ import com.ngn.spring.project.cdb.admin.dto.EquipmentDTO;
 import com.ngn.spring.project.cdb.admin.dto.NewDeleteExistDTO;
 import com.ngn.spring.project.cdb.admin.dto.PaymentUpdateDTO;
 import com.ngn.spring.project.cdb.common.CommonService;
+import com.ngn.spring.project.cdb.consultant.model.Consultant;
 import com.ngn.spring.project.cdb.contractor.registration.ContractorNRService;
 import com.ngn.spring.project.cdb.contractor.registration.dto.ContractorHrDTO;
 import com.ngn.spring.project.cdb.contractor.registration.model.Contractor;

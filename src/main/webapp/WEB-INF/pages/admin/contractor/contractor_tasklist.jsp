@@ -101,7 +101,6 @@
 
     </div>
 </div>
-
 <script>
     function gMToggle(){
         $('body').on('click','.gMToggle',function(){

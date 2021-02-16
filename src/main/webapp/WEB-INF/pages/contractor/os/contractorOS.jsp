@@ -833,11 +833,11 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-lg-2">Salutation
+                                        <label class="col-lg-2">Title
                                             <span class="text-danger">*</span>:</label>
                                         <div class="col-lg-4">
                                             <select name="contractorHRs[0].salutationId" id="hr1" required="" class="form-control custom-select text-left select-beast">
-                                                <option value="">Select Salutation</option>
+                                                <option value="">Select Title</option>
                                                 <c:forEach var="item" items="${salutationList}">
                                                     <option value="${item.value}"><c:out value="${item.text}"/></option>
                                                 </c:forEach>
@@ -1078,7 +1078,7 @@
                                                 </c:forEach>
                                             </select>
                                         </div>
-                                        <label class="col-lg-3">Registration No <span class="text-danger">*</span>:</label>
+                                        <label class="col-lg-3">Registration No. <span class="text-danger">*</span>:</label>
                                         <div class="col-lg-3">
                                             <input type="text" name="equipments[0].registrationNo" class="form-control registrationNo" onchange="validateNo(this.value)"<%--required="true"--%> disabled id="eq2" placeholder="BP-1-A1234">
                                         </div>

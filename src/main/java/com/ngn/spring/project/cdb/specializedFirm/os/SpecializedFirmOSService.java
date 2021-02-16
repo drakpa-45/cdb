@@ -291,7 +291,24 @@ public class SpecializedFirmOSService extends BaseService {
 
     public void updateIncorporation(List<SpFirmAttachment> cAttachments,LoggedInUser loggedInUser,String specializedFirmId) throws Exception{
         if(cAttachments != null && cAttachments.size() >= 1) {
-            for(SpFirmAttachment cAttachment:cAttachments) {
+          /*  for(SpFirmAttachment cAttachment:cAttachments) {
+                cAttachment.setSpecializedTradeId(specializedFirmId);
+                specializedFirmService.saveAttachment(cAttachment, loggedInUser);
+            }*/
+            for (SpFirmAttachment cAttachment : cAttachments) {
+                if(!emptyNullCheck(cAttachment.getId())){
+                    if(cAttachment.getAttachment() == null){ // no changes
+                        cAttachment = specializedFirmService.getAttachmentFinal(cAttachment.getId());
+                        cAttachment.setAttachmentFor(cAttachment.getAttachmentFor());
+                    }else{ // for edit
+                        cAttachment.setEditedBy(loggedInUser.getUserID());
+                        cAttachment.setEditedOn(loggedInUser.getServerDate());
+                    }
+                }else {
+                    if (cAttachment.getAttachment() == null) { //No changes, so no need to save
+                        continue;
+                    }
+                }
                 cAttachment.setSpecializedTradeId(specializedFirmId);
                 specializedFirmService.saveAttachment(cAttachment, loggedInUser);
             }

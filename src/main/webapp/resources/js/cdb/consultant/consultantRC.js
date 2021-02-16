@@ -129,7 +129,7 @@ function getModalData(tableId, prefix, totalCol) {
     }
     td = td + "<td ><span class='doc'></span> <div class='hidden hr_attachment'></div></td>";
 
-    td = td + "<td ><input type='checkbox' name='contractorHRs[0].deleteRequest' value='1'></td>";
+    td = td + "<td ><input type='checkbox' name='consultantHRs[0].deleteRequest' value='1'></td>";
 
     var tr = "<tr id='"+j+"'>" + td + "<td class=' '><a class='p-2 edit-"+prefix+"'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a></td></tr>";
 
@@ -274,7 +274,7 @@ function submitApplication(){
     });
 
     var consultantForm = $("#consultantRenewalForm");
-    var url=_baseURL() + "/save?itemId="+itemId;
+    var url=_baseURL() + "/save";
     var options = {
         target:'#registrtaionFormCard',
         url:url,
@@ -830,15 +830,15 @@ var consultantRC = (function () {
         });
     }
 
-   /* function enableClassCategory(){
+    function enableClassCategory(){
         $('.categoryCheck').on('click',function(e){
             if($(this).is(':checked')){
-                $(this).closest('tr').find('.categoryCheck').prop('disabled',false);
+                $(this).closest('tr').find('.appliedClassID').prop('disabled',false);
             }else{
-                $(this).closest('tr').find('.categoryCheck').val('').prop('disabled',true);
+                $(this).closest('tr').find('.appliedClassID').val('').prop('disabled',true);
             }
         })
-    }*/
+    }
 
     function editInModalOwner(){
         $('body').on('click','.edit-rowOW',function(e){
@@ -1193,6 +1193,7 @@ var consultantRC = (function () {
         editInModalOwner();
         isFirmNameUnique();
         isEmailUnique();
+        enableClassCategory();
     }
     return {
         init:init

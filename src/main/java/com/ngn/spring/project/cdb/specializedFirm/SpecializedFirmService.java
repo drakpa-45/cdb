@@ -244,7 +244,7 @@ public class SpecializedFirmService extends BaseService {
     @Transactional(readOnly = false)
     public void saveAttachment(SpFirmAttachment cAttachment,LoggedInUser loggedInUser) throws Exception {
         MultipartFile attachment = cAttachment.getAttachment();
-        String docName = cAttachment.getDocumentName()+commonService.getFileEXT(attachment);
+        /*String docName = cAttachment.getDocumentName()+commonService.getFileEXT(attachment);
         String specificLoc = UPLOAD_LOC+"//CertIncorporation";
         String docPath = commonService.uploadDocument(attachment, specificLoc, docName);
         String attachmentId = commonService.getRandomGeneratedId();
@@ -252,6 +252,22 @@ public class SpecializedFirmService extends BaseService {
         cAttachment.setDocumentPath(docPath);
         cAttachment.setDocumentName(docName);
         cAttachment.setFileType(attachment.getContentType());
+        cAttachment.setCreatedBy(loggedInUser.getUserID());
+        cAttachment.setCreatedOn(loggedInUser.getServerDate());
+        dao.saveUpdate(cAttachment);*/
+
+        if(attachment != null) {
+            String docNameUpload = cAttachment.getDocumentName() + commonService.getFileEXT(attachment);
+            String specificLoc = UPLOAD_LOC+"//IncorporationCertificate";
+            String docPath = commonService.uploadDocument(attachment, specificLoc, docNameUpload);
+            cAttachment.setDocumentPath(docPath);
+            cAttachment.setDocumentName(docNameUpload);
+            cAttachment.setFileType(attachment.getContentType());
+        }
+        if(emptyNullCheck(cAttachment.getId())){
+            String attachmentID = commonService.getRandomGeneratedId();
+            cAttachment.setId(attachmentID);
+        }
         cAttachment.setCreatedBy(loggedInUser.getUserID());
         cAttachment.setCreatedOn(loggedInUser.getServerDate());
         dao.saveUpdate(cAttachment);
@@ -418,5 +434,9 @@ public class SpecializedFirmService extends BaseService {
 
     public SpFirmEQAttachment getEQAttachmentFinal(String eqaId) {
         return dao.getEQAttachmentFinal(eqaId);
+    }
+
+    public SpFirmAttachment getAttachmentFinal(String aId) {
+        return dao.getAttachmentFinal(aId);
     }
 }

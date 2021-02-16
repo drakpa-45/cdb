@@ -732,48 +732,62 @@
                         <div class="panel-body">
                             <div id="modal-print-equipment">
                                 <div class="form-group">
-                                    <p align="center"><strong><u><font size="3px;">Caution</font></u></strong></p>
-                                    <p align="center"><strong>An equipment is allowed to execute only one work at a time for the perticular firm.</strong></p>
-                                    <p align="center"><font size="5px;">Details of Registration No: <span id="regchecked"></span></font></p>
+                                    <p align="center"><strong><u><font size="3px;">Caution</font></u></strong>
+                                    </p>
+
+                                    <p align="center"><strong>An equipment is allowed to execute only one work
+                                        at a time for the perticular firm.</strong></p>
+
+                                    <p align="center"><font size="5px;">Details of Registration No: <span
+                                            id="regchecked"></span></font></p>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-lg-12">
                                         <p align="center"><strong>From RSTA database</strong></p>
-                                        <div class="col-lg-12">
-                                            <div class="col-lg-12 form-group mb-0 pt-4">
-                                                <label class="col-lg-3 form-label">Registered No.</label>
-                                                <label class="col-lg-8 form-label" id="regNo">BP-1-D1234</label>
-                                            </div>
-                                            <div class="col-lg-12 form-group mb-0">
-                                                <label class="col-lg-3 form-label">Owner Name</label>
-                                                <label class="col-lg-8 form-label" id="ownerName">Tshewan Tenzin</label>
-                                            </div>
-                                            <div class="col-lg-12 form-group mb-0">
-                                                <label class="col-lg-3 form-label">Registered Region</label>
-                                                <label class="col-lg-8 form-label">Samtse</label>
-                                            </div>
-                                            <div class="col-lg-12 form-group mb-0">
-                                                <label class="col-lg-3 form-label">Vehicle Type</label>
-                                                <label class="col-lg-8 form-label">Tractor</label>
+
+                                        <%-- <div class="col-lg-12">
+                                             <div class="col-lg-12 form-group mb-0 pt-4">
+                                                 <label class="col-lg-3 form-label">Registered No.</label>
+                                                 <label class="col-lg-8 form-label" id="regNo">BP-1-D1234</label>
+                                             </div>
+                                             <div class="col-lg-12 form-group mb-0">
+                                                 <label class="col-lg-3 form-label">Owner Name</label>
+                                                 <label class="col-lg-8 form-label" id="ownerName">Tshewan Tenzin</label>
+                                             </div>
+                                             <div class="col-lg-12 form-group mb-0">
+                                                 <label class="col-lg-3 form-label">Registered Region</label>
+                                                 <label class="col-lg-8 form-label">Samtse</label>
+                                             </div>
+                                             <div class="col-lg-12 form-group mb-0">
+                                                 <label class="col-lg-3 form-label">Vehicle Type</label>
+                                                 <label class="col-lg-8 form-label">Tractor</label>
+                                             </div>
+                                         </div>--%>
+
+                                        <div class="form-group">
+                                            <div class="col-lg-12" align="center">
+                                                <p><span id="eqInfo"></span></p>
                                             </div>
                                         </div>
+
                                         <p align="center">
-                                            <span id="regcheckerrorspa" class="has-error"></span>
-
-                                        <p align="center"></p>
-
+                                            <span id="regcheckerrorspa" class="has-error"></span></p>
+                                        <p align="center">In case of RSTA registered equipment kindly verify with RSTA if there are any mismatch in ownership as the RSTA data is currently under migration and stabilization.</p>
                                         <p align="center"><strong><span id="engagementStatus"></span></strong>
+                                            Show engagement status here.....
                                         </p>
+                                        <div class="form-group">
+                                            <div class="col-lg-12" align="center">
+                                                <p><span id="engStatusInfo"></span></p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <p align="center"><strong>Print this page as an evidence to prove that
-                                        particular HR is engaged or not in a work or project</strong></p>
-
+                                    <p align="center"><strong>Print this page as an evidence to prove that particular Equipment is engaged or not in a work or project</strong></p>
                                     <p align="center">
-                                        Printed on: 28-05-2019 <span id="dateSpan1"
-                                                                     style="display: none;"></span>
-                                        By:Tshewang Tenzin
+                                        Printed on:  <%=new Date()%>
+                                        By: ${auth.fullName}
                                     </p>
                                 </div>
                             </div>

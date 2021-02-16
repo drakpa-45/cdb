@@ -45,6 +45,8 @@ public class ContractorTaskListController extends BaseController {
             appStatus = ApplicationStatus.UNDER_PROCESS.getCode();
         }else if(request.isUserInRole("ROLE_PAYMENT")){
             appStatus = ApplicationStatus.APPROVED_FOR_PAYMENT.getCode();
+        }else{
+            appStatus = ApplicationStatus.UNDER_PROCESS.getCode();
         }
         model.addAttribute("groupTaskList", contractorNRActionService.gTaskList(null,appStatus,service));
         model.addAttribute("myTaskList", contractorNRActionService.gTaskList(loggedInUser.getUserID(),appStatus,service));
@@ -61,17 +63,19 @@ public class ContractorTaskListController extends BaseController {
     public String redirectToAction(HttpServletRequest request,RedirectAttributes attributes,@PathVariable String appNo,@PathVariable String flag) {
         String service = (String)request.getSession().getAttribute("SERVICE");
         //String appStatus = contractorNRActionService.getApplicationStatus(appNo);
-        contractorNRActionService.send2MyOrGroupTask(appNo,flag,getLoggedInUser().getUserID());
-        attributes.addFlashAttribute("appNo", appNo);
-        switch (service){
-            case "NR":
-                return "redirect:/admin/contractorNRAction";
-            case "RC":
-                return "redirect:/admin/contractorRCAction";
-            case "CC":
-                return "redirect:/admin/contractorCCAction";
-            case "OS":
-                return "redirect:/admin/contractorOSAction";
+        if(service !=null){
+            contractorNRActionService.send2MyOrGroupTask(appNo,flag,getLoggedInUser().getUserID());
+            attributes.addFlashAttribute("appNo", appNo);
+            switch (service){
+                case "NR":
+                    return "redirect:/admin/contractorNRAction";
+                case "RC":
+                    return "redirect:/admin/contractorRCAction";
+                case "CC":
+                    return "redirect:/admin/contractorCCAction";
+                case "OS":
+                    return "redirect:/admin/contractorOSAction";
+            }
         }
         return "redirect:/admin/contractorNRAction";
     }

@@ -157,7 +157,7 @@
                                                                 <th>Sl No</th>
                                                                 <th>Nationality</th>
                                                                 <th>CID/Work Permit No.</th>
-                                                                <th>Salutation</th>
+                                                                <th>Title</th>
                                                                 <th>Name</th>
                                                                 <th>Gender</th>
                                                                 <th>Designation</th>
@@ -303,7 +303,7 @@
                                                                         <th>SLNo</th>
                                                                         <th>Nationality</th>
                                                                         <th>CID/Work Permit No</th>
-                                                                        <th>Salutation</th>
+                                                                        <th>Title</th>
                                                                         <th>Name</th>
                                                                         <th>Gender</th>
                                                                         <th>Designation</th>
@@ -349,7 +349,6 @@
                                             <form action="" method="post" class="">
                                                 <div id="contractorEquipment" style="">
                                                     <i><strong>Contractor Equipment Details</strong></i>
-
                                                     <div class="panel panel-default">
                                                         <div class="panel-body">
                                                             <div class="table-responsive">
@@ -635,14 +634,14 @@
                                             <p align="center"><strong><u><font size="3px;">Caution</font></u></strong>
                                             </p>
 
-                                            <p align="center"><strong>An equipment is allowed to execute only one work at a time for the perticular firm.</strong></p>
+                                            <p align="center"><strong>An equipment is allowed to execute only one work at a time for the particular firm.</strong></p>
 
                                             <p align="center"><font size="5px;">Details of Registration No:<span id="regchecked"></span></font></p>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-12">
                                                 <p align="center"><strong>From RSTA database</strong></p>
-
+<%--
                                                 <div class="col-lg-12">
                                                     <div class="col-lg-12 form-group mb-0 pt-4">
                                                         <label class="col-lg-3 form-label">Registered No.</label>
@@ -654,19 +653,31 @@
                                                     </div>
                                                     <div class="col-lg-12 form-group mb-0">
                                                         <label class="col-lg-3 form-label">Registered Region</label>
-                                                        <label class="col-lg-8 form-label">Samtse</label>
+                                                        <label class="col-lg-8 form-label" id="registeredReg">Samtse</label>
                                                     </div>
                                                     <div class="col-lg-12 form-group mb-0">
                                                         <label class="col-lg-3 form-label">Vehicle Type</label>
-                                                        <label class="col-lg-8 form-label">Light Vehicle</label>
+                                                        <label class="col-lg-8 form-label" id="vType">Light Vehicle</label>
+                                                    </div>
+                                                </div>--%>
+
+                                                <div class="form-group">
+                                                    <div class="col-lg-12" align="center">
+                                                        <p><span id="eqInfo"></span></p>
                                                     </div>
                                                 </div>
+
                                                 <p align="center">
                                                     <span id="regcheckerrorspa" class="has-error"></span></p>
                                                 <p align="center">In case of RSTA registered equipment kindly verify with RSTA if there are any mismatch in ownership as the RSTA data is currently under migration and stabilization.</p>
                                                 <p align="center"><strong><span id="engagementStatus"></span></strong>
                                                     Show engagement status here.....
                                                 </p>
+                                                <div class="form-group">
+                                                    <div class="col-lg-12" align="center">
+                                                        <p><span id="engStatusInfo"></span></p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -674,7 +685,6 @@
                                                 particular Equipment is engaged or not in a work or project</strong></p>
                                             <p align="center">
                                                 Printed on:  <%=new Date()%>
-
                                                 By: ${auth.fullName}
                                             </p>
                                         </div>
@@ -692,6 +702,7 @@
                 </div>
             </div>
         </div>
+
         <script type="text/javascript">
             function showAcknowledgement() {
                 $("#registrtaionFormCard").hide();

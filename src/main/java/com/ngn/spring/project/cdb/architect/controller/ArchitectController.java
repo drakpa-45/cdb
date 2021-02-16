@@ -187,9 +187,8 @@ public class ArchitectController extends BaseController {
             model.addAttribute("fee_details", spservices.getFeesDetals("Specialized"));
            // model.addAttribute("checkOngoingApplication", spservices.checkOngoingApplication(type.split("999")[1]));
             String checkForOwnership=spservices.checkOwnerShipType(type.split("999")[1]);
-
-                model.addAttribute("registrationDetails", commonService.populateSpApplicantDetails(type.split("999")[1]));
-                return "trade/sptrade_renewal_index";
+            model.addAttribute("registrationDetails", commonService.populateSpApplicantDetails(type.split("999")[1]));
+            return "trade/sptrade_renewal_index";
         }
     }
 
@@ -260,7 +259,7 @@ public class ArchitectController extends BaseController {
         }
     }
 
-    @RequestMapping(value ={"/public_access/emptylayout/openRejectedApplication"}, method = RequestMethod.GET)
+    @RequestMapping(value ={"/public_access/openRejectedApplication"}, method = RequestMethod.GET)
     public String fetchRejectedAppDetails(HttpServletRequest request,String appNo,Model model) {
         String cmnSalutation = "f237fdb8-a5ef-11e4-8ab5-080027dcfac6";
         String qualification = "ff4e55ee-a254-11e4-b4d2-080027dcfac6";
@@ -273,7 +272,7 @@ public class ArchitectController extends BaseController {
 
         model.addAttribute("fee_details", services.getFeesDetals("Architect"));
         ArchitectDto dto = services.fetchRejectedAppDetails(appNo);
-            model.addAttribute("registrationDetails", dto);
+        model.addAttribute("registrationDetails", dto);
         return "architect/rejection/rejectedIndex";
               //return "/architect/rejection/rejectedIndex";
         }
@@ -348,6 +347,7 @@ public class ArchitectController extends BaseController {
         }
         return null;
     }
+
     public static byte[] downloadFile(String uploadUlr) throws Exception{
         FileInputStream fileInputStream = new FileInputStream(uploadUlr);
         return IOUtils.toByteArray(fileInputStream);

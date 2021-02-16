@@ -125,16 +125,15 @@ var contractorPr = (function () {
                 for (var i in categories) {
                     var category = '';
                     var className = '';
-                    if(categories[i].aClassId == 'e19afe94-c3ea-11e4-af9f-080027dcfac6'){
+                    if(categories[i].apClassId == 'e19afe94-c3ea-11e4-af9f-080027dcfac6'){
                         className = 'Large';
-                    }else if(categories[i].aClassId == '003f9a02-c3eb-11e4-af9f-080027dcfac6'){
+                    }else if(categories[i].apClassId == '003f9a02-c3eb-11e4-af9f-080027dcfac6'){
                         className = 'Medium';
-                    }else if(categories[i].aClassId == 'ef832830-c3ea-11e4-af9f-080027dcfac6'){
+                    }else if(categories[i].apClassId == 'ef832830-c3ea-11e4-af9f-080027dcfac6'){
                         className = 'Small';
-                    }else if(categories[i].aClassId == '0c14ebea-c3eb-11e4-af9f-080027dcfac6'){
+                    }else if(categories[i].apClassId == '0c14ebea-c3eb-11e4-af9f-080027dcfac6'){
                         className = 'Registered';
                     }
-
                     if (categories[i].categoryId == "6cd737d4-a2b7-11e4-b4d2-080027dcfac6") {
                         category = 'W1-Roads and Bridges';
                     }
@@ -153,10 +152,8 @@ var contractorPr = (function () {
                     '<td>'+className +'</td>'+
                     '<td>'+className +'</td></tr>'
                 }
-
                 $('#classificationTbl').find('tbody').html(tr);
             }
-
         });
     }
 

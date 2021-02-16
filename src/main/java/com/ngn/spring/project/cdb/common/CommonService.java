@@ -525,7 +525,7 @@ public class CommonService extends BaseService {
     }
 
     @Transactional(readOnly = true)
-    public ResponseMessage checkEquipment(String regNo) {
+    public ResponseMessage checkEquipment(String regNo, String serviceName) {
         ResourceBundle resourceBundle1 = ResourceBundle.getBundle("wsEndPointURL_en_US");
         String rstaendpointURL =resourceBundle1.getString("getEquipmentDetailsFromRSTA.endPointURL");
         String rstaaccessToken =resourceBundle1.getString("getEquipmentDetailsFromRSTA.accessToken");
@@ -550,7 +550,9 @@ public class CommonService extends BaseService {
             equipmentDTO.setRegisteredRegion(citizendetailsObj.getGender());
             equipmentDTO.setVehicleType(citizendetailsObj.getCid());
             equipmentDTO.setOwnerName(citizendetailsObj.getDzongkhagName());
-*/
+           */
+
+            equipmentDTO.setCdbDTOs(commonDao.fetchEqDtlsFromCDB(regNo,serviceName));
             equipmentDTO.setVehicleDetailses(vehicleDetailses);
             responseMessage = new ResponseMessage();
             responseMessage.setStatus(SUCCESSFUL_STATUS);
@@ -565,11 +567,12 @@ public class CommonService extends BaseService {
             responseMessage.setDto(personalInfoDTO);
             return responseMessage;*/
 
-            vehicleDetailses.get(0).setRegistrationNo(regNo);
+            /*vehicleDetailses.size().setRegistrationNo("BP-1-A1234");
             vehicleDetailses.get(0).setRegisteredRegion("Thimphu");
             vehicleDetailses.get(0).setVehicleType("Medium");
-            vehicleDetailses.get(0).setOwnerName("Drakpa");
+            vehicleDetailses.get(0).setOwnerName("Drakpa");*/
             e.printStackTrace();
+            equipmentDTO.setCdbDTOs(commonDao.fetchEqDtlsFromCDB(regNo,serviceName));
             equipmentDTO.setVehicleDetailses(vehicleDetailses);
             responseMessage.setStatus(SUCCESSFUL_STATUS);
             responseMessage.setDto(equipmentDTO);

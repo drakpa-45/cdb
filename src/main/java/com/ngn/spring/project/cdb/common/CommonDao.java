@@ -275,7 +275,7 @@ public class CommonDao extends BaseDao {
         String cdbNo="";
         String specializedquery="SELECT f.SPNo cdbNo FROM sysuser s LEFT JOIN crpspecializedtradefinal f ON f.SysUserId=s.Id WHERE s.username=?";
         Query spNo = sqlQuery(specializedquery).setParameter(1, loginDTO.getUsername());
-                            return (String) spNo.list().get(0);
+        return (String) spNo.list().get(0);
     }
 
     @Transactional
@@ -450,11 +450,10 @@ try {
     existingCDBNo = (String)hibernateQuery(consquery).setParameter(1, cid).uniqueResult();
     if(existingCDBNo !=null) {
         cdbNo = existingCDBNo;
-    }
-
+        }
     }catch (Exception e){
     e.printStackTrace();
-    }
+     }
         return cdbNo;
     }
 
@@ -483,9 +482,8 @@ try {
         }else if(type.equalsIgnoreCase("SpecializedTrade")){
             sqlQuery = properties.getProperty("CommonDao.isExpiredSpecializedTrade");
         }
-       // BigInteger bigIntValue = (BigInteger)hibernateQuery(sqlQuery).setParameter("cdbNo", cdbNo).list().get(0);
+      // BigInteger bigIntValue = (BigInteger)hibernateQuery(sqlQuery).setParameter("cdbNo", cdbNo).list().get(0);
        Integer bigIntValue = (Integer) hibernateQuery(sqlQuery).setParameter("cdbNo", cdbNo).list().get(0);
-
         return (bigIntValue.intValue() == 1);
     }
 
@@ -512,7 +510,6 @@ try {
         List<EmployeeDetailsDTO> employeeDetailsDTOs = new ArrayList<>();
         sqlQuery = properties.getProperty("CommonDao.validateWorkEngagementCidNo");
          employeeDetailsDTOs =(List<EmployeeDetailsDTO>) hibernateQuery(sqlQuery, EmployeeDetailsDTO.class).setParameter("cidNo", cidNo).list();
-
         return employeeDetailsDTOs;
     }
 
@@ -730,6 +727,22 @@ try {
             e.printStackTrace();
         }
         return responseMessage;
+    }
+
+    @Transactional
+    public List<CdbDTO> fetchEqDtlsFromCDB(String regNo, String serviceName) {
+        List<CdbDTO> cdbDTOs = new ArrayList<>();
+        if(serviceName.equalsIgnoreCase("consultant")){
+            sqlQuery = properties.getProperty("CommonDao.consultantFetchEqDtlsFromCDB");
+        }
+        if(serviceName.equalsIgnoreCase("contractor")){
+            sqlQuery = properties.getProperty("CommonDao.contractorFetchEqDtlsFromCDB");
+        }
+        if(serviceName.equalsIgnoreCase("specializedFirm")){
+            sqlQuery = properties.getProperty("CommonDao.specializedFirmFetchEqDtlsFromCDB");
+        }
+        cdbDTOs =(List<CdbDTO>) hibernateQuery(sqlQuery, CdbDTO.class).setParameter("regNo", regNo).list();
+        return cdbDTOs;
     }
 }
 

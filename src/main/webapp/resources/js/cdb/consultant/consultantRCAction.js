@@ -268,17 +268,17 @@ var consultantRCAction = (function () {
                         incorporation(consultantDTO.incAttachments);
 
                         var categoryClassDTOs = consultantDTO.categories;
-
+/*
                         var ccTr = "";
                         var tFeeAmount = 0;
                         for (var i in categoryClassDTOs) {
                             var valueee = categoryClassDTOs.value;
                             tFeeAmount = tFeeAmount + parseFloat(categoryClassDTOs[i].aAmount);
                             //  var total = valueee.();
-                            /* for(var j in valueee){
+                            *//* for(var j in valueee){
                              count ++;
                              return count;
-                             }*/
+                             }*//*
                             ccTr = ccTr + "<tr> <td>" + categoryClassDTOs[i].name + "</td>" +
                             "<td>"+
                             " <a href='javascript:void(0)' style='color: #006699' title='${categoryClassDTOs[i].obj1}' data-toggle='tooltip' data-placement='top' class='tooltipCSSSelector'><i class='fa fa-question-circle'></i></a>"+
@@ -289,7 +289,7 @@ var consultantRCAction = (function () {
                         }
                         var tfoot = "<tr><td colspan='2' align='right'>Total</td><td>"+tFeeAmount+"</td> ";
                         $('#consultantCCTbl').find('tbody').html(ccTr);
-                        $('#consultantCCTbl').find('tfoot').html(tfoot);
+                        $('#consultantCCTbl').find('tfoot').html(tfoot);*/
 
                         var appHistoryDTOs = consultantDTO.appHistoryDTOs;
 
@@ -553,18 +553,30 @@ var consultantRCAction = (function () {
             type: 'GET',
             data: {appNo: applicationNo},
             success: function (res) {
-                var tr = '';
-                for(var i in res){
-                    tr = tr + '<tr>' +
-                    '<td><input type="checkbox" checked disabled /></td>'+
-                    '<td>'+res[i].serviceName+'</td>'+
-                    '<td>'+res[i].categoryName+'</td>'+
-                    '<td>'+res[i].exClassName+'</td>'+
-                    '<td>'+res[i].aClassName+'</td>'+
-                    '<td>'+res[i].aAmount+'</td>'+
-                    '</tr>';
+                if(res.status == '1'){
+                    var consultantDTO = res.dto;
+                var categoryClassDTOs = consultantDTO.categories;
+                var ccTr = "";
+                var tFeeAmount = 0;
+                for (var i in categoryClassDTOs) {
+                    var valueee = categoryClassDTOs.value;
+                    tFeeAmount = tFeeAmount + parseFloat(categoryClassDTOs[i].aAmount);
+                    //  var total = valueee.();
+                    /* for(var j in valueee){
+                     count ++;
+                     return count;
+                     }*/
+                    ccTr = ccTr + "<tr> <td> <input type='checkbox' id='checkid' disabled></td>" +
+                    "<td>"+ categoryClassDTOs[i].code + " - " +categoryClassDTOs[i].name+"</td> " +
+                    "<td>"+categoryClassDTOs[i].value+"</td> " +
+                    "<td>"+categoryClassDTOs[i].aAmount+"</td>"+
+                    "</tr>";
+                    $('#checkid').prop('checked',true);
                 }
-                $('#consultantCCTbl').find('tbody').html(tr);
+                    var tfoot = "<tr><td colspan='3' align='right'>Total</td><td>"+tFeeAmount+"</td> ";
+                    $('#consultantCCTbl').find('tbody').html(ccTr);
+                    $('#consultantCCTbl').find('tfoot').html(tfoot);
+                }
             }
         })
     }
@@ -577,7 +589,7 @@ var consultantRCAction = (function () {
             var categoryTr = '';
             var ownerTr = '';
             for(var i in data){
-                if(data[i].attachmentFor == 'InSole') {
+                if(data[i].attachmentFor == 'InSole' || data[i].attachmentFor == ' ') {
                     cIncTr = cIncTr + "<tr>" +
                     "<td></td>" +
                     "<td>" + data[i].documentName + "</td>" +
@@ -609,10 +621,54 @@ var consultantRCAction = (function () {
     function checkEquipment(){
         $('body').on('click','.equipmentCheck',function(){
             //var modal = $(this).closest('.modal').attr('id');
-            $("#CheckModalEquipment").modal('show');
             $check = $(this).closest('tr').find('.check');
+            var registrationNo = $(this).closest('tr').find('.registrationNo').text();
+            $.ajax({
+                url: cdbGlobal.baseURL() + "/admin/consultantNRAction/checkEquipment",
+                type: 'GET',
+                data: {registrationNo: registrationNo,serviceName:'consultant'},
+                success: function (res) {
+                    /*  if (res.status == '1') {
+                     var dto = res.dto;
+                     $('#regNo').text(dto.fullName);
+                     $('#ownerName').text(dto.sex);
+                     $('#registeredReg').text(dto.dzongkhagNmae);
+                     $('#vType').text(dto.dzongkhagNmae);
+                     $("#CheckModalEquipment").modal('show');
+                     $("#closeModal1").modal('show');
+                     }*/
+                    $("#CheckModalEquipment").modal('show');
+                    $('#eqInfo').append("<br/> <b>Owner: </b> " + "Drakpa" + "  ||  <b> Owner CID:  </b> "+ "1111111" +"  ||  <b> Region:</b>"+"Thimphu"+" ||  <b> Vehicle Type:</b>"+"Medium"+"");
+
+                    var vehicleDetailses = res.dto.vehicleDetailses;
+                    var cdbDtlsDTO = res.dto.cdbDTOs;
+
+                    $("#regchecked").val(registrationNo);
+                    if(vehicleDetailses !=''){
+                        for(var i in vehicleDetailses){
+                            var vRegNo = employeeDetailsDTO[i].registrationNo;
+                            if(vRegNo !='' && vRegNo != null){
+                                alert(vRegNo);
+                                $('#eqInfo').append("<br/> <b>Owner: </b> "+vehicleDetailses[i].ownerName+"  ||  <b> Owner CID:  </b> "+ +"  ||  <b> Region:</b>"+vehicleDetailses[i].registeredRegion+" ||  <b> Vehicle Type:</b>"+vehicleDetailses[i].vehicleType+"");
+                            }else{
+                                $('#eqInfo').append("<br/> This equipment is not registered.");
+                            }
+                        }
+                    }else{
+                        $('#eqInfo').append("<br/> This equipment is not registered.");
+                    }
+                    if(cdbDtlsDTO !=''){
+                        for(var i in cdbDtlsDTO){
+                            $('#engStatusInfo').append("<br/> <b>Equipment is owned by: </b> "+cdbDtlsDTO[i].consultantFirmname+" ( CDB No." +cdbDtlsDTO[i].consultantCDBNo+" )");
+                        }
+                    }else{
+                        $('#engStatusInfo').append("<br/>This equipment is not registered in any firm. ");
+                    }
+                }
+            });
         });
     }
+
     function verify() {
         $('#btnVerify').on('click', function (e) {
             $.ajax({

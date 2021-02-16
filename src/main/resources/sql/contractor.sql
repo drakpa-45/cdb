@@ -9,6 +9,7 @@ ContractorDao.getTrainingDtl = SELECT a.`CmnTrainingTypeId` tTypeId,a.`CmnTraini
 ContractorDao.getContractorOngoingApp = SELECT aa.`CrpContractorId` contractorId,aa.`ReferenceNo` AS referenceNo, aa.ApplicationDate AS applicationDate, aa.CDBNo AS cdbNo,aa.Id AS appStatusId,bb.Name AS appStatusName FROM `crpcontractor` aa INNER JOIN cmnlistitem bb ON aa.`CmnApplicationRegistrationStatusId`=bb.Id WHERE  bb.Id IN ('262a3f11-adbd-11e4-99d7-080027dcfac6','36f9627a-adbd-11e4-99d7-080027dcfac6','6195664d-c3c5-11e4-af9f-080027dcfac6') AND aa.CDBNo =:cdbNo
 ContractorDao.getHRAttachmentFinal = SELECT Id id, CrpContractorHumanResourceFinalId contractorHrId,DocumentName documentName,DocumentPath documentPath, FileType fileType,CreatedBy createdBy ,CreatedOn createdOn FROM crpcontractorhumanresourceattachmentfinal WHERE Id=:hraId
 ContractorDao.getEQAttachmentFinal = SELECT Id id,CrpContractorEquipmentFinalId equipmentId,DocumentName documentName,DocumentPath documentPath,FileType fileType,CreatedBy createdBy,CreatedOn createdOn FROM crpcontractorequipmentattachmentfinal WHERE Id = :eqaId
+ContractorDao.getAttachmentFinal = SELECT Id id,CrpContractorFinalId contractorId,DocumentName documentName,DocumentPath documentPath,AttachmentFor attachmentFor,FileType fileType,CreatedBy createdBy,CreatedOn createdOn FROM crpcontractorattachmentfinal WHERE Id = :aId
 /** ContractorActionDao */
 ContractorActionDao.gTaskList = CALL ProCrpContractorTaskList (:userId,:status,:service);
 

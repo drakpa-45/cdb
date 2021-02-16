@@ -38,6 +38,8 @@ public class ConsultantServicePaymentDetail extends BaseModel implements Seriali
     private String verifiedClassId;
     @Column(name = "ApprovedService")
     private String approvedClassId;
+    @Column(name = "ServiceXFee")
+    private String serviceXFee;
     @Column(name = "Amount")
     private BigDecimal amount;
 
@@ -95,6 +97,14 @@ public class ConsultantServicePaymentDetail extends BaseModel implements Seriali
 
     public void setApprovedClassId(String approvedClassId) {
         this.approvedClassId = approvedClassId;
+    }
+
+    public String getServiceXFee() {
+        return serviceXFee;
+    }
+
+    public void setServiceXFee(String serviceXFee) {
+        this.serviceXFee = serviceXFee;
     }
 
     public BigDecimal getAmount() {

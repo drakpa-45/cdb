@@ -131,10 +131,9 @@ public class ConsultantRCDao extends BaseDao {
         return hQuery.list().isEmpty()?null:hQuery.list().get(0).toString();
     }
 
-    public List getProposedCategories(String appNo) {
+    public List getProposedCategories(String consultantId) {
         sqlQuery = properties.getProperty("ConsultantRCActionDao.getProposedCategories");
-        return hibernateQuery(sqlQuery, CategoryClassDTO.class)
-                .setParameter("appNo", appNo).list();
+        return hibernateQuery(sqlQuery, CategoryClassDTO.class).setParameter("consultantId", consultantId).list();
     }
 
     public List<ConsultantAttachment> getIncAttachmentFinal(String consultantIdFinal) {

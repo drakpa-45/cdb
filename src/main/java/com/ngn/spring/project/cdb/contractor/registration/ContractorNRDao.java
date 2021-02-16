@@ -6,6 +6,7 @@ import com.ngn.spring.project.cdb.contractor.registration.dto.ContractorDTOFetch
 import com.ngn.spring.project.cdb.contractor.registration.dto.ContractorTrainingDTO;
 import com.ngn.spring.project.cdb.contractor.registration.dto.FeeStructureDTO;
 import com.ngn.spring.project.cdb.contractor.registration.model.Contractor;
+import com.ngn.spring.project.cdb.contractor.registration.model.ContractorAttachment;
 import com.ngn.spring.project.cdb.contractor.registration.model.ContractorEQAttachment;
 import com.ngn.spring.project.cdb.contractor.registration.model.ContractorHRAttachment;
 import com.ngn.spring.project.lib.DropdownDTO;
@@ -103,5 +104,11 @@ public class ContractorNRDao extends BaseDao {
     public ContractorEQAttachment getEQAttachmentFinal(String eqaId) {
         sqlQuery = properties.getProperty("ContractorDao.getEQAttachmentFinal");
         return (ContractorEQAttachment)hibernateQuery(sqlQuery,ContractorEQAttachment.class).setParameter("eqaId",eqaId).list().get(0);
+    }
+
+    @Transactional(readOnly = true)
+    public ContractorAttachment getAttachmentFinal(String aId) {
+        sqlQuery = properties.getProperty("ContractorDao.getAttachmentFinal");
+        return (ContractorAttachment)hibernateQuery(sqlQuery,ContractorAttachment.class).setParameter("aId",aId).list().get(0);
     }
 }

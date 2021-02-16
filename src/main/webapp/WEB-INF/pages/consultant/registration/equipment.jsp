@@ -280,7 +280,7 @@
                                     </thead>
                                     <tbody class="files">
                                     <tr>
-                                        <td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/></td>
+                                        <td><input type='text' required="" value="Bluebook" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/></td>
                                         <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment'
                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/>
                                         </td>
@@ -288,18 +288,21 @@
                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                     </tr>
                                     <tr>
-                                        <td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/></td>
+                                        <td><input type='text' required="" value="Insurance Certificate" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/></td>
                                         <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment'
                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/>
                                         </td>
                                         <td class='file-size'></td>
                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                     </tr>
-                                    <%--  <tr><td><input type='text' required="" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/> </td>
-                                          <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/> </td>
-                                          <td class='file-size'></td>
-                                          <td class='del_row'> <a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
-                                      </tr>--%>
+                                    <tr>
+                                        <td><input type='text' required="" value="Others" class='form-control docName' name='equipments[0].consultantEQAs[0].documentName'/></td>
+                                        <td><input type='file' required="" class='file' name='equipments[0].consultantEQAs[0].attachment'
+                                                   accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/>
+                                        </td>
+                                        <td class='file-size'></td>
+                                        <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
