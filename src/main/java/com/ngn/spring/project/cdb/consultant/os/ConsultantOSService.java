@@ -305,7 +305,7 @@ public class ConsultantOSService extends BaseService {
     }
 
     public void updateIncorporation(List<ConsultantAttachment> cAttachments, LoggedInUser loggedInUser,String consultantId) throws Exception{
-        if(cAttachments.size() > 1) {
+        if(cAttachments != null && cAttachments.size() >= 1) {
            /* for(ConsultantAttachment cAttachment:cAttachments) {
                 cAttachment.setConsultantId(consultantId);
                 consultantNRService.saveAttachment(cAttachment, loggedInUser);

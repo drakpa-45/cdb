@@ -990,13 +990,12 @@
                                                     <span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
                                                     <select name="contractorOWs[0].countryId" id="ow1" required="" class="form-control custom-select text-left select-beast country">
-                                                        <option value="">Select Country</option>
                                                         <c:forEach var="item" items="${countryList}">
                                                             <option value="${item.value}"><c:out value="${item.text}"/></option>
                                                         </c:forEach>
                                                     </select>
                                                 </div>
-                                                <label class="col-md-2 col-lg-2">CID/Work Permit No <span class="text-danger">*</span>:</label>
+                                                <label class="col-md-2 col-lg-2">CID/Work Permit No.<span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
                                                     <div class="input-icon">
                                                       <span class="input-icon-addon">

@@ -413,7 +413,7 @@ var consultantOS = (function () {
     var certCategory ="<tr><td></td>" +
         "<td><input type='hidden' class='form-control aFor' name='categoryAttachments[0].attachmentFor' value='AL'/>" +
         "<input type='text' class='form-control' name='categoryAttachments[0].documentName'/> </td>"+
-        "<td><input type='file' name='categoryAttachments[2].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
+        "<td><input type='file' name='categoryAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
         "<td class='file-size'></td>" +
         "<td><a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a></td>" +
         "</tr>";
@@ -421,7 +421,7 @@ var consultantOS = (function () {
     var certOSC = "<tr><td></td>" +
         "<td><input type='hidden' class='form-control aFor' name='ownerAttachments[0].attachmentFor' value='OC'/>" +
         "<input type='text' class='form-control' name='ownerAttachments[0].documentName'/> </td>"+
-        "<td><input type='file' name='ownerAttachments[1].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
+        "<td><input type='file' name='ownerAttachments[0].attachment' class='form-control-file file' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'></td>" +
         "<td class='file-size'></td>" +
         "<td><a class='p-2 del_row'><i class='fa fa-trash text-danger'></i></a></td>" +
         "</tr>";
@@ -429,16 +429,12 @@ var consultantOS = (function () {
     function addMoreCertCategory(){
         $('#addMoreCertCategory').on('click',function(e){
             var certificateTbl = $('#certificateTblCategory').find('tbody').append(certCategory);
-            /*var row = certificateTbl.find('tr:eq(0)').html();
-             certificateTbl.append('<tr>'+row.find(':input').val('')+'</tr>');*/
         });
     }
 
     function addMoreCertOwner(){
         $('#addMoreCertOwner').on('click',function(e){
             var certificateTbl = $('#certificateTblOwner').find('tbody').append(certOSC);
-            /*var row = certificateTbl.find('tr:eq(0)').html();
-             certificateTbl.append('<tr>'+row.find(':input').val('')+'</tr>');*/
         });
     }
 
@@ -546,7 +542,7 @@ var consultantOS = (function () {
                             "<td>" +
                             "<input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='InSole'/>" +
                             "<input type='hidden' class='form-control' name='cAttachments[0].id' value='"+data[i].id+"'/>" +
-                            "<input type='text' class='form-control docName' name='cAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
+                            "<input type='text' class='form-control docName' name='cAttachments[0].documentName' value='"+data[i].documentName+"'/></td>" +
                             "<td class='attachment'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
                             "<td></td>" +
                             "<td class='action'><button class='btn-sm btn-info btn-block edit_row' >Edit</button>" +
@@ -559,7 +555,7 @@ var consultantOS = (function () {
                             "<td>" +
                             "<input type='hidden' class='form-control aFor' name='categoryAttachments[0].attachmentFor' value='AL'/>" +
                             "<input type='hidden' class='form-control' name='categoryAttachments[0].id' value='"+data[i].id+"'/>" +
-                            "<input type='text' class='form-control docName' name='categoryAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
+                            "<input type='text' class='form-control docName' name='categoryAttachments[0].documentName' value='"+data[i].documentName+"'/></td>" +
                             "<td class='attachmentcc'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
                             "<td></td>" +
                             "<td class='action'><button class='btn-sm btn-info btn-block edit_row_cc' >Edit</button>" +
@@ -572,7 +568,7 @@ var consultantOS = (function () {
                             "<td>" +
                             "<input type='hidden' class='form-control aFor' name='ownerAttachments[0].attachmentFor' value='OC'/>" +
                             "<input type='hidden' class='form-control' name='ownerAttachments[0].id' value='"+data[i].id+"'/>" +
-                            "<input type='text' class='form-control docName' name='ownerAttachments[0].documentName' value='"+data[i].documentName+"'/ disabled></td>" +
+                            "<input type='text' class='form-control docName' name='ownerAttachments[0].documentName' value='"+data[i].documentName+"'/></td>" +
                             "<td class='attachmentoc'><a href='" + _baseURL() + "/viewDownload?documentPath=" + data[i].documentPath + "' target='_blank'> View </a></td>" +
                             "<td></td>" +
                             "<td class='action'><button class='btn-sm btn-info btn-block edit_row_oc' >Edit</button>" +
@@ -652,7 +648,7 @@ var consultantOS = (function () {
                     var consultantHrs = res;
                     for (var i in consultantHrs) {
                         partnerHrTr = partnerHrTr + "<tr>" +
-                        "<td class='countryName'><input type='hidden' class='consultantOWid' name='consultantOWs[0].id' value='"+consultantHrs[i].id +"'/> " + consultantHrs[i].countryName + "</td>" +
+                        "<td class='countryName'><input type='hidden' class='consultantOWid' name='consultantOWs[0].id' value='"+consultantHrs[i].id +"'/>" + consultantHrs[i].countryName + "</td>" +
                         "<td class='cidNo'>" + consultantHrs[i].cidNo + "</td>" +
                         "<td class='salutationName'>" + consultantHrs[i].salutationName + "</td>" +
                         "<td class='name'>" + consultantHrs[i].name + "</td>" +

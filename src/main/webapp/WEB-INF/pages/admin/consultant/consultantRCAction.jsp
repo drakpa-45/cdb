@@ -201,7 +201,7 @@
                                                     <th>Sl No</th>
                                                     <th>Nationality</th>
                                                     <th>CID/Work Permit No.</th>
-                                                    <th>Salutation</th>
+                                                    <th>Title</th>
                                                     <th>Name</th>
                                                     <th>Gender</th>
                                                     <th>Designation</th>
@@ -235,7 +235,7 @@
                                 <div class="card hidd" id="oIncorporation">
                                     <div class="bg-blue card-status card-status-left"></div>
                                     <div class="card-header">
-                                        <h3 class="card-title">Attach Certificates of Incorporation</h3>
+                                        <h3 class="card-title">Attach Certificates of ownership change</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="col-lg-12">

@@ -261,7 +261,7 @@
                                                                 <tr>
                                                                     <th>Nationality</th>
                                                                     <th>CID/Work Permit No.</th>
-                                                                    <th>Tilte</th>
+                                                                    <th>Title</th>
                                                                     <th>Name</th>
                                                                     <th>Gender</th>
                                                                     <th>Designation</th>
@@ -271,43 +271,7 @@
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                <%--<tr>
-                                                                    <td class="country">
-                                                                        <form:select id="countryList" class="form-control" name="consultant.consultantHRs[0].countryId" data-msg-required="" data-rule-required="true" path="countryList">
-                                                                            <form:option value="" label="Select Country"/>
-                                                                            <form:options items="${countryList}" itemValue="value" itemLabel="text"/>
-                                                                        </form:select>
-                                                                    </td>
-                                                                    <td><input type="text" name="consultant.consultantHRs[0].cidNo" id="cidNo" class="form-control hr-cid" placeholder="Text.."></td>
-                                                                    <td>
-                                                                        <form:select id="salutation" name="consultant.consultantHRs[0].salutationId" class="form-control input-sm" data-msg-required="true" data-rule-required="true" path="salutationList">
-                                                                            <form:option value="" label="Select Salutation"/>
-                                                                            <form:options items="${salutationList}" itemValue="value" itemLabel="text"/>
-                                                                        </form:select>
-                                                                    </td>
-                                                                    <td><input type="text" class="form-control name" name="consultant.consultantHRs[0].name" placeholder="Text.."></td>
-                                                                    <td>
-                                                                        <select id="gender" name="consultant.consultantHRs[0].sex" class="form-control sex">
-                                                                            <option value="">Select Gender</option>
-                                                                            <option value="M">Male</option>
-                                                                            <option value="F">Female</option>
-                                                                        </select>
-                                                                    </td>
-                                                                    <td>
-                                                                        <form:select id="designation" name="consultant.consultantHRs[0].designationId" class="form-control input-sm" data-msg-required="" data-rule-required="true" path="designationList">
-                                                                            <form:option value="" label="Select Designation"/>
-                                                                            <form:options items="${designationList}" itemValue="value" itemLabel="text"/>
-                                                                        </form:select>
-                                                                    </td>
-                                                                    <td>
-                                                                        <label class="custom-control custom-checkbox ml-6">
-                                                                            <input type="checkbox" class="custom-control-input showCert" name="consultant.consultantHRs[0].siCertificate" value="1">
-                                                                            <i class="custom-control-label"></i>
-                                                                        </label>
-                                                                    </td>
-                                                                    <td><input type='checkbox' id="deleteRequest" disabled name='consultant.consultantHRs[0].deleteRequest' value='1'></td>
-                                                                  &lt;%&ndash; <td class='action'><button class='btn-sm btn-info btn-block edit-rowOW'>Edit</button></td>&ndash;%&gt;
-                                                                </tr>--%>
+
                                                                 </tbody>
                                                             </table>
                                                             <div class="col-lg-12 text-right hide" id="ownerPartner">
@@ -343,21 +307,7 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody class="files">
-                                                                    <%--<tr>
-                                                                        <td><input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='C'/>
-                                                                            <input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/></td>
-                                                                        <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/></td>
-                                                                        <td class='file-size'></td>
-                                                                        <td><input type='button' class='p-2 del_row btn btn-azure' value='Delete'></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <input type='hidden' class='form-control aFor' name='cAttachments[0].attachmentFor' value='C'/>
-                                                                            <input type='text' required="" class='form-control docName' name='cAttachments[0].documentName'/></td>
-                                                                        <td><input type='file' required="" class='file' name='cAttachments[0].attachment' accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg'/></td>
-                                                                        <td class='file-size'></td>
-                                                                        <td><input type='button' class='p-2 del_row btn btn-azure' value='Delete'></td>
-                                                                    </tr>--%>
+
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -1129,7 +1079,6 @@
                                                     <span class="text-danger">*</span>:</label>
                                                 <div class="col-lg-4">
                                                     <select name="consultantOWs[0].countryId" id="ow1" required="" class="form-control custom-select text-left select-beast country">
-                                                        <option value="">Select Country</option>
                                                         <c:forEach var="item" items="${countryList}">
                                                             <option value="${item.value}"><c:out value="${item.text}"/></option>
                                                         </c:forEach>

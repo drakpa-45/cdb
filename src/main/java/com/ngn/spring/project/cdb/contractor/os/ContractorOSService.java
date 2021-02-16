@@ -301,7 +301,6 @@ public class ContractorOSService extends BaseService {
                     contractorNRService.saveAttachment(cAttachment, loggedInUser);
                 }
             }*/
-
             for (ContractorAttachment cAttachment : cAttachments) {
                 if(!emptyNullCheck(cAttachment.getId())){
                     if(cAttachment.getAttachment() == null){ // no changes

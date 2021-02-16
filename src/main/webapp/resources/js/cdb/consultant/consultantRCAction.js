@@ -589,7 +589,7 @@ var consultantRCAction = (function () {
             var categoryTr = '';
             var ownerTr = '';
             for(var i in data){
-                if(data[i].attachmentFor == 'InSole' || data[i].attachmentFor == ' ') {
+                if(data[i].attachmentFor == 'InSole' || data[i].attachmentFor == null) {
                     cIncTr = cIncTr + "<tr>" +
                     "<td></td>" +
                     "<td>" + data[i].documentName + "</td>" +
