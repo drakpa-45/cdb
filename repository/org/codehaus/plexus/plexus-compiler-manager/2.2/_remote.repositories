@@ -1,4 +1,4 @@
-#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
-#Thu Jan 21 16:46:35 BDT 2021
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Tue Nov 05 15:59:44 BDT 2019
 plexus-compiler-manager-2.2.jar>central=
 plexus-compiler-manager-2.2.pom>central=

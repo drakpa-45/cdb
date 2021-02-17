@@ -252,18 +252,13 @@ var contractorNRAction = (function () {
                             }
                         }
                     }else{
-                        // $('#dcbinfo').hide();
                         $('#eqInfo').append("<br/> This equipment is not registered.");
                     }
-
                     if(cdbDtlsDTO !=''){
-                        alert('a');
                         for(var i in cdbDtlsDTO){
-                            alert('b');
                             $('#engStatusInfo').append("<br/> <b>Equipment is owned by: </b> "+cdbDtlsDTO[i].consultantFirmname+" ( CDB No." +cdbDtlsDTO[i].consultantCDBNo+" )");
                         }
                     }else{
-                        // $('#dcbinfo').hide();
                         $('#engStatusInfo').append("<br/>This equipment is not registered in any firm. ");
                     }
                 }

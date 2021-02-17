@@ -1,0 +1,4 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Thu Oct 01 16:51:17 BDT 2020
+wsdl4j-1.6.pom>=
+wsdl4j-1.6.jar>=

@@ -1,4 +1,4 @@
-#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
-#Thu Jan 21 16:47:16 BDT 2021
-maven-archiver-2.5.pom>central=
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Tue Feb 11 12:10:17 ALMT 2020
 maven-archiver-2.5.jar>central=
+maven-archiver-2.5.pom>central=

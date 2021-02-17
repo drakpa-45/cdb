@@ -565,7 +565,7 @@ var contractorRCAction = (function () {
             $check = $(this).closest('tr').find('.check');
             var registrationNo = $(this).closest('tr').find('.registrationNo').text();
             $.ajax({
-                url:  cdbGlobal.baseURL() + "/contractorNRAction/checkEquipment",
+                url:  cdbGlobal.baseURL() + "/admin/contractorNRAction/checkEquipment",
                 type: 'GET',
                 data: {registrationNo: registrationNo,serviceName:'contractor'},
                 success: function (res) {

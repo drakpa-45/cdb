@@ -23,8 +23,8 @@ CommonDao.isExpiredArchitect =  SELECT `RegistrationExpiryDate` < NOW() FROM `cr
 CommonDao.isExpiredSpecializedTrade = SELECT `RegistrationExpiryDate` < NOW() FROM`crpspecializedtradefinal` where SPNo =:cdbNo
 
 CommonDao.validateWorkEngagementCidNo = SELECT DISTINCT(t5.Id) id, GROUP_CONCAT(t4.CDBNo SEPARATOR ', ' ) cdbNo, \
-CASE WHEN T5.migratedworkid IS NULL THEN CONCAT(T6.Code,'/',YEAR(T5.UploadedDate),'/',T5.WorkId) ELSE T5.migratedworkid END AS workId, \
-T6.Name AS procuringAgency \
+CASE WHEN t5.migratedworkid IS NULL THEN CONCAT(t6.Code,'/',YEAR(t5.UploadedDate),'/',t5.WorkId) ELSE t5.migratedworkid END AS workId, \
+t6.Name AS procuringAgency \
 FROM etlcontractorhumanresource t1 \
 LEFT JOIN etltenderbiddercontractor t2 ON t1.EtlTenderBidderContractorId=t2.Id \
 LEFT JOIN etltenderbiddercontractordetail t3 ON t3.EtlTenderBidderContractorId=t2.Id \

@@ -20,6 +20,8 @@ import com.ngn.spring.project.cdb.trade.dto.TradeFeesDto;
 import com.ngn.spring.project.commonDto.TasklistDto;
 import com.ngn.spring.project.lib.DropdownDTO;
 import com.ngn.spring.project.lib.ResponseMessage;
+import com.ngn.spring.project.token.APIService;
+import com.ngn.spring.project.token.Token;
 import com.squareup.okhttp.OkHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -57,22 +59,19 @@ public class CommonService extends BaseService {
 
     @Autowired
     private CommonDao commonDao;
-
     @Autowired
     private ArchitectDao arDao;
-
     @Autowired
     private SpecializedDao spDao;
-
     @Autowired
     private SurveyDao suDao;
-
     @Autowired
     private EngineerDao engineerDao;
-
-
     @Autowired
     private ConsultantRCActionService cRCActionService;
+
+    @Autowired
+    private APIService apiService;
     /**
      * To get the country list
      * @return List
@@ -278,8 +277,8 @@ public class CommonService extends BaseService {
     //TODO-- fetch from API DCRC
     public ResponseMessage getPersonalInfo(String cid, String type){
         ResourceBundle resourceBundle1 = ResourceBundle.getBundle("wsEndPointURL_en_US");
-        String dcrcCitizenEndPointUrl =resourceBundle1.getString("getCitizenDetails.endPointURL");
-        String dcrcCitizenaccessToken =resourceBundle1.getString("getCitizenDetails.accessToken");
+        String dcrcCitizenEndPointUrl =resourceBundle1.getString("getCitizenDetailsDCRC.endPointURL");
+        //String dcrcCitizenaccessToken =resourceBundle1.getString("getCitizenDetails.accessToken");
         PersonalInfoDTO personalInfoDTO = new PersonalInfoDTO();
 
         if(type.equalsIgnoreCase("fetch")) {
@@ -299,10 +298,14 @@ public class CommonService extends BaseService {
             org.wso2.client.api.ApiClient apiClient = new org.wso2.client.api.ApiClient();
             apiClient.setHttpClient(httpClient);
             apiClient.setBasePath(dcrcCitizenEndPointUrl);
-            apiClient.setAccessToken(dcrcCitizenaccessToken);
+
+            Token token = apiService.getApplicationToken();
+            apiClient.setAccessToken(token.getAccess_token());
+          //  apiClient.setAccessToken(dcrcCitizenaccessToken);
 
             DefaultApi api = new DefaultApi(apiClient);
             CitizenDetailsResponse citizenDetailsResponse = api.citizendetailsCidGet(cid);
+
             CitizendetailsObj citizendetailsObj = citizenDetailsResponse.getCitizenDetailsResponse().getCitizenDetail().get(0);
             String dzongkhagIdDCRC = citizendetailsObj.getDzongkhagId();
             if(dzongkhagIdDCRC.length() == 1){
@@ -333,14 +336,15 @@ public class CommonService extends BaseService {
             responseMessage.setDto(personalInfoDTO);
             return responseMessage;
         }catch(Exception e){
-           /* personalInfoDTO.setFullName(" ");
+            System.out.print("Exception in CommonDaoImpl # getPersonalDetails: "+e);
+            personalInfoDTO.setFullName(" ");
             responseMessage = new ResponseMessage();
-            responseMessage.setStatus(SUCCESSFUL_STATUS);*/
-            /*responseMessage.setText("Could not connect to DCRC API. Please wait for the connection OR enter the information correctly.");
+            responseMessage.setStatus(UNSUCCESSFUL_STATUS);
+            responseMessage.setText("Could not connect to DCRC API. Please wait for the connection OR enter the information correctly.");
             responseMessage.setDto(personalInfoDTO);
-            return responseMessage;*/
+            return responseMessage;
 
-            personalInfoDTO.setFullName("Drakpa");
+           /* personalInfoDTO.setFullName("Drakpa");
             personalInfoDTO.setSex("M");
             personalInfoDTO.setCidNo("11214002875");
             personalInfoDTO.setDzongkhagNmae("Thimphu");
@@ -354,12 +358,12 @@ public class CommonService extends BaseService {
                 personalInfoDTO.setEmployeeDetailsDTOs(commonDao.validateWorkEngagementCidNo(cid));
                 personalInfoDTO.setCdbDTOs(commonDao.validatePartnerCidNoFromCDBdatabase(cid));
                 personalInfoDTO.setGovCopDTOs(commonDao.validateCorporateCidNo(cid));
-            }
+            }*/
             // System.out.print("Exception in CommonDaoImpl # getPersonalDetails: "+e);
-            e.printStackTrace();
+           /* e.printStackTrace();
             responseMessage.setStatus(SUCCESSFUL_STATUS);
             responseMessage.setDto(personalInfoDTO);
-            return responseMessage;
+            return responseMessage;*/
         }
     }
 
