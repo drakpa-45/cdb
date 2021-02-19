@@ -63,7 +63,7 @@
                                             <div class="col-lg-12 col-lg-md col-sm-12 col-xs-12">
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                     <div class="form-group row">
-                                                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Salutation:</label>
+                                                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12">Title:</label>
                                                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                                             <input type="hidden" readonly id="salutation" name="salutation" value="${appDetails.salutation}" class="form-control number">
                                                             <label class="col-lg-8 form-label form-control">${appDetails.salutation}</label>
@@ -188,7 +188,7 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                             <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Trade:</label>
-                                            <input type="hidden" value="${appDetails.trade}" readonly maxlength="100" id="trade" name="trade" class="form-control">
+                                            <input type="hidden" value="${appDetails.cmnTradeId}" readonly maxlength="100" id="trade" name="trade" class="form-control">
                                             <label class="col-lg-8 form-label form-control">${appDetails.trade}</label>
                                         </div>
                                     </div>

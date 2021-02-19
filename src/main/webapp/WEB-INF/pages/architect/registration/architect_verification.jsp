@@ -80,7 +80,7 @@
                                                             <div class="col-lg-12 col-lg-md col-sm-12 col-xs-12">
                                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                                                     <div class="form-group row">
-                                                                        <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Salutation:</label>
+                                                                        <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Title:</label>
                                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                                             <input type="hidden" readonly id="salutation" name="salutation" value="${appDetails.salutation}" class="form-control number">
                                                                             <label class="col-lg-8 form-label form-control">${appDetails.salutation}</label>

@@ -17,8 +17,6 @@
                 <img src="<c:url value="/resources/img/logo.png"/>" class="mt-2 header-brand-img" alt="tabler logo" style="height:60px;width:60px">
             </a>
             <h3 class="text-white"><br/>Government to citizen service delivery initiative</h3>
-
-
             <div class="d-flex order-lg-2 ml-auto mt-5">
                 <div class="dropdown">
                     <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">

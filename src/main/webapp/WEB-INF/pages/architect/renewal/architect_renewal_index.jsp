@@ -54,8 +54,9 @@
                             <div class="card-header">
                                 <h3 class="card-title font-weight-bold">Renewal of Architect</h3>
                                 <span class="pl-9">CDB Number: ${registrationDetails.cdbNo}</span>
+                                <input type="hidden" name="cdbNo" value="${registrationDetails.cdbNo}">
                             </div>
-                            <div class="card-body">
+                            <div class="card-body">+
                                 <div class="row">
                                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                         <div class="nav-tabs-custom">
@@ -254,11 +255,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="card tab2">
-                                                            <div class="bg-blue card-status card-status-left"></div>
-                                                            <div class="card-header">
-                                                                <h3 class="card-title">Qualification Details</h3>
-                                                            </div>
                                                             <div class="card tab2">
                                                                 <div class="bg-blue card-status card-status-left"></div>
                                                                 <div class="card-header">
@@ -296,7 +292,6 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
                                                         <hr/>
                                                         <div class="form-group row pull-right">
                                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
@@ -394,7 +389,6 @@
                                                     <hr/>
                                                     <div class="form-group row pull-right">
                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                                                            <input type="hidden" name="cdbNo" value="${registrationDetails.cdbNo}">
                                                             <button type="button" onclick="previousTab('categoryDtls','saveAndPreview')" class="btn btn-success">
                                                                 <i class="fa fa-arrow-circle-left"></i> Previous
                                                             </button>

@@ -440,7 +440,6 @@ try {
     if(existingCDBNo !=null) {
         cdbNo = existingCDBNo;
     }
-
     consquery = "SELECT SPNo FROM crpspecializedtradefinal WHERE CIDNo =?";
     existingCDBNo = (String)hibernateQuery(consquery).setParameter(1, cid).uniqueResult();
     if(existingCDBNo !=null) {
@@ -482,7 +481,7 @@ try {
         }else if(type.equalsIgnoreCase("SpecializedTrade")){
             sqlQuery = properties.getProperty("CommonDao.isExpiredSpecializedTrade");
         }
-      //BigInteger bigIntValue = (BigInteger)hibernateQuery(sqlQuery).setParameter("cdbNo", cdbNo).list().get(0);
+        // BigInteger bigIntValue = (BigInteger)hibernateQuery(sqlQuery).setParameter("cdbNo", cdbNo).list().get(0);
        Integer bigIntValue = (Integer) hibernateQuery(sqlQuery).setParameter("cdbNo", cdbNo).list().get(0);
         return (bigIntValue.intValue() == 1);
     }

@@ -311,7 +311,7 @@ public class ArchitectServices extends BaseService{
             dto1.setNoOfDaysLate(dto.getNoOfDaysLate());
             if(dto.getServiceTypeId().equalsIgnoreCase("registration")){
                 insert=dao.insertuserDetails(dto1, userID, request);
-                String architectNo=dao.generateArchitectNo(dto1.getCountryId(),dto.getServiceSectorType());
+                String architectNo=dao.generateArchitectNo(dto1.getCmnCountryId(),dto.getServiceSectorType());
                 dto.setCdbNo(architectNo);
                 dto1.setCdbNo(architectNo);
                 if(!insert.equalsIgnoreCase("Insert_Fail")){
@@ -401,6 +401,7 @@ public class ArchitectServices extends BaseService{
             BigDecimal payAmount = dto.getPaymentAmt();
             if(payAmount == null || dto.getServiceSectorType().equalsIgnoreCase("Government")){
                 payAmount = BigDecimal.valueOf(00.00);
+                dto.setPaymentAmt(BigDecimal.valueOf(00.00));
             }
             BigDecimal totalAmount;
 

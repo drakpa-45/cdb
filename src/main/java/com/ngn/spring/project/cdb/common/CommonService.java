@@ -34,6 +34,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.wso2.client.api.DCRC_CitizenDetailsAPI.DefaultApi;
 import org.wso2.client.model.DCRC_CitizenDetailsAPI.CitizenDetailsResponse;
 import org.wso2.client.model.DCRC_CitizenDetailsAPI.CitizendetailsObj;
+import org.wso2.client.model.RSTA_LicenseAndVehicleInformationAPI.VehicledetailObj;
+import org.wso2.client.model.RSTA_LicenseAndVehicleInformationAPI.VehicledetailsVehicleTypesResponseVehicleDetails;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -532,7 +534,6 @@ public class CommonService extends BaseService {
     public ResponseMessage checkEquipment(String regNo, String serviceName) {
         ResourceBundle resourceBundle1 = ResourceBundle.getBundle("wsEndPointURL_en_US");
         String rstaendpointURL =resourceBundle1.getString("getEquipmentDetailsFromRSTA.endPointURL");
-        String rstaaccessToken =resourceBundle1.getString("getEquipmentDetailsFromRSTA.accessToken");
         EquipmentDTO equipmentDTO = new EquipmentDTO();
 
         List<VehicleDetails> vehicleDetailses = new ArrayList<VehicleDetails>();
@@ -544,7 +545,9 @@ public class CommonService extends BaseService {
             org.wso2.client.api.ApiClient apiClient = new org.wso2.client.api.ApiClient();
             apiClient.setHttpClient(httpClient);
             apiClient.setBasePath(rstaendpointURL);
-            apiClient.setAccessToken(rstaaccessToken);
+
+            Token token = apiService.getApplicationToken();
+            apiClient.setAccessToken(token.getAccess_token());
 
             DefaultApi api = new DefaultApi(apiClient);
             CitizenDetailsResponse citizenDetailsResponse = api.citizendetailsCidGet(regNo);
@@ -570,11 +573,11 @@ public class CommonService extends BaseService {
             /*responseMessage.setText("Could not connect to RSTA API. Please wait for the connection OR enter the information correctly.");
             responseMessage.setDto(personalInfoDTO);
             return responseMessage;*/
-
             /*vehicleDetailses.size().setRegistrationNo("BP-1-A1234");
             vehicleDetailses.get(0).setRegisteredRegion("Thimphu");
             vehicleDetailses.get(0).setVehicleType("Medium");
             vehicleDetailses.get(0).setOwnerName("Drakpa");*/
+
             e.printStackTrace();
             equipmentDTO.setCdbDTOs(commonDao.fetchEqDtlsFromCDB(regNo,serviceName));
             equipmentDTO.setVehicleDetailses(vehicleDetailses);

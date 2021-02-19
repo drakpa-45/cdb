@@ -347,7 +347,7 @@ public class SurveyServices extends BaseService {
         //  if(dto.getServiceSectorType().equalsIgnoreCase("Goverment")) {
         if (dto.getServiceTypeId().equalsIgnoreCase("registration")) {
             insert = dao.insertuserDetails(dto1, userID, request);
-            String surveyNo = dao.generateSurveyNo(dto1.getCountryId(), dto.getServiceSectorType());
+            String surveyNo = dao.generateSurveyNo(dto1.getCmnCountryId(), dto.getServiceSectorType());
             dto.setCdbNo(surveyNo);
             dto1.setCdbNo(surveyNo);
             if (!insert.equalsIgnoreCase("Insert_Fail")) {

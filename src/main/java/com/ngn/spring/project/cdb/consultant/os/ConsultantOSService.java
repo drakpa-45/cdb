@@ -167,8 +167,6 @@ public class ConsultantOSService extends BaseService {
         if(renewalServiceType.getUpgradeDowngrade() != null){
             List<ConsultantCategory> categories = consultantDTO.getCategories();
             //region save contractor category
-
-           // categories.stream().filter(c->c.getServiceCateID() != null).forEach(c -> {
                 categories.stream().filter(c->c.getServiceCateID() != null).forEach(c -> {
                 c.setConsultantID(consultantId);
                 saveCC(c, loggedInUser, consultant, request);
@@ -428,7 +426,7 @@ public class ConsultantOSService extends BaseService {
 
         String consultantFinalId = (String)commonService.getValue("crpconsultantfinal","Id","CDBNo",consultant.getCdbNo());
         List<ServiceFeeDTO> appliedService = consultantOSDao.getRegisteredService(consultantFinalId);
-        Integer amount = 0; String totalServices = null; Integer amountOS = 0;
+        Integer amount = 0; String totalServices = null;String totalService = "0"; Integer amountOS = 0;
         for(String aService : aServiceList) {
              for(int i = 0; i < appliedService.size(); i++){
                 if (appliedService.get(i).getServiceName() != aService) {
@@ -440,8 +438,9 @@ public class ConsultantOSService extends BaseService {
                 }
             }
         }
+
         Integer totalAmt = amountOS + amount;
-        consultantServicePaymentDetail.setServiceXFee(totalServices.concat(",").concat(totalServices));
+        consultantServicePaymentDetail.setServiceXFee(totalServices.concat(",").concat(totalService));
         consultantServicePaymentDetail.setAmount(BigDecimal.valueOf(totalAmt));
         consultantServicePaymentDetail.setCreatedBy(loggedInUser.getUserID());
         consultantServicePaymentDetail.setCreatedOn(loggedInUser.getServerDate());

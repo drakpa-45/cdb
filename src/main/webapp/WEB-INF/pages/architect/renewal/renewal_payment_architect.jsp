@@ -152,9 +152,9 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                                             <label class="col-lg-4 col-md-4 col-sm-4 col-xs-12">Type: </label>
-                                            <input type="hidden" value="${appDetails.serviceSectorType}" readonly maxlength="100" id="service" name="serviceSectorType" class="form-control">
+                                            <input type="hidden" value="${appDetails.serviceSectorType}" readonly maxlength="100" id="serviceSectorType" name="serviceSectorType" class="form-control">
                                             <label class="col-lg-8 form-label form-control">${appDetails.serviceSectorType}</label>
-                                            <input type="hidden" value="${appDetails.serviceSectorTypeId}" readonly maxlength="100" id="service" name="serviceSectorTypeId" class="form-control">
+                                            <input type="hidden" value="${appDetails.serviceSectorTypeId}" readonly maxlength="100" id="serviceSectorTypeId" name="serviceSectorTypeId" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">

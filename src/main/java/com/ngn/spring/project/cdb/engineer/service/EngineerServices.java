@@ -316,7 +316,7 @@ public class EngineerServices extends BaseService{
       //  if(dto.getServiceSectorType().equalsIgnoreCase("Goverment")) {
             if (dto.getServiceTypeId().equalsIgnoreCase("registration")) {
                 insert = dao.insertuserDetails(dto1, userID, request);
-                String engineerNo=dao.generateEngineerNo(dto1.getCountryId(), dto.getServiceSectorType());
+                String engineerNo=dao.generateEngineerNo(dto1.getCmnCountryId(), dto.getServiceSectorType());
                 dto1.setCdbNo(engineerNo);
                 dto.setCdbNo(engineerNo);
                 if (!insert.equalsIgnoreCase("Insert_Fail")) {
