@@ -8,6 +8,7 @@ import com.ngn.spring.project.cdb.specializedFirm.dto.SpFirmDTOFetch;
 import com.ngn.spring.project.cdb.specializedFirm.model.*;
 import com.ngn.spring.project.global.enu.ApplicationStatus;
 import com.ngn.spring.project.global.global.MailSender;
+import com.ngn.spring.project.global.global.SmsSender;
 import com.ngn.spring.project.lib.LoggedInUser;
 import com.ngn.spring.project.lib.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -160,14 +161,19 @@ public class SpecializedFirmService extends BaseService {
                 "<b>You can track your application using above Application Number.</b> <br>" +
                 "Thanks You.");
 
-        String mailContent = "<b>Application No: "+REFERENCE_NO+" is submitted sucessfully on "+new Date()+" with Construction Development Board (CDB)." +
+        String mailContent = "<b>Application No: "+REFERENCE_NO+" is submitted successfully on "+new Date()+" with Construction Development Board (CDB)." +
                 "Applied Firm name : "+specializedFirm.getFirmName()
                 +"This is to acknowledge for the registration of the Specialized Firm with Construction Development Board (CDB)." +
                 " Your application will processed in due course. You can check the status of the application using CID no or Application number provided." +
                 " You will also be notified via email when your application is approved." +
                 "Thank You," +
                 "(CDB)";
+        String smsContent = "Dear user,"+
+                "New Registration for Specialized Firm is submitted successfully with application Number: "+REFERENCE_NO+"  on "+new Date()+ "  with Construction Development Board (CDB)."+
+                "Thank you," +
+                "(CDB)";
         MailSender.sendMail(specializedFirm.getRegEmail(), "cdb@gov.bt", null, mailContent, "Application Registered Success");
+        SmsSender.smsSender(specializedFirm.getRegPhoneNo(), "cdb@gov.bt", null, smsContent, "Application Registered Success");
         return responseMessage;
     }
 

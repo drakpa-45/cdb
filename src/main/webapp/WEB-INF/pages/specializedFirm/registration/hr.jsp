@@ -114,7 +114,7 @@
                         <table class="table table-bordered" id="hrDtlsTable">
                             <thead>
                             <tr>
-                                <th style="width: 5%">Salutation</th>
+                                <th style="width: 5%">Title</th>
                                 <th style="width: 10%">Name</th>
                                 <th style="width: 10%">ID/Work Permit No.</th>
                                 <th style="width: 5%">Gender</th>
@@ -133,7 +133,7 @@
                             </tbody>
                         </table>
                         <div class="col-lg-12 text-right">
-                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addHRModal"><i class="fa fa-plus"></i> Add More HR</button>
+                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" id="addMoreHrBtn" data-target="#addHRModal"><i class="fa fa-plus"></i> Add More HR</button>
                         </div>
                     </div>
                 </div>
@@ -174,11 +174,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2">Salutation
+                        <label class="col-lg-2">Title
                             <span class="text-danger">*</span>:</label>
                         <div class="col-lg-4">
                             <select name="spFirmHRs[0].salutationId" id="hr1" required="" class="form-control custom-select text-left select-beast">
-                                <option value="">Select Salutation</option>
+                                <option value="">Select Title</option>
                                 <c:forEach var="item" items="${salutationList}">
                                     <option value="${item.value}"><c:out value="${item.text}"/></option>
                                 </c:forEach>
@@ -278,7 +278,7 @@
                                     </thead>
                                     <tbody id="fileListhrsection" class="files">
                                     <tr>
-                                        <td><input type='text' required="true" value="CID" class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/></td>
+                                        <td><input type='text' required="true" value="Certificate" class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/></td>
                                         <td><input type='file' required="true" class='file' name='spFirmHRs[0].spFirmHRAs[0].attachment'
                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                         </td>
@@ -286,7 +286,7 @@
                                         <td class='del_row'><a class='p-2'><i class='fa fa-trash text-danger '></i></a></td>
                                     </tr>
                                     <tr>
-                                        <td><input type='text' required="true" value="Certificate" class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/></td>
+                                        <td><input type='text' required="true" value="Undertaking" class='form-control docName' name='spFirmHRs[0].spFirmHRAs[0].documentName'/></td>
                                         <td><input type='file' required="true" class='file' name='spFirmHRs[0].spFirmHRAs[0].attachment'
                                                    accept='application/msword,application/pdf,application/vnd.ms-excel,image/gif, image/jpeg, image/jpg,application/vnd.openxmlformats-officedocument.wordprocessingml.document'/>
                                         </td>

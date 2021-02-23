@@ -85,7 +85,7 @@
                     <tr>
                         <th>Nationality</th>
                         <th>CID/Work Permit No.</th>
-                        <th>Salutation</th>
+                        <th>Title</th>
                         <th>Name</th>
                         <th>Gender</th>
                         <th>Designation</th>
@@ -105,7 +105,7 @@
                         </td>
                         <td>
                             <form:select id="salutation" name="specializedFirm.spFirmHRs[0].salutationId" class="form-control input-sm" data-msg-required="true" data-rule-required="true" path="salutationList">
-                                <form:option value="" label="Select Salutation"/>
+                                <form:option value="" label="Select Title"/>
                                 <form:options items="${salutationList}" itemValue="value" itemLabel="text"/>
                             </form:select>
                         </td>
@@ -134,7 +134,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <div class="col-lg-12 text-right">
+                <div class="col-lg-12 text-right" id="addNdeleteBtn">
                     <%-- <b class="text-orange">Note:Please Tick(✔) in "Show in Certificate" field to display your name in Certificate.</b> &nbsp; &nbsp;--%>
                     <button type="button" class="btn btn-outline-primary btn-sm" onclick="addRow('partnerDtls')">
                         <i class="fe fe-plus mr-2"></i>Add More

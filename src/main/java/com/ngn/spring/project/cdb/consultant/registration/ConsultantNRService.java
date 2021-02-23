@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 import java.util.stream.Collectors;
@@ -168,9 +169,14 @@ public class ConsultantNRService extends BaseService {
         String mailContent = "Dear User," +
                 "Your application for New Registration of Consultant is submitted with an application number : "+REFERENCE_NO+
                 "You can check your application status using above application number."+
-                "Thank You.";
+                "Thank you."+
+                 "(CDB)";
+        String smsContent = "Dear user,"+
+                "New Registration for Consultant is submitted successfully with application Number: "+REFERENCE_NO+"  on "+new Date()+ "  with Construction Development Board (CDB)."+
+                "Thank you," +
+                "(CDB)";
         MailSender.sendMail(consultant.getRegEmail(), "cdb@gov.bt", null, mailContent, "Application Submitted");
-        SmsSender.smsSender(consultant.getRegPhoneNo(), "cdb@gov.bt", null, mailContent, "Application Submitted");
+        SmsSender.smsSender(consultant.getRegPhoneNo(), "cdb@gov.bt", null, smsContent, "Application Submitted");
         return responseMessage;
     }
 

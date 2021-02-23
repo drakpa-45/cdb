@@ -30,7 +30,6 @@ public class ContractorAppliedS extends BaseModel implements Serializable {
     @Column(name = "CmnServiceTypeId")
     private String serviceTypeId;
 
-
     public String getId() {
         return id;
     }

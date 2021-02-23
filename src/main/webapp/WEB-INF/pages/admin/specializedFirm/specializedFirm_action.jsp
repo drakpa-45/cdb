@@ -480,30 +480,33 @@
                                             <div class="form-group">
                                                 <div class="col-lg-9 mt-8">
                                                     <span class=""><b>From DCRC database</b></span>
-
+                                                    <div class="col-lg-12 form-group mb-0">
+                                                        <label class="col-lg-3 form-label">Name:</label>
+                                                        <label class="col-lg-8 form-label" id="nameM"></label>
+                                                    </div>
                                                     <div class="col-lg-12 form-group mb-0 pt-4">
-                                                        <label class="col-lg-3 form-label">Sex</label>
+                                                        <label class="col-lg-3 form-label">Gender:</label>
                                                         <label class="col-lg-8 form-label" id="sexM"></label>
                                                     </div>
                                                     <div class="col-lg-12 form-group mb-0">
-                                                        <label class="col-lg-3 form-label">Name</label>
-                                                        <label class="col-lg-8 form-label" id="nameM"></label>
-                                                    </div>
-                                                    <div class="col-lg-12 form-group mb-0">
-                                                        <label class="col-lg-3 form-label">Dzongkhag</label>
+                                                        <label class="col-lg-3 form-label">Dzongkhag:</label>
                                                         <label class="col-lg-8 form-label" id="dzongkhagM"></label>
                                                     </div>
                                                     <div class="col-lg-12 form-group mb-0">
-                                                        <label class="col-lg-3 form-label">Gewog</label>
+                                                        <label class="col-lg-3 form-label">Gewog:</label>
                                                         <label class="col-lg-8 form-label" id="gewogM"></label>
                                                     </div>
                                                     <div class="col-lg-12 form-group mb-0">
-                                                        <label class="col-lg-3 form-label">Village</label>
+                                                        <label class="col-lg-3 form-label">Village:</label>
                                                         <label class="col-lg-8 form-label" id="villageM"></label>
                                                     </div>
                                                     <div class="col-lg-12 form-group mb-0">
-                                                        <label class="col-lg-3 form-label">DOB</label>
+                                                        <label class="col-lg-3 form-label">DOB:</label>
                                                         <label class="col-lg-8 form-label" id="dobM"></label>
+                                                    </div>
+                                                    <div class="col-lg-12 form-group mb-0">
+                                                        <label class="col-lg-3 form-label">CDB Number:</label>
+                                                        <label class="col-lg-8 form-label" id="cdbNumber"></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3" align="center">
@@ -598,17 +601,17 @@
                                                 <hr />
                                             </div>
                                             <div class="form-group">
+                                                <div class="col-lg-12" align="center">
                                                 <p align="center">With regard to Corporate Employee please verify with the
                                                     concern agencies. There may be certain inconsistency.</p>
                                                 <hr>
                                                 <p align="center"><strong>Print this page as an evidence to prove that
                                                     particular HR is engaged or not in a work or project</strong></p>
-
                                                 <p align="center">
                                                     Printed on:  <%=new Date()%>
-
                                                     By: ${auth.fullName}
                                                 </p>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-md-12 col-lg-12 col-sm-12">

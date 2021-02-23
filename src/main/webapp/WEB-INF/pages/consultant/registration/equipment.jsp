@@ -212,7 +212,7 @@
                     </tbody>
                 </table>
                 <div class="col-lg-12 text-right">
-                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#eqModal"><i
+                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" id="addMoreEqup" data-target="#eqModal"><i
                             class="fa fa-plus"></i> Add More Equipment
                     </button>
                 </div>

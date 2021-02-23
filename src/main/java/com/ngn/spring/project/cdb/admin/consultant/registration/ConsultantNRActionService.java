@@ -22,10 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * ==================================================================================
@@ -142,6 +139,15 @@ public class ConsultantNRActionService extends BaseService {
         String consultantId = (String)commonService.getValue("crpconsultant","CrpConsultantId","ReferenceNo",appNo.toString());
         consultantActionDao.approve(consultantId, loggedInUser.getUserID(), aRemarks);
 
+        List<CategoryClassDTO> categoryClassDTOs = consultantActionDao.getCategoryClass(consultantId);
+        BigDecimal tFeeAmount = BigDecimal.ZERO;
+
+        BigDecimal arrlist = BigDecimal.ZERO;
+
+        for(int i =0; i<categoryClassDTOs.size();i++){
+            tFeeAmount =tFeeAmount.add(categoryClassDTOs.get(i).getaAmount());
+        }
+
         RequestDTO dto = new RequestDTO();
         dto.setApplicationNo(applicationNo);
         dto.setAgencyCode("CDB");
@@ -150,8 +156,8 @@ public class ConsultantNRActionService extends BaseService {
         ArrayList<PaymentDTO> paymentList = new ArrayList<PaymentDTO>();
         PaymentDTO paymentdto = new PaymentDTO();
         //Integer amount = passportUploadDAO.getServiceFees(applicationNo);
-        BigDecimal amount = (BigDecimal) commonService.getValue("crpconsultantregistrationpayment","Amount","CrpConsultantFinalId",consultantId);
-        paymentdto.setServiceFee(String.valueOf(amount));
+       // BigDecimal amount = (BigDecimal) commonService.getValue("crpconsultantregistrationpayment","Amount","CrpConsultantFinalId",consultantId);
+        paymentdto.setServiceFee(String.valueOf(tFeeAmount));
 
         paymentdto.setAccountHeadId("131310001");
         paymentList.add(paymentdto);
@@ -162,11 +168,11 @@ public class ConsultantNRActionService extends BaseService {
         boolean isSaved = invokews.insertPaymentDetailsOnApproval(dto);
         System.out.println("Response from Aggregator: "+isSaved);
 
-        List<CategoryClassDTO> categoryClassDTOs = consultantActionDao.getCategoryClass(consultantId);
-        Integer tFeeAmount = 0;
-     //   tFeeAmount + categoryClassDTOs[i].aAmount;
         String emailId = (String)commonService.getValue("crpconsultant","Email","ReferenceNo",appNo.toString());
         String phoneNumber = (String)commonService.getValue("crpconsultant","MobileNo","ReferenceNo",appNo.toString());
+        String smsContent = "Dear User,<br>Your application for application number : "+appNo.toString()+" is approved."+
+                "Thank you," +
+                "(CDB)";
         String mailContent = "Dear User,<br>Your application for application number : "+appNo.toString()+" is approved."+
                 "<br>You may pay the required fee online through following link:<br>" +
                 "<a target='_blank' href='https://www.citizenservices.gov.bt/G2CPaymentAggregatorStg'>https://www.citizenservices.gov.bt/G2CPaymentAggregatorStg</a>" +
@@ -193,7 +199,7 @@ public class ConsultantNRActionService extends BaseService {
                 "</html>";
         try {
             MailSender.sendMail(emailId, "cdb@gov.bt", null, mailContent, "Application approved for Payment");
-            SmsSender.smsSender(phoneNumber, "cdb@gov.bt", null, mailContent, "Application approved for Payment");
+            SmsSender.smsSender(phoneNumber, "cdb@gov.bt", null, smsContent, "Application approved for Payment");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -220,8 +226,8 @@ public class ConsultantNRActionService extends BaseService {
         paymentUpdateDTO.setConsultantId(consultant.getConsultantId());
         consultantActionDao.paymentUpdate(consultant.getConsultantId(),loggedInUser.getUserID(), approvedApplicationStatusId,loggedInUser.getUserID());//consultant.getCreatedBy()
         responseMessage.setStatus(SUCCESSFUL_STATUS);
-        responseMessage.setText("Consultant application number :"+paymentUpdateDTO.getAppNo()+" Payment Approved. Your CDBNo is:"+paymentUpdateDTO.getCdbNo());
-        String mailContent = "Dear User,Your application for application number : "+paymentUpdateDTO.getAppNo()+" is approved."+
+        responseMessage.setText("Consultant application number :"+paymentUpdateDTO.getAppNo().charAt(0)+" Payment Approved. Your CDBNo is:"+paymentUpdateDTO.getCdbNo());
+        String mailContent = "Dear User,Your application for application number : "+paymentUpdateDTO.getAppNo().charAt(0)+" is approved."+
                 "You can login to the system for renewal other services using following credential:" +
                 "Username : your registered email" +
                 "Password : 123" +

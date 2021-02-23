@@ -136,14 +136,14 @@ function isnull(str){
 function successMsg(msg, url) {
     if (!url) {
         swal({
-           title: "Good Job!",
+           title: "SUCCESS!",
             title: "Success!",
             text: msg,
             type: "success"
         })
     } else {
         swal({
-            title: "Good Job!",
+            title: "SUCCESS!",
             text: msg,
             type: "success"
         }, function () {

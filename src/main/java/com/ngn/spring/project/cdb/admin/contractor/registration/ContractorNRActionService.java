@@ -26,10 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * ==================================================================================
@@ -162,7 +159,7 @@ public class ContractorNRActionService extends BaseService {
 
         String emailId = (String)commonService.getValue("crpcontractor","Email","ReferenceNo",appNo.toString());
         String phoneNumber = (String)commonService.getValue("crpcontractor","MobileNo","ReferenceNo",appNo.toString());
-        String mailContent = "Dear User,<br>Your application for application number : "+appNo.toString()+" is approved."+
+        String mailContent = "Dear User,<br>Your application number : "+appNo.toString()+" is approved for payment."+
                 "<br>You may pay the required fee online through following link:<br>" +
                 "<a target='_blank' href='https://tinyurl.com/y3m7wa3c'>https://tinyurl.com/y3m7wa3c</a>" +
                 "<br>Or You may visit our CDB counters to pay the fee. " +
@@ -187,8 +184,11 @@ public class ContractorNRActionService extends BaseService {
                 "</table>"+
                 "</div>"+
                 "</html>";
+        String smsContent = "Dear User,<br>Your application number : "+appNo.toString()+" is approved for payment."+
+                "Thank you," +
+                "(CDB)";
         MailSender.sendMail("pemadrkpa45@gmail.com", "cdb@gov.bt", null, mailContent, "Application approved for Payment");
-        SmsSender.smsSender(phoneNumber, "cdb@gov.bt", null, mailContent, "Application approved for Payment");
+        SmsSender.smsSender(phoneNumber, "cdb@gov.bt", null, smsContent, "Application approved for Payment");
         responseMessage.setStatus(SUCCESSFUL_STATUS);
         responseMessage.setText("Contractor application number :" + appNo + " approved successfully.");
         return responseMessage;

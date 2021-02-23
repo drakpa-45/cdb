@@ -184,16 +184,20 @@ public class ContractorNRService extends BaseService {
         responseMessage.setText("Your application for Registration Of Contractor has been submitted and your application number is <b>" + REFERENCE_NO + "</b><br>" +
                 "You will receive an email with the Application summary.<br><br>" +
                 "You can track your application using above Application Number. <br>" +
-                "Thanks You.");
-        String mailContent = "<b>Application No: "+REFERENCE_NO+" is submitted sucessfully on "+new Date()+" with Construction Development Board (CDB)." +
+                "Thank you.");
+        String mailContent = "<b>Application No: "+REFERENCE_NO+" is submitted successfully on "+new Date()+" with Construction Development Board (CDB)." +
                 "Applied Firm name : "+contractor.getFirmName()
                 +"This is to acknowledge for the registration of the Contractor with Construction Development Board (CDB)." +
                 " Your application will processed in due course. You can check the status of the application using CID no or Application number provided." +
                 " You will also be notified via email when your application is approved." +
-                "Thank You," +
+                "Thank you," +
+                "(CDB)";
+        String smsContent = "Dear user,"+
+                "New Registration for Contractor is submitted successfully with application Number: "+REFERENCE_NO+"  on "+new Date()+ "  with Construction Development Board (CDB)."+
+                "Thank you," +
                 "(CDB)";
         MailSender.sendMail(contractor.getRegEmail(), "cdb@gov.bt", null, mailContent, "Application Registered Success");
-        SmsSender.smsSender(contractor.getRegMobileNo(), "cdb@gov.bt", null, mailContent, "Application Registered Success");
+        SmsSender.smsSender(contractor.getRegMobileNo(), "cdb@gov.bt", null, smsContent, "Application Registered Success");
 
         return responseMessage;
     }

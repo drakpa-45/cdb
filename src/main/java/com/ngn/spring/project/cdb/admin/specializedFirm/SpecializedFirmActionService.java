@@ -138,18 +138,25 @@ public class SpecializedFirmActionService extends BaseService {
         String specializedFirmId = (String)commonService.getValue("crpspecializedtrade","CrpSpecializedTradeId","ReferenceNo",appNo.toString());
         specializedFirmActionDao.approve(specializedFirmId, loggedInUser.getUserID(), aRemarks);
 
+        List<CategoryClassDTO> categoryClassDTOs = specializedFirmActionDao.getFeeCategoryClass(specializedFirmId);
+
+        BigDecimal tFeeAmount = BigDecimal.ZERO;
+        for(int i =0; i<categoryClassDTOs.size();i++){
+            tFeeAmount =tFeeAmount.add(categoryClassDTOs.get(i).getaAmount());
+        }
+
         RequestDTO dto = new RequestDTO();
         dto.setApplicationNo(applicationNumber);
         dto.setAgencyCode("CDB");
         dto.setServiceName("New Registration of Specialized Firm");
         dto.setExpiryDate(null);
+
         ArrayList<PaymentDTO> paymentList = new ArrayList<PaymentDTO>();
         PaymentDTO paymentdto = new PaymentDTO();
         //Integer amount = passportUploadDAO.getServiceFees(applicationNo);
         BigDecimal amount = (BigDecimal) commonService.getValue("crpspecializedtraderegistrationpayment","ApprovedAmount","CrpSpecializedTradeFinalId",specializedFirmId);
-        paymentdto.setServiceFee(String.valueOf(amount));
-
-        paymentdto.setAccountHeadId("Choneywangmo@cdb.gov.bt");
+        paymentdto.setServiceFee(String.valueOf(tFeeAmount));
+        paymentdto.setAccountHeadId("acc_head_id_here");
         paymentList.add(paymentdto);
         dto.setPaymentList(paymentList.toArray(new PaymentDTO[paymentList.size()]));
         System.out.println("Response from Aggregator: "+paymentdto.getServiceFee());
@@ -190,13 +197,15 @@ public class SpecializedFirmActionService extends BaseService {
         specializedFirm.setPaymentApproverUserId(loggedInUser.getUserID());
         specializedFirm.setPaymentApproverRemark(paymentUpdateDTO.getPaymentRemarks());
         specializedFirm.setHasNotification("0");
-       //contractor.setLockedByUserId("null");
         specializedFirm.setPaymentReceiptDate(paymentUpdateDTO.getPaymentDate());
         specializedFirm.setPaymentReceiptNo(paymentUpdateDTO.getPaymentReceiptNo());
         specializedFirmActionDao.saveOrUpdate(specializedFirm);
 
         paymentUpdateDTO.setSpecializedFirmId(specializedFirm.getCrpSpecializedTradeId());
         specializedFirmActionDao.paymentUpdate(specializedFirm.getCrpSpecializedTradeId(),loggedInUser.getUserID(),approvedApplicationStatusId,specializedFirm.getCreatedBy());
+
+        String phoneNumber = (String)commonService.getValue("crpspecializedtrade", "MobileNo", "ReferenceNo", paymentUpdateDTO.getAppNo().toString());
+
         responseMessage.setStatus(SUCCESSFUL_STATUS);
         responseMessage.setText("Specialized Firm application number :"+paymentUpdateDTO.getAppNo().charAt(0)+" Payment Approved.And CDB number is:"+paymentUpdateDTO.getCdbNo());
         String mailContent = "Dear User,Your application for application number : "+paymentUpdateDTO.getAppNo().charAt(0)+" is approved.And CDB number is:"+paymentUpdateDTO.getCdbNo()+
@@ -205,7 +214,41 @@ public class SpecializedFirmActionService extends BaseService {
                 "Password : 123" +
                 "Please change your default password after login.";
         MailSender.sendMail(specializedFirm.getRegEmail(), "cdb@gov.bt", null, mailContent, "Application Payment approved");
-        SmsSender.smsSender(specializedFirm.getRegEmail(), "cdb@gov.bt", null, mailContent, "Application Payment approved");
+        SmsSender.smsSender(phoneNumber, "cdb@gov.bt", null, mailContent, "Application Payment approved");
+
+        return responseMessage;
+    }
+
+    @Transactional(readOnly = false)
+    public ResponseMessage onlinepaymentUpdate(PaymentUpdateDTO paymentUpdateDTO, LoggedInUser loggedInUser) throws Exception{
+        SpecializedFirm specializedFirm = specializedFirmService.getSpecializedFirm(paymentUpdateDTO.getAppNo());
+        String approvedApplicationStatusId = (String)commonService.getValue("cmnlistitem","Id","ReferenceNo","12003");
+        // contractor.setAppStatusId(approvedApplicationStatusId);
+        specializedFirm.setAppStatusId(ApplicationStatus.APPROVED.getCode());
+        specializedFirm.setRegStatus("3");
+        specializedFirm.setCdbNo(paymentUpdateDTO.getCdbNo());
+        specializedFirm.setPaymentApprovedDate(loggedInUser.getServerDate());
+        specializedFirm.setPaymentApproverUserId(loggedInUser.getUserID());
+        specializedFirm.setPaymentApproverRemark(paymentUpdateDTO.getPaymentRemarks());
+        specializedFirm.setHasNotification("0");
+        specializedFirm.setPaymentReceiptDate(paymentUpdateDTO.getPaymentDate());
+        specializedFirm.setPaymentReceiptNo(paymentUpdateDTO.getPaymentReceiptNo());
+        specializedFirmActionDao.saveOrUpdate(specializedFirm);
+
+        paymentUpdateDTO.setSpecializedFirmId(specializedFirm.getCrpSpecializedTradeId());
+        specializedFirmActionDao.paymentUpdate(specializedFirm.getCrpSpecializedTradeId(),loggedInUser.getUserID(),approvedApplicationStatusId,specializedFirm.getCreatedBy());
+
+        String phoneNumber = (String)commonService.getValue("crpspecializedtrade", "MobileNo", "ReferenceNo", paymentUpdateDTO.getAppNo().toString());
+
+        responseMessage.setStatus(SUCCESSFUL_STATUS);
+        responseMessage.setText("Specialized Firm application number :"+paymentUpdateDTO.getAppNo().charAt(0)+" Payment Approved.And CDB number is:"+paymentUpdateDTO.getCdbNo());
+        String mailContent = "Dear User,Your application for application number : "+paymentUpdateDTO.getAppNo().charAt(0)+" is approved.And CDB number is:"+paymentUpdateDTO.getCdbNo()+
+                "You can login to the system for renewal other services using following credential:" +
+                "Username : your registered email" +
+                "Password : 123" +
+                "Please change your default password after login.";
+        MailSender.sendMail(specializedFirm.getRegEmail(), "cdb@gov.bt", null, mailContent, "Application Payment approved");
+        SmsSender.smsSender(phoneNumber, "cdb@gov.bt", null, mailContent, "Application Payment approved");
 
         return responseMessage;
     }

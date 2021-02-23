@@ -203,7 +203,7 @@
                         </table>
 
                         <div class="col-lg-12 text-right">
-                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addHRModal"><i class="fa fa-plus"></i> Add More HR</button>
+                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" id="addMoreHrBtn" data-target="#addHRModal"><i class="fa fa-plus"></i> Add More HR</button>
                         </div>
                     </div>
                 </div>

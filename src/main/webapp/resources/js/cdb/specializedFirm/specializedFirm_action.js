@@ -63,12 +63,13 @@ var specializedFirm_action = (function () {
                         $('#gewogM').text(dto.gowegName);
                         $('#villageM').text(dto.villageName);
                         $('#dobM').text(dto.dob);
+                        $('#cdbNumber').text(dto.cdbNo);
                         $('#cidchecked').text(cidNo);
                         var imagelink='https://www.citizenservices.gov.bt/BtImgWS/ImageServlet?type=PH&cidNo='+cidNo;
                         $('#photoM').html("<img src='"+imagelink+"'  width='200px'  height='200px' class='pull-right'/>");
                         $("#hrModal").modal('show');
                         $("#closeModal").modal('show');
-debugger;
+
                         var employeeDetailsDTO = dto.employeeDetailsDTOs;
                         var govCopDTO = dto.govCopDTOs;
                         var cdbDTO = dto.cdbDTOs;

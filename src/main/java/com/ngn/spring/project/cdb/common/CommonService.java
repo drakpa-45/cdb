@@ -283,7 +283,7 @@ public class CommonService extends BaseService {
         //String dcrcCitizenaccessToken =resourceBundle1.getString("getCitizenDetails.accessToken");
         PersonalInfoDTO personalInfoDTO = new PersonalInfoDTO();
 
-        if(type.equalsIgnoreCase("fetch")) {
+        if(type.equalsIgnoreCase("fetch") || type.equalsIgnoreCase("check")) {
             String cdbNo = commonDao.getCDBNo(cid);
             if (!cdbNo.isEmpty()) {
                 personalInfoDTO.setCdbNo(cdbNo);

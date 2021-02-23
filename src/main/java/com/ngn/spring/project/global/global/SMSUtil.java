@@ -9,8 +9,7 @@ import java.util.ResourceBundle;
  * Created by USER on 6/27/2020.
  */
 public class SMSUtil implements Runnable {
-
-    ResourceBundle bundle = ResourceBundle.getBundle("smsNotificationURL");
+    ResourceBundle bundle = ResourceBundle.getBundle("wsEndPointURL_en_US");
     private String smsUrl = bundle.getString("smsNotificationURL");
     private String mobileNo = null;
     private String smsContent = null;
@@ -36,8 +35,9 @@ public class SMSUtil implements Runnable {
     /**
      * @param mobileNo the mobileNo to set
      */
-    public void setMobileNo(String mobileNo) {
+    public SMSUtil setMobileNo(String mobileNo) {
         this.mobileNo = mobileNo;
+        return null;
     }
 
     /**
@@ -101,7 +101,7 @@ public class SMSUtil implements Runnable {
             try{
                 encodedMobileNo=URLEncoder.encode(mobileNo, SMS_ENCONDING_TYPE);
                 encodedSMScontent=URLEncoder.encode(smsContent, SMS_ENCONDING_TYPE);
-                fullURLStr = smsUrl + mobileNo+ URL_MIDDLE_PART +smsContent;
+                fullURLStr = smsUrl + mobileNo+ URL_MIDDLE_PART +subject +smsContent;
                 fullURLStr= fullURLStr.replaceAll(" ","%20");
                 url = new URL(fullURLStr);
                 connection = (HttpURLConnection) url.openConnection();

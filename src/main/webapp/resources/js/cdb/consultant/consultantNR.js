@@ -51,6 +51,9 @@ function saveAndPreview(presentClass, nextClass) {
     $('#btn5').hide();
     $('#btnValEqNext').hide();
     $('#btn6').hide();
+    $('#addMoreEqup').hide();
+    $('#addMoreHrBtn').hide();
+    $('#addNdeleteBtn').hide();
 
     window.scroll(0, 0);
 
