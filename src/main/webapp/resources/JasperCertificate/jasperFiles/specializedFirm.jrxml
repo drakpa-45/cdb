@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OtherPassportPrint1" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="00c38a41-e2bc-4c8b-85ae-7db99fd3ffa9">
 	<property name="ireport.zoom" value="1.3636363636363638"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="402"/>
+	<property name="ireport.y" value="642"/>
 	<subDataset name="dataset1" uuid="3bc2008e-f52f-433d-bcc9-307c42176f33"/>
 	<parameter name="paramFirstName" class="java.lang.String"/>
 	<parameter name="paramSurname" class="java.lang.String"/>
@@ -132,6 +132,9 @@
 	<parameter name="s6" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="cdbSeal" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT
 a.SPNo cdbNo,
@@ -190,7 +193,7 @@ WHERE a.SPNo=$P{cdbNo} AND f.IsPartnerOrOwner=1]]>
 				<text><![CDATA[Initial Registration Date     : ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="85" y="409" width="111" height="27" uuid="5f6eb31f-31ed-4fc9-b816-3b6239cfa270"/>
+				<reportElement x="100" y="407" width="111" height="27" forecolor="#0000CC" uuid="5f6eb31f-31ed-4fc9-b816-3b6239cfa270"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11" isBold="true" isItalic="true"/>
 				</textElement>
@@ -211,7 +214,7 @@ WHERE a.SPNo=$P{cdbNo} AND f.IsPartnerOrOwner=1]]>
 				<text><![CDATA[This is to certify that ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="223" y="388" width="89" height="27" uuid="fde9b55a-9627-4bae-b5bb-5fc9b9b1ac96"/>
+				<reportElement x="225" y="385" width="270" height="27" forecolor="#0000CC" uuid="fde9b55a-9627-4bae-b5bb-5fc9b9b1ac96"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11" isBold="true" isItalic="true"/>
 				</textElement>
@@ -225,11 +228,11 @@ WHERE a.SPNo=$P{cdbNo} AND f.IsPartnerOrOwner=1]]>
 				<text><![CDATA[of]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="66" y="436" width="249" height="25" uuid="c1f17186-4433-4192-839d-af596d75374d"/>
+				<reportElement x="66" y="436" width="175" height="25" uuid="c1f17186-4433-4192-839d-af596d75374d"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11"/>
 				</textElement>
-				<text><![CDATA[ the Construction Development Board. ]]></text>
+				<text><![CDATA[ Construction Development Board. ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="230" y="691" width="145" height="22" uuid="2901966d-34d1-4e4f-8d78-ec46b1ed8d98"/>
@@ -253,9 +256,9 @@ WHERE a.SPNo=$P{cdbNo} AND f.IsPartnerOrOwner=1]]>
 				<text><![CDATA[Construction Development Board]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="139" y="749" width="314" height="18" uuid="1d0754a6-f103-41fe-b5c0-0f39daafceb2"/>
+				<reportElement x="146" y="749" width="304" height="18" uuid="1d0754a6-f103-41fe-b5c0-0f39daafceb2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="10"/>
+					<font fontName="SansSerif" size="9"/>
 				</textElement>
 				<text><![CDATA[Tel. No: +975-2-326035/34 Fax No: +975-2-321989 : Post Box # 1349 ]]></text>
 			</staticText>
@@ -329,56 +332,49 @@ WHERE a.SPNo=$P{cdbNo} AND f.IsPartnerOrOwner=1]]>
 				<text><![CDATA[Revalidation Date  :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="196" y="355" width="104" height="29" uuid="2cd00eff-8d31-4d94-a256-a5ac99f428cf"/>
+				<reportElement x="196" y="355" width="104" height="29" forecolor="#0033CC" uuid="2cd00eff-8d31-4d94-a256-a5ac99f428cf"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial Narrow" size="8"/>
+					<font fontName="Arial Narrow" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{reValidationDate}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="230" y="409" width="125" height="27" uuid="fa098c3d-4e6f-4a2b-a033-9a19e2117c30"/>
+				<reportElement x="222" y="410" width="125" height="27" uuid="fa098c3d-4e6f-4a2b-a033-9a19e2117c30"/>
 				<textElement verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
 				<text><![CDATA[Dzongkhag is registered as]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="345" y="409" width="112" height="24" uuid="73502b16-e75e-4c7d-99c6-5f83f3e9dc3d"/>
+				<reportElement x="347" y="410" width="111" height="24" forecolor="#3300CC" uuid="73502b16-e75e-4c7d-99c6-5f83f3e9dc3d"/>
 				<textElement verticalAlignment="Middle">
 					<font size="11" isBold="true" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[ "Specialized Firm"]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="169" y="388" width="55" height="27" uuid="b72af5e5-8cf4-4071-b6c9-586ddaa740a7"/>
+				<reportElement x="169" y="388" width="346" height="27" uuid="b72af5e5-8cf4-4071-b6c9-586ddaa740a7"/>
 				<textElement verticalAlignment="Middle">
 					<font size="11" isBold="true" isItalic="true"/>
 				</textElement>
-				<text><![CDATA[M/s.......]]></text>
+				<text><![CDATA[M/s..........................................................................................................]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="301" y="388" width="214" height="27" uuid="9edfda65-03ac-4b72-bd85-e297ceeeb825"/>
+				<reportElement x="76" y="410" width="163" height="27" forecolor="#000000" uuid="c39aeab9-c742-41cc-8521-b0f34b29b612"/>
 				<textElement verticalAlignment="Middle">
 					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[.................................................................................]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="169" y="409" width="61" height="27" uuid="c39aeab9-c742-41cc-8521-b0f34b29b612"/>
-				<textElement verticalAlignment="Middle">
-					<font size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[......................]]></text>
+				<text><![CDATA[.................................................]]></text>
 			</staticText>
 			<line>
 				<reportElement x="70" y="492" width="1" height="158" uuid="8578fbed-2e08-4837-b548-377389ecdcfb"/>
 			</line>
 			<staticText>
-				<reportElement x="268" y="436" width="247" height="24" uuid="88d340f6-e04b-4b2e-9513-4c09493cb576"/>
+				<reportElement x="239" y="436" width="299" height="24" uuid="88d340f6-e04b-4b2e-9513-4c09493cb576"/>
 				<textElement verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
-				<text><![CDATA[The firm is registered in the following specialized ]]></text>
+				<text><![CDATA[The firm is registered in the following specialized categories.]]></text>
 			</staticText>
 			<line>
 				<reportElement x="526" y="492" width="1" height="158" uuid="af23c3a6-d866-44d7-9dec-e012b3025892"/>
@@ -439,38 +435,31 @@ WHERE a.SPNo=$P{cdbNo} AND f.IsPartnerOrOwner=1]]>
 				<text><![CDATA[Classification]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="433" y="535" width="93" height="24" uuid="8d0453ad-2f99-42c5-9abe-b45704d0dbc1"/>
+				<reportElement x="433" y="535" width="93" height="24" forecolor="#0000CC" uuid="8d0453ad-2f99-42c5-9abe-b45704d0dbc1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{s2}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="433" y="510" width="94" height="24" uuid="67c957cd-607c-44a7-87d0-b2331a82e7fa"/>
+				<reportElement x="433" y="510" width="94" height="24" forecolor="#0000CC" uuid="67c957cd-607c-44a7-87d0-b2331a82e7fa"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{s1}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="433" y="560" width="93" height="21" uuid="309cd903-95d2-41c8-96dd-b3bc780fabfc"/>
+				<reportElement x="433" y="560" width="93" height="21" forecolor="#0000CC" uuid="309cd903-95d2-41c8-96dd-b3bc780fabfc"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{s3}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="433" y="584" width="93" height="20" uuid="18b747f2-ddde-4d36-83a8-362314b5b149"/>
+				<reportElement x="433" y="584" width="93" height="20" forecolor="#0000CC" uuid="18b747f2-ddde-4d36-83a8-362314b5b149"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{s4}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="66" y="460" width="249" height="20" uuid="765145b7-19c3-4b07-a6d7-d407232e4a3f"/>
-				<textElement verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<text><![CDATA[categories.]]></text>
-			</staticText>
 			<staticText>
 				<reportElement x="458" y="409" width="57" height="27" uuid="f26400ad-7c1a-445e-923d-0a8f4c014ecc"/>
 				<textElement verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
-				<text><![CDATA[with]]></text>
+				<text><![CDATA[with the]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="301" y="280" width="211" height="31" uuid="f57a7553-547e-42d7-abd2-e8333ca16061"/>
@@ -480,36 +469,40 @@ WHERE a.SPNo=$P{cdbNo} AND f.IsPartnerOrOwner=1]]>
 				<text><![CDATA[Proprietor's Name & CID]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="311" y="332" width="197" height="20" uuid="109fe0f5-de32-4daa-bd17-3ea1ee577795"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="311" y="332" width="197" height="20" forecolor="#0033CC" uuid="109fe0f5-de32-4daa-bd17-3ea1ee577795"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{ownerName}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="312" y="352" width="197" height="20" uuid="6f33e001-51e1-4fbb-9c04-d985a7867752"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="312" y="352" width="197" height="20" forecolor="#0000CC" uuid="6f33e001-51e1-4fbb-9c04-d985a7867752"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{ownerCID}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="312" y="376" width="196" height="1" uuid="608937b4-0283-4ac4-b3f0-7e1331a38dc9"/>
 			</line>
 			<textField>
-				<reportElement x="196" y="269" width="102" height="32" uuid="7243aa64-68fd-4613-98c9-347558e257c3"/>
+				<reportElement x="196" y="269" width="102" height="32" forecolor="#0000CC" uuid="7243aa64-68fd-4613-98c9-347558e257c3"/>
 				<textElement verticalAlignment="Middle">
-					<font size="9"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cdbNo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="196" y="302" width="102" height="30" uuid="09d5dc09-6112-40a9-9640-e7a123c52108"/>
+				<reportElement x="196" y="302" width="102" height="30" forecolor="#3300CC" uuid="09d5dc09-6112-40a9-9640-e7a123c52108"/>
 				<textElement verticalAlignment="Middle">
-					<font size="9"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{initialRegistrationDate}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="196" y="332" width="104" height="23" uuid="0b68b61e-4a86-4e81-8932-c5d8cea42e05"/>
+				<reportElement x="196" y="332" width="104" height="23" forecolor="#3300CC" uuid="0b68b61e-4a86-4e81-8932-c5d8cea42e05"/>
 				<textElement verticalAlignment="Middle">
-					<font size="9"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{regExpiryDate}]]></textFieldExpression>
 			</textField>
@@ -530,15 +523,19 @@ WHERE a.SPNo=$P{cdbNo} AND f.IsPartnerOrOwner=1]]>
 				<text><![CDATA[SF6- Painting]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="433" y="607" width="93" height="20" uuid="33319b7f-6247-4f2c-8c18-94eb10c9cc5b"/>
+				<reportElement x="433" y="607" width="93" height="20" forecolor="#0000CC" uuid="33319b7f-6247-4f2c-8c18-94eb10c9cc5b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{s5}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="433" y="629" width="93" height="21" uuid="a99e77ae-b060-4b4b-9841-aad7dc77f7cb"/>
+				<reportElement x="433" y="629" width="93" height="21" forecolor="#0033CC" uuid="a99e77ae-b060-4b4b-9841-aad7dc77f7cb"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{s6}]]></textFieldExpression>
 			</textField>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="375" y="651" width="68" height="54" uuid="69814388-60d0-4e21-a315-300d335fca37"/>
+				<imageExpression><![CDATA[$P{cdbSeal}]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

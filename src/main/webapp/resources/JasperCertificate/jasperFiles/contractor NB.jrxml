@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OtherPassportPrint1" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="00c38a41-e2bc-4c8b-85ae-7db99fd3ffa9">
 	<property name="ireport.zoom" value="1.3636363636363638"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="18"/>
+	<property name="ireport.y" value="384"/>
 	<subDataset name="dataset1" uuid="3bc2008e-f52f-433d-bcc9-307c42176f33"/>
 	<parameter name="paramFirstName" class="java.lang.String"/>
 	<parameter name="paramSurname" class="java.lang.String"/>
@@ -114,6 +114,9 @@
 	<parameter name="firmName" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="cdbSeal" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT
 a.CDBNo cdbNo,
@@ -123,7 +126,7 @@ DATE_FORMAT(a.RegistrationExpiryDate , "%d-%m-%Y") regExpiryDate,
 IF(a.CmnOwnershipTypeId='1e243ef0-c652-11e4-b574-080027dcfac6' AND f.ShowInCertificate='1',CONCAT('(',GROUP_CONCAT(f.CIDNo),')') ,'')ownerCID,
 IF(a.CmnOwnershipTypeId='1e243ef0-c652-11e4-b574-080027dcfac6' AND f.ShowInCertificate='1',GROUP_CONCAT(f.Name) ,'')ownerName,
 a.NameOfFirm firmName,
-IF(d.NameEn IS NULL,'',d.NameEn) dzongkhagName,
+IF(d.Name IS NULL,'',d.Name) dzongkhagName,
 IF((SELECT NAME FROM cmncontractorclassification  WHERE Id=(SELECT CmnApprovedClassificationId FROM crpcontractorworkclassificationfinal WHERE CmnProjectCategoryId='6cd737d4-a2b7-11e4-b4d2-080027dcfac6' AND CrpContractorFinalId=a.Id)) IS NULL,'-',(SELECT NAME FROM cmncontractorclassification  WHERE Id=(SELECT CmnApprovedClassificationId FROM crpcontractorworkclassificationfinal WHERE CmnProjectCategoryId='6cd737d4-a2b7-11e4-b4d2-080027dcfac6' AND CrpContractorFinalId=a.Id))) w1,
 IF((SELECT NAME FROM cmncontractorclassification  WHERE Id=(SELECT CmnApprovedClassificationId FROM crpcontractorworkclassificationfinal WHERE CmnProjectCategoryId='8176bd2d-a2b7-11e4-b4d2-080027dcfac6' AND CrpContractorFinalId=a.Id)) IS NULL,'-',(SELECT NAME FROM cmncontractorclassification  WHERE Id=(SELECT CmnApprovedClassificationId FROM crpcontractorworkclassificationfinal WHERE CmnProjectCategoryId='8176bd2d-a2b7-11e4-b4d2-080027dcfac6' AND CrpContractorFinalId=a.Id))) w2,
 IF((SELECT NAME FROM cmncontractorclassification  WHERE Id=(SELECT CmnApprovedClassificationId FROM crpcontractorworkclassificationfinal WHERE CmnProjectCategoryId='8afc0568-a2b7-11e4-b4d2-080027dcfac6' AND CrpContractorFinalId=a.Id)) IS NULL,'-',(SELECT NAME FROM cmncontractorclassification  WHERE Id=(SELECT CmnApprovedClassificationId FROM crpcontractorworkclassificationfinal WHERE CmnProjectCategoryId='8afc0568-a2b7-11e4-b4d2-080027dcfac6' AND CrpContractorFinalId=a.Id))) w3,
@@ -131,7 +134,7 @@ IF((SELECT NAME FROM cmncontractorclassification  WHERE Id=(SELECT CmnApprovedCl
 FROM
 crpcontractorfinal a
 LEFT JOIN crpcontractorhumanresourcefinal f ON f.CrpContractorFinalId=a.Id
-LEFT JOIN cmndzongkhag d ON d.Id=a.CmnDzongkhagId
+LEFT JOIN cmncountry d ON d.Id=a.CmnCountryId
 WHERE a.CDBNo=$P{cdbNo} AND f.IsPartnerOrOwner=1]]>
 	</queryString>
 	<field name="cdbNo" class="java.lang.String">
@@ -156,60 +159,53 @@ WHERE a.CDBNo=$P{cdbNo} AND f.IsPartnerOrOwner=1]]>
 	<title>
 		<band height="842" splitType="Stretch">
 			<staticText>
-				<reportElement x="73" y="296" width="123" height="33" uuid="14346496-3f58-4207-b8a5-d97abd23692e"/>
+				<reportElement x="73" y="279" width="123" height="23" uuid="14346496-3f58-4207-b8a5-d97abd23692e"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CDB Registration Number : ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="72" y="329" width="124" height="30" uuid="63eae51f-8e65-49a1-872e-d6c625908950"/>
+				<reportElement x="72" y="302" width="124" height="22" uuid="63eae51f-8e65-49a1-872e-d6c625908950"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Initial Registration Date     : ]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="86" y="450" width="111" height="27" uuid="5f6eb31f-31ed-4fc9-b816-3b6239cfa270"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="11" isBold="true" isItalic="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dzongkhagName}]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="73" y="359" width="123" height="23" uuid="f74e6b10-90a3-426c-a950-97433d96daa6"/>
+				<reportElement x="73" y="324" width="123" height="23" uuid="f74e6b10-90a3-426c-a950-97433d96daa6"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Registration Expiry Date   : ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="66" y="423" width="110" height="27" uuid="fc8603f2-9bf9-4983-b3e3-8bee3b15a5ea"/>
+				<reportElement x="66" y="372" width="110" height="27" uuid="fc8603f2-9bf9-4983-b3e3-8bee3b15a5ea"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11"/>
 				</textElement>
 				<text><![CDATA[This is to certify that ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="208" y="424" width="89" height="27" uuid="fde9b55a-9627-4bae-b5bb-5fc9b9b1ac96"/>
+				<reportElement x="199" y="369" width="176" height="27" forecolor="#0000CC" uuid="fde9b55a-9627-4bae-b5bb-5fc9b9b1ac96"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11" isBold="true" isItalic="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{firmName}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="66" y="449" width="19" height="27" uuid="78cd1a9c-25dd-4d5f-a6be-a5bbdcd5830d"/>
+				<reportElement x="66" y="398" width="24" height="27" uuid="78cd1a9c-25dd-4d5f-a6be-a5bbdcd5830d"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11"/>
 				</textElement>
-				<text><![CDATA[of]]></text>
+				<text><![CDATA[is a]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="66" y="477" width="249" height="25" uuid="c1f17186-4433-4192-839d-af596d75374d"/>
+				<reportElement x="65" y="422" width="483" height="25" uuid="c1f17186-4433-4192-839d-af596d75374d"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11"/>
 				</textElement>
-				<text><![CDATA[ the Construction Development Board. ]]></text>
+				<text><![CDATA[ Board. The firm is registered in the following categories and classification.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="230" y="691" width="145" height="22" uuid="2901966d-34d1-4e4f-8d78-ec46b1ed8d98"/>
@@ -286,219 +282,232 @@ WHERE a.CDBNo=$P{cdbNo} AND f.IsPartnerOrOwner=1]]>
 				<imageExpression><![CDATA[$P{sideImageMiddleLeft}]]></imageExpression>
 			</image>
 			<image hAlign="Center">
-				<reportElement x="100" y="70" width="384" height="191" uuid="81fc36f8-b2a4-4ebd-b143-940300a1deed"/>
+				<reportElement x="100" y="63" width="384" height="181" uuid="81fc36f8-b2a4-4ebd-b143-940300a1deed"/>
 				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 			</image>
 			<line>
-				<reportElement x="71" y="296" width="451" height="1" uuid="af2e5c6f-42f9-4e8b-aa68-262b866333de"/>
+				<reportElement x="71" y="278" width="451" height="1" uuid="af2e5c6f-42f9-4e8b-aa68-262b866333de"/>
 			</line>
 			<line>
-				<reportElement x="73" y="411" width="448" height="1" uuid="0e54d88c-ae41-498b-942c-89f0f2abd705"/>
+				<reportElement x="73" y="364" width="448" height="1" uuid="0e54d88c-ae41-498b-942c-89f0f2abd705"/>
 			</line>
 			<line>
-				<reportElement x="521" y="296" width="1" height="116" uuid="010cc60e-6448-4ad6-ab9a-ace8b7e5588d"/>
+				<reportElement x="522" y="278" width="1" height="86" uuid="010cc60e-6448-4ad6-ab9a-ace8b7e5588d"/>
 			</line>
 			<line>
-				<reportElement x="71" y="296" width="1" height="115" uuid="545a27cc-8938-4253-a147-dc64948791f6"/>
+				<reportElement x="71" y="279" width="1" height="85" uuid="545a27cc-8938-4253-a147-dc64948791f6"/>
 			</line>
 			<staticText>
-				<reportElement x="73" y="382" width="123" height="29" uuid="303d43e5-5a46-41b2-b7ab-c50a22c81276"/>
+				<reportElement x="72" y="347" width="123" height="17" uuid="303d43e5-5a46-41b2-b7ab-c50a22c81276"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Revalidation Date  :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="196" y="382" width="104" height="29" uuid="2cd00eff-8d31-4d94-a256-a5ac99f428cf"/>
+				<reportElement x="196" y="347" width="104" height="17" forecolor="#000099" uuid="2cd00eff-8d31-4d94-a256-a5ac99f428cf"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial Narrow" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{reValidationDate}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="260" y="450" width="87" height="27" uuid="fa098c3d-4e6f-4a2b-a033-9a19e2117c30"/>
+				<reportElement x="193" y="399" width="58" height="27" uuid="fa098c3d-4e6f-4a2b-a033-9a19e2117c30"/>
 				<textElement verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
-				<text><![CDATA[ is registered as]]></text>
+				<text><![CDATA[  registered]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="345" y="452" width="112" height="24" uuid="73502b16-e75e-4c7d-99c6-5f83f3e9dc3d"/>
+				<reportElement x="246" y="400" width="112" height="24" forecolor="#000099" uuid="73502b16-e75e-4c7d-99c6-5f83f3e9dc3d"/>
 				<textElement verticalAlignment="Middle">
 					<font size="11" isBold="true" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[ "Construction Firm"]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="169" y="424" width="55" height="27" uuid="b72af5e5-8cf4-4071-b6c9-586ddaa740a7"/>
+				<reportElement x="169" y="372" width="55" height="27" uuid="b72af5e5-8cf4-4071-b6c9-586ddaa740a7"/>
 				<textElement verticalAlignment="Middle">
 					<font size="11" isBold="true" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[M/s.......]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="285" y="423" width="230" height="27" uuid="9edfda65-03ac-4b72-bd85-e297ceeeb825"/>
+				<reportElement x="208" y="372" width="167" height="27" uuid="9edfda65-03ac-4b72-bd85-e297ceeeb825"/>
 				<textElement verticalAlignment="Middle">
 					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[...................................................................................]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="169" y="450" width="99" height="27" uuid="c39aeab9-c742-41cc-8521-b0f34b29b612"/>
-				<textElement verticalAlignment="Middle">
-					<font size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[.........................................]]></text>
+				<text><![CDATA[........................................................]]></text>
 			</staticText>
 			<line>
-				<reportElement x="70" y="531" width="1" height="114" uuid="8578fbed-2e08-4837-b548-377389ecdcfb"/>
+				<reportElement x="70" y="492" width="1" height="123" uuid="8578fbed-2e08-4837-b548-377389ecdcfb"/>
+			</line>
+			<line>
+				<reportElement x="513" y="492" width="1" height="123" uuid="af23c3a6-d866-44d7-9dec-e012b3025892"/>
+			</line>
+			<line>
+				<reportElement x="71" y="492" width="442" height="1" uuid="39dede5e-55c9-4ec5-b153-0e78e5c06205"/>
+			</line>
+			<line>
+				<reportElement x="71" y="509" width="442" height="1" uuid="c0bc07af-5ca3-499c-9891-da94896155b1"/>
+			</line>
+			<line>
+				<reportElement x="71" y="534" width="442" height="1" uuid="79bf4bb6-e078-40c6-8dc5-a95b0c0a01c3"/>
+			</line>
+			<line>
+				<reportElement x="70" y="559" width="442" height="1" uuid="bd508116-3c03-4c9d-906d-fda942ea81f5"/>
+			</line>
+			<line>
+				<reportElement x="70" y="593" width="442" height="1" uuid="e98e9648-31bb-4164-9906-c19040ff4693"/>
+			</line>
+			<line>
+				<reportElement x="71" y="615" width="442" height="1" uuid="0469d82e-8815-46fc-b11e-4abd484c89aa"/>
+			</line>
+			<line>
+				<reportElement x="413" y="493" width="1" height="122" uuid="ead0696c-3db0-4fa8-a53e-ed9ff35f672d"/>
 			</line>
 			<staticText>
-				<reportElement x="251" y="476" width="247" height="24" uuid="88d340f6-e04b-4b2e-9513-4c09493cb576"/>
-				<textElement verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<text><![CDATA[The firm is registered in the following ]]></text>
-			</staticText>
-			<line>
-				<reportElement x="513" y="531" width="1" height="114" uuid="af23c3a6-d866-44d7-9dec-e012b3025892"/>
-			</line>
-			<line>
-				<reportElement x="71" y="531" width="442" height="1" uuid="39dede5e-55c9-4ec5-b153-0e78e5c06205"/>
-			</line>
-			<line>
-				<reportElement x="71" y="557" width="442" height="1" uuid="c0bc07af-5ca3-499c-9891-da94896155b1"/>
-			</line>
-			<line>
-				<reportElement x="71" y="581" width="442" height="1" uuid="79bf4bb6-e078-40c6-8dc5-a95b0c0a01c3"/>
-			</line>
-			<line>
-				<reportElement x="70" y="604" width="442" height="1" uuid="bd508116-3c03-4c9d-906d-fda942ea81f5"/>
-			</line>
-			<line>
-				<reportElement x="70" y="624" width="442" height="1" uuid="e98e9648-31bb-4164-9906-c19040ff4693"/>
-			</line>
-			<line>
-				<reportElement x="71" y="644" width="442" height="1" uuid="0469d82e-8815-46fc-b11e-4abd484c89aa"/>
-			</line>
-			<line>
-				<reportElement x="432" y="531" width="1" height="113" uuid="ead0696c-3db0-4fa8-a53e-ed9ff35f672d"/>
-			</line>
-			<staticText>
-				<reportElement x="71" y="532" width="362" height="25" uuid="033aec95-85e7-40fd-8fa2-833b87901787"/>
+				<reportElement x="71" y="493" width="342" height="16" uuid="033aec95-85e7-40fd-8fa2-833b87901787"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ Category]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="71" y="556" width="361" height="24" uuid="b68d6523-6b02-49b4-866a-d19925c98dec"/>
+				<reportElement x="71" y="510" width="342" height="24" uuid="b68d6523-6b02-49b4-866a-d19925c98dec"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[W1 - Roads and Bridges]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="71" y="581" width="362" height="25" uuid="acc0bc58-a013-4220-a2c9-e0b8e72cd5e3"/>
+				<reportElement x="71" y="535" width="342" height="24" uuid="acc0bc58-a013-4220-a2c9-e0b8e72cd5e3"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[W2 - Traditional Bhutanese Painting/Finishing]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="70" y="606" width="363" height="20" uuid="df333e0c-4a67-477e-9a22-6d4fae5df77c"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="71" y="561" width="342" height="32" uuid="df333e0c-4a67-477e-9a22-6d4fae5df77c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
 				<text><![CDATA[W3 - Building,Irrigation,Drainage,Flood Control,Water Supply and Sewerage]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="71" y="624" width="361" height="20" uuid="5707621d-f86d-44f0-9527-d6193ccc74ea"/>
+				<reportElement x="71" y="595" width="342" height="20" uuid="5707621d-f86d-44f0-9527-d6193ccc74ea"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[W4 - Power and Telecommunication Works]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="429" y="532" width="83" height="24" uuid="bd55cb2c-0c3c-4b85-9cfb-3243f27be6e3"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="414" y="492" width="98" height="18" uuid="bd55cb2c-0c3c-4b85-9cfb-3243f27be6e3"/>
+				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Classification]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="433" y="580" width="79" height="24" uuid="8d0453ad-2f99-42c5-9abe-b45704d0dbc1"/>
+				<reportElement x="414" y="535" width="98" height="24" forecolor="#003399" uuid="8d0453ad-2f99-42c5-9abe-b45704d0dbc1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{w2}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="433" y="557" width="80" height="24" uuid="67c957cd-607c-44a7-87d0-b2331a82e7fa"/>
+				<reportElement x="414" y="510" width="99" height="24" forecolor="#0033FF" uuid="67c957cd-607c-44a7-87d0-b2331a82e7fa"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{w1}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="433" y="604" width="79" height="19" uuid="309cd903-95d2-41c8-96dd-b3bc780fabfc"/>
+				<reportElement x="414" y="560" width="99" height="33" forecolor="#0000CC" uuid="309cd903-95d2-41c8-96dd-b3bc780fabfc"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{w3}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="433" y="622" width="80" height="22" uuid="18b747f2-ddde-4d36-83a8-362314b5b149"/>
+				<reportElement x="414" y="594" width="99" height="21" forecolor="#003399" uuid="18b747f2-ddde-4d36-83a8-362314b5b149"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{w4}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="66" y="502" width="249" height="20" uuid="765145b7-19c3-4b07-a6d7-d407232e4a3f"/>
+				<reportElement x="357" y="398" width="179" height="27" uuid="f26400ad-7c1a-445e-923d-0a8f4c014ecc"/>
 				<textElement verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
-				<text><![CDATA[categories and classification.]]></text>
+				<text><![CDATA[with  the  Construction Development]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="458" y="449" width="57" height="27" uuid="f26400ad-7c1a-445e-923d-0a8f4c014ecc"/>
-				<textElement verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<text><![CDATA[with]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="301" y="316" width="211" height="31" uuid="f57a7553-547e-42d7-abd2-e8333ca16061"/>
+				<reportElement x="301" y="282" width="211" height="31" uuid="f57a7553-547e-42d7-abd2-e8333ca16061"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Proprietor's Name & CID]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="312" y="365" width="197" height="20" uuid="109fe0f5-de32-4daa-bd17-3ea1ee577795"/>
+				<reportElement x="312" y="318" width="197" height="20" forecolor="#0033CC" uuid="109fe0f5-de32-4daa-bd17-3ea1ee577795"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{ownerName}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="312" y="385" width="197" height="20" uuid="6f33e001-51e1-4fbb-9c04-d985a7867752"/>
+				<reportElement x="312" y="338" width="197" height="20" forecolor="#0033CC" uuid="6f33e001-51e1-4fbb-9c04-d985a7867752"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{ownerCID}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="312" y="406" width="196" height="1" uuid="608937b4-0283-4ac4-b3f0-7e1331a38dc9"/>
+				<reportElement x="312" y="359" width="196" height="1" uuid="608937b4-0283-4ac4-b3f0-7e1331a38dc9"/>
 			</line>
 			<textField>
-				<reportElement x="196" y="297" width="102" height="32" uuid="7243aa64-68fd-4613-98c9-347558e257c3"/>
+				<reportElement x="196" y="279" width="105" height="23" forecolor="#000099" uuid="7243aa64-68fd-4613-98c9-347558e257c3"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cdbNo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="196" y="329" width="102" height="30" uuid="09d5dc09-6112-40a9-9640-e7a123c52108"/>
+				<reportElement x="196" y="302" width="105" height="22" forecolor="#000099" uuid="09d5dc09-6112-40a9-9640-e7a123c52108"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{initialRegistrationDate}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="196" y="359" width="104" height="23" uuid="0b68b61e-4a86-4e81-8932-c5d8cea42e05"/>
+				<reportElement x="196" y="324" width="104" height="23" forecolor="#0000CC" uuid="0b68b61e-4a86-4e81-8932-c5d8cea42e05"/>
 				<textElement verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{regExpiryDate}]]></textFieldExpression>
 			</textField>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="375" y="628" width="68" height="62" uuid="0d3fe763-c55b-426a-9898-f62591a19403"/>
+				<imageExpression><![CDATA[$P{cdbSeal}]]></imageExpression>
+			</image>
 			<staticText>
-				<reportElement x="85" y="268" width="423" height="20" forecolor="#FF0033" uuid="4f919ca5-f02d-467f-88c3-14c3b2dbfffc"/>
-				<textElement>
-					<font size="15" isBold="true"/>
+				<reportElement x="71" y="247" width="452" height="27" forecolor="#FF0000" uuid="7245c86c-80db-499f-815a-60ccbb620fca"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="15"/>
 				</textElement>
 				<text><![CDATA["ONLY FOR INTERNATIONAL COMPETITIVE BIDDING"]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="371" width="146" height="27" uuid="78342faf-93bb-44a7-98d9-17365c5fdbde"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[...................................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="375" y="371" width="38" height="27" uuid="c22d1ef7-fa98-436a-9aaf-8196d534606a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<text><![CDATA[from]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="407" y="367" width="139" height="27" forecolor="#0000CC" uuid="5ed296db-fbeb-4391-a634-a13186fb144e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dzongkhagName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="90" y="399" width="106" height="27" uuid="c014caeb-76a3-404f-86e8-9e6da5789630"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA["Non-Bhutanese"]]></text>
 			</staticText>
 		</band>
 	</title>

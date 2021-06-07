@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OtherPassportPrint1" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="00c38a41-e2bc-4c8b-85ae-7db99fd3ffa9">
+	<property name="ireport.zoom" value="1.3636363636363638"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="642"/>
+	<subDataset name="dataset1" uuid="3bc2008e-f52f-433d-bcc9-307c42176f33"/>
+	<parameter name="paramFirstName" class="java.lang.String"/>
+	<parameter name="paramSurname" class="java.lang.String"/>
+	<parameter name="paramNationality" class="java.lang.String"/>
+	<parameter name="paramDOB" class="java.lang.String"/>
+	<parameter name="paramSex" class="java.lang.String"/>
+	<parameter name="paramDateOfIssue" class="java.lang.String"/>
+	<parameter name="paramDateOfExpiry" class="java.lang.String"/>
+	<parameter name="paramCitizenshipIdNo" class="java.lang.String"/>
+	<parameter name="paramPlaceOfBirth" class="java.lang.String"/>
+	<parameter name="paramIssuingAuthority" class="java.lang.String"/>
+	<parameter name="paramSignatureOfBearer" class="java.lang.String"/>
+	<parameter name="paramType" class="java.lang.String"/>
+	<parameter name="paramCode" class="java.lang.String"/>
+	<parameter name="paramPassportNo" class="java.lang.String"/>
+	<parameter name="paramFacialImage" class="java.lang.String"/>
+	<parameter name="paramMac1" class="java.lang.String"/>
+	<parameter name="paramMac2" class="java.lang.String"/>
+	<parameter name="labelKingdom" class="java.lang.String"/>
+	<parameter name="labelPassportType" class="java.lang.String"/>
+	<parameter name="labelType" class="java.lang.String"/>
+	<parameter name="labelCode" class="java.lang.String"/>
+	<parameter name="labelPassportNo" class="java.lang.String"/>
+	<parameter name="labelNameOfBearer" class="java.lang.String"/>
+	<parameter name="labelSurname" class="java.lang.String"/>
+	<parameter name="labelNationality" class="java.lang.String"/>
+	<parameter name="labelCitizenIDNo" class="java.lang.String"/>
+	<parameter name="labelDOB" class="java.lang.String"/>
+	<parameter name="labelPlaceOfBirth" class="java.lang.String"/>
+	<parameter name="labelSex" class="java.lang.String"/>
+	<parameter name="labelIssuingAuthority" class="java.lang.String"/>
+	<parameter name="labelDateOfIssue" class="java.lang.String"/>
+	<parameter name="labelDateOfExpiry" class="java.lang.String"/>
+	<parameter name="labelSignature" class="java.lang.String"/>
+	<parameter name="paramPassportType" class="java.lang.String"/>
+	<parameter name="paramFacialFadedImage" class="java.lang.String"/>
+	<parameter name="cdbNo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="regExpiryDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="initialRegistrationDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ownerName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ownerCID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="directorSignature" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dzongkhagName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="imageTop" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="imageBottom" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sideImageMiddleLeft" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sideImageMiddleRight" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sideImageBottomLeft" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sideImageBottomTop" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sideImageTopRight" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sideImageTopLeft" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sideImageBottomRight" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reValidationDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reValidDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tickCross" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="W1" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="W2" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="W3" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="W4" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="firmName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="cdbSeal" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="cdbNo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="initialRegistrationDate" class="java.lang.String"/>
+	<field name="reValidationDate" class="java.lang.String"/>
+	<field name="regExpiryDate" class="java.lang.String"/>
+	<field name="ownerCID" class="java.lang.String"/>
+	<field name="ownerName" class="java.lang.String"/>
+	<field name="firmName" class="java.lang.String"/>
+	<field name="dzongkhagName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="w1" class="java.lang.String"/>
+	<field name="w2" class="java.lang.String"/>
+	<field name="w3" class="java.lang.String"/>
+	<field name="w4" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="842" splitType="Stretch">
+			<image hAlign="Right">
+				<reportElement x="457" y="40" width="100" height="100" uuid="592aa4a1-20ac-4ed7-ab32-255f9c0ea80c"/>
+				<imageExpression><![CDATA[$P{sideImageTopRight}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="39" y="38" width="100" height="100" uuid="95bf9685-fe91-4d4a-baab-e8128033ed63"/>
+				<imageExpression><![CDATA[$P{sideImageTopLeft}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="139" y="38" width="317" height="10" uuid="3322c23e-202c-4016-9729-cb097dd89d53"/>
+				<imageExpression><![CDATA[$P{imageTop}]]></imageExpression>
+			</image>
+			<image vAlign="Bottom">
+				<reportElement x="39" y="690" width="100" height="114" uuid="93eca466-d7f2-4806-be86-66f6440766a8"/>
+				<imageExpression><![CDATA[$P{sideImageBottomLeft}]]></imageExpression>
+			</image>
+			<image hAlign="Right" vAlign="Bottom">
+				<reportElement x="454" y="690" width="100" height="115" uuid="9d281fda-ebf4-48ca-9f09-884091f4ecaf"/>
+				<imageExpression><![CDATA[$P{sideImageBottomRight}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="139" y="796" width="314" height="11" uuid="900b9822-db89-456f-88dc-9cdcb2c7b071"/>
+				<imageExpression><![CDATA[$P{imageBottom}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="548" y="138" width="10" height="567" uuid="a7f31582-e756-4181-ad3e-1d0212606e60"/>
+				<imageExpression><![CDATA[$P{sideImageMiddleRight}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="39" y="138" width="10" height="567" uuid="a0b35897-b2bd-4a45-ba53-91ed6140dff1"/>
+				<imageExpression><![CDATA[$P{sideImageMiddleLeft}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="72" y="71" width="451" height="1" uuid="af2e5c6f-42f9-4e8b-aa68-262b866333de"/>
+			</line>
+			<line>
+				<reportElement x="522" y="72" width="1" height="681" uuid="010cc60e-6448-4ad6-ab9a-ace8b7e5588d"/>
+			</line>
+			<line>
+				<reportElement x="72" y="753" width="451" height="1" uuid="46a372f3-9eba-4057-99cb-4a7611804a64"/>
+			</line>
+			<line>
+				<reportElement x="71" y="72" width="1" height="682" uuid="a0eb4866-be6d-406a-ba29-6691f40e00f0"/>
+			</line>
+			<staticText>
+				<reportElement x="139" y="97" width="315" height="20" uuid="2a8b6d17-8ec7-483f-b1eb-969c5fb642fa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Terms & Conditions of CDB Certificatation]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="152" width="406" height="31" uuid="e328a478-3918-4541-9bb0-ec1d17516d6d"/>
+				<text><![CDATA[1.CDB Registration certificate is the property of the board and is neither transferable nor to be held or stored by other individuals that is otherwise named in the certificate.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="187" width="406" height="44" uuid="42e272ac-a9d3-4c8d-a5e8-db82147b6eb1"/>
+				<text><![CDATA[2.CDB Registration certificate holder is responsible for complying with the CDB Manual, relevant Guidelines issued from time to time by CDB and any other relevant laws during the validity period.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="233" width="422" height="38" uuid="21a72e16-9f6a-4c8c-9d35-3669b1abfdb5"/>
+				<text><![CDATA[3.Construction professionals shall comply with the instructions, circulars and notifications issued by CDB from time to time vide conventional means of printing or electronic means.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="273" width="406" height="43" uuid="5ee94467-bac7-4b7c-ae5a-ea7b10ba8a64"/>
+				<text><![CDATA[4.Without compromising the individual rights and the prevailing laws, CDB reserves the right to use and disclose such information in any form of publication for the use and benefit of the construction industry.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="319" width="406" height="30" uuid="82f16285-212d-44b5-9b9b-1c51f3dc6032"/>
+				<text><![CDATA[5.Construction professionals shall be issued a CDB Registration Certificate with a validity period as stated on the Certificate.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="352" width="406" height="30" uuid="ea2c65f0-05f1-41a7-8fea-acfe278ccb94"/>
+				<text><![CDATA[6.Construction professionals shall renew the CBD Registration Certificate before the expiry date. Application for renewal can be made within 30 days from the expiry date.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="385" width="406" height="28" uuid="4cadf8bd-8802-4239-99bc-94d26bb34770"/>
+				<text><![CDATA[7.Construction professionals provided with CDB registration number shall be eligible to be used in the evaluation or for registration with construction/consultancy firms.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="416" width="406" height="31" uuid="0e62e196-042b-4df6-b82e-bfdff8106df9"/>
+				<text><![CDATA[8.Construction professionals shall report immediately to CDB if his/her Certificate is engaged in firm with whom he/she is not working.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="451" width="406" height="28" uuid="cd0b489e-af44-408f-ac93-f6149196f91b"/>
+				<text><![CDATA[9.Construction professionals shall abide by Code of Conduct and Ethics developed by Engineering Council of Bhutan and other competent institutions.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="483" width="406" height="32" uuid="8a876099-4fdc-43d1-838f-eec43e386ba1"/>
+				<text><![CDATA[10.Construction professionals shall abide by the OHS Rules and regulations published by Department of Labour, MoLHR.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="518" width="406" height="23" uuid="361a0e6d-ddfc-4641-af51-3064e09aab24"/>
+				<text><![CDATA[11.Construction professionals shall update the correct information in CDB system.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="650" width="406" height="87" forecolor="#FF3333" uuid="2f9bff85-0246-492b-a28b-f53e1f97852f"/>
+				<text><![CDATA[Note: This is computer generated CDB Registration Certificate is meant solely for the purpose of bidding for the works. The Procuring Agency are to scrutinize and accept this certificate. Construction Development Board shall not be responsible for misuse of this document or alteration or distortion of information contained in this document by respective firms. The Procuring Agency may verify the authenticity of the document with the CDB incase of any suspicion.]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

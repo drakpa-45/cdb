@@ -10,5 +10,5 @@ package com.ngn.spring.project.cdb.admin.specializedFirm.cancellation;
  * Changes made :
  * ====================================================================
  */
-public class ConsultantCCActionDao {
+public class SpecializedFirmCCActionDao {
 }
